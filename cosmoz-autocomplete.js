@@ -1,4 +1,4 @@
-/*global _, cz, Cosmoz, document, Polymer, window,Node */
+/*global Cosmoz, Polymer, window, Node */
 /**
  * Element to create an input with autocompletetion, multi selection,
  * case-intensive capabilities and more!
@@ -14,7 +14,8 @@
 	Polymer({
 		is: 'cosmoz-autocomplete',
 		behaviors: [
-			Cosmoz.MultiSelectableBehavior
+			Cosmoz.MultiSelectableBehavior,
+			Cosmoz.TranslatableBehavior
 		],
 
 		properties: {
@@ -348,7 +349,7 @@
 
 		trySearch: function (term) {
 			if (this.minimumInputLength > term.length) {
-				this._searchErrorMsg = _('Enter at least {0} characters to search.', this.minimumInputLength);
+				this._searchErrorMsg = this._('Enter at least {0} characters to search.', this.minimumInputLength);
 				return [];
 			}
 
@@ -366,7 +367,7 @@
 				});
 			}
 
-			this._searchErrorMsg = noResults ? _('No results found') : '';
+			this._searchErrorMsg = noResults ? this._('No results found') : '';
 			return this.highlightResults(terms, results);
 		},
 
