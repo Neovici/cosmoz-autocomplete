@@ -131,6 +131,7 @@
 			inputValue: {
 				type: String,
 				value: '',
+				notify: true,
 				observer: 'inputValueChanged'
 			},
 
