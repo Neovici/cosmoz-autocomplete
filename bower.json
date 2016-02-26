@@ -31,5 +31,8 @@
     "juicy-html": "~1.0.0",
     "cosmoz-selectable": "neovici/cosmoz-selectable#master",
     "cosmoz-i18next": "neovici/cosmoz-i18next#master"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4.2.1"
   }
 }
