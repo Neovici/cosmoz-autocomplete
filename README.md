@@ -1,5 +1,7 @@
 # cosmoz-autocomplete
 
+[![Build Status](https://travis-ci.org/Neovici/cosmoz-autocomplete.svg?branch=master)](https://travis-ci.org/Neovici/cosmoz-autocomplete)
+
 cosmoz-autocomplete is a Polymer component to combine drop-down like behaviour with searchable filtering behaviour. Supports both single and multiple selections.
 
 ## Credits
