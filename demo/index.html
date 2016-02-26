@@ -19,30 +19,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<link rel="import" href="../../paper-styles/demo-pages.html">
 	</head>
 	<body unresolved>
-		<h1>cosmoz-autocomplete</h1>
-		<!-- multi selection selected items -->
-		<div class="vertical center-justified layout">
-			<h4>Multi selection selected items</h4>
-			<div class="horizontal-section">
-				<cosmoz-autocomplete items="{{ demoItems }}"
-					multi-selection
-					placeholder="Search"
-					selected-items="{{ demoSelected }}"
-					id="a1">
-				</cosmoz-autocomplete>
+		<template is="dom-bind">
+			<h1>cosmoz-autocomplete</h1>
+			<!-- multi selection selected items -->
+			<div class="vertical center-justified layout">
+				<h4>Multi selection selected items</h4>
+				<div class="horizontal-section">
+					<cosmoz-autocomplete items="{{ demoItems }}"
+						multi-selection
+						placeholder="Search"
+						selected-items="{{ demoSelected1 }}"
+						id="a1">
+					</cosmoz-autocomplete>
+				</div>
 			</div>
-		</div>
-		<!-- single selection selected item -->
-		<div class="vertical center-justified layout">
-			<h4>Single selection selected item</h4>
-			<div class="horizontal-section">
-				<cosmoz-autocomplete items="{{ demoItems }}"
-					placeholder="Search"
-					selected-items="{{ demoSelected }}"
-					id="a2">
-				</cosmoz-autocomplete>
+			<!-- single selection selected item -->
+			<div class="vertical center-justified layout">
+				<h4>Single selection selected item</h4>
+				<div class="horizontal-section">
+					<cosmoz-autocomplete items="{{ demoItems }}"
+						placeholder="Search"
+						selected-items="{{ demoSelected2 }}"
+						id="a2">
+					</cosmoz-autocomplete>
+				</div>
 			</div>
-		</div>
+		</template>
 	</body>
 <script>
 /*globals window, document,cz,Polymer */
@@ -67,8 +69,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			id: 'six',
 			label: 'Black selection'
 		}];
-	document.getElementById('a1').items = demoItems;
-	document.getElementById('a2').items = demoItems;
+
+	window.addEventListener('WebComponentsReady', function () {		
+		document.getElementById('a1').items = demoItems;
+		document.getElementById('a2').items = demoItems;
+	});
 }());
 </script>
 </html>
