@@ -1,0 +1,37 @@
+{
+  "name": "cosmoz-autocomplete",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/Neovici/cosmoz-autocomplete.svg?branch=master)](https://travis-ci.org/Neovici/cosmoz-autocomplete)",
+  "main": "cosmoz-autocomplete.html",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gift": "^0.7.0",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-if": "^2.0.0",
+    "gulp-load-plugins": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neovici/cosmoz-autocomplete.git"
+  },
+  "keywords": [
+    "polymer",
+    "web-components"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/neovici/cosmoz-autocomplete/issues"
+  },
+  "homepage": "https://github.com/neovici/cosmoz-autocomplete#readme"
+}
