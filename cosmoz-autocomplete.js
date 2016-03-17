@@ -227,7 +227,7 @@
 		clearOneSelection: function (event) {
 			var item = event.model.item;
 			if (this.isSelected(item)) {
-				this.toggleSelected(item);
+				this.deselectItem(item);
 			}
 		},
 
