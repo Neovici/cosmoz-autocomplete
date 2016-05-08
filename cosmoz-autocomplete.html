@@ -150,14 +150,13 @@
 			<!-- input field + item selector -->
 			<div hidden$="{{ _computeHideAutocomplete(multiSelection, selectedItem) }}">
 				<paper-input class="flex" label="{{placeholder}}" id="searchInput"
-					on-focus="onFocus"
-					on-blur="onBlur"
+					focused="{{ _focus }}"
 					on-keyup="keyup"
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
 					invalid="{{ _computeInvalidInput(_searchErrorMsg) }}">
 				</paper-input>
-				<div class="relative" hidden$="{{_hideSuggestions}}">
+				<div class="relative" hidden$="[[ _hideSuggestions ]]">
 					<paper-material elevation="1" class="result-holder">
 						<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect">
 							<template is="dom-if" if="{{ resultAction }}">

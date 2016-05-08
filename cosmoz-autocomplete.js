@@ -136,16 +136,21 @@
 			},
 
 			shownlistdata: {
-				type: Array
+				type: Array,
+				value: function () {
+					return [];
+				}
 			},
 
 			_focus: {
 				type: Boolean,
-				value: false
+				value: false,
+				observer: '_focusChanged'
 			},
 
 			_hideSuggestions: {
-				type: Boolean
+				type: Boolean,
+				observer: '_hideSuggestionsChanged'
 			},
 
 			_hideSelectedItem: {
@@ -160,8 +165,7 @@
 		},
 
 		observers: [
-			'_selectedItemsChanged(selectedItems.*)',
-			'_computeHideSuggestions(_focus, resultAction, shownlistdata)'
+			'_selectedItemsChanged(selectedItems.*)'
 		],
 
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
@@ -187,25 +191,9 @@
 			return false;
 		},
 
-		_computeHideSuggestions: function (focus, resultAction, shownlistdata) {
-			var previousValue = this._hideSuggestions;
-			if (!focus) {
-				this._hideSuggestions = true;
-			} else {
-				if (resultAction) {
-					if (shownlistdata && shownlistdata.length < this.showActionsLimit) {
-						this._hideSuggestions = false;
-					} else {
-						this._hideSuggestions = true;
-					}
-				} else if (shownlistdata && shownlistdata.length > 0) {
-					this._hideSuggestions = false;
-				} else {
-					this._hideSuggestions = true;
-				}
-			}
-			if (!this._hideSuggestions && this._hideSuggestions !== previousValue) {
-				this.$$('#searchResults').selected = 0;
+		_hideSuggestionsChanged: function (newhide, oldhide) {
+			if (!newhide && newhide !== oldhide) {
+				this.$.searchResults.selected = 0;
 			}
 		},
 
@@ -218,10 +206,6 @@
 				return item[prop];
 			}
 			return '';
-		},
-
-		attached: function () {
-			this.shownlistdata = [];
 		},
 
 		clearOneSelection: function (event) {
@@ -369,6 +353,9 @@
 			}
 
 			this._searchErrorMsg = noResults ? this._('No results found') : '';
+			if (this._focus && !noResults) {
+				this._hideSuggestions = false;
+			}
 			return this.highlightResults(terms, results);
 		},
 
@@ -393,21 +380,23 @@
 				if (!this.isSelected(selectedItem)) {
 					this.selectSuggestion(selectedItem);
 					element.selected = undefined;
+					this.inputValue = '';
 				}
 			} else {
 				this.onResultActionClick(item);
 			}
 		},
 
-		onFocus: function (event) {
-			this._focus = true;
-			this.shownlistdata = this.trySearch(this.inputValue);
-		},
+		_focusChanged: function (focus) {
+			if (focus) {
+				this.cancelDebouncer('hideSuggestions');
+				this.shownlistdata = this.trySearch(this.inputValue);
+				return;
+			}
 
-		onBlur: function (event) {
+			// On blur
 
-			var that = this,
-				term = this.$$('#searchInput').value,
+			var term = this.inputValue,
 				results;
 
 			this._searchErrorMsg = '';
@@ -415,26 +404,23 @@
 			if ((!this.selectedItems || this.selectedItems.length === 0) && term.length > 0) {
 				results = this.trySearch(term);
 				results.some(function (item, index) {
-					if (term === item[that.valueProperty]) {
-						that.selectItem(item);
+					if (term === item[this.valueProperty]) {
+						this.selectItem(item);
 						return true;
 					}
-				});
+				}.bind(this));
 			}
 
 			// FIXME(pasleq): this sometimes occurs before the core-activate event,
 			// so the onSearchResulSelect function does nothing.
-			window.setTimeout(function () {
-				that._focus = false;
-				that.hideSuggestions();
-			}, 200); // allow the actual selection to take place before hiding;
+			// allow the actual selection to take place before hiding;
+			this.debounce('hideSuggestions', this.hideSuggestions, 200);
 		},
 
 		onResultActionClick: function (item) {
 			var
-				inputValue = this.$$('#searchInput').value,
 				eventDetail = {
-					inputValue: inputValue
+					inputValue: this.inputValue
 				},
 				eventOptions = {
 					bubbles: true,
