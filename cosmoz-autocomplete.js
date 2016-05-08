@@ -201,13 +201,6 @@
 			return num + inc;
 		},
 
-		_resolveProp: function (item, prop) {
-			if (item) {
-				return item[prop];
-			}
-			return '';
-		},
-
 		clearOneSelection: function (event) {
 			var item = event.model.item;
 			if (this.isSelected(item)) {

@@ -78,6 +78,7 @@
 				padding: 2px 3px 2px 6px;
 				margin: 0 3px 3px 0;
 				font-size: 12px;
+				overflow: hidden;
 			}
 
 			.selectedItem span {
@@ -121,11 +122,11 @@
 		</style>
 		<div>
 			<!-- multi selection selected items -->
-			<template is="dom-if" if="{{ _computeShowMultiSelection(multiSelection, hideSelections) }}">
+			<template is="dom-if" if="[[ _computeShowMultiSelection(multiSelection, hideSelections) ]]">
 				<div id="selectedItemsList" class="horizontal layout wrap">
 					<template is="dom-repeat" items="{{ selectedItems }}">
-						<div class="selectedItem horizontal layout center">
-						<span>{{ _resolveProp(item, valueProperty) }}</span>
+						<div class="selectedItem horizontal layout center" title$="[[ get(valueProperty, item) ]]">
+						<span>[[ get(valueProperty, item) ]]</span>
 							<a href="" on-click="clearOneSelection" onclick="return false;" class="clearSelection">
 								<iron-icon icon="delete"></iron-icon>
 							</a>
@@ -134,13 +135,13 @@
 				</div>
 			</template>
 			<!-- single selection selected item -->
-			<template is="dom-if" if="{{ !multiSelection }}">
-				<div class="singleSelectedItem horizontal layout center" hidden$="{{ _hideSelectedItem }}" }}>
-					<template is="dom-if" if="{{ searchType }}">
-						<div class="selectedItemLabel">{{ searchType }}:</div>
+			<template is="dom-if" if="[[ !multiSelection ]]">
+				<div class="singleSelectedItem horizontal layout center" hidden$="[[ _hideSelectedItem ]]" }}>
+					<template is="dom-if" if="[[ searchType ]]">
+						<div class="selectedItemLabel">[[ searchType ]]:</div>
 					</template>
-					<div class="selectedItem horizontal layout flex">
-						<span>{{ _resolveProp(selectedItem, valueProperty) }}</span>
+					<div class="selectedItem horizontal layout flex" title$="[[ get(valueProperty, item) ]]">
+						<span class="flex">[[ get(valueProperty, selectedItem) ]]</span>
 						<a href="" on-click="clearSelection" onclick="return false;" class="clearSelection">
 							<iron-icon icon="delete"></iron-icon>
 						</a>
