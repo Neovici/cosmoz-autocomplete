@@ -150,12 +150,12 @@
 			</template>
 			<!-- input field + item selector -->
 			<div hidden$="{{ _computeHideAutocomplete(multiSelection, selectedItem) }}">
-				<paper-input class="flex" label="{{placeholder}}" id="searchInput"
+				<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]" id="searchInput"
 					focused="{{ _focus }}"
 					on-keyup="keyup"
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
-					invalid="{{ _computeInvalidInput(_searchErrorMsg) }}">
+					invalid="[[ _computeInvalidInput(_searchErrorMsg) ]]">
 				</paper-input>
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">
 					<paper-material elevation="1" class="result-holder">
