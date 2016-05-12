@@ -282,6 +282,9 @@
 						return; // space in multi word search, continue
 					}
 					var searchProperty = item[that.valueProperty];
+					if (typeof searchProperty === 'number') {
+						searchProperty = searchProperty.toString();
+					}
 					if (that.caseInsensitive) {
 						term = term.toLowerCase();
 						searchProperty = searchProperty.toLowerCase();
@@ -311,7 +314,7 @@
 				that = this;
 			results.forEach(function (result, resultIndex) {
 				var displayResult = {
-					displayLabel: result[that.valueProperty],
+					displayLabel: result[that.valueProperty].toString(),
 					data: result
 				};
 				displayResults.push(displayResult);
