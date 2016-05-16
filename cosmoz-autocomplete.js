@@ -305,25 +305,29 @@
 		},
 
 		highlightResults: function (terms, results) {
+
 			if (typeof terms === "string") {
 				terms = [terms];
 			}
+
 			var
 				regexpResult = '<b>$1</b>',
-				displayResults = [],
-				that = this;
+				displayResults = [];
+
 			results.forEach(function (result, resultIndex) {
-				var displayResult = {
-					displayLabel: result[that.valueProperty].toString(),
-					data: result
-				};
+				var plain = result[this.valueProperty].toString(),
+					displayResult = {
+						displayLabel: plain,
+						plainText: plain,
+						data: result
+					};
 				displayResults.push(displayResult);
 				terms.forEach(function (term, termIndex) {
 					if (term.length > 0) {
 						displayResult.displayLabel = displayResult.displayLabel.replace(new RegExp('(' + term + ')', 'ig'), regexpResult);
 					}
 				});
-			});
+			}, this);
 
 			return displayResults;
 		},

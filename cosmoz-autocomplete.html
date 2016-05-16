@@ -52,13 +52,16 @@
 				padding: 5px;
 				color: inherit;
 				text-decoration: none;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 
 			.result-holder {
 				background-color: white;
 				position: absolute;
 				z-index: 1000;
-				top: 1px;
+				top: 0;
 				width: 100%;
 				max-height: 50vh;
 				overflow-y: auto;
@@ -160,12 +163,12 @@
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">
 					<paper-material elevation="1" class="result-holder">
 						<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect">
-							<template is="dom-if" if="{{ resultAction }}">
+							<template is="dom-if" if="[[ resultAction ]]">
 								<content id="resultAction"></content>
 							</template>
-							<template is="dom-repeat" items="{{shownlistdata}}">
-								<div index="{{ _increaseNum(index, 1) }}" class="result">
-									<template is="juicy-html" content$="{{ item.displayLabel }}"></template>
+							<template is="dom-repeat" items="[[ shownlistdata ]]">
+								<div index="[[ _increaseNum(index, 1) ]]" class="result" title$="[[ item.plainText ]]">
+									<template is="juicy-html" content$="[[ item.displayLabel ]]"></template>
 								</div>
 							</template>
 						</iron-selector>
