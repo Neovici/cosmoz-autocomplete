@@ -165,8 +165,14 @@
 		},
 
 		observers: [
+			'_itemsChanged(items)',
 			'_selectedItemsChanged(selectedItems.*)'
 		],
+
+		_itemsChanged: function (items) {
+			// If reference to items is changed, clear selection
+			this.emptySelection();
+		},
 
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
 			return multiSelection && !hideSelections;
