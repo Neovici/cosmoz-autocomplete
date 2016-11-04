@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "del": "^2.2.0",
+    "eslint": "^3.9.1",
+    "eslint-plugin-html": "^1.5.5",
     "gift": "^0.7.0",
     "gulp": "^3.9.1",
     "gulp-gh-pages": "^0.5.4",
