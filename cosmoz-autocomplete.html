@@ -6,7 +6,7 @@
 <link rel="import" href="../iron-selector/iron-selector.html" />
 <link rel="import" href="../paper-input/paper-input.html" />
 <link rel="import" href="../paper-material/paper-material.html" />
-<link rel="import" href="../juicy-html/juicy-html.html">
+<link rel="import" href="../cosmoz-behaviors/cosmoz-templatehelper-behavior.html">
 <link rel="import" href="../cosmoz-selectable/cosmoz-multi-selectable-behavior.html">
 <link rel="import" href="../cosmoz-i18next/cosmoz-i18next.html">
 
@@ -61,7 +61,7 @@
 				background-color: white;
 				position: absolute;
 				z-index: 1000;
-				top: 0;
+				top: -5px;
 				width: 100%;
 				max-height: 50vh;
 				overflow-y: auto;
@@ -139,13 +139,13 @@
 			</template>
 			<!-- single selection selected item -->
 			<template is="dom-if" if="[[ !multiSelection ]]">
-				<div class="singleSelectedItem horizontal layout center" hidden$="[[ _hideSelectedItem ]]" }}>
+				<div class="singleSelectedItem horizontal layout center" hidden$="[[ isEmpty(selectedItem) ]]" }}>
 					<template is="dom-if" if="[[ searchType ]]">
 						<div class="selectedItemLabel">[[ searchType ]]:</div>
 					</template>
 					<div class="selectedItem horizontal layout flex" title$="[[ get(valueProperty, item) ]]">
 						<span class="flex">[[ get(valueProperty, selectedItem) ]]</span>
-						<a href="" on-click="clearSelection" onclick="return false;" class="clearSelection">
+						<a href="" on-click="emptySelection" onclick="return false;" class="clearSelection">
 							<iron-icon icon="delete"></iron-icon>
 						</a>
 					</div>
@@ -158,18 +158,16 @@
 					on-keyup="keyup"
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
-					invalid="[[ _computeInvalidInput(_searchErrorMsg) ]]">
+					invalid="[[ !isEmpty(_searchErrorMsg) ]]">
 				</paper-input>
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">
 					<paper-material elevation="1" class="result-holder">
-						<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect">
+						<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect" selected="{{ selectedSearchResult }}">
 							<template is="dom-if" if="[[ resultAction ]]">
 								<content id="resultAction"></content>
 							</template>
-							<template is="dom-repeat" items="[[ shownlistdata ]]">
-								<div index="[[ _increaseNum(index, 1) ]]" class="result" title$="[[ item.plainText ]]">
-									<template is="juicy-html" content$="[[ item.displayLabel ]]"></template>
-								</div>
+							<template is="dom-repeat" items="[[ shownListData ]]">
+								<div index="[[ index ]]" class="result" title$="[[ item.plainText ]]" inner-h-t-m-l="[[ item.displayLabel ]]"></div>
 							</template>
 						</iron-selector>
 					</paper-material>

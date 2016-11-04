@@ -7,7 +7,7 @@
  */
 (function () {
 
-	"use strict";
+	'use strict';
 
 	window.Cosmoz = window.Cosmoz || {};
 
@@ -15,6 +15,7 @@
 		is: 'cosmoz-autocomplete',
 		behaviors: [
 			Cosmoz.MultiSelectableBehavior,
+			Cosmoz.TemplateHelperBehavior,
 			Cosmoz.TranslatableBehavior
 		],
 
@@ -30,10 +31,10 @@
 				value: false
 			},
 			/**
-			 * If false and multiSelection is true, the selected values will be shown.
+			 * Do not show the list of multi-selection values.
+			 * Used when selected item list is handled by the compositing element.
 			 * @type {Boolean}
 			 * @memberof element/cosmoz-autocomplete
-			 * @default true
 			 * @instance
 			 */
 			hideSelections: {
@@ -85,10 +86,9 @@
 				value: 'Search'
 			},
 			/**
-			 * Not implemented yet.
+			 * Prefix label on single item selection
 			 * @type {string}
 			 * @memberof element/cosmoz-autocomplete
-			 * @default true
 			 * @instance
 			 */
 			searchType: {
@@ -130,15 +130,12 @@
 			inputValue: {
 				type: String,
 				value: '',
-				notify: true,
-				observer: 'inputValueChanged'
+				notify: true
 			},
 
-			shownlistdata: {
+			shownListData: {
 				type: Array,
-				value: function () {
-					return [];
-				}
+				computed: '_computeShownListData(inputValue, _focus, _searchKicker)'
 			},
 
 			_focus: {
@@ -148,29 +145,28 @@
 			},
 
 			_hideSuggestions: {
-				type: Boolean,
-				observer: '_hideSuggestionsChanged'
+				type: Boolean
 			},
 
-			_hideSelectedItem: {
-				type: Boolean,
-				value: true,
-				computed: '_computeHideSelectedItem(selectedItem)'
-			},
 			multiSelection: {
 				type: Boolean
+			},
+
+			selectedSearchResult: {
+				type: Number,
+				value: 0
+			},
+
+			_searchErrorMsg: {
+				type: String,
+				computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length)'
+			},
+
+			_searchKicker: {
+				type: Number,
+				value: 0
 			}
 
-		},
-
-		observers: [
-			'_itemsChanged(items)',
-			'_selectedItemsChanged(selectedItems.*)'
-		],
-
-		_itemsChanged: function (items) {
-			// If reference to items is changed, clear selection
-			this.emptySelection();
 		},
 
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
@@ -181,25 +177,17 @@
 			return !multiSelection && selectedItem;
 		},
 
-		_selectedItemsChanged: function (path) {
-			this.fire('cosmoz-selected-items-changed', this.selectedItems);
-		},
-
-		_computeHideSelectedItem: function (selectedItem) {
-			return !selectedItem;
-		},
-
-		_computeInvalidInput: function (text) {
-			if (text && text.length > 0) {
-				return true;
+		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
+			if (!focus) {
+				return '';
 			}
-			return false;
-		},
-
-		_hideSuggestionsChanged: function (newhide, oldhide) {
-			if (!newhide && newhide !== oldhide) {
-				this.$.searchResults.selected = 0;
+			if (term.length < minLength) {
+				return this._('Enter at least {0} characters to search.', this.minimumInputLength);
 			}
+			if (term.length > 0 && numResults === 0) {
+				return this._('No results found');
+			}
+			return '';
 		},
 
 		_increaseNum: function (num, inc) {
@@ -213,26 +201,23 @@
 			}
 		},
 
-		keyup: function (event, detail, element) {
-			// runs after inputValueChanged
-			if (this.shownlistdata.length < 1) {
-				return;
-			}
-
+		keyup: function (event, detail) {
 			var
-				el = this.$$('#searchResults'),
-				selectorSelectedItem = el.selectedItem,
+				el = this.$.searchResults,
 				selectedItem;
 
 			switch (event.keyCode) {
 			case 13: // Enter
-				if (selectorSelectedItem && selectorSelectedItem.index) {
-					selectedItem = this.shownlistdata[selectorSelectedItem.index - 1].data;
-					this.selectSuggestion(selectedItem);
-					this.shownlistdata = this.trySearch(this.inputValue);
+				if (this.selectedSearchResult >= 0) {
+					selectedItem = this.shownListData[this.selectedSearchResult].data;
+					this.selectItem(selectedItem);
+					if (this.shownListData.length === this.selectedSearchResult + 1) {
+						this.selectedSearchResult -= 1;
+					}
+					this._searchKicker += 1;
 				} else {
 					this.onResultActionClick();
-					el.selected = undefined;
+					this.selectedSearchResult = undefined;
 				}
 				break;
 			case 27: // Escape
@@ -250,18 +235,15 @@
 			}
 		},
 
-		clearSelection: function (event) {
-			this.emptySelection();
-			this._searchErrorMsg = '';
-		},
-
 		hideSuggestions: function () {
 			this._hideSuggestions = true;
+			this.selectedSearchResult = 0;
 		},
 
 		selectSuggestion: function (item) {
 			this.selectItem(item);
 			this.hideSuggestions();
+			this.inputValue = '';
 		},
 
 		search: function (terms) {
@@ -275,14 +257,16 @@
 				return [];
 			}
 
-			this.items.forEach(function (item, itemIndex) {
-				var addItem = true;
-				terms.some(function (term, termIndex) {
+			this.items.some(function (item) {
+
+				// don't add already selected items
+				if (this.selectedItems && this.selectedItems.length > 0 && this.selectedItems.indexOf(item) !== -1) {
+					return;
+				}
+
+				var noSearchHit = terms.some(function (term) {
 					if (term === '') {
-						if (terms.length === 1) {
-							return true; // empty search, match everything
-						}
-						return; // space in multi word search, continue
+						return; // beginning/ending space in multi word search, continue
 					}
 					var searchProperty = item[this.valueProperty];
 					if (typeof searchProperty === 'number') {
@@ -293,96 +277,71 @@
 						searchProperty = searchProperty.toLowerCase();
 					}
 					if (searchProperty.indexOf(term) === -1) {
-						addItem = false;
-						return true; // exit loop.array
+						return true; // exit
 					}
 				}, this);
-				if (results.length > this.maxNumberResult) {
-					return results;
+
+				if (noSearchHit) {
+					return;
 				}
-				if (addItem) {
-					results.push(item);
+
+				results.push(this.highlightResult(terms, item));
+
+				if (results.length > this.maxNumberResult) {
+					return true;
 				}
 			}, this);
+
 			return results;
 		},
 
-		highlightResults: function (terms, results) {
+		highlightResult: function (terms, result) {
 
-			if (typeof terms === "string") {
-				terms = [terms];
-			}
+			var regexpResult = '<b>$1</b>',
+				plain = result[this.valueProperty].toString(),
+				label = plain;
 
-			var
-				regexpResult = '<b>$1</b>',
-				displayResults = [];
+			terms.forEach(function (term) {
+				if (term.length > 0) {
+					var re = new RegExp('(' + term + ')', 'ig');
+					label = label.replace(re, regexpResult);
+				}
+			});
 
-			results.forEach(function (result, resultIndex) {
-				var plain = result[this.valueProperty].toString(),
-					displayResult = {
-						displayLabel: plain,
-						plainText: plain,
-						data: result
-					};
-				displayResults.push(displayResult);
-				terms.forEach(function (term, termIndex) {
-					if (term.length > 0) {
-						displayResult.displayLabel = displayResult.displayLabel.replace(new RegExp('(' + term + ')', 'ig'), regexpResult);
-					}
-				});
-			}, this);
-
-			return displayResults;
+			return {
+				displayLabel: label,
+				plainText: plain,
+				data: result
+			};
 		},
 
-		trySearch: function (term) {
-			if (this.minimumInputLength > term.length) {
-				this._searchErrorMsg = this._('Enter at least {0} characters to search.', this.minimumInputLength);
+		_computeShownListData: function (term, focus) {
+			if (!focus || term.length < this.minimumInputLength) {
+				this.debounce('hideSuggestions', this.hideSuggestions, 200);
+			}
+			if (term.length < this.minimumInputLength) {
 				return [];
 			}
 
 			var
 				terms = this.exactQuery ? [ term ] : term.split(' '),
-				results = this.search(terms),
-				noResults = results.length === 0 && this._focus;
+				results = this.search(terms);
 
-			if (this.selectedItems && this.selectedItems.length > 0) {
-				this.selectedItems.forEach(function (item, index) {
-					var hasItemIndex = results.indexOf(item);
-					if (hasItemIndex > -1) {
-						results.splice(hasItemIndex, 1);
-					}
-				});
-			}
-
-			this._searchErrorMsg = noResults ? this._('No results found') : '';
-			if (this._focus && !noResults) {
+			if (this._focus && results.length > 0) {
 				this._hideSuggestions = false;
 			}
-			return this.highlightResults(terms, results);
-		},
-
-		inputValueChanged: function (newValue, oldValue) {
-			// runs before keyup
-			if (!this._focus || newValue.length < this.minimumInputLength) {
-				this.hideSuggestions();
-			} else {
-				this.shownlistdata = this.trySearch(newValue);
-			}
+			return results;
 		},
 
 		onSearchResultSelect: function (event, detail) {
-			var
-				element = event.target,
-				item = detail.item,
+			var item = detail.item,
 				itemIndex = item.index,
 				selectedItem;
-			if (itemIndex) {
-				// TODO(pasleq): why do we increase the index by 1 ?
-				selectedItem = this.shownlistdata[itemIndex - 1].data;
+
+			if (itemIndex !== undefined) {
+				selectedItem = this.shownListData[itemIndex].data;
 				if (!this.isSelected(selectedItem)) {
 					this.selectSuggestion(selectedItem);
-					element.selected = undefined;
 					this.inputValue = '';
 				}
 			} else {
@@ -393,45 +352,30 @@
 		_focusChanged: function (focus) {
 			if (focus) {
 				this.cancelDebouncer('hideSuggestions');
-				this.shownlistdata = this.trySearch(this.inputValue);
 				return;
 			}
 
 			// On blur
 
-			var term = this.inputValue,
-				results;
-
-			this._searchErrorMsg = '';
-
-			if ((!this.selectedItems || this.selectedItems.length === 0) && term.length > 0) {
-				results = this.trySearch(term);
-				results.some(function (item, index) {
-					if (term === item[this.valueProperty]) {
-						this.selectItem(item);
+			// auto-select item that matches input value exactly on blur
+			if ((!this.selectedItems || this.selectedItems.length === 0) && this.inputValue.length > 0) {
+				this.shownListData.some(function (item) {
+					if (this.inputValue === item.data[this.valueProperty]) {
+						this.selectSuggestion(item.data);
 						return true;
 					}
-				}.bind(this));
+				}, this);
 			}
-
-			// FIXME(pasleq): this sometimes occurs before the core-activate event,
-			// so the onSearchResulSelect function does nothing.
-			// allow the actual selection to take place before hiding;
-			this.debounce('hideSuggestions', this.hideSuggestions, 200);
 		},
 
 		onResultActionClick: function (item) {
-			var
-				eventDetail = {
-					inputValue: this.inputValue
-				},
-				eventOptions = {
-					bubbles: true,
-					cancelable: true,
-					node: item
-				};
-
-			this.fire('action', eventDetail, eventOptions);
+			this.fire('action', {
+				inputValue: this.inputValue
+			}, {
+				bubbles: true,
+				cancelable: true,
+				node: item
+			});
 		}
 	});
 }());

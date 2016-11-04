@@ -27,9 +27,9 @@
     "iron-selector": "polymerelements/iron-selector#^1.0.0",
     "paper-input": "polymerelements/paper-input#^1.0.0",
     "paper-material": "PolymerElements/paper-material#^1.0.0",
-    "juicy-html": "~1.0.0",
     "cosmoz-selectable": "neovici/cosmoz-selectable#master",
-    "cosmoz-i18next": "neovici/cosmoz-i18next#master"
+    "cosmoz-i18next": "neovici/cosmoz-i18next#master",
+    "cosmoz-behaviors": "Neovici/cosmoz-behaviors"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
