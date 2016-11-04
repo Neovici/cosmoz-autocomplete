@@ -20,15 +20,14 @@
 
 		properties: {
 			/**
-			 * if true does not care about capital letter distinctions.
+			 * Whether to care about capital letter distinctions.
 			 * @type {Boolean}
 			 * @memberof element/cosmoz-autocomplete
-			 * @default true
 			 * @instance
 			 */
-			caseInsensitive: {
+			caseSensitive: {
 				type: Boolean,
-				value: true
+				value: false
 			},
 			/**
 			 * If false and multiSelection is true, the selected values will be shown.
@@ -266,11 +265,9 @@
 		},
 
 		search: function (terms) {
-			var
-				results = [],
-				that = this;
+			var results = [];
 
-			if (typeof terms === "string") {
+			if (typeof terms === 'string') {
 				terms = [terms];
 			}
 
@@ -281,17 +278,17 @@
 			this.items.forEach(function (item, itemIndex) {
 				var addItem = true;
 				terms.some(function (term, termIndex) {
-					if (term === "") {
+					if (term === '') {
 						if (terms.length === 1) {
 							return true; // empty search, match everything
 						}
 						return; // space in multi word search, continue
 					}
-					var searchProperty = item[that.valueProperty];
+					var searchProperty = item[this.valueProperty];
 					if (typeof searchProperty === 'number') {
 						searchProperty = searchProperty.toString();
 					}
-					if (that.caseInsensitive) {
+					if (!this.caseSensitive) {
 						term = term.toLowerCase();
 						searchProperty = searchProperty.toLowerCase();
 					}
@@ -299,14 +296,14 @@
 						addItem = false;
 						return true; // exit loop.array
 					}
-				});
-				if (results.length > that.maxNumberResult) {
+				}, this);
+				if (results.length > this.maxNumberResult) {
 					return results;
 				}
 				if (addItem) {
 					results.push(item);
 				}
-			});
+			}, this);
 			return results;
 		},
 
