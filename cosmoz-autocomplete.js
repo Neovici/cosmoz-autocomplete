@@ -63,15 +63,15 @@
 				value: 0
 			},
 			/**
-			 * if true allows for multiple words seperated by space to be used in search.
+			 * Make input value a single search including spaces instead of
+			 * splitting up words in an AND query
 			 * @type {Boolean}
 			 * @memberof element/cosmoz-autocomplete
-			 * @default true
 			 * @instance
 			 */
-			multiWordSearch: {
+			exactQuery: {
 				type: Boolean,
-				value: true
+				value: false
 			},
 			/**
 			 * Placehold value for input box.
@@ -342,7 +342,7 @@
 			}
 
 			var
-				terms = this.multiWordSearch ? term.split(' ') : [ term ],
+				terms = this.exactQuery ? [ term ] : term.split(' '),
 				results = this.search(terms),
 				noResults = results.length === 0 && this._focus;
 
