@@ -127,7 +127,7 @@
 			<!-- multi selection selected items -->
 			<template is="dom-if" if="[[ _computeShowMultiSelection(multiSelection, hideSelections) ]]">
 				<div id="selectedItemsList" class="horizontal layout wrap">
-					<template is="dom-repeat" items="{{ selectedItems }}">
+					<template is="dom-repeat" items="[[ selectedItems ]]">
 						<div class="selectedItem horizontal layout center" title$="[[ get(valueProperty, item) ]]">
 						<span>[[ get(valueProperty, item) ]]</span>
 							<a href="" on-click="clearOneSelection" onclick="return false;" class="clearSelection">
@@ -138,8 +138,9 @@
 				</div>
 			</template>
 			<!-- single selection selected item -->
-			<template is="dom-if" if="[[ !multiSelection ]]">
-				<div class="singleSelectedItem horizontal layout center" hidden$="[[ isEmpty(selectedItem) ]]" }}>
+			<!-- FIXME: Have to use dom-if to not render when selectedItem is undefined -->
+			<template is="dom-if" if="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
+				<div class="singleSelectedItem horizontal layout center">
 					<template is="dom-if" if="[[ searchType ]]">
 						<div class="selectedItemLabel">[[ searchType ]]:</div>
 					</template>
@@ -152,7 +153,7 @@
 				</div>
 			</template>
 			<!-- input field + item selector -->
-			<div hidden$="{{ _computeHideAutocomplete(multiSelection, selectedItem) }}">
+			<div hidden$="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
 				<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]" id="searchInput"
 					focused="{{ _focus }}"
 					on-keyup="keyup"
