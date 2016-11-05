@@ -135,7 +135,7 @@
 
 			shownListData: {
 				type: Array,
-				computed: '_computeShownListData(inputValue, _focus, _searchKicker)'
+				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items)'
 			},
 
 			_focus: {
@@ -184,7 +184,7 @@
 			if (term.length < minLength) {
 				return this._('Enter at least {0} characters to search.', this.minimumInputLength);
 			}
-			if (term.length > 0 && numResults === 0) {
+			if (numResults === 0) {
 				return this._('No results found');
 			}
 			return '';

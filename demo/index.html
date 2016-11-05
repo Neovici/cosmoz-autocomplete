@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<title>cosmoz-autocomplete Demo</title>
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<link rel="import" href="../cosmoz-autocomplete.html">
+		<link rel="import" href="../../iron-ajax/iron-ajax.html">
 		<link rel="import" href="../../paper-styles/demo-pages.html">
 	</head>
 	<body unresolved>
@@ -40,6 +41,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						placeholder="Search"
 						selected-items="{{ demoSelected2 }}"
 						id="a2">
+					</cosmoz-autocomplete>
+				</div>
+			</div>
+			<!-- single selection ajax -->
+			<div class="vertical center-justified layout">
+				<h4>ajax</h4>
+				<div class="horizontal-section">
+					<iron-ajax auto url="items.json" last-response="{{ acdata }}" params="[[ a3value ]]"></iron-ajax>
+					<cosmoz-autocomplete items="[[ acdata ]]"
+						placeholder="Search"
+						input-value="{{ a3value }}"
+						selected-items="{{ demoSelected3 }}">
 					</cosmoz-autocomplete>
 				</div>
 			</div>
