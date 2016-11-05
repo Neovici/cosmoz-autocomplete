@@ -56,6 +56,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					</cosmoz-autocomplete>
 				</div>
 			</div>
+
+			<!-- multi selection ajax -->
+			<div class="vertical center-justified layout">
+				<h4>multi ajax</h4>
+				<div class="horizontal-section">
+					<iron-ajax auto url="items.json" last-response="{{ acdata2 }}" params="[[ a4value ]]"></iron-ajax>
+					<cosmoz-autocomplete items="[[ acdata2 ]]"
+						placeholder="Search" multi-selection persist-selection
+						input-value="{{ a4value }}"
+						selected-items="{{ demoSelected4 }}">
+					</cosmoz-autocomplete>
+				</div>
+			</div>
 		</template>
 	</body>
 <script>

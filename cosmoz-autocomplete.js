@@ -22,9 +22,6 @@
 		properties: {
 			/**
 			 * Whether to care about capital letter distinctions.
-			 * @type {Boolean}
-			 * @memberof element/cosmoz-autocomplete
-			 * @instance
 			 */
 			caseSensitive: {
 				type: Boolean,
@@ -33,9 +30,6 @@
 			/**
 			 * Do not show the list of multi-selection values.
 			 * Used when selected item list is handled by the compositing element.
-			 * @type {Boolean}
-			 * @memberof element/cosmoz-autocomplete
-			 * @instance
 			 */
 			hideSelections: {
 				type: Boolean,
@@ -43,10 +37,6 @@
 			},
 			/**
 			 * Maximum number of shown results in a search.
-			 * @type {Int}
-			 * @memberof element/cosmoz-autocomplete
-			 * @default 30
-			 * @instance
 			 */
 			maxNumberResult: {
 				type: Number,
@@ -54,10 +44,6 @@
 			},
 			/**
 			 * Minimum length of search string for search to activate.
-			 * @type {Int}
-			 * @memberof element/cosmoz-autocomplete
-			 * @default 0
-			 * @instance
 			 */
 			minimumInputLength: {
 				type: Boolean,
@@ -66,20 +52,13 @@
 			/**
 			 * Make input value a single search including spaces instead of
 			 * splitting up words in an AND query
-			 * @type {Boolean}
-			 * @memberof element/cosmoz-autocomplete
-			 * @instance
 			 */
 			exactQuery: {
 				type: Boolean,
 				value: false
 			},
 			/**
-			 * Placehold value for input box.
-			 * @type {string}
-			 * @memberof element/cosmoz-autocomplete
-			 * @default 'Search'
-			 * @instance
+			 * Label to show/float within the input to describe the search
 			 */
 			placeholder: {
 				type: String,
@@ -87,45 +66,22 @@
 			},
 			/**
 			 * Prefix label on single item selection
-			 * @type {string}
-			 * @memberof element/cosmoz-autocomplete
-			 * @instance
 			 */
 			searchType: {
 				type: String
 			},
 
 			/**
-			 * if true along with other conditions, set action is executed.
-			 * @type {Boolean}
-			 * @memberof element/cosmoz-autocomplete
-			 * @default false
-			 * @instance
-			 */
-			resultAction: {
-				type: Boolean,
-				value: false
-			},
-
-			/**
 			 * Display actions provided in elements light DOM when the count
 			 * of items in the selector is below this value.
-			 * @type {Number}
-			 * @memberof element/cosmoz-autocomplete
-			 * @default 10
-			 * @instance
 			 */
 			showActionsLimit: {
 				type: Number,
-				value: 10
+				value: 5
 			},
 
 			/**
 			 * Input value, the current search string.
-			 * @type {string}
-			 * @memberof element/cosmoz-autocomplete
-			 * @default ''
-			 * @instance
 			 */
 			inputValue: {
 				type: String,
@@ -133,39 +89,73 @@
 				notify: true
 			},
 
+			/**
+			 * If multiple results can be selected
+			 */
+			multiSelection: {
+				type: Boolean
+			},
+
+			/**
+			 * Index of the highlighted result in shownListData
+			 */
+			selectedSearchResult: {
+				type: Number,
+				value: 0
+			},
+
+			/**
+			 * The shown list of results matching the inputValue query
+			 */
 			shownListData: {
 				type: Array,
 				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items)'
 			},
 
+
+			// PRIVATE
+
+
+			/**
+			 * Focus state of the input element
+			 */
 			_focus: {
 				type: Boolean,
 				value: false,
 				observer: '_focusChanged'
 			},
 
+			/**
+			 * Whether to show shownListData
+			 */
 			_hideSuggestions: {
 				type: Boolean
 			},
 
-			multiSelection: {
-				type: Boolean
-			},
-
-			selectedSearchResult: {
-				type: Number,
-				value: 0
-			},
-
+			/**
+			 * The message to display for the current state error
+			 */
 			_searchErrorMsg: {
 				type: String,
 				computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length)'
 			},
 
+			/**
+			 * Workaround kicker to carry out a search when inputValue, focus and items is the same,
+			 * like when selecting an item by pressing Enter on the keyboard
+			 */
 			_searchKicker: {
 				type: Number,
 				value: 0
-			}
+			},
+
+			/**
+			 * State of whether we should show any result actions supplied
+			 */
+			_showActions: {
+				type: Boolean,
+				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
+			},
 
 		},
 
@@ -188,6 +178,10 @@
 				return this._('No results found');
 			}
 			return '';
+		},
+
+		_computeShowActions: function (showActionsLimit, numShownResults) {
+			return numShownResults <= showActionsLimit;
 		},
 
 		_increaseNum: function (num, inc) {
@@ -259,16 +253,36 @@
 
 			this.items.some(function (item) {
 
-				// don't add already selected items
-				if (this.selectedItems && this.selectedItems.length > 0 && this.selectedItems.indexOf(item) !== -1) {
-					return;
+				var hasOtherInstance = false,
+					itemValue = this._valueForItem(item),
+					noSearchHit = false;
+
+				if (this.selectedItems && this.selectedItems.length > 0) {
+
+					// don't add already selected items
+					if (this.selectedItems.indexOf(item) !== -1) {
+						return;
+					}
+
+					// don't add new instances of the same items
+					if (this.persistSelection) {
+						hasOtherInstance = this.selectedItems.some(function (selectedItem) {
+							if (this._valueForItem(selectedItem) === itemValue) {
+								return true;
+							}
+						}, this);
+
+						if (hasOtherInstance) {
+							return;
+						}
+					}
 				}
 
-				var noSearchHit = terms.some(function (term) {
+				noSearchHit = terms.some(function (term) {
 					if (term === '') {
 						return; // beginning/ending space in multi word search, continue
 					}
-					var searchProperty = item[this.valueProperty];
+					var searchProperty = itemValue;
 					if (typeof searchProperty === 'number') {
 						searchProperty = searchProperty.toString();
 					}
@@ -298,7 +312,7 @@
 		highlightResult: function (terms, result) {
 
 			var regexpResult = '<b>$1</b>',
-				plain = result[this.valueProperty].toString(),
+				plain = this._valueForItem(result).toString(),
 				label = plain;
 
 			terms.forEach(function (term) {
@@ -360,7 +374,7 @@
 			// auto-select item that matches input value exactly on blur
 			if ((!this.selectedItems || this.selectedItems.length === 0) && this.inputValue.length > 0) {
 				this.shownListData.some(function (item) {
-					if (this.inputValue === item.data[this.valueProperty]) {
+					if (this.inputValue === this._valueForItem(item.data)) {
 						this.selectSuggestion(item.data);
 						return true;
 					}
