@@ -46,7 +46,7 @@
 			 * Minimum length of search string for search to activate.
 			 */
 			minimumInputLength: {
-				type: Boolean,
+				type: Number,
 				value: 0
 			},
 			/**
@@ -172,7 +172,7 @@
 				return '';
 			}
 			if (term.length < minLength) {
-				return this._('Enter at least {0} characters to search.', this.minimumInputLength);
+				return this._('Enter at least {0} characters to search.', minLength);
 			}
 			if (numResults === 0) {
 				return this._('No results found');
