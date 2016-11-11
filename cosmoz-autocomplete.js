@@ -111,6 +111,13 @@
 				type: Array,
 				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items)'
 			},
+			/**
+			 * Set to true to disable the floating label
+			 */
+			noLabelFloat: {
+				type: Boolean,
+				value: false
+			},
 
 
 			// PRIVATE

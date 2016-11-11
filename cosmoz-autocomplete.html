@@ -155,6 +155,7 @@
 			<!-- input field + item selector -->
 			<div hidden$="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
 				<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]" id="searchInput"
+					no-label-float$="[[ noLabelFloat ]]"
 					focused="{{ _focus }}"
 					on-keyup="keyup"
 					value="{{ inputValue }}"
