@@ -29,7 +29,8 @@
     "paper-material": "PolymerElements/paper-material#^1.0.0",
     "cosmoz-selectable": "neovici/cosmoz-selectable#master",
     "cosmoz-i18next": "neovici/cosmoz-i18next#master",
-    "cosmoz-behaviors": "Neovici/cosmoz-behaviors"
+    "cosmoz-behaviors": "Neovici/cosmoz-behaviors",
+    "paper-spinner": "polymerelements/paper-spinner#^1.2.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

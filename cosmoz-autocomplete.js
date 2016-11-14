@@ -36,6 +36,15 @@
 				value: false
 			},
 			/**
+			 * Whether to show a loading spinner.
+			 * Useful when something external is controlling the items dynamically (XHR)
+			 * and users should be informed something is going on.
+			 */
+			loading: {
+				type: Boolean,
+				value: false
+			},
+			/**
 			 * Maximum number of shown results in a search.
 			 */
 			maxNumberResult: {
@@ -379,7 +388,7 @@
 			// On blur
 
 			// auto-select item that matches input value exactly on blur
-			if ((!this.selectedItems || this.selectedItems.length === 0) && this.inputValue.length > 0) {
+			if ((!this.selectedItems || this.selectedItems.length === 0) && this.inputValue.length > 0 && this.shownListData) {
 				this.shownListData.some(function (item) {
 					if (this.inputValue === this._valueForItem(item.data)) {
 						this.selectSuggestion(item.data);

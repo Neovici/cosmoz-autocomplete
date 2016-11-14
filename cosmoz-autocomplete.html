@@ -6,6 +6,7 @@
 <link rel="import" href="../iron-selector/iron-selector.html" />
 <link rel="import" href="../paper-input/paper-input.html" />
 <link rel="import" href="../paper-material/paper-material.html" />
+<link rel="import" href="../paper-spinner/paper-spinner.html" />
 <link rel="import" href="../cosmoz-behaviors/cosmoz-templatehelper-behavior.html">
 <link rel="import" href="../cosmoz-selectable/cosmoz-multi-selectable-behavior.html">
 <link rel="import" href="../cosmoz-i18next/cosmoz-i18next.html">
@@ -117,6 +118,13 @@
 				text-overflow: ellipsis;
 			}
 
+			#searchInput paper-spinner {
+				height: 28px;
+				width: 28px;
+				margin-right: 3px;
+				transform: scale(0.5, 0.5);
+			}
+
 			/* Input placeholder text overflow */
 			input[placeholder] { text-overflow: ellipsis; }
 			::-moz-placeholder { text-overflow: ellipsis; } /* firefox 19+ */
@@ -161,6 +169,7 @@
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
 					invalid="[[ !isEmpty(_searchErrorMsg) ]]">
+					<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
 				</paper-input>
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">
 					<paper-material elevation="1" class="result-holder">
