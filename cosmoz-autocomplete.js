@@ -127,7 +127,13 @@
 				type: Boolean,
 				value: false
 			},
-
+			/**
+			 * Set to true to disable element
+			 */
+			disabled: {
+				type: Boolean,
+				value: false
+			},
 
 			// PRIVATE
 

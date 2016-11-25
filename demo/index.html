@@ -82,6 +82,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					</cosmoz-autocomplete>
 				</div>
 			</div>
+
+			<!-- disabled -->
+			<div class="vertical center-justified layout">
+				<h4>disabled</h4>
+				<div class="horizontal-section">
+					<cosmoz-autocomplete items="{{ demoItems }}"
+						disabled
+						no-label-float
+						placeholder="Search"
+						selected-items="{{ demoSelected5 }}"
+						id="a4">
+					</cosmoz-autocomplete>
+				</div>
+			</div>
 		</template>
 	</body>
 <script>
@@ -111,6 +125,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	window.addEventListener('WebComponentsReady', function () {
 		document.getElementById('a1').items = demoItems;
 		document.getElementById('a2').items = demoItems;
+		var selectedItems = [demoItems[0]];
+		document.getElementById('a4').selectItem(demoItems[0]);
 	});
 }());
 </script>
