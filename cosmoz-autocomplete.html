@@ -140,11 +140,9 @@
 					<template is="dom-repeat" items="[[ selectedItems ]]">
 						<div class="selectedItem horizontal layout center" title$="[[ get(valueProperty, item) ]]">
 							<span>[[ get(valueProperty, item) ]]</span>
-							<template is="dom-if" if="[[ !disabled ]]">
-								<a href="" on-click="clearOneSelection" onclick="return false;" class="clearSelection">
-									<iron-icon icon="delete"></iron-icon>
-								</a>
-							</template>
+							<a href="" hidden$="[[ disabled ]]" on-click="clearOneSelection" onclick="return false;" class="clearSelection">
+								<iron-icon icon="delete"></iron-icon>
+							</a>
 						</div>
 					</template>
 				</div>
@@ -158,11 +156,9 @@
 					</template>
 					<div class="selectedItem horizontal layout flex" title$="[[ get(valueProperty, item) ]]">
 						<span class="flex">[[ get(valueProperty, selectedItem) ]]</span>
-						<template is="dom-if" if="[[ !disabled ]]">
-							<a href="" on-click="emptySelection" onclick="return false;" class="clearSelection">
-								<iron-icon icon="delete"></iron-icon>
-							</a>
-						</template>
+						<a href="" hidden$="[[ disabled ]]" on-click="emptySelection" onclick="return false;" class="clearSelection">
+							<iron-icon icon="delete"></iron-icon>
+						</a>
 					</div>
 				</div>
 			</template>
