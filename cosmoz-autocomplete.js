@@ -177,7 +177,7 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
-			},
+			}
 
 		},
 
