@@ -127,6 +127,12 @@
 				transform: scale(0.5, 0.5);
 			}
 
+			#searchInput {
+				--paper-input-container-label: {
+					opacity: var(--placeholder-opacity, inheirit); 
+				}
+			}
+
 			/* Input placeholder text overflow */
 			input[placeholder] { text-overflow: ellipsis; }
 			::-moz-placeholder { text-overflow: ellipsis; } /* firefox 19+ */
