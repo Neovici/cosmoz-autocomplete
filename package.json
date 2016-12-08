@@ -6,9 +6,6 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "gulp": "^3.9.1"
-  },
   "devDependencies": {
     "del": "^2.2.0",
     "eslint": "^3.9.1",

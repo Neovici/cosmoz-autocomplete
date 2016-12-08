@@ -151,7 +151,8 @@
 			 * Whether to show shownListData
 			 */
 			_hideSuggestions: {
-				type: Boolean
+				type: Boolean,
+				value: true
 			},
 
 			/**
