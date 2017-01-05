@@ -413,10 +413,6 @@
 				cancelable: true,
 				node: item
 			});
-		},
-
-		attached: function () {
-			console.log('attached!');
 		}
 	});
 }());
