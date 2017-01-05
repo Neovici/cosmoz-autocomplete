@@ -12,7 +12,7 @@ addons:
 before_script:
 - npm install -g bower polylint web-component-tester
 - bower install
-- polylint --no-follow-dependencies
+- polylint --no-recursion
 script: xvfb-run wct
 notifications:
   slack:
