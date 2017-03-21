@@ -70,6 +70,11 @@
 				overflow-y: auto;
 			}
 
+			.dropup {
+				top: auto !important;
+				bottom: 40px;
+			}
+
 			.clearSelection {
 				text-decoration: none;
 				color: #555;
@@ -181,7 +186,7 @@
 					<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
 				</paper-input>
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">
-					<paper-material elevation="1" class="result-holder">
+					<paper-material elevation="1" class$="result-holder [[ _getDropUpClass(_dropUp) ]]">
 						<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect" selected="{{ selectedSearchResult }}">
 							<template is="dom-repeat" items="[[ shownListData ]]">
 								<div index="[[ index ]]" class="result" title$="[[ item.plainText ]]" inner-h-t-m-l="[[ item.displayLabel ]]"></div>

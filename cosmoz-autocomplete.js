@@ -137,7 +137,6 @@
 
 			// PRIVATE
 
-
 			/**
 			 * Focus state of the input element
 			 */
@@ -145,6 +144,14 @@
 				type: Boolean,
 				value: false,
 				observer: '_focusChanged'
+			},
+
+			/**
+			 * Whether to make results show above element
+			 */
+			_dropUp: {
+				type: Boolean,
+				value: false
 			},
 
 			/**
@@ -362,12 +369,20 @@
 
 			var
 				terms = this.exactQuery ? [ term ] : term.split(' '),
-				results = this.search(terms);
+				results = this.search(terms),
+				offsetTop,
+				offsetBottom;
 
 			if (this._focus && results.length > 0) {
+				offsetBottom = this.offsetParent.offsetHeight - this.offsetTop;
 				this._hideSuggestions = false;
+				this._dropUp = this.offsetTop > offsetBottom;
 			}
 			return results;
+		},
+
+		_getDropUpClass: function (dropUp) {
+			return dropUp ? 'dropup' : '';
 		},
 
 		onSearchResultSelect: function (event, detail) {
