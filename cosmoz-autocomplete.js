@@ -374,9 +374,10 @@
 				offsetBottom;
 
 			if (this._focus && results.length > 0) {
-				offsetBottom = this.offsetParent.offsetHeight - this.offsetTop;
+				offsetTop = this.offsetTop;
+				offsetBottom = this.offsetParent.offsetHeight - offsetTop;
 				this._hideSuggestions = false;
-				this._dropUp = this.offsetTop > offsetBottom;
+				this._dropUp = offsetTop > offsetBottom;
 			}
 			return results;
 		},
