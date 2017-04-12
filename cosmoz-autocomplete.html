@@ -183,7 +183,7 @@
 						</template>
 						<template is="dom-if" if="[[ _showActions ]]">
 							<div hidden$="[[ !_showActions ]]">
-								<content select=".result-action"></content>
+								<slot name="result-action"></slot>
 							</div>
 						</template>
 					</iron-selector>
