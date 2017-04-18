@@ -386,6 +386,13 @@
 			return dropUp ? 'dropup' : '';
 		},
 
+		_getLabel: function (disabled, label) {
+			if (disabled) {
+				return;
+			}
+			return label;
+		},
+
 		onSearchResultSelect: function (event, detail) {
 			var item = detail.item,
 				itemIndex = item.index,

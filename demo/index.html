@@ -83,9 +83,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				</div>
 			</div>
 
-			<!-- disabled -->
+			<!-- disabled selected -->
 			<div class="vertical center-justified layout">
-				<h4>disabled</h4>
+				<h4>disabled with selection</h4>
 				<div class="horizontal-section">
 					<cosmoz-autocomplete items="{{ demoItems }}"
 						disabled
@@ -93,6 +93,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						placeholder="Search"
 						selected-items="{{ demoSelected5 }}"
 						id="a4">
+					</cosmoz-autocomplete>
+				</div>
+			</div>
+
+			<!-- disabled not selected -->
+			<div class="vertical center-justified layout">
+				<h4>disabled, no selection</h4>
+				<div class="horizontal-section">
+					<cosmoz-autocomplete items="{{ demoItems }}"
+						disabled
+						no-label-float
+						placeholder="Search"
+						id="a5">
 					</cosmoz-autocomplete>
 				</div>
 			</div>

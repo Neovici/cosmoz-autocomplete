@@ -134,7 +134,7 @@
 
 			#searchInput {
 				--paper-input-container-label: {
-					opacity: var(--placeholder-opacity, inheirit); 
+					opacity: var(--placeholder-opacity, inherit); 
 				}
 			}
 
@@ -161,21 +161,30 @@
 			<!-- single selection selected item -->
 			<!-- FIXME: Have to use dom-if to not render when selectedItem is undefined -->
 			<template is="dom-if" if="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
-				<div class="singleSelectedItem horizontal layout center">
-					<template is="dom-if" if="[[ searchType ]]">
-						<div class="selectedItemLabel">[[ searchType ]]:</div>
-					</template>
-					<div class="selectedItem horizontal layout flex" title$="[[ get(valueProperty, item) ]]">
-						<span class="flex">[[ get(valueProperty, selectedItem) ]]</span>
-						<a href="" hidden$="[[ disabled ]]" on-click="emptySelection" onclick="return false;" class="clearSelection">
-							<iron-icon icon="delete"></iron-icon>
-						</a>
+				<template is="dom-if" if="[[ !disabled ]]">
+					<div class="singleSelectedItem horizontal layout center">
+						<template is="dom-if" if="[[ searchType ]]">
+							<div class="selectedItemLabel">[[ searchType ]]:</div>
+						</template>
+						<div class="selectedItem horizontal layout flex" title$="[[ get(valueProperty, item) ]]">
+							<span class="flex">[[ get(valueProperty, selectedItem) ]]</span>
+							<a href="" hidden$="[[ disabled ]]" on-click="emptySelection" onclick="return false;" class="clearSelection">
+								<iron-icon icon="delete"></iron-icon>
+							</a>
+						</div>
 					</div>
-				</div>
+				</template>
+				<template is="dom-if" if="[[ disabled ]]">
+					<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]"
+						disabled="[[ disabled ]]"
+						no-label-float="[[ noLabelFloat ]]"
+						value="[[ get(valueProperty, selectedItem) ]]"
+						invalid="[[ !isEmpty(_searchErrorMsg) ]]">
+				</template>
 			</template>
 			<!-- input field + item selector -->
 			<div hidden$="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
-				<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]" id="searchInput"
+				<paper-input class="flex" label="[[ _getLabel(disabled, placeholder) ]]" title$="[[ placeholder ]]" id="searchInput"
 					disabled="[[ disabled ]]"
 					no-label-float="[[ noLabelFloat ]]"
 					focused="{{ _focus }}"
