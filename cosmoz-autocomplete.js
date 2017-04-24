@@ -277,7 +277,7 @@
 				terms = [terms];
 			}
 
-			if (this.items === undefined) {
+			if (this.items === undefined || this.items === null) {
 				return [];
 			}
 
