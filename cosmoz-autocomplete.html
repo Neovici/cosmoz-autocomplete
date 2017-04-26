@@ -158,22 +158,7 @@
 					</template>
 				</div>
 			</template>
-			<!-- single selection selected item -->
-			<!-- FIXME: Have to use dom-if to not render when selectedItem is undefined -->
 			<template is="dom-if" if="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
-				<template is="dom-if" if="[[ !disabled ]]">
-					<div class="singleSelectedItem horizontal layout center">
-						<template is="dom-if" if="[[ searchType ]]">
-							<div class="selectedItemLabel">[[ searchType ]]:</div>
-						</template>
-						<div class="selectedItem horizontal layout flex" title$="[[ get(valueProperty, item) ]]">
-							<span class="flex">[[ get(valueProperty, selectedItem) ]]</span>
-							<a href="" hidden$="[[ disabled ]]" on-click="emptySelection" onclick="return false;" class="clearSelection">
-								<iron-icon icon="delete"></iron-icon>
-							</a>
-						</div>
-					</div>
-				</template>
 				<template is="dom-if" if="[[ disabled ]]">
 					<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]"
 						disabled="[[ disabled ]]"
@@ -189,6 +174,7 @@
 					no-label-float="[[ noLabelFloat ]]"
 					focused="{{ _focus }}"
 					on-keyup="keyup"
+					tabindex$="[[ tabindex ]]"
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
 					invalid="[[ !isEmpty(_searchErrorMsg) ]]">

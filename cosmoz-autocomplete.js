@@ -135,6 +135,10 @@
 				value: false
 			},
 
+			tabindex: {
+				type: Number
+			},
+
 			// PRIVATE
 
 			/**
@@ -188,13 +192,19 @@
 			}
 
 		},
+		observers: [
+			'_onItemSelected(selectedItem)'
+		],
+		_onItemSelected: function (data) {
+			console.log(data);
+		},
 
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
 			return multiSelection && !hideSelections;
 		},
 
 		_computeHideAutocomplete: function (multiSelection, selectedItem) {
-			return !multiSelection && selectedItem;
+			return multiSelection && selectedItem;
 		},
 
 		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
@@ -239,6 +249,9 @@
 						this.selectedSearchResult -= 1;
 					}
 					this._searchKicker += 1;
+					this.inputValue = this.multiSelection ? '' : selectedItem.label;
+					//this.selectSuggestion(selectedItem);
+					this._requestNextFocus();
 				} else {
 					this.onResultActionClick();
 					this.selectedSearchResult = undefined;
@@ -267,7 +280,7 @@
 		selectSuggestion: function (item) {
 			this.selectItem(item);
 			this.hideSuggestions();
-			this.inputValue = '';
+			this.inputValue = this.multiSelection ? '' : item.label;
 		},
 
 		search: function (terms) {
@@ -279,6 +292,10 @@
 
 			if (this.items === undefined || this.items === null) {
 				return [];
+			}
+
+			if (!this.multiSelection) {
+				this.emptySelection();
 			}
 
 			this.items.some(function (item) {
@@ -359,6 +376,15 @@
 			};
 		},
 
+		_requestNextFocus: function () {
+			this.fire('request-next-focus', {
+				tabindex: this.tabindex
+			}, {
+				bubbles: true,
+				cancelable: true
+			});
+		},
+
 		_computeShownListData: function (term, focus) {
 			if (!focus || term.length < this.minimumInputLength) {
 				this.debounce('hideSuggestions', this.hideSuggestions, 200);
@@ -374,10 +400,16 @@
 				offsetBottom;
 
 			if (this._focus && results.length > 0) {
-				offsetTop = this.offsetTop;
-				offsetBottom = this.offsetParent.offsetHeight - offsetTop;
-				this._hideSuggestions = false;
-				this._dropUp = offsetTop > offsetBottom;
+				Polymer.RenderStatus.afterNextRender(this, function () {
+					if (this.offsetParent === null) {
+						return;
+					}
+					offsetTop = this.offsetTop;
+					offsetBottom = this.offsetParent.offsetHeight - offsetTop;
+					this._hideSuggestions = false;
+					this._dropUp = offsetTop > offsetBottom;
+
+				});
 			}
 			return results;
 		},
@@ -402,7 +434,6 @@
 				selectedItem = this.shownListData[itemIndex].data;
 				if (!this.isSelected(selectedItem)) {
 					this.selectSuggestion(selectedItem);
-					this.inputValue = '';
 				}
 			} else {
 				this.onResultActionClick(item);
@@ -411,6 +442,7 @@
 
 		_focusChanged: function (focus) {
 			if (focus) {
+				console.log('focusChanged');
 				this.cancelDebouncer('hideSuggestions');
 				return;
 			}
@@ -436,6 +468,15 @@
 				cancelable: true,
 				node: item
 			});
+		},
+		focus: function (focus) {
+			this.async(function () {
+				if(focus) {
+					this.$.searchInput.focus();
+				} else {
+					this.$.searchInput.blur();
+				}
+			}, 1);
 		}
 	});
 }());
