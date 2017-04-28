@@ -174,10 +174,11 @@
 					no-label-float="[[ noLabelFloat ]]"
 					focused="{{ _focus }}"
 					on-keyup="keyup"
-					tabindex$="[[ tabindex ]]"
+					tabbindex$="[[ tabbindex ]]"
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
 					invalid="[[ !isEmpty(_searchErrorMsg) ]]">
+					<iron-icon suffix icon="clear" hidden$="[[ _noItemSelected ]]" on-tap="emptySelection"></iron-icon>
 					<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
 				</paper-input>
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">
@@ -186,9 +187,11 @@
 							<template is="dom-repeat" items="[[ shownListData ]]">
 								<div index="[[ index ]]" class="result" title$="[[ item.plainText ]]" inner-h-t-m-l="[[ item.displayLabel ]]"></div>
 							</template>
-							<div hidden$="[[ !_showActions ]]">
-								<content select=".result-action"></content>
-							</div>
+							<template is="dom-if" if="[[ _showActions ]]">
+								<div hidden$="[[ !_showActions ]]">
+									<content select=".result-action"></content>
+								</div>
+							</template>
 						</iron-selector>
 					</paper-material>
 				</div>

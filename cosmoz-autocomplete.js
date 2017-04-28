@@ -135,7 +135,7 @@
 				value: false
 			},
 
-			tabindex: {
+			tabbindex: {
 				type: Number
 			},
 
@@ -189,14 +189,26 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
+			},
+			_noItemSelected: {
+				type: Boolean,
+				computed: '_computeNoItemSelected(selectedItem)'
 			}
 
 		},
 		observers: [
 			'_onItemSelected(selectedItem)'
 		],
-		_onItemSelected: function (data) {
-			console.log(data);
+		_onItemSelected: function (item) {
+			if (item) {
+				this.inputValue = this.multiSelection ? '' : item.label;
+			} else {
+				this.inputValue = '';
+			}
+		},
+
+		_computeNoItemSelected: function (selectedItem) {
+			return !selectedItem;
 		},
 
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
@@ -208,7 +220,7 @@
 		},
 
 		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
-			if (!focus) {
+			if (!focus || this.selectedItem && term === this.selectedItem.label) {
 				return '';
 			}
 			if (term.length < minLength) {
@@ -222,6 +234,35 @@
 
 		_computeShowActions: function (showActionsLimit, numShownResults) {
 			return numShownResults <= showActionsLimit;
+		},
+
+		_computeShownListData: function (term, focus) {
+			if (!focus || term.length < this.minimumInputLength) {
+				this.debounce('hideSuggestions', this.hideSuggestions, 200);
+			}
+			if (term.length < this.minimumInputLength || this.selectedItem && term === this.selectedItem.label) {
+				return [];
+			}
+
+			var
+				terms = this.exactQuery ? [ term ] : term.split(' '),
+				results = this.search(terms),
+				offsetTop,
+				offsetBottom;
+
+			if (this._focus && results.length > 0) {
+				Polymer.RenderStatus.afterNextRender(this, function () {
+					if (this.offsetParent === null) {
+						return;
+					}
+					offsetTop = this.offsetTop;
+					offsetBottom = this.offsetParent.offsetHeight - offsetTop;
+					this._hideSuggestions = false;
+					this._dropUp = offsetTop > offsetBottom;
+
+				});
+			}
+			return results;
 		},
 
 		_increaseNum: function (num, inc) {
@@ -243,14 +284,18 @@
 			switch (event.keyCode) {
 			case 13: // Enter
 				if (this.selectedSearchResult >= 0) {
+					if (!this.shownListData[this.selectedSearchResult]) {
+						this._requestNextFocus();
+						break;
+					}
 					selectedItem = this.shownListData[this.selectedSearchResult].data;
 					this.selectItem(selectedItem);
 					if (this.shownListData.length === this.selectedSearchResult + 1) {
 						this.selectedSearchResult -= 1;
 					}
 					this._searchKicker += 1;
-					this.inputValue = this.multiSelection ? '' : selectedItem.label;
-					//this.selectSuggestion(selectedItem);
+					//this.inputValue = this.multiSelection ? '' : selectedItem.label;
+					this.selectSuggestion(selectedItem);
 					this._requestNextFocus();
 				} else {
 					this.onResultActionClick();
@@ -378,41 +423,13 @@
 
 		_requestNextFocus: function () {
 			this.fire('request-next-focus', {
-				tabindex: this.tabindex
+				tabindex: this.tabbindex
 			}, {
-				bubbles: true,
+				bubbles: false,
 				cancelable: true
 			});
 		},
 
-		_computeShownListData: function (term, focus) {
-			if (!focus || term.length < this.minimumInputLength) {
-				this.debounce('hideSuggestions', this.hideSuggestions, 200);
-			}
-			if (term.length < this.minimumInputLength) {
-				return [];
-			}
-
-			var
-				terms = this.exactQuery ? [ term ] : term.split(' '),
-				results = this.search(terms),
-				offsetTop,
-				offsetBottom;
-
-			if (this._focus && results.length > 0) {
-				Polymer.RenderStatus.afterNextRender(this, function () {
-					if (this.offsetParent === null) {
-						return;
-					}
-					offsetTop = this.offsetTop;
-					offsetBottom = this.offsetParent.offsetHeight - offsetTop;
-					this._hideSuggestions = false;
-					this._dropUp = offsetTop > offsetBottom;
-
-				});
-			}
-			return results;
-		},
 
 		_getDropUpClass: function (dropUp) {
 			return dropUp ? 'dropup' : '';
@@ -442,7 +459,6 @@
 
 		_focusChanged: function (focus) {
 			if (focus) {
-				console.log('focusChanged');
 				this.cancelDebouncer('hideSuggestions');
 				return;
 			}
@@ -471,7 +487,7 @@
 		},
 		focus: function (focus) {
 			this.async(function () {
-				if(focus) {
+				if (focus) {
 					this.$.searchInput.focus();
 				} else {
 					this.$.searchInput.blur();
