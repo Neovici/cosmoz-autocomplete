@@ -192,6 +192,7 @@
 			},
 			_noItemSelected: {
 				type: Boolean,
+				value: true,
 				computed: '_computeNoItemSelected(selectedItem)'
 			}
 
