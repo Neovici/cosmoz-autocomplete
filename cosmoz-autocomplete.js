@@ -201,7 +201,7 @@
 		],
 		_onItemSelected: function (item) {
 			if (item) {
-				this.inputValue = this.multiSelection ? '' : item.label;
+				this.inputValue = this.multiSelection ? '' : this._valueForItem(item);
 			} else {
 				this.inputValue = '';
 			}
@@ -220,7 +220,7 @@
 		},
 
 		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
-			if (!focus || this.selectedItem && term === this.selectedItem.label) {
+			if (!focus || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
 				return '';
 			}
 			if (term.length < minLength) {
@@ -240,7 +240,7 @@
 			if (!focus || term.length < this.minimumInputLength) {
 				this.debounce('hideSuggestions', this.hideSuggestions, 200);
 			}
-			if (term.length < this.minimumInputLength || this.selectedItem && term === this.selectedItem.label) {
+			if (term.length < this.minimumInputLength || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
 				return [];
 			}
 
@@ -325,7 +325,7 @@
 		selectSuggestion: function (item) {
 			this.selectItem(item);
 			this.hideSuggestions();
-			this.inputValue = this.multiSelection ? '' : item.label;
+			this.inputValue = this.multiSelection ? '' : this._valueForItem(item);
 		},
 
 		search: function (terms) {
