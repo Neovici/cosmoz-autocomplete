@@ -182,7 +182,7 @@
 					value="{{ inputValue }}"
 					error-message="{{ _searchErrorMsg }}"
 					invalid="[[ !isEmpty(_searchErrorMsg) ]]">
-					<iron-icon suffix icon="clear" hidden$="[[ _noItemSelected ]]" on-tap="emptySelection"></iron-icon>
+					<iron-icon suffix icon="clear" hidden$="[[ !_showClear ]]" on-tap="emptySelection"></iron-icon>
 					<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
 				</paper-input>
 				<div class="relative" hidden$="[[ _hideSuggestions ]]">

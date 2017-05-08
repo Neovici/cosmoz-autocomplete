@@ -113,6 +113,11 @@
 				value: 0
 			},
 
+			_showClear: {
+				type: Boolean,
+				computed: '_computeShowClear(disabled, selectedItem)'
+			},
+
 			/**
 			 * The shown list of results matching the inputValue query
 			 */
@@ -133,6 +138,13 @@
 			disabled: {
 				type: Boolean,
 				value: false
+			},
+
+			selectedItem: {
+				type: Object,
+				notify: true,
+				value: null,
+				observer: '_onItemSelected'
 			},
 
 			tabbindex: {
@@ -189,17 +201,10 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
-			},
-			_noItemSelected: {
-				type: Boolean,
-				value: true,
-				computed: '_computeNoItemSelected(selectedItem)'
 			}
 
 		},
-		observers: [
-			'_onItemSelected(selectedItem)'
-		],
+
 		_onItemSelected: function (item) {
 			if (item) {
 				this.inputValue = this.multiSelection ? '' : this._valueForItem(item);
@@ -208,12 +213,12 @@
 			}
 		},
 
-		_computeNoItemSelected: function (selectedItem) {
-			return !selectedItem;
-		},
-
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
 			return multiSelection && !hideSelections;
+		},
+
+		_computeShowClear: function (disabled, selectedItem) {
+			return !disabled && selectedItem;
 		},
 
 		_computeHideAutocomplete: function (multiSelection, selectedItem) {
