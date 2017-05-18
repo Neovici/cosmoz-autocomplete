@@ -8,21 +8,13 @@
 <link rel="import" href="../paper-material/paper-material.html" />
 <link rel="import" href="../paper-spinner/paper-spinner.html" />
 <link rel="import" href="../cosmoz-behaviors/cosmoz-templatehelper-behavior.html">
-<link rel="import" href="../cosmoz-selectable/cosmoz-multi-selectable-behavior.html">
 <link rel="import" href="../cosmoz-i18next/cosmoz-i18next.html">
 
 
 <!--
-
-<link rel="import" href="../cosmoz-selectable/cosmoz-multi-selectable-behavior.html">
-
-
-
-`<cosmoz-autocomplete>` is an auto-completed/typeahead multi-select
+`<cosmoz-autocomplete>` is an auto-complete/typeahead multi-select
 
 ### Usage
-
-
 
 *html example here*
 
@@ -162,43 +154,31 @@
 					</template>
 				</div>
 			</template>
-			<template is="dom-if" if="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
-				<template is="dom-if" if="[[ disabled ]]">
-					<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]"
-						disabled="[[ disabled ]]"
-						no-label-float="[[ noLabelFloat ]]"
-						value="[[ get(valueProperty, selectedItem) ]]"
-						invalid="[[ !isEmpty(_searchErrorMsg) ]]">
-				</template>
-			</template>
-			<!-- input field + item selector -->
-			<div hidden$="[[ _computeHideAutocomplete(multiSelection, selectedItem) ]]">
-				<paper-input class="flex" label="[[ _getLabel(disabled, placeholder) ]]" title$="[[ placeholder ]]" id="searchInput"
-					disabled="[[ disabled ]]"
-					no-label-float="[[ noLabelFloat ]]"
-					focused="{{ _focus }}"
-					on-keyup="keyup"
-					tabbindex$="[[ tabbindex ]]"
-					value="{{ inputValue }}"
-					error-message="{{ _searchErrorMsg }}"
-					invalid="[[ !isEmpty(_searchErrorMsg) ]]">
-					<iron-icon suffix icon="clear" hidden$="[[ !_showClear ]]" on-tap="emptySelection"></iron-icon>
-					<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
-				</paper-input>
-				<div class="relative" hidden$="[[ _hideSuggestions ]]">
-					<paper-material elevation="1" class$="result-holder [[ _getDropUpClass(_dropUp) ]]">
-						<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect" selected="{{ selectedSearchResult }}">
-							<template is="dom-repeat" items="[[ shownListData ]]">
-								<div index="[[ index ]]" class="result" title$="[[ item.plainText ]]" inner-h-t-m-l="[[ item.displayLabel ]]"></div>
-							</template>
-							<template is="dom-if" if="[[ _showActions ]]">
-								<div hidden$="[[ !_showActions ]]">
-									<content select=".result-action"></content>
-								</div>
-							</template>
-						</iron-selector>
-					</paper-material>
-				</div>
+			<paper-input class="flex" label="[[ placeholder ]]" title$="[[ placeholder ]]" id="searchInput"
+				disabled="[[ disabled ]]"
+				no-label-float="[[ noLabelFloat ]]"
+				focused="{{ _focus }}"
+				on-keyup="keyup"
+				tabbindex$="[[ tabbindex ]]"
+				value="{{ inputValue }}"
+				error-message="{{ _searchErrorMsg }}"
+				invalid="[[ !isEmpty(_searchErrorMsg) ]]">
+				<iron-icon suffix icon="clear" hidden$="[[ !_showClear ]]" on-tap="emptySelection"></iron-icon>
+				<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
+			</paper-input>
+			<div class="relative" hidden$="[[ _hideSuggestions ]]">
+				<paper-material elevation="1" class$="result-holder [[ _getDropUpClass(_dropUp) ]]">
+					<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect" selected="{{ selectedSearchResult }}">
+						<template is="dom-repeat" items="[[ shownListData ]]">
+							<div index="[[ index ]]" class="result" title$="[[ item.plainText ]]" inner-h-t-m-l="[[ item.displayLabel ]]"></div>
+						</template>
+						<template is="dom-if" if="[[ _showActions ]]">
+							<div hidden$="[[ !_showActions ]]">
+								<content select=".result-action"></content>
+							</div>
+						</template>
+					</iron-selector>
+				</paper-material>
 			</div>
 		</div>
 	</template>

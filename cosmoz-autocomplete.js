@@ -14,7 +14,6 @@
 	Polymer({
 		is: 'cosmoz-autocomplete',
 		behaviors: [
-			Cosmoz.MultiSelectableBehavior,
 			Cosmoz.TemplateHelperBehavior,
 			Cosmoz.TranslatableBehavior
 		],
@@ -34,6 +33,14 @@
 			hideSelections: {
 				type: Boolean,
 				value: false
+			},
+
+			items: {
+				type: Array,
+				value: function () {
+					return [];
+				},
+				observer: 'itemsChanged'
 			},
 			/**
 			 * Whether to show a loading spinner.
@@ -63,6 +70,10 @@
 			 * splitting up words in an AND query
 			 */
 			exactQuery: {
+				type: Boolean,
+				value: false
+			},
+			persistSelection: {
 				type: Boolean,
 				value: false
 			},
@@ -102,7 +113,8 @@
 			 * If multiple results can be selected
 			 */
 			multiSelection: {
-				type: Boolean
+				type: Boolean,
+				value: false
 			},
 
 			/**
@@ -123,8 +135,9 @@
 			 */
 			shownListData: {
 				type: Array,
-				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items)'
+				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)'
 			},
+
 			/**
 			 * Set to true to disable the floating label
 			 */
@@ -144,7 +157,21 @@
 				type: Object,
 				notify: true,
 				value: null,
-				observer: '_onItemSelected'
+				observer: 'selectedItemChanged'
+			},
+
+			selectedItems: {
+				type: Array,
+				notify: true,
+				value: function () {
+					return [];
+				},
+				observer: 'selectedItemsChanged'
+			},
+
+			valueProperty: {
+				type: String,
+				value: 'label'
 			},
 
 			tabbindex: {
@@ -205,11 +232,54 @@
 
 		},
 
-		_onItemSelected: function (item) {
-			if (item) {
-				this.inputValue = this.multiSelection ? '' : this._valueForItem(item);
-			} else {
-				this.inputValue = '';
+		observers: [
+			'isSelectedDisabled(disabled, selectedItem, valueProperty)'
+		],
+
+		isSelectedDisabled: function (disabled, selectedItem, valueProperty) {
+			if (disabled && selectedItem) {
+				this.inputValue = this.get(valueProperty, selectedItem)
+			}
+		},
+
+		itemsChanged: function (newItems) {
+			if (this.persistSelection || !Array.isArray(newItems) || !Array.isArray(this.selectedItems)) {
+				return;
+			}
+			this.selectedItems.forEach(function (item, index) {
+				if (newItems.indexOf(item) !== -1) {
+					return;
+				}
+				this.splice('selectedItems', index, 1);
+			}, this);
+		},
+
+		selectedItemChanged: function (item) {
+			var value = '';
+			if (item && !this.multiSelection) {
+				value = this._valueForItem(item);
+			}
+			this.inputValue = value;
+			if (this.selectedItems === undefined || this.selectedItems === null || !Array.isArray(this.selectedItems)) {
+				this.selectedItems = [];
+				if (item !== undefined && item !== null) {
+					this.push('selectedItems', item);
+				}
+			} else if (this.selectedItems.indexOf(item) === -1) {
+				this.splice('selectedItems', 0, this.selectedItems.length);
+				if (item !== undefined && item !== null) {
+					this.push('selectedItems', item);
+				}
+			}
+		},
+
+		selectedItemsChanged: function (items) {
+			var item = null;
+			if (items !== undefined && items !== null && Array.isArray(items) && items.length > 0) {
+				item = items[0];
+			}
+			if (this.selectedItem !== item) {
+				this.set('selectedItem', item);
 			}
 		},
 
@@ -219,10 +289,6 @@
 
 		_computeShowClear: function (disabled, selectedItem) {
 			return !disabled && selectedItem;
-		},
-
-		_computeHideAutocomplete: function (multiSelection, selectedItem) {
-			return multiSelection && selectedItem;
 		},
 
 		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
@@ -276,10 +342,18 @@
 		},
 
 		clearOneSelection: function (event) {
-			var item = event.model.item;
-			if (this.isSelected(item)) {
-				this.deselectItem(item);
+			if (!Array.isArray(this.selectedItems)) {
+				return;
 			}
+			var item = event.model.item,
+				selectIndex = this.selectedItems.indexOf(item);
+			if (selectIndex !== -1) {
+				this.splice('selectedItems', selectIndex, 1);
+			}
+		},
+
+		isSelected: function (item) {
+			return Array.isArray(this.selectedItems) && this.selectedItems.indexOf(item) !== -1;
 		},
 
 		keyup: function (event, detail) {
@@ -294,8 +368,8 @@
 						this._requestNextFocus();
 						break;
 					}
-					selectedItem = this.shownListData[this.selectedSearchResult].data;
-					this.selectItem(selectedItem);
+					this.selectedItem = this.shownListData[this.selectedSearchResult].data;
+				  	
 					if (this.shownListData.length === this.selectedSearchResult + 1) {
 						this.selectedSearchResult -= 1;
 					}
@@ -328,6 +402,20 @@
 			this.selectedSearchResult = 0;
 		},
 
+		selectItem: function (item) {
+			if (!this.multiSelection) {
+				if (this.selectedItem !== item) {
+					this.selectedItem = item;
+				}
+				return;
+			}
+			if (!Array.isArray(this.selectedItems) || this.selectedItems.indexOf(item) !== -1) {
+				return;
+			}
+
+			this.push('selectedItems', item);
+		},
+
 		selectSuggestion: function (item) {
 			this.selectItem(item);
 			this.hideSuggestions();
@@ -345,14 +433,13 @@
 				return [];
 			}
 
-			if (!this.multiSelection) {
-				this.emptySelection();
-			}
-
 			this.items.some(function (item) {
 
+				if (item === null || item === undefined) {
+					return;
+				}
+
 				var hasOtherInstance = false,
-					itemValue = this._valueForItem(item),
 					noSearchHit = false;
 
 				if (this.selectedItems && this.selectedItems.length > 0) {
@@ -365,9 +452,7 @@
 					// don't add new instances of the same items
 					if (this.persistSelection) {
 						hasOtherInstance = this.selectedItems.some(function (selectedItem) {
-							if (this._valueForItem(selectedItem) === itemValue) {
-								return true;
-							}
+							return selectedItem === item;
 						}, this);
 
 						if (hasOtherInstance) {
@@ -409,6 +494,10 @@
 
 		highlightResult: function (terms, result) {
 
+			if (result === null || result === undefined) {
+				return;
+			}
+
 			var regexpResult = '<b>$1</b>',
 				plain = this._valueForItem(result).toString(),
 				label = plain;
@@ -441,20 +530,12 @@
 			return dropUp ? 'dropup' : '';
 		},
 
-		_getLabel: function (disabled, label) {
-			if (disabled) {
-				return;
-			}
-			return label;
-		},
-
 		onSearchResultSelect: function (event, detail) {
 			var item = detail.item,
-				itemIndex = item.index,
 				selectedItem;
 
-			if (itemIndex !== undefined) {
-				selectedItem = this.shownListData[itemIndex].data;
+			if (item.index !== undefined) {
+				selectedItem = this.shownListData[item.index].data;
 				if (!this.isSelected(selectedItem)) {
 					this.selectSuggestion(selectedItem);
 				}
@@ -482,6 +563,13 @@
 			}
 		},
 
+		_valueForItem: function (item) {
+			if (item === null || item === undefined) {
+				return;
+			}
+			return item[this.valueProperty];
+		},
+
 		onResultActionClick: function (item) {
 			this.fire('action', {
 				inputValue: this.inputValue
@@ -490,6 +578,9 @@
 				cancelable: true,
 				node: item
 			});
+		},
+		emptySelection: function () {
+			this.set('selectedItem', null);
 		},
 		focus: function (focus) {
 			this.async(function () {

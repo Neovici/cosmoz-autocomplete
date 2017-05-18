@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<link rel="import" href="../../paper-styles/demo-pages.html">
 	</head>
 	<body unresolved>
-		<template is="dom-bind">
+		<template is="dom-bind" id="t">
 			<h1>cosmoz-autocomplete</h1>
 			<!-- multi selection selected items -->
 			<div class="vertical center-justified layout">
@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<div class="horizontal-section">
 					<cosmoz-autocomplete items="{{ demoItems }}"
 						placeholder="Search"
-						selected-items="{{ demoSelected2 }}"
+						selected-item="{{ demoItems.1 }}"
 						id="a2">
 					</cosmoz-autocomplete>
 				</div>
@@ -91,7 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						disabled
 						no-label-float
 						placeholder="Search"
-						selected-items="{{ demoSelected5 }}"
+						selected-item="{{ demoItems.4 }}"
 						id="a4">
 					</cosmoz-autocomplete>
 				</div>
@@ -136,10 +136,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		}];
 
 	window.addEventListener('WebComponentsReady', function () {
-		document.getElementById('a1').items = demoItems;
-		document.getElementById('a2').items = demoItems;
-		var selectedItems = [demoItems[0]];
-		document.getElementById('a4').selectItem(demoItems[0]);
+		var t = document.getElementById('t');
+		t.demoSelected1 = demoItems.slice(1,3);
+		t.demoItems = demoItems;
 	});
 }());
 </script>
