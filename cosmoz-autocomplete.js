@@ -433,61 +433,61 @@
 				return [];
 			}
 
-			this.items.some(function (item) {
-
-				if (item === null || item === undefined) {
-					return;
-				}
-
-				var hasOtherInstance = false,
-					noSearchHit = false;
-
-				if (this.selectedItems && this.selectedItems.length > 0) {
-
-					// don't add already selected items
-					if (this.selectedItems.indexOf(item) !== -1) {
-						return;
+			this.items
+				.filter(function (item) {
+					if (item === null || item === undefined) {
+						return false;
 					}
+					if (Array.isArray(this.selectedItems) && this.selectedItems.length > 0) {
+						// don't add already selected items
+						if (this.selectedItems.indexOf(item) !== -1) {
+							return false;
+						}
 
-					// don't add new instances of the same items
-					if (this.persistSelection) {
-						hasOtherInstance = this.selectedItems.some(function (selectedItem) {
-							return selectedItem === item;
-						}, this);
-
-						if (hasOtherInstance) {
-							return;
+						// don't add new instances of the same items
+						if (this.persistSelection) {
+							return this.selectedItems.some(function (selectedItem) {
+								return selectedItem === item;
+							}, this);
 						}
 					}
-				}
+					return true;
+				}, this)
+				.every(function (item) {
 
-				noSearchHit = terms.some(function (term) {
-					if (term === '') {
-						return; // beginning/ending space in multi word search, continue
-					}
-					var searchProperty = itemValue;
+					var hasOtherInstance = false,
+						searchProperty,
+						searchHit;
+						
+					var searchProperty = this._valueForItem(item);
 					if (typeof searchProperty === 'number') {
 						searchProperty = searchProperty.toString();
 					}
 					if (!this.caseSensitive) {
-						term = term.toLowerCase();
 						searchProperty = searchProperty.toLowerCase();
 					}
-					if (searchProperty.indexOf(term) === -1) {
-						return true; // exit
+					
+					searchHit = terms
+						.filter(function (term) {
+							// beginning/ending space in multi word search, continue
+							return term !== '';
+						})
+						.every(function (term) {
+							if (!this.caseSensitive) {
+								term = term.toLowerCase();
+							}
+							return searchProperty.indexOf(term) !== -1;
+						}, this);
+
+					if (!searchHit) {
+						return true;
 					}
+
+					results.push(this.highlightResult(terms, item));
+
+					return results.length <= this.maxNumberResult;
+
 				}, this);
-
-				if (noSearchHit) {
-					return;
-				}
-
-				results.push(this.highlightResult(terms, item));
-
-				if (results.length > this.maxNumberResult) {
-					return true;
-				}
-			}, this);
 
 			return results;
 		},
@@ -502,12 +502,14 @@
 				plain = this._valueForItem(result).toString(),
 				label = plain;
 
-			terms.forEach(function (term) {
-				if (term.length > 0) {
+			terms
+				.filter(function (term) {
+					return term.length > 0;
+				})
+				.forEach(function (term) {
 					var re = new RegExp('(' + term + ')', 'ig');
 					label = label.replace(re, regexpResult);
-				}
-			});
+				});
 
 			return {
 				displayLabel: label,
