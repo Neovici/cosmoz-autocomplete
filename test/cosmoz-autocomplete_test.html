@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>cosmoz-bottom-bar tests</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+	<script src="../../web-component-tester/browser.js"></script>
+	<script src="../../test-fixture/test-fixture-mocha.js"></script>
+	<script src="../../iron-test-helpers/mock-interactions.js"></script>
+
+
+	<link rel="import" href="../cosmoz-autocomplete.html">
+
+	<style>
+	</style>
+
+</head>
+<body>
+	<test-fixture id="basic">
+		<template>
+			<cosmoz-autocomplete></cosmoz-autocomplete>
+		</template>
+	</test-fixture>
+
+	<test-fixture id="multiSelection">
+		<template>
+			<cosmoz-autocomplete multi-selection></cosmoz-autocomplete>
+		</template>
+	</test-fixture>
+
+
+	<script>
+	/*global suite, fixture, setup, test, Polymer, assert, MockInteractions */
+	(function () {
+		'use strict';
+
+		suite('basic', function () {
+			var autocomplete,
+				items;
+
+			setup(function () {
+				items = [
+					{
+						label: 'test1',
+						prop: 'prop1'
+					},
+					{
+						label: 'test2',
+						prop: 'prop2'
+					},
+					{
+						label: 'Uppercase Test',
+						prop: 'prop3'
+					},
+				];
+
+				autocomplete = fixture('basic');
+				autocomplete.items = items;
+			});
+
+			test('instantiating the element works', function () {
+				assert.equal(autocomplete.is, 'cosmoz-autocomplete');
+			});
+
+			test('renders all items when no input value', function (done) {
+				// Need to async to wait for dom-repeat templates to render
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result'),
+						result1,
+						result2,
+						result3;
+					assert.equal(searchResults.length, 3);
+					result1 = searchResults[0];
+					result2 = searchResults[1];
+					result3 = searchResults[2];
+					assert.equal(result1.innerText, 'test1');
+					assert.equal(result2.innerText, 'test2');
+					assert.equal(result3.innerText, 'Uppercase Test');
+					done();
+				}, 200);
+			});
+
+			test('renders items that match intputValue', function (done) {
+				autocomplete.inputValue = 'test2';
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result'),
+						result;
+					assert.equal(searchResults.length, 1);
+					result = searchResults[0];
+					assert.equal(result.innerText, 'test2');
+					done();
+				}, 200);
+			});
+
+			test('Default search is case insensitive', function (done) {
+				autocomplete.inputValue = 'uppercase';
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result'),
+						result;
+					assert.equal(searchResults.length, 1);
+					result = searchResults[0];
+					assert.equal(result.innerText, 'Uppercase Test');
+					done();
+				}, 200);
+			});
+
+			test('Case sensitive search', function (done) {
+				autocomplete.caseSensitive = true;
+				autocomplete.inputValue = 'uppercase';
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result');
+					assert.equal(searchResults.length, 0);
+					done();
+				}, 200);
+			});
+
+			test('Case sensitive search', function (done) {
+				autocomplete.caseSensitive = true;
+				autocomplete.inputValue = 'Uppercase';
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result'),
+						result;
+					assert.equal(searchResults.length, 1);
+					result = searchResults[0];
+					assert.equal(result.innerText, 'Uppercase Test');
+					done();
+				}, 200);
+			});
+
+
+			test('Uses value-property', function (done) {
+				autocomplete.valueProperty = 'prop';
+				autocomplete.inputValue = 'prop2';
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result'),
+						result;
+					assert.equal(searchResults.length, 1);
+					result = searchResults[0];
+					assert.equal(result.innerText, 'prop2');
+					done();
+				}, 200);
+			});
+
+			test('setting selectedItem', function (done) {
+				autocomplete.selectedItem = items[1];
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result');
+					assert.equal(autocomplete.inputValue, 'test2');
+					assert.equal(searchResults.length, 0); // When a selection is made, nothing can be selected anymore
+					done();
+				}, 200);
+			});
+
+			test('taping an item in the search list selects the item', function (done) {
+				Polymer.Base.async(function () {
+					var
+						searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result'),
+						result2 = searchResults[1];
+					MockInteractions.tap(result2);
+					assert.equal(autocomplete.selectedItem, items[1]);
+					assert.equal(autocomplete.inputValue, items[1].label);
+					done();
+				}, 200);
+			});
+		});
+
+		suite('multiSelection', function () {
+			var autocomplete,
+				items;
+
+			setup(function () {
+				items = [
+					{
+						label: 'test1',
+						prop: 'prop1'
+					},
+					{
+						label: 'test2',
+						prop: 'prop2'
+					},
+					{
+						label: 'test3',
+						prop: 'prop3'
+					},
+					{
+						label: 'test4',
+						prop: 'prop4'
+					},
+				];
+
+				autocomplete = fixture('multiSelection');
+				autocomplete.items = items;
+			});
+
+			test('setting selectedItem sets selectedItems', function (done) {
+				autocomplete.selectedItem = items[1];
+				Polymer.Base.async(function () {
+					var selectedItems = autocomplete.selectedItems;
+					assert.isOk(selectedItems);
+					assert.equal(selectedItems.length, 1);
+					assert.equal(selectedItems[0], autocomplete.selectedItem);
+					done();
+				}, 200);
+			});
+
+			test('selecting an item removes it from the searchList', function (done) {
+				autocomplete.selectedItems = [ items[1] ];
+				Polymer.Base.async(function () {
+					var searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result');
+					assert.equal(searchResults.length, 3);
+					assert.equal(searchResults[0].innerText, 'test1');
+					assert.equal(searchResults[1].innerText, 'test3');
+					assert.equal(searchResults[2].innerText, 'test4');
+					done();
+				}, 200);
+			});
+
+			test('selecting several items removes them from the searchList', function (done) {
+				autocomplete.selectedItems = [ items[1], items[3] ];
+				Polymer.Base.async(function () {
+					var searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result');
+					assert.equal(searchResults.length, 2);
+					assert.equal(searchResults[0].innerText, 'test1');
+					assert.equal(searchResults[1].innerText, 'test3');
+					done();
+				}, 200);
+			});
+
+		});
+	}());
+	</script>
+</body>
+</html>
