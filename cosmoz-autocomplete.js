@@ -238,7 +238,7 @@
 
 		isSelectedDisabled: function (disabled, selectedItem, valueProperty) {
 			if (disabled && selectedItem) {
-				this.inputValue = this.get(valueProperty, selectedItem)
+				this.inputValue = this.get(valueProperty, selectedItem);
 			}
 		},
 
@@ -324,6 +324,7 @@
 
 			if (this._focus && results.length > 0) {
 				Polymer.RenderStatus.afterNextRender(this, function () {
+					/* eslint-disable no-invalid-this */
 					if (this.offsetParent === null) {
 						return;
 					}
@@ -331,6 +332,7 @@
 					offsetBottom = this.offsetParent.offsetHeight - offsetTop;
 					this._hideSuggestions = false;
 					this._dropUp = offsetTop > offsetBottom;
+					/* esling-enable no-invalid-this */
 
 				});
 			}
@@ -369,7 +371,7 @@
 						break;
 					}
 					this.selectedItem = this.shownListData[this.selectedSearchResult].data;
-				  	
+
 					if (this.shownListData.length === this.selectedSearchResult + 1) {
 						this.selectedSearchResult -= 1;
 					}
@@ -423,10 +425,11 @@
 		},
 
 		search: function (terms) {
-			var results = [];
+			var results = [],
+				searchTerms = terms;
 
 			if (typeof terms === 'string') {
-				terms = [terms];
+				searchTerms = [terms];
 			}
 
 			if (this.items === undefined || this.items === null) {
@@ -454,36 +457,36 @@
 					return true;
 				}, this)
 				.every(function (item) {
-
-					var hasOtherInstance = false,
-						searchProperty,
+					var searchProperty,
 						searchHit;
-						
-					var searchProperty = this._valueForItem(item);
+
+					searchProperty = this._valueForItem(item);
+
 					if (typeof searchProperty === 'number') {
 						searchProperty = searchProperty.toString();
 					}
 					if (!this.caseSensitive) {
 						searchProperty = searchProperty.toLowerCase();
 					}
-					
-					searchHit = terms
+
+					searchHit = searchTerms
 						.filter(function (term) {
 							// beginning/ending space in multi word search, continue
 							return term !== '';
 						})
 						.every(function (term) {
+							var searchTerm = term;
 							if (!this.caseSensitive) {
-								term = term.toLowerCase();
+								searchTerm = term.toLowerCase();
 							}
-							return searchProperty.indexOf(term) !== -1;
+							return searchProperty.indexOf(searchTerm) !== -1;
 						}, this);
 
 					if (!searchHit) {
 						return true;
 					}
 
-					results.push(this.highlightResult(terms, item));
+					results.push(this.highlightResult(searchTerms, item));
 
 					return results.length <= this.maxNumberResult;
 
