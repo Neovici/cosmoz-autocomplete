@@ -260,13 +260,20 @@
 				value = this._valueForItem(item);
 			}
 			this.inputValue = value;
+
+
+
 			if (this.selectedItems === undefined || this.selectedItems === null || !Array.isArray(this.selectedItems)) {
+
 				this.selectedItems = [];
 				if (item !== undefined && item !== null) {
 					this.push('selectedItems', item);
 				}
+
 			} else if (this.selectedItems.indexOf(item) === -1) {
+
 				this.splice('selectedItems', 0, this.selectedItems.length);
+
 				if (item !== undefined && item !== null) {
 					this.push('selectedItems', item);
 				}
@@ -363,22 +370,29 @@
 				el = this.$.searchResults,
 				selectedItem;
 
+
 			switch (event.keyCode) {
 			case 13: // Enter
+
 				if (this.selectedSearchResult >= 0) {
 					if (!this.shownListData[this.selectedSearchResult]) {
 						this._requestNextFocus();
 						break;
 					}
-					this.selectedItem = this.shownListData[this.selectedSearchResult].data;
+
+					selectedItem = this.shownListData[this.selectedSearchResult].data;
 
 					if (this.shownListData.length === this.selectedSearchResult + 1) {
 						this.selectedSearchResult -= 1;
 					}
+
 					this._searchKicker += 1;
+
 					//this.inputValue = this.multiSelection ? '' : selectedItem.label;
+
 					this.selectSuggestion(selectedItem);
 					this._requestNextFocus();
+
 				} else {
 					this.onResultActionClick();
 					this.selectedSearchResult = undefined;
@@ -414,7 +428,6 @@
 			if (!Array.isArray(this.selectedItems) || this.selectedItems.indexOf(item) !== -1) {
 				return;
 			}
-
 			this.push('selectedItems', item);
 		},
 
@@ -454,6 +467,7 @@
 							}, this);
 						}
 					}
+
 					return true;
 				}, this)
 				.every(function (item) {
