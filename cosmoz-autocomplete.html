@@ -130,7 +130,7 @@
 
 			#searchInput {
 				--paper-input-container-label: {
-					opacity: var(--placeholder-opacity, inherit); 
+					opacity: var(--placeholder-opacity, inherit);
 				}
 			}
 
@@ -138,6 +138,15 @@
 			input[placeholder] { text-overflow: ellipsis; }
 			::-moz-placeholder { text-overflow: ellipsis; } /* firefox 19+ */
 			input:-moz-placeholder { text-overflow: ellipsis; }
+
+			/*
+			   This is to prevent the error message to be overlapped by content that is rendered too close below this element
+			*/
+			#searchInput {
+				--paper-input-error: {
+					z-index: 1;
+				};
+			}
 
 		</style>
 		<div>
