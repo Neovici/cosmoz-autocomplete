@@ -16,7 +16,8 @@
 		behaviors: [
 			Cosmoz.TemplateHelperBehavior,
 			Cosmoz.TranslatableBehavior,
-			Polymer.IronValidatableBehavior
+			Polymer.IronValidatableBehavior,
+			Polymer.IronFormElementBehavior
 		],
 
 		properties: {
