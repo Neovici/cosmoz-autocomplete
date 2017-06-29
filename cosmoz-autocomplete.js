@@ -16,7 +16,7 @@
 		behaviors: [
 			Cosmoz.TemplateHelperBehavior,
 			Cosmoz.TranslatableBehavior,
-			Polymer.IronValidatorBehavior
+			Polymer.IronValidatableBehavior
 		],
 
 		properties: {
@@ -27,6 +27,13 @@
 				type: Boolean,
 				value: false
 			},
+
+
+			customError: {
+				type: String,
+				value: 'Error'
+			},
+
 			/**
 			 * Do not show the list of multi-selection values.
 			 * Used when selected item list is handled by the compositing element.
@@ -221,8 +228,8 @@
 			 * The message to display for the current state error
 			 */
 			_searchErrorMsg: {
-				type: String,
-				computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length)'
+				type: String//,
+				// computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length)'
 			},
 
 			/**
@@ -316,7 +323,7 @@
 			return !disabled && selectedItem;
 		},
 
-		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
+		_computeSearchErrorMessage: function (focus, term, minLength, numResults, customError) {
 			if (!focus || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
 				return '';
 			}
@@ -325,6 +332,10 @@
 			}
 			if (numResults === 0) {
 				return this._('No results found');
+			}
+
+			if (customError) {
+				return customError;
 			}
 			return '';
 		},
@@ -362,6 +373,11 @@
 				});
 			}
 			return results;
+		},
+
+		_getValidity: function () {
+			console.log('_getValidity()');
+			return false;
 		},
 
 		_increaseNum: function (num, inc) {
@@ -580,7 +596,6 @@
 				this.onResultActionClick(item);
 			}
 		},
-
 		_focusChanged: function (focus) {
 			if (focus) {
 				this.cancelDebouncer('hideSuggestions');
@@ -634,7 +649,6 @@
 		},
 		validate: function () {
 			console.log('validate()');
-			this.set('_searchErrorMsg', 'Fy på dig!');
 			return false;
 		}
 	});
