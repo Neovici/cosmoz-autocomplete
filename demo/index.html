@@ -20,6 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	<link rel="import" href="../cosmoz-autocomplete.html">
 	<link rel="import" href="../../iron-ajax/iron-ajax.html">
 	<link rel="import" href="../../paper-styles/demo-pages.html">
+	<link rel="import" href="../../iron-form/iron-form.html">
 </head>
 <body>
 	<dom-module id="demo-page">
@@ -116,7 +117,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			</div>
 
 			<!-- multi selection selected items -->
-			<iron-form id="a6form">
+			<form is="iron-form" id="a6form">
 				<div class="vertical center-justified layout">
 					<h4>Multi selection selected items with required attribute</h4>
 					<div class="horizontal-section">
@@ -132,7 +133,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						<button on-tap="a6buttonclickvalidate">Validate</button>
 					</div>
 				</div>
-			</iron-form>
+			</form>
 
 		</template>
 	</dom-module>
