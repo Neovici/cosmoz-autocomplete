@@ -15,7 +15,8 @@
 		is: 'cosmoz-autocomplete',
 		behaviors: [
 			Cosmoz.TemplateHelperBehavior,
-			Cosmoz.TranslatableBehavior
+			Cosmoz.TranslatableBehavior,
+			Polymer.IronValidatorBehavior
 		],
 
 		properties: {
@@ -33,6 +34,12 @@
 			hideSelections: {
 				type: Boolean,
 				value: false
+			},
+
+			invalid: {
+				notify: true,
+				type: Boolean,
+				value: true
 			},
 
 			items: {
@@ -115,6 +122,11 @@
 			multiSelection: {
 				type: Boolean,
 				value: false
+			},
+
+			required: {
+				type: Boolean,
+				value: true
 			},
 
 			/**
@@ -228,7 +240,13 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
-			}
+			},
+
+			valid: {
+				type: Boolean,
+				notify: true,
+				computed: 'isValid()'
+			},
 
 		},
 
@@ -609,6 +627,15 @@
 					this.$.searchInput.blur();
 				}
 			}, 1);
+		},
+		isValid: function () {
+			console.log('isvalid()');
+			return false;
+		},
+		validate: function () {
+			console.log('validate()');
+			this.set('_searchErrorMsg', 'Fy på dig!');
+			return false;
 		}
 	});
 }());
