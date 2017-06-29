@@ -35,6 +35,11 @@
 				value: 'Error'
 			},
 
+			forceErrorDisplay: {
+				type: Boolean,
+				value: false
+			},
+
 			/**
 			 * Do not show the list of multi-selection values.
 			 * Used when selected item list is handled by the compositing element.
@@ -223,8 +228,8 @@
 			 * The message to display for the current state error
 			 */
 			_searchErrorMsg: {
-				type: String//,
-				// computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length)'
+				type: String,
+				computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length, customError, forceErrorDisplay)'
 			},
 
 			/**
@@ -311,10 +316,21 @@
 			return !disabled && selectedItem;
 		},
 
-		_computeSearchErrorMessage: function (focus, term, minLength, numResults, customError) {
-			if (!focus || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
+		_computeSearchErrorMessage: function (focus, term, minLength, numResults, customError, forceErrorDisplay) {
+
+			if (!focus && !forceErrorDisplay) {
 				return '';
 			}
+
+			if (this.selectedItem && term === this._valueForItem(this.selectedItem)) {
+				return '';
+			}
+
+			if (customError) {
+				return customError;
+			}
+
+
 			if (term.length < minLength) {
 				return this._('Enter at least {0} characters to search.', minLength);
 			}
@@ -322,9 +338,7 @@
 				return this._('No results found');
 			}
 
-			if (customError) {
-				return customError;
-			}
+
 			return '';
 		},
 
@@ -364,6 +378,8 @@
 		},
 
 		_getValidity: function () {
+			// this.customError = 'Error';
+			this.forceErrorDisplay = true;
 			console.log('_getValidity()');
 			return false;
 		},
