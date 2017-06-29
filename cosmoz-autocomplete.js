@@ -43,12 +43,6 @@
 				value: false
 			},
 
-			invalid: {
-				notify: true,
-				type: Boolean,
-				value: true
-			},
-
 			items: {
 				type: Array,
 				value: function () {
@@ -247,14 +241,7 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
-			},
-
-			valid: {
-				type: Boolean,
-				notify: true,
-				computed: 'isValid()'
-			},
-
+			}
 		},
 
 		observers: [
@@ -642,14 +629,6 @@
 					this.$.searchInput.blur();
 				}
 			}, 1);
-		},
-		isValid: function () {
-			console.log('isvalid()');
-			return false;
-		},
-		validate: function () {
-			console.log('validate()');
-			return false;
 		}
 	});
 }());
