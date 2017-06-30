@@ -29,12 +29,6 @@
 				value: false
 			},
 
-
-			customError: {
-				type: String,
-				value: 'Error'
-			},
-
 			forceErrorDisplay: {
 				type: Boolean,
 				value: false
@@ -77,7 +71,8 @@
 			 */
 			minimumInputLength: {
 				type: Number,
-				value: 0
+				value: 0,
+				observer: 'minimumInputLengthChanged'
 			},
 			/**
 			 * Make input value a single search including spaces instead of
@@ -120,7 +115,8 @@
 			inputValue: {
 				type: String,
 				value: '',
-				notify: true
+				notify: true,
+				observer: 'inputValueChanged'
 			},
 
 			/**
@@ -133,7 +129,7 @@
 
 			required: {
 				type: Boolean,
-				value: true
+				value: false
 			},
 
 			/**
@@ -154,7 +150,8 @@
 			 */
 			shownListData: {
 				type: Array,
-				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)'
+				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)',
+				observer: 'shownListDataChanged'
 			},
 
 			/**
@@ -227,9 +224,8 @@
 			/**
 			 * The message to display for the current state error
 			 */
-			_searchErrorMsg: {
+			_errorMessage: {
 				type: String,
-				computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length, customError, forceErrorDisplay)'
 			},
 
 			/**
@@ -272,14 +268,20 @@
 			}, this);
 		},
 
+		inputValueChanged: function () {
+			this._validateComponent();
+		},
+
+		minimumInputLengthChanged: function() {
+			this._validateComponent();
+		},
+
 		selectedItemChanged: function (item) {
 			var value = '';
 			if (item && !this.multiSelection) {
 				value = this._valueForItem(item);
 			}
 			this.inputValue = value;
-
-
 
 			if (this.selectedItems === undefined || this.selectedItems === null || !Array.isArray(this.selectedItems)) {
 
@@ -308,38 +310,16 @@
 			}
 		},
 
+		shownListDataChanged: function () {
+			this._validateComponent();
+		},
+
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
 			return multiSelection && !hideSelections;
 		},
 
 		_computeShowClear: function (disabled, selectedItem) {
 			return !disabled && selectedItem;
-		},
-
-		_computeSearchErrorMessage: function (focus, term, minLength, numResults, customError, forceErrorDisplay) {
-
-			if (!focus && !forceErrorDisplay) {
-				return '';
-			}
-
-			if (this.selectedItem && term === this._valueForItem(this.selectedItem)) {
-				return '';
-			}
-
-			if (customError) {
-				return customError;
-			}
-
-
-			if (term.length < minLength) {
-				return this._('Enter at least {0} characters to search.', minLength);
-			}
-			if (numResults === 0) {
-				return this._('No results found');
-			}
-
-
-			return '';
 		},
 
 		_computeShowActions: function (showActionsLimit, numShownResults) {
@@ -350,10 +330,10 @@
 			if (!focus || term.length < this.minimumInputLength) {
 				this.debounce('hideSuggestions', this.hideSuggestions, 200);
 			}
+
 			if (term.length < this.minimumInputLength || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
 				return [];
 			}
-
 			var
 				terms = this.exactQuery ? [ term ] : term.split(' '),
 				results = this.search(terms),
@@ -378,10 +358,14 @@
 		},
 
 		_getValidity: function () {
-			// this.customError = 'Error';
-			this.forceErrorDisplay = true;
-			console.log('_getValidity()');
-			return false;
+
+			/*this.forceErrorDisplay = true;
+
+			if (this.required && !this.selectedItems.length) {
+				this.customError = this._('Nothing selected.');
+			}*/
+
+			return this._validateComponent(true);
 		},
 
 		_increaseNum: function (num, inc) {
@@ -489,9 +473,12 @@
 
 			this.items
 				.filter(function (item) {
+
+
 					if (item === null || item === undefined) {
 						return false;
 					}
+
 					if (Array.isArray(this.selectedItems) && this.selectedItems.length > 0) {
 						// don't add already selected items
 						if (this.selectedItems.indexOf(item) !== -1) {
@@ -511,6 +498,8 @@
 				.every(function (item) {
 					var searchProperty,
 						searchHit;
+
+
 
 					searchProperty = this._valueForItem(item);
 
@@ -534,6 +523,7 @@
 							return searchProperty.indexOf(searchTerm) !== -1;
 						}, this);
 
+
 					if (!searchHit) {
 						return true;
 					}
@@ -543,7 +533,6 @@
 					return results.length <= this.maxNumberResult;
 
 				}, this);
-
 			return results;
 		},
 
@@ -582,7 +571,6 @@
 			});
 		},
 
-
 		_getDropUpClass: function (dropUp) {
 			return dropUp ? 'dropup' : '';
 		},
@@ -601,6 +589,9 @@
 			}
 		},
 		_focusChanged: function (focus) {
+
+			this._validateComponent();
+
 			if (focus) {
 				this.cancelDebouncer('hideSuggestions');
 				return;
@@ -646,6 +637,59 @@
 					this.$.searchInput.blur();
 				}
 			}, 1);
+
+			this._validateComponent();
+		},
+
+		_validateComponent: function(printErrorMessage) {
+
+			if (!printErrorMessage)  {
+				this._errorMessage = '';
+			}
+
+			// not focus and not force error display
+			if (!focus && !forceErrorDisplay) {
+				if (printErrorMessage) {
+					this._errorMessage = '';
+				}
+				return true;
+			}
+
+			// an item is selected and the term matches the value?
+			if (this.selectedItem && this.inputValue === this._valueForItem(this.selectedItem)) {
+				if (printErrorMessage) {
+					this._errorMessage = '';
+				}
+				return true;
+			}
+
+			// this is required and nothing is selected?
+			if (this.required && (!this.selectedItems || !this.selectedItems.length)) {
+				if (printErrorMessage) {
+					this._errorMessage = this._('Nothing selected');
+				}
+				return false;
+			}
+
+			// no search terms are entered
+			if (this.inputValue && this.inputValue.length < this.minimumInputLength) {
+				if (printErrorMessage) {
+					this._errorMessage = this._('Enter at least {0} characters to search.', minLength);
+				}
+				return false;
+			}
+
+			// no results found
+			if (this.shownListData && this.shownListData.length === 0) {
+				if (printErrorMessage) {
+					this._errorMessage = this._('No results found');
+				}
+				return false;
+			}
+
+			this._errorMessage = '';
+			// passed all the above
+			return true;
 		}
 	});
 }());
