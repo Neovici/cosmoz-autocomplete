@@ -67,7 +67,7 @@
 			minimumInputLength: {
 				type: Number,
 				value: 0,
-				observer: 'minimumInputLengthChanged'
+				observer: '_minimumInputLengthChanged'
 			},
 			/**
 			 * Make input value a single search including spaces instead of
@@ -111,7 +111,7 @@
 				type: String,
 				value: '',
 				notify: true,
-				observer: 'inputValueChanged'
+				observer: '_inputValueChanged'
 			},
 
 			/**
@@ -146,7 +146,7 @@
 			shownListData: {
 				type: Array,
 				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)',
-				observer: 'shownListDataChanged'
+				observer: '_shownListDataChanged'
 			},
 
 			/**
@@ -263,11 +263,11 @@
 			}, this);
 		},
 
-		inputValueChanged: function () {
+		_inputValueChanged: function () {
 			this._validateComponent();
 		},
 
-		minimumInputLengthChanged: function() {
+		_minimumInputLengthChanged: function() {
 			this._validateComponent();
 		},
 
@@ -305,7 +305,7 @@
 			}
 		},
 
-		shownListDataChanged: function () {
+		_shownListDataChanged: function () {
 			this._validateComponent();
 		},
 
@@ -379,7 +379,6 @@
 			var
 				el = this.$.searchResults,
 				selectedItem;
-
 
 			switch (event.keyCode) {
 			case 13: // Enter
@@ -462,7 +461,6 @@
 			this.items
 				.filter(function (item) {
 
-
 					if (item === null || item === undefined) {
 						return false;
 					}
@@ -486,8 +484,6 @@
 				.every(function (item) {
 					var searchProperty,
 						searchHit;
-
-
 
 					searchProperty = this._valueForItem(item);
 
