@@ -29,11 +29,6 @@
 				value: false
 			},
 
-			forceErrorDisplay: {
-				type: Boolean,
-				value: false
-			},
-
 			/**
 			 * Do not show the list of multi-selection values.
 			 * Used when selected item list is handled by the compositing element.
@@ -358,13 +353,6 @@
 		},
 
 		_getValidity: function () {
-
-			/*this.forceErrorDisplay = true;
-
-			if (this.required && !this.selectedItems.length) {
-				this.customError = this._('Nothing selected.');
-			}*/
-
 			return this._validateComponent(true);
 		},
 
@@ -648,7 +636,7 @@
 			}
 
 			// not focus and not force error display
-			if (!focus && !forceErrorDisplay) {
+			if (!focus) {
 				if (printErrorMessage) {
 					this._errorMessage = '';
 				}
