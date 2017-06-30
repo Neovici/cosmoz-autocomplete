@@ -45,6 +45,7 @@
 				},
 				observer: 'itemsChanged'
 			},
+
 			/**
 			 * Whether to show a loading spinner.
 			 * Useful when something external is controlling the items dynamically (XHR)
@@ -54,6 +55,7 @@
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Maximum number of shown results in a search.
 			 */
@@ -61,6 +63,7 @@
 				type: Number,
 				value: 30
 			},
+
 			/**
 			 * Minimum length of search string for search to activate.
 			 */
@@ -69,6 +72,7 @@
 				value: 0,
 				observer: '_minimumInputLengthChanged'
 			},
+
 			/**
 			 * Make input value a single search including spaces instead of
 			 * splitting up words in an AND query
@@ -77,10 +81,12 @@
 				type: Boolean,
 				value: false
 			},
+
 			persistSelection: {
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Label to show/float within the input to describe the search
 			 */
@@ -88,6 +94,7 @@
 				type: String,
 				value: 'Search'
 			},
+
 			/**
 			 * Prefix label on single item selection
 			 */
@@ -156,6 +163,7 @@
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Set to true to disable element
 			 */
@@ -346,7 +354,6 @@
 					this._hideSuggestions = false;
 					this._dropUp = offsetTop > offsetBottom;
 					/* esling-enable no-invalid-this */
-
 				});
 			}
 			return results;
@@ -381,7 +388,7 @@
 				selectedItem;
 
 			switch (event.keyCode) {
-			case 13: // Enter
+			case 13: // enter
 
 				if (this.selectedSearchResult >= 0) {
 					if (!this.shownListData[this.selectedSearchResult]) {
@@ -397,23 +404,22 @@
 
 					this._searchKicker += 1;
 
-					//this.inputValue = this.multiSelection ? '' : selectedItem.label;
+					// this.inputValue = this.multiSelection ? '' : selectedItem.label;
 
 					this.selectSuggestion(selectedItem);
 					this._requestNextFocus();
-
 				} else {
 					this.onResultActionClick();
 					this.selectedSearchResult = undefined;
 				}
 				break;
-			case 27: // Escape
+			case 27: // escape
 				this.hideSuggestions();
 				break;
-			case 38: // Up
+			case 38: // up
 				el.selectPrevious(false);
 				break;
-			case 40: // Down
+			case 40: // down
 				el.selectNext(false);
 				break;
 			default:
@@ -581,7 +587,7 @@
 				return;
 			}
 
-			// On blur
+			// on blur
 
 			// auto-select item that matches input value exactly on blur
 			if ((!this.selectedItems || this.selectedItems.length === 0) && this.inputValue.length > 0 && this.shownListData) {
@@ -650,7 +656,7 @@
 			// this is required and nothing is selected?
 			if (this.required && (!this.selectedItems || !this.selectedItems.length)) {
 				if (printErrorMessage) {
-					this._errorMessage = this._('Nothing selected');
+					this._errorMessage = this._('Nothing selected.');
 				}
 				return false;
 			}
@@ -666,7 +672,7 @@
 			// no results found
 			if (this.shownListData && this.shownListData.length === 0) {
 				if (printErrorMessage) {
-					this._errorMessage = this._('No results found');
+					this._errorMessage = this._('No results found.');
 				}
 				return false;
 			}
