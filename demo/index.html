@@ -172,27 +172,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			properties: {},
 			behaviors: [],
 			attached: function () {
+				this.demoItems = demoItems;
 			},
 			a6buttonclickvalidate: function (event) {
 				event.preventDefault();
 				var form = this.$.a6form;
 
-				console.log(form.validate());
+				form.validate();
 
 				return;
-
-				if (!form.checkValidity()) {
-					form.reportValidity();
-					console.log('Form error!');
-				} else {
-					console.log('Form OK!');
-				}
-				event.preventDefault();
-				return false;
-			},
-			attached: function () {
-                this.demoItems = demoItems;
-            },
+			}
 		});
 
 	}());
