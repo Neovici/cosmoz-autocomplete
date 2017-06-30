@@ -54,7 +54,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<h4>ajax</h4>
 				<div class="horizontal-section">
 					<iron-ajax auto url="items.json" last-response="{{ acdata }}" params="[[ a3value ]]"></iron-ajax>
-					<cosmoz-autocomplete items="[[ acdata ]]"
+					<cosmoz-autocomplete
+						items="[[ acdata ]]"
 						placeholder="Search"
 						input-value="{{ a3value }}"
 						selected-items="{{ demoSelected3 }}">
@@ -121,7 +122,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<div class="vertical center-justified layout">
 					<h4>Multi selection selected items with required attribute</h4>
 					<div class="horizontal-section">
-						<cosmoz-autocomplete items="{{ demoItems }}"
+						<cosmoz-autocomplete
+							items="{{ demoItems }}"
 							multi-selection
 							placeholder="Search"
 							required
@@ -165,12 +167,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				label: 'Black selection'
 			}];
 
-		window.addEventListener('WebComponentsReady', function () {
-			var t = document.getElementById('t');
-			t.demoSelected1 = demoItems.slice(1,3);
-			t.demoItems = demoItems;
-		});
-
 		Polymer({
 			is: 'demo-page',
 			properties: {},
@@ -193,7 +189,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				}
 				event.preventDefault();
 				return false;
-			}
+			},
+			attached: function () {
+                this.demoItems = demoItems;
+            },
 		});
 
 	}());
