@@ -152,8 +152,12 @@
 			 */
 			shownListData: {
 				type: Array,
+<<<<<<< HEAD
 				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)',
 				observer: '_shownListDataChanged'
+=======
+				computed: '_computeShownListData(inputValue, _focus, minimumInputLength, _searchKicker, items, selectedItems.length)'
+>>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 			},
 
 			/**
@@ -246,6 +250,13 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
+<<<<<<< HEAD
+=======
+			},
+
+			_searchErrorMessage: {
+				type: String
+>>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 			}
 		},
 
@@ -343,7 +354,13 @@
 				offsetTop,
 				offsetBottom;
 
-			if (this._focus && results.length > 0) {
+			if (results.length === 0) {
+				this._searchErrorMessage = this._('No results found');
+			} else {
+				this._searchErrorMessage = null;
+			}
+
+			if (this._focus) {
 				Polymer.RenderStatus.afterNextRender(this, function () {
 					/* eslint-disable no-invalid-this */
 					if (this.offsetParent === null) {
@@ -356,6 +373,7 @@
 					/* esling-enable no-invalid-this */
 				});
 			}
+
 			return results;
 		},
 
@@ -631,7 +649,11 @@
 			this._validateComponent();
 		},
 
+<<<<<<< HEAD
 		_validateComponent: function(printErrorMessage) {
+=======
+		_validateComponent: function (printErrorMessage) {
+>>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 
 			if (!printErrorMessage)  {
 				this._errorMessage = '';
@@ -653,6 +675,7 @@
 				return false;
 			}
 
+<<<<<<< HEAD
 			// no results found
 			if (this.shownListData && this.shownListData.length === 0) {
 				if (printErrorMessage) {
@@ -661,6 +684,8 @@
 				return false;
 			}
 
+=======
+>>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 			this._errorMessage = '';
 			// passed all the above
 			return true;
