@@ -152,12 +152,7 @@
 			 */
 			shownListData: {
 				type: Array,
-<<<<<<< HEAD
-				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)',
-				observer: '_shownListDataChanged'
-=======
 				computed: '_computeShownListData(inputValue, _focus, minimumInputLength, _searchKicker, items, selectedItems.length)'
->>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 			},
 
 			/**
@@ -250,13 +245,10 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
-<<<<<<< HEAD
-=======
 			},
 
 			_searchErrorMessage: {
 				type: String
->>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 			}
 		},
 
@@ -649,11 +641,7 @@
 			this._validateComponent();
 		},
 
-<<<<<<< HEAD
-		_validateComponent: function(printErrorMessage) {
-=======
 		_validateComponent: function (printErrorMessage) {
->>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 
 			if (!printErrorMessage)  {
 				this._errorMessage = '';
@@ -675,17 +663,6 @@
 				return false;
 			}
 
-<<<<<<< HEAD
-			// no results found
-			if (this.shownListData && this.shownListData.length === 0) {
-				if (printErrorMessage) {
-					this._errorMessage = this._('No results found.');
-				}
-				return false;
-			}
-
-=======
->>>>>>> e75513efe630d8747dab066e892d256dd0e00345
 			this._errorMessage = '';
 			// passed all the above
 			return true;
