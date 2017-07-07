@@ -637,14 +637,6 @@
 				this._errorMessage = '';
 			}
 
-			// not focus and not force error display
-			if (!focus) {
-				if (printErrorMessage) {
-					this._errorMessage = '';
-				}
-				return true;
-			}
-
 			// an item is selected and the term matches the value?
 			if (this.selectedItem && this.inputValue === this._valueForItem(this.selectedItem)) {
 				if (printErrorMessage) {
