@@ -31,12 +31,18 @@
     "cosmoz-behaviors": "Neovici/cosmoz-behaviors#master",
     "paper-spinner": "polymerelements/paper-spinner#^1.2.1",
     "iron-icons": "^1.0.0",
-    "iron-icon": "^1.0.0"
+    "iron-icon": "^1.0.0",
+    "iron-form-element-behavior": "PolymerElements/iron-form-element-behavior#^1.0.0",
+    "iron-validatable-behavior": "^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "^4.2.1",
     "iron-ajax": "polymerelements/iron-ajax#^1.4.3",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0"
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+    "iron-form": "PolymerElements/iron-form#^1.1.6"
+  },
+  "resolutions": {
+    "iron-validatable-behavior": "^2.0.0"
   }
 }

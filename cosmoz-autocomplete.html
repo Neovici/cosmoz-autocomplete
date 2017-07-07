@@ -9,6 +9,10 @@
 <link rel="import" href="../paper-spinner/paper-spinner.html" />
 <link rel="import" href="../cosmoz-behaviors/cosmoz-templatehelper-behavior.html">
 <link rel="import" href="../cosmoz-i18next/cosmoz-i18next.html">
+<link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+
+
 
 
 <!--
@@ -45,6 +49,17 @@
 				display: block;
 				padding: 5px;
 				color: inherit;
+				text-decoration: none;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				cursor: pointer;
+			}
+
+			.searchErrorMessage {
+				display: block;
+				padding: 5px;
+				font-style: italic;
 				text-decoration: none;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -170,14 +185,17 @@
 				on-keyup="keyup"
 				tabbindex$="[[ tabbindex ]]"
 				value="{{ inputValue }}"
-				error-message="{{ _searchErrorMsg }}"
-				invalid="[[ !isEmpty(_searchErrorMsg) ]]">
+				error-message="{{ _errorMessage }}"
+				invalid="[[ !isEmpty(_errorMessage) ]]">
 				<iron-icon suffix icon="clear" hidden$="[[ !_showClear ]]" on-tap="emptySelection"></iron-icon>
 				<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
 			</paper-input>
 			<div class="relative" hidden$="[[ _hideSuggestions ]]">
 				<paper-material elevation="1" class$="result-holder [[ _getDropUpClass(_dropUp) ]]">
-					<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect" selected="{{ selectedSearchResult }}">
+					<iron-selector id="searchResults" on-iron-activate="onSearchResultSelect" selected="{{ selectedSearchResult }}" selectable=".result">
+						<template is="dom-if" if="[[_searchErrorMessage]]">
+							<div class="searchErrorMessage">[[_searchErrorMessage]]</div>
+						</template>
 						<template is="dom-repeat" items="[[ shownListData ]]">
 							<div index="[[ index ]]" class="result" title$="[[ item.plainText ]]" inner-h-t-m-l="[[ item.displayLabel ]]"></div>
 						</template>

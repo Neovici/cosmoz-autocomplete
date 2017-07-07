@@ -15,7 +15,9 @@
 		is: 'cosmoz-autocomplete',
 		behaviors: [
 			Cosmoz.TemplateHelperBehavior,
-			Cosmoz.TranslatableBehavior
+			Cosmoz.TranslatableBehavior,
+			Polymer.IronValidatableBehavior,
+			Polymer.IronFormElementBehavior
 		],
 
 		properties: {
@@ -26,6 +28,7 @@
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Do not show the list of multi-selection values.
 			 * Used when selected item list is handled by the compositing element.
@@ -42,6 +45,7 @@
 				},
 				observer: 'itemsChanged'
 			},
+
 			/**
 			 * Whether to show a loading spinner.
 			 * Useful when something external is controlling the items dynamically (XHR)
@@ -51,6 +55,7 @@
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Maximum number of shown results in a search.
 			 */
@@ -58,13 +63,16 @@
 				type: Number,
 				value: 30
 			},
+
 			/**
 			 * Minimum length of search string for search to activate.
 			 */
 			minimumInputLength: {
 				type: Number,
-				value: 0
+				value: 0,
+				observer: '_minimumInputLengthChanged'
 			},
+
 			/**
 			 * Make input value a single search including spaces instead of
 			 * splitting up words in an AND query
@@ -73,10 +81,12 @@
 				type: Boolean,
 				value: false
 			},
+
 			persistSelection: {
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Label to show/float within the input to describe the search
 			 */
@@ -84,6 +94,7 @@
 				type: String,
 				value: 'Search'
 			},
+
 			/**
 			 * Prefix label on single item selection
 			 */
@@ -106,13 +117,19 @@
 			inputValue: {
 				type: String,
 				value: '',
-				notify: true
+				notify: true,
+				observer: '_inputValueChanged'
 			},
 
 			/**
 			 * If multiple results can be selected
 			 */
 			multiSelection: {
+				type: Boolean,
+				value: false
+			},
+
+			required: {
 				type: Boolean,
 				value: false
 			},
@@ -135,7 +152,7 @@
 			 */
 			shownListData: {
 				type: Array,
-				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)'
+				computed: '_computeShownListData(inputValue, _focus, minimumInputLength, _searchKicker, items, selectedItems.length)'
 			},
 
 			/**
@@ -145,6 +162,7 @@
 				type: Boolean,
 				value: false
 			},
+
 			/**
 			 * Set to true to disable element
 			 */
@@ -208,9 +226,8 @@
 			/**
 			 * The message to display for the current state error
 			 */
-			_searchErrorMsg: {
+			_errorMessage: {
 				type: String,
-				computed: '_computeSearchErrorMessage(_focus, inputValue, minimumInputLength, shownListData.length)'
 			},
 
 			/**
@@ -228,8 +245,11 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
-			}
+			},
 
+			_searchErrorMessage: {
+				type: String
+			}
 		},
 
 		observers: [
@@ -254,14 +274,20 @@
 			}, this);
 		},
 
+		_inputValueChanged: function () {
+			this._validateComponent();
+		},
+
+		_minimumInputLengthChanged: function() {
+			this._validateComponent();
+		},
+
 		selectedItemChanged: function (item) {
 			var value = '';
 			if (item && !this.multiSelection) {
 				value = this._valueForItem(item);
 			}
 			this.inputValue = value;
-
-
 
 			if (this.selectedItems === undefined || this.selectedItems === null || !Array.isArray(this.selectedItems)) {
 
@@ -290,25 +316,16 @@
 			}
 		},
 
+		_shownListDataChanged: function () {
+			this._validateComponent();
+		},
+
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
 			return multiSelection && !hideSelections;
 		},
 
 		_computeShowClear: function (disabled, selectedItem) {
 			return !disabled && selectedItem;
-		},
-
-		_computeSearchErrorMessage: function (focus, term, minLength, numResults) {
-			if (!focus || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
-				return '';
-			}
-			if (term.length < minLength) {
-				return this._('Enter at least {0} characters to search.', minLength);
-			}
-			if (numResults === 0) {
-				return this._('No results found');
-			}
-			return '';
 		},
 
 		_computeShowActions: function (showActionsLimit, numShownResults) {
@@ -319,17 +336,23 @@
 			if (!focus || term.length < this.minimumInputLength) {
 				this.debounce('hideSuggestions', this.hideSuggestions, 200);
 			}
+
 			if (term.length < this.minimumInputLength || this.selectedItem && term === this._valueForItem(this.selectedItem)) {
 				return [];
 			}
-
 			var
 				terms = this.exactQuery ? [ term ] : term.split(' '),
 				results = this.search(terms),
 				offsetTop,
 				offsetBottom;
 
-			if (this._focus && results.length > 0) {
+			if (results.length === 0) {
+				this._searchErrorMessage = this._('No results found');
+			} else {
+				this._searchErrorMessage = null;
+			}
+
+			if (this._focus) {
 				Polymer.RenderStatus.afterNextRender(this, function () {
 					/* eslint-disable no-invalid-this */
 					if (this.offsetParent === null) {
@@ -340,10 +363,14 @@
 					this._hideSuggestions = false;
 					this._dropUp = offsetTop > offsetBottom;
 					/* esling-enable no-invalid-this */
-
 				});
 			}
+
 			return results;
+		},
+
+		_getValidity: function () {
+			return this._validateComponent(true);
 		},
 
 		_increaseNum: function (num, inc) {
@@ -370,9 +397,8 @@
 				el = this.$.searchResults,
 				selectedItem;
 
-
 			switch (event.keyCode) {
-			case 13: // Enter
+			case 13: // enter
 
 				if (this.selectedSearchResult >= 0) {
 					if (!this.shownListData[this.selectedSearchResult]) {
@@ -388,23 +414,22 @@
 
 					this._searchKicker += 1;
 
-					//this.inputValue = this.multiSelection ? '' : selectedItem.label;
+					// this.inputValue = this.multiSelection ? '' : selectedItem.label;
 
 					this.selectSuggestion(selectedItem);
 					this._requestNextFocus();
-
 				} else {
 					this.onResultActionClick();
 					this.selectedSearchResult = undefined;
 				}
 				break;
-			case 27: // Escape
+			case 27: // escape
 				this.hideSuggestions();
 				break;
-			case 38: // Up
+			case 38: // up
 				el.selectPrevious(false);
 				break;
-			case 40: // Down
+			case 40: // down
 				el.selectNext(false);
 				break;
 			default:
@@ -451,9 +476,11 @@
 
 			this.items
 				.filter(function (item) {
+
 					if (item === null || item === undefined) {
 						return false;
 					}
+
 					if (Array.isArray(this.selectedItems) && this.selectedItems.length > 0) {
 						// don't add already selected items
 						if (this.selectedItems.indexOf(item) !== -1) {
@@ -496,6 +523,7 @@
 							return searchProperty.indexOf(searchTerm) !== -1;
 						}, this);
 
+
 					if (!searchHit) {
 						return true;
 					}
@@ -505,7 +533,6 @@
 					return results.length <= this.maxNumberResult;
 
 				}, this);
-
 			return results;
 		},
 
@@ -544,7 +571,6 @@
 			});
 		},
 
-
 		_getDropUpClass: function (dropUp) {
 			return dropUp ? 'dropup' : '';
 		},
@@ -562,14 +588,16 @@
 				this.onResultActionClick(item);
 			}
 		},
-
 		_focusChanged: function (focus) {
+
+			this._validateComponent();
+
 			if (focus) {
 				this.cancelDebouncer('hideSuggestions');
 				return;
 			}
 
-			// On blur
+			// on blur
 
 			// auto-select item that matches input value exactly on blur
 			if ((!this.selectedItems || this.selectedItems.length === 0) && this.inputValue.length > 0 && this.shownListData) {
@@ -609,6 +637,35 @@
 					this.$.searchInput.blur();
 				}
 			}, 1);
+
+			this._validateComponent();
+		},
+
+		_validateComponent: function (printErrorMessage) {
+
+			if (!printErrorMessage)  {
+				this._errorMessage = '';
+			}
+
+			// an item is selected and the term matches the value?
+			if (this.selectedItem && this.inputValue === this._valueForItem(this.selectedItem)) {
+				if (printErrorMessage) {
+					this._errorMessage = '';
+				}
+				return true;
+			}
+
+			// this is required and nothing is selected?
+			if (this.required && (!this.selectedItems || !this.selectedItems.length)) {
+				if (printErrorMessage) {
+					this._errorMessage = this._('Nothing selected.');
+				}
+				return false;
+			}
+
+			this._errorMessage = '';
+			// passed all the above
+			return true;
 		}
 	});
 }());
