@@ -117,6 +117,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				</div>
 			</div>
 
+			<div class="vertical center-justified layout">
+				<h4>Actions</h4>
+				<div class="horizontal-section">
+					<cosmoz-autocomplete items="{{ demoItems }}"
+						no-label-float
+						placeholder="Search"
+						id="a5">
+						<div slot="result-action">Action1 when no results</div>
+						<div slot="result-action">Action2 when no results</div>
+					</cosmoz-autocomplete>
+				</div>
+			</div>
+
 			<!-- multi selection selected items -->
 			<form is="iron-form" id="a6form">
 				<div class="vertical center-justified layout">
