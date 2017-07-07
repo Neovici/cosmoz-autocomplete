@@ -69,8 +69,7 @@
 			 */
 			minimumInputLength: {
 				type: Number,
-				value: 0,
-				observer: '_minimumInputLengthChanged'
+				value: 0
 			},
 
 			/**
@@ -117,8 +116,7 @@
 			inputValue: {
 				type: String,
 				value: '',
-				notify: true,
-				observer: '_inputValueChanged'
+				notify: true
 			},
 
 			/**
@@ -152,8 +150,7 @@
 			 */
 			shownListData: {
 				type: Array,
-				computed: '_computeShownListData(inputValue, _focus, _searchKicker, items, selectedItems.length)',
-				observer: '_shownListDataChanged'
+				computed: '_computeShownListData(inputValue, _focus, minimumInputLength, _searchKicker, items, selectedItems.length)'
 			},
 
 			/**
@@ -246,6 +243,10 @@
 			_showActions: {
 				type: Boolean,
 				computed: '_computeShowActions(showActionsLimit, shownListData.length)'
+			},
+
+			_searchErrorMessage: {
+				type: String
 			}
 		},
 
@@ -269,14 +270,6 @@
 				}
 				this.splice('selectedItems', index, 1);
 			}, this);
-		},
-
-		_inputValueChanged: function () {
-			this._validateComponent();
-		},
-
-		_minimumInputLengthChanged: function() {
-			this._validateComponent();
 		},
 
 		selectedItemChanged: function (item) {
@@ -313,10 +306,6 @@
 			}
 		},
 
-		_shownListDataChanged: function () {
-			this._validateComponent();
-		},
-
 		_computeShowMultiSelection: function (multiSelection, hideSelections) {
 			return multiSelection && !hideSelections;
 		},
@@ -343,7 +332,13 @@
 				offsetTop,
 				offsetBottom;
 
-			if (this._focus && results.length > 0) {
+			if (results.length === 0) {
+				this._searchErrorMessage = this._('No results found');
+			} else {
+				this._searchErrorMessage = null;
+			}
+
+			if (this._focus) {
 				Polymer.RenderStatus.afterNextRender(this, function () {
 					/* eslint-disable no-invalid-this */
 					if (this.offsetParent === null) {
@@ -356,6 +351,7 @@
 					/* esling-enable no-invalid-this */
 				});
 			}
+
 			return results;
 		},
 
@@ -631,7 +627,7 @@
 			this._validateComponent();
 		},
 
-		_validateComponent: function(printErrorMessage) {
+		_validateComponent: function (printErrorMessage) {
 
 			if (!printErrorMessage)  {
 				this._errorMessage = '';
@@ -649,14 +645,6 @@
 			if (this.required && (!this.selectedItems || !this.selectedItems.length)) {
 				if (printErrorMessage) {
 					this._errorMessage = this._('Nothing selected.');
-				}
-				return false;
-			}
-
-			// no results found
-			if (this.shownListData && this.shownListData.length === 0) {
-				if (printErrorMessage) {
-					this._errorMessage = this._('No results found.');
 				}
 				return false;
 			}

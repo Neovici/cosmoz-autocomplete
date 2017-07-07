@@ -135,6 +135,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					</div>
 				</div>
 			</form>
+			<form is="iron-form" id="a7form">
+				<div class="vertical center-justified layout">
+					<h4>Minimun input length (suggestions will display when at least 3 characters have been entered</h4>
+					<div class="horizontal-section">
+						<cosmoz-autocomplete
+							id="a7cosmozautocomplete"
+							items="{{ demoItems }}"
+							multi-selection
+							minimum-input-length="3"
+							placeholder="Search"
+							selected-items="{{ demoSelected7 }}">
+						</cosmoz-autocomplete>
+						<br>
+						<button on-tap="a7buttonclickvalidate">Validate</button>
+					</div>
+				</div>
+			</form>
 
 		</template>
 	</dom-module>
@@ -176,6 +193,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			a6buttonclickvalidate: function (event) {
 				event.preventDefault();
 				var form = this.$.a6form;
+
+				form.validate();
+
+				return;
+			},
+			a7buttonclickvalidate: function (event) {
+				event.preventDefault();
+				var form = this.$.a7form;
 
 				form.validate();
 
