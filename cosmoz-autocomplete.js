@@ -653,14 +653,6 @@
 				return false;
 			}
 
-			// no search terms are entered
-			if (this.inputValue && this.inputValue.length < this.minimumInputLength) {
-				if (printErrorMessage) {
-					this._errorMessage = this._('Enter at least {0} characters to search.', minLength);
-				}
-				return false;
-			}
-
 			// no results found
 			if (this.shownListData && this.shownListData.length === 0) {
 				if (printErrorMessage) {
