@@ -40,7 +40,8 @@
     "web-component-tester": "^4.2.1",
     "iron-ajax": "polymerelements/iron-ajax#^1.4.3",
     "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
-    "iron-form": "PolymerElements/iron-form#^1.1.6"
+    "iron-form": "PolymerElements/iron-form#^1.1.6",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0"
   },
   "resolutions": {
     "iron-validatable-behavior": "^2.0.0"
