@@ -1,33 +1,66 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../iron-icons/iron-icons.html" />
-<link rel="import" href="../iron-icon/iron-icon.html" />
-<link rel="import" href="../iron-selector/iron-selector.html" />
-<link rel="import" href="../paper-input/paper-input.html" />
-<link rel="import" href="../paper-material/paper-material.html" />
-<link rel="import" href="../paper-spinner/paper-spinner.html" />
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
 <link rel="import" href="../cosmoz-behaviors/cosmoz-templatehelper-behavior.html">
 <link rel="import" href="../cosmoz-i18next/cosmoz-i18next.html">
 <link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
 <link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
 
-
-
-
 <!--
-`<cosmoz-autocomplete>` is an auto-complete/typeahead multi-select
+`<cosmoz-autocomplete>` is an autocomplete/typeahead element.
 
-### Usage
+It has such features as multi selection, autocompletion, loading items using AJAX,
+case-intensive capabilities, validation and some other cool things.
 
-*html example here*
+### Examples
+
+		<cosmoz-autocomplete
+			items="{{ items }}"
+			selectedItem="{{ selectedItem }}"
+			placeholder="Search">
+		</cosmoz-autocomplete>
+
+		<cosmoz-autocomplete
+			items="{{ items }}"
+			selectedItems="{{ selectedItems }}"
+			multi-selection>
+		</cosmoz-autocomplete>
+
+		<cosmoz-autocomplete
+			items="{{ items }}"
+			selectedItem="{{ selectedItem }}"
+			disabled>
+		</cosmoz-autocomplete>
+
+		<cosmoz-autocomplete
+			items="{{ items }}"
+			selectedItem="{{ selectedItem }}"
+			required>
+		</cosmoz-autocomplete>
+
+		<iron-ajax
+			url="api/get/items.json"
+			last-response="{{ items }}"
+			params="[[ value ]]">
+		</iron-ajax>
+		<cosmoz-autocomplete
+			items="[[ items ]]"
+			input-value="{{ value }}"
+			selected-items="{{ selectedItems }}"
+			multi-selection>
+		</cosmoz-autocomplete>
 
 
 @group Cosmoz Elements
 @element cosmoz-autocomplete
 @demo demo/index.html
 -->
-
 
 <dom-module id="cosmoz-autocomplete">
 	<template>
@@ -162,8 +195,8 @@
 					z-index: 1;
 				};
 			}
-
 		</style>
+
 		<div>
 			<!-- multi selection selected items -->
 			<template is="dom-if" if="[[ _computeShowMultiSelection(multiSelection, hideSelections) ]]">
