@@ -1,4 +1,3 @@
-<!doctype html>
 <!--
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -10,218 +9,228 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <!doctype html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-	<title>cosmoz-autocomplete Demo</title>
+		<title>cosmoz-autocomplete demo</title>
 
-	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-	<link rel="import" href="../cosmoz-autocomplete.html">
-	<link rel="import" href="../../iron-ajax/iron-ajax.html">
-	<link rel="import" href="../../paper-styles/demo-pages.html">
-	<link rel="import" href="../../iron-form/iron-form.html">
-</head>
-<body>
-	<dom-module id="demo-page">
-		<template id="t">
-			<h1>cosmoz-autocomplete</h1>
-			<!-- multi selection selected items -->
-			<div class="vertical center-justified layout">
-				<h4>Multi selection selected items</h4>
-				<div class="horizontal-section">
-					<cosmoz-autocomplete items="{{ demoItems }}"
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+		<link rel="import" href="../../iron-ajax/iron-ajax.html">
+		<link rel="import" href="../../paper-styles/demo-pages.html">
+		<link rel="import" href="../../iron-form/iron-form.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<link rel="import" href="../cosmoz-autocomplete.html">
+
+		<style is="custom-style" include="demo-pages-shared-styles">
+			div {
+				max-width: 1200px !important;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- multi selection selected items -->
+		<div class="vertical-section-container centered">
+			<h4>Multi selection selected items</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t1">
+					<cosmoz-autocomplete
+						items="{{ demoItems }}"
 						multi-selection
 						placeholder="Search"
-						selected-items="{{ demoSelected1 }}"
-						id="a1">
+						selected-items="{{ demoSelected1 }}">
 					</cosmoz-autocomplete>
-				</div>
-			</div>
-			<!-- single selection selected item -->
-			<div class="vertical center-justified layout">
-				<h4>Single selection selected item</h4>
-				<div class="horizontal-section">
-					<cosmoz-autocomplete items="{{ demoItems }}"
-						placeholder="Search"
-						selected-item="{{ demoItems.1 }}"
-						id="a2">
-					</cosmoz-autocomplete>
-				</div>
-			</div>
-			<!-- single selection ajax -->
-			<div class="vertical center-justified layout">
-				<h4>ajax</h4>
-				<div class="horizontal-section">
-					<iron-ajax auto url="items.json" last-response="{{ acdata }}" params="[[ a3value ]]"></iron-ajax>
+				</template>
+			</demo-snippet>
+		</div>
+
+		<!-- single selection selected item -->
+		<div class="vertical-section-container centered">
+			<h4>Single selection selected item</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t2">
 					<cosmoz-autocomplete
-						items="[[ acdata ]]"
+						items="{{ demoItems }}"
+						placeholder="Search"
+						selected-item="{{ demoItems.1 }}">
+					</cosmoz-autocomplete>
+				</template>
+			</demo-snippet>
+		</div>
+
+		<!-- single selection ajax -->
+		<div class="vertical-section-container centered">
+			<h4>AJAX</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t3">
+					<iron-ajax auto url="items.json" last-response="{{ acdata3 }}" params="[[ a3value ]]"></iron-ajax>
+					<cosmoz-autocomplete
+						items="[[ acdata3 ]]"
 						placeholder="Search"
 						input-value="{{ a3value }}"
 						selected-items="{{ demoSelected3 }}">
 					</cosmoz-autocomplete>
-				</div>
-			</div>
+				</template>
+			</demo-snippet>
+		</div>
 
-			<!-- multi selection ajax -->
-			<div class="vertical center-justified layout">
-				<h4>multi ajax</h4>
-				<div class="horizontal-section">
-					<iron-ajax auto url="items.json" last-response="{{ acdata2 }}" params="[[ a4value ]]"></iron-ajax>
-					<cosmoz-autocomplete items="[[ acdata2 ]]"
+		<!-- multi selection ajax -->
+		<div class="vertical-section-container centered">
+			<h4>Multi AJAX</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t4">
+					<iron-ajax auto url="items.json" last-response="{{ acdata4 }}" params="[[ a4value ]]"></iron-ajax>
+					<cosmoz-autocomplete
+						items="[[ acdata4 ]]"
 						multi-selection
 						placeholder="Search"
 						input-value="{{ a4value }}"
 						selected-items="{{ demoSelected4 }}">
 					</cosmoz-autocomplete>
-				</div>
-			</div>
+				</template>
+			</demo-snippet>
+		</div>
 
-			<!-- no label float -->
-			<div class="vertical center-justified layout">
-				<h4>No label float property</h4>
-				<div class="horizontal-section">
-					<cosmoz-autocomplete items="{{ demoItems }}"
+		<!-- no label float -->
+		<div class="vertical-section-container centered">
+			<h4>No label float property</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t5">
+					<cosmoz-autocomplete
+						items="{{ demoItems }}"
 						no-label-float
 						placeholder="Search"
-						selected-items="{{ demoSelected5 }}"
-						id="a3">
+						selected-items="{{ demoSelected5 }}">
 					</cosmoz-autocomplete>
-				</div>
-			</div>
+				</template>
+			</demo-snippet>
+		</div>
 
-			<!-- disabled selected -->
-			<div class="vertical center-justified layout">
-				<h4>disabled with selection</h4>
-				<div class="horizontal-section">
-					<cosmoz-autocomplete items="{{ demoItems }}"
+		<!-- disabled selected -->
+		<div class="vertical-section-container centered">
+			<h4>Disabled with selection</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t6">
+					<cosmoz-autocomplete
+						items="{{ demoItems }}"
 						disabled
 						no-label-float
 						placeholder="Search"
-						selected-item="{{ demoItems.4 }}"
-						id="a4">
+						selected-item="{{ demoItems.4 }}">
 					</cosmoz-autocomplete>
-				</div>
-			</div>
+				</template>
+			</demo-snippet>
+		</div>
 
-			<!-- disabled not selected -->
-			<div class="vertical center-justified layout">
-				<h4>disabled, no selection</h4>
-				<div class="horizontal-section">
-					<cosmoz-autocomplete items="{{ demoItems }}"
+		<!-- disabled not selected -->
+		<div class="vertical-section-container centered">
+			<h4>Disabled, no selection</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t7">
+					<cosmoz-autocomplete
+						items="{{ demoItems }}"
 						disabled
 						no-label-float
-						placeholder="Search"
-						id="a5">
+						placeholder="Search">
 					</cosmoz-autocomplete>
-				</div>
-			</div>
+				</template>
+			</demo-snippet>
+		</div>
 
-			<div class="vertical center-justified layout">
-				<h4>Actions</h4>
-				<div class="horizontal-section">
-					<cosmoz-autocomplete items="{{ demoItems }}"
+		<!-- actions -->
+		<div class="vertical-section-container centered">
+			<h4>Actions</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t8">
+					<cosmoz-autocomplete
+						items="{{ demoItems }}"
 						no-label-float
-						placeholder="Search"
-						id="a5">
+						placeholder="Search">
 						<div slot="result-action">Action1 when no results</div>
 						<div slot="result-action">Action2 when no results</div>
 					</cosmoz-autocomplete>
-				</div>
-			</div>
+				</template>
+			</demo-snippet>
+		</div>
 
-			<!-- multi selection selected items -->
-			<form is="iron-form" id="a6form">
-				<div class="vertical center-justified layout">
-					<h4>Multi selection selected items with required attribute</h4>
-					<div class="horizontal-section">
+		<!-- multi selection selected items -->
+		<div class="vertical-section-container centered">
+			<h4>Multi selection selected items with required attribute</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t9">
+					<form is="iron-form" id="a9form">
 						<cosmoz-autocomplete
-							id="a6cosmozautocomplete"
 							items="{{ demoItems }}"
 							multi-selection
 							placeholder="Search"
 							required
-							selected-items="{{ demoSelected6 }}">
+							selected-items="{{ demoSelected9 }}">
 						</cosmoz-autocomplete>
 						<br>
-						<button on-tap="a6buttonclickvalidate">Validate</button>
-					</div>
-				</div>
-			</form>
-			<form is="iron-form" id="a7form">
-				<div class="vertical center-justified layout">
-					<h4>Minimun input length (suggestions will display when at least 3 characters have been entered</h4>
-					<div class="horizontal-section">
+						<button on-tap="a9buttonclickvalidate">Validate</button>
+					</form>
+				</template>
+			</demo-snippet>
+		</div>
+
+		<!-- minimum input length -->
+		<div class="vertical-section-container centered">
+			<h4>Minimum input length (suggestions will display when at least 3 characters have been entered</h4>
+			<demo-snippet>
+				<template is="dom-bind" id="t10">
+					<form is="iron-form" id="a10form">
 						<cosmoz-autocomplete
-							id="a7cosmozautocomplete"
 							items="{{ demoItems }}"
 							multi-selection
 							minimum-input-length="3"
 							placeholder="Search"
-							selected-items="{{ demoSelected7 }}">
+							selected-items="{{ demoSelected10 }}">
 						</cosmoz-autocomplete>
-						<br>
-						<button on-tap="a7buttonclickvalidate">Validate</button>
-					</div>
-				</div>
-			</form>
+					</form>
+				</template>
+			</demo-snippet>
+		</div>
 
-		</template>
-	</dom-module>
+		<script>
+			(function () {
+				var demoItems,
+					i,
+					t;
 
-	<demo-page class="fit"></demo-page>
+				demoItems = [{
+					id: 'one',
+					label: 'Red selection'
+				}, {
+					id: 'two',
+					label: 'Blue selection'
+				}, {
+					id: 'three',
+					label: 'Green selection'
+				}, {
+					id: 'four',
+					label: 'Yellow selection'
+				}, {
+					id: 'five',
+					label: 'White selection'
+				}, {
+					id: 'six',
+					label: 'Black selection'
+				}];
 
-	<script type="text/javascript">
-	/*global Cosmoz, window, document,cz,Polymer */
-	(function () {
-		"use strict";
-
-		var demoItems = [{
-				id: 'one',
-				label: 'Red selection'
-			}, {
-				id: 'two',
-				label: 'Blue selection'
-			}, {
-				id: 'three',
-				label: 'Green selection'
-			}, {
-				id: 'four',
-				label: 'Yellow selection'
-			}, {
-				id: 'five',
-				label: 'White selection'
-			}, {
-				id: 'six',
-				label: 'Black selection'
-			}];
-
-		Polymer({
-			is: 'demo-page',
-			properties: {},
-			behaviors: [],
-			attached: function () {
-				this.demoItems = demoItems;
-			},
-			a6buttonclickvalidate: function (event) {
-				event.preventDefault();
-				var form = this.$.a6form;
-
-				form.validate();
-
-				return;
-			},
-			a7buttonclickvalidate: function (event) {
-				event.preventDefault();
-				var form = this.$.a7form;
-
-				form.validate();
-
-				return;
-			}
-		});
-
-	}());
-	</script>
-</body>
+				t = new Array(11);
+				for (i = 1; i <= 10; i += 1) {
+					t[i] = document.querySelector('#t' + i);
+					if (i !== 3 || i !== 4) {
+						t[i].demoItems = demoItems;
+					}
+				}
+				t[9].a9buttonclickvalidate = function (event) {
+					event.preventDefault();
+					document.querySelector('#a9form').validate();
+				};
+			})();
+		</script>
+	</body>
 </html>
