@@ -1,3 +1,17 @@
+<!--
+@license
+Copyright (c) 2015 Neovici AB. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+		http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
@@ -13,53 +27,27 @@
 <link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
 
 <!--
-`<cosmoz-autocomplete>` is an autocomplete/typeahead element.
+`<cosmoz-autocomplete>` displays an input allowing a user to select/search a value from the list.
 
-It has such features as multi selection, autocompletion, validation,
-case-intensive capabilities and some other cool things.
+It provides advanced capabilities such as multi selection, autocompletion, filtering,
+validation, case-intensive capabilities and more!
 
-### Examples
+It utilizes paper-input element to provide its features as loading items via AJAX.
 
-		<cosmoz-autocomplete
-			items="{{ items }}"
-			selectedItem="{{ selectedItem }}"
-			placeholder="Search">
-		</cosmoz-autocomplete>
+### Example
 
 		<cosmoz-autocomplete
-			items="{{ items }}"
-			selectedItems="{{ selectedItems }}"
-			multi-selection>
-		</cosmoz-autocomplete>
-
-		<cosmoz-autocomplete
-			items="{{ items }}"
-			selectedItem="{{ selectedItem }}"
-			disabled>
-		</cosmoz-autocomplete>
-
-		<cosmoz-autocomplete
-			items="{{ items }}"
-			selectedItem="{{ selectedItem }}"
+			items='["Red", "Green", "Blue"]'
+			multi-selection
+			placeholder="Search"
 			required>
-		</cosmoz-autocomplete>
-
-		<iron-ajax
-			url="api/get/items.json"
-			last-response="{{ items }}"
-			params="[[ value ]]">
-		</iron-ajax>
-		<cosmoz-autocomplete
-			items="[[ items ]]"
-			input-value="{{ value }}"
-			selected-items="{{ selectedItems }}"
-			multi-selection>
 		</cosmoz-autocomplete>
 
 
 @group Cosmoz Elements
 @element cosmoz-autocomplete
 @demo demo/index.html
+@homepage github.com/Neovici/cosmoz-autocomplete
 -->
 
 <dom-module id="cosmoz-autocomplete">
