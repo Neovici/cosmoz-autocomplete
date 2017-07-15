@@ -23,24 +23,18 @@ selected = []
 ```
 
 The following code will create `cosmoz-autocomplete` with multiple selection feature:
-<!---
-```
-<custom-element-demo>
-  <template is="dom-bind">
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="cosmoz-autocomplete.html">
-    <next-code-block></next-code-block>
-  </template>
-</custom-element-demo>
-```
--->
 ```html
-<cosmoz-autocomplete 
-  items="{{ data }}"
-  selected-items="{{ selected }}"
-  placeholder="Search"
-  multi-selection>
-</cosmoz-autocomplete>
+<script src="../webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../cosmoz-autocomplete/cosmoz-autocomplete.html">
+
+<template is="dom-bind">
+  <cosmoz-autocomplete 
+    items="{{ data }}"
+    selected-items="{{ selected }}"
+    placeholder="Search"
+    multi-selection>
+  </cosmoz-autocomplete>
+</template>
 ```
 
 ## Docs
