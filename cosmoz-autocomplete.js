@@ -277,7 +277,7 @@
 			this._validateComponent();
 		},
 
-		_minimumInputLengthChanged: function() {
+		_minimumInputLengthChanged: function () {
 			this._validateComponent();
 		},
 
