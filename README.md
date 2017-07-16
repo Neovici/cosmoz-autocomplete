@@ -26,7 +26,7 @@ The following code will create `cosmoz-autocomplete` with multiple selection fea
 <!---
 ```
 <custom-element-demo>
-  <template is="dom-bind">
+  <template is="dom-bind" data='[ "Red", "Green", "Blue", "White", "Black" ]' selected='[]'>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="cosmoz-autocomplete.html">
     <next-code-block></next-code-block>
@@ -36,7 +36,7 @@ The following code will create `cosmoz-autocomplete` with multiple selection fea
 -->
 ```html
 <cosmoz-autocomplete 
-  items='[ "Red", "Green", "Blue", "White", "Black" ]'
+  items="{{ data }}"
   selected-items="{{ selected }}"
   placeholder="Search"
   multi-selection>
