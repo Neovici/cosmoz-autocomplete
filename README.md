@@ -12,21 +12,16 @@ To install, run: `bower install --save Neovici/cosmoz-autocomplete`
 
 ## Usage
 
-For example, we have the following `data` array:
+For example, we have the following array of items:
 ```js
-data = ["Red", "Green", "Blue", "White", "Black"]
-```
-
-And an array for storing selected items:
-```js
-selected = []
+[{ "id": "1", "label": "Red" }, { "id": "2", "label": "Green" }, { "id": "3", "label": "Blue" }]
 ```
 
 The following code will create `cosmoz-autocomplete` with multiple selection feature:
 <!---
 ```
 <custom-element-demo>
-  <template is="dom-bind" data='[ "Red", "Green", "Blue", "White", "Black" ]' selected='[]'>
+  <template is="dom-bind">
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="cosmoz-autocomplete.html">
     <next-code-block></next-code-block>
@@ -36,9 +31,8 @@ The following code will create `cosmoz-autocomplete` with multiple selection fea
 -->
 ```html
 <cosmoz-autocomplete 
-  items="{{ data }}"
-  selected-items="{{ selected }}"
-  placeholder="Search"
+  items='[{ "id": "1", "label": "Red" }, { "id": "2", "label": "Green" }, { "id": "3", "label": "Blue" }]'
+  placeholder="Search color"
   multi-selection>
 </cosmoz-autocomplete>
 ```
