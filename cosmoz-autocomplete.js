@@ -1,7 +1,6 @@
-/*global Cosmoz, Polymer, window, Node */
 /**
  * Element to create an input with autocompletetion, multi selection,
- * case-intensive capabilities and more!
+ * case-insensitive capabilities and more!
  *
  * @namespace element/cosmoz-autocomplete
  */
