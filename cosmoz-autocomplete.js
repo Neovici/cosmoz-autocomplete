@@ -306,10 +306,14 @@
 		},
 
 		selectedItemsChanged: function (items) {
-			var item = null;
-			if (items !== undefined && items !== null && Array.isArray(items) && items.length > 0) {
-				item = items[0];
+			if (items === undefined || items === null || !Array.isArray(items)) {
+				this.selectedItems = [];
+				return;
 			}
+			if (items.length === 0) {
+				return;
+			}
+			var item = items[0];
 			if (this.selectedItem !== item) {
 				this.set('selectedItem', item);
 			}
