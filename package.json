@@ -7,6 +7,7 @@
     "test": "test"
   },
   "devDependencies": {
+    "bower": "^1.8.0",
     "del": "^2.2.0",
     "eslint": "^3.9.1",
     "eslint-plugin-html": "^1.5.5",
@@ -18,7 +19,7 @@
   },
   "scripts": {
     "start": "polymer serve -o",
-    "postinstall": "bower i",
+    "postinstall": "./node_modules/.bin/bower i",
     "lint": "./node_modules/.bin/eslint --cache cosmoz-*.html cosmoz-*.js test/cosmoz-*.html && polymer lint cosmoz-autocomplete*.html",
     "test": "polymer test"
   },
