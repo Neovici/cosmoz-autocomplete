@@ -10,7 +10,7 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install polylint polymer web-component-tester
+- npm install -g polylint polymer web-component-tester
 - npm test
 - polylint --no-recursion
 script: xvfb-run wct
