@@ -669,6 +669,10 @@
 			this._errorMessage = '';
 			// passed all the above
 			return true;
+		},
+
+		_getSelectedItemTitle: function (item, prop) {
+			return this.get(prop, item);
 		}
 	});
 }());
