@@ -15,12 +15,13 @@
     "gulp": "^3.9.1",
     "gulp-gh-pages": "^0.5.4",
     "gulp-if": "^2.0.0",
-    "gulp-load-plugins": "^1.2.0"
+    "gulp-load-plugins": "^1.2.0",
+    "polymer-cli": "^1.3.1"
   },
   "scripts": {
     "start": "polymer serve -o",
     "postinstall": "./node_modules/.bin/bower i",
-    "lint": "./node_modules/.bin/eslint --cache cosmoz-*.html cosmoz-*.js test/cosmoz-*.html && polymer lint cosmoz-autocomplete*.html",
+    "lint": "./node_modules/.bin/eslint --cache cosmoz-*.html cosmoz-*.js test/cosmoz-*.html && ./node_modules/.bin/polymer lint cosmoz-*.html",
     "test": "polymer test"
   },
   "repository": {
