@@ -8,11 +8,10 @@ addons:
     sources:
     - google-chrome
     packages:
-    - google-chrome-stable
+    - google-chrome-stable xvfb
 before_script:
 - npm run lint
 - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
-script: xvfb-run npm test
 notifications:
   slack:
     secure: X7e0PU2TUomDdgugPBlvwoCPC1B6AQ4JKtNdwatlVGOIaG08vEShwAo9RPyIgg1rq3FbAuSKrIPtvaBVqleChs5iESbwNWOUFVGLK3vjiytuadkivPo99HZlFEx3OjYFOyG43SrTr+h/sgRHWA0a+l5bB7mrnbpj4NAqn4LZmgWaUEe2sfKmlsfeqqZvlTUiM1RcCNZBa14mg0GIRMQyGP/ghID5TpXk6PSOock+sPD8+nYL1/ljSENDJAbUde2RuRzJgjvXDoIU4kxX/BIShWd4rSoVzV0Y04brDXBv1Y8GUiLzsTeVC8WudCg49b3n05cHFIR8hA9se7V4ghMlMH/kkulR0dlKYjcmd4cYtlnsUX03pEfXamUnQkJVJhjrPtVyFfb2//A5AhoQh2q5gNm8nT3q87LGAkFTDFklAS1d8mhkzT4jznIVkfyIQwLNiIaMlraOYNhgzxWIAa+2LU6yMDAkV/YESK1LU9DSPkGEIs6kGagVsvQZjg/GI4rqCxO6EL/26JVhe2oITmL/zHkOY+BiB/ZcMfb4FUhhGzuAn6w0CfoNnkDxe0BM2pRtzbu2c3JhFzUefm42Y/QUcdGYKnKo9N+YrdrstRlROeN6LTKbguiogkpxy23pjss5D+4eg7Ta7zhJ1448oAGojHe6d4efoleEHWCY/OYGJIc=
