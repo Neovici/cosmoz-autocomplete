@@ -17,7 +17,10 @@
     "gulp-load-plugins": "^1.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "polymer serve -o",
+    "postinstall": "bower i",
+    "lint": "./node_modules/.bin/eslint --cache cosmoz-*.html cosmoz-*.js test/cosmoz-*.html && polymer lint cosmoz-autocomplete*.html",
+    "test": "polymer test"
   },
   "repository": {
     "type": "git",
