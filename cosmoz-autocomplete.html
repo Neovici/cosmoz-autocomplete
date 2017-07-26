@@ -207,8 +207,7 @@ It utilizes paper-input element to provide its features as loading items via AJA
 				tabbindex$="[[ tabbindex ]]"
 				value="{{ inputValue }}"
 				error-message="{{ _errorMessage }}"
-				invalid="[[ !isEmpty(_errorMessage) ]]"
-			  required$="[[ required ]]">
+				invalid="[[ !isEmpty(_errorMessage) ]]">
 				<iron-icon suffix icon="clear" hidden$="[[ !_showClear ]]" on-tap="emptySelection"></iron-icon>
 				<paper-spinner hidden$="[[ !loading ]]" alt="Loading" active prefix></paper-spinner>
 			</paper-input>
