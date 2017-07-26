@@ -2,7 +2,7 @@
   "name": "cosmoz-autocomplete",
   "version": "1.0.0",
   "description": "[![Build Status](https://travis-ci.org/Neovici/cosmoz-autocomplete.svg?branch=master)](https://travis-ci.org/Neovici/cosmoz-autocomplete)",
-  "main": "cosmoz-autocomplete.html",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },

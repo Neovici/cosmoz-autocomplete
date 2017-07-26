@@ -3,25 +3,17 @@
 
 # &lt;cosmoz-autocomplete&gt;
 
-`cosmoz-autocomplete` is a Polymer Component to combine drop-down like behaviour with searchable filtering behaviour. 
-Supports both single and multiple selections.
+`cosmoz-autocomplete` is an auto-complete component with multi-selection support
 
 ## Installation
 
 To install, run: `bower install --save Neovici/cosmoz-autocomplete`
 
 ## Usage
-
-For example, we have the following array of items:
-```js
-[{ "id": "1", "label": "Red" }, { "id": "2", "label": "Green" }, { "id": "3", "label": "Blue" }]
-```
-
-The following code will create `cosmoz-autocomplete` with multiple selection feature:
 <!---
 ```
 <custom-element-demo>
-  <template is="dom-bind">
+  <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="cosmoz-autocomplete.html">
     <next-code-block></next-code-block>
@@ -33,10 +25,7 @@ The following code will create `cosmoz-autocomplete` with multiple selection fea
 <cosmoz-autocomplete 
   items='[{ "id": "1", "label": "Red" }, { "id": "2", "label": "Green" }, { "id": "3", "label": "Blue" }]'
   placeholder="Search color"
-  multi-selection>
+  multi-selection
+  selected-items="{{ selectedItems }}">
 </cosmoz-autocomplete>
 ```
-
-## Docs
-
-See http://neovici.github.io/cosmoz-autocomplete
