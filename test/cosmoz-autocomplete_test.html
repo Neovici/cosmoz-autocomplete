@@ -213,7 +213,7 @@
 			});
 
 			test('selecting an item removes it from the searchList', function (done) {
-				autocomplete.selectedItems = [ items[1] ];
+				autocomplete.selectedItems = [items[1]];
 				Polymer.Base.async(function () {
 					var searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result');
 					assert.equal(searchResults.length, 3);
@@ -225,7 +225,7 @@
 			});
 
 			test('selecting several items removes them from the searchList', function (done) {
-				autocomplete.selectedItems = [ items[1], items[3] ];
+				autocomplete.selectedItems = [items[1], items[3]];
 				Polymer.Base.async(function () {
 					var searchResults = Polymer.dom(autocomplete.root).querySelectorAll('#searchResults > .result');
 					assert.equal(searchResults.length, 2);
