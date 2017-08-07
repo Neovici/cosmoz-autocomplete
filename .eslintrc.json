@@ -48,7 +48,6 @@
             2,
             "always"
         ],
-        // "sort-keys": 2,
         "space-before-function-paren": [
             2,
             {
