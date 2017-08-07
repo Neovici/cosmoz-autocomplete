@@ -1,0 +1,12 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "assert": false,
+    "fixture": false,
+    "test": false,
+    "a11ySuite": false,
+    "MockInteractions": false,
+  }
+}
