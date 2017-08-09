@@ -344,7 +344,7 @@
 				return [];
 			}
 			var
-				terms = this.exactQuery ? [ term ] : term.split(' '),
+				terms = this.exactQuery ? [term] : term.split(' '),
 				results = this.search(terms),
 				offsetTop,
 				offsetBottom;
