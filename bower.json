@@ -33,7 +33,7 @@
     "iron-icons": "^1.0.0",
     "iron-icon": "^1.0.0",
     "iron-form-element-behavior": "PolymerElements/iron-form-element-behavior#^1.0.0",
-    "iron-validatable-behavior": "^2.0.0"
+    "iron-validatable-behavior": "^1.1.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -42,8 +42,5 @@
     "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
     "iron-form": "PolymerElements/iron-form#^1.1.6",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0"
-  },
-  "resolutions": {
-    "iron-validatable-behavior": "^2.0.0"
   }
 }
