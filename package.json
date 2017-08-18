@@ -20,8 +20,8 @@
   },
   "scripts": {
     "start": "polymer serve -o",
-    "lint": "eslint --cache cosmoz-*.html cosmoz-*.js test/* demo/*.html && polymer lint cosmoz-*.html",
     "postinstall": "polymer install",
+    "lint": "eslint --cache cosmoz-* test/*.html demo/*.html && polymer lint cosmoz-*.html",
     "test": "polymer test"
   },
   "repository": {
