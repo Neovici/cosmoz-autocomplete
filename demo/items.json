@@ -1,7 +1,7 @@
 [{
-  "id": "one",
-  "label": "Red selection"
+	"id": "one",
+	"label": "Red selection"
 }, {
-  "id": "two",
-  "label": "Blue selection"
+	"id": "two",
+	"label": "Blue selection"
 }]
