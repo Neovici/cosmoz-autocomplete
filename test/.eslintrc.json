@@ -6,6 +6,7 @@
 		"a11ySuite": false,
 		"assert": false,
 		"fixture": false,
+		"flush": false,
 		"MockInteractions": false,
 		"test": false
 	}
