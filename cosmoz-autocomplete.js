@@ -257,7 +257,7 @@
 
 		isSelectedDisabled: function (disabled, selectedItem, valueProperty) {
 			if (disabled && selectedItem) {
-				this.inputValue = this.get(valueProperty, selectedItem);
+				this.inputValue = this._valueForItem(selectedItem, valueProperty);
 			}
 		},
 
@@ -613,11 +613,14 @@
 			}
 		},
 
-		_valueForItem: function (item) {
+		_valueForItem: function (item, valueProperty = this.valueProperty) {
 			if (item === null || item === undefined) {
 				return;
 			}
-			return item[this.valueProperty];
+			if (valueProperty === undefined || valueProperty === null || valueProperty === '') {
+				return item;
+			}
+			return this.get(valueProperty, item);
 		},
 
 		onResultActionClick: function (item) {
@@ -669,10 +672,6 @@
 			this._errorMessage = '';
 			// passed all the above
 			return true;
-		},
-
-		_getSelectedItemTitle: function (item, prop) {
-			return this.get(prop, item);
 		}
 	});
 }());
