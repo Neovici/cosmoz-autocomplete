@@ -274,7 +274,14 @@
 		},
 
 		_inputValueChanged: function () {
+			this._inputValueChanging = true;
 			this._validateComponent();
+
+			if (! this._selectedItemChanging){
+				this.set('selectedItem', null);
+				this.set('selectedItems', null);
+			}
+			this._inputValueChanging = false;
 		},
 
 		_minimumInputLengthChanged: function () {
@@ -283,10 +290,15 @@
 
 		selectedItemChanged: function (item) {
 			var value = '';
+			this._selectedItemChanging = true;
 			if (item && !this.multiSelection) {
 				value = this._valueForItem(item);
 			}
-			this.inputValue = value;
+
+			if (! this._inputValueChanging) {
+				this.inputValue = value;
+			}
+
 
 			if (this.selectedItems === undefined || this.selectedItems === null || !Array.isArray(this.selectedItems)) {
 
@@ -303,6 +315,7 @@
 					this.push('selectedItems', item);
 				}
 			}
+			this._selectedItemChanging = false;
 		},
 
 		selectedItemsChanged: function (items) {
