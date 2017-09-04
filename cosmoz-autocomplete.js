@@ -279,7 +279,6 @@
 
 			if (! this._selectedItemChanging){
 				this.set('selectedItem', null);
-				this.set('selectedItems', null);
 			}
 			this._inputValueChanging = false;
 		},
