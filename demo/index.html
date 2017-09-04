@@ -54,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<cosmoz-autocomplete
 						items="{{ demoItems }}"
 						placeholder="Search"
-						selected-item="[[ demoItems.1 ]]">
+						selected-item="{{ demoSelected2  }}">
 					</cosmoz-autocomplete>
 				</template>
 			</demo-snippet>
@@ -118,7 +118,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						disabled
 						no-label-float
 						placeholder="Search"
-						selected-item="[[ demoItems.4 ]]">
+						selected-item="{{ demoSelected6 }}">
 					</cosmoz-autocomplete>
 				</template>
 			</demo-snippet>
@@ -226,6 +226,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						t[i].demoItems = demoItems;
 					}
 				}
+				t[2].demoSelected2 =  demoItems[1];
+				t[6].demoSelected6 =  demoItems[4];
 				t[9].a9buttonclickvalidate = function (event) {
 					event.preventDefault();
 					document.querySelector('#a9form').validate();
