@@ -170,11 +170,9 @@
 				value: false
 			},
 
-			selectedItem: {
-				type: Object,
-				notify: true,
-				value: null,
-				observer: 'selectedItemChanged'
+			valueProperty: {
+				type: String,
+				value: 'label'
 			},
 
 			selectedItems: {
@@ -186,10 +184,13 @@
 				observer: 'selectedItemsChanged'
 			},
 
-			valueProperty: {
-				type: String,
-				value: 'label'
+			selectedItem: {
+				type: Object,
+				notify: true,
+				value: null,
+				observer: 'selectedItemChanged'
 			},
+
 
 			tabbindex: {
 				type: Number
@@ -274,7 +275,13 @@
 		},
 
 		_inputValueChanged: function () {
+			this._inputValueChanging = true;
 			this._validateComponent();
+
+			if (! this._selectedItemChanging){
+				this.set('selectedItem', null);
+			}
+			this._inputValueChanging = false;
 		},
 
 		_minimumInputLengthChanged: function () {
@@ -282,39 +289,28 @@
 		},
 
 		selectedItemChanged: function (item) {
-			var value = '';
+			var value = '',
+				selection = this.selectedItems;
+
+			this._selectedItemChanging = true;
+
 			if (item && !this.multiSelection) {
 				value = this._valueForItem(item);
 			}
-			this.inputValue = value;
 
-			if (this.selectedItems === undefined || this.selectedItems === null || !Array.isArray(this.selectedItems)) {
-
-				this.selectedItems = [];
-				if (item !== undefined && item !== null) {
-					this.push('selectedItems', item);
-				}
-
-			} else if (this.selectedItems.indexOf(item) === -1) {
-
-				this.splice('selectedItems', 0, this.selectedItems.length);
-
-				if (item !== undefined && item !== null) {
-					this.push('selectedItems', item);
-				}
+			if (! this._inputValueChanging) {
+				this.inputValue = value;
 			}
+
+			if (selection && selection.indexOf(item) < 0) {
+				this.splice.apply(this, ['selectedItems', 0, selection.length].concat(item && [item] || []));
+			}
+			this._selectedItemChanging = false;
 		},
 
 		selectedItemsChanged: function (items) {
-			if (items === undefined || items === null || !Array.isArray(items)) {
-				this.selectedItems = [];
-				return;
-			}
-			if (items.length === 0) {
-				return;
-			}
-			var item = items[0];
-			if (this.selectedItem !== item) {
+			var item = items && items[0];
+			if (!this.multiSelection && item && this.selectedItem !== item) {
 				this.set('selectedItem', item);
 			}
 		},

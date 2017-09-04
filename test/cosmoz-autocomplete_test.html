@@ -170,6 +170,43 @@
 					done();
 				}, 200);
 			});
+
+			test('erasing text unselects item and does another search', function (done) {
+				var items = [{
+					id: 'one',
+					label: 'Red selection'
+				}, {
+					id: 'two',
+					label: 'Blue selection'
+				}, {
+					id: 'three',
+					label: 'Green selection'
+				}, {
+					id: 'four',
+					label: 'Yellow selection'
+				}, {
+					id: 'five',
+					label: 'White selection'
+				}, {
+					id: 'six',
+					label: 'Black selection'
+				}];
+
+				autocomplete.items = items;
+				autocomplete.selectedItem = items[0];
+				assert.equal(autocomplete.inputValue, 'Red selection');
+				Polymer.Base.async(function () {
+					autocomplete._focus = true;
+					autocomplete.inputValue = 'Red selecti';
+
+					Polymer.Base.async(function () {
+						assert.equal(autocomplete.inputValue, 'Red selecti');
+						assert.equal(autocomplete.shownListData.length, 1);
+						assert.equal(autocomplete.shownListData[0].plainText, 'Red selection');
+						done();
+					}, 200);
+				}, 200);
+			});
 		});
 
 		suite('multiSelection', function () {
