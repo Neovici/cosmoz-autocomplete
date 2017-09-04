@@ -170,11 +170,9 @@
 				value: false
 			},
 
-			selectedItem: {
-				type: Object,
-				notify: true,
-				value: null,
-				observer: 'selectedItemChanged'
+			valueProperty: {
+				type: String,
+				value: 'label'
 			},
 
 			selectedItems: {
@@ -186,10 +184,13 @@
 				observer: 'selectedItemsChanged'
 			},
 
-			valueProperty: {
-				type: String,
-				value: 'label'
+			selectedItem: {
+				type: Object,
+				notify: true,
+				value: null,
+				observer: 'selectedItemChanged'
 			},
+
 
 			tabbindex: {
 				type: Number
