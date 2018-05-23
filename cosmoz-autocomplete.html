@@ -44,6 +44,15 @@ It utilizes paper-input element to provide its features as loading items via AJA
 		</cosmoz-autocomplete>
 
 
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--cosmoz-autocomplete-dropdown-selected-hovered-backgroundcolor` | The focused or hovered dropdown listitem's background color | `#e3f1ee`
+
+
 @group Cosmoz Elements
 @element cosmoz-autocomplete
 @demo demo/index.html
@@ -62,7 +71,7 @@ It utilizes paper-input element to provide its features as loading items via AJA
 			:host ::content .iron-selected,
 			:host ::content .result:hover  {
 				font-weight: bold;
-				background-color: #e3f1ee;
+				background-color: var(--cosmoz-autocomplete-dropdown-selected-hovered-backgroundcolor, #e3f1ee);
 			}
 
 			::content .result,
