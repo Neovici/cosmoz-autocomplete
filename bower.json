@@ -1,7 +1,7 @@
 {
 	"name": "cosmoz-autocomplete",
 	"main": "cosmoz-autocomplete.html",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"homepage": "https://github.com/Neovici/cosmoz-autocomplete",
 	"authors": [
 		"Neovici Development"
