@@ -1,0 +1,92 @@
+{
+	"name": "@neovici/cosmoz-autocomplete",
+	"version": "2.0.0",
+	"description": "A autocomplete input web component",
+	"keywords": [
+		"polymer",
+		"web-components"
+	],
+	"homepage": "https://github.com/neovici/cosmoz-autocomplete#readme",
+	"bugs": {
+		"url": "https://github.com/neovici/cosmoz-autocomplete/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/neovici/cosmoz-autocomplete.git"
+	},
+	"license": "Apache-2.0",
+	"author": "",
+	"main": "cosmoz-autocomplete.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"lint": "eslint --cache --ext .js .",
+		"start": "es-dev-server",
+		"test": "karma start --coverage",
+		"test:watch": "karma start --auto-watch=true --single-run=false",
+		"test:update-snapshots": "karma start --update-snapshots",
+		"test:prune-snapshots": "karma start --prune-snapshots",
+		"test:compatibility": "karma start --compatibility all --auto-watch=true --single-run=false",
+		"storybook": "start-storybook --node-resolve --watch --open",
+		"storybook:build": "build-storybook"
+	},
+	"release": {
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			"@semantic-release/changelog",
+			"@semantic-release/github",
+			"@semantic-release/npm",
+			"@semantic-release/git"
+		],
+		"branch": "master",
+		"preset": "conventionalcommits"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"dependencies": {
+		"@open-wc/demoing-storybook": "^1.15.1",
+		"@polymer/iron-icons": "^3.0.1",
+		"@polymer/paper-icon-button": "^3.0.2",
+		"@polymer/paper-input": "^3.2.1",
+		"haunted": "^4.7.0",
+		"lit-html": "^1.2.1",
+		"lit-virtualizer": "^0.4.2"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^8.3.5",
+		"@commitlint/config-conventional": "^8.3.4",
+		"@neovici/eslint-config": "^1.2.0",
+		"@neovici/github-actions-eslint-annotator": "^0.4.0",
+		"@open-wc/testing": "^2.5.8",
+		"@open-wc/testing-karma": "^3.3.10",
+		"@semantic-release/changelog": "^5.0.1",
+		"@semantic-release/git": "^9.0.0",
+		"@webcomponents/webcomponentsjs": "^2.4.3",
+		"babel-eslint": "^10.1.0",
+		"chai": "^4.2.0",
+		"deepmerge": "^4.2.2",
+		"eslint": "^6.8.0",
+		"eslint-plugin-html": "^6.0.0",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-mocha": "^6.3.0",
+		"husky": "^4.2.0",
+		"karma": "^4.4.0",
+		"karma-firefox-launcher": "^1.3.0",
+		"karma-sauce-launcher": "^2.0.0",
+		"semantic-release": "^17.0.0",
+		"sinon": "^9.0.0"
+	}
+}
