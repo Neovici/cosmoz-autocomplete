@@ -22,7 +22,7 @@
 	},
 	"scripts": {
 		"lint": "eslint --cache --ext .js .",
-		"start": "es-dev-server",
+		"start": "npm run storybook",
 		"test": "karma start --coverage",
 		"test:watch": "karma start --auto-watch=true --single-run=false",
 		"test:update-snapshots": "karma start --update-snapshots",
@@ -57,10 +57,14 @@
 		}
 	},
 	"dependencies": {
+		"@neovici/cosmoz-utils": "^3.2.0",
 		"@open-wc/demoing-storybook": "^1.15.1",
 		"@polymer/iron-icons": "^3.0.1",
 		"@polymer/paper-icon-button": "^3.0.2",
 		"@polymer/paper-input": "^3.2.1",
+		"@polymer/paper-item": "^3.0.1",
+		"@polymer/paper-material": "^3.0.1",
+		"@polymer/paper-ripple": "^3.0.2",
 		"haunted": "^4.7.0",
 		"lit-html": "^1.2.1",
 		"lit-virtualizer": "^0.4.2"

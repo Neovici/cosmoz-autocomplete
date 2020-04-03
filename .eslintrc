@@ -1,3 +1,6 @@
 {
-	"extends": "@neovici"
+	"extends": "@neovici",
+	"rules": {
+		"max-lines-per-function": 0
+	}
 }
