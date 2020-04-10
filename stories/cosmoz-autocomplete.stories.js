@@ -28,6 +28,7 @@ export const singleComponent = () => {
 		<cosmoz-autocomplete
 			.label=${'Choose color'}
 			.options=${options}
+			.textProperty=${'text'}
 		></cosmoz-autocomplete>
 	`;
 };

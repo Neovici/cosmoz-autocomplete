@@ -12,7 +12,13 @@ import './cosmoz-suggestions';
 import { useAutocomplete } from './lib/hooks/use-autocomplete';
 
 const Autocomplete = ({
-	label, disabled, options
+	invalid,
+	errorMessage,
+	label,
+	placeholder,
+	disabled,
+	options,
+	textProperty
 }) => {
 	const {
 			value,
@@ -41,7 +47,10 @@ const Autocomplete = ({
 			.placeholder="$"
 			placeholder}
 			.value=${live(value)}
+			.errorMessage=${errorMessage}
+			invalid=${ifDefined(invalid)}
 			disabled=${ifDefined(disabled)}
+			.placeholder=${placeholder}
 			aria-disabled=${ifDefined(disabled)}
 			@value-changed=${e => setValue(e.target.value)}
 			@focused-changed=${e => setFocused(e.target.focused)}
@@ -59,12 +68,11 @@ const Autocomplete = ({
 				`}
 			<slot name="suffix" slot="suffix"></slot>
 		</paper-input>
-
-		${focused && items.length
-		? html`
-					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
-			  `
-		: nothing}
+		${/* eslint-disable indent */
+			focused && items.length
+				? html`<cosmoz-suggestions .items=${items} .onSelect=${onSelect} .textProperty=${textProperty} />`
+				: nothing
+		/*eslint-enable indent */}
 	`;
 };
 
