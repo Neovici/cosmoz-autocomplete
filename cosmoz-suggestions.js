@@ -1,17 +1,21 @@
-import { html } from "lit-html";
-import { classMap } from "lit-html/directives/class-map.js";
-import { component, useCallback } from "haunted";
+import { html } from 'lit-html';
+import { classMap } from 'lit-html/directives/class-map.js';
+import {
+	component, useCallback
+} from 'haunted';
 
-import { scroll } from "lit-virtualizer";
-import "@polymer/paper-ripple";
-import "@polymer/paper-material";
-import "@polymer/paper-item";
-import { useSuggestions } from "./lib/hooks/use-suggestions";
+import { scroll } from 'lit-virtualizer';
+import '@polymer/paper-ripple';
+import '@polymer/paper-material';
+import '@polymer/paper-item';
+import { useSuggestions } from './lib/use-suggestions';
 
 const defaultRenderItem = (
 		item,
 		i,
-		{ highlight, select, textProperty }
+		{
+			highlight, select, textProperty
+		}
 	) => html`
 		<paper-item
 			role="option"
@@ -94,4 +98,4 @@ const defaultRenderItem = (
 		`;
 	};
 
-customElements.define("cosmoz-suggestions", component(Suggestions));
+customElements.define('cosmoz-suggestions', component(Suggestions));

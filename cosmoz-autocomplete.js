@@ -9,7 +9,7 @@ import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icons/iron-icons';
 import './cosmoz-suggestions';
-import { useAutocomplete } from './lib/hooks/use-autocomplete';
+import { useAutocomplete } from './lib/use-autocomplete';
 
 const Autocomplete = ({
 	invalid,
