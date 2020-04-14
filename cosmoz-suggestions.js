@@ -24,7 +24,7 @@ const defaultRenderItem = (
 			@click=${() => select(item)}
 			@mousedown=${e => e.preventDefault()}
 		>
-			<div>${item[textProperty]}</div>
+			<div>${textProperty ? item[textProperty] : item}</div>
 			<paper-ripple></paper-ripple>
 		</paper-item>
 	`,

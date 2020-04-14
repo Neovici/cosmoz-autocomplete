@@ -44,8 +44,6 @@ const Autocomplete = ({
 		<paper-input
 			id="input"
 			.label=${label}
-			.placeholder="$"
-			placeholder}
 			.value=${live(value)}
 			.errorMessage=${errorMessage}
 			invalid=${ifDefined(invalid)}
