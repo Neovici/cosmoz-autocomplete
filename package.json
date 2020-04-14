@@ -3,7 +3,7 @@
 	"version": "2.0.0",
 	"description": "A autocomplete input web component",
 	"keywords": [
-		"polymer",
+		"lit-html",
 		"web-components"
 	],
 	"homepage": "https://github.com/neovici/cosmoz-autocomplete#readme",
