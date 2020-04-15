@@ -17,22 +17,19 @@ const Autocomplete = ({
 	label,
 	placeholder,
 	disabled,
-	options,
-	textProperty
+	source,
+	textProperty,
+	onChange,
+	value
 }) => {
 	const {
-			value,
-			setValue,
-			focused,
-			setFocused,
-			items,
-			clear
-		} = useAutocomplete({
-			options
-		}),
-		onSelect = ({ text }) => {
-			setValue(text);
-		};
+		text, items, onClear, onEdit, onFocus, onSelect
+	} = useAutocomplete({
+		source,
+		textProperty,
+		onChange,
+		value
+	});
 	return html`
 		<style>
 			:host {
@@ -44,33 +41,37 @@ const Autocomplete = ({
 		<paper-input
 			id="input"
 			.label=${label}
-			.value=${live(value)}
+			.value=${live(text)}
 			.errorMessage=${errorMessage}
 			invalid=${ifDefined(invalid)}
 			disabled=${ifDefined(disabled)}
 			.placeholder=${placeholder}
 			aria-disabled=${ifDefined(disabled)}
-			@value-changed=${e => setValue(e.target.value)}
-			@focused-changed=${e => setFocused(e.target.focused)}
+			@value-changed=${onEdit}
+			@focused-changed=${onFocus}
 		>
 			<slot name="prefix" slot="prefix"></slot>
-			${clear &&
+			${onClear &&
 				html`
 					<paper-icon-button
 						id="clear"
 						slot="suffix"
 						icon="clear"
 						tabindex="-1"
-						@click="${clear}}"
+						@click="${onClear}}"
 					></paper-icon-button>
 				`}
 			<slot name="suffix" slot="suffix"></slot>
 		</paper-input>
-		${/* eslint-disable indent */
-			focused && items.length
-				? html`<cosmoz-suggestions .items=${items} .onSelect=${onSelect} .textProperty=${textProperty} />`
-				: nothing
-		/*eslint-enable indent */}
+		${items.length
+		? html`
+					<cosmoz-suggestions
+						.items=${items}
+						.onSelect=${onSelect}
+						.textProperty=${textProperty}
+					/>
+			  `
+		: nothing}
 	`;
 };
 
