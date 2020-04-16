@@ -152,10 +152,7 @@ suite('use-suggestions', () => {
 			lastVisible: 2
 		});
 		await nextFrame();
-		assert.deepEqual(result.current.range, {
-			first: 1,
-			last: 2
-		});
+		assert.deepEqual(result.current.range, [1, 2]);
 	});
 
 	test('enter', async () => {
