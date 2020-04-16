@@ -77,7 +77,6 @@
 		"@commitlint/cli": "^8.3.5",
 		"@commitlint/config-conventional": "^8.3.4",
 		"@neovici/eslint-config": "^1.2.0",
-		"@neovici/github-actions-eslint-annotator": "^0.4.0",
 		"@open-wc/testing": "^2.5.8",
 		"@open-wc/testing-karma": "^3.3.10",
 		"@semantic-release/changelog": "^5.0.1",
@@ -91,9 +90,9 @@
 		"eslint-plugin-import": "^2.20.2",
 		"eslint-plugin-mocha": "^6.3.0",
 		"husky": "^4.2.0",
-		"karma": "^4.4.0",
+		"karma": "^5.0.0",
 		"karma-firefox-launcher": "^1.3.0",
-		"karma-sauce-launcher": "^2.0.0",
+		"karma-sauce-launcher": "^4.0.0",
 		"semantic-release": "^17.0.0",
 		"sinon": "^9.0.0"
 	}
