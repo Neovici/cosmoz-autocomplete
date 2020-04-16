@@ -30,8 +30,7 @@ checks:
 
 plugins:
   eslint:
-    enabled: true
-    channel: "eslint-6"
+    enabled: false
   fixme:
     enabled: true
 
