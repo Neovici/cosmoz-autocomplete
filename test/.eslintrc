@@ -1,0 +1,4 @@
+
+{
+	"extends": "@neovici/eslint-config/test-config"
+}

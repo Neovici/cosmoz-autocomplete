@@ -1,41 +1,99 @@
 {
-	"name": "cosmoz-autocomplete",
-	"version": "1.0.0",
-	"description": "[![Build Status](https://travis-ci.org/Neovici/cosmoz-autocomplete.svg?branch=master)](https://travis-ci.org/Neovici/cosmoz-autocomplete)",
-	"main": "index.js",
-	"directories": {
-		"test": "test"
-	},
-	"devDependencies": {
-		"del": "^2.2.0",
-		"eslint": "^3.9.1",
-		"eslint-plugin-html": "^3.1.1",
-		"eslint-plugin-mocha": "^4.11.0",
-		"gift": "^0.7.0",
-		"gulp": "^3.9.1",
-		"gulp-gh-pages": "^0.5.4",
-		"gulp-if": "^2.0.0",
-		"gulp-load-plugins": "^1.2.0",
-		"polymer-cli": "^1.4.1"
-	},
-	"scripts": {
-		"start": "polymer serve -o",
-		"postinstall": "polymer install",
-		"lint": "eslint --cache --ext .js,.html . && polymer lint cosmoz-*.html",
-		"test": "polymer test"
+	"name": "@neovici/cosmoz-autocomplete",
+	"version": "2.0.0",
+	"description": "A autocomplete input web component",
+	"keywords": [
+		"lit-html",
+		"web-components"
+	],
+	"homepage": "https://github.com/neovici/cosmoz-autocomplete#readme",
+	"bugs": {
+		"url": "https://github.com/neovici/cosmoz-autocomplete/issues"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/neovici/cosmoz-autocomplete.git"
 	},
-	"keywords": [
-		"polymer",
-		"web-components"
-	],
-	"author": "",
 	"license": "Apache-2.0",
-	"bugs": {
-		"url": "https://github.com/neovici/cosmoz-autocomplete/issues"
+	"author": "",
+	"main": "cosmoz-autocomplete.js",
+	"directories": {
+		"test": "test"
 	},
-	"homepage": "https://github.com/neovici/cosmoz-autocomplete#readme"
+	"scripts": {
+		"lint": "eslint --cache --ext .js .",
+		"start": "npm run storybook",
+		"test": "karma start --coverage",
+		"test:watch": "karma start --auto-watch=true --single-run=false",
+		"test:update-snapshots": "karma start --update-snapshots",
+		"test:prune-snapshots": "karma start --prune-snapshots",
+		"test:compatibility": "karma start --compatibility all --auto-watch=true --single-run=false",
+		"storybook": "start-storybook --node-resolve --watch --open",
+		"storybook:build": "build-storybook"
+	},
+	"release": {
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			"@semantic-release/changelog",
+			"@semantic-release/github",
+			"@semantic-release/npm",
+			"@semantic-release/git"
+		],
+		"branch": "master",
+		"preset": "conventionalcommits"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"*.js",
+		"lib/**/*.js"
+	],
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"dependencies": {
+		"@neovici/cosmoz-utils": "^3.2.0",
+		"@open-wc/demoing-storybook": "^2.0.0",
+		"@polymer/iron-icons": "^3.0.1",
+		"@polymer/paper-icon-button": "^3.0.2",
+		"@polymer/paper-input": "^3.2.1",
+		"@polymer/paper-item": "^3.0.1",
+		"@polymer/paper-material": "^3.0.1",
+		"@polymer/paper-ripple": "^3.0.2",
+		"haunted": "^4.7.0",
+		"lit-html": "^1.2.1",
+		"lit-virtualizer": "^0.4.2"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^8.3.5",
+		"@commitlint/config-conventional": "^8.3.4",
+		"@neovici/eslint-config": "^1.2.0",
+		"@open-wc/testing": "^2.5.8",
+		"@open-wc/testing-karma": "^3.3.10",
+		"@semantic-release/changelog": "^5.0.1",
+		"@semantic-release/git": "^9.0.0",
+		"@webcomponents/webcomponentsjs": "^2.4.3",
+		"babel-eslint": "^10.1.0",
+		"chai": "^4.2.0",
+		"deepmerge": "^4.2.2",
+		"eslint": "^6.8.0",
+		"eslint-plugin-html": "^6.0.0",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-mocha": "^6.3.0",
+		"husky": "^4.2.0",
+		"karma": "^5.0.0",
+		"karma-firefox-launcher": "^1.3.0",
+		"karma-sauce-launcher": "^4.0.0",
+		"semantic-release": "^17.0.0",
+		"sinon": "^9.0.0"
+	}
 }

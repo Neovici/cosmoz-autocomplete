@@ -1,26 +1,41 @@
 ---
-engines:
+version: "2"
+checks:
+  argument-count:
+    enabled: false  # handled by eslint rule "max-params"
+  complex-logic:
+    enabled: true
+    config:
+      threshold: 4
+  file-lines:
+    enabled: false  # handled by eslint rule "max-lines"
+  method-complexity:
+    enabled: false  # handled by eslint rule "complexity"
+  method-count:
+    enabled: true
+    config:
+      threshold: 20
+  method-lines:
+    enabled: false  # handled by eslint rule "max-lines-per-function"
+  nested-control-flow:
+    enabled: false  # handled by eslint rule "max-depth"
+  return-statements:
+    enabled: true
+    config:
+      threshold: 4
+  similar-code:
+    enabled: true
+  identical-code:
+    enabled: true
+
+plugins:
   eslint:
-    enabled: true
-    checks:
-      complexity:
-        enabled: false
-    config:
-      sanitize_batch: false
-      extensions:
-       - .js
-       - .html
-
-  duplication:
-    enabled: true
-    config:
-      languages:
-        - javascript
-
+    enabled: false
   fixme:
     enabled: true
 
-ratings:
-  paths:
-  - "**.js"
-  - "**.html"
+exclude_patterns:
+  - "node_modules/"
+  - "test/"
+  - "demo/"
+  - "*.bak"
