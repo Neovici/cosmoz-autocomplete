@@ -9,6 +9,7 @@ import '@polymer/paper-ripple';
 import '@polymer/paper-material';
 import '@polymer/paper-item';
 import { useSuggestions } from './lib/use-suggestions';
+import { propOrRoot } from './lib/utils';
 
 const defaultRenderItem = (
 		item,
@@ -24,7 +25,7 @@ const defaultRenderItem = (
 			@click=${() => select(item)}
 			@mousedown=${e => e.preventDefault()}
 		>
-			<div>${textProperty ? item[textProperty] : item}</div>
+			<div>${propOrRoot(item, textProperty)}</div>
 			<paper-ripple></paper-ripple>
 		</paper-item>
 	`,

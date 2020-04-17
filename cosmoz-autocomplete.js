@@ -23,7 +23,7 @@ const Autocomplete = ({
 	value
 }) => {
 	const {
-		text, items, onClear, onEdit, onFocus, onSelect
+		text, items, clear, onEdit, onFocus, onSelect
 	} = useAutocomplete({
 		source,
 		textProperty,
@@ -51,14 +51,14 @@ const Autocomplete = ({
 			@focused-changed=${onFocus}
 		>
 			<slot name="prefix" slot="prefix"></slot>
-			${onClear &&
+			${!!text &&
 				html`
 					<paper-icon-button
 						id="clear"
 						slot="suffix"
 						icon="clear"
 						tabindex="-1"
-						@click="${onClear}}"
+						@click="${clear}}"
 					></paper-icon-button>
 				`}
 			<slot name="suffix" slot="suffix"></slot>
