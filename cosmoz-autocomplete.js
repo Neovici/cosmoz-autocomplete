@@ -20,15 +20,22 @@ const Autocomplete = ({
 	source,
 	textProperty,
 	onChange,
-	value
+	value: eValue
 }) => {
 	const {
-		text, items, clear, onEdit, onFocus, onSelect
+		text,
+		items,
+		clear,
+		onEdit,
+		onText,
+		onFocus,
+		onSelect,
+		value
 	} = useAutocomplete({
 		source,
 		textProperty,
 		onChange,
-		value
+		value: eValue
 	});
 	return html`
 		<style>
@@ -47,11 +54,12 @@ const Autocomplete = ({
 			disabled=${ifDefined(disabled)}
 			.placeholder=${placeholder}
 			aria-disabled=${ifDefined(disabled)}
-			@value-changed=${onEdit}
+			@input=${onEdit}
+			@value-changed=${onText}
 			@focused-changed=${onFocus}
 		>
 			<slot name="prefix" slot="prefix"></slot>
-			${!!text &&
+			${!!value &&
 				html`
 					<paper-icon-button
 						id="clear"

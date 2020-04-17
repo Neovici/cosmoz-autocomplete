@@ -1,6 +1,9 @@
 import '../cosmoz-suggestions';
 import {
-	assert, html, fixture, nextFrame, waitUntil
+	assert,
+	html,
+	fixture,
+	nextFrame
 } from '@open-wc/testing';
 import { spy } from 'sinon';
 
@@ -15,8 +18,8 @@ suite('cosmoz-suggestions', () => {
 					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
 				`
 			);
-
-		await waitUntil(() => el.shadowRoot.querySelector('paper-item'), 'Renders items');
+		await nextFrame();
+		await nextFrame();
 		assert.equal(el.shadowRoot.querySelector('paper-item').innerText, 'item 0');
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
@@ -63,7 +66,9 @@ suite('cosmoz-suggestions', () => {
 					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
 				`
 			);
-		await waitUntil(() => el.shadowRoot.querySelector('paper-item'), 'Renders items');
+
+		await nextFrame();
+		await nextFrame();
 
 		el.shadowRoot
 			.querySelector('paper-item:nth-of-type(4)')
@@ -75,7 +80,6 @@ suite('cosmoz-suggestions', () => {
 		assert.isTrue(onSelect.calledOnce);
 		assert.isTrue(onSelect.calledWith(items[3]));
 	});
-
 
 	test('mousedown, click', async () => {
 		const onSelect = spy(),
