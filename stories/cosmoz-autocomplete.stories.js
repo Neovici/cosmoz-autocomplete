@@ -1,21 +1,21 @@
-import { html } from "lit-html";
-import "../cosmoz-autocomplete";
+import { html } from 'lit-html';
+import '../cosmoz-autocomplete';
 
 export default {
-	title: "Autocomplete",
-	component: "cosmoz-autocomplete"
+	title: 'Autocomplete',
+	component: 'cosmoz-autocomplete'
 };
 
 export const basic = () => {
 	const words = [
-			"Red",
-			"Green",
-			"Purple",
-			"Blue",
-			"White",
-			"Brown",
-			"Aqua",
-			"Nothing"
+			'Red',
+			'Green',
+			'Purple',
+			'Blue',
+			'White',
+			'Brown',
+			'Aqua',
+			'Nothing'
 		],
 		options = Array(1e5)
 			.fill()
@@ -24,9 +24,9 @@ export const basic = () => {
 			}));
 	return html`
 		<cosmoz-autocomplete
-			.label=${"Choose color"}
+			.label=${'Choose color'}
 			.source=${options}
-			.textProperty=${"text"}
+			.textProperty=${'text'}
 		></cosmoz-autocomplete>
 	`;
 };
