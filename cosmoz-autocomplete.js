@@ -48,7 +48,6 @@ const Autocomplete = ({
 		<paper-input
 			id="input"
 			.label=${label}
-			.value=${live(text)}
 			.errorMessage=${errorMessage}
 			invalid=${ifDefined(invalid)}
 			disabled=${ifDefined(disabled)}
@@ -57,6 +56,7 @@ const Autocomplete = ({
 			@input=${onEdit}
 			@value-changed=${onText}
 			@focused-changed=${onFocus}
+			.value=${live(text)}
 		>
 			<slot name="prefix" slot="prefix"></slot>
 			${!!value &&
@@ -73,12 +73,12 @@ const Autocomplete = ({
 		</paper-input>
 		${items.length
 		? html`
-					<cosmoz-suggestions
-						.items=${items}
-						.onSelect=${onSelect}
-						.textProperty=${textProperty}
-					/>
-			  `
+			<cosmoz-suggestions
+				.items=${items}
+				.onSelect=${onSelect}
+				.textProperty=${textProperty}
+			/>
+		 `
 		: nothing}
 	`;
 };
