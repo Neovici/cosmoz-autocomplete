@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map.js';
 import {
-	component, useCallback
+	component, useCallback, useLayoutEffect, useRef
 } from 'haunted';
 
 import { scroll } from 'lit-virtualizer';
@@ -9,13 +9,15 @@ import '@polymer/paper-ripple';
 import '@polymer/paper-material';
 import '@polymer/paper-item';
 import { useSuggestions } from './lib/use-suggestions';
-import { propOrRoot } from './lib/utils';
+import {
+	mark, propOrRoot
+} from './lib/utils';
 
-const defaultRenderItem = (
+const defaultItemRenderer = (
 		item,
 		i,
 		{
-			highlight, select, textProperty
+			highlight, select, textProperty, query
 		}
 	) => html`
 		<paper-item
@@ -25,7 +27,7 @@ const defaultRenderItem = (
 			@click=${() => select(item)}
 			@mousedown=${e => e.preventDefault()}
 		>
-			<div>${propOrRoot(item, textProperty)}</div>
+			<div>${mark(propOrRoot(item, textProperty), query)}</div>
 			<paper-ripple></paper-ripple>
 		</paper-item>
 	`,
@@ -33,18 +35,35 @@ const defaultRenderItem = (
 		items,
 		onSelect,
 		textProperty,
-		renderItem = defaultRenderItem
+		query,
+		itemRenderer = defaultItemRenderer
 	}) => {
 		const {
-			index,
-			rangechange,
-			scrollToIndex,
-			highlight,
-			select
-		} = useSuggestions({
-			items,
-			onSelect
-		});
+				index,
+				rangechange,
+				scrollToIndex,
+				highlight,
+				select
+			} = useSuggestions({
+				items,
+				onSelect
+			}),
+			ref = useRef();
+
+		useLayoutEffect(() => {
+			ref.current = {
+				highlight,
+				select,
+				textProperty,
+				query
+			};
+		}, [ref, highlight, select, textProperty, query]);
+
+		const renderItem = useCallback(
+			(item, i) => itemRenderer(item, i, ref.current),
+			[ref, itemRenderer]
+		);
+
 		return html`
 			<style>
 				paper-material {
@@ -85,15 +104,7 @@ const defaultRenderItem = (
 				>${/* eslint-disable indent*/ scroll({
 					items,
 					scrollToIndex,
-					renderItem: useCallback(
-						(item, i) =>
-							renderItem(item, i, {
-								highlight,
-								select,
-								textProperty
-							}),
-						[highlight, select, textProperty]
-					)
+					renderItem
 				})}</paper-material
 			>
 		`;
