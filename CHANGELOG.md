@@ -1,3 +1,10 @@
+### [2.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.0.0...v2.0.1) (2020-04-22)
+
+
+### Bug Fixes
+
+* don't update text state unless it actually changed ([203abd1](https://github.com/neovici/cosmoz-autocomplete/commit/203abd160fc6b9b1506e0f951b9abacf3d79a87a))
+
 ## [2.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v1.0.2...v2.0.0) (2020-04-17)
 
 
