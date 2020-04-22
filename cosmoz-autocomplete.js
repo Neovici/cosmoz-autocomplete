@@ -24,6 +24,7 @@ const Autocomplete = ({
 }) => {
 	const {
 		text,
+		query,
 		items,
 		clear,
 		onEdit,
@@ -74,6 +75,7 @@ const Autocomplete = ({
 		${items.length
 		? html`
 			<cosmoz-suggestions
+				.query=${query}
 				.items=${items}
 				.onSelect=${onSelect}
 				.textProperty=${textProperty}
