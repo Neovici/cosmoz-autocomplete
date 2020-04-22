@@ -1,3 +1,15 @@
+## [2.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.0.1...v2.1.0) (2020-04-22)
+
+
+### Features
+
+* adds query mark to cosmoz-suggestions ([086c090](https://github.com/neovici/cosmoz-autocomplete/commit/086c090b4c4f4fca99e2c58c29955c662c0ce4a9))
+
+
+### Bug Fixes
+
+* remote whitespace in mark template ([ff991b9](https://github.com/neovici/cosmoz-autocomplete/commit/ff991b96f3663a921aada1d98759b35f84082adb))
+
 ### [2.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.0.0...v2.0.1) (2020-04-22)
 
 
