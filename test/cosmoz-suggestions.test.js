@@ -1,9 +1,6 @@
 import '../cosmoz-suggestions';
 import {
-	assert,
-	html,
-	fixture,
-	nextFrame
+	assert, html, fixture, nextFrame
 } from '@open-wc/testing';
 import { spy } from 'sinon';
 
@@ -36,7 +33,7 @@ suite('cosmoz-suggestions', () => {
 		assert.isTrue(onSelect.calledWith(items[2]));
 	});
 
-	test('render', async () => {
+	test('render (textProperty)', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
@@ -54,6 +51,27 @@ suite('cosmoz-suggestions', () => {
 		await nextFrame();
 		await nextFrame();
 		assert.equal(el.shadowRoot.querySelector('paper-item').innerText, 'item 0');
+	});
+
+	test('render (query)', async () => {
+		const onSelect = spy(),
+			items = Array(10)
+				.fill()
+				.map((_, i) => ({ textProp: `item ${i}` })),
+			el = await fixture(
+				html`
+					<cosmoz-suggestions
+						.query=${'1'}
+						.items=${items}
+						.onSelect=${onSelect}
+						.textProperty=${'textProp'}
+					/>
+				`
+			);
+
+		await nextFrame();
+		await nextFrame();
+		assert.equal(el.shadowRoot.querySelector('paper-item mark').innerText, '1');
 	});
 
 	test('highlight and enter', async () => {
