@@ -11,33 +11,37 @@ import '@polymer/iron-icons/iron-icons';
 import './cosmoz-suggestions';
 import { useAutocomplete } from './lib/use-autocomplete';
 
-const Autocomplete = ({
+function Autocomplete({
 	invalid,
 	errorMessage,
 	label,
 	placeholder,
 	disabled,
-	source,
-	textProperty,
-	onChange,
-	value: eValue
-}) => {
+	...opts
+}) {
 	const {
-		text,
-		query,
-		items,
-		clear,
-		onEdit,
-		onText,
-		onFocus,
-		onSelect,
-		value
-	} = useAutocomplete({
-		source,
-		textProperty,
-		onChange,
-		value: eValue
-	});
+			textProperty, onSelect: onSelectCb
+		} = opts,
+		{
+			text,
+			query,
+			items,
+			clear,
+			onEdit,
+			onText,
+			onFocus,
+			onSelect,
+			value
+		} = useAutocomplete({
+			...opts,
+			onSelect: value => {
+				this.dispatchEvent(new CustomEvent('select', { detail: { value }}));
+				if (onSelectCb) {
+					onSelectCb(value);
+				}
+			}
+		});
+
 	return html`
 		<style>
 			:host {
@@ -50,9 +54,9 @@ const Autocomplete = ({
 			id="input"
 			.label=${label}
 			.errorMessage=${errorMessage}
+			.placeholder=${placeholder}
 			invalid=${ifDefined(invalid)}
 			disabled=${ifDefined(disabled)}
-			.placeholder=${placeholder}
 			aria-disabled=${ifDefined(disabled)}
 			@input=${onEdit}
 			@value-changed=${onText}
@@ -74,15 +78,15 @@ const Autocomplete = ({
 		</paper-input>
 		${items.length
 		? html`
-			<cosmoz-suggestions
-				.query=${query}
-				.items=${items}
-				.onSelect=${onSelect}
-				.textProperty=${textProperty}
-			/>
-		 `
+					<cosmoz-suggestions
+						.query=${query}
+						.items=${items}
+						.onSelect=${onSelect}
+						.textProperty=${textProperty}
+					/>
+			  `
 		: nothing}
 	`;
-};
+}
 
 customElements.define('cosmoz-autocomplete', component(Autocomplete));
