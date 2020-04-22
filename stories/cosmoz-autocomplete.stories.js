@@ -6,7 +6,7 @@ export default {
 	component: 'cosmoz-autocomplete'
 };
 
-export const singleComponent = () => {
+export const basic = () => {
 	const words = [
 			'Red',
 			'Green',
@@ -19,11 +19,9 @@ export const singleComponent = () => {
 		],
 		options = Array(1e5)
 			.fill()
-			.map((_, i) => {
-				return {
-					text: `${i}. ${words[Math.floor(Math.random() * words.length)]}`
-				};
-			});
+			.map((_, i) => ({
+				text: `${i}. ${words[Math.floor(Math.random() * words.length)]}`
+			}));
 	return html`
 		<cosmoz-autocomplete
 			.label=${'Choose color'}
