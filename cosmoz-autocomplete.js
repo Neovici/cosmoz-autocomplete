@@ -49,6 +49,13 @@ const Autocomplete = function ({
 				display: block;
 				position: relative;
 			}
+
+			#clear {
+				height: 24px;
+				width: 24px;
+				padding: 2px;
+				line-height: 8px;
+			}
 		</style>
 
 		<paper-input
