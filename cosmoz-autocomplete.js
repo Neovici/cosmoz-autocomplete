@@ -11,12 +11,13 @@ import '@polymer/iron-icons/iron-icons';
 import './cosmoz-suggestions';
 import { useAutocomplete } from './lib/use-autocomplete';
 
-function Autocomplete({
+const Autocomplete = function ({
 	invalid,
 	errorMessage,
 	label,
 	placeholder,
 	disabled,
+	noLabelFloat,
 	...opts
 }) {
 	const {
@@ -55,6 +56,7 @@ function Autocomplete({
 			.label=${label}
 			.errorMessage=${errorMessage}
 			.placeholder=${placeholder}
+			no-label-float=${noLabelFloat}
 			invalid=${ifDefined(invalid)}
 			disabled=${ifDefined(disabled)}
 			aria-disabled=${ifDefined(disabled)}
@@ -87,6 +89,9 @@ function Autocomplete({
 			  `
 		: nothing}
 	`;
-}
+};
 
-customElements.define('cosmoz-autocomplete', component(Autocomplete));
+customElements.define(
+	'cosmoz-autocomplete',
+	component(Autocomplete, { observedAttributes: ['no-label-float']})
+);
