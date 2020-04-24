@@ -1,101 +1,56 @@
 import {
-	nothing, html
-} from 'lit-html';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { live } from 'lit-html/directives/live';
-import { component } from 'haunted';
+	component, useMemo
+} from 'haunted';
 
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icons/iron-icons';
+
 import './cosmoz-suggestions';
-import { useAutocomplete } from './lib/use-autocomplete';
+
+import { prop } from './lib/utils';
+import { useInput } from './lib/use-input';
+import { useSelect } from './lib/use-select';
+import { autocomplete } from './autocomplete';
 
 const Autocomplete = function ({
-	invalid,
-	errorMessage,
-	label,
-	placeholder,
-	disabled,
-	noLabelFloat,
+	textProperty,
+	source,
+	value,
+	onChange,
+	limit = Infinity,
 	...opts
 }) {
 	const {
-			textProperty, onSelect: onSelectCb
-		} = opts,
+			select, deselect, values
+		} = useSelect({
+			value,
+			onChange,
+			limit,
+			source,
+			dispatchEvent: this.dispatchEvent.bind(this)
+		}),
+		textual = useMemo(() => prop(textProperty), [textProperty]),
 		{
-			text,
-			query,
-			items,
-			clear,
-			onEdit,
-			onText,
-			onFocus,
-			onSelect,
-			value
-		} = useAutocomplete({
-			...opts,
-			onSelect: value => {
-				this.dispatchEvent(new CustomEvent('select', { detail: { value }}));
-				if (onSelectCb) {
-					onSelectCb(value);
-				}
-			}
+			text, query, items, onText, onFocus, onSelect
+		} = useInput({
+			textual,
+			values,
+			onSelect: select
 		});
-
-	return html`
-		<style>
-			:host {
-				display: block;
-				position: relative;
-			}
-
-			#clear {
-				height: 24px;
-				width: 24px;
-				padding: 2px;
-				line-height: 8px;
-			}
-		</style>
-
-		<paper-input
-			id="input"
-			.label=${label}
-			.errorMessage=${errorMessage}
-			.placeholder=${placeholder}
-			no-label-float=${noLabelFloat}
-			invalid=${ifDefined(invalid)}
-			disabled=${ifDefined(disabled)}
-			aria-disabled=${ifDefined(disabled)}
-			@input=${onEdit}
-			@value-changed=${onText}
-			@focused-changed=${onFocus}
-			.value=${live(text)}
-		>
-			<slot name="prefix" slot="prefix"></slot>
-			${!!value &&
-				html`
-					<paper-icon-button
-						id="clear"
-						slot="suffix"
-						icon="clear"
-						tabindex="-1"
-						@click="${clear}}"
-					></paper-icon-button>
-				`}
-			<slot name="suffix" slot="suffix"></slot>
-		</paper-input>
-		${items.length
-		? html`
-					<cosmoz-suggestions
-						.query=${query}
-						.items=${items}
-						.onSelect=${onSelect}
-						.textProperty=${textProperty}
-					/>
-			  `
-		: nothing}
-	`;
+	return autocomplete({
+		...opts,
+		textual,
+		text,
+		query,
+		items,
+		onText,
+		onFocus,
+		onSelect,
+		onDeselect: deselect,
+		value,
+		limit
+	});
 };
 
 customElements.define(

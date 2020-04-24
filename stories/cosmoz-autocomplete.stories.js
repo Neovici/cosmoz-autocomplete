@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import '../cosmoz-autocomplete';
 
 export default {
-	title: 'Autocomplete',
+	title: 'Autocomplete(chips)',
 	component: 'cosmoz-autocomplete'
 };
 
@@ -17,11 +17,9 @@ export const basic = () => {
 			'Aqua',
 			'Nothing'
 		],
-		options = Array(1e5)
-			.fill()
-			.map((_, i) => ({
-				text: `${i}. ${words[Math.floor(Math.random() * words.length)]}`
-			}));
+		options = words.map(text => ({
+			text
+		}));
 	return html`
 		<cosmoz-autocomplete
 			.label=${'Choose color'}
