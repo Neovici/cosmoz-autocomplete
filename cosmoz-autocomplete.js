@@ -1,88 +1,38 @@
 import {
-	nothing, html
-} from 'lit-html';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { live } from 'lit-html/directives/live';
-import { component } from 'haunted';
+	component, useState, useEffect, useCallback
+} from 'haunted';
 
-import '@polymer/paper-input/paper-input';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
-import './cosmoz-suggestions';
-import { useAutocomplete } from './lib/use-autocomplete';
+import {
+	Autocomplete, observedAttributes
+} from './lib/autocomplete';
 
-const Autocomplete = ({
-	invalid,
-	errorMessage,
-	label,
-	placeholder,
-	disabled,
-	source,
-	textProperty,
-	onChange,
-	value: eValue
-}) => {
-	const {
-		text,
-		query,
-		items,
-		clear,
-		onEdit,
-		onText,
-		onFocus,
-		onSelect,
-		value
-	} = useAutocomplete({
-		source,
-		textProperty,
-		onChange,
-		value: eValue
-	});
-	return html`
-		<style>
-			:host {
-				display: block;
-				position: relative;
+const Standalone = function ({
+	value: eValue, onChange: onChangeCb, ...props
+}) {
+	const [value, setValue] = useState(eValue);
+	useEffect(() => {
+		setValue(eValue);
+	}, [setValue, eValue]);
+	return Autocomplete.call(this, {
+		...props,
+		value,
+		onChange: useCallback(value => {
+			setValue(value);
+			if (onChangeCb) {
+				onChangeCb(value);
 			}
-		</style>
 
-		<paper-input
-			id="input"
-			.label=${label}
-			.errorMessage=${errorMessage}
-			invalid=${ifDefined(invalid)}
-			disabled=${ifDefined(disabled)}
-			.placeholder=${placeholder}
-			aria-disabled=${ifDefined(disabled)}
-			@input=${onEdit}
-			@value-changed=${onText}
-			@focused-changed=${onFocus}
-			.value=${live(text)}
-		>
-			<slot name="prefix" slot="prefix"></slot>
-			${!!value &&
-				html`
-					<paper-icon-button
-						id="clear"
-						slot="suffix"
-						icon="clear"
-						tabindex="-1"
-						@click="${clear}}"
-					></paper-icon-button>
-				`}
-			<slot name="suffix" slot="suffix"></slot>
-		</paper-input>
-		${items.length
-		? html`
-			<cosmoz-suggestions
-				.query=${query}
-				.items=${items}
-				.onSelect=${onSelect}
-				.textProperty=${textProperty}
-			/>
-		 `
-		: nothing}
-	`;
+		}, [setValue, onChangeCb])
+	});
 };
 
-customElements.define('cosmoz-autocomplete', component(Autocomplete));
+
+customElements.define(
+	'cosmoz-autocomplete-ui',
+	component(Autocomplete, { observedAttributes })
+);
+
+customElements.define(
+	'cosmoz-autocomplete',
+	component(Standalone, { observedAttributes })
+);

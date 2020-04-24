@@ -10,14 +10,14 @@ import '@polymer/paper-material';
 import '@polymer/paper-item';
 import { useSuggestions } from './lib/use-suggestions';
 import {
-	mark, propOrRoot
+	mark, identity
 } from './lib/utils';
 
 const defaultItemRenderer = (
 		item,
 		i,
 		{
-			highlight, select, textProperty, query
+			highlight, select, textual, query
 		}
 	) => html`
 		<paper-item
@@ -27,15 +27,15 @@ const defaultItemRenderer = (
 			@click=${() => select(item)}
 			@mousedown=${e => e.preventDefault()}
 		>
-			<div>${mark(propOrRoot(item, textProperty), query)}</div>
+			<div>${mark(textual(item), query)}</div>
 			<paper-ripple></paper-ripple>
 		</paper-item>
 	`,
 	Suggestions = ({
 		items,
 		onSelect,
-		textProperty,
 		query,
+		textual = identity,
 		itemRenderer = defaultItemRenderer
 	}) => {
 		const {
@@ -54,10 +54,10 @@ const defaultItemRenderer = (
 			ref.current = {
 				highlight,
 				select,
-				textProperty,
+				textual,
 				query
 			};
-		}, [ref, highlight, select, textProperty, query]);
+		}, [ref, highlight, select, textual, query]);
 
 		const renderItem = useCallback(
 			(item, i) => itemRenderer(item, i, ref.current),

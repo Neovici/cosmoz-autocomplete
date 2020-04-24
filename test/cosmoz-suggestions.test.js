@@ -2,6 +2,7 @@ import '../cosmoz-suggestions';
 import {
 	assert, html, fixture, nextFrame
 } from '@open-wc/testing';
+import { prop } from '../lib/utils';
 import { spy } from 'sinon';
 
 suite('cosmoz-suggestions', () => {
@@ -33,17 +34,17 @@ suite('cosmoz-suggestions', () => {
 		assert.isTrue(onSelect.calledWith(items[2]));
 	});
 
-	test('render (textProperty)', async () => {
+	test('render (textual)', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
-				.map((_, i) => ({ textProp: `item ${i}` })),
+				.map((_, i) => ({ text: `item ${i}` })),
 			el = await fixture(
 				html`
 					<cosmoz-suggestions
 						.items=${items}
 						.onSelect=${onSelect}
-						.textProperty=${'textProp'}
+						.textual=${prop('text')}
 					/>
 				`
 			);
@@ -64,7 +65,7 @@ suite('cosmoz-suggestions', () => {
 						.query=${'1'}
 						.items=${items}
 						.onSelect=${onSelect}
-						.textProperty=${'textProp'}
+						.textual=${prop('textProp')}
 					/>
 				`
 			);

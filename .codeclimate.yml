@@ -39,3 +39,4 @@ exclude_patterns:
   - "test/"
   - "demo/"
   - "*.bak"
+  - "stories/"
