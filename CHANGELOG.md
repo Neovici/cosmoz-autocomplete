@@ -1,3 +1,10 @@
+### [2.2.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.0...v2.2.1) (2020-04-24)
+
+
+### Bug Fixes
+
+* prop should fallback to identity if key is falsy ([d7f7adc](https://github.com/neovici/cosmoz-autocomplete/commit/d7f7adc6f060892988e0d6ee1324a5ceb7284e2b))
+
 ## [2.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.1.0...v2.2.0) (2020-04-24)
 
 
