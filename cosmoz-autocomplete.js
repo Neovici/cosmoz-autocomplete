@@ -1,59 +1,38 @@
 import {
-	component, useMemo
+	component, useState, useEffect, useCallback
 } from 'haunted';
 
-import '@polymer/paper-input/paper-input';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
+import {
+	Autocomplete, observedAttributes
+} from './lib/autocomplete';
 
-import './cosmoz-suggestions';
-
-import { prop } from './lib/utils';
-import { useInput } from './lib/use-input';
-import { useSelect } from './lib/use-select';
-import { autocomplete } from './autocomplete';
-
-const Autocomplete = function ({
-	textProperty,
-	source,
-	value,
-	onChange,
-	limit = Infinity,
-	...opts
+const Standalone = function ({
+	value: eValue, onChange: onChangeCb, ...props
 }) {
-	const {
-			select, deselect, values
-		} = useSelect({
-			value,
-			onChange,
-			limit,
-			source,
-			dispatchEvent: this.dispatchEvent.bind(this)
-		}),
-		textual = useMemo(() => prop(textProperty), [textProperty]),
-		{
-			text, query, items, onText, onFocus, onSelect
-		} = useInput({
-			textual,
-			values,
-			onSelect: select
-		});
-	return autocomplete({
-		...opts,
-		textual,
-		text,
-		query,
-		items,
-		onText,
-		onFocus,
-		onSelect,
-		onDeselect: deselect,
+	const [value, setValue] = useState(eValue);
+	useEffect(() => {
+		setValue(eValue);
+	}, [setValue, eValue]);
+	return Autocomplete.call(this, {
+		...props,
 		value,
-		limit
+		onChange: useCallback(value => {
+			setValue(value);
+			if (onChangeCb) {
+				onChangeCb(value);
+			}
+
+		}, [setValue, onChangeCb])
 	});
 };
 
+
+customElements.define(
+	'cosmoz-autocomplete-ui',
+	component(Autocomplete, { observedAttributes })
+);
+
 customElements.define(
 	'cosmoz-autocomplete',
-	component(Autocomplete, { observedAttributes: ['no-label-float']})
+	component(Standalone, { observedAttributes })
 );
