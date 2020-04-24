@@ -1,3 +1,19 @@
+## [2.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.1.0...v2.2.0) (2020-04-24)
+
+
+### Features
+
+* implements multi selection ([f7c797c](https://github.com/neovici/cosmoz-autocomplete/commit/f7c797c3ccb84118deb6ccfa4d57114e9b81a28f))
+
+
+### Bug Fixes
+
+* adds no-label-float ([2d7b8d6](https://github.com/neovici/cosmoz-autocomplete/commit/2d7b8d636773d06a2febf9eb59ec666a99aebe41))
+* paper-autocomplete misc compat fixes ([503ef2c](https://github.com/neovici/cosmoz-autocomplete/commit/503ef2c34d84c87d43360d59fc645c52b92b3571))
+* sort search results by position ([71b49d6](https://github.com/neovici/cosmoz-autocomplete/commit/71b49d6692853a8ebcc091eeb0702258a816c392))
+* styles clear icon button ([fde2205](https://github.com/neovici/cosmoz-autocomplete/commit/fde22059a6b53a623f351206e68fa2b611527d63))
+* use capture for keyboard navigation events ([d563bd6](https://github.com/neovici/cosmoz-autocomplete/commit/d563bd6d795ea53a0ff2648eec52fb29bff92ba5))
+
 ## [2.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.0.1...v2.1.0) (2020-04-22)
 
 
