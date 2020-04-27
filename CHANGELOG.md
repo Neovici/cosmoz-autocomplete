@@ -1,3 +1,10 @@
+### [2.2.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.1...v2.2.2) (2020-04-27)
+
+
+### Bug Fixes
+
+* unarray value on select if limit is 1 ([aaca081](https://github.com/neovici/cosmoz-autocomplete/commit/aaca08150f078ef75087b57d7f30a920ade29288))
+
 ### [2.2.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.0...v2.2.1) (2020-04-24)
 
 
