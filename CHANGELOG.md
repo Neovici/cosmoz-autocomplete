@@ -1,3 +1,10 @@
+### [2.2.3](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.2...v2.2.3) (2020-04-28)
+
+
+### Bug Fixes
+
+* adds suggestionsWidth property ([a229453](https://github.com/neovici/cosmoz-autocomplete/commit/a229453241c42aaa40b4b32245f03d4c47d3afec))
+
 ### [2.2.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.1...v2.2.2) (2020-04-27)
 
 
