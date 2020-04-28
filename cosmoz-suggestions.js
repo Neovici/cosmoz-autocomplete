@@ -19,18 +19,22 @@ const defaultItemRenderer = (
 		{
 			highlight, select, textual, query
 		}
-	) => html`
+	) => {
+		const text = textual(item);
+		return html`
 		<paper-item
 			role="option"
 			data-index=${i}
 			@mouseenter=${() => highlight(i)}
 			@click=${() => select(item)}
 			@mousedown=${e => e.preventDefault()}
+			title=${text}
 		>
-			<div>${mark(textual(item), query)}</div>
+			<div>${mark(text, query)}</div>
 			<paper-ripple></paper-ripple>
 		</paper-item>
-	`,
+	`;
+	},
 	Suggestions = ({
 		items,
 		onSelect,
@@ -66,6 +70,11 @@ const defaultItemRenderer = (
 
 		return html`
 			<style>
+				:host {
+					display: block;
+					position: relative;
+					width: var(--cosmoz-suggestions-width, 100%);
+				}
 				paper-material {
 					position: absolute;
 					width: 100%;
@@ -81,18 +90,22 @@ const defaultItemRenderer = (
 				paper-item {
 					min-height: var(--paper-item-min-height, 36px);
 					padding: 0 16px;
-					position: relative;
 					line-height: 18px;
 					width: 100%;
 					box-sizing: border-box;
 					cursor: pointer;
+				}
+				paper-item div {
+					width: 100%;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 				paper-item[data-index="${index}"] {
 					background: #eee;
 					color: #333;
 				}
 				paper-material:not(.overflowing) paper-item {
-					position: static !important;
+					position: relative !important;
 					transform: none !important;
 				}
 			</style>
