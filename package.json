@@ -62,13 +62,13 @@
 		}
 	},
 	"dependencies": {
-		"@neovici/cosmoz-utils": "^3.2.0",
-		"@polymer/iron-icons": "^3.0.1",
-		"@polymer/paper-icon-button": "^3.0.2",
-		"@polymer/paper-input": "^3.2.1",
-		"@polymer/paper-item": "^3.0.1",
-		"@polymer/paper-material": "^3.0.1",
-		"@polymer/paper-ripple": "^3.0.2",
+		"@neovici/cosmoz-utils": "^3.3.0",
+		"@polymer/iron-icons": "^3.0.0",
+		"@polymer/paper-icon-button": "^3.0.0",
+		"@polymer/paper-input": "^3.0.0",
+		"@polymer/paper-item": "^3.0.0",
+		"@polymer/paper-material": "^3.0.0",
+		"@polymer/paper-ripple": "^3.0.0",
 		"haunted": "^4.7.0",
 		"lit-html": "^1.2.1",
 		"lit-virtualizer": "^0.4.2"
