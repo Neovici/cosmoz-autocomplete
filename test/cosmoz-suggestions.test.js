@@ -5,6 +5,12 @@ import {
 import { prop } from '../lib/utils';
 import { spy } from 'sinon';
 
+const someFrames = async () => {
+	await nextFrame();
+	await nextFrame();
+	await nextFrame();
+};
+
 suite('cosmoz-suggestions', () => {
 	test('render', async () => {
 		const onSelect = spy(),
@@ -16,8 +22,7 @@ suite('cosmoz-suggestions', () => {
 					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
 				`
 			);
-		await nextFrame();
-		await nextFrame();
+		await someFrames();
 		assert.equal(el.shadowRoot.querySelector('paper-item').innerText, 'item 0');
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
@@ -49,8 +54,7 @@ suite('cosmoz-suggestions', () => {
 				`
 			);
 
-		await nextFrame();
-		await nextFrame();
+		await someFrames();
 		assert.equal(el.shadowRoot.querySelector('paper-item').innerText, 'item 0');
 	});
 
@@ -70,8 +74,7 @@ suite('cosmoz-suggestions', () => {
 				`
 			);
 
-		await nextFrame();
-		await nextFrame();
+		await someFrames();
 		assert.equal(el.shadowRoot.querySelector('paper-item mark').innerText, '1');
 	});
 
@@ -86,8 +89,7 @@ suite('cosmoz-suggestions', () => {
 				`
 			);
 
-		await nextFrame();
-		await nextFrame();
+		await someFrames();
 
 		el.shadowRoot
 			.querySelector('paper-item:nth-of-type(4)')
@@ -111,8 +113,7 @@ suite('cosmoz-suggestions', () => {
 				`
 			);
 
-		await nextFrame();
-		await nextFrame();
+		await someFrames();
 
 		el.shadowRoot
 			.querySelector('paper-item:nth-of-type(4)')
