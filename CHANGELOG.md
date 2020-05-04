@@ -1,3 +1,17 @@
+## [2.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.3...v2.3.0) (2020-05-04)
+
+
+### Features
+
+* adds onFocusChange ([3de918e](https://github.com/neovici/cosmoz-autocomplete/commit/3de918e6ee8f96a3108cd8ede11654d252bfe266))
+
+
+### Bug Fixes
+
+* **test:** adds someFrames ([dcc8f58](https://github.com/neovici/cosmoz-autocomplete/commit/dcc8f5846cddf1c55d5cf4147c4f6956f598da9b))
+* update reduce and action usage ([6e174ab](https://github.com/neovici/cosmoz-autocomplete/commit/6e174aba2502cb540d9a9ab12f903a7345094533))
+* **deps:** use correct caret version for paper-* elements ([cf7ef79](https://github.com/neovici/cosmoz-autocomplete/commit/cf7ef798fce111e85b0723286d13e40738afedec))
+
 ### [2.2.3](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.2...v2.2.3) (2020-04-28)
 
 
