@@ -55,7 +55,8 @@ module.exports = config => {
 			}],
 
 			esm: {
-				nodeResolve: true
+				nodeResolve: true,
+				preserveSymlinks: true
 			},
 			client: {
 				mocha: {
