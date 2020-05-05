@@ -7,22 +7,37 @@ import {
 } from './lib/autocomplete';
 
 const Standalone = function ({
-	value: eValue, onChange: onChangeCb, ...props
+	value: eValue,
+	onChange: onChangeCb,
+	text: eText,
+	onText: onTextCb,
+	...props
 }) {
-	const [value, setValue] = useState(eValue);
+	const [value, setValue] = useState(eValue),
+		[text, setText] = useState(eText);
+
 	useEffect(() => {
 		setValue(eValue);
 	}, [setValue, eValue]);
+
+	useEffect(() => {
+		setText(eText);
+	}, [setText, eText]);
+
 	return Autocomplete.call(this, {
 		...props,
 		value,
 		onChange: useCallback(value => {
 			setValue(value);
-			if (onChangeCb) {
-				onChangeCb(value);
-			}
+			onChangeCb && onChangeCb(value);
 
-		}, [setValue, onChangeCb])
+		}, [setValue, onChangeCb]),
+		text,
+		onText: useCallback(text => {
+			setText(text);
+			onTextCb && onTextCb(text);
+
+		}, [setText, onTextCb])
 	});
 };
 

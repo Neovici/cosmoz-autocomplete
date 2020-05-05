@@ -1,7 +1,6 @@
 import { assert } from '@open-wc/testing';
 import {
 	array,
-	unarray,
 	without,
 	search,
 	prop,
@@ -38,10 +37,6 @@ suite('utils', () => {
 			assert.equal(array(empty), empty);
 			assert.equal(array(obj)[0], obj);
 			assert.lengthOf(array(), 0);
-		});
-		test('unarray', () => {
-			assert.equal(unarray(empty), empty);
-			assert.equal(unarray([obj]), obj);
 		});
 		test('without', () => {
 			assert.lengthOf(without(obj)(obj), 0);
