@@ -1,3 +1,10 @@
+### [2.3.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.3.0...v2.3.1) (2020-05-05)
+
+
+### Bug Fixes
+
+* handle undefined in utils search ([6bffa91](https://github.com/neovici/cosmoz-autocomplete/commit/6bffa910b15f17f7ec1da30b04f8db73aec6e2cf))
+
 ## [2.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.2.3...v2.3.0) (2020-05-04)
 
 
