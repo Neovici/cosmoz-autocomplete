@@ -15,7 +15,7 @@ suite('utils', () => {
 		test('search', () => {
 			assert.deepEqual(
 				search(
-					[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }],
+					[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
 					'bc',
 					({ text }) => text
 				),
