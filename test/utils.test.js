@@ -4,6 +4,7 @@ import {
 	without,
 	search,
 	prop,
+	strProp,
 	identity
 } from '../lib/utils';
 
@@ -16,7 +17,7 @@ suite('utils', () => {
 				search(
 					[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
 					'bc',
-					({ text }) => text
+					strProp('text')
 				),
 				[{ text: 'bc' }, { text: 'abc' }]
 			);
