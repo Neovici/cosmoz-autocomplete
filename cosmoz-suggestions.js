@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map.js';
 import {
-	component, useCallback, useLayoutEffect, useRef
+	component, useCallback, useLayoutEffect, useRef, useMemo
 } from 'haunted';
 
 import { scroll } from 'lit-virtualizer';
@@ -47,13 +47,13 @@ const defaultItemRenderer = (
 				rangechange,
 				scrollToIndex,
 				highlight,
-				select
+				select,
+				range
 			} = useSuggestions({
 				items,
 				onSelect
 			}),
 			ref = useRef();
-
 		useLayoutEffect(() => {
 			ref.current = {
 				highlight,
@@ -64,20 +64,20 @@ const defaultItemRenderer = (
 		}, [ref, highlight, select, textual, query]);
 
 		const renderItem = useCallback(
-			(item, i) => itemRenderer(item, i, ref.current),
-			[ref, itemRenderer]
-		);
+				(item, i) => itemRenderer(item, i, ref.current),
+				[ref, itemRenderer]
+			),
+			texts = useMemo(() => items.slice(...range || [0, 1]).map(textual).join('\n'), [items, range, textual]);
 
 		return html`
 			<style>
 				:host {
 					display: block;
 					position: relative;
-					width: var(--cosmoz-suggestions-width, 100%);
 				}
 				paper-material {
 					position: absolute;
-					width: 100%;
+					min-width: 100%;
 					z-index: 1000;
 					background-color: #fff;
 					min-height: 36px;
@@ -108,6 +108,18 @@ const defaultItemRenderer = (
 					position: relative !important;
 					transform: none !important;
 				}
+
+				paper-item.sizer {
+					visibility: hidden;
+					opacity:0;
+					pointer-events: none;
+					position: relative;
+					z-index: -1;
+					padding: 0 16px;
+					white-space: pre;
+					min-height: 0;
+					height: 0;
+				}
 			</style>
 			<paper-material
 				unselectable="on"
@@ -118,8 +130,9 @@ const defaultItemRenderer = (
 					items,
 					scrollToIndex,
 					renderItem
-				})}</paper-material
-			>
+				})}
+				<paper-item class="sizer">${texts}</paper-item>
+			</paper-material>
 		`;
 	};
 
