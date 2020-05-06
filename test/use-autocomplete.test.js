@@ -27,7 +27,7 @@ suite('use-autocomplete', () => {
 
 	test('focus', async () => {
 		const onFocus = spy(),
-		 source = [{ text: 'Item 1' }, { text: 'Item 2' }],
+			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${source} .value=${source[0]} .text=${'It'} .textProperty=${'text'}
 					.onFocus=${onFocus} />
@@ -42,7 +42,7 @@ suite('use-autocomplete', () => {
 
 	test('edit', async () => {
 		const onText = spy(),
-		 source = [{ text: 'Item 1' }, { text: 'Item 2' }],
+			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${source} .value=${source[0]} .text=${'It'} .textProperty=${'text'}
 					.onText=${onText} />
@@ -56,7 +56,7 @@ suite('use-autocomplete', () => {
 	test('select', async () => {
 		const onText = spy(),
 			onChange = spy(),
-		 source = [{ text: 'Item 1' }, { text: 'Item 2' }],
+			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${source} .value=${source[0]} .text=${'It'} .textProperty=${'text'}
 					.onText=${onText} .onChange=${onChange} />
@@ -72,7 +72,7 @@ suite('use-autocomplete', () => {
 	test('deselect', async () => {
 		const onText = spy(),
 			onChange = spy(),
-		 source = [{ text: 'Item 1' }, { text: 'Item 2' }],
+			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${source} .value=${source[0]} .text=${'It'} .textProperty=${'text'}
 					.onText=${onText} .onChange=${onChange} />
@@ -90,7 +90,7 @@ suite('use-autocomplete', () => {
 			result = await fixture(html`
 				<use-autocomplete .source=${source} .text=${'la'} .textProperty=${'text'} .external=${true} />
 			`);
-		assert.isFalse(result.current.query)
+		assert.isFalse(result.current.query);
 		result.current.onFocus({ target: { focused: true }});
 		await nextFrame();
 		assert.lengthOf(result.current.items, 2);
