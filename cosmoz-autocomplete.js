@@ -8,9 +8,9 @@ import {
 
 const Standalone = function ({
 	value: eValue,
-	onChange: onChangeCb,
+	onChange,
 	text: eText,
-	onText: onTextCb,
+	onText: onText,
 	...props
 }) {
 	const [value, setValue] = useState(eValue),
@@ -29,15 +29,13 @@ const Standalone = function ({
 		value,
 		onChange: useCallback(value => {
 			setValue(value);
-			onChangeCb && onChangeCb(value);
-
-		}, [setValue, onChangeCb]),
+			onChange?.(value);
+		}, [setValue, onChange]),
 		text,
 		onText: useCallback(text => {
 			setText(text);
-			onTextCb && onTextCb(text);
-
-		}, [setText, onTextCb])
+			onText?.(text);
+		}, [setText, onText])
 	});
 };
 
