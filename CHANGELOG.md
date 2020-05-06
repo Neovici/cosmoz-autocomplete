@@ -1,3 +1,16 @@
+## [2.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.3.1...v2.4.0) (2020-05-06)
+
+
+### Features
+
+* refactor exposing text, onText and external ([20f5dfb](https://github.com/neovici/cosmoz-autocomplete/commit/20f5dfb21f2a658e28d6b4fbda8cb86e8033a526))
+
+
+### Bug Fixes
+
+* add strProp ([3571d2a](https://github.com/neovici/cosmoz-autocomplete/commit/3571d2a0f4b7f4c67e3bbb39c4c7867d3fd8ac4a))
+* autosize suggestions ([2fc406d](https://github.com/neovici/cosmoz-autocomplete/commit/2fc406d36dc1d7d8ba0c1619a2c2571d22ebaa0a))
+
 ### [2.3.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.3.0...v2.3.1) (2020-05-05)
 
 
