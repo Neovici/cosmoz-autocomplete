@@ -1,3 +1,10 @@
+### [2.4.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.0...v2.4.1) (2020-05-07)
+
+
+### Bug Fixes
+
+* improves autosize and external behavior ([64bce1a](https://github.com/neovici/cosmoz-autocomplete/commit/64bce1afdadfd79496659f8ae2080df27d1c7818))
+
 ## [2.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.3.1...v2.4.0) (2020-05-06)
 
 
