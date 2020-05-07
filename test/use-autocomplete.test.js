@@ -88,9 +88,9 @@ suite('use-autocomplete', () => {
 	test('external', async () => {
 		const source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
-				<use-autocomplete .source=${source} .text=${'la'} .textProperty=${'text'} .external=${true} />
+				<use-autocomplete .source=${source} .text=${'La'} .textProperty=${'text'} .external=${true} />
 			`);
-		assert.isFalse(result.current.query);
+		assert.equal(result.current.query, 'la');
 		result.current.onFocus({ target: { focused: true }});
 		await nextFrame();
 		assert.lengthOf(result.current.items, 2);
