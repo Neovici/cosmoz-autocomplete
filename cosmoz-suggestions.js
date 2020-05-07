@@ -1,14 +1,16 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map.js';
 import {
-	component, useCallback, useLayoutEffect, useRef, useMemo
+	component, useCallback, useLayoutEffect, useRef
 } from 'haunted';
 
 import { scroll } from 'lit-virtualizer';
 import '@polymer/paper-ripple';
 import '@polymer/paper-material';
 import '@polymer/paper-item';
-import { useSuggestions } from './lib/use-suggestions';
+import {
+	useSuggestions, useSizer
+} from './lib/use-suggestions';
 import {
 	mark, identity
 } from './lib/utils';
@@ -40,7 +42,8 @@ const defaultItemRenderer = (
 		onSelect,
 		query,
 		textual = identity,
-		itemRenderer = defaultItemRenderer
+		itemRenderer = defaultItemRenderer,
+		limit = 5
 	}) => {
 		const {
 				index,
@@ -54,6 +57,7 @@ const defaultItemRenderer = (
 				onSelect
 			}),
 			ref = useRef();
+
 		useLayoutEffect(() => {
 			ref.current = {
 				highlight,
@@ -67,8 +71,12 @@ const defaultItemRenderer = (
 				(item, i) => itemRenderer(item, i, ref.current),
 				[ref, itemRenderer]
 			),
-			texts = useMemo(() => items.slice(...range || [0, 1]).map(textual).join('\n'), [items, range, textual]);
-
+			height = limit * 36 + 2,
+			sizer = useSizer({
+				items,
+				range,
+				textual
+			});
 		return html`
 			<style>
 				:host {
@@ -83,8 +91,8 @@ const defaultItemRenderer = (
 					min-height: 36px;
 				}
 				paper-material.overflowing {
-					height: 182px;
-					max-height: 182px;
+					height: ${height}px;
+					max-height: ${height}px;
 					overflow-y: auto;
 				}
 				paper-item {
@@ -104,6 +112,7 @@ const defaultItemRenderer = (
 					background: #eee;
 					color: #333;
 				}
+
 				paper-material:not(.overflowing) paper-item {
 					position: relative !important;
 					transform: none !important;
@@ -124,14 +133,14 @@ const defaultItemRenderer = (
 			<paper-material
 				unselectable="on"
 				elevation="1"
-				class=${classMap({ overflowing: items.length > 5 })}
+				class=${classMap({ overflowing: items.length > limit })}
 				@rangechange=${rangechange}
 				>${/* eslint-disable indent*/ scroll({
 					items,
 					scrollToIndex,
 					renderItem
 				})}
-				<paper-item class="sizer">${texts}</paper-item>
+				<paper-item class="sizer">${sizer} </paper-item>
 			</paper-material>
 		`;
 	};
