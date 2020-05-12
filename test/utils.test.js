@@ -5,7 +5,8 @@ import {
 	search,
 	prop,
 	strProp,
-	identity
+	identity,
+	mark
 } from '../lib/utils';
 
 suite('utils', () => {
@@ -42,6 +43,19 @@ suite('utils', () => {
 		test('without', () => {
 			assert.lengthOf(without(obj)(obj), 0);
 			assert.lengthOf(without([1])([obj, 1]), 1);
+		});
+	});
+
+	suite('mark', () => {
+		test('handles RegExp chars', () => {
+			assert.equal(mark('asd', '[q'), 'asd');
+			assert.equal(mark('txt', '[=?'), 'txt');
+		});
+		test('marks RegExp chars', () => {
+			const marked = mark('txt[qasd', '[q');
+			assert.lengthOf(marked, 3);
+			assert.equal(marked[0], 'txt');
+			assert.equal(marked[2], 'asd');
 		});
 	});
 });
