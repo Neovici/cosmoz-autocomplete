@@ -1,3 +1,10 @@
+### [2.4.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.1...v2.4.2) (2020-05-12)
+
+
+### Bug Fixes
+
+* **mark:** handle special chars in mark ([059c4b4](https://github.com/neovici/cosmoz-autocomplete/commit/059c4b46dd87ffb7f5e1370a8395704951b105dd)), closes [#50](https://github.com/neovici/cosmoz-autocomplete/issues/50)
+
 ### [2.4.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.0...v2.4.1) (2020-05-07)
 
 
