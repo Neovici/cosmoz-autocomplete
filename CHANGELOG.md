@@ -1,3 +1,12 @@
+### [2.4.3](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.2...v2.4.3) (2020-05-15)
+
+
+### Bug Fixes
+
+* **autocomplete:** correct paper-input attributes binding ([480b7a6](https://github.com/neovici/cosmoz-autocomplete/commit/480b7a6ef8634cde61b23a8f95a4e29a280fcf5d)), closes [#53](https://github.com/neovici/cosmoz-autocomplete/issues/53)
+* **suggestions:** don't compute sizer when range is undefined ([d4e6613](https://github.com/neovici/cosmoz-autocomplete/commit/d4e6613d7a444e01aa1f06319b8325aff8936f6b))
+* **suggestions:** rangechange infinite loop ([508e632](https://github.com/neovici/cosmoz-autocomplete/commit/508e6327512e30b5f035f1f5bac1764429501a4e)), closes [#52](https://github.com/neovici/cosmoz-autocomplete/issues/52)
+
 ### [2.4.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.1...v2.4.2) (2020-05-12)
 
 
