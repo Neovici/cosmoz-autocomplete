@@ -2,8 +2,8 @@
 {}:
 with import (
   builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/fce7562.tar.gz";
-    sha256 = "14rvi69ji61x3z88vbn17rg5vxrnw2wbnanxb7y0qzyqrj7spapx";
+    url = "https://github.com/NixOS/nixpkgs/archive/8ba41a1.tar.gz";
+    sha256 = "0c2wn7si8vcx0yqwm92dpry8zqjglj9dfrvmww6ha6ihnjl6mfhh";
   }
 ) {};
 mkShell {
