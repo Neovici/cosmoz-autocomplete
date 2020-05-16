@@ -16,10 +16,10 @@ suite('cosmoz-suggestions', () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
-				.map((_, i) => `item ${i}`),
+				.map((_, i) => `item ${ i }`),
 			el = await fixture(
 				html`
-					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
+					<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } />
 				`
 			);
 		await someFrames();
@@ -43,13 +43,13 @@ suite('cosmoz-suggestions', () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
-				.map((_, i) => ({ text: `item ${i}` })),
+				.map((_, i) => ({ text: `item ${ i }` })),
 			el = await fixture(
 				html`
 					<cosmoz-suggestions
-						.items=${items}
-						.onSelect=${onSelect}
-						.textual=${prop('text')}
+						.items=${ items }
+						.onSelect=${ onSelect }
+						.textual=${ prop('text') }
 					/>
 				`
 			);
@@ -62,14 +62,14 @@ suite('cosmoz-suggestions', () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
-				.map((_, i) => ({ textProp: `item ${i}` })),
+				.map((_, i) => ({ textProp: `item ${ i }` })),
 			el = await fixture(
 				html`
 					<cosmoz-suggestions
-						.query=${'1'}
-						.items=${items}
-						.onSelect=${onSelect}
-						.textual=${prop('textProp')}
+						.query=${ '1' }
+						.items=${ items }
+						.onSelect=${ onSelect }
+						.textual=${ prop('textProp') }
 					/>
 				`
 			);
@@ -82,10 +82,10 @@ suite('cosmoz-suggestions', () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
-				.map((_, i) => `item ${i}`),
+				.map((_, i) => `item ${ i }`),
 			el = await fixture(
 				html`
-					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
+					<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } />
 				`
 			);
 
@@ -106,10 +106,10 @@ suite('cosmoz-suggestions', () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
-				.map((_, i) => `item ${i}`),
+				.map((_, i) => `item ${ i }`),
 			el = await fixture(
 				html`
-					<cosmoz-suggestions .items=${items} .onSelect=${onSelect} />
+					<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } />
 				`
 			);
 
