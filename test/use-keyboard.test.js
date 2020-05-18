@@ -13,7 +13,7 @@ suite('use-keyboard', () => {
 			const onUp = spy();
 			await fixture(
 				html`
-					<use-keyboard .onUp=${onUp} />
+					<use-keyboard .onUp=${ onUp } />
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Up' }));
@@ -24,7 +24,7 @@ suite('use-keyboard', () => {
 			const onUp = spy();
 			await fixture(
 				html`
-					<use-keyboard .onUp=${onUp} />
+					<use-keyboard .onUp=${ onUp } />
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
@@ -37,7 +37,7 @@ suite('use-keyboard', () => {
 			const onDown = spy();
 			await fixture(
 				html`
-					<use-keyboard .onDown=${onDown} />
+					<use-keyboard .onDown=${ onDown } />
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
@@ -48,7 +48,7 @@ suite('use-keyboard', () => {
 			const onDown = spy();
 			await fixture(
 				html`
-					<use-keyboard .onDown=${onDown} />
+					<use-keyboard .onDown=${ onDown } />
 				`
 			);
 			document.dispatchEvent(
@@ -63,7 +63,7 @@ suite('use-keyboard', () => {
 			const onEnter = spy();
 			await fixture(
 				html`
-					<use-keyboard .onEnter=${onEnter} />
+					<use-keyboard .onEnter=${ onEnter } />
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
@@ -78,7 +78,7 @@ suite('use-keyboard', () => {
 				onEnter = spy();
 			await fixture(
 				html`
-					<use-keyboard .onUp=${onUp} .onDown=${onDown} .onEnter=${onEnter} />
+					<use-keyboard .onUp=${ onUp } .onDown=${ onDown } .onEnter=${ onEnter } />
 				`
 			);
 			document.dispatchEvent(

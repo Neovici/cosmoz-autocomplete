@@ -26,13 +26,13 @@ const defaultItemRenderer = (
 		return html`
 		<paper-item
 			role="option"
-			data-index=${i}
-			@mouseenter=${() => highlight(i)}
-			@click=${() => select(item)}
-			@mousedown=${e => e.preventDefault()}
-			title=${text}
+			data-index=${ i }
+			@mouseenter=${ () => highlight(i) }
+			@click=${ () => select(item) }
+			@mousedown=${ e => e.preventDefault() }
+			title=${ text }
 		>
-			<div>${mark(text, query)}</div>
+			<div>${ mark(text, query) }</div>
 			<paper-ripple></paper-ripple>
 		</paper-item>
 	`;
@@ -91,8 +91,8 @@ const defaultItemRenderer = (
 					min-height: 36px;
 				}
 				paper-material.overflowing {
-					height: ${height}px;
-					max-height: ${height}px;
+					height: ${ height }px;
+					max-height: ${ height }px;
 					overflow-y: auto;
 				}
 				paper-item {
@@ -108,7 +108,7 @@ const defaultItemRenderer = (
 					overflow: hidden;
 					text-overflow: ellipsis;
 				}
-				paper-item[data-index="${index}"] {
+				paper-item[data-index="${ index }"] {
 					background: #eee;
 					color: #333;
 				}
@@ -133,14 +133,14 @@ const defaultItemRenderer = (
 			<paper-material
 				unselectable="on"
 				elevation="1"
-				class=${classMap({ overflowing: items.length > limit })}
-				@rangechange=${rangechange}
+				class=${ classMap({ overflowing: items.length > limit }) }
+				@rangechange=${ rangechange }
 				>${/* eslint-disable indent*/ scroll({
 					items,
 					scrollToIndex,
 					renderItem
-				})}
-				<paper-item class="sizer">${sizer} </paper-item>
+				}) }
+				<paper-item class="sizer">${ sizer } </paper-item>
 			</paper-material>
 		`;
 	};

@@ -19,7 +19,7 @@ suite('use-suggestions', () => {
 		const items = [0, 1, 2],
 			result = await fixture(
 				html`
-					<use-suggestions .items=${items} />
+					<use-suggestions .items=${ items } />
 				`
 			);
 		assert.equal(result.current.length, 3);
@@ -28,7 +28,7 @@ suite('use-suggestions', () => {
 	test('down', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2]} />
+				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
 		assert.isUndefined(result.current.index);
@@ -40,7 +40,7 @@ suite('use-suggestions', () => {
 	test('down (cycle)', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2]} />
+				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
 		result.current.highlight(2);
@@ -53,7 +53,7 @@ suite('use-suggestions', () => {
 	test('down (scroll)', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2, 3, 4]} />
+				<use-suggestions .items=${ [0, 1, 2, 3, 4] } />
 			`
 		);
 		assert.isUndefined(result.current.scrollToIndex);
@@ -71,7 +71,7 @@ suite('use-suggestions', () => {
 	test('up', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2]} />
+				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
 		result.current.highlight(1);
@@ -84,7 +84,7 @@ suite('use-suggestions', () => {
 	test('up (cycle)', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2]} />
+				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
 		assert.isUndefined(result.current.index);
@@ -96,7 +96,7 @@ suite('use-suggestions', () => {
 	test('up (scroll)', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2, 3, 4]} />
+				<use-suggestions .items=${ [0, 1, 2, 3, 4] } />
 			`
 		);
 		assert.isUndefined(result.current.scrollToIndex);
@@ -118,7 +118,7 @@ suite('use-suggestions', () => {
 		const items = [0, 1, 2],
 			result = await fixture(
 				html`
-					<use-suggestions .items=${items} />
+					<use-suggestions .items=${ items } />
 				`
 			);
 		assert.isUndefined(result.current.index);
@@ -132,7 +132,7 @@ suite('use-suggestions', () => {
 			onSelect = spy(),
 			result = await fixture(
 				html`
-					<use-suggestions .items=${items} .onSelect=${onSelect} />
+					<use-suggestions .items=${ items } .onSelect=${ onSelect } />
 				`
 			);
 		result.current.select(items[1]);
@@ -143,7 +143,7 @@ suite('use-suggestions', () => {
 	test('rangechange', async () => {
 		const result = await fixture(
 			html`
-				<use-suggestions .items=${[0, 1, 2]} />
+				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
 		assert.isUndefined(result.current.range);
@@ -159,7 +159,7 @@ suite('use-suggestions', () => {
 		const onSelect = spy(),
 			result = await fixture(
 				html`
-					<use-suggestions .items=${[0, 1, 2]} .onSelect=${onSelect} />
+					<use-suggestions .items=${ [0, 1, 2] } .onSelect=${ onSelect } />
 				`
 			);
 		result.current.highlight(1);
