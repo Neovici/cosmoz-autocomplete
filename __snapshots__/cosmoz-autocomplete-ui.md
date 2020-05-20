@@ -3,10 +3,7 @@
 #### `render`
 
 ```html
-<div
-  class="chips"
-  slot="prefix"
->
+<div class="chips">
   <div class="chip">
     <span class="chip-text">
       Item 1
@@ -41,8 +38,10 @@
 
 ```html
 <paper-input
+  always-float-label=""
   aria-disabled="false"
   id="input"
+  readonly=""
   tabindex="0"
 >
   <slot
@@ -77,10 +76,7 @@
 #### `render (suggestions)`
 
 ```html
-<div
-  class="chips"
-  slot="prefix"
->
+<div class="chips">
   <div class="chip">
     <span class="chip-text">
       Item 1
@@ -117,10 +113,7 @@
 #### `render (deselect)`
 
 ```html
-<div
-  class="chips"
-  slot="prefix"
->
+<div class="chips">
   <div class="chip">
     <span class="chip-text">
       Item 1

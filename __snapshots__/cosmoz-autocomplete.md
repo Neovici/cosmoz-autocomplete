@@ -3,10 +3,7 @@
 #### `render`
 
 ```html
-<div
-  class="chips"
-  slot="prefix"
->
+<div class="chips">
   <div class="chip">
     <span class="chip-text">
       Item 1
@@ -34,5 +31,6 @@
   >
   </slot>
 </paper-input>
+
 ```
 
