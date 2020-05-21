@@ -1,3 +1,10 @@
+### [2.4.5](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.4...v2.4.5) (2020-05-21)
+
+
+### Bug Fixes
+
+* **suggestions:** handles onEnter without highlight/selection ([f341101](https://github.com/neovici/cosmoz-autocomplete/commit/f341101ad8ca3d27ebfcc7e8b7025e7adbaed652)), closes [#59](https://github.com/neovici/cosmoz-autocomplete/issues/59)
+
 ### [2.4.4](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.3...v2.4.4) (2020-05-21)
 
 
