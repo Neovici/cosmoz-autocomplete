@@ -1,3 +1,10 @@
+### [2.4.4](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.3...v2.4.4) (2020-05-21)
+
+
+### Bug Fixes
+
+* **autocomplete:** better ui for single selection ([d185ad1](https://github.com/neovici/cosmoz-autocomplete/commit/d185ad13674b7fe96cac95b3689f969c6769efa0)), closes [#57](https://github.com/neovici/cosmoz-autocomplete/issues/57)
+
 ### [2.4.3](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.2...v2.4.3) (2020-05-15)
 
 
