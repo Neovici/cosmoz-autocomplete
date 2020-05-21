@@ -155,6 +155,17 @@ suite('use-suggestions', () => {
 		assert.deepEqual(result.current.range, [1, 2]);
 	});
 
+	test('enter (no selection)', async () => {
+		const onSelect = spy();
+		await fixture(
+			html`
+				<use-suggestions .items=${ [0, 1, 2] } .onSelect=${ onSelect } />
+			`
+		);
+		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+		assert.isFalse(onSelect.calledOnce);
+	});
+
 	test('enter', async () => {
 		const onSelect = spy(),
 			result = await fixture(
