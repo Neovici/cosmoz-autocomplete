@@ -1,11 +1,12 @@
 # see https://nixos.wiki/wiki/Development_environment_with_nix-shell
 {}:
-with import (
-  builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/8ba41a1.tar.gz";
-    sha256 = "0c2wn7si8vcx0yqwm92dpry8zqjglj9dfrvmww6ha6ihnjl6mfhh";
-  }
-) {};
+with import
+  (
+    builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/0a14605.tar.gz";
+      sha256 = "154ypjfhy9qqa0ww6xi7d8280h85kffqaqf6b6idymizga9ckjcd";
+    }
+  ) { };
 mkShell {
   buildInputs = [ nodejs-12_x python3 firefox ];
   shellHook = ''
