@@ -8,11 +8,8 @@
     <span class="chip-text">
       Item 1
     </span>
-    <iron-icon
-      class="chip-clear"
-      icon="clear"
-    >
-    </iron-icon>
+    <span class="chip-clear">
+    </span>
   </div>
 </div>
 <paper-input

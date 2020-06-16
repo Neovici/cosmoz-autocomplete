@@ -56,7 +56,7 @@ const defaultItemRenderer = (
 				items,
 				onSelect
 			}),
-			ref = useRef();
+			ref = useRef(undefined);
 
 		useLayoutEffect(() => {
 			ref.current = {
