@@ -1,3 +1,11 @@
+### [2.4.6](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.5...v2.4.6) (2020-06-16)
+
+
+### Bug Fixes
+
+* **autocomplete:** hide suggestions if disabled ([c658dd8](https://github.com/neovici/cosmoz-autocomplete/commit/c658dd80bd91fda06289b881dee6cb75bac9dd8e))
+* **autocomplete:** replace iron-icon with inline svg ([8333a4e](https://github.com/neovici/cosmoz-autocomplete/commit/8333a4e6db7912f88fc53a4f296ab11d30b28d3b))
+
 ### [2.4.5](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.4...v2.4.5) (2020-05-21)
 
 
