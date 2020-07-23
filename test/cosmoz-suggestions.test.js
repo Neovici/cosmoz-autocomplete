@@ -23,7 +23,7 @@ suite('cosmoz-suggestions', () => {
 				`
 			);
 		await someFrames();
-		assert.equal(el.shadowRoot.querySelector('paper-item').innerText, 'item 0');
+		assert.equal(el.shadowRoot.querySelector('.item').innerText, 'item 0');
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
 		await nextFrame();
@@ -55,7 +55,7 @@ suite('cosmoz-suggestions', () => {
 			);
 
 		await someFrames();
-		assert.equal(el.shadowRoot.querySelector('paper-item').innerText, 'item 0');
+		assert.equal(el.shadowRoot.querySelector('.item').innerText, 'item 0');
 	});
 
 	test('render (query)', async () => {
@@ -75,7 +75,7 @@ suite('cosmoz-suggestions', () => {
 			);
 
 		await someFrames();
-		assert.equal(el.shadowRoot.querySelector('paper-item mark').innerText, '1');
+		assert.equal(el.shadowRoot.querySelector('.item mark').innerText, '1');
 	});
 
 	test('highlight and enter', async () => {
@@ -92,7 +92,7 @@ suite('cosmoz-suggestions', () => {
 		await someFrames();
 
 		el.shadowRoot
-			.querySelector('paper-item:nth-of-type(4)')
+			.querySelector('.item[data-index="3"]')
 			.dispatchEvent(new MouseEvent('mouseenter'));
 
 		await nextFrame();
@@ -116,10 +116,10 @@ suite('cosmoz-suggestions', () => {
 		await someFrames();
 
 		el.shadowRoot
-			.querySelector('paper-item:nth-of-type(4)')
+			.querySelector('.item[data-index="3"]')
 			.dispatchEvent(new MouseEvent('mousedown'));
 		el.shadowRoot
-			.querySelector('paper-item:nth-of-type(4)')
+			.querySelector('.item[data-index="3"]')
 			.dispatchEvent(new MouseEvent('click'));
 
 		assert.isTrue(onSelect.calledOnce);

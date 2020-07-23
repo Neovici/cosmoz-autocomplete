@@ -5,9 +5,6 @@ import {
 } from 'haunted';
 
 import { scroll } from 'lit-virtualizer';
-import '@polymer/paper-ripple';
-import '@polymer/paper-material';
-import '@polymer/paper-item';
 import {
 	useSuggestions, useSizer
 } from './lib/use-suggestions';
@@ -24,17 +21,14 @@ const defaultItemRenderer = (
 	) => {
 		const text = textual(item);
 		return html`
-		<paper-item
+		<div class="item"
 			role="option"
 			data-index=${ i }
 			@mouseenter=${ () => highlight(i) }
 			@click=${ () => select(item) }
 			@mousedown=${ e => e.preventDefault() }
 			title=${ text }
-		>
-			<div>${ mark(text, query) }</div>
-			<paper-ripple></paper-ripple>
-		</paper-item>
+		>${ mark(text, query) }</div>
 	`;
 	},
 	Suggestions = ({
@@ -83,42 +77,44 @@ const defaultItemRenderer = (
 					display: block;
 					position: relative;
 				}
-				paper-material {
+				.items {
 					position: absolute;
 					min-width: 100%;
-					z-index: 1000;
-					background-color: #fff;
 					min-height: 36px;
+					z-index: 1000;
+					background: #fff;
+					box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+						0 1px 8px 0 rgba(0, 0, 0, 0.12),
+						0 3px 3px -2px rgba(0, 0, 0, 0.4);
 				}
-				paper-material.overflowing {
+				.items.overflowing {
 					height: ${ height }px;
 					max-height: ${ height }px;
 					overflow-y: auto;
 				}
-				paper-item {
+
+				.item {
 					min-height: var(--paper-item-min-height, 36px);
+					line-height: var(--paper-item-min-height, 36px);
 					padding: 0 16px;
-					line-height: 18px;
 					width: 100%;
 					box-sizing: border-box;
 					cursor: pointer;
-				}
-				paper-item div {
-					width: 100%;
+					font-family: var(--paper-font-subhead_-_font-family, initial);
 					overflow: hidden;
 					text-overflow: ellipsis;
 				}
-				paper-item[data-index="${ index }"] {
+				.item[data-index="${ index }"] {
 					background: #eee;
 					color: #333;
 				}
 
-				paper-material:not(.overflowing) paper-item {
+				.items:not(.overflowing) .item {
 					position: relative !important;
 					transform: none !important;
 				}
 
-				paper-item.sizer {
+				.item.sizer {
 					visibility: hidden;
 					opacity:0;
 					pointer-events: none;
@@ -130,18 +126,16 @@ const defaultItemRenderer = (
 					height: 0;
 				}
 			</style>
-			<paper-material
-				unselectable="on"
-				elevation="1"
-				class=${ classMap({ overflowing: items.length > limit }) }
+			<div
+				class="items ${ classMap({ overflowing: items.length > limit }) }"
 				@rangechange=${ rangechange }
 				>${/* eslint-disable indent*/ scroll({
 					items,
 					scrollToIndex,
 					renderItem
 				}) }
-				<paper-item class="sizer">${ sizer } </paper-item>
-			</paper-material>
+				<div class="item sizer">${ sizer } </div>
+			</div>
 		`;
 	};
 

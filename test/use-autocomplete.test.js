@@ -61,6 +61,7 @@ suite('use-autocomplete', () => {
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
 					.onText=${ onText } .onChange=${ onChange } />
 			`);
+
 		result.current.onSelect(source[1]);
 		await nextFrame();
 		assert.isTrue(onText.calledOnce);
