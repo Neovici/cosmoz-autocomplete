@@ -5,6 +5,7 @@ import {
 } from 'haunted';
 
 import { scroll } from 'lit-virtualizer';
+import { useHostBounds } from '@neovici/cosmoz-utils/lib/hooks/use-host-bounds';
 import {
 	useSuggestions, useSizer
 } from './lib/use-suggestions';
@@ -70,7 +71,10 @@ const defaultItemRenderer = (
 				items,
 				range,
 				textual
-			});
+			}),
+			bounds = useHostBounds();
+
+
 		return html`
 			<style>
 				:host {
@@ -78,8 +82,8 @@ const defaultItemRenderer = (
 					position: relative;
 				}
 				.items {
-					position: absolute;
-					min-width: 100%;
+					position: fixed;
+					min-width: ${ bounds?.width ?? 0 }px;
 					min-height: 36px;
 					z-index: 1000;
 					background: #fff;
@@ -108,12 +112,10 @@ const defaultItemRenderer = (
 					background: #eee;
 					color: #333;
 				}
-
 				.items:not(.overflowing) .item {
 					position: relative !important;
 					transform: none !important;
 				}
-
 				.item.sizer {
 					visibility: hidden;
 					opacity:0;
