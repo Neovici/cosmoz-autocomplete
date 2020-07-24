@@ -63,7 +63,7 @@
 		}
 	},
 	"dependencies": {
-		"@neovici/cosmoz-utils": "^3.3.0",
+		"@neovici/cosmoz-utils": "^3.10.3",
 		"@polymer/paper-input": "^3.0.0",
 		"haunted": "^4.7.0",
 		"lit-html": "^1.2.1",
