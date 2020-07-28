@@ -1,3 +1,10 @@
+### [2.4.7](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.6...v2.4.7) (2020-07-28)
+
+
+### Bug Fixes
+
+* display suggestions using position fixed ([a09f3cb](https://github.com/neovici/cosmoz-autocomplete/commit/a09f3cb849a6ae2e1076322d1f88db9272fb936b))
+
 ### [2.4.6](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.5...v2.4.6) (2020-06-16)
 
 
