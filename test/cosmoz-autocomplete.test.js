@@ -40,6 +40,7 @@ suite('cosmoz-autocomplete-ui', () => {
 		await nextFrame();
 		await nextFrame();
 		assert.shadowDom.equalSnapshot(el);
+		document.activeElement.blur();
 	});
 
 	test('render (deselect)', async () => {
