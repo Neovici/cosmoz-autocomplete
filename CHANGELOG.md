@@ -1,3 +1,10 @@
+### [2.4.8](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.7...v2.4.8) (2020-07-30)
+
+
+### Bug Fixes
+
+* use functional utils from @neovici/cosmoz-utils ([7cdd283](https://github.com/neovici/cosmoz-autocomplete/commit/7cdd2839fc0af66a4c2003854fbcb1da55d9af39))
+
 ### [2.4.7](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.6...v2.4.7) (2020-07-28)
 
 
