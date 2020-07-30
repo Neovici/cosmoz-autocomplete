@@ -63,15 +63,15 @@
 		}
 	},
 	"dependencies": {
-		"@neovici/cosmoz-utils": "^3.10.3",
+		"@neovici/cosmoz-utils": "^3.11.0",
 		"@polymer/paper-input": "^3.0.0",
 		"haunted": "^4.7.0",
 		"lit-html": "^1.2.1",
 		"lit-virtualizer": "^0.4.2"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^9.1.1",
-		"@commitlint/config-conventional": "^9.1.1",
+		"@commitlint/cli": "^9.1.0",
+		"@commitlint/config-conventional": "^9.1.0",
 		"@neovici/eslint-config": "^1.2.0",
 		"@open-wc/demoing-storybook": "^2.1.0",
 		"@open-wc/testing": "^2.5.8",
