@@ -1,3 +1,10 @@
+### [2.4.9](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.8...v2.4.9) (2020-08-27)
+
+
+### Bug Fixes
+
+* sets initial sizer on mount ([d823ea3](https://github.com/neovici/cosmoz-autocomplete/commit/d823ea3759d17b1e97a0ba757d6dc659536fa070)), closes [#67](https://github.com/neovici/cosmoz-autocomplete/issues/67)
+
 ### [2.4.8](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.7...v2.4.8) (2020-07-30)
 
 
