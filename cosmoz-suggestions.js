@@ -107,6 +107,7 @@ const defaultItemRenderer = (
 					font-family: var(--paper-font-subhead_-_font-family, initial);
 					overflow: hidden;
 					text-overflow: ellipsis;
+					white-space: nowrap
 				}
 				.item[data-index="${ index }"] {
 					background: #eee;
@@ -121,6 +122,8 @@ const defaultItemRenderer = (
 					opacity:0;
 					pointer-events: none;
 					position: relative;
+					overflow: initial;
+					text-overflow: initial;
 					z-index: -1;
 					padding: 0 16px;
 					white-space: pre;
