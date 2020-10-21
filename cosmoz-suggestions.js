@@ -134,7 +134,7 @@ const defaultItemRenderer = (
 			<div
 				class="items ${ classMap({ overflowing: items.length > limit }) }"
 				@rangechange=${ rangechange }
-				>${/* eslint-disable indent*/ scroll({
+				>${ /* eslint-disable indent*/ scroll({
 					items,
 					scrollToIndex,
 					renderItem
