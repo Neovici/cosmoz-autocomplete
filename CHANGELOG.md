@@ -1,3 +1,10 @@
+### [2.4.10](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.9...v2.4.10) (2020-10-21)
+
+
+### Bug Fixes
+
+* paper-input slot styling on Safari ([05e3356](https://github.com/neovici/cosmoz-autocomplete/commit/05e33566c7c6d736da6e1bfcac3f98cd99475ea5))
+
 ### [2.4.9](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.8...v2.4.9) (2020-08-27)
 
 
