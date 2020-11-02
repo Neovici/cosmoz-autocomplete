@@ -1,3 +1,10 @@
+## [2.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.10...v2.5.0) (2020-11-02)
+
+
+### Features
+
+* render suggestions in a portal ([cbc199e](https://github.com/neovici/cosmoz-autocomplete/commit/cbc199e9da71daa6715c5911fbbb87cde1883980)), closes [#73](https://github.com/neovici/cosmoz-autocomplete/issues/73)
+
 ### [2.4.10](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.9...v2.4.10) (2020-10-21)
 
 
