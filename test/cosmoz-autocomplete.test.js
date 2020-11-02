@@ -5,8 +5,19 @@ import {
 
 import { spy } from 'sinon';
 
-const source = [{ text: 'Item 1' }, { text: 'Item 2' }];
+suiteSetup(() => {
+	const e = window.onerror;
+	window.onerror = function (err) {
+		if (err.startsWith('ResizeObserver loop')) {
+			// eslint-disable-next-line no-console
+			console.warn(`[ignored] ${ err }`);
+			return false;
+		}
+		return e(...arguments);
+	};
+});
 
+const source = [{ text: 'Item 1' }, { text: 'Item 2' }];
 suite('cosmoz-autocomplete-ui', () => {
 	test('render', async () => {
 		const el = await fixture(html`
@@ -81,7 +92,7 @@ suite('cosmoz-autocomplete', () => {
 		el.shadowRoot.querySelector('paper-input').focus();
 		await nextFrame();
 		await nextFrame();
-		el.shadowRoot.querySelector('cosmoz-suggestions').onSelect(source[1]);
+		document.body.querySelector('cosmoz-suggestions').onSelect(source[1]);
 		assert.isTrue(onChange.calledOnce);
 		assert.isTrue(onChange.calledWith([source[0], source[1]]));
 	});

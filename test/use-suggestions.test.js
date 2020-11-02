@@ -15,16 +15,6 @@ customElements.define(
 );
 
 suite('use-suggestions', () => {
-	test('init', async () => {
-		const items = [0, 1, 2],
-			result = await fixture(
-				html`
-					<use-suggestions .items=${ items } />
-				`
-			);
-		assert.equal(result.current.length, 3);
-	});
-
 	test('down', async () => {
 		const result = await fixture(
 			html`
@@ -37,7 +27,7 @@ suite('use-suggestions', () => {
 		assert.equal(result.current.index, 0);
 	});
 
-	test('down (cycle)', async () => {
+	test('down', async () => {
 		const result = await fixture(
 			html`
 				<use-suggestions .items=${ [0, 1, 2] } />
@@ -50,23 +40,6 @@ suite('use-suggestions', () => {
 		assert.equal(result.current.index, 0);
 	});
 
-	test('down (scroll)', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2, 3, 4] } />
-			`
-		);
-		assert.isUndefined(result.current.scrollToIndex);
-		result.current.rangechange({
-			firstVisible: 0,
-			lastVisible: 2
-		});
-		result.current.highlight(1);
-		await nextFrame();
-		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
-		await nextFrame();
-		assert.deepEqual(result.current.scrollToIndex, { index: 2 });
-	});
 
 	test('up', async () => {
 		const result = await fixture(
@@ -93,27 +66,6 @@ suite('use-suggestions', () => {
 		assert.equal(result.current.index, 2);
 	});
 
-	test('up (scroll)', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2, 3, 4] } />
-			`
-		);
-		assert.isUndefined(result.current.scrollToIndex);
-		result.current.rangechange({
-			firstVisible: 2,
-			lastVisible: 4
-		});
-		result.current.highlight(2);
-		await nextFrame();
-		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Up' }));
-		await nextFrame();
-		assert.deepEqual(result.current.scrollToIndex, {
-			index: 1,
-			position: 'end'
-		});
-	});
-
 	test('highlight', async () => {
 		const items = [0, 1, 2],
 			result = await fixture(
@@ -138,21 +90,6 @@ suite('use-suggestions', () => {
 		result.current.select(items[1]);
 		assert.isTrue(onSelect.calledOnce);
 		assert.isTrue(onSelect.calledWith(items[1]));
-	});
-
-	test('rangechange', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2] } />
-			`
-		);
-		assert.isUndefined(result.current.range);
-		result.current.rangechange({
-			firstVisible: 1,
-			lastVisible: 2
-		});
-		await nextFrame();
-		assert.deepEqual(result.current.range, [1, 2]);
 	});
 
 	test('enter (no selection)', async () => {
