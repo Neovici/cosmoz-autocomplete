@@ -61,7 +61,7 @@ module.exports = config => {
 			sauceLabs: {
 				testName: 'cosmoz-autocomplete karma tests'
 			},
-			reporters: ['dots', 'saucelabs'],
+			reporters: ['dots', ...useSauce ? ['saucelabs'] : ''],
 			singleRun: true
 		})
 	);

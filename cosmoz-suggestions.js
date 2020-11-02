@@ -24,7 +24,6 @@ const Suggestions = host => {
 					font-family: var(--paper-font-subhead_-_font-family, initial);
 					background: #fff;
 					min-width: 72px;
-					max-width: 65vw;
 					box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
 						0 1px 8px 0 rgba(0, 0, 0, 0.12),
 						0 3px 3px -2px rgba(0, 0, 0, 0.4);
@@ -32,7 +31,6 @@ const Suggestions = host => {
 				.items {
 					position: relative;
 					overflow-y: auto;
-					max-width: inherit;
 					height: 100%;
 				}
 				.item {
