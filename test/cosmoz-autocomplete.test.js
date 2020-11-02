@@ -9,7 +9,8 @@ suiteSetup(() => {
 	const e = window.onerror;
 	window.onerror = function (err) {
 		if (err.startsWith('ResizeObserver loop')) {
-			console.warn(`[ignored] ${err}`);
+			// eslint-disable-next-line no-console
+			console.warn(`[ignored] ${ err }`);
 			return false;
 		}
 		return e(...arguments);
