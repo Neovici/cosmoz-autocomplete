@@ -1,3 +1,10 @@
+## [2.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.6.0...v2.7.0) (2020-11-09)
+
+
+### Features
+
+* when items or query changes reset index to 0 instead of undefined ([d0d440f](https://github.com/neovici/cosmoz-autocomplete/commit/d0d440faf02d3872798e2f6907c97eb4e0023177))
+
 ## [2.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.5.0...v2.6.0) (2020-11-09)
 
 
