@@ -4,17 +4,28 @@
 
 ```html
 <div class="chips">
-  <div class="chip">
-    <span class="chip-text">
+  <div
+    class="chip"
+    part="chip"
+    title="Item 1"
+  >
+    <span
+      class="chip-text"
+      part="chip-text"
+    >
       Item 1
     </span>
-    <span class="chip-clear">
+    <span
+      class="chip-clear"
+      part="chip-clear"
+    >
     </span>
   </div>
 </div>
 <paper-input
   aria-disabled="false"
   id="input"
+  part="input"
   tabindex="0"
 >
   <slot
@@ -38,6 +49,7 @@
   always-float-label=""
   aria-disabled="false"
   id="input"
+  part="input"
   readonly=""
   tabindex="0"
 >
@@ -55,11 +67,21 @@
     class="chips"
     slot="prefix"
   >
-    <div class="chip">
-      <span class="chip-text">
+    <div
+      class="chip"
+      part="chip"
+      title="Item 1"
+    >
+      <span
+        class="chip-text"
+        part="chip-text"
+      >
         Item 1
       </span>
-      <span class="chip-clear">
+      <span
+        class="chip-clear"
+        part="chip-clear"
+      >
       </span>
     </div>
   </div>
@@ -71,11 +93,21 @@
 
 ```html
 <div class="chips">
-  <div class="chip">
-    <span class="chip-text">
+  <div
+    class="chip"
+    part="chip"
+    title="Item 1"
+  >
+    <span
+      class="chip-text"
+      part="chip-text"
+    >
       Item 1
     </span>
-    <span class="chip-clear">
+    <span
+      class="chip-clear"
+      part="chip-clear"
+    >
     </span>
   </div>
 </div>
@@ -83,6 +115,7 @@
   aria-disabled="false"
   focused=""
   id="input"
+  part="input"
   tabindex="0"
 >
   <slot
@@ -105,17 +138,28 @@
 
 ```html
 <div class="chips">
-  <div class="chip">
-    <span class="chip-text">
+  <div
+    class="chip"
+    part="chip"
+    title="Item 1"
+  >
+    <span
+      class="chip-text"
+      part="chip-text"
+    >
       Item 1
     </span>
-    <span class="chip-clear">
+    <span
+      class="chip-clear"
+      part="chip-clear"
+    >
     </span>
   </div>
 </div>
 <paper-input
   aria-disabled="false"
   id="input"
+  part="input"
   tabindex="0"
 >
   <slot
