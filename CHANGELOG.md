@@ -1,3 +1,16 @@
+## [2.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.5.0...v2.6.0) (2020-11-09)
+
+
+### Features
+
+* adds confinement and placement support ([567a4c3](https://github.com/neovici/cosmoz-autocomplete/commit/567a4c355036606b670e775243d33c5d6edb56d5))
+
+
+### Bug Fixes
+
+* don't blur autocomplete on select ([42fd2e8](https://github.com/neovici/cosmoz-autocomplete/commit/42fd2e83c30aee10ee1bf868eb020f0822823c0c))
+* **autocomplete:** adds input, chip, chip-text, chip-clear parts ([cdf4320](https://github.com/neovici/cosmoz-autocomplete/commit/cdf432033d6734be0e678ec774447848eb672a62))
+
 ## [2.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.4.10...v2.5.0) (2020-11-02)
 
 
