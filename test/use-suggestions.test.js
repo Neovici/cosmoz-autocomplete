@@ -21,13 +21,13 @@ suite('use-suggestions', () => {
 				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
-		assert.isUndefined(result.current.index);
+		assert.equal(result.current.index, 0);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
 		await nextFrame();
-		assert.equal(result.current.index, 0);
+		assert.equal(result.current.index, 1);
 	});
 
-	test('down', async () => {
+	test('down(cycle)', async () => {
 		const result = await fixture(
 			html`
 				<use-suggestions .items=${ [0, 1, 2] } />
@@ -60,7 +60,7 @@ suite('use-suggestions', () => {
 				<use-suggestions .items=${ [0, 1, 2] } />
 			`
 		);
-		assert.isUndefined(result.current.index);
+		assert.equal(result.current.index, 0);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 		await nextFrame();
 		assert.equal(result.current.index, 2);
@@ -73,7 +73,7 @@ suite('use-suggestions', () => {
 					<use-suggestions .items=${ items } />
 				`
 			);
-		assert.isUndefined(result.current.index);
+		assert.equal(result.current.index, 0);
 		result.current.highlight(1);
 		await nextFrame();
 		assert.equal(result.current.index, 1);
@@ -100,7 +100,8 @@ suite('use-suggestions', () => {
 			`
 		);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-		assert.isFalse(onSelect.calledOnce);
+		assert.isTrue(onSelect.calledOnce);
+		assert.isTrue(onSelect.calledWith(0));
 	});
 
 	test('enter', async () => {

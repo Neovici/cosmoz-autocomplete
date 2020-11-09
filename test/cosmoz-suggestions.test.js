@@ -36,7 +36,7 @@ suite('cosmoz-suggestions', () => {
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 		assert.isTrue(onSelect.calledOnce);
-		assert.isTrue(onSelect.calledWith(items[2]));
+		assert.isTrue(onSelect.calledWith(items[3]));
 	});
 
 	test('render (textual)', async () => {
