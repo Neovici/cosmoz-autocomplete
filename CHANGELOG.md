@@ -1,3 +1,10 @@
+### [2.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.0...v2.7.1) (2020-11-11)
+
+
+### Bug Fixes
+
+* add text and value events ([271a96c](https://github.com/neovici/cosmoz-autocomplete/commit/271a96cb0fb6e1bd05eb672d00da347ea7ddde39))
+
 ## [2.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.6.0...v2.7.0) (2020-11-09)
 
 
