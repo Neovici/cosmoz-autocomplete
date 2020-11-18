@@ -1,3 +1,10 @@
+### [2.7.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.1...v2.7.2) (2020-11-18)
+
+
+### Bug Fixes
+
+* add limit, text-property to observed attributes ([2093313](https://github.com/neovici/cosmoz-autocomplete/commit/2093313bd82a296c7d995607e548ab280505b4fc))
+
 ### [2.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.0...v2.7.1) (2020-11-11)
 
 
