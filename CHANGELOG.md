@@ -1,3 +1,10 @@
+### [2.7.3](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.2...v2.7.3) (2020-11-19)
+
+
+### Bug Fixes
+
+* use input as anchor for suggestions ([990cde5](https://github.com/neovici/cosmoz-autocomplete/commit/990cde5d03ea805190563571cd47fb7e4e5b71e4))
+
 ### [2.7.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.1...v2.7.2) (2020-11-18)
 
 
