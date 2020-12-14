@@ -1,3 +1,10 @@
+### [2.7.4](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.3...v2.7.4) (2020-12-14)
+
+
+### Bug Fixes
+
+* change state to props to fix changed events ([9aa6fd9](https://github.com/neovici/cosmoz-autocomplete/commit/9aa6fd96c74ec365f7f794e14be46629eb34c6c9))
+
 ### [2.7.3](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.2...v2.7.3) (2020-11-19)
 
 
