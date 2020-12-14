@@ -1,41 +1,28 @@
 import {
-	component, useState, useEffect, useCallback
+	component, useCallback
 } from 'haunted';
 
 import {
 	Autocomplete, observedAttributes
 } from './lib/autocomplete';
 
-const Standalone = function ({
-	value: eValue,
-	onChange,
-	text: eText,
-	onText: onText,
-	...props
-}) {
-	const [value, setValue] = useState(eValue),
-		[text, setText] = useState(eText);
+const Standalone = host => {
+	const {
+		onChange,
+		onText,
+		...props
+	} = host;
 
-	useEffect(() => {
-		setValue(eValue);
-	}, [setValue, eValue]);
-
-	useEffect(() => {
-		setText(eText);
-	}, [setText, eText]);
-
-	return Autocomplete.call(this, {
+	return Autocomplete.call(host, {
 		...props,
-		value,
 		onChange: useCallback(value => {
-			setValue(value);
+			host.value = value;
 			onChange?.(value);
-		}, [setValue, onChange]),
-		text,
+		}, [onChange]),
 		onText: useCallback(text => {
-			setText(text);
+			host.text = text;
 			onText?.(text);
-		}, [setText, onText])
+		}, [onText])
 	});
 };
 
