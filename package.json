@@ -63,7 +63,7 @@
 		}
 	},
 	"dependencies": {
-		"@neovici/cosmoz-utils": "^3.11.0",
+		"@neovici/cosmoz-utils": "^3.13.0",
 		"@polymer/paper-input": "^3.0.0",
 		"haunted": "^4.7.0",
 		"lit-html": "^1.2.1",
@@ -82,8 +82,8 @@
 		"@storybook/storybook-deployer": "^2.8.5",
 		"@webcomponents/webcomponentsjs": "^2.4.0",
 		"chai": "^4.2.0",
-		"deepmerge": "^4.2.2",
-		"eslint": "^7.13.0",
+		"deepmerge": "^4.2.0",
+		"eslint": "^7.0.0",
 		"husky": "^4.2.0",
 		"karma": "^5.0.0",
 		"karma-firefox-launcher": "^2.1.0",
