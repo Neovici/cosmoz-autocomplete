@@ -1,3 +1,10 @@
+### [2.7.5](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.4...v2.7.5) (2020-12-18)
+
+
+### Bug Fixes
+
+* **autocomplete:** prevent clearing input on backspace press if disabled ([e58c988](https://github.com/neovici/cosmoz-autocomplete/commit/e58c988baf30dd43c336c91c2cd0ecd8f336f586))
+
 ### [2.7.4](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.3...v2.7.4) (2020-12-14)
 
 
