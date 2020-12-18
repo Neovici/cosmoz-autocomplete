@@ -23,8 +23,18 @@ const basic = () => html`
 			.textProperty=${ 'text' }
 			.value=${ colors[2] }
 		></cosmoz-autocomplete>
+	`,
+	disabled = () => html`
+		<cosmoz-autocomplete
+			disabled
+			.label=${ 'Choose color' }
+			.source=${ colors }
+			.limit=${ 1 }
+			.textProperty=${ 'text' }
+			.value=${ colors[2] }
+		></cosmoz-autocomplete>
 	`;
 
 export {
-	basic, single
+	basic, single, disabled
 };
