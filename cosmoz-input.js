@@ -93,8 +93,8 @@ const styles = `
 				errorMessage
 			} = host,
 
-		 onInput = useCallback(e => notifyProperty(host, 'value', e.target.value), []),
-		 onFocus = useCallback(e => notifyProperty(host, 'focused', e.type === 'focus'), []);
+			onInput = useCallback(e => notifyProperty(host, 'value', e.target.value), []),
+			onFocus = useCallback(e => notifyProperty(host, 'focused', e.type === 'focus'), []);
 
 		return html`
 		<style>${ styles }</style>
