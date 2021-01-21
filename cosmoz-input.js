@@ -43,7 +43,7 @@ const styles = `
 		width: 100%;
 		transition: transform 0.25s, width 0.25s;
 		transform-origin: left top;
-		color: var(--secondary-text-color);
+		color: var(--secondary-text-color, #737373);
 		white-space: nowrap;
 	}
 
@@ -52,14 +52,14 @@ const styles = `
 		transform: translateY(-75%) scale(0.75);
 	}
 	input:not(:placeholder-shown):focus + label {
-		color: var(--primary-color);
+		color: var(--primary-color, #3f51b5);
 	}
 
 	.line {
-		border-bottom: 2px solid var(--secondary-text-color);
+		border-bottom: 2px solid var(--secondary-text-color, #737373);
 	}
 	:host(:focus-within) .line {
-		border-bottom-color:  var(--primary-color);
+		border-bottom-color:  var(--primary-color, #3f51b5);
 	}
 	:host([disabled]) .line {
 		border-bottom-style: dashed;
@@ -75,10 +75,10 @@ const styles = `
 		line-height: 20px;
 	}
 	:host([invalid]) label, .error {
-		color: var(--error-color);
+		color: var(--error-color, #dd2c00);
 	}
 	:host([invalid]) .line {
-		border-bottom-color: var(--error-color);
+		border-bottom-color: var(--error-color, #dd2c00);
 	}
 `,
 	Input = host => {
