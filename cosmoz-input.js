@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-newline
-import { ifDefined } from 'lit-html/directives/if-defined';
 import { live } from 'lit-html/directives/live';
+import { notifyProperty } from '@neovici/cosmoz-utils/lib/hooks/use-notify-property';
 import {
 	component, useCallback
 } from 'haunted';
@@ -8,6 +8,7 @@ import {
 const styles = `
 	:host {
 		display: block;
+		padding: 8px 0;
 		font-family: var(--cosmoz-font-family, 'Roboto', 'Noto', sans-serif);
 	}
 	:host([disabled]) {
@@ -21,7 +22,7 @@ const styles = `
 		position: relative;
 	}
 
-	.control {flex: 1; }
+	.control { flex: 1; }
 
 	input {
 		display: block;
@@ -82,32 +83,37 @@ const styles = `
 `,
 	Input = host => {
 		const {
-			type = 'text',
-			value,
-			label,
-			placeholder,
-			readonly,
-			disabled,
-			invalid,
-			errorMessage
-		} = host;
+				type = 'text',
+				value,
+				label,
+				placeholder,
+				readonly,
+				disabled,
+				invalid,
+				errorMessage
+			} = host,
+
+		 onInput = useCallback(e => notifyProperty(host, 'value', e.target.value), []),
+		 onFocus = useCallback(e => notifyProperty(host, 'focused', e.type === 'focus'), []);
+
 		return html`
 		<style>${ styles }</style>
-		<div class="float">&nbsp;</div>
-		<div class="wrap">
+		<div class="float" part="float">&nbsp;</div>
+		<div class="wrap" part="wrap">
 			<slot name="prefix"></slot>
 			<div class="control">
-				<input id="input"
+				<input id="input" part="input"
 					type=${ type } placeholder=${ placeholder || ' ' } ?readonly=${ readonly }
 					?aria-disabled=${ disabled } ?disabled=${ disabled }
-					.value=${ live(value) }
+					.value=${ live(value ?? '') }
+					@input=${ onInput } @focus=${ onFocus } @blur=${ onFocus }
 				>
 				${ label ? html`<label for="input">${ label }</label>` : nothing }
 			</div>
 			<slot name="suffix"></slot>
 		</div>
-		<div class="line"></div>
-		${ invalid && errorMessage ? html`<div class="error">${ errorMessage }</div>` : nothing }
+		<div class="line" part="line"></div>
+		${ invalid && errorMessage ? html`<div class="error" part="error">${ errorMessage }</div>` : nothing }
 	`;
 	},
 
