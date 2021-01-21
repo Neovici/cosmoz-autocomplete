@@ -1,5 +1,6 @@
 import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-newline
 import { live } from 'lit-html/directives/live';
+import { useImperativeApi } from '@neovici/cosmoz-utils/lib/hooks/use-imperative-api';
 import { notifyProperty } from '@neovici/cosmoz-utils/lib/hooks/use-notify-property';
 import {
 	component, useCallback
@@ -94,7 +95,10 @@ const styles = `
 			} = host,
 
 			onInput = useCallback(e => notifyProperty(host, 'value', e.target.value), []),
-			onFocus = useCallback(e => notifyProperty(host, 'focused', e.type === 'focus'), []);
+			onFocus = useCallback(e => notifyProperty(host, 'focused', e.type === 'focus'), []),
+			focus = useCallback(() => host.shadowRoot.querySelector('input')?.focus(), []);
+
+		useImperativeApi({ focus });
 
 		return html`
 		<style>${ styles }</style>

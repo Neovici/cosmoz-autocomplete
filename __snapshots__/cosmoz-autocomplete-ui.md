@@ -22,11 +22,9 @@
     </span>
   </div>
 </div>
-<paper-input
-  aria-disabled="false"
+<cosmoz-input
   id="input"
   part="input"
-  tabindex="0"
 >
   <slot
     name="prefix"
@@ -38,20 +36,18 @@
     slot="suffix"
   >
   </slot>
-</paper-input>
+</cosmoz-input>
 
 ```
 
 #### `render (limit 1)`
 
 ```html
-<paper-input
+<cosmoz-input
   always-float-label=""
-  aria-disabled="false"
   id="input"
   part="input"
   readonly=""
-  tabindex="0"
 >
   <slot
     name="prefix"
@@ -85,7 +81,7 @@
       </span>
     </div>
   </div>
-</paper-input>
+</cosmoz-input>
 
 ```
 
@@ -111,12 +107,9 @@
     </span>
   </div>
 </div>
-<paper-input
-  aria-disabled="false"
-  focused=""
+<cosmoz-input
   id="input"
   part="input"
-  tabindex="0"
 >
   <slot
     name="prefix"
@@ -128,7 +121,7 @@
     slot="suffix"
   >
   </slot>
-</paper-input>
+</cosmoz-input>
 <disconnect-observer>
 </disconnect-observer>
 
@@ -156,11 +149,9 @@
     </span>
   </div>
 </div>
-<paper-input
-  aria-disabled="false"
+<cosmoz-input
   id="input"
   part="input"
-  tabindex="0"
 >
   <slot
     name="prefix"
@@ -172,7 +163,7 @@
     slot="suffix"
   >
   </slot>
-</paper-input>
+</cosmoz-input>
 
 ```
 

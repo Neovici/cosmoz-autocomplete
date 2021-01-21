@@ -22,11 +22,9 @@
     </span>
   </div>
 </div>
-<paper-input
-  aria-disabled="false"
+<cosmoz-input
   id="input"
   part="input"
-  tabindex="0"
 >
   <slot
     name="prefix"
@@ -38,7 +36,7 @@
     slot="suffix"
   >
   </slot>
-</paper-input>
+</cosmoz-input>
 
 ```
 
