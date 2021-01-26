@@ -1,3 +1,10 @@
+### [2.8.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.8.0...v2.8.1) (2021-01-26)
+
+
+### Bug Fixes
+
+* correct limit is one check ([403a85d](https://github.com/neovici/cosmoz-autocomplete/commit/403a85dad1e213fa6f3a05396f4402c8e55accbf))
+
 ## [2.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.5...v2.8.0) (2021-01-26)
 
 
