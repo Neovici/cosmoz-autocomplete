@@ -47,7 +47,7 @@ suite('cosmoz-autocomplete-ui', () => {
 				.text=${ 'It' } .textProperty=${ 'text' }
 				/>
 			`);
-		el.shadowRoot.querySelector('paper-input').focus();
+		el.shadowRoot.querySelector('cosmoz-input').focus();
 		await nextFrame();
 		await nextFrame();
 		assert.shadowDom.equalSnapshot(el);
@@ -89,7 +89,7 @@ suite('cosmoz-autocomplete', () => {
 				.onChange=${ onChange }
 				/>
 			`);
-		el.shadowRoot.querySelector('paper-input').focus();
+		el.shadowRoot.querySelector('cosmoz-input').focus();
 		await nextFrame();
 		await nextFrame();
 		document.body.querySelector('cosmoz-suggestions').onSelect(source[1]);
@@ -114,7 +114,7 @@ suite('cosmoz-autocomplete', () => {
 		await nextFrame();
 		await nextFrame();
 
-		assert.equal(el.shadowRoot.querySelector('paper-input').value, 'asd');
+		assert.equal(el.shadowRoot.querySelector('cosmoz-input').value, 'asd');
 		assert.equal(el.shadowRoot.querySelector('.chip-text').innerText, 'Item 2');
 	});
 
