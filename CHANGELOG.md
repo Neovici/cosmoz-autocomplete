@@ -1,3 +1,17 @@
+## [2.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.5...v2.8.0) (2021-01-26)
+
+
+### Features
+
+* **autocomplete:** allow typing on top of limited(1) input ([f7e97d0](https://github.com/neovici/cosmoz-autocomplete/commit/f7e97d0314c1c71c102e9a428c8d0ffba36a7bf0))
+* **cosmoz-autocomplete:** replace paper-input with cosmoz-input ([4806c83](https://github.com/neovici/cosmoz-autocomplete/commit/4806c83199f9559160309374f15cc70b4cf8cc3f))
+* **cosmoz-input:** implementation ([59989eb](https://github.com/neovici/cosmoz-autocomplete/commit/59989eb143a775e32f7c564377547d68c1898c2c))
+
+
+### Bug Fixes
+
+* switch to cosmoz-input ([ac27335](https://github.com/neovici/cosmoz-autocomplete/commit/ac273359b3178fd8874e0010b56b52edc8395a7d))
+
 ### [2.7.5](https://github.com/neovici/cosmoz-autocomplete/compare/v2.7.4...v2.7.5) (2020-12-18)
 
 
