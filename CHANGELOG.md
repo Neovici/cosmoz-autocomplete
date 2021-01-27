@@ -1,3 +1,10 @@
+## [2.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.8.1...v2.9.0) (2021-01-27)
+
+
+### Features
+
+* **autocomplete:** adds hide-empty to hide suggestions when query is empty ([361be88](https://github.com/neovici/cosmoz-autocomplete/commit/361be88073973dd037a1bce2495041edc9221c1c)), closes [#87](https://github.com/neovici/cosmoz-autocomplete/issues/87)
+
 ### [2.8.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.8.0...v2.8.1) (2021-01-26)
 
 
