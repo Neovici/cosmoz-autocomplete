@@ -1,3 +1,10 @@
+### [2.9.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.9.0...v2.9.1) (2021-01-28)
+
+
+### Bug Fixes
+
+* use-keyboard event handling ([8daf0c0](https://github.com/neovici/cosmoz-autocomplete/commit/8daf0c081d1c44d4338903fe6f271404e6750cd1))
+
 ## [2.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.8.1...v2.9.0) (2021-01-27)
 
 
