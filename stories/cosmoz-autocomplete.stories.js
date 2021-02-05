@@ -34,6 +34,15 @@ const basic = () => html`
 			hide-empty
 		></cosmoz-autocomplete>
 	`,
+	defaultIndex = () => html`
+		<cosmoz-autocomplete
+			.label=${ 'Choose color' }
+			.source=${ colors }
+			.limit=${ 1 }
+			.textProperty=${ 'text' }
+			default-index="-1"
+		></cosmoz-autocomplete>
+	`,
 	disabled = () => html`
 		<cosmoz-autocomplete
 			disabled
@@ -46,5 +55,5 @@ const basic = () => html`
 	`;
 
 export {
-	basic, single, hideEmpty, disabled
+	basic, single, hideEmpty, defaultIndex, disabled
 };
