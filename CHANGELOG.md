@@ -1,3 +1,10 @@
+### [2.11.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.11.0...v2.11.1) (2021-02-05)
+
+
+### Bug Fixes
+
+* improve default-index ([764cc95](https://github.com/neovici/cosmoz-autocomplete/commit/764cc9531cd0e1d6030b6364760a0c291fba6096))
+
 ## [2.11.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.10.0...v2.11.0) (2021-02-05)
 
 
