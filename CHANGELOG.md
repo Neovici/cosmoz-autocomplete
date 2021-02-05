@@ -1,3 +1,10 @@
+## [2.11.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.10.0...v2.11.0) (2021-02-05)
+
+
+### Features
+
+* **suggesions:** add support for default-index(defaultIndex) ([64eee11](https://github.com/neovici/cosmoz-autocomplete/commit/64eee116f6c8e456c738b8e251c3c7f7c1033ad3))
+
 ## [2.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.9.1...v2.10.0) (2021-02-05)
 
 
