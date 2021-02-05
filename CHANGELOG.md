@@ -1,3 +1,10 @@
+## [2.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.9.1...v2.10.0) (2021-02-05)
+
+
+### Features
+
+* **autocomplete:** implement showing suggestions on up/down when hideEmpty ([289c210](https://github.com/neovici/cosmoz-autocomplete/commit/289c21050cf7f48946cf7477518eecf6dfdb8ca0))
+
 ### [2.9.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.9.0...v2.9.1) (2021-01-28)
 
 
