@@ -23,6 +23,8 @@
   </div>
 </div>
 <cosmoz-input
+  autocomplete="off"
+  exportparts="input: input-input, label: input-label"
   id="input"
   part="input"
 >
