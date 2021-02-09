@@ -24,7 +24,7 @@
 </div>
 <cosmoz-input
   autocomplete="off"
-  exportparts="input: input-input, label: input-label"
+  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
@@ -48,7 +48,7 @@
 <cosmoz-input
   always-float-label=""
   autocomplete="off"
-  exportparts="input: input-input, label: input-label"
+  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
   readonly=""
@@ -113,7 +113,7 @@
 </div>
 <cosmoz-input
   autocomplete="off"
-  exportparts="input: input-input, label: input-label"
+  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
@@ -157,7 +157,7 @@
 </div>
 <cosmoz-input
   autocomplete="off"
-  exportparts="input: input-input, label: input-label"
+  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
