@@ -1,3 +1,10 @@
+### [2.11.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.11.1...v2.11.2) (2021-02-09)
+
+
+### Bug Fixes
+
+* export line and error parts from input ([2572c60](https://github.com/neovici/cosmoz-autocomplete/commit/2572c60b00dc0a2fa98b304e7373bd9362094af4))
+
 ### [2.11.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.11.0...v2.11.1) (2021-02-05)
 
 
