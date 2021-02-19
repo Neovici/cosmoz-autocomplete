@@ -1,3 +1,10 @@
+## [2.12.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.11.2...v2.12.0) (2021-02-19)
+
+
+### Features
+
+* **autocomplete:** support function and/or Promise source ([a6e7d83](https://github.com/neovici/cosmoz-autocomplete/commit/a6e7d830bfbdcc5cab6a44fa0893e293f3fc0cb1)), closes [#96](https://github.com/neovici/cosmoz-autocomplete/issues/96)
+
 ### [2.11.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.11.1...v2.11.2) (2021-02-09)
 
 
