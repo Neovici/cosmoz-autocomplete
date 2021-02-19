@@ -22,7 +22,7 @@ suite('use-autocomplete', () => {
 			`);
 		assert.equal(result.current.query, 'it');
 		assert.isFalse(result.current.focused);
-		assert.lengthOf(result.current.items, 0);
+		assert.lengthOf(await result.current.items$, 0);
 	});
 
 	test('focus', async () => {
@@ -32,10 +32,11 @@ suite('use-autocomplete', () => {
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
 					.onFocus=${ onFocus } />
 			`);
-		assert.lengthOf(result.current.items, 0);
+
+		assert.lengthOf(await result.current.items$, 0);
 		result.current.onFocus({ target: { focused: true }});
 		await nextFrame();
-		assert.lengthOf(result.current.items, 1);
+		assert.lengthOf(await result.current.items$, 1);
 		assert.isTrue(onFocus.calledOnce);
 		assert.isTrue(onFocus.calledWith(true));
 	});
@@ -94,6 +95,6 @@ suite('use-autocomplete', () => {
 		assert.equal(result.current.query, 'la');
 		result.current.onFocus({ target: { focused: true }});
 		await nextFrame();
-		assert.lengthOf(result.current.items, 2);
+		assert.lengthOf(await result.current.items$, 2);
 	});
 });
