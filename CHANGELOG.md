@@ -1,3 +1,10 @@
+### [2.12.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.12.0...v2.12.1) (2021-03-12)
+
+
+### Bug Fixes
+
+* **use-suggestions:** reset defaultIndex only when we have query and less than 2 results ([a77e93c](https://github.com/neovici/cosmoz-autocomplete/commit/a77e93cc9d23f7d8c1b761d97d3b177cf18476c1))
+
 ## [2.12.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.11.2...v2.12.0) (2021-02-19)
 
 
