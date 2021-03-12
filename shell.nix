@@ -3,8 +3,8 @@
 with import
   (
     builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/f217c0ea7c14.tar.gz";
-      sha256 = "0cyksxg2lnzxd0pss09rmmk2c2axz0lf9wvgvfng59nwf8dpq2kf";
+      url = "https://github.com/NixOS/nixpkgs/archive/102eb68ceecb.tar.gz";
+      sha256 = "1mlrd419vaz9vw5k0lymb8nasxziqv0yd4f2v7p14mlxcin3g7c3";
     })
 { };
 mkShell {
