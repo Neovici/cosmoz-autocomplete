@@ -42,6 +42,13 @@ const basic = () => html`
 			.textProperty=${ 'text' }
 			default-index="-1"
 		></cosmoz-autocomplete>
+		<cosmoz-autocomplete
+			.label=${ 'Choose color (single value)' }
+			.source=${ colors.slice(0, 1) }
+			.limit=${ 1 }
+			.textProperty=${ 'text' }
+			default-index="-1"
+		></cosmoz-autocomplete>
 	`,
 	disabled = () => html`
 		<cosmoz-autocomplete
