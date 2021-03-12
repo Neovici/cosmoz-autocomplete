@@ -44,7 +44,7 @@ const basic = () => html`
 		></cosmoz-autocomplete>
 		<cosmoz-autocomplete
 			.label=${ 'Choose color (single value)' }
-			.source=${ colors.slice(0,1) }
+			.source=${ colors.slice(0, 1) }
 			.limit=${ 1 }
 			.textProperty=${ 'text' }
 			default-index="-1"
