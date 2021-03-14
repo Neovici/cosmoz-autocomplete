@@ -25,5 +25,6 @@ npm install --save @neovici/cosmoz-autocomplete
 ### Usage
 
 ``` javascript
+import { html } from 'lit-html';
 html`<cosmoz-autocomplete .source=${["A", "B","C", "D"]} />`;
 ```
