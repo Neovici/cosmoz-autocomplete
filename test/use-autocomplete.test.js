@@ -1,100 +1,91 @@
+import { component } from 'haunted';
 import { useAutocomplete } from '../lib/use-autocomplete';
 
-import { component } from 'haunted';
 import {
-	assert, html, fixture, nextFrame
+	expect, html, fixture, nextFrame
 } from '@open-wc/testing';
 import { spy } from 'sinon';
 
 customElements.define(
 	'use-autocomplete',
-	component(function (p) {
-		// eslint-disable-next-line no-invalid-this
-		this.current = useAutocomplete(p);
+	component(host => {
+		host.current = useAutocomplete(host);
 	})
 );
 
-suite('use-autocomplete', () => {
-	test('init', async () => {
+describe('use-autocomplete', () => {
+	it('init', async () => {
 		const source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' } />
 			`);
-		assert.equal(result.current.query, 'it');
-		assert.isFalse(result.current.focused);
-		assert.lengthOf(await result.current.items$, 0);
+		expect(result.current.query).to.equal('it');
+		expect(result.current.focused).to.be.false;
+		expect(await result.current.items$).to.be.empty;
 	});
 
-	test('focus', async () => {
+	it('focus', async () => {
 		const onFocus = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
-					.onFocus=${ onFocus } />
-			`);
+					.onFocus=${ onFocus } />`);
 
-		assert.lengthOf(await result.current.items$, 0);
+		expect(await result.current.items$).to.be.empty;
 		result.current.onFocus({ target: { focused: true }});
 		await nextFrame();
-		assert.lengthOf(await result.current.items$, 1);
-		assert.isTrue(onFocus.calledOnce);
-		assert.isTrue(onFocus.calledWith(true));
+		expect(await result.current.items$).not.to.be.empty;
+		expect(onFocus).to.have.been.calledOnceWith(true);
 	});
 
-	test('edit', async () => {
+	it('edit', async () => {
 		const onText = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
-					.onText=${ onText } />
-			`);
+					.onText=${ onText } />`);
 		result.current.onText({ target: { value: 'ite' }});
 		await nextFrame();
-		assert.isTrue(onText.calledOnce);
-		assert.isTrue(onText.calledWith('ite'));
+		expect(onText).to.have.been.calledOnceWith('ite');
 	});
 
-	test('select', async () => {
+	it('select', async () => {
 		const onText = spy(),
 			onChange = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
-					.onText=${ onText } .onChange=${ onChange } />
-			`);
+					.onText=${ onText } .onChange=${ onChange } />`);
 
 		result.current.onSelect(source[1]);
 		await nextFrame();
-		assert.isTrue(onText.calledOnce);
-		assert.isTrue(onText.calledWith(''));
-		assert.isTrue(onChange.calledOnce);
-		assert.isTrue(onChange.calledWith(source));
+		expect(onText).to.have.been.calledOnceWith('');
+		expect(onChange).to.have.been.calledOnceWith(source);
 	});
 
-	test('deselect', async () => {
+	it('deselect', async () => {
 		const onText = spy(),
 			onChange = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
-					.onText=${ onText } .onChange=${ onChange } />
-			`);
+					.onText=${ onText } .onChange=${ onChange } />`);
 		result.current.onDeselect(source[0]);
 		await nextFrame();
-		assert.isFalse(onText.calledOnce);
-		assert.isTrue(onChange.calledOnce);
-		assert.isTrue(onChange.calledWith([]));
+		expect(onText).not.to.have.been.calledOnce;
+		expect(onChange).to.have.been.calledOnceWith([]);
 	});
 
 
-	test('external', async () => {
+	it('external', async () => {
 		const source = [{ text: 'Item 1' }, { text: 'Item 2' }],
 			result = await fixture(html`
 				<use-autocomplete .source=${ source } .text=${ 'La' } .textProperty=${ 'text' } .external=${ true } />
 			`);
-		assert.equal(result.current.query, 'la');
+		expect(result.current.query).to.equal('la');
 		result.current.onFocus({ target: { focused: true }});
 		await nextFrame();
-		assert.lengthOf(await result.current.items$, 2);
+
+		expect(await result.current.items$).to.have.lengthOf(2);
 	});
 });

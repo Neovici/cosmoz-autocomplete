@@ -1,33 +1,30 @@
-import { assert } from '@open-wc/testing';
+import { expect } from '@open-wc/testing';
 import {
 	search,
 	strProp,
 	mark
 } from '../lib/utils';
 
-suite('utils', () => {
-	suite('search', () => {
-		test('search', () => {
-			assert.deepEqual(
-				search(
-					[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
-					'bc',
-					strProp('text')
-				),
-				[{ text: 'bc' }, { text: 'abc' }]
-			);
+describe('utils', () => {
+	describe('search', () => {
+		it('search', () => {
+			expect(search(
+				[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
+				'bc',
+				strProp('text')
+			)).to.deep.equal([{ text: 'bc' }, { text: 'abc' }]);
 		});
 	});
-	suite('mark', () => {
-		test('handles RegExp chars', () => {
-			assert.equal(mark('asd', '[q'), 'asd');
-			assert.equal(mark('txt', '[=?'), 'txt');
+	describe('mark', () => {
+		it('handles RegExp chars', () => {
+			expect(mark('asd', '[q')).to.equal('asd');
+			expect(mark('txt', '[=?')).to.equal('txt');
 		});
-		test('marks RegExp chars', () => {
+		it('marks RegExp chars', () => {
 			const marked = mark('txt[qasd', '[q');
-			assert.lengthOf(marked, 3);
-			assert.equal(marked[0], 'txt');
-			assert.equal(marked[2], 'asd');
+			expect(marked).to.have.lengthOf(3);
+			expect(marked[0]).to.equal('txt');
+			expect(marked[2]).to.equal('asd');
 		});
 	});
 });
