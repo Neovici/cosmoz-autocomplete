@@ -1,3 +1,16 @@
+## [2.13.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.12.1...v2.13.0) (2021-03-14)
+
+
+### Features
+
+* **ci:** nix flake init ([d0c9da5](https://github.com/neovici/cosmoz-autocomplete/commit/d0c9da56a3c1ebc30338f3ac3f463a8abd4c9bf4))
+* **ci:** remove karma and cleanup ([aa8b59d](https://github.com/neovici/cosmoz-autocomplete/commit/aa8b59dae2368c3848f5f8a496cb4c05699afc90))
+
+
+### Bug Fixes
+
+* **ci:** add codecov badge ([f6d9ca4](https://github.com/neovici/cosmoz-autocomplete/commit/f6d9ca4a215a1dd3ac3a23c6653ff607fb85ff92))
+
 ### [2.12.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.12.0...v2.12.1) (2021-03-12)
 
 
