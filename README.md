@@ -7,6 +7,7 @@ cosmoz-autocomplete
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Maintainability](https://api.codeclimate.com/v1/badges/56671dc0a46898d2f539/maintainability)](https://codeclimate.com/github/Neovici/cosmoz-autocomplete/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/56671dc0a46898d2f539/test_coverage)](https://codeclimate.com/github/Neovici/cosmoz-autocomplete/test_coverage)
+[![codecov](https://codecov.io/gh/Neovici/cosmoz-autocomplete/branch/master/graph/badge.svg?token=Pg5yXQH7wS)](https://codecov.io/gh/Neovici/cosmoz-autocomplete)
 
 ## &lt;cosmoz-autocomplete&gt;
 
