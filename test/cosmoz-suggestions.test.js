@@ -1,6 +1,6 @@
 import '../cosmoz-suggestions';
 import {
-	assert, html, fixture, nextFrame
+	expect, html, fixture, nextFrame
 } from '@open-wc/testing';
 import { prop } from '../lib/utils';
 import { spy } from 'sinon';
@@ -11,19 +11,15 @@ const someFrames = async () => {
 	await nextFrame();
 };
 
-suite('cosmoz-suggestions', () => {
-	test('render', async () => {
+describe('cosmoz-suggestions', () => {
+	it('render', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
 				.map((_, i) => `item ${ i }`),
-			el = await fixture(
-				html`
-					<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } />
-				`
-			);
+			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect }></cosmoz-suggestions>`);
 		await someFrames();
-		assert.equal(el.shadowRoot.querySelector('.item').innerText, 'item 0');
+		expect(el.shadowRoot.querySelector('.item').innerText).to.equal('item 0');
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
 		await nextFrame();
@@ -35,59 +31,38 @@ suite('cosmoz-suggestions', () => {
 		await nextFrame();
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-		assert.isTrue(onSelect.calledOnce);
-		assert.isTrue(onSelect.calledWith(items[3]));
+		expect(onSelect).to.have.been.calledOnceWith;
 	});
 
-	test('render (textual)', async () => {
+	it('render (textual)', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
 				.map((_, i) => ({ text: `item ${ i }` })),
-			el = await fixture(
-				html`
-					<cosmoz-suggestions
-						.items=${ items }
-						.onSelect=${ onSelect }
-						.textual=${ prop('text') }
-					/>
-				`
-			);
+			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } .textual=${ prop('text') }></cosmoz-suggestions>`);
 
 		await someFrames();
-		assert.equal(el.shadowRoot.querySelector('.item').innerText, 'item 0');
+		expect(el.shadowRoot.querySelector('.item').innerText).to.equal('item 0');
 	});
 
-	test('render (query)', async () => {
+	it('render (query)', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
 				.map((_, i) => ({ textProp: `item ${ i }` })),
-			el = await fixture(
-				html`
-					<cosmoz-suggestions
-						.query=${ '1' }
-						.items=${ items }
-						.onSelect=${ onSelect }
-						.textual=${ prop('textProp') }
-					/>
-				`
-			);
+			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } .textual=${ prop('textProp') }
+				.query=${ '1' }></cosmoz-suggestions>`);
 
 		await someFrames();
-		assert.equal(el.shadowRoot.querySelector('.item mark').innerText, '1');
+		expect(el.shadowRoot.querySelector('.item mark').innerText).to.equal('1');
 	});
 
-	test('highlight and enter', async () => {
+	it('highlight and enter', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
 				.map((_, i) => `item ${ i }`),
-			el = await fixture(
-				html`
-					<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } />
-				`
-			);
+			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect }></cosmoz-suggestions>`);
 
 		await someFrames();
 
@@ -97,21 +72,15 @@ suite('cosmoz-suggestions', () => {
 
 		await nextFrame();
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-
-		assert.isTrue(onSelect.calledOnce);
-		assert.isTrue(onSelect.calledWith(items[3]));
+		expect(onSelect).to.have.been.calledOnceWith(items[3]);
 	});
 
-	test('mousedown, click', async () => {
+	it('mousedown, click', async () => {
 		const onSelect = spy(),
 			items = Array(10)
 				.fill()
 				.map((_, i) => `item ${ i }`),
-			el = await fixture(
-				html`
-					<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } />
-				`
-			);
+			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect }></cosmoz-suggestions>`);
 
 		await someFrames();
 
@@ -121,8 +90,6 @@ suite('cosmoz-suggestions', () => {
 		el.shadowRoot
 			.querySelector('.item[data-index="3"]')
 			.dispatchEvent(new MouseEvent('click'));
-
-		assert.isTrue(onSelect.calledOnce);
-		assert.isTrue(onSelect.calledWith(items[3]));
+		expect(onSelect).to.have.been.calledOnceWith(items[3]);
 	});
 });

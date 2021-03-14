@@ -1,15 +1,15 @@
 import { useKeyboard } from '../lib/use-keyboard';
 import { component } from 'haunted';
 import {
-	assert, html, fixture
+	expect, html, fixture
 } from '@open-wc/testing';
 import { spy } from 'sinon';
 
 customElements.define('use-keyboard', component(useKeyboard));
 
-suite('use-keyboard', () => {
-	suite('onUp', () => {
-		test('handles Up key ', async () => {
+describe('use-keyboard', () => {
+	describe('onUp', () => {
+		it('handles Up key ', async () => {
 			const onUp = spy();
 			await fixture(
 				html`
@@ -17,10 +17,10 @@ suite('use-keyboard', () => {
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Up' }));
-			assert.isTrue(onUp.calledOnce);
+			expect(onUp).to.have.been.calledOnce;
 		});
 
-		test('handles ArrowUp key ', async () => {
+		it('handles ArrowUp key ', async () => {
 			const onUp = spy();
 			await fixture(
 				html`
@@ -28,12 +28,12 @@ suite('use-keyboard', () => {
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-			assert.isTrue(onUp.calledOnce);
+			expect(onUp).to.have.been.calledOnce;
 		});
 	});
 
-	suite('onDown', () => {
-		test('handles Down key ', async () => {
+	describe('onDown', () => {
+		it('handles Down key ', async () => {
 			const onDown = spy();
 			await fixture(
 				html`
@@ -41,10 +41,10 @@ suite('use-keyboard', () => {
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
-			assert.isTrue(onDown.calledOnce);
+			expect(onDown).to.have.been.calledOnce;
 		});
 
-		test('handles ArrowDown key ', async () => {
+		it('handles ArrowDown key ', async () => {
 			const onDown = spy();
 			await fixture(
 				html`
@@ -54,12 +54,12 @@ suite('use-keyboard', () => {
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', { key: 'ArrowDown' })
 			);
-			assert.isTrue(onDown.calledOnce);
+			expect(onDown).to.have.been.calledOnce;
 		});
 	});
 
-	suite('onEnter', () => {
-		test('handles Enter key ', async () => {
+	describe('onEnter', () => {
+		it('handles Enter key ', async () => {
 			const onEnter = spy();
 			await fixture(
 				html`
@@ -67,12 +67,12 @@ suite('use-keyboard', () => {
 				`
 			);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-			assert.isTrue(onEnter.calledOnce);
+			expect(onEnter).to.have.been.calledOnce;
 		});
 	});
 
-	suite('unhandled', () => {
-		test('ctrl & alt', async () => {
+	describe('unhandled', () => {
+		it('ctrl & alt', async () => {
 			const onUp = spy(),
 				onDown = spy(),
 				onEnter = spy();
@@ -108,9 +108,9 @@ suite('use-keyboard', () => {
 				})
 			);
 
-			assert.isFalse(onUp.calledOnce);
-			assert.isFalse(onDown.calledOnce);
-			assert.isFalse(onEnter.calledOnce);
+			expect(onUp).not.to.have.been.called;
+			expect(onDown).not.to.have.been.called;
+			expect(onEnter).not.to.have.been.called;
 		});
 	});
 });
