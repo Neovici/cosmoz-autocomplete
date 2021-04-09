@@ -1,3 +1,10 @@
+### [2.13.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.13.0...v2.13.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* **use-suggestions:** do not change defaultIndex for less than 1 item ([ceb2ce3](https://github.com/neovici/cosmoz-autocomplete/commit/ceb2ce30866624caa41ee547fc0a59f2d15b9a58))
+
 ## [2.13.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.12.1...v2.13.0) (2021-03-14)
 
 
