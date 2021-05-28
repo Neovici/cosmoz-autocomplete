@@ -1,3 +1,10 @@
+## [2.14.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.13.1...v2.14.0) (2021-05-28)
+
+
+### Features
+
+* valueProperty support ([11586de](https://github.com/neovici/cosmoz-autocomplete/commit/11586de63f30cebd05ece17f3b1c1e3eb14819c7))
+
 ### [2.13.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.13.0...v2.13.1) (2021-04-09)
 
 
