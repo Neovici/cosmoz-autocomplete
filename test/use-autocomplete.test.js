@@ -88,4 +88,17 @@ describe('use-autocomplete', () => {
 
 		expect(await result.current.items$).to.have.lengthOf(2);
 	});
+
+
+	it('valueProperty', async () => {
+		const source = [{ id: 1, text: 'Item 1' }, { id: 2, text: 'Item 2' }],
+			result = await fixture(html`
+				<use-autocomplete .source=${ source } .value=${ { id: 1, text: 'Item 1' } } .text=${ 'It' } .textProperty=${ 'text' } .valueProperty=${ 'id' } />
+			`);
+
+		result.current.onFocus({ target: { focused: true } });
+		await nextFrame();
+
+		expect(await result.current.items$).to.be.deep.equal([{ id: 2, text: 'Item 2' }]);
+	});
 });
