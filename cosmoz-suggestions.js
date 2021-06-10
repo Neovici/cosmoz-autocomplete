@@ -6,9 +6,7 @@ import { useSuggestions } from './lib/use-suggestions';
 import { scrollIntoViewIfNeeded } from './lib/utils';
 
 const Suggestions = host => {
-	const {
-		index, items, renderItem, height, itemHeight
-	} = useSuggestions(host);
+	const { index, items, renderItem, height, itemHeight } = useSuggestions(host);
 
 	useEffect(() => {
 		scrollIntoViewIfNeeded(host.shadowRoot.querySelector('[data-index="' + index + '"]'), host);
@@ -61,11 +59,8 @@ const Suggestions = host => {
 					max-width: inherit;
 				}
 			</style>
-			<div class="items">${ /* eslint-disable indent*/ scroll({
-				items,
-				renderItem
-			}) }</div>
+			<div class="items">${ scroll({ items, renderItem }) }</div>
 		`;
-	};
+};
 
 customElements.define('cosmoz-suggestions', component(Suggestions));

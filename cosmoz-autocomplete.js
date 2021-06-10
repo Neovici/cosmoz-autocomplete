@@ -1,17 +1,8 @@
-import {
-	component, useCallback
-} from 'haunted';
-
-import {
-	Autocomplete, observedAttributes
-} from './lib/autocomplete';
+import { component, useCallback } from 'haunted';
+import { Autocomplete, observedAttributes } from './lib/autocomplete';
 
 const Standalone = host => {
-	const {
-		onChange,
-		onText,
-		...props
-	} = host;
+	const { onChange, onText, ...props } = host;
 
 	return Autocomplete.call(host, {
 		...props,
@@ -26,13 +17,5 @@ const Standalone = host => {
 	});
 };
 
-
-customElements.define(
-	'cosmoz-autocomplete-ui',
-	component(Autocomplete, { observedAttributes })
-);
-
-customElements.define(
-	'cosmoz-autocomplete',
-	component(Standalone, { observedAttributes })
-);
+customElements.define('cosmoz-autocomplete-ui', component(Autocomplete, { observedAttributes }));
+customElements.define('cosmoz-autocomplete', component(Standalone, { observedAttributes }));
