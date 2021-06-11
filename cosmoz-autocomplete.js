@@ -6,9 +6,9 @@ const Standalone = host => {
 
 	return Autocomplete.call(host, {
 		...props,
-		onChange: useCallback(value => {
+		onChange: useCallback((value, ...args) => {
 			host.value = value;
-			onChange?.(value);
+			onChange?.(value, ...args);
 		}, [onChange]),
 		onText: useCallback(text => {
 			host.text = text;
