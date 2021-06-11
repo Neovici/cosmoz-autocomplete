@@ -70,7 +70,7 @@ describe('cosmoz-autocomplete-ui', () => {
 		</cosmoz-input>`);
 	});
 
-	it('render (suggestions)', async () => {
+	it('render (listbox)', async () => {
 		const el = await fixture(html`
 				<cosmoz-autocomplete-ui
 				.source=${ source } .value=${ source[0] }
@@ -162,7 +162,7 @@ describe('cosmoz-autocomplete', () => {
 		el.shadowRoot.querySelector('cosmoz-input').focus();
 		await nextFrame();
 		await nextFrame();
-		document.body.querySelector('cosmoz-suggestions').onSelect(source[1]);
+		document.body.querySelector('cosmoz-listbox').onSelect(source[1]);
 		expect(onChange).to.have.been.calledOnceWith([source[0], source[1]]);
 	});
 
