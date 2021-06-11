@@ -1,7 +1,5 @@
-import '../cosmoz-suggestions';
-import {
-	expect, html, fixture, nextFrame
-} from '@open-wc/testing';
+import '../cosmoz-listbox';
+import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 import { prop } from '../lib/utils';
 import { spy } from 'sinon';
 
@@ -11,13 +9,11 @@ const someFrames = async () => {
 	await nextFrame();
 };
 
-describe('cosmoz-suggestions', () => {
+describe('cosmoz-listbox', () => {
 	it('render', async () => {
 		const onSelect = spy(),
-			items = Array(10)
-				.fill()
-				.map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect }></cosmoz-suggestions>`);
+			items = Array(10).fill().map((_, i) => `item ${ i }`),
+			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect }></cosmoz-listbox>`);
 		await someFrames();
 		expect(el.shadowRoot.querySelector('.item').innerText).to.equal('item 0');
 
@@ -36,10 +32,8 @@ describe('cosmoz-suggestions', () => {
 
 	it('render (textual)', async () => {
 		const onSelect = spy(),
-			items = Array(10)
-				.fill()
-				.map((_, i) => ({ text: `item ${ i }` })),
-			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } .textual=${ prop('text') }></cosmoz-suggestions>`);
+			items = Array(10).fill().map((_, i) => ({ text: `item ${ i }` })),
+			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect } .textual=${ prop('text') }></cosmoz-listbox>`);
 
 		await someFrames();
 		expect(el.shadowRoot.querySelector('.item').innerText).to.equal('item 0');
@@ -47,11 +41,9 @@ describe('cosmoz-suggestions', () => {
 
 	it('render (query)', async () => {
 		const onSelect = spy(),
-			items = Array(10)
-				.fill()
-				.map((_, i) => ({ textProp: `item ${ i }` })),
-			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect } .textual=${ prop('textProp') }
-				.query=${ '1' }></cosmoz-suggestions>`);
+			items = Array(10).fill().map((_, i) => ({ textProp: `item ${ i }` })),
+			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect } .textual=${ prop('textProp') }
+				.query=${ '1' }></cosmoz-listbox>`);
 
 		await someFrames();
 		expect(el.shadowRoot.querySelector('.item mark').innerText).to.equal('1');
@@ -59,10 +51,8 @@ describe('cosmoz-suggestions', () => {
 
 	it('highlight and enter', async () => {
 		const onSelect = spy(),
-			items = Array(10)
-				.fill()
-				.map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect }></cosmoz-suggestions>`);
+			items = Array(10).fill().map((_, i) => `item ${ i }`),
+			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect }></cosmoz-listbox>`);
 
 		await someFrames();
 
@@ -77,10 +67,8 @@ describe('cosmoz-suggestions', () => {
 
 	it('mousedown, click', async () => {
 		const onSelect = spy(),
-			items = Array(10)
-				.fill()
-				.map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-suggestions .items=${ items } .onSelect=${ onSelect }></cosmoz-suggestions>`);
+			items = Array(10).fill().map((_, i) => `item ${ i }`),
+			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect }></cosmoz-listbox>`);
 
 		await someFrames();
 

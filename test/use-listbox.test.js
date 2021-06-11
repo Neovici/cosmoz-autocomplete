@@ -1,25 +1,19 @@
-import { useSuggestions } from '../lib/use-suggestions';
+import { useListbox } from '../lib/use-listbox';
 
 import { component } from 'haunted';
-import {
-	expect, html, fixture, nextFrame
-} from '@open-wc/testing';
+import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 import { spy } from 'sinon';
 
 customElements.define(
-	'use-suggestions',
+	'use-listbox',
 	component(host => {
-		host.current = useSuggestions(host);
+		host.current = useListbox(host);
 	})
 );
 
-describe('use-suggestions', () => {
+describe('use-listbox', () => {
 	it('down', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2] } />
-			`
-		);
+		const result = await fixture(html`<use-listbox .items=${ [0, 1, 2] } />`);
 		expect(result.current.index).to.equal(0);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
 		await nextFrame();
@@ -27,11 +21,7 @@ describe('use-suggestions', () => {
 	});
 
 	it('down(cycle)', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2] } />
-			`
-		);
+		const result = await fixture(html`<use-listbox .items=${ [0, 1, 2] } />`);
 		result.current.highlight(2);
 		await nextFrame();
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
@@ -41,11 +31,7 @@ describe('use-suggestions', () => {
 
 
 	it('up', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2] } />
-			`
-		);
+		const result = await fixture(html`<use-listbox .items=${ [0, 1, 2] } />`);
 		result.current.highlight(1);
 		await nextFrame();
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
@@ -54,11 +40,7 @@ describe('use-suggestions', () => {
 	});
 
 	it('up (cycle)', async () => {
-		const result = await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2] } />
-			`
-		);
+		const result = await fixture(html`<use-listbox .items=${ [0, 1, 2] } />`);
 		expect(result.current.index).to.equal(0);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 		await nextFrame();
@@ -67,11 +49,7 @@ describe('use-suggestions', () => {
 
 	it('highlight', async () => {
 		const items = [0, 1, 2],
-			result = await fixture(
-				html`
-					<use-suggestions .items=${ items } />
-				`
-			);
+			result = await fixture(html`<use-listbox .items=${ items } />`);
 		expect(result.current.index).to.equal(0);
 		result.current.highlight(1);
 		await nextFrame();
@@ -81,33 +59,21 @@ describe('use-suggestions', () => {
 	it('select', async () => {
 		const items = [0, 1, 2],
 			onSelect = spy(),
-			result = await fixture(
-				html`
-					<use-suggestions .items=${ items } .onSelect=${ onSelect } />
-				`
-			);
+			result = await fixture(html`<use-listbox .items=${ items } .onSelect=${ onSelect } />`);
 		result.current.select(items[1]);
 		expect(onSelect).to.have.been.calledOnceWith(items[1]);
 	});
 
 	it('enter (no selection)', async () => {
 		const onSelect = spy();
-		await fixture(
-			html`
-				<use-suggestions .items=${ [0, 1, 2] } .onSelect=${ onSelect } />
-			`
-		);
+		await fixture(html`<use-listbox .items=${ [0, 1, 2] } .onSelect=${ onSelect } />`);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 		expect(onSelect).to.have.been.calledOnceWith(0);
 	});
 
 	it('enter', async () => {
 		const onSelect = spy(),
-			result = await fixture(
-				html`
-					<use-suggestions .items=${ [0, 1, 2] } .onSelect=${ onSelect } />
-				`
-			);
+			result = await fixture(html`<use-listbox .items=${ [0, 1, 2] } .onSelect=${ onSelect } />`);
 		result.current.highlight(1);
 		await nextFrame();
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));

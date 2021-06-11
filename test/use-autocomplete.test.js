@@ -1,10 +1,7 @@
 import { component } from 'haunted';
-import { useAutocomplete } from '../lib/use-autocomplete';
-
-import {
-	expect, html, fixture, nextFrame
-} from '@open-wc/testing';
+import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 import { spy } from 'sinon';
+import { useAutocomplete } from '../lib/use-autocomplete';
 
 customElements.define(
 	'use-autocomplete',
@@ -20,7 +17,6 @@ describe('use-autocomplete', () => {
 				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' } />
 			`);
 		expect(result.current.query).to.equal('it');
-		expect(result.current.focused).to.be.false;
 		expect(await result.current.items$).to.be.empty;
 	});
 
