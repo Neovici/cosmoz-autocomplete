@@ -1,3 +1,17 @@
+## [2.15.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.14.0...v2.15.0) (2021-06-14)
+
+
+### Features
+
+* **cosmoz-autocomplete:** implement show-single and show-selection ([3c0ab63](https://github.com/neovici/cosmoz-autocomplete/commit/3c0ab6396a465da1aa2bcd6b7d7d92eeed16b737))
+* **cosmoz-select:** initial implementation ([9f080c6](https://github.com/neovici/cosmoz-autocomplete/commit/9f080c66aabe83614517ebb648dc8317e0e914c7))
+
+
+### Bug Fixes
+
+* **autocomplete:** close on Escape ([394b7bb](https://github.com/neovici/cosmoz-autocomplete/commit/394b7bb547ff2d3937f0afa15c8f36e7a20e7dae))
+* **cosmoz-suggestions:** pass itemHeight and itemLimit to cosmoz-suggestions ([8140da9](https://github.com/neovici/cosmoz-autocomplete/commit/8140da9fe6c276b2f88bf51b50bbd5d719d48b5f))
+
 ## [2.14.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.13.1...v2.14.0) (2021-05-28)
 
 
