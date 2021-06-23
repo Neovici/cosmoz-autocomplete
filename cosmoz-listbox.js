@@ -10,7 +10,7 @@ const Listbox = host => {
 	const { index, items, renderItem, height, itemHeight } = useListbox(host);
 
 	useEffect(() => {
-		scrollIntoViewIfNeeded(host.shadowRoot.querySelector('[data-index="' + index + '"]'), host);
+		scrollIntoViewIfNeeded(host.shadowRoot.querySelector('[data-index="' + index + '"]:not(:hover)'), host);
 	}, [index]);
 
 	return html`
