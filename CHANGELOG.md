@@ -1,3 +1,10 @@
+### [2.15.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.15.0...v2.15.1) (2021-06-23)
+
+
+### Bug Fixes
+
+* **listbox:** improve scrolling and selection ([e4f32c6](https://github.com/neovici/cosmoz-autocomplete/commit/e4f32c66a1a8b408e1299c379c03a1117e93a6b3))
+
 ## [2.15.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.14.0...v2.15.0) (2021-06-14)
 
 
