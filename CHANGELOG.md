@@ -1,3 +1,11 @@
+## [2.16.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.15.1...v2.16.0) (2021-08-24)
+
+
+### Features
+
+* **use-focus:** implement ([9bafcb2](https://github.com/neovici/cosmoz-autocomplete/commit/9bafcb2da66d04653cef1b1df11fe61ad3b99641))
+* **use-position:** separate use-position hook ([c0c0249](https://github.com/neovici/cosmoz-autocomplete/commit/c0c0249942f630274b5c2e8687b3cd5950bab4d7))
+
 ### [2.15.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.15.0...v2.15.1) (2021-06-23)
 
 
