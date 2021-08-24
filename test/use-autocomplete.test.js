@@ -28,7 +28,7 @@ describe('use-autocomplete', () => {
 					.onFocus=${ onFocus } />`);
 
 		expect(await result.current.items$).to.be.empty;
-		result.current.onFocus({ target: { focused: true }});
+		result.current.onFocus({ currentTarget: { matches: () => true }});
 		await nextFrame();
 		expect(await result.current.items$).not.to.be.empty;
 		expect(onFocus).to.have.been.calledOnceWith(true);
@@ -79,7 +79,7 @@ describe('use-autocomplete', () => {
 				<use-autocomplete .source=${ source } .text=${ 'La' } .textProperty=${ 'text' } .external=${ true } />
 			`);
 		expect(result.current.query).to.equal('la');
-		result.current.onFocus({ target: { focused: true }});
+		result.current.onFocus({ currentTarget: { matches: () => true }});
 		await nextFrame();
 
 		expect(await result.current.items$).to.have.lengthOf(2);
@@ -92,7 +92,7 @@ describe('use-autocomplete', () => {
 				<use-autocomplete .source=${ source } .value=${ { id: 1, text: 'Item 1' } } .text=${ 'It' } .textProperty=${ 'text' } .valueProperty=${ 'id' } />
 			`);
 
-		result.current.onFocus({ target: { focused: true }});
+		result.current.onFocus({ currentTarget: { matches: () => true }});
 		await nextFrame();
 
 		expect(await result.current.items$).to.be.deep.equal([{ id: 2, text: 'Item 2' }]);
