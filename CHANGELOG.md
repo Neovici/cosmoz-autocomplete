@@ -1,3 +1,10 @@
+## [2.17.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.16.0...v2.17.0) (2021-09-07)
+
+
+### Features
+
+* **use-focus:** add toggle ([d9dd7ac](https://github.com/neovici/cosmoz-autocomplete/commit/d9dd7acd0d8793485258701958a2c20c679ec8b6))
+
 ## [2.16.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.15.1...v2.16.0) (2021-08-24)
 
 
