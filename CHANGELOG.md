@@ -1,3 +1,10 @@
+### [2.17.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.17.0...v2.17.1) (2021-10-08)
+
+
+### Bug Fixes
+
+* **lib/use-focus:** iosSupport for onToggle ([9d5e525](https://github.com/neovici/cosmoz-autocomplete/commit/9d5e5255b2b0c8100a8430922c2e819547ca66fa))
+
 ## [2.17.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.16.0...v2.17.0) (2021-09-07)
 
 
