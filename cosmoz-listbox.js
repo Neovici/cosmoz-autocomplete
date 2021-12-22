@@ -63,6 +63,7 @@ const Listbox = host => {
 				overflow: hidden;
 				max-width: inherit;
 			}
+			.items > :first-child { line-height: 1;}
 		</style>
 		<div class="items">${ scroll({ items, renderItem }) }</div>`;
 };
