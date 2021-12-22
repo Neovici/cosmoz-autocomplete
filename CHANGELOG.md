@@ -1,3 +1,10 @@
+### [2.17.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.17.1...v2.17.2) (2021-12-22)
+
+
+### Bug Fixes
+
+* **cosmoz-listbox:** fix white-sapce at the end of the list ([fbc77b1](https://github.com/neovici/cosmoz-autocomplete/commit/fbc77b1bc43885f65a9968346d4f5973b9bca23f))
+
 ### [2.17.1](https://github.com/neovici/cosmoz-autocomplete/compare/v2.17.0...v2.17.1) (2021-10-08)
 
 
