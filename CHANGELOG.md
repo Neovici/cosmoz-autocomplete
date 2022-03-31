@@ -1,3 +1,21 @@
+## [3.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.17.2...v3.0.0) (2022-03-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **autocomplete:** display badge instead of chips
+
+### Features
+
+* **autocomplete:** close by default, keeep-query, keep-opened ([851492d](https://github.com/neovici/cosmoz-autocomplete/commit/851492d19f3f85d11f0bf390dea12fab605dca68))
+* **autocomplete:** display badge instead of chips ([fd4581e](https://github.com/neovici/cosmoz-autocomplete/commit/fd4581e45d12d23d84b2ba8b5afc7d7360fd7cb2))
+* use-focus & use-position from cosmoz-dropdown ([2f419b8](https://github.com/neovici/cosmoz-autocomplete/commit/2f419b8904f5d105b7800601cc378b960addb8f6))
+
+
+### Bug Fixes
+
+* correct imports ([cae949a](https://github.com/neovici/cosmoz-autocomplete/commit/cae949a40cae4f75c29890a44b5297c55c1aa5d3))
+
 ### [2.17.2](https://github.com/neovici/cosmoz-autocomplete/compare/v2.17.1...v2.17.2) (2021-12-22)
 
 
