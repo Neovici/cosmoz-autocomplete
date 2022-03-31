@@ -65,19 +65,18 @@
 		"position.js": "^0.3.0"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^15.0.0",
-		"@commitlint/config-conventional": "^15.0.0",
-		"@neovici/eslint-config": "^1.3.0",
+		"@commitlint/cli": "^16.0.0",
+		"@commitlint/config-conventional": "^16.0.0",
+		"@neovici/cfg": "^1.13.0",
+		"@neovici/cosmoz-dropdown": "^1.8.0",
 		"@open-wc/demoing-storybook": "^2.1.0",
 		"@open-wc/testing": "^2.5.32",
 		"@semantic-release/changelog": "^6.0.0",
 		"@semantic-release/git": "^10.0.0",
 		"@storybook/storybook-deployer": "^2.8.5",
-		"@web/test-runner": "^0.13.0",
-		"@web/test-runner-selenium": "^0.5.0",
 		"husky": "^7.0.0",
-		"semantic-release": "^18.0.0",
-		"sinon": "^12.0.0",
-		"typescript": "^4.5.0"
+		"semantic-release": "^19.0.0",
+		"sinon": "^13.0.0",
+		"typescript": "^4.6.0"
 	}
 }

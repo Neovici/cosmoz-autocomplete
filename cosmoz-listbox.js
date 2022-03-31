@@ -33,24 +33,24 @@ const Listbox = host => {
 				height: 100%;
 			}
 			.item {
+				font-size: 14px;
 				line-height: ${ itemHeight }px;
 				height: ${ itemHeight }px;
-				padding: 0 16px;
+				padding: 0 20px;
 				box-sizing: border-box;
 				width: 100%;
 				cursor: pointer;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
+				transition: background 0.2s;
+				color: var(--cosmoz-listbox-color, #101010);
 			}
-			.item[data-index="${ index }"] {
-				background: #eee;
-				color: #333;
+
+			.item[data-index="${ index }"]{
+				background: var(--cosmoz-listbox-active-color, var(--cosmoz-selection-color, rgba(58, 145, 226, 0.1)));
 			}
-			.item[aria-selected] {
-				background: #dadada;
-				color: #333;
-			}
+
 			.sizer {
 				position: relative;
 				visibility: hidden;
@@ -64,6 +64,7 @@ const Listbox = host => {
 				max-width: inherit;
 			}
 			.items > :first-child { line-height: 1;}
+			${ host.styles || '' }
 		</style>
 		<div class="items">${ scroll({ items, renderItem }) }</div>`;
 };

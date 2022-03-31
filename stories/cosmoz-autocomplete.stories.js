@@ -6,8 +6,17 @@ export default {
 	title: 'Autocomplete',
 	component: 'cosmoz-autocomplete'
 };
-
-const basic = () => html`
+const css = html`
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
+cosmoz-autocomplete,
+cosmoz-listbox {
+	font-family: 'Inter', sans-serif;
+}
+</style>
+`,
+	basic = () => html`
+		${ css }
 		<cosmoz-autocomplete
 			.label=${ 'Choose color' }
 			.source=${ colors }
@@ -16,6 +25,7 @@ const basic = () => html`
 		></cosmoz-autocomplete>
 	`,
 	single = () => html`
+		${ css }
 		<cosmoz-autocomplete
 			.label=${ 'Choose color' }
 			.source=${ colors }
@@ -25,6 +35,7 @@ const basic = () => html`
 		></cosmoz-autocomplete>
 	`,
 	hideEmpty = () => html`
+		${ css }
 		<cosmoz-autocomplete
 			.label=${ 'Choose color' }
 			.source=${ colors }
@@ -35,6 +46,7 @@ const basic = () => html`
 		></cosmoz-autocomplete>
 	`,
 	defaultIndex = () => html`
+		${ css }
 		<cosmoz-autocomplete
 			.label=${ 'Choose color' }
 			.source=${ colors }
@@ -51,6 +63,7 @@ const basic = () => html`
 		></cosmoz-autocomplete>
 	`,
 	disabled = () => html`
+		${ css }
 		<cosmoz-autocomplete
 			disabled
 			.label=${ 'Choose color' }
