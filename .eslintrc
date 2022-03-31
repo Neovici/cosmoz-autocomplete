@@ -2,6 +2,6 @@
 	"extends": "@neovici",
 	"rules": {
 		"max-lines-per-function": 0,
-		"no-unused-expressions": 0
+		"import/group-exports": 0
 	}
 }

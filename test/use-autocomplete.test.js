@@ -95,6 +95,6 @@ describe('use-autocomplete', () => {
 		result.current.onFocus({ currentTarget: { matches: () => true }});
 		await nextFrame();
 
-		expect(await result.current.items$).to.be.deep.equal([{ id: 2, text: 'Item 2' }]);
+		expect(await result.current.items$).to.be.deep.equal(source);
 	});
 });

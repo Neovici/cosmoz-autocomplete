@@ -31,18 +31,13 @@ describe('cosmoz-autocomplete-ui', () => {
 			value: 'It'
 		});
 		expect(el).shadowDom.to.equal(`
-			<div class="chips">
-				<div class="chip" part="chip" title="Item 1">
-					<span class="chip-text" part="chip-text" >Item 1</span>
-					<span class="chip-clear" part="chip-clear"></span>
-				</div>
-			</div>
 			<cosmoz-input
 				id="input" autocomplete="off" part="input"
 				exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
+				<div class="badge" part="badge" slot="suffix">1</div>
 			</cosmoz-input>`);
 	});
 
@@ -61,11 +56,9 @@ describe('cosmoz-autocomplete-ui', () => {
 		>
 			<slot name="prefix" slot="prefix"></slot>
 			<slot name="suffix" slot="suffix"></slot>
-			<div class="chips" slot="prefix">
-				<div class="chip" part="chip" title="Item 1">
-					<span class="chip-text" part="chip-text">Item 1</span>
-					<span class="chip-clear" part="chip-clear"></span>
-			    </div>
+			<div class="chip" part="chip" slot="suffix" title="Item 1">
+				<span class="chip-text" part="chip-text">Item 1</span>
+				<span class="chip-clear" part="chip-clear"></span>
 			</div>
 		</cosmoz-input>`);
 	});
@@ -81,47 +74,18 @@ describe('cosmoz-autocomplete-ui', () => {
 		await nextFrame();
 		await nextFrame();
 		expect(el).shadowDom.to.equal(`
-			<div class="chips">
-				<div class="chip" part="chip" title="Item 1">
-					<span class="chip-text" part="chip-text">Item 1</span>
-					<span class="chip-clear" part="chip-clear"></span>
-				</div>
-			</div>
 			<cosmoz-input
 				id="input" part="input" autocomplete="off"
 				exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
+				<div class="badge" part="badge" slot="suffix">1</div>
 			</cosmoz-input>
 			<disconnect-observer></disconnect-observer>`);
 		document.activeElement.blur();
 	});
 
-	it('render (deselect)', async () => {
-		const el = await fixture(html`
-				<cosmoz-autocomplete-ui
-				.source=${ source } .value=${ source[0] }
-				.text=${ 'It' } .textProperty=${ 'text' }
-				/>
-			`);
-		el.shadowRoot.querySelector('.chip-clear').click();
-		await nextFrame();
-		expect(el).shadowDom.to.equal(`
-			<div class="chips">
-				<div class="chip" part="chip" title="Item 1">
-					<span class="chip-text" part="chip-text">Item 1</span>
-					<span class="chip-clear" part="chip-clear"></span>
-				</div>
-			</div>
-			<cosmoz-input
-				id="input" part="input" autocomplete="off"
-				exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
-			>
-				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix"></slot>
-			</cosmoz-input>`);
-	});
 });
 
 describe('cosmoz-autocomplete', () => {
@@ -134,12 +98,29 @@ describe('cosmoz-autocomplete', () => {
 			/>
 		`);
 		expect(el).shadowDom.to.equal(`
-			<div class="chips">
-				<div class="chip" part="chip" title="Item 1">
-					<span class="chip-text" part="chip-text">Item 1</span>
-					<span class="chip-clear" part="chip-clear"></span>
-				</div>
-			</div>
+			<cosmoz-input
+				id="input" part="input" autocomplete="off"
+				exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+			>
+				<slot name="prefix" slot="prefix"></slot>
+				<slot name="suffix" slot="suffix"></slot>
+				<div class="badge" part="badge" slot="suffix">1</div>
+			</cosmoz-input>`);
+	});
+
+	it('render (deselect)', async () => {
+		const el = await fixture(html`
+				<cosmoz-autocomplete
+				.source=${ source } .value=${ source[0] }
+				.text=${ 'It' } .textProperty=${ 'text' }
+				.limit=${1}
+				/>
+			`);
+		await nextFrame();
+		el.shadowRoot.querySelector('.chip-clear').click();
+		await nextFrame();
+		await nextFrame();
+		expect(el).shadowDom.to.equal(`
 			<cosmoz-input
 				id="input" part="input" autocomplete="off"
 				exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
@@ -175,6 +156,7 @@ describe('cosmoz-autocomplete', () => {
 				.textProperty=${ 'text' }
 				.text=${ 'it' }
 			/>`);
+
 		el.text = 'asd';
 		el.value = [source[1]];
 
@@ -182,7 +164,7 @@ describe('cosmoz-autocomplete', () => {
 		await nextFrame();
 
 		expect(el.shadowRoot.querySelector('cosmoz-input').value).to.equal('asd');
-		expect(el.shadowRoot.querySelector('.chip-text').innerText).to.equal('Item 2');
+		expect(el.shadowRoot.querySelector('.badge').innerText).to.equal('1');
 	});
 
 });
