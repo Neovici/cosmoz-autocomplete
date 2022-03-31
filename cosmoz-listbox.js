@@ -59,9 +59,10 @@ const Listbox = host => {
 				z-index: -1;
 				height: 0;
 				width: auto;
-				padding: 0 16px;
+				padding: 0 20px;
 				overflow: hidden;
 				max-width: inherit;
+				font-size: 14px;
 			}
 			.items > :first-child { line-height: 1;}
 			${ host.styles || '' }
