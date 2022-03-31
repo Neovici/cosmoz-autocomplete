@@ -68,6 +68,7 @@
 		"@commitlint/cli": "^16.0.0",
 		"@commitlint/config-conventional": "^16.0.0",
 		"@neovici/cfg": "^1.13.0",
+		"@neovici/cosmoz-dropdown": "^1.7.0",
 		"@open-wc/demoing-storybook": "^2.1.0",
 		"@open-wc/testing": "^2.5.32",
 		"@semantic-release/changelog": "^6.0.0",
