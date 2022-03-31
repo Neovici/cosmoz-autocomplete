@@ -1,3 +1,10 @@
+### [3.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v3.0.0...v3.0.1) (2022-03-31)
+
+
+### Bug Fixes
+
+* **listbox:** better auto sizing ([6f54c9c](https://github.com/neovici/cosmoz-autocomplete/commit/6f54c9c115b85c0d1bcfd273b13720941bb3e579))
+
 ## [3.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v2.17.2...v3.0.0) (2022-03-31)
 
 
