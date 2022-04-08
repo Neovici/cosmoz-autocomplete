@@ -1,3 +1,10 @@
+### [3.0.3](https://github.com/neovici/cosmoz-autocomplete/compare/v3.0.2...v3.0.3) (2022-04-08)
+
+
+### Bug Fixes
+
+* **autocomplete:** remove one chip max-width ([3b8bb99](https://github.com/neovici/cosmoz-autocomplete/commit/3b8bb997f5755fe071046ede0b2cba2c05a76fe7))
+
 ### [3.0.2](https://github.com/neovici/cosmoz-autocomplete/compare/v3.0.1...v3.0.2) (2022-04-05)
 
 
