@@ -1,6 +1,6 @@
 import { component } from 'haunted';
 import { expect, html, fixture, nextFrame } from '@open-wc/testing';
-import { spy } from 'sinon';
+import { spy, match as sinonMatch } from 'sinon';
 import { useAutocomplete } from '../lib/use-autocomplete';
 
 customElements.define(
@@ -57,6 +57,18 @@ describe('use-autocomplete', () => {
 		await nextFrame();
 		expect(onText).to.have.been.calledOnceWith('');
 		expect(onChange).to.have.been.calledOnceWith(source);
+	});
+
+	it('onSelect', async () => {
+		const onSelect = spy(),
+			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
+			result = await fixture(html`
+				<use-autocomplete .source=${ source } .value=${ source[0] } .text=${ 'It' } .textProperty=${ 'text' }
+				 .onSelect=${onSelect} />`);
+
+		result.current.onSelect(source[1]);
+		await nextFrame();
+		expect(onSelect).to.have.been.calledOnceWith(source[1], sinonMatch.object);
 	});
 
 	it('deselect', async () => {
