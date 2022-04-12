@@ -1,3 +1,15 @@
+## [3.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v3.0.3...v3.1.0) (2022-04-12)
+
+
+### Features
+
+* **use-autocomplete:** allow overriding onSelect ([178da61](https://github.com/neovici/cosmoz-autocomplete/commit/178da618e7f7816294ccf71038f9f8f8df53fe83))
+
+
+### Bug Fixes
+
+* **listbox:** correct multi style ([368b22a](https://github.com/neovici/cosmoz-autocomplete/commit/368b22a41c65d1d1f53768ca6a7bdb5c6f0543b4))
+
 ### [3.0.3](https://github.com/neovici/cosmoz-autocomplete/compare/v3.0.2...v3.0.3) (2022-04-08)
 
 
