@@ -1,3 +1,10 @@
+### [3.1.1](https://github.com/neovici/cosmoz-autocomplete/compare/v3.1.0...v3.1.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* **listbox:** display the svg check mark ([70719cc](https://github.com/neovici/cosmoz-autocomplete/commit/70719cc3fd570b2962e9283ea8b301320e519804))
+
 ## [3.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v3.0.3...v3.1.0) (2022-04-12)
 
 
