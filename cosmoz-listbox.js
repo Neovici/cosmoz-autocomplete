@@ -95,7 +95,7 @@ const svg =
 				}
 				:host([multi]) .item[aria-selected]::before {
 					border-color: #5881f6;
-					background: url('${svg}') #5881f6 no-repeat 50%;
+					background: url("${svg}") #5881f6 no-repeat 50%;
 				}
 				:host([multi]) .sizer {
 					padding-left: 33px;
