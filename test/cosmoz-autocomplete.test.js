@@ -37,7 +37,9 @@ describe('cosmoz-autocomplete-ui', () => {
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
-				<div class="badge" part="badge" slot="suffix">2</div>
+				<div class="badge" part="badge" slot="suffix">2
+					<span class="badge-clear" part="chip-clear"></span>
+				</div>
 			</cosmoz-input>`);
 	});
 
