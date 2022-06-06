@@ -1,3 +1,10 @@
+## [3.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v3.1.1...v3.2.0) (2022-06-06)
+
+
+### Features
+
+* **autocomplete:** add badge clear ([16c367b](https://github.com/neovici/cosmoz-autocomplete/commit/16c367b3d7af72b812f3f46f17ef1fae94a4ecf9))
+
 ### [3.1.1](https://github.com/neovici/cosmoz-autocomplete/compare/v3.1.0...v3.1.1) (2022-04-14)
 
 
