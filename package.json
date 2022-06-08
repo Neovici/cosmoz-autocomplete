@@ -65,8 +65,8 @@
 		"position.js": "^0.3.0"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^16.0.0",
-		"@commitlint/config-conventional": "^16.0.0",
+		"@commitlint/cli": "^17.0.0",
+		"@commitlint/config-conventional": "^17.0.0",
 		"@neovici/cfg": "^1.13.0",
 		"@neovici/cosmoz-dropdown": "^1.8.0",
 		"@open-wc/demoing-storybook": "^2.1.0",
@@ -74,9 +74,9 @@
 		"@semantic-release/changelog": "^6.0.0",
 		"@semantic-release/git": "^10.0.0",
 		"@storybook/storybook-deployer": "^2.8.5",
-		"husky": "^7.0.0",
+		"husky": "^8.0.0",
 		"semantic-release": "^19.0.0",
-		"sinon": "^13.0.0",
+		"sinon": "^14.0.0",
 		"typescript": "^4.6.0"
 	}
 }
