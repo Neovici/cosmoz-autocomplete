@@ -4,9 +4,11 @@ on:
   pull_request:
     branches:
       - master
+      - beta
   push:
     branches:
       - master
+      - beta
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,7 +18,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Use Node.js 16.x
+    - name: Use Node.js
       uses: actions/setup-node@v2
       with:
         node-version: 16.x
@@ -32,20 +34,9 @@ jobs:
       run: npm run lint
 
     - name: Test and report
-      env:
-        CC_TEST_REPORTER_ID: 00abab5c2c35391cab2e4f17534d3d7ef3203251d131a7f77574f3941d78124c
-        GIT_BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || github.ref }}
-        GIT_COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        NEO_CC_URL: https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-        NEO_CC: ./cc-test-reporter
-        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-        SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
       run: |
-        ([[ -e $NEO_CC ]] || curl -L $NEO_CC_URL > $NEO_CC) && chmod +x $NEO_CC
-        $NEO_CC before-build
-        echo "::add-matcher::.github/karma-problem-matcher.json"
+        echo "::add-matcher::.github/problem-matcher.json"
         npm test
-        $NEO_CC after-build --exit-code $?
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
