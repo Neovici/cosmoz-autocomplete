@@ -1,3 +1,14 @@
+## [4.0.0-beta.1](https://github.com/neovici/cosmoz-autocomplete/compare/v3.2.0...v4.0.0-beta.1) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade to latest lit & haunted
+
+### Features
+
+* upgrade to latest lit ([a7fd0d3](https://github.com/neovici/cosmoz-autocomplete/commit/a7fd0d39b2103cb53ca13dbe7ea0a036522bb837))
+
 ## [3.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v3.1.1...v3.2.0) (2022-06-06)
 
 
