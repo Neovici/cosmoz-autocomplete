@@ -1,3 +1,19 @@
+## [4.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v3.2.0...v4.0.0) (2022-06-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade to latest lit & haunted
+
+### Features
+
+* upgrade to latest lit ([a7fd0d3](https://github.com/neovici/cosmoz-autocomplete/commit/a7fd0d39b2103cb53ca13dbe7ea0a036522bb837))
+
+
+### Bug Fixes
+
+* **cosmoz-listbox:** handle missing 0 index style ([8f08923](https://github.com/neovici/cosmoz-autocomplete/commit/8f08923ca3a441ae0a2b3e15d2cf36b68997387a))
+
 ## [4.0.0-beta.2](https://github.com/neovici/cosmoz-autocomplete/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-06-21)
 
 
