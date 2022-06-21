@@ -42,7 +42,7 @@ const svg =
 			color: var(--cosmoz-listbox-color, #101010);
 		}
 
-		.item[data-index='${index}'] {
+		.item[data-index="${index || '0'}"] {
 			background: var(
 				--cosmoz-listbox-active-color,
 				var(--cosmoz-selection-color, rgba(58, 145, 226, 0.1))
