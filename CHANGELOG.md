@@ -1,3 +1,10 @@
+## [4.0.0-beta.2](https://github.com/neovici/cosmoz-autocomplete/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-06-21)
+
+
+### Bug Fixes
+
+* **cosmoz-listbox:** handle missing 0 index style ([8f08923](https://github.com/neovici/cosmoz-autocomplete/commit/8f08923ca3a441ae0a2b3e15d2cf36b68997387a))
+
 ## [4.0.0-beta.1](https://github.com/neovici/cosmoz-autocomplete/compare/v3.2.0...v4.0.0-beta.1) (2022-06-10)
 
 
