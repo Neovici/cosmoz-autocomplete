@@ -1,9 +1,9 @@
 import { html, component, useEffect } from 'haunted';
 import { virtualize } from '@lit-labs/virtualizer/virtualize.js';
 import { tagged as css } from '@neovici/cosmoz-utils';
-import { portal } from '@neovici/cosmoz-utils/lib/directives/portal';
-import { spreadProps } from '@neovici/cosmoz-utils/lib/directives/spread-props';
-import { props } from '@neovici/cosmoz-utils/lib/object';
+import { portal } from '@neovici/cosmoz-utils/directives/portal';
+import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
+import { props } from '@neovici/cosmoz-utils/object';
 import { useListbox, properties } from './lib/use-listbox';
 import { scrollIntoViewIfNeeded } from './lib/utils';
 
