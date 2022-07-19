@@ -1,3 +1,14 @@
+## [5.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v4.0.0...v5.0.0) (2022-07-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Upgrade to cosmoz-utils v5
+
+### Features
+
+* **deps:** upgrade to cosmoz-utils@5 ([94b5ab2](https://github.com/neovici/cosmoz-autocomplete/commit/94b5ab2ee0a23530f069fe5a756316a10a8fd7df))
+
 ## [4.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v3.2.0...v4.0.0) (2022-06-21)
 
 
