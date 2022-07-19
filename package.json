@@ -63,9 +63,9 @@
 	},
 	"dependencies": {
 		"@lit-labs/virtualizer": "^0.7.0",
-		"@neovici/cosmoz-dropdown": "^2.0.0",
-		"@neovici/cosmoz-input": "^2.0.0",
-		"@neovici/cosmoz-utils": "^4.0.0",
+		"@neovici/cosmoz-dropdown": "^3.0.0",
+		"@neovici/cosmoz-input": "^3.0.0",
+		"@neovici/cosmoz-utils": "^5.0.0",
 		"haunted": "^5.0.0",
 		"lit-html": "^2.0.0",
 		"position.js": "^0.3.0"
