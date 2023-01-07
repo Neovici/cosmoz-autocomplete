@@ -42,7 +42,7 @@ const svg =
 			color: var(--cosmoz-listbox-color, #101010);
 		}
 
-		.item[data-index="${index || '0'}"] {
+		.item[data-index='${index || '0'}'] {
 			background: var(
 				--cosmoz-listbox-active-color,
 				var(--cosmoz-selection-color, rgba(58, 145, 226, 0.1))
@@ -86,6 +86,15 @@ const svg =
 		}
 		:host([multi]) .sizer {
 			padding-left: 33px;
+		}
+		.swatch {
+			width: 18px;
+			height: 18px;
+			display: inline-block;
+			box-sizing: border-box;
+			vertical-align: middle;
+			border-radius: 50%;
+			border: 2px solid #eee;
 		}
 	`,
 	Listbox = (host) => {

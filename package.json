@@ -81,7 +81,7 @@
 		"@web/dev-server-storybook": "^0.5.1",
 		"husky": "^8.0.0",
 		"semantic-release": "^19.0.0",
-		"sinon": "^14.0.0",
+		"sinon": "^15.0.0",
 		"typescript": "^4.6.0"
 	}
 }
