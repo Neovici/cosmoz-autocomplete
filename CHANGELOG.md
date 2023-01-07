@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.0...v5.1.1) (2023-01-07)
+
+
+### Bug Fixes
+
+* **autocomplete:** get keep-opened from props ([800677e](https://github.com/neovici/cosmoz-autocomplete/commit/800677e673e7445dc728bdef5e25fcc4af68b826))
+
 ## [5.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.0.0...v5.1.0) (2023-01-07)
 
 
