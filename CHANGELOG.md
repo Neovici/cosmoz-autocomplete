@@ -1,3 +1,10 @@
+## [5.1.2](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.1...v5.1.2) (2023-01-07)
+
+
+### Bug Fixes
+
+* **item-renderer:** measure the rendered content ([ca6caaa](https://github.com/neovici/cosmoz-autocomplete/commit/ca6caaa57b4e6d67ebbdc35fc0c9ff7d52a1c210))
+
 ## [5.1.1](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.0...v5.1.1) (2023-01-07)
 
 
