@@ -1,3 +1,16 @@
+## [5.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.0.0...v5.1.0) (2023-01-07)
+
+
+### Features
+
+* allow composing item renderer ([3ebb9fa](https://github.com/neovici/cosmoz-autocomplete/commit/3ebb9fad559d43c7d8c4cf35902105dff22273ae))
+
+
+### Bug Fixes
+
+* correctly pass down itemRenderer to listbox ([b7c0c98](https://github.com/neovici/cosmoz-autocomplete/commit/b7c0c985082fba39e3f3f15d6ab139693c5f3f6d))
+* when ([c838c0f](https://github.com/neovici/cosmoz-autocomplete/commit/c838c0fed5ab6049b388ba042bb3c16168ba6f31))
+
 ## [5.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v4.0.0...v5.0.0) (2022-07-19)
 
 
