@@ -1,3 +1,10 @@
+## [5.1.3](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.2...v5.1.3) (2023-01-12)
+
+
+### Bug Fixes
+
+* **autocomplete:** prevent autocomplete spinner from flexing ([3b2daba](https://github.com/neovici/cosmoz-autocomplete/commit/3b2dabaad3715c56b65f9a570c515c3be950d130))
+
 ## [5.1.2](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.1...v5.1.2) (2023-01-07)
 
 
