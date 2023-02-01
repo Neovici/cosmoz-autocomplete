@@ -62,6 +62,18 @@ const css = html`
 			default-index="-1"
 		></cosmoz-autocomplete>
 	`,
+	filterInside = () => html`
+		${css}
+		<cosmoz-autocomplete
+			.label=${'Choose color'}
+			.source=${colors}
+			.textProperty=${'text'}
+			.value=${[colors[0], colors[3]]}
+			keep-opened
+			float-label-value-selected
+			filter-from-dropdown
+		></cosmoz-autocomplete>
+	`,
 	disabled = () => html`
 		${css}
 		<cosmoz-autocomplete
@@ -74,4 +86,4 @@ const css = html`
 		></cosmoz-autocomplete>
 	`;
 
-export { basic, single, hideEmpty, defaultIndex, disabled };
+export { basic, filterInside, single, hideEmpty, defaultIndex, disabled };
