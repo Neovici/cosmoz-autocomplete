@@ -43,6 +43,34 @@ describe('cosmoz-autocomplete-ui', () => {
 			</cosmoz-input>`);
 	});
 
+	it('render multiple', async () => {
+		const el = await fixture(html`
+				<cosmoz-autocomplete-ui
+					.source=${source}
+					.value=${source.slice(0, 2)}
+					.textProperty=${'text'}
+					show-multiple-selections
+				/>
+			`);
+		expect(el).shadowDom.to.equal(`
+			<cosmoz-input
+				id="input" autocomplete="off" part="input"
+				exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+			>
+				<slot name="prefix" slot="prefix"></slot>
+				<slot name="suffix" slot="suffix"></slot>
+				<div class="badge-cointainer" slot="suffix">
+						<div class="badge" part="badge">Item 1
+							<span class="badge-clear" part="chip-clear"></span>
+						</div>
+						<div class="badge" part="badge">Item 2
+							<span class="badge-clear" part="chip-clear"></span>
+						</div>
+				</div>
+
+			</cosmoz-input>`);
+	});
+
 	it('render (limit 1)', async () => {
 		const el = await fixture(html`
 			<cosmoz-autocomplete-ui
