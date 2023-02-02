@@ -24,26 +24,6 @@ describe('cosmoz-listbox', () => {
 		expect(onSelect).to.have.been.calledOnceWith;
 	});
 
-	it('render-filter', async () => {
-		const onSelect = spy(),
-			items = Array(10).fill().map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect } filter-from-dropdown></cosmoz-listbox>`);
-
-		await oneEvent(el.shadowRoot.querySelector('.items'), 'visibilityChanged')
-
-		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
-		await nextFrame();
-
-		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
-		await nextFrame();
-
-		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
-		await nextFrame();
-
-		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-		expect(onSelect).to.have.been.calledOnceWith;
-	});
-
 	it('render (textual)', async () => {
 		const onSelect = spy(),
 			items = Array(10).fill().map((_, i) => ({ text: `item ${ i }` })),
@@ -93,5 +73,33 @@ describe('cosmoz-listbox', () => {
 			.querySelector('.item[data-index="3"]')
 			.dispatchEvent(new MouseEvent('click'));
 		expect(onSelect).to.have.been.calledOnceWith(items[3]);
+	});
+
+	it('render-filter', async () => {
+		const onText = spy(),
+			onSelect = spy(),
+			onFocus = spy(),
+			items = Array(10).fill().map((_, i) => `item ${ i }`),
+			el = await fixture(html`
+				<cosmoz-listbox 
+					.items=${ items } 
+					.onSelect=${ onSelect } 
+					.onFocus=${onFocus} 
+					.filterFromDropdown=${true} 
+					.onText=${onText}>
+				</cosmoz-listbox>`);
+
+		expect(el).shadowDom.to.equals(`
+			<div class="searchbar">
+				<input type="text" id="input">
+				<button class="close-button"></button>
+			</div>
+			<div
+			  class="items"
+			  style="display: block; position: relative; contain: strict; overflow: auto; min-height: 150px;"
+			  with-searchbar=""
+			>
+				<div virtualizer-sizer=""></div>
+			</div>`, { ignoreAttributes: ['style'] });
 	});
 });
