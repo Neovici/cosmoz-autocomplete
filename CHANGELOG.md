@@ -1,3 +1,10 @@
+## [5.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.3...v5.2.0) (2023-02-22)
+
+
+### Features
+
+* **autocomplete:** add more css vars to style chips ([5d7d424](https://github.com/neovici/cosmoz-autocomplete/commit/5d7d4248a1a5575746bdb1fe8cc030f8cbf954d6))
+
 ## [5.1.3](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.2...v5.1.3) (2023-01-12)
 
 
