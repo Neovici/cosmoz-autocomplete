@@ -1,3 +1,16 @@
+## [5.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.2.0...v5.3.0) (2023-03-07)
+
+
+### Features
+
+* **use-listbox:** add `scroll` prop to position ([53bde4c](https://github.com/neovici/cosmoz-autocomplete/commit/53bde4c53041deea95468e66b3963cb13de2a79a))
+* **virtualizer:** update usage ([dc96e18](https://github.com/neovici/cosmoz-autocomplete/commit/dc96e1890a7326c06d54e356a3f03270efd2129f))
+
+
+### Bug Fixes
+
+* cleanup ([b69f99d](https://github.com/neovici/cosmoz-autocomplete/commit/b69f99dae0750858b81ba7cb21bbdafae7eb8cfe))
+
 ## [5.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.1.3...v5.2.0) (2023-02-22)
 
 
