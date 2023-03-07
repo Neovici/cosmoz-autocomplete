@@ -1,15 +1,20 @@
-import { html, component, useEffect } from 'haunted';
-import { virtualize } from '@lit-labs/virtualizer/virtualize.js';
+import { html, component, useEffect, useRef } from 'haunted';
+import { ref } from 'lit-html/directives/ref.js';
+import {
+	virtualize,
+	virtualizerRef,
+} from '@lit-labs/virtualizer/virtualize.js';
 import { tagged as css } from '@neovici/cosmoz-utils';
 import { portal } from '@neovici/cosmoz-utils/directives/portal';
 import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
 import { props } from '@neovici/cosmoz-utils/object';
 import { useListbox, properties } from './lib/use-listbox';
-import { scrollIntoViewIfNeeded } from './lib/utils';
 
 const svg =
-		'data:image/svg+xml,%3Csvg width=\'11\' height=\'8\' viewBox=\'0 0 11 8\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath ' +
-		'd=\'M9.5 1L5.20039 7.04766L1.66348 3.46152\' stroke=\'white\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+		/* eslint-disable quotes */
+		"data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath " +
+		"d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
+	/* eslint-enable quotes */
 	styles = ({ index, height, itemHeight }) => css`
 		:host {
 			position: fixed;
@@ -98,23 +103,28 @@ const svg =
 		}
 	`,
 	Listbox = (host) => {
-		const { index, items, renderItem, height, itemHeight } = useListbox(host);
+		const listRef = useRef(undefined);
+		const { position, items, renderItem, height, itemHeight } =
+			useListbox(host);
 
 		useEffect(() => {
-			scrollIntoViewIfNeeded(
-				host.shadowRoot.querySelector(
-					'[data-index="' + index + '"]:not(:hover)'
-				),
-				host
-			);
-		}, [index]);
+			if (!position.scroll) return;
+			const vl = listRef.current[virtualizerRef];
+			if (!vl._layout) return;
+			vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
+		}, [position]);
 
 		return html` <style>
-				${styles({ index, height, itemHeight })}
+				${styles({ ...position, height, itemHeight })}
 			</style>
-			<div class="items">
+			<div class="items" ${ref((el) => (listRef.current = el))}>
 				<div virtualizer-sizer></div>
-				${virtualize({ items, renderItem, scroller: true })}
+				${virtualize({
+					items,
+					renderItem,
+					scroller: true,
+					layout: { _itemSize: { height: itemHeight - 0.00001 } },
+				})}
 			</div>`;
 	};
 
