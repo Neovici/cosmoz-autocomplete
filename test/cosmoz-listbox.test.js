@@ -3,13 +3,48 @@ import { expect, html, fixture, nextFrame, oneEvent } from '@open-wc/testing';
 import { prop } from '../lib/utils';
 import { spy } from 'sinon';
 
+const ready = async (el) => {
+	await oneEvent(el.shadowRoot.querySelector('.items'), 'rangeChanged');
+	await nextFrame();
+};
+
+// TODO: Remove when https://github.com/lit/lit/pull/3708 is merged
+before(() => {
+	const e = window.onerror;
+	window.onerror = function (err) {
+		if (
+			err.startsWith('TypeError: this._layout is null') ||
+			err.startsWith(
+				// eslint-disable-next-line quotes
+				"TypeError: Cannot read properties of null (reading 'measureChildren')"
+			) ||
+			err.startsWith(
+				// eslint-disable-next-line quotes
+				"Uncaught TypeError: Cannot read properties of null (reading 'measureChildren')"
+			)
+		) {
+			// eslint-disable-next-line no-console
+			console.warn(`[ignored] ${err}`);
+			return false;
+		}
+		return e(...arguments);
+	};
+});
+
 describe('cosmoz-listbox', () => {
 	it('render', async () => {
 		const onSelect = spy(),
-			items = Array(10).fill().map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect }></cosmoz-listbox>`);
+			items = Array(10)
+				.fill()
+				.map((_, i) => `item ${i}`),
+			el = await fixture(
+				html`<cosmoz-listbox
+					.items=${items}
+					.onSelect=${onSelect}
+				></cosmoz-listbox>`
+			);
 
-		await oneEvent(el.shadowRoot.querySelector('.items'), 'visibilityChanged')
+		await ready(el);
 
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
 		await nextFrame();
@@ -26,29 +61,52 @@ describe('cosmoz-listbox', () => {
 
 	it('render (textual)', async () => {
 		const onSelect = spy(),
-			items = Array(10).fill().map((_, i) => ({ text: `item ${ i }` })),
-			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect } .textual=${ prop('text') }></cosmoz-listbox>`);
+			items = Array(10)
+				.fill()
+				.map((_, i) => ({ text: `item ${i}` })),
+			el = await fixture(
+				html`<cosmoz-listbox
+					.items=${items}
+					.onSelect=${onSelect}
+					.textual=${prop('text')}
+				></cosmoz-listbox>`
+			);
 
-		await oneEvent(el.shadowRoot.querySelector('.items'), 'visibilityChanged')
+		await ready(el);
+
 		expect(el.shadowRoot.querySelector('.item').innerText).to.equal('item 0');
 	});
 
 	it('render (query)', async () => {
 		const onSelect = spy(),
-			items = Array(10).fill().map((_, i) => ({ textProp: `item ${ i }` })),
-			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect } .textual=${ prop('textProp') }
-				.query=${ '1' }></cosmoz-listbox>`);
+			items = Array(10)
+				.fill()
+				.map((_, i) => ({ textProp: `item ${i}` })),
+			el = await fixture(html`<cosmoz-listbox
+				.items=${items}
+				.onSelect=${onSelect}
+				.textual=${prop('textProp')}
+				.query=${'1'}
+			></cosmoz-listbox>`);
 
-		await oneEvent(el.shadowRoot.querySelector('.items'), 'visibilityChanged')
+		await ready(el);
+
 		expect(el.shadowRoot.querySelector('.item mark').innerText).to.equal('1');
 	});
 
 	it('highlight and enter', async () => {
 		const onSelect = spy(),
-			items = Array(10).fill().map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect }></cosmoz-listbox>`);
+			items = Array(10)
+				.fill()
+				.map((_, i) => `item ${i}`),
+			el = await fixture(
+				html`<cosmoz-listbox
+					.items=${items}
+					.onSelect=${onSelect}
+				></cosmoz-listbox>`
+			);
 
-		await oneEvent(el.shadowRoot.querySelector('.items'), 'visibilityChanged')
+		await ready(el);
 
 		el.shadowRoot
 			.querySelector('.item[data-index="3"]')
@@ -61,10 +119,17 @@ describe('cosmoz-listbox', () => {
 
 	it('mousedown, click', async () => {
 		const onSelect = spy(),
-			items = Array(10).fill().map((_, i) => `item ${ i }`),
-			el = await fixture(html`<cosmoz-listbox .items=${ items } .onSelect=${ onSelect }></cosmoz-listbox>`);
+			items = Array(10)
+				.fill()
+				.map((_, i) => `item ${i}`),
+			el = await fixture(
+				html`<cosmoz-listbox
+					.items=${items}
+					.onSelect=${onSelect}
+				></cosmoz-listbox>`
+			);
 
-		await oneEvent(el.shadowRoot.querySelector('.items'), 'visibilityChanged')
+		await ready(el);
 
 		el.shadowRoot
 			.querySelector('.item[data-index="3"]')
