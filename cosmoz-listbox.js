@@ -11,10 +11,10 @@ import { props } from '@neovici/cosmoz-utils/object';
 import { useListbox, properties } from './lib/use-listbox';
 
 const svg =
-		// eslint-disable quotes
+		/* eslint-disable quotes */
 		"data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath " +
 		"d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
-	// eslint-enable quotes
+	/* eslint-enable quotes */
 	styles = ({ index, height, itemHeight }) => css`
 		:host {
 			position: fixed;
