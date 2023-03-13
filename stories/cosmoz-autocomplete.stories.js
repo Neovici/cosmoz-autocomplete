@@ -72,6 +72,16 @@ const css = html`
 			.textProperty=${'text'}
 			.value=${colors[2]}
 		></cosmoz-autocomplete>
+	`,
+	placeholder = () => html`
+		${css}
+		<cosmoz-autocomplete
+			.placeholder=${'Choose color'}
+			.source=${colors}
+			.limit=${1}
+			.textProperty=${'text'}
+			.value=${colors[0]}
+		></cosmoz-autocomplete>
 	`;
 
-export { basic, single, hideEmpty, defaultIndex, disabled };
+export { basic, single, hideEmpty, defaultIndex, disabled, placeholder };
