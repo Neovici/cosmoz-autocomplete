@@ -1,3 +1,10 @@
+## [5.3.1](https://github.com/neovici/cosmoz-autocomplete/compare/v5.3.0...v5.3.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* **autocomplete:** hide placeholder if autocomplete has one value ([c46aa4a](https://github.com/neovici/cosmoz-autocomplete/commit/c46aa4aeb822044fa51483661381eb524239e509))
+
 ## [5.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.2.0...v5.3.0) (2023-03-07)
 
 
