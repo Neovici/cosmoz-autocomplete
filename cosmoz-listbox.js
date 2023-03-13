@@ -1,4 +1,4 @@
-import { html, component, useEffect, useRef } from 'haunted';
+import { html, component, useEffect, useRef, useMemo } from 'haunted';
 import { ref } from 'lit-html/directives/ref.js';
 import {
 	virtualize,
@@ -114,6 +114,11 @@ const svg =
 			vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
 		}, [position]);
 
+		const layout = useMemo(
+			() => ({ _itemSize: { height: itemHeight - 0.00001 } }),
+			[itemHeight]
+		);
+
 		return html` <style>
 				${styles({ ...position, height, itemHeight })}
 			</style>
@@ -123,7 +128,7 @@ const svg =
 					items,
 					renderItem,
 					scroller: true,
-					layout: { _itemSize: { height: itemHeight - 0.00001 } },
+					layout,
 				})}
 			</div>`;
 	};
