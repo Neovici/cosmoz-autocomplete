@@ -1,3 +1,10 @@
+## [5.3.2](https://github.com/neovici/cosmoz-autocomplete/compare/v5.3.1...v5.3.2) (2023-03-13)
+
+
+### Bug Fixes
+
+* **listbox:** memoize virtulizer layout config ([6540fea](https://github.com/neovici/cosmoz-autocomplete/commit/6540fea2cd65f1a291d58f8ecbcd4e9d3e3b73df))
+
 ## [5.3.1](https://github.com/neovici/cosmoz-autocomplete/compare/v5.3.0...v5.3.1) (2023-03-13)
 
 
