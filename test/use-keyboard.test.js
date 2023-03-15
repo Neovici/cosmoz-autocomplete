@@ -1,9 +1,7 @@
-import { useKeyboard } from '../lib/use-keyboard';
 import { component } from 'haunted';
-import {
-	expect, html, fixture
-} from '@open-wc/testing';
+import { expect, html, fixture } from '@open-wc/testing';
 import { spy } from 'sinon';
+import { useKeyboard } from '../src/listbox/use-keyboard';
 
 customElements.define('use-keyboard', component(useKeyboard));
 
@@ -11,22 +9,14 @@ describe('use-keyboard', () => {
 	describe('onUp', () => {
 		it('handles Up key ', async () => {
 			const onUp = spy();
-			await fixture(
-				html`
-					<use-keyboard .onUp=${ onUp } />
-				`
-			);
+			await fixture(html` <use-keyboard .onUp=${onUp} /> `);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Up' }));
 			expect(onUp).to.have.been.calledOnce;
 		});
 
 		it('handles ArrowUp key ', async () => {
 			const onUp = spy();
-			await fixture(
-				html`
-					<use-keyboard .onUp=${ onUp } />
-				`
-			);
+			await fixture(html` <use-keyboard .onUp=${onUp} /> `);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 			expect(onUp).to.have.been.calledOnce;
 		});
@@ -35,22 +25,14 @@ describe('use-keyboard', () => {
 	describe('onDown', () => {
 		it('handles Down key ', async () => {
 			const onDown = spy();
-			await fixture(
-				html`
-					<use-keyboard .onDown=${ onDown } />
-				`
-			);
+			await fixture(html` <use-keyboard .onDown=${onDown} /> `);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
 			expect(onDown).to.have.been.calledOnce;
 		});
 
 		it('handles ArrowDown key ', async () => {
 			const onDown = spy();
-			await fixture(
-				html`
-					<use-keyboard .onDown=${ onDown } />
-				`
-			);
+			await fixture(html` <use-keyboard .onDown=${onDown} /> `);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', { key: 'ArrowDown' })
 			);
@@ -61,11 +43,7 @@ describe('use-keyboard', () => {
 	describe('onEnter', () => {
 		it('handles Enter key ', async () => {
 			const onEnter = spy();
-			await fixture(
-				html`
-					<use-keyboard .onEnter=${ onEnter } />
-				`
-			);
+			await fixture(html` <use-keyboard .onEnter=${onEnter} /> `);
 			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 			expect(onEnter).to.have.been.calledOnce;
 		});
@@ -78,33 +56,33 @@ describe('use-keyboard', () => {
 				onEnter = spy();
 			await fixture(
 				html`
-					<use-keyboard .onUp=${ onUp } .onDown=${ onDown } .onEnter=${ onEnter } />
+					<use-keyboard .onUp=${onUp} .onDown=${onDown} .onEnter=${onEnter} />
 				`
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'Up',
 					ctrlKey: true,
-					altKey: true
+					altKey: true,
 				})
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'Down',
 					ctrlKey: true,
-					altKey: true
+					altKey: true,
 				})
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'Enter',
 					ctrlKey: true,
-					altKey: true
+					altKey: true,
 				})
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
-					key: 'unhandled'
+					key: 'unhandled',
 				})
 			);
 

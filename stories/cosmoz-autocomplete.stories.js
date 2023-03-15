@@ -1,5 +1,5 @@
 import { html } from 'lit-html';
-import '../cosmoz-autocomplete';
+import '../src/autocomplete/index';
 import { colors } from './data';
 
 export default {

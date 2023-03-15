@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'haunted';
+import { useCallback } from 'haunted';
 
 export const search = <I>(
 	source: I[],

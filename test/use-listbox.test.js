@@ -1,8 +1,7 @@
-import { useListbox } from '../lib/use-listbox';
-
 import { component } from 'haunted';
 import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 import { spy } from 'sinon';
+import { useListbox } from '../src/listbox/use-listbox';
 
 customElements.define(
 	'use-listbox',

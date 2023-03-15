@@ -1,4 +1,4 @@
-import '../cosmoz-autocomplete';
+import '../src/autocomplete';
 import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 
 import { spy } from 'sinon';

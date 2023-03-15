@@ -11,7 +11,7 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 	return Autocomplete({
 		...props,
 		onChange: useCallback(
-			<T extends []>(value: I[], ...args: T) => {
+			(value: I[], ...args) => {
 				host.value = value;
 				onChange?.(value, ...args);
 			},

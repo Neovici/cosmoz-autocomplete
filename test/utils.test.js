@@ -1,18 +1,18 @@
 import { expect } from '@open-wc/testing';
-import {
-	search,
-	strProp,
-	mark
-} from '../lib/utils';
+import { strProp } from '@neovici/cosmoz-utils/object';
+import { search } from '../src/autocomplete/util';
+import { mark } from '../src/listbox/util';
 
 describe('utils', () => {
 	describe('search', () => {
 		it('search', () => {
-			expect(search(
-				[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
-				'bc',
-				strProp('text')
-			)).to.deep.equal([{ text: 'bc' }, { text: 'abc' }]);
+			expect(
+				search(
+					[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
+					'bc',
+					strProp('text')
+				)
+			).to.deep.equal([{ text: 'bc' }, { text: 'abc' }]);
 		});
 	});
 	describe('mark', () => {
