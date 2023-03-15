@@ -1,14 +1,16 @@
 {
 	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
+		"allowSyntheticDefaultImports": true,
 		"noEmit": true,
-		"target": "esnext",
 		"module": "esnext",
 		"moduleResolution": "node",
-	},
-	"exclude": [
-		"coverage",
-		"test"
-	]
+		"strict": true,
+		"target": "esnext",
+		"allowJs": true,
+		"paths": {
+				"@neovici/cosmoz-utils/*": [
+					"./node_modules/@neovici/cosmoz-utils/dist/*"
+				]
+			}
+	}
 }
