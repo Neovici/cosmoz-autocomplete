@@ -6,81 +6,32 @@ import { useCallback } from 'haunted';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { array } from '@neovici/cosmoz-utils/array';
 import '@neovici/cosmoz-input';
-import { useAutocomplete } from './use-autocomplete';
-import { listbox } from '../cosmoz-listbox';
-import style from './autocomplete.css';
+import { useAutocomplete, Props as Base, RProps } from './use-autocomplete';
+import { listbox } from '../listbox';
+import style from './styles.css';
+import { selection } from './selection';
 
-const blank = () => nothing,
-	clear = html`
-		<svg
-			width="9"
-			height="8"
-			viewBox="0 0 9 8"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<line
-				x1="7.53033"
-				y1="0.994808"
-				x2="1.16637"
-				y2="7.35877"
-				stroke-width="1.5"
-			/>
-			<line
-				x1="7.46967"
-				y1="7.35882"
-				x2="1.10571"
-				y2="0.99486"
-				stroke-width="1.5"
-			/>
-		</svg>
-	`,
-	renderChip = (text, onClear, disabled, isOne) => html`
-		<div
-			class="chip"
-			part="chip"
-			slot="suffix"
-			title=${text}
-			?data-one=${isOne}
-		>
-			<span class="chip-text" part="chip-text">${text}</span>
-			${when(
-				!disabled,
-				() =>
-					html` <span class="chip-clear" part="chip-clear" @click=${onClear}>
-						${clear}
-					</span>`
-			)}
-		</div>
-	`,
-	renderBadge = ({ value, onDeselect }) => {
-		const len = value?.length;
-		return when(
-			len > 0,
-			() => html`<div class="badge" slot="suffix" part="badge">
-				${len}
-				<span
-					class="badge-clear"
-					part="chip-clear"
-					@click=${() => onDeselect(value)}
-					>${clear}</span
-				>
-			</div>`
-		);
-	},
-	renderSelection = (value, isOne, onDeselect, textual, disabled) => {
-		if (isOne || value.length === 1) {
-			const val = value[0];
-			return when(val, () =>
-				renderChip(textual(val), () => onDeselect(val), disabled, isOne)
-			);
-		}
-		return renderBadge({ value, onDeselect });
-	},
-	inputParts = ['input', 'label', 'line', 'error']
-		.map((part) => `${part}: input-${part}`)
-		.join(),
-	autocomplete = (props) => {
+export interface Props<I> extends Base<I> {
+	invalid?: boolean;
+	errorMessage?: string;
+	label?: string;
+	placeholder?: string;
+	noLabelFloat?: boolean;
+	alwaysFloatLabel?: boolean;
+	showSingle?: boolean;
+	itemHeight?: number;
+	itemLimit?: number;
+}
+
+type AProps<I> = Omit<Props<I>, keyof RProps<I>> & RProps<I>;
+
+const blank = () => nothing;
+
+const inputParts = ['input', 'label', 'line', 'error']
+	.map((part) => `${part}: input-${part}`)
+	.join();
+
+const autocomplete = <I>(props: AProps<I>) => {
 		const {
 				invalid,
 				errorMessage,
@@ -105,13 +56,13 @@ const blank = () => nothing,
 			isOne = limit == 1, // eslint-disable-line eqeqeq
 			isSingle = isOne && array(value)?.[0] != null,
 			anchor = useCallback(
-				() => host.shadowRoot.querySelector('#input'),
+				() => host.shadowRoot!.querySelector('#input'),
 				[host, value]
 			),
 			suggestions = until(
-				items$.then((items) =>
+				items$.then((items: I[]) =>
 					when((!isSingle || showSingle) && items.length, () =>
-						listbox({
+						listbox<I>({
 							...props,
 							anchor,
 							items,
@@ -143,7 +94,7 @@ const blank = () => nothing,
 				.errorMessage=${until(
 					values$.then(
 						() => errorMessage,
-						(e) => e.message
+						(e: { message?: string }) => e.message
 					),
 					errorMessage
 				)}
@@ -157,7 +108,7 @@ const blank = () => nothing,
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
-				${renderSelection(array(value), isOne, onDeselect, textual, disabled)}
+				${selection(array(value), isOne, onDeselect, textual, disabled)}
 				${until(
 					values$.then(blank, blank),
 					html`<div slot="suffix" class="spinner"></div>`
@@ -166,7 +117,7 @@ const blank = () => nothing,
 
 			${suggestions}`;
 	},
-	Autocomplete = (props) =>
+	Autocomplete = <I>(props: Props<I>) =>
 		autocomplete({
 			...props,
 			...useAutocomplete(props),

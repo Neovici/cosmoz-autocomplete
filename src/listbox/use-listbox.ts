@@ -31,9 +31,9 @@ export interface Props<I> {
 	query: string;
 	textual: (i: I) => string;
 	itemRenderer?: ItemRenderer<I>;
-	itemHeight: number;
-	itemLimit: number;
-	anchor?: HTMLElement;
+	itemHeight?: number;
+	itemLimit?: number;
+	anchor?: () => Element | null;
 	confinement?: unknown;
 	placement?: unknown;
 }
