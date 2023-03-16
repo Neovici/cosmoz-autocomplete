@@ -1,3 +1,19 @@
+## [6.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.3.2...v6.0.0) (2023-03-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ts:** convert to ts and adjust exports
+
+### Features
+
+* **listbox:** convert to ts ([f3c75a9](https://github.com/neovici/cosmoz-autocomplete/commit/f3c75a91993578b8fe66ad3ba2d6bd9ef0cc20cc))
+* **listbox:** passthru ([3934c00](https://github.com/neovici/cosmoz-autocomplete/commit/3934c00678d4ac49bbde95bb9f24241cc1c63de2))
+* rewrite in ts ([a0b7472](https://github.com/neovici/cosmoz-autocomplete/commit/a0b7472101162bfb14060a4689ea4374ffe9b302))
+* **selection|chips:** refactor params ([b016224](https://github.com/neovici/cosmoz-autocomplete/commit/b016224d19c909c02ec34c656b52a77b2b5f6a03))
+* **ts:** build ([f38c867](https://github.com/neovici/cosmoz-autocomplete/commit/f38c86761653eea57ba37ff444b08637500b53cd))
+* **ts:** convert and adjust exports ([7bc0951](https://github.com/neovici/cosmoz-autocomplete/commit/7bc095177b1bb21eaea7f90732c814fc7b2fa48a))
+
 ## [5.3.2](https://github.com/neovici/cosmoz-autocomplete/compare/v5.3.1...v5.3.2) (2023-03-13)
 
 
