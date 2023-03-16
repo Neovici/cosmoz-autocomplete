@@ -4,7 +4,6 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { useCallback } from 'haunted';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
-import { array } from '@neovici/cosmoz-utils/array';
 import '@neovici/cosmoz-input';
 import { useAutocomplete, Props as Base, RProps } from './use-autocomplete';
 import { listbox } from '../listbox';
