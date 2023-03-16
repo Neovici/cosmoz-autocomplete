@@ -1,6 +1,6 @@
-import '../cosmoz-listbox';
 import { expect, html, fixture, nextFrame, oneEvent } from '@open-wc/testing';
-import { prop } from '../lib/utils';
+import { prop } from '@neovici/cosmoz-utils/object';
+import '../src/listbox';
 import { spy } from 'sinon';
 
 const ready = async (el) => {

@@ -21,14 +21,14 @@
 		"test": "test"
 	},
 	"scripts": {
-		"lint": "eslint --cache --ext .js .",
-		"lint-tsc": "tsc",
+		"lint": "tsc && eslint --cache .",
+		"build": "tsc -p tsconfig.build.json",
 		"start": "wds",
 		"test": "wtr --coverage",
 		"test:watch": "wtr --watch",
+		"prepare": "husky install",
 		"storybook:build": "build-storybook",
-		"storybook:deploy": "storybook-to-ghpages",
-		"prepare": "husky install"
+		"storybook:deploy": "storybook-to-ghpages"
 	},
 	"release": {
 		"plugins": [
@@ -46,8 +46,7 @@
 		"access": "public"
 	},
 	"files": [
-		"*.js",
-		"lib/**/*.js"
+		"dist/"
 	],
 	"commitlint": {
 		"extends": [
@@ -61,14 +60,19 @@
 			]
 		}
 	},
+	"exports": {
+		".": "./dist/index.js",
+		"./autocomplete": "./dist/autocomplete/index.js",
+		"./listbox": "./dist/listbox/index.js",
+		"./item-renderer": "./dist/listbox/item-renderer.js"
+	},
 	"dependencies": {
 		"@lit-labs/virtualizer": "^1.0.0",
 		"@neovici/cosmoz-dropdown": "^3.0.0",
 		"@neovici/cosmoz-input": "^3.0.0",
 		"@neovici/cosmoz-utils": "^5.0.0",
 		"haunted": "^5.0.0",
-		"lit-html": "^2.0.0",
-		"position.js": "^0.3.0"
+		"lit-html": "^2.0.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.0",
