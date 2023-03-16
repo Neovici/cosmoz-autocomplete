@@ -46,8 +46,7 @@
 		"access": "public"
 	},
 	"files": [
-		"*.js",
-		"lib/**/*.js"
+		"dist/"
 	],
 	"commitlint": {
 		"extends": [
@@ -60,6 +59,12 @@
 				100
 			]
 		}
+	},
+	"exports": {
+		".": "./dist/index.js",
+		"./autocomplete": "./dist/autocomplete/index.js",
+		"./listbox": "./dist/listbox/index.js",
+		"./item-renderer": "./dist/listbox/item-renderer.js"
 	},
 	"dependencies": {
 		"@lit-labs/virtualizer": "^1.0.0",

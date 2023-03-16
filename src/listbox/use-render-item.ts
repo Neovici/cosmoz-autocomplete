@@ -17,4 +17,4 @@ export const useRenderItem = <I>({
 	);
 };
 
-export { ItemRenderer };
+export type { ItemRenderer };
