@@ -21,8 +21,9 @@ interface Base<I> {
 	onSelect: (value: I, meta: Meta<I>) => void;
 }
 
-interface Meta<I> extends Base<I> {
+interface Meta<I> extends Omit<Base<I>, 'value'> {
 	setClosed: (closed?: boolean) => void;
+	value: I[];
 }
 
 export interface Props<I> extends Base<I> {
@@ -37,7 +38,7 @@ export interface Props<I> extends Base<I> {
 }
 
 export const useAutocomplete = <I>({
-	value,
+	value: _value,
 	text,
 	onChange: _onChange,
 	onText: _onText,
@@ -72,12 +73,13 @@ export const useAutocomplete = <I>({
 				),
 			[source, active, query]
 		),
+		value = useMemo(() => array(_value), [_value]),
 		values$ = useMemo(
 			() =>
 				source$.then(
 					(source) =>
 						[
-							...array(value),
+							...value,
 							...without(value, prop(valueProperty) as <T>(t: T) => T)(source),
 						] as I[]
 				),
@@ -108,6 +110,7 @@ export const useAutocomplete = <I>({
 	return {
 		query,
 		textual,
+		value,
 		values$,
 		items$: useMemo(() => {
 			if (!active || (hideEmpty && empty)) {
@@ -165,4 +168,3 @@ export const useAutocomplete = <I>({
 };
 
 export type RProps<I> = ReturnType<typeof useAutocomplete<I>>;
-

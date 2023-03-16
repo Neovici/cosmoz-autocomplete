@@ -54,7 +54,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
-			isSingle = isOne && array(value)?.[0] != null,
+			isSingle = isOne && value?.[0] != null,
 			// TODO: Refactor with ref or a state callback
 			anchor = useCallback(
 				() => host.shadowRoot!.querySelector('#input'),
@@ -110,7 +110,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
 				${selection({
-					value: array(value),
+					value,
 					isOne,
 					onDeselect,
 					textual,
