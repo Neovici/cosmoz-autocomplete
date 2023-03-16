@@ -29,12 +29,17 @@ const clear = html`
 	</svg>
 `;
 
-const chip = (
-	text: string,
-	onClear: () => void,
-	disabled?: boolean,
-	isOne?: boolean
-) => html`
+const chip = ({
+	text,
+	onClear,
+	disabled,
+	isOne,
+}: {
+	text: string;
+	onClear: () => void;
+	disabled?: boolean;
+	isOne?: boolean;
+}) => html`
 	<div class="chip" part="chip" slot="suffix" title=${text} ?data-one=${isOne}>
 		<span class="chip-text" part="chip-text">${text}</span>
 		${when(
@@ -69,17 +74,30 @@ const badge = <I>({
 	);
 };
 
-export const selection = <I>(
-	value: I[],
-	isOne: boolean,
-	onDeselect: Deselect<I>,
-	textual: (i: I) => string,
-	disabled?: boolean
-) => {
+interface Props<I> {
+	value: I[];
+	isOne: boolean;
+	onDeselect: Deselect<I>;
+	textual: (i: I) => string;
+	disabled?: boolean;
+}
+
+export const selection = <I>({
+	value,
+	isOne,
+	onDeselect,
+	textual,
+	disabled,
+}: Props<I>) => {
 	if (isOne || value.length === 1) {
 		const val = value[0];
 		return when(val, () =>
-			chip(textual(val), () => onDeselect(val), disabled, isOne)
+			chip({
+				text: textual(val),
+				onClear: () => onDeselect(val),
+				disabled,
+				isOne,
+			})
 		);
 	}
 	return badge({ value, onDeselect });
