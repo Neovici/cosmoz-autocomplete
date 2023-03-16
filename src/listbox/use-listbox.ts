@@ -49,14 +49,13 @@ export const useListbox = <I>({
 	itemRenderer,
 	itemHeight = 40,
 	itemLimit = 5,
-	anchor,
-	confinement,
-	placement,
+	...thru
 }: Props<I>) => {
 	const isSelected = useMemo(
 			() => byValue(value, valueProperty),
 			[value, valueProperty]
 		),
+		// TODO: investigate if we can drop this
 		items = useMemo(() => _items.slice(), [_items, isSelected]),
 		{ position, highlight, select } = useItems({
 			items,
@@ -66,12 +65,9 @@ export const useListbox = <I>({
 				: Number(defaultIndex),
 		});
 
-	const host = useHost();
 	usePosition({
-		anchor,
-		host,
-		confinement,
-		placement,
+		host: useHost(),
+		...thru,
 		limit: true,
 	});
 
