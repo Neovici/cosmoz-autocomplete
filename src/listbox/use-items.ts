@@ -7,7 +7,7 @@ export interface UseItems<T> {
 	defaultIndex?: number;
 }
 
-interface Position {
+export interface Position {
 	index: number;
 	scroll?: boolean;
 }

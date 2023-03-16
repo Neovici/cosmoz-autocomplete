@@ -34,7 +34,7 @@ export interface Props<I> {
 	itemHeight?: number;
 	itemLimit?: number;
 	anchor?: () => Element | null;
-	confinement?: unknown;
+	confinement?: Element | null;
 	placement?: unknown;
 }
 
@@ -54,9 +54,9 @@ export const useListbox = <I>({
 	placement,
 }: Props<I>) => {
 	const isSelected = useMemo(
-		() => byValue(value, valueProperty),
-		[value, valueProperty]
-	),
+			() => byValue(value, valueProperty),
+			[value, valueProperty]
+		),
 		items = useMemo(() => _items.slice(), [_items, isSelected]),
 		{ position, highlight, select } = useItems({
 			items,

@@ -2,7 +2,7 @@ declare module '@neovici/cosmoz-dropdown/src/use-position.js' {
 	export function usePosition(opts: {
 		anchor?: () => Element | null;
 		host?: HTMLElement;
-		confinement?: unknown;
+		confinement?: Element | null;
 		placement?: unknown;
 		limit: boolean;
 	}): void;
