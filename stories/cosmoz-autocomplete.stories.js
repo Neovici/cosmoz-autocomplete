@@ -1,5 +1,5 @@
 import { html } from 'lit-html';
-import '../src/autocomplete/index';
+import '../src/autocomplete/';
 import { colors } from './data';
 
 export default {

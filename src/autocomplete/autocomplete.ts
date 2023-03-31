@@ -56,7 +56,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			isSingle = isOne && value?.[0] != null,
 			// TODO: Refactor with ref or a state callback
 			anchor = useCallback(
-				() => host.shadowRoot!.querySelector('#input'),
+				() => host.shadowRoot!.querySelector<HTMLElement>('#input'),
 				[host, value]
 			),
 			suggestions = until(
