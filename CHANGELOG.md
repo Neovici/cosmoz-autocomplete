@@ -1,3 +1,10 @@
+## [6.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.0.0...v6.1.0) (2023-03-31)
+
+
+### Features
+
+* upgrade cosmoz-dropdown ([2571f11](https://github.com/neovici/cosmoz-autocomplete/commit/2571f1188d4c166bdbe2de75d821031254ff36a1))
+
 ## [6.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v5.3.2...v6.0.0) (2023-03-16)
 
 
