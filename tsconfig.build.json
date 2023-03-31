@@ -5,5 +5,5 @@
 		"declaration": true,
 		"noEmit": false
 	},
-	"include": ["src", "types/*.d.ts"]
+	"include": ["src"]
 }

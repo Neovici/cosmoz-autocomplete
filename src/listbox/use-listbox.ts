@@ -1,7 +1,6 @@
 import { useMemo } from 'haunted';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
-import { usePosition } from '@neovici/cosmoz-dropdown/src/use-position.js';
-
+import { usePosition, Placement } from '@neovici/cosmoz-dropdown/use-position';
 import { byValue } from './util';
 import { useItems } from './use-items';
 import { useRenderItem, ItemRenderer } from './use-render-item';
@@ -33,9 +32,9 @@ export interface Props<I> {
 	itemRenderer?: ItemRenderer<I>;
 	itemHeight?: number;
 	itemLimit?: number;
-	anchor?: () => Element | null;
-	confinement?: Element | null;
-	placement?: unknown;
+	anchor?: () => HTMLElement | null;
+	confinement?: HTMLElement;
+	placement?: Placement;
 }
 
 export const useListbox = <I>({

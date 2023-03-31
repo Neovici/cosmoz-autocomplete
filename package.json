@@ -67,7 +67,7 @@
 		"./item-renderer": "./dist/listbox/item-renderer.js"
 	},
 	"dependencies": {
-		"@lit-labs/virtualizer": "^1.0.0",
+		"@lit-labs/virtualizer": "^2.0.0",
 		"@neovici/cosmoz-dropdown": "^3.0.0",
 		"@neovici/cosmoz-input": "^3.0.0",
 		"@neovici/cosmoz-utils": "^5.0.0",
@@ -85,8 +85,8 @@
 		"@web/dev-server-storybook": "^0.6.0",
 		"eslint-import-resolver-exports": "^1.0.0-beta.5",
 		"husky": "^8.0.0",
-		"semantic-release": "^20.0.0",
+		"semantic-release": "^21.0.0",
 		"sinon": "^15.0.0",
-		"typescript": "^4.6.0"
+		"typescript": "^5.0.0"
 	}
 }

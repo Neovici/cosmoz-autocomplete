@@ -10,6 +10,9 @@
 		"paths": {
 				"@neovici/cosmoz-utils/*": [
 					"./node_modules/@neovici/cosmoz-utils/dist/*"
+				],
+				"@neovici/cosmoz-dropdown/*": [
+					"./node_modules/@neovici/cosmoz-dropdown/dist/*"
 				]
 			}
 	}

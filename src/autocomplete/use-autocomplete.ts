@@ -3,11 +3,11 @@ import { without, array } from '@neovici/cosmoz-utils/array';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
-import { useFocus } from '@neovici/cosmoz-dropdown/src/use-focus.js';
+import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { useKeys } from './use-keys';
 import { search, notify, useNotify, EMPTY$ } from './util';
 
-type Source<I> = (opts: { query: string; active: boolean }) => PromiseLike<I>;
+type Source<I> = (opts: { query: string; active?: boolean }) => PromiseLike<I>;
 
 interface Base<I> {
 	value: I | I[];
@@ -22,7 +22,7 @@ interface Base<I> {
 }
 
 interface Meta<I> extends Omit<Base<I>, 'value'> {
-	setClosed: (closed?: boolean) => void;
+	setClosed: (closed: boolean) => void;
 	value: I[];
 }
 
