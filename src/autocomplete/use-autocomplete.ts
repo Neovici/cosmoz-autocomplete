@@ -7,7 +7,10 @@ import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { useKeys } from './use-keys';
 import { search, notify, useNotify, EMPTY$ } from './util';
 
-type Source<I> = (opts: { query: string; active?: boolean }) => PromiseLike<I>;
+type Source<I> = (opts: {
+	query: string;
+	active?: boolean;
+}) => PromiseLike<I[]>;
 
 interface Base<I> {
 	value: I | I[];
@@ -76,13 +79,10 @@ export const useAutocomplete = <I>({
 		value = useMemo(() => array(_value), [_value]),
 		values$ = useMemo(
 			() =>
-				source$.then(
-					(source) =>
-						[
-							...value,
-							...without(value, prop(valueProperty) as <T>(t: T) => T)(source),
-						] as I[]
-				),
+				source$.then((source) => [
+					...value,
+					...without(value, prop(valueProperty))(source),
+				]),
 			[source$, value, valueProperty]
 		);
 
