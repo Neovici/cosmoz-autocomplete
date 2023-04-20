@@ -33,7 +33,7 @@ export interface Props<I> extends Base<I> {
 	text: string;
 	source: I[] | Source<I>;
 	textProperty?: string;
-	textual?: (i: I) => string;
+	textual?: (prop?: string) => (i: I) => string;
 	valueProperty?: string;
 	external?: boolean;
 	hideEmpty?: boolean;
@@ -59,7 +59,7 @@ export const useAutocomplete = <I>({
 	...thru
 }: Props<I>) => {
 	const textual = useMemo(
-			() => _textual || strProp(textProperty),
+			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty]
 		),
 		{ active, onFocus, setClosed } = useFocus(thru),
