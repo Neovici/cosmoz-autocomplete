@@ -1,6 +1,6 @@
 {
 	"name": "@neovici/cosmoz-autocomplete",
-	"version": "6.2.0",
+	"version": "6.3.0",
 	"description": "A autocomplete input web component",
 	"keywords": [
 		"lit-html",

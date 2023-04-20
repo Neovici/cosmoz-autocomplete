@@ -1,3 +1,10 @@
+## [6.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.2.0...v6.3.0) (2023-04-20)
+
+
+### Features
+
+* **textual:** configurable autocomplete textual ([317c733](https://github.com/neovici/cosmoz-autocomplete/commit/317c733b8eba91f3776c309ac476b553af4e6c69))
+
 ## [6.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.1.0...v6.2.0) (2023-04-20)
 
 
