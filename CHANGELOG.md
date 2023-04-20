@@ -1,3 +1,10 @@
+## [6.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.1.0...v6.2.0) (2023-04-20)
+
+
+### Features
+
+* update ts ([dbe80c2](https://github.com/neovici/cosmoz-autocomplete/commit/dbe80c21db7305e5d74a460f6f0fe66eb411d3d9))
+
 ## [6.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.0.0...v6.1.0) (2023-03-31)
 
 
