@@ -33,6 +33,7 @@ export interface Props<I> extends Base<I> {
 	text: string;
 	source: I[] | Source<I>;
 	textProperty?: string;
+	textual?: (i: I) => string;
 	valueProperty?: string;
 	external?: boolean;
 	hideEmpty?: boolean;
@@ -49,6 +50,7 @@ export const useAutocomplete = <I>({
 	limit,
 	source,
 	textProperty,
+	textual: _textual,
 	valueProperty,
 	external,
 	hideEmpty,
@@ -56,7 +58,10 @@ export const useAutocomplete = <I>({
 	keepOpened,
 	...thru
 }: Props<I>) => {
-	const textual = useMemo(() => strProp(textProperty), [textProperty]),
+	const textual = useMemo(
+			() => _textual || strProp(textProperty),
+			[_textual, textProperty]
+		),
 		{ active, onFocus, setClosed } = useFocus(thru),
 		empty = !text,
 		query = useMemo(() => text?.trim().toLowerCase(), [text]),
