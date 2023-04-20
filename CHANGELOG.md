@@ -1,3 +1,10 @@
+## [6.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.3.0...v6.4.0) (2023-04-20)
+
+
+### Features
+
+* pass text property to textual ([fdeac18](https://github.com/neovici/cosmoz-autocomplete/commit/fdeac187742b6655d243f896e526d739efc3c264))
+
 ## [6.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.2.0...v6.3.0) (2023-04-20)
 
 
