@@ -1,3 +1,23 @@
+## [7.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.4.0...v7.0.0) (2023-04-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **autocomplete:** Show multiple chips on the same rows before input.
+Collapse chips that don't fit into a numbered badge.
+
+### Features
+
+* adjust spacing ([e436a76](https://github.com/neovici/cosmoz-autocomplete/commit/e436a763da0655fc7f2e81a05fc697cfdf0bfea0))
+* **autocomplete:** multiple chips ([0d07c62](https://github.com/neovici/cosmoz-autocomplete/commit/0d07c6290c345c2e5797d25720eb621a552d70c0))
+* set title per chip ([2a79d47](https://github.com/neovici/cosmoz-autocomplete/commit/2a79d4786f5c8d791f23f29d9d80fa14e1587a8f))
+
+
+### Bug Fixes
+
+* **autocomplete:** correct focus style ([7ad8c3a](https://github.com/neovici/cosmoz-autocomplete/commit/7ad8c3ac9c3d0ab4ea67038a21724fad69d26d7b))
+* cleanup styles ([2218da1](https://github.com/neovici/cosmoz-autocomplete/commit/2218da1f95d997c2d8914d7fb02dac7d3cc925f6))
+
 ## [6.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.3.0...v6.4.0) (2023-04-20)
 
 
