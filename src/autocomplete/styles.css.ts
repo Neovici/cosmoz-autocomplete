@@ -15,7 +15,7 @@ export default css`
 		flex: 1 24px;
 		min-width: 0;
 	}
-	cosmoz-input::part(input):focus {
+	cosmoz-input:not([data-one])::part(input):focus {
 		flex: 4 0.00001 50px;
 		min-width: 20px;
 	}
