@@ -23,7 +23,7 @@ export default css`
 		min-width: initial;
 		flex: none;
 		text-align: center;
-		padding: 0 3px;
+		padding: 0 4px;
 	}
 
 	[data-one]::part(input) {

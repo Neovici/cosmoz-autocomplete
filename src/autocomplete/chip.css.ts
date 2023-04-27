@@ -10,8 +10,8 @@ export default css`
 		align-items: center;
 		flex: 0.0001 1 fit-content;
 		max-width: 18ch;
-		min-width: 45px;
-		padding: 0 4px 0 10px;
+		min-width: 40px;
+		padding: 0 4px 0 8px;
 		gap: 4px;
 	}
 	.content {
