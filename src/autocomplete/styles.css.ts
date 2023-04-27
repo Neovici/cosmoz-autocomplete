@@ -5,84 +5,41 @@ export default css`
 		display: block;
 		position: relative;
 	}
-	.chip {
-		border-radius: var(--cosmoz-autocomplete-chip-border-radius, 500px);
-		background: var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb);
-		margin: 1px 4px 1px 0;
-		white-space: nowrap;
-		overflow: hidden;
+
+	cosmoz-input::part(control) {
 		display: flex;
-		flex-direction: row;
-		align-items: center;
-		flex: 0.00001 1 min-content;
-		max-width: 285px;
-		max-width: 28ch;
+		gap: 4px;
+		min-width: 35px;
 	}
-	.chip[data-one] {
-		position: absolute;
-		left: 0;
-		top: 1px;
-		bottom: 1px;
-		right: 0;
-		margin: 0;
-		z-index: 2;
-		pointer-events: auto;
+	cosmoz-input::part(input) {
+		flex: 1 24px;
+		min-width: 0;
+	}
+	cosmoz-input:not([data-one])::part(input):focus {
+		flex: 4 0.00001 50px;
+		min-width: 20px;
+	}
+	.badge {
+		min-width: initial;
+		flex: none;
+		text-align: center;
+		padding: 0 4px;
+	}
+
+	[data-one]::part(input) {
+		flex: 0;
+	}
+	[data-one] .chip {
 		max-width: initial;
-	}
-	.chip-text {
-		color: var(--cosmoz-autocomplete-chip-color, #424242);
-		margin: var(--cosmoz-autocomplete-chip-text-margin, 0 10px);
-		font-size: var(--cosmoz-autocomplete-chip-text-font-size, 12px);
-		line-height: var(--cosmoz-autocomplete-chip-text-line-height, 22px);
-		overflow: hidden;
-		text-overflow: ellipsis;
 		flex: 1;
 	}
-	.chip-clear {
-		margin: 2px 4px 2px -6px;
-		background-color: var(--cosmoz-autocomplete-chip-clear-bg-color, #81899b);
-		border-radius: 500px;
-		cursor: pointer;
-		width: 16px;
-		height: 16px;
-		stroke: var(
-			--cosmoz-autocomplete-chip-clear-stroke,
-			var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb)
-		);
-		display: block;
+
+	[data-one] .badge {
+		display: none;
 	}
 
-	.chip-clear svg,
-	.badge-clear svg {
-		display: block;
-		transform: translate(3.5px, 3.5px);
-	}
-
-	.badge {
-		background: var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb);
-		color: var(--cosmoz-autocomplete-chip-color, #424242);
-		font-weight: 500;
-		font-size: 12px;
-		line-height: 22px;
-		padding: 0 4px 0 6px;
-		gap: 4px;
-		border-radius: 90px;
-		text-align: center;
-		box-sizing: border-box;
-		/* fallback for unsupported min-content FF, Safari */
-		flex: 0.01 2 30px;
-		flex: 0 2 min-content;
-		display: flex;
-		align-items: center;
-	}
-	.badge-clear {
-		background-color: var(--cosmoz-autocomplete-chip-clear-bg-color, #81899b);
-		border-radius: 500px;
-		cursor: pointer;
-		width: 16px;
-		height: 16px;
-		stroke: var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb);
-		display: block;
+	[hidden] {
+		display: none;
 	}
 
 	slot {
