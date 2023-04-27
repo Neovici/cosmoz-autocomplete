@@ -113,6 +113,7 @@ export const useAutocomplete = <I>({
 	});
 
 	return {
+		active,
 		query,
 		textual,
 		value,

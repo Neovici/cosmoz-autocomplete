@@ -41,3 +41,20 @@ export const useNotify = <V>(
 
 export const EMPTY = [],
 	EMPTY$ = Promise.resolve(EMPTY);
+
+type Arr = unknown[];
+type ArrFn<T extends Arr> = (...args: T) => void;
+export const raf =
+	<A extends Arr, F extends ArrFn<A> = ArrFn<A>>(fn: F) =>
+	(...args: A) => {
+		let id: number | undefined;
+		const cleanup = () => {
+			if (id) cancelAnimationFrame(id);
+		};
+		cleanup();
+		id = requestAnimationFrame(() => {
+			id = undefined;
+			fn(...args);
+		});
+		return cleanup;
+	};

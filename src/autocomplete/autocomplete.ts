@@ -9,6 +9,7 @@ import { useAutocomplete, Props as Base, RProps } from './use-autocomplete';
 import { listbox } from '../listbox';
 import style from './styles.css';
 import { selection } from './selection';
+import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	invalid?: boolean;
@@ -22,7 +23,10 @@ export interface Props<I> extends Base<I> {
 	itemLimit?: number;
 }
 
-type AProps<I> = Omit<Props<I>, keyof RProps<I>> & RProps<I>;
+type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
+	RProps<I> & {
+		onInputRef?: (el?: Element) => void;
+	};
 
 const blank = () => nothing;
 
@@ -81,7 +85,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
 				?no-label-float=${noLabelFloat}
-				?always-float-label=${isSingle || alwaysFloatLabel}
+				?always-float-label=${value?.length > 0 || alwaysFloatLabel}
 				?readonly=${isSingle}
 				?disabled=${disabled}
 				?invalid=${until(
@@ -105,6 +109,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				@click=${onClick}
 				autocomplete="off"
 				exportparts=${inputParts}
+				?data-one=${isOne}
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
@@ -123,11 +128,14 @@ const autocomplete = <I>(props: AProps<I>) => {
 
 			${suggestions}`;
 	},
-	Autocomplete = <I>(props: Props<I>) =>
-		autocomplete({
+	Autocomplete = <I>(props: Props<I>) => {
+		const thru = {
 			...props,
 			...useAutocomplete(props),
-		}),
+		};
+		useOverflow(thru);
+		return autocomplete(thru);
+	},
 	observedAttributes = [
 		'disabled',
 		'invalid',
