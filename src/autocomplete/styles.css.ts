@@ -19,12 +19,6 @@ export default css`
 		flex: 4 0.00001 50px;
 		min-width: 20px;
 	}
-
-	.chip {
-		flex: 0.00001 1 fit-content;
-		max-width: 18ch;
-		min-width: 45px;
-	}
 	.badge {
 		min-width: initial;
 		flex: none;
