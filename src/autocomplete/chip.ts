@@ -70,5 +70,6 @@ export const chip = ({
 		exportparts="chip-text, chip-clear"
 		?disabled=${disabled}
 		.onClear=${onClear}
+		title=${ifDefined(typeof content === 'string' ? content : undefined)}
 		>${content}</cosmoz-autocomplete-chip
 	>`;
