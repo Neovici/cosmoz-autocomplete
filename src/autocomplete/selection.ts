@@ -31,5 +31,6 @@ export const selection = <I>({
 		className: 'badge',
 		disabled: true,
 		slot: 'control',
+		hidden: true,
 	}),
 ];

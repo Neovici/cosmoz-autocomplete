@@ -10,7 +10,6 @@ const overflow = (host: HTMLElement) => {
 		chip.hidden = false;
 	}
 	const input = host.shadowRoot!.querySelector('cosmoz-input')!;
-	if (input.matches('[data-one]')) return;
 	const limit = input.shadowRoot
 		?.querySelector('.control')
 		?.getBoundingClientRect();
@@ -36,22 +35,32 @@ const overflow = (host: HTMLElement) => {
 export const useOverflow = <I>({
 	value,
 	active,
+	wrap,
+	limit,
 }: {
 	value: I[];
 	active?: boolean;
+	wrap?: boolean;
+	limit?: number;
 }) => {
 	const host = useHost();
+	// eslint-disable-next-line eqeqeq
+	const enabled = !(wrap || limit == 1);
 	const doRaf = useMemo(() => raf(() => overflow(host)), []);
 	const [width, setWidth] = useState(0);
 
 	useLayoutEffect(() => {
+		if (!enabled) return;
 		const input = host.shadowRoot!.querySelector('cosmoz-input')!;
 		const observer = new ResizeObserver((e) => {
 			setWidth(e[0].contentRect.width);
 		});
 		observer.observe(input);
 		return () => observer.disconnect();
-	}, []);
+	}, [enabled]);
 
-	useLayoutEffect(() => doRaf(), [width, active, value]);
+	useLayoutEffect(
+		() => (enabled ? doRaf() : undefined),
+		[enabled, width, active, value]
+	);
 };

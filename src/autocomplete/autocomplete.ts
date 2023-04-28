@@ -150,6 +150,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'default-index',
 		'item-height',
 		'item-limit',
+		'wrap'
 	];
 
 export { autocomplete, Autocomplete, observedAttributes };
