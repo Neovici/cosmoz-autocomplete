@@ -1,3 +1,11 @@
+## [7.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.1.0...v7.2.0) (2023-04-28)
+
+
+### Features
+
+* adjust tests ([1d61916](https://github.com/neovici/cosmoz-autocomplete/commit/1d61916c25ed685d8eb3c2284919a64543330b65))
+* auto-close & auto-clear ([0af9cb1](https://github.com/neovici/cosmoz-autocomplete/commit/0af9cb19284072843f2e8d4f172c88d89a860d24))
+
 ## [7.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.0.0...v7.1.0) (2023-04-28)
 
 
