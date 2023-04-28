@@ -4,6 +4,7 @@ export default css`
 	:host {
 		display: block;
 		position: relative;
+		min-width: 35px;
 	}
 
 	cosmoz-input::part(control) {
@@ -40,6 +41,13 @@ export default css`
 
 	[hidden] {
 		display: none;
+	}
+
+	:host([wrap]) cosmoz-input::part(control) {
+		flex-wrap: wrap;
+	}
+	:host([wrap]) .chip {
+		max-width: 100%;
 	}
 
 	slot {
