@@ -10,7 +10,7 @@ describe('use-backspace', () => {
 		const onChange = spy();
 		await fixture(html` <use-backspace
 			.onChange=${onChange}
-			.active=${true}
+			.focused=${true}
 			.empty=${true}
 			.value=${['1']}
 		></use-backspace>`);
@@ -23,7 +23,7 @@ describe('use-backspace', () => {
 		await fixture(html` <use-backspace
 			.limit=${1}
 			.onChange=${onChange}
-			.active=${true}
+			.focused=${true}
 			.empty=${true}
 			.value=${['1']}
 		></use-backspace>`);

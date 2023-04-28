@@ -3,7 +3,7 @@ import { array } from '@neovici/cosmoz-utils/array';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 
 export interface Props<I> {
-	active?: boolean;
+	focused?: boolean;
 	empty?: boolean;
 	hideEmpty?: boolean;
 	value: I | I[];
@@ -12,8 +12,8 @@ export interface Props<I> {
 	onText: (s: string) => void;
 }
 
-export const useKeys = <I>({ active, empty, ...info }: Props<I>) => {
-	const enabled = active && empty,
+export const useKeys = <I>({ focused, empty, ...info }: Props<I>) => {
+	const enabled = focused && empty,
 		meta = useMeta(info);
 	useEffect(() => {
 		if (!enabled) {
