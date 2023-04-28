@@ -1,3 +1,10 @@
+## [7.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.0.0...v7.1.0) (2023-04-28)
+
+
+### Features
+
+* **autocomplete:** implement wrap ([93905db](https://github.com/neovici/cosmoz-autocomplete/commit/93905db3feed7f6a649014f2088230daf20e5af9))
+
 ## [7.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v6.4.0...v7.0.0) (2023-04-27)
 
 
