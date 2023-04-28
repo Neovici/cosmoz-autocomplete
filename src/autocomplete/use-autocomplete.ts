@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'haunted';
+import { useCallback, useMemo, useEffect } from 'haunted';
 import { without, array } from '@neovici/cosmoz-utils/array';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
@@ -15,8 +15,9 @@ type Source<I> = (opts: {
 interface Base<I> {
 	value: I | I[];
 	limit?: number;
-	keepQuery?: boolean;
-	keepOpened?: boolean;
+
+	autoClose?: boolean;
+	autoClear?: boolean;
 
 	onText: (text: string) => void;
 	onChange: (value: I[], done?: () => void) => void;
@@ -54,15 +55,15 @@ export const useAutocomplete = <I>({
 	valueProperty,
 	external,
 	hideEmpty,
-	keepQuery,
-	keepOpened,
+	autoClose,
+	autoClear,
 	...thru
 }: Props<I>) => {
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty]
 		),
-		{ active, onFocus, setClosed } = useFocus(thru),
+		{ active, focused, onFocus, setClosed } = useFocus(thru),
 		empty = !text,
 		query = useMemo(() => text?.trim().toLowerCase(), [text]),
 		host = useHost(),
@@ -92,7 +93,7 @@ export const useAutocomplete = <I>({
 		);
 
 	useKeys({
-		active,
+		focused,
 		empty,
 		limit,
 		value,
@@ -101,13 +102,17 @@ export const useAutocomplete = <I>({
 		onText,
 	});
 
+	useEffect(() => {
+		if (!focused) onText('');
+	}, [focused]);
+
 	const meta = useMeta<Meta<I>>({
 		onText,
 		onChange,
 		value,
 		limit,
-		keepQuery,
-		keepOpened,
+		autoClose,
+		autoClear,
 		setClosed,
 		onSelect,
 	});
@@ -137,25 +142,18 @@ export const useAutocomplete = <I>({
 		),
 		onSelect: useCallback(
 			(newVal: I) => {
-				const { onSelect } = meta;
-				if (onSelect) {
-					return onSelect(newVal, meta);
-				}
+				meta.onSelect?.(newVal, meta);
 				const {
 					onChange,
 					onText,
 					limit,
 					value: val,
-					keepQuery,
-					keepOpened,
+					autoClose,
+					autoClear,
 					setClosed,
 				} = meta;
-				if (!keepQuery) {
-					onText('');
-				}
-				if (!keepOpened) {
-					setClosed(true);
-				}
+				if (autoClear) onText('');
+				if (autoClose) setClosed(true);
 				const value = array(val);
 				onChange(
 					(value.includes(newVal)

@@ -68,8 +68,8 @@
 	},
 	"dependencies": {
 		"@lit-labs/virtualizer": "^2.0.0",
-		"@neovici/cosmoz-dropdown": "^3.0.0",
-		"@neovici/cosmoz-input": "^3.0.0",
+		"@neovici/cosmoz-dropdown": "^3.4.0",
+		"@neovici/cosmoz-input": "^3.11.0",
 		"@neovici/cosmoz-utils": "^5.0.0",
 		"haunted": "^5.0.0",
 		"lit-html": "^2.0.0"
@@ -77,12 +77,12 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.0",
 		"@commitlint/config-conventional": "^17.0.0",
-		"@neovici/cfg": "^1.13.0",
+		"@neovici/cfg": "^1.34.0",
 		"@open-wc/testing": "^3.0.0",
 		"@semantic-release/changelog": "^6.0.0",
 		"@semantic-release/git": "^10.0.0",
 		"@storybook/storybook-deployer": "^2.8.5",
-		"@web/dev-server-storybook": "^0.6.0",
+		"@web/dev-server-storybook": "^0.7.0",
 		"eslint-import-resolver-exports": "^1.0.0-beta.5",
 		"husky": "^8.0.0",
 		"semantic-release": "^21.0.0",
