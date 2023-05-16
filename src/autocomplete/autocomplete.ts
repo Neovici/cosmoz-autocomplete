@@ -30,7 +30,7 @@ type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 
 const blank = () => nothing;
 
-const inputParts = ['input', 'label', 'line', 'error']
+const inputParts = ['input', 'control', 'label', 'line', 'error']
 	.map((part) => `${part}: input-${part}`)
 	.join();
 
@@ -151,7 +151,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'default-index',
 		'item-height',
 		'item-limit',
-		'wrap'
+		'wrap',
 	];
 
 export { autocomplete, Autocomplete, observedAttributes };
