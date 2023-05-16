@@ -6,19 +6,7 @@ import { spy } from 'sinon';
 before(() => {
 	const e = window.onerror;
 	window.onerror = function (err) {
-		if (
-			err.startsWith('ResizeObserver loop') ||
-			// TODO: Remove when https://github.com/lit/lit/pull/3708 is merged
-			err.startsWith('TypeError: this._layout is null') ||
-			err.startsWith(
-				// eslint-disable-next-line quotes
-				"TypeError: Cannot read properties of null (reading 'measureChildren')"
-			) ||
-			err.startsWith(
-				// eslint-disable-next-line quotes
-				"Uncaught TypeError: Cannot read properties of null (reading 'measureChildren')"
-			)
-		) {
+		if (err.startsWith('ResizeObserver loop')) {
 			// eslint-disable-next-line no-console
 			console.warn(`[ignored] ${err}`);
 			return false;

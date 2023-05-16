@@ -57,6 +57,7 @@ snapshots["cosmoz-autocomplete-ui render (limit 1)"] =
   always-float-label=""
   autocomplete="off"
   data-one=""
+  data-single=""
   exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
