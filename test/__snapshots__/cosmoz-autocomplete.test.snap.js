@@ -5,7 +5,7 @@ snapshots["cosmoz-autocomplete-ui render"] =
 `<cosmoz-input
   always-float-label=""
   autocomplete="off"
-  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+  exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
@@ -58,7 +58,7 @@ snapshots["cosmoz-autocomplete-ui render (limit 1)"] =
   autocomplete="off"
   data-one=""
   data-single=""
-  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+  exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
   readonly=""
@@ -101,7 +101,7 @@ snapshots["cosmoz-autocomplete-ui render (listbox)"] =
 `<cosmoz-input
   always-float-label=""
   autocomplete="off"
-  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+  exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
@@ -146,7 +146,7 @@ snapshots["cosmoz-autocomplete render"] =
 `<cosmoz-input
   always-float-label=""
   autocomplete="off"
-  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+  exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
@@ -188,7 +188,7 @@ snapshots["cosmoz-autocomplete render (deselect)"] =
 `<cosmoz-input
   autocomplete="off"
   data-one=""
-  exportparts="input: input-input,label: input-label,line: input-line,error: input-error"
+  exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error"
   id="input"
   part="input"
 >
