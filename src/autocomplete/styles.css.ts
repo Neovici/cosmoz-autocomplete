@@ -27,7 +27,7 @@ export default css`
 		padding: 0 4px;
 	}
 
-	[data-one]::part(input) {
+	[data-single]::part(input) {
 		flex: 0;
 	}
 	[data-one] .chip {
