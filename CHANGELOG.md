@@ -1,3 +1,10 @@
+## [7.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.3.0...v7.4.0) (2023-05-16)
+
+
+### Features
+
+* **input:** export input's control part ([198fa5f](https://github.com/neovici/cosmoz-autocomplete/commit/198fa5fbe7fce655f05fe9f9aee438d2bd58c1a1))
+
 ## [7.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.2.0...v7.3.0) (2023-05-16)
 
 
