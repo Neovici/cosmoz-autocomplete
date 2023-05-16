@@ -110,6 +110,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				autocomplete="off"
 				exportparts=${inputParts}
 				?data-one=${isOne}
+				?data-single=${isSingle}
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
