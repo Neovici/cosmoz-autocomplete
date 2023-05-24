@@ -25,10 +25,20 @@ const Listbox = <I>(props: Props<I>) => {
 		vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
 	}, [position]);
 
+	useEffect(
+		() => () => {
+			const vl = (listRef.current as VirtualizerHostElement | undefined)?.[
+				virtualizerRef
+			];
+			vl?.disconnected();
+		},
+		[]
+	);
+
 	const layout = useMemo(
 		() =>
 			({
-				_itemSize: { height: itemHeight - 0.00001 },
+				_itemSize: { height: itemHeight },
 			} as VirtualizeDirectiveConfig<unknown>['layout']),
 		[itemHeight]
 	);
