@@ -10,7 +10,7 @@ export default css`
 		align-items: center;
 		flex: 0.0001 1 fit-content;
 		max-width: 18ch;
-		min-width: 40px;
+		min-width: 12px;
 		padding: 0 4px 0 8px;
 		gap: 4px;
 	}
@@ -22,7 +22,7 @@ export default css`
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		flex: auto;
-		min-width: 16px;
+		min-width: 4px;
 	}
 	.clear {
 		background-color: var(--cosmoz-autocomplete-chip-clear-bg-color, #81899b);
