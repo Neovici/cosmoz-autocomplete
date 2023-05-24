@@ -1,3 +1,10 @@
+## [7.4.1](https://github.com/neovici/cosmoz-autocomplete/compare/v7.4.0...v7.4.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* chips no longer hovering other omnitable fields ([b1af256](https://github.com/neovici/cosmoz-autocomplete/commit/b1af256525d0c5c24dbb819657f518b49abfaf2a))
+
 ## [7.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.3.0...v7.4.0) (2023-05-16)
 
 
