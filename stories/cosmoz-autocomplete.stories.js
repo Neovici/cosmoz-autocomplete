@@ -1,6 +1,6 @@
 import { html } from 'lit-html';
 import '../src/autocomplete/';
-import { colors } from './data';
+import { colors, colors$ } from './data';
 
 export default {
 	title: 'Autocomplete',
@@ -19,7 +19,7 @@ const css = html`
 		${css}
 		<cosmoz-autocomplete
 			.label=${'Choose color'}
-			.source=${colors}
+			.source=${colors$}
 			.textProperty=${'text'}
 			.value=${[colors[0], colors[3]]}
 		></cosmoz-autocomplete>
