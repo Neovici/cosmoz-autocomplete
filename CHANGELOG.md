@@ -1,3 +1,10 @@
+## [7.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.4.1...v7.5.0) (2023-06-13)
+
+
+### Features
+
+* **autocomplete:** restore keep-oepened & keep-query ([2d9f161](https://github.com/neovici/cosmoz-autocomplete/commit/2d9f1618d2af2d1495557015d2a66c4934c58eea))
+
 ## [7.4.1](https://github.com/neovici/cosmoz-autocomplete/compare/v7.4.0...v7.4.1) (2023-05-24)
 
 
