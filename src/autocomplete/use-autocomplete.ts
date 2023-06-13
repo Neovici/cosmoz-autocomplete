@@ -16,8 +16,8 @@ interface Base<I> {
 	value: I | I[];
 	limit?: number;
 
-	autoClose?: boolean;
-	autoClear?: boolean;
+	keepOpened?: boolean;
+	keepQuery?: boolean;
 
 	onText: (text: string) => void;
 	onChange: (value: I[], done?: () => void) => void;
@@ -55,8 +55,8 @@ export const useAutocomplete = <I>({
 	valueProperty,
 	external,
 	hideEmpty,
-	autoClose,
-	autoClear,
+	keepOpened,
+	keepQuery,
 	...thru
 }: Props<I>) => {
 	const textual = useMemo(
@@ -111,8 +111,8 @@ export const useAutocomplete = <I>({
 		onChange,
 		value,
 		limit,
-		autoClose,
-		autoClear,
+		keepQuery,
+		keepOpened,
 		setClosed,
 		onSelect,
 	});
@@ -148,12 +148,12 @@ export const useAutocomplete = <I>({
 					onText,
 					limit,
 					value: val,
-					autoClose,
-					autoClear,
+					keepQuery,
+					keepOpened,
 					setClosed,
 				} = meta;
-				if (autoClear) onText('');
-				if (autoClose) setClosed(true);
+				if (!keepQuery) onText('');
+				if (!keepOpened) setClosed(true);
 				const value = array(val);
 				onChange(
 					(value.includes(newVal)
