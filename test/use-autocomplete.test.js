@@ -71,6 +71,7 @@ describe('use-autocomplete', () => {
 				.onText=${onText}
 				.onChange=${onChange}
 			/>`);
+		onText.resetHistory();
 
 		result.current.onSelect(source[1]);
 		await nextFrame();
