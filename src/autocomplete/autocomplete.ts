@@ -143,6 +143,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'no-label-float',
 		'always-float-label',
 		'text-property',
+		'value-property',
 		'limit',
 		'show-single',
 		'keep-opened',
