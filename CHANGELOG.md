@@ -1,3 +1,10 @@
+## [7.5.1](https://github.com/neovici/cosmoz-autocomplete/compare/v7.5.0...v7.5.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* value-property attribute is not observed ([ca96936](https://github.com/neovici/cosmoz-autocomplete/commit/ca969362dcabb9751b58f18367179ae94a77c8e9))
+
 ## [7.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.4.1...v7.5.0) (2023-06-13)
 
 
