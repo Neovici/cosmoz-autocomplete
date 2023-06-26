@@ -65,7 +65,7 @@ export const useAutocomplete = <I>({
 		),
 		{ active, focused, onFocus, setClosed } = useFocus(thru),
 		empty = !text,
-		query = useMemo(() => text?.trim().toLowerCase(), [text]),
+		query = useMemo(() => text?.trim(), [text]),
 		host = useHost(),
 		onText = useNotify(host, _onText, 'text'),
 		onChange = useCallback(

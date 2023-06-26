@@ -21,7 +21,7 @@ describe('use-autocomplete', () => {
 					.textProperty=${'text'}
 				/>
 			`);
-		expect(result.current.query).to.equal('it');
+		expect(result.current.query).to.equal('It');
 		expect(await result.current.items$).to.be.empty;
 	});
 
@@ -123,7 +123,7 @@ describe('use-autocomplete', () => {
 					.external=${true}
 				/>
 			`);
-		expect(result.current.query).to.equal('la');
+		expect(result.current.query).to.equal('La');
 		result.current.onFocus({ currentTarget: { matches: () => true } });
 		await nextFrame();
 

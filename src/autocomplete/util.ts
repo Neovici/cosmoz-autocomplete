@@ -5,9 +5,10 @@ export const search = <I>(
 	query: string,
 	textual: (i: I) => string
 ) => {
+	const qry = query.toLowerCase();
 	const matches = [];
 	for (const item of source) {
-		const index = textual(item).toLowerCase().indexOf(query);
+		const index = textual(item).toLowerCase().indexOf(qry);
 		if (index < 0) {
 			continue;
 		}
