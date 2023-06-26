@@ -1,3 +1,10 @@
+## [7.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.5.1...v7.6.0) (2023-06-26)
+
+
+### Features
+
+* **autocomplete:** maintain query case ([c69ea4b](https://github.com/neovici/cosmoz-autocomplete/commit/c69ea4b9f4f5d063d1b033e713f6b24931c0957b))
+
 ## [7.5.1](https://github.com/neovici/cosmoz-autocomplete/compare/v7.5.0...v7.5.1) (2023-06-15)
 
 
