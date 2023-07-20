@@ -1,3 +1,10 @@
+## [7.6.1](https://github.com/neovici/cosmoz-autocomplete/compare/v7.6.0...v7.6.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* **selection:** handle undefined value in selection ([7f5845e](https://github.com/neovici/cosmoz-autocomplete/commit/7f5845e78d14ab7825f94d766cb60c15d26cfa3e))
+
 ## [7.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.5.1...v7.6.0) (2023-06-26)
 
 
