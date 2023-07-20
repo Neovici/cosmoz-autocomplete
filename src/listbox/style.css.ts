@@ -32,6 +32,7 @@ const style = css`
 		white-space: nowrap;
 		transition: background 0.2s;
 		color: var(--cosmoz-listbox-color, #101010);
+		overflow: hidden;
 	}
 
 	.sizer {
