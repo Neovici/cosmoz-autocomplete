@@ -1,3 +1,10 @@
+## [7.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.6.1...v7.7.0) (2023-07-20)
+
+
+### Features
+
+* **listbox:** hide item overflow ([2e0ccc5](https://github.com/neovici/cosmoz-autocomplete/commit/2e0ccc5fda757d022987cd023063d4801f2688d7))
+
 ## [7.6.1](https://github.com/neovici/cosmoz-autocomplete/compare/v7.6.0...v7.6.1) (2023-07-20)
 
 
