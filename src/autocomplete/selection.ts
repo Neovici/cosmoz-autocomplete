@@ -18,7 +18,7 @@ export const selection = <I>({
 	textual,
 	disabled,
 }: Props<I>) => [
-	...values.map((value) =>
+	...values.filter(Boolean).map((value) =>
 		chip({
 			content: textual(value),
 			onClear: () => onDeselect(value),
