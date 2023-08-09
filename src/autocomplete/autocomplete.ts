@@ -4,6 +4,7 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { useCallback } from 'haunted';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
+import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
 import '@neovici/cosmoz-input';
 import { useAutocomplete, Props as Base, RProps } from './use-autocomplete';
 import { listbox } from '../listbox';
@@ -75,6 +76,16 @@ const autocomplete = <I>(props: AProps<I>) => {
 					)
 				)
 			);
+
+		useImperativeApi(
+			{
+				focus: () =>
+					(
+						host.shadowRoot?.querySelector('#input') as HTMLInputElement
+					)?.focus(),
+			},
+			[]
+		);
 
 		return html` <style>
 				${style}

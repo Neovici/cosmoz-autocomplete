@@ -35,12 +35,5 @@ customElements.define(
 );
 customElements.define(
 	'cosmoz-autocomplete',
-	component<Props<unknown>>(Standalone, {
-		observedAttributes,
-		baseElement: class extends HTMLElement {
-			focus() {
-				(this.shadowRoot?.querySelector('#input') as HTMLInputElement).focus();
-			}
-		},
-	})
+	component<Props<unknown>>(Standalone, { observedAttributes })
 );
