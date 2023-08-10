@@ -1,3 +1,11 @@
+## [7.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.7.0...v7.8.0) (2023-08-10)
+
+
+### Features
+
+* add focus function to autocomplete ([e8c39f1](https://github.com/neovici/cosmoz-autocomplete/commit/e8c39f10419535150fc504775ecf526ef733412e))
+* add useImperativeApi focus to autocomplete ([5429cc2](https://github.com/neovici/cosmoz-autocomplete/commit/5429cc236f4d3c3083344b66ebf27f58ae59d1af))
+
 ## [7.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.6.1...v7.7.0) (2023-07-20)
 
 
