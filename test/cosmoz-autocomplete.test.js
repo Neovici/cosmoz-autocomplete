@@ -129,4 +129,20 @@ describe('cosmoz-autocomplete', () => {
 		expect(el.shadowRoot.querySelector('cosmoz-input').value).to.equal('asd');
 		expect(el.shadowRoot.querySelector('.chip').innerText).to.equal('Item 2');
 	});
+
+	it('focus', async () => {
+		await fixture(html`
+			<cosmoz-autocomplete
+				.source=${source}
+				.value=${source[0]}
+				.textProperty=${'text'}
+			/>
+		`);
+
+		await nextFrame();
+		document.body.querySelector('cosmoz-autocomplete').focus();
+		await nextFrame();
+
+		expect(document.body.querySelector('cosmoz-listbox')).to.be.ok;
+	});
 });
