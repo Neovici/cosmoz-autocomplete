@@ -24,6 +24,11 @@ export const search = <I>(
 		.map(({ item }) => item);
 };
 
+export const normalize = <I>(source: I[] | false | null) => {
+	if (source === false || source == null) return [];
+	return source;
+};
+
 export const notify = <T>(host: EventTarget, name: string, detail: T) =>
 	host.dispatchEvent(new CustomEvent(name, { detail }));
 

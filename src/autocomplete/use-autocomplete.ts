@@ -5,7 +5,7 @@ import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { useKeys } from './use-keys';
-import { search, notify, useNotify, EMPTY$ } from './util';
+import { search, normalize, notify, useNotify, EMPTY$ } from './util';
 
 type Source<I> = (opts: {
 	query: string;
@@ -85,10 +85,12 @@ export const useAutocomplete = <I>({
 		value = useMemo(() => array(_value), [_value]),
 		values$ = useMemo(
 			() =>
-				source$.then((source) => [
-					...value,
-					...without(value, prop(valueProperty))(source),
-				]),
+				source$.then((source) => {
+					return [
+						...value,
+						...without(value, prop(valueProperty))(normalize(source)),
+					];
+				}),
 			[source$, value, valueProperty]
 		);
 
