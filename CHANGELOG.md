@@ -1,3 +1,10 @@
+## [7.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.8.0...v7.9.0) (2023-10-19)
+
+
+### Features
+
+* **autocomplete:** handle falsy source ([c3d41f5](https://github.com/neovici/cosmoz-autocomplete/commit/c3d41f5dcf243a0b7e82523e69e0194b95d979b2))
+
 ## [7.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.7.0...v7.8.0) (2023-08-10)
 
 
