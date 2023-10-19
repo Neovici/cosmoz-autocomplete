@@ -25,7 +25,7 @@ export const search = <I>(
 };
 
 export const normalize = <I>(source: I[] | false | null) => {
-	if (source == false || source == null) return [];
+	if (source === false || source == null) return [];
 	return source;
 };
 
