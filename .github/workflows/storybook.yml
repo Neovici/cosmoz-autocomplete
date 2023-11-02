@@ -1,5 +1,5 @@
 ---
-name: Github CI
+name: Storybook
 on:
   push:
     branches:
