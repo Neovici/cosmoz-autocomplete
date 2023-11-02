@@ -3,10 +3,5 @@
 	"rules": {
 		"max-lines-per-function": 0,
 		"import/group-exports": 0
-	},
-	"settings": {
-		"import/resolver": {
-			"exports": {}
-		}
 	}
 }
