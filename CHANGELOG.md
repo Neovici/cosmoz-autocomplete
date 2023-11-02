@@ -1,3 +1,10 @@
+## [7.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.9.0...v7.10.0) (2023-11-02)
+
+
+### Features
+
+* upgrade deps ([22578e8](https://github.com/neovici/cosmoz-autocomplete/commit/22578e81d416d8ff36bfc5c30c7deb614bba0e12))
+
 ## [7.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.8.0...v7.9.0) (2023-10-19)
 
 
