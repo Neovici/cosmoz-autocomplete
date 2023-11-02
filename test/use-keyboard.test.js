@@ -34,7 +34,7 @@ describe('use-keyboard', () => {
 			const onDown = spy();
 			await fixture(html` <use-keyboard .onDown=${onDown} /> `);
 			document.dispatchEvent(
-				new KeyboardEvent('keydown', { key: 'ArrowDown' })
+				new KeyboardEvent('keydown', { key: 'ArrowDown' }),
 			);
 			expect(onDown).to.have.been.calledOnce;
 		});
@@ -54,36 +54,34 @@ describe('use-keyboard', () => {
 			const onUp = spy(),
 				onDown = spy(),
 				onEnter = spy();
-			await fixture(
-				html`
-					<use-keyboard .onUp=${onUp} .onDown=${onDown} .onEnter=${onEnter} />
-				`
-			);
+			await fixture(html`
+				<use-keyboard .onUp=${onUp} .onDown=${onDown} .onEnter=${onEnter} />
+			`);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'Up',
 					ctrlKey: true,
 					altKey: true,
-				})
+				}),
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'Down',
 					ctrlKey: true,
 					altKey: true,
-				})
+				}),
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'Enter',
 					ctrlKey: true,
 					altKey: true,
-				})
+				}),
 			);
 			document.dispatchEvent(
 				new KeyboardEvent('keydown', {
 					key: 'unhandled',
-				})
+				}),
 			);
 
 			expect(onUp).not.to.have.been.called;

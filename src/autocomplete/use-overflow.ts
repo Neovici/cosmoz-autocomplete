@@ -61,6 +61,6 @@ export const useOverflow = <I>({
 
 	useLayoutEffect(
 		() => (enabled ? doRaf() : undefined),
-		[enabled, width, active, value]
+		[enabled, width, active, value],
 	);
 };

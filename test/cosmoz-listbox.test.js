@@ -8,29 +8,6 @@ const ready = async (el) => {
 	await nextFrame();
 };
 
-// TODO: Remove when https://github.com/lit/lit/pull/3708 is merged
-before(() => {
-	const e = window.onerror;
-	window.onerror = function (err) {
-		if (
-			err.startsWith('TypeError: this._layout is null') ||
-			err.startsWith(
-				// eslint-disable-next-line quotes
-				"TypeError: Cannot read properties of null (reading 'measureChildren')"
-			) ||
-			err.startsWith(
-				// eslint-disable-next-line quotes
-				"Uncaught TypeError: Cannot read properties of null (reading 'measureChildren')"
-			)
-		) {
-			// eslint-disable-next-line no-console
-			console.warn(`[ignored] ${err}`);
-			return false;
-		}
-		return e(...arguments);
-	};
-});
-
 describe('cosmoz-listbox', () => {
 	it('render', async () => {
 		const onSelect = spy(),
@@ -41,7 +18,7 @@ describe('cosmoz-listbox', () => {
 				html`<cosmoz-listbox
 					.items=${items}
 					.onSelect=${onSelect}
-				></cosmoz-listbox>`
+				></cosmoz-listbox>`,
 			);
 
 		await ready(el);
@@ -69,7 +46,7 @@ describe('cosmoz-listbox', () => {
 					.items=${items}
 					.onSelect=${onSelect}
 					.textual=${prop('text')}
-				></cosmoz-listbox>`
+				></cosmoz-listbox>`,
 			);
 
 		await ready(el);
@@ -82,12 +59,14 @@ describe('cosmoz-listbox', () => {
 			items = Array(10)
 				.fill()
 				.map((_, i) => ({ textProp: `item ${i}` })),
-			el = await fixture(html`<cosmoz-listbox
-				.items=${items}
-				.onSelect=${onSelect}
-				.textual=${prop('textProp')}
-				.query=${'1'}
-			></cosmoz-listbox>`);
+			el = await fixture(
+				html`<cosmoz-listbox
+					.items=${items}
+					.onSelect=${onSelect}
+					.textual=${prop('textProp')}
+					.query=${'1'}
+				></cosmoz-listbox>`,
+			);
 
 		await ready(el);
 
@@ -103,7 +82,7 @@ describe('cosmoz-listbox', () => {
 				html`<cosmoz-listbox
 					.items=${items}
 					.onSelect=${onSelect}
-				></cosmoz-listbox>`
+				></cosmoz-listbox>`,
 			);
 
 		await ready(el);
@@ -126,7 +105,7 @@ describe('cosmoz-listbox', () => {
 				html`<cosmoz-listbox
 					.items=${items}
 					.onSelect=${onSelect}
-				></cosmoz-listbox>`
+				></cosmoz-listbox>`,
 			);
 
 		await ready(el);

@@ -10,8 +10,8 @@ describe('utils', () => {
 				search(
 					[{ text: 'abc' }, { text: 'bc' }, { text: 'ad' }, {}],
 					'bc',
-					strProp('text')
-				)
+					strProp('text'),
+				),
 			).to.deep.equal([{ text: 'bc' }, { text: 'abc' }]);
 		});
 	});

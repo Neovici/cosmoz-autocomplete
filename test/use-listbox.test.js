@@ -7,7 +7,7 @@ customElements.define(
 	'use-listbox',
 	component((host) => {
 		host.current = useListbox(host);
-	})
+	}),
 );
 
 describe('use-listbox', () => {
@@ -59,7 +59,7 @@ describe('use-listbox', () => {
 		const items = [0, 1, 2],
 			onSelect = spy(),
 			result = await fixture(
-				html`<use-listbox .items=${items} .onSelect=${onSelect} />`
+				html`<use-listbox .items=${items} .onSelect=${onSelect} />`,
 			);
 		result.current.select(items[1]);
 		expect(onSelect).to.have.been.calledOnceWith(items[1]);
@@ -68,7 +68,7 @@ describe('use-listbox', () => {
 	it('enter (no selection)', async () => {
 		const onSelect = spy();
 		await fixture(
-			html`<use-listbox .items=${[0, 1, 2]} .onSelect=${onSelect} />`
+			html`<use-listbox .items=${[0, 1, 2]} .onSelect=${onSelect} />`,
 		);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 		expect(onSelect).to.have.been.calledOnceWith(0);
@@ -77,7 +77,7 @@ describe('use-listbox', () => {
 	it('enter', async () => {
 		const onSelect = spy(),
 			result = await fixture(
-				html`<use-listbox .items=${[0, 1, 2]} .onSelect=${onSelect} />`
+				html`<use-listbox .items=${[0, 1, 2]} .onSelect=${onSelect} />`,
 			);
 		result.current.highlight(1);
 		await nextFrame();

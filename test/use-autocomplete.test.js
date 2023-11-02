@@ -7,7 +7,7 @@ customElements.define(
 	'use-autocomplete',
 	component((host) => {
 		host.current = useAutocomplete(host);
-	})
+	}),
 );
 
 describe('use-autocomplete', () => {
@@ -28,13 +28,15 @@ describe('use-autocomplete', () => {
 	it('focus', async () => {
 		const onFocus = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
-			result = await fixture(html` <use-autocomplete
-				.source=${source}
-				.value=${source[0]}
-				.text=${'It'}
-				.textProperty=${'text'}
-				.onFocus=${onFocus}
-			/>`);
+			result = await fixture(
+				html` <use-autocomplete
+					.source=${source}
+					.value=${source[0]}
+					.text=${'It'}
+					.textProperty=${'text'}
+					.onFocus=${onFocus}
+				/>`,
+			);
 
 		expect(await result.current.items$).to.be.empty;
 		result.current.onFocus({ currentTarget: { matches: () => true } });
@@ -46,13 +48,15 @@ describe('use-autocomplete', () => {
 	it('edit', async () => {
 		const onText = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
-			result = await fixture(html` <use-autocomplete
-				.source=${source}
-				.value=${source[0]}
-				.text=${'It'}
-				.textProperty=${'text'}
-				.onText=${onText}
-			/>`);
+			result = await fixture(
+				html` <use-autocomplete
+					.source=${source}
+					.value=${source[0]}
+					.text=${'It'}
+					.textProperty=${'text'}
+					.onText=${onText}
+				/>`,
+			);
 		onText.resetHistory();
 		result.current.onText({ target: { value: 'ite' } });
 		await nextFrame();
@@ -63,14 +67,16 @@ describe('use-autocomplete', () => {
 		const onText = spy(),
 			onChange = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
-			result = await fixture(html` <use-autocomplete
-				.source=${source}
-				.value=${source[0]}
-				.text=${'It'}
-				.textProperty=${'text'}
-				.onText=${onText}
-				.onChange=${onChange}
-			/>`);
+			result = await fixture(
+				html` <use-autocomplete
+					.source=${source}
+					.value=${source[0]}
+					.text=${'It'}
+					.textProperty=${'text'}
+					.onText=${onText}
+					.onChange=${onChange}
+				/>`,
+			);
 		onText.resetHistory();
 
 		result.current.onSelect(source[1]);
@@ -82,13 +88,15 @@ describe('use-autocomplete', () => {
 	it('onSelect', async () => {
 		const onSelect = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
-			result = await fixture(html` <use-autocomplete
-				.source=${source}
-				.value=${source[0]}
-				.text=${'It'}
-				.textProperty=${'text'}
-				.onSelect=${onSelect}
-			/>`);
+			result = await fixture(
+				html` <use-autocomplete
+					.source=${source}
+					.value=${source[0]}
+					.text=${'It'}
+					.textProperty=${'text'}
+					.onSelect=${onSelect}
+				/>`,
+			);
 
 		result.current.onSelect(source[1]);
 		await nextFrame();
@@ -99,14 +107,16 @@ describe('use-autocomplete', () => {
 		const onText = spy(),
 			onChange = spy(),
 			source = [{ text: 'Item 1' }, { text: 'Item 2' }],
-			result = await fixture(html` <use-autocomplete
-				.source=${source}
-				.value=${source[0]}
-				.text=${'It'}
-				.textProperty=${'text'}
-				.onText=${onText}
-				.onChange=${onChange}
-			/>`);
+			result = await fixture(
+				html` <use-autocomplete
+					.source=${source}
+					.value=${source[0]}
+					.text=${'It'}
+					.textProperty=${'text'}
+					.onText=${onText}
+					.onChange=${onChange}
+				/>`,
+			);
 		onText.resetHistory();
 		result.current.onDeselect(source[0]);
 		await nextFrame();

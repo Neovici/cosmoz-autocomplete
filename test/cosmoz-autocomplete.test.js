@@ -113,12 +113,14 @@ describe('cosmoz-autocomplete', () => {
 	});
 
 	it('effects', async () => {
-		const el = await fixture(html` <cosmoz-autocomplete
-			.source=${source}
-			.value=${source[0]}
-			.textProperty=${'text'}
-			.text=${'it'}
-		/>`);
+		const el = await fixture(
+			html` <cosmoz-autocomplete
+				.source=${source}
+				.value=${source[0]}
+				.textProperty=${'text'}
+				.text=${'it'}
+			/>`,
+		);
 
 		el.text = 'asd';
 		el.value = [source[1]];
