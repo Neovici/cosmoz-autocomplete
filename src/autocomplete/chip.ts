@@ -42,13 +42,13 @@ export const Chip = ({ onClear, disabled }: Props) => html`
 		() =>
 			html` <span class="clear" part="clear chip-clear" @click=${onClear}>
 				${clear}
-			</span>`
+			</span>`,
 	)}
 `;
 
 customElements.define(
 	'cosmoz-autocomplete-chip',
-	component<Props>(Chip, { observedAttributes: ['disabled'] })
+	component<Props>(Chip, { observedAttributes: ['disabled'] }),
 );
 
 interface ChipProps extends Props {

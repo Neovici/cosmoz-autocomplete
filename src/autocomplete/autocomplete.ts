@@ -62,7 +62,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			// TODO: Refactor with ref or a state callback
 			anchor = useCallback(
 				() => host.shadowRoot!.querySelector<HTMLElement>('#input'),
-				[host, value]
+				[host, value],
 			),
 			suggestions = until(
 				items$.then((items: I[]) =>
@@ -72,9 +72,9 @@ const autocomplete = <I>(props: AProps<I>) => {
 							anchor,
 							items,
 							multi: !isOne,
-						})
-					)
-				)
+						}),
+					),
+				),
 			);
 
 		useImperativeApi(
@@ -84,7 +84,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 						host.shadowRoot?.querySelector('#input') as HTMLInputElement
 					)?.focus(),
 			},
-			[]
+			[],
 		);
 
 		return html` <style>
@@ -102,16 +102,16 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?invalid=${until(
 					values$.then(
 						() => invalid,
-						() => true
+						() => true,
 					),
-					invalid
+					invalid,
 				)}
 				.errorMessage=${until(
 					values$.then(
 						() => errorMessage,
-						(e: { message?: string }) => e.message
+						(e: { message?: string }) => e.message,
 					),
-					errorMessage
+					errorMessage,
 				)}
 				.value=${live(text)}
 				@value-changed=${onText}
@@ -134,7 +134,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				})}
 				${until(
 					values$.then(blank, blank),
-					html`<div slot="suffix" class="spinner"></div>`
+					html`<div slot="suffix" class="spinner"></div>`,
 				)}
 			</cosmoz-input>
 
