@@ -1,4 +1,4 @@
-import { html, component } from 'haunted';
+import { html, component } from '@pionjs/pion';
 import { when } from 'lit-html/directives/when.js';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
 import styles from './chip.css';

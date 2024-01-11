@@ -1,4 +1,4 @@
-import { useCallback } from 'haunted';
+import { useCallback } from '@pionjs/pion';
 
 export const search = <I>(
 	source: I[],

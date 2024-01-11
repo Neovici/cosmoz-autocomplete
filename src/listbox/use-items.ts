@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'haunted';
+import { useCallback, useEffect, useState } from '@pionjs/pion';
 import { useKeyboard } from './use-keyboard';
 
 export interface UseItems<T> {

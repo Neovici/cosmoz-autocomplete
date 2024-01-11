@@ -1,4 +1,4 @@
-import { useMemo } from 'haunted';
+import { useMemo } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { usePosition, Placement } from '@neovici/cosmoz-dropdown/use-position';
 import { byValue } from './util';

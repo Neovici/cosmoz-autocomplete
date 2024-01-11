@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-ne
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
-import { useCallback } from 'haunted';
+import { useCallback } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
 import '@neovici/cosmoz-input';

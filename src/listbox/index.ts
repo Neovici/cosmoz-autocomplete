@@ -1,4 +1,4 @@
-import { html, component, useEffect, useRef, useMemo } from 'haunted';
+import { html, component, useEffect, useRef, useMemo } from '@pionjs/pion';
 import { ref } from 'lit-html/directives/ref.js';
 import {
 	virtualize,
