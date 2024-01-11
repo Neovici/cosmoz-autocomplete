@@ -1,3 +1,14 @@
+## [8.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.10.0...v8.0.0) (2024-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to @pionjs/pion
+
+### Features
+
+* update to pion ([d367046](https://github.com/neovici/cosmoz-autocomplete/commit/d367046bb9e01d4b518f340365eb30f664b1b99c))
+
 ## [7.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.9.0...v7.10.0) (2023-11-02)
 
 
