@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useEffect } from 'haunted';
+import { useCallback, useMemo, useEffect } from '@pionjs/pion';
 import { without, array } from '@neovici/cosmoz-utils/array';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';

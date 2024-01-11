@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useMemo } from 'haunted';
+import { useLayoutEffect, useState, useMemo } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { raf } from './util';
 

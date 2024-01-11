@@ -1,4 +1,4 @@
-import { component } from 'haunted';
+import { component } from '@pionjs/pion';
 import { expect, html, fixture } from '@open-wc/testing';
 import { spy } from 'sinon';
 import { useKeyboard } from '../src/listbox/use-keyboard';

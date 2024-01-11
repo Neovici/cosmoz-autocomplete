@@ -1,4 +1,4 @@
-import { component, useCallback } from 'haunted';
+import { component, useCallback } from '@pionjs/pion';
 import {
 	Autocomplete,
 	observedAttributes as atts,

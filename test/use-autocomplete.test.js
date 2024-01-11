@@ -1,4 +1,4 @@
-import { component } from 'haunted';
+import { component } from '@pionjs/pion';
 import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 import { spy, match as sinonMatch } from 'sinon';
 import { useAutocomplete } from '../src/autocomplete/use-autocomplete';
