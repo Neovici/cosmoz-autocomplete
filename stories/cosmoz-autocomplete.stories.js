@@ -82,9 +82,41 @@ const css = html`
 			.textProperty=${'text'}
 			.value=${colors[0]}
 		></cosmoz-autocomplete>
-	`;
+	`,
+	contourStyling = () => html` <style>
+			cosmoz-autocomplete {
+				--cosmoz-input-border-radius: 4px;
+				--cosmoz-input-padding: 8px 0;
+				--cosmoz-input-label-width: auto;
+				--cosmoz-input-no-placeholder-label-bg: white;
+				--cosmoz-input-label-padding: 0;
+				--cosmoz-input-line-display: none;
+				--cosmoz-input-contour-size: 1px;
+				--cosmoz-input-background: white;
+				--cosmoz-autocomplete-chip-border-radius: 4px;
+			}
+			cosmoz-autocomplete::part(input-control) {
+				margin: 0 8px;
+			}
+		</style>
+		<cosmoz-autocomplete
+			.placeholder=${'Choose color'}
+			.source=${colors}
+			.limit=${1}
+			.textProperty=${'text'}
+			.value=${colors[0]}
+			contour
+		></cosmoz-autocomplete>`;
 
-export { basic, single, hideEmpty, defaultIndex, disabled, placeholder };
+export {
+	basic,
+	single,
+	hideEmpty,
+	defaultIndex,
+	disabled,
+	placeholder,
+	contourStyling,
+};
 
 export const overflown = () => html` ${css}
 	<cosmoz-autocomplete
