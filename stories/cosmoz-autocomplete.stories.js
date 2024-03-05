@@ -98,11 +98,14 @@ const css = html`
 			cosmoz-autocomplete::part(input-control) {
 				margin: 0 8px;
 			}
+			cosmoz-autocomplete::part(chip-clear) {
+				margin-left: 4px;
+			}
 		</style>
 		<cosmoz-autocomplete
-			.placeholder=${'Choose color'}
+			.label=${'Choose color'}
 			.source=${colors}
-			.limit=${1}
+			.limit=${5}
 			.textProperty=${'text'}
 			.value=${colors[0]}
 			contour
