@@ -114,9 +114,33 @@ export const select = () => html`
 		.source=${colors}
 		.limit=${1}
 		.textProperty=${'text'}
-		.value=${colors[2]}
-		show-single
-		preserve-order
-		.min=${1}
-	></cosmoz-autocomplete>
-`;
+		.value=${[colors[0], colors[1], colors[2]]}
+		wrap
+		style="max-width: 170px"
+	></cosmoz-autocomplete>`;
+
+export const contour = () => html`<style>
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
+		cosmoz-autocomplete,
+		cosmoz-listbox {
+			font-family: 'Inter', sans-serif;
+		}
+		cosmoz-autocomplete::part(input) {
+			--cosmoz-input-color: #aeacac;
+			--cosmoz-input-border-radius: 4px;
+			--cosmoz-input-padding: 12px;
+			--cosmoz-input-line-display: none;
+			--cosmoz-input-contour-size: 1px;
+			--cosmoz-input-label-translate-y: 35%;
+			--cosmoz-autocomplete-chip-translate-y: 8px;
+			--cosmoz-autocomplete-chip-border-radius: 4px;
+		}
+	</style>
+	<cosmoz-autocomplete
+		.label=${'Choose color'}
+		.source=${colors}
+		.textProperty=${'text'}
+		.value=${[colors[0], colors[1], colors[2]]}
+		wrap
+		style="max-width: 255px;"
+	></cosmoz-autocomplete> `;
