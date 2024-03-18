@@ -1,3 +1,16 @@
+## [8.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.0.0...v8.1.0) (2024-03-18)
+
+
+### Features
+
+* min and preserve-order modifiers to make it more similar to select ([2425a42](https://github.com/neovici/cosmoz-autocomplete/commit/2425a428f831c21b050f87774084e6782309e91e))
+
+
+### Bug Fixes
+
+* chip has text cursor even though text is not selectable ([0157f9d](https://github.com/neovici/cosmoz-autocomplete/commit/0157f9d4113f4fbdb64d5798b87f0f3dd0b83a07))
+* use adopted stylesheets instead of style tags ([b6bc700](https://github.com/neovici/cosmoz-autocomplete/commit/b6bc700f45b1aa93af92410cebf3d6ae86421942))
+
 ## [8.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v7.10.0...v8.0.0) (2024-01-11)
 
 
