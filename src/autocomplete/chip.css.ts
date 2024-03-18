@@ -13,6 +13,7 @@ export default css`
 		min-width: 40px;
 		padding: 0 4px 0 8px;
 		gap: 4px;
+		cursor: pointer;
 	}
 	.content {
 		color: var(--cosmoz-autocomplete-chip-color, #424242);
