@@ -3,7 +3,9 @@ import {
 	Autocomplete,
 	observedAttributes as atts,
 	Props,
+	style,
 } from './autocomplete';
+import { sheet } from '@neovici/cosmoz-utils';
 
 const Standalone = <I>(host: HTMLElement & Props<I>) => {
 	const { onChange, onText, ...props } = host;
@@ -15,25 +17,26 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 				host.value = value;
 				onChange?.(value, ...args);
 			},
-			[onChange]
+			[onChange],
 		),
 		onText: useCallback(
 			(text: string) => {
 				host.text = text;
 				onText?.(text);
 			},
-			[onText]
+			[onText],
 		),
 	});
 };
 
-const observedAttributes = atts as (keyof Props<unknown>)[];
+const observedAttributes = atts as (keyof Props<unknown>)[],
+	styleSheets = [sheet(style)];
 
 customElements.define(
 	'cosmoz-autocomplete-ui',
-	component<Props<unknown>>(Autocomplete, { observedAttributes })
+	component<Props<unknown>>(Autocomplete, { observedAttributes, styleSheets }),
 );
 customElements.define(
 	'cosmoz-autocomplete',
-	component<Props<unknown>>(Standalone, { observedAttributes })
+	component<Props<unknown>>(Standalone, { observedAttributes, styleSheets }),
 );

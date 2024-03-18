@@ -88,9 +88,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			[],
 		);
 
-		return html` <style>
-				${style}
-			</style>
+		return html`
 			<cosmoz-input
 				id="input"
 				part="input"
@@ -170,4 +168,4 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'wrap',
 	];
 
-export { autocomplete, Autocomplete, observedAttributes };
+export { autocomplete, Autocomplete, observedAttributes, style };
