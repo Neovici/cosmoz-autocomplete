@@ -86,21 +86,37 @@ const css = html`
 
 export { basic, single, hideEmpty, defaultIndex, disabled, placeholder };
 
-export const overflown = () => html` ${css}
-	<cosmoz-autocomplete
-		.label=${'Choose color'}
-		.source=${colors}
-		.textProperty=${'text'}
-		.value=${[colors[0], colors[1], colors[2]]}
-		style="max-width: 170px"
-	></cosmoz-autocomplete>`;
+export const overflown = () =>
+	html` ${css}
+		<cosmoz-autocomplete
+			.label=${'Choose color'}
+			.source=${colors}
+			.textProperty=${'text'}
+			.value=${[colors[0], colors[1], colors[2]]}
+			style="max-width: 170px"
+		></cosmoz-autocomplete>`;
 
-export const wrap = () => html` ${css}
+export const wrap = () =>
+	html` ${css}
+		<cosmoz-autocomplete
+			.label=${'Choose color'}
+			.source=${colors}
+			.textProperty=${'text'}
+			.value=${[colors[0], colors[1], colors[2]]}
+			wrap
+			style="max-width: 170px"
+		></cosmoz-autocomplete>`;
+
+export const select = () => html`
+	${css}
 	<cosmoz-autocomplete
 		.label=${'Choose color'}
 		.source=${colors}
+		.limit=${1}
 		.textProperty=${'text'}
-		.value=${[colors[0], colors[1], colors[2]]}
-		wrap
-		style="max-width: 170px"
-	></cosmoz-autocomplete>`;
+		.value=${colors[2]}
+		show-single
+		preserve-order
+		.min=${1}
+	></cosmoz-autocomplete>
+`;

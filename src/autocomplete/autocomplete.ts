@@ -52,6 +52,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				onDeselect,
 				value,
 				limit,
+				min,
 				showSingle,
 				items$,
 				values$,
@@ -127,6 +128,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				<slot name="suffix" slot="suffix"></slot>
 				${selection({
 					value,
+					min,
 					isOne,
 					onDeselect,
 					textual,
@@ -156,7 +158,9 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'text-property',
 		'value-property',
 		'limit',
+		'min',
 		'show-single',
+		'preserve-order',
 		'keep-opened',
 		'keep-query',
 		'hide-empty',

@@ -29,7 +29,7 @@ const clear = html`
 `;
 
 interface Props {
-	onClear?: () => void;
+	onClear?: false | (() => void);
 	disabled?: boolean;
 }
 export const Chip = ({ onClear, disabled }: Props) => html`
@@ -38,7 +38,7 @@ export const Chip = ({ onClear, disabled }: Props) => html`
 	</style>
 	<div class="content" part="content chip-text"><slot></slot></div>
 	${when(
-		!disabled,
+		onClear && !disabled,
 		() =>
 			html` <span class="clear" part="clear chip-clear" @click=${onClear}>
 				${clear}
