@@ -1,6 +1,7 @@
-import { html, component } from '@pionjs/pion';
-import { when } from 'lit-html/directives/when.js';
+import { sheet } from '@neovici/cosmoz-utils';
+import { component, html } from '@pionjs/pion';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
+import { when } from 'lit-html/directives/when.js';
 import styles from './chip.css';
 
 const clear = html`
@@ -33,9 +34,6 @@ interface Props {
 	disabled?: boolean;
 }
 export const Chip = ({ onClear, disabled }: Props) => html`
-	<style>
-		${styles}
-	</style>
 	<div class="content" part="content chip-text"><slot></slot></div>
 	${when(
 		onClear && !disabled,
@@ -48,7 +46,10 @@ export const Chip = ({ onClear, disabled }: Props) => html`
 
 customElements.define(
 	'cosmoz-autocomplete-chip',
-	component<Props>(Chip, { observedAttributes: ['disabled'] }),
+	component<Props>(Chip, {
+		observedAttributes: ['disabled'],
+		styleSheets: [sheet(styles)],
+	}),
 );
 
 interface ChipProps extends Props {

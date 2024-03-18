@@ -96,8 +96,6 @@ export const styles = ({
 	height: number;
 	itemHeight: number;
 }) => css`
-	${style}
-
 	:host {
 		min-height: ${itemHeight}px;
 		height: ${height}px;
