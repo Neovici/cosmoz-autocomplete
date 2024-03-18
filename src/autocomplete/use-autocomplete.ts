@@ -15,6 +15,7 @@ type Source<I> = (opts: {
 interface Base<I> {
 	value: I | I[];
 	limit?: number;
+	min?: number;
 
 	keepOpened?: boolean;
 	keepQuery?: boolean;
@@ -40,6 +41,7 @@ export interface Props<I> extends Base<I> {
 	hideEmpty?: boolean;
 	disabled?: boolean;
 	onFocus?: (focused?: boolean) => void;
+	preserveOrder?: boolean;
 }
 
 export const useAutocomplete = <I>({
@@ -49,6 +51,7 @@ export const useAutocomplete = <I>({
 	onText: _onText,
 	onSelect,
 	limit,
+	min,
 	source,
 	textProperty,
 	textual: _textual,
@@ -57,11 +60,12 @@ export const useAutocomplete = <I>({
 	hideEmpty,
 	keepOpened,
 	keepQuery,
+	preserveOrder,
 	...thru
 }: Props<I>) => {
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
-			[_textual, textProperty]
+			[_textual, textProperty],
 		),
 		{ active, focused, onFocus, setClosed } = useFocus(thru),
 		empty = !text,
@@ -73,25 +77,27 @@ export const useAutocomplete = <I>({
 				_onChange?.(val, () => setClosed(true));
 				notify(host, 'value', val);
 			},
-			[_onChange]
+			[_onChange],
 		),
 		source$ = useMemo(
 			() =>
 				Promise.resolve(
-					typeof source === 'function' ? source({ query, active }) : source
+					typeof source === 'function' ? source({ query, active }) : source,
 				),
-			[source, active, query]
+			[source, active, query],
 		),
 		value = useMemo(() => array(_value), [_value]),
 		values$ = useMemo(
 			() =>
-				source$.then((source) => {
-					return [
-						...value,
-						...without(value, prop(valueProperty))(normalize(source)),
-					];
-				}),
-			[source$, value, valueProperty]
+				source$.then((source) =>
+					preserveOrder
+						? normalize(source)
+						: [
+								...value,
+								...without(value, prop(valueProperty))(normalize(source)),
+							],
+				),
+			[source$, value, valueProperty],
 		);
 
 	useKeys({
@@ -113,6 +119,7 @@ export const useAutocomplete = <I>({
 		onChange,
 		value,
 		limit,
+		min,
 		keepQuery,
 		keepOpened,
 		setClosed,
@@ -140,7 +147,7 @@ export const useAutocomplete = <I>({
 				onText((e.target as HTMLInputElement).value);
 				setClosed(false);
 			},
-			[onText, text, setClosed]
+			[onText, text, setClosed],
 		),
 		onSelect: useCallback(
 			(newVal: I) => {
@@ -149,6 +156,7 @@ export const useAutocomplete = <I>({
 					onChange,
 					onText,
 					limit,
+					min,
 					value: val,
 					keepQuery,
 					keepOpened,
@@ -156,19 +164,23 @@ export const useAutocomplete = <I>({
 				} = meta;
 				if (!keepQuery) onText('');
 				if (!keepOpened) setClosed(true);
-				const value = array(val);
+				const value = array(val),
+					deselect = value.includes(newVal);
+
+				if (deselect && value.length === min) return;
+
 				onChange(
-					(value.includes(newVal)
+					(deselect
 						? (without(newVal)(value) as I[])
 						: [...value, newVal]
-					).slice(-limit!)
+					).slice(-limit!),
 				);
 			},
-			[meta]
+			[meta],
 		),
 		onDeselect: useCallback(
 			(val: I | I[]) => meta.onChange(without(val)(meta.value) as I[]),
-			[meta]
+			[meta],
 		),
 	};
 };
