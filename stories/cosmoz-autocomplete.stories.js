@@ -107,8 +107,7 @@ export const wrap = () =>
 			style="max-width: 170px"
 		></cosmoz-autocomplete>`;
 
-export const select = () => html`
-	${css}
+export const select = () => html` ${css}
 	<cosmoz-autocomplete
 		.label=${'Choose color'}
 		.source=${colors}
@@ -125,7 +124,7 @@ export const contour = () => html`<style>
 		cosmoz-listbox {
 			font-family: 'Inter', sans-serif;
 		}
-		cosmoz-autocomplete::part(input) {
+		cosmoz-autocomplete {
 			--cosmoz-input-color: #aeacac;
 			--cosmoz-input-border-radius: 4px;
 			--cosmoz-input-padding: 12px;
