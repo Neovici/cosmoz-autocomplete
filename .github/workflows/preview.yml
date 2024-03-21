@@ -8,37 +8,6 @@ on:
       - synchronize
       - closed
 jobs:
-  deploy-preview:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install
-        run: npm ci
-
-      - name: Build
-        run: npm run build --if-present
-
-      - name: Fix imports
-        run: |
-          [ -d "stories" ] && sed -i 's/..\/src/..\/dist/g' stories/*.stories.js || true
-          [ -d "demo" ] && sed -i 's/..\/src/..\/dist/g' demo/*.js || true
-
-      - name: Build storybook
-        run: npm run storybook:build
-
-      - uses: rossjrw/pr-preview-action@v1
-        with:
-          source-dir: ./storybook-static
-          preview-branch: gh-pages
-          umbrella-dir: pr-preview
-          action: auto
+  storybook:
+    uses: Neovici/cfg/.github/workflows/preview.yml@master
+    secrets: inherit
