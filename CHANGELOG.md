@@ -1,3 +1,10 @@
+## [8.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.2.0...v8.3.0) (2024-03-21)
+
+
+### Features
+
+* adjust workflow ([ebecbb1](https://github.com/neovici/cosmoz-autocomplete/commit/ebecbb128f3efdc36c6ae1d91fba574b74a69794))
+
 ## [8.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.1.0...v8.2.0) (2024-03-21)
 
 
