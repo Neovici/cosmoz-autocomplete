@@ -3,3 +3,4 @@ coverage/
 .eslintcache
 .DS_Store
 dist/
+storybook-static/
