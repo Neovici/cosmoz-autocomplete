@@ -1,7 +1,7 @@
 name: Deploy PR previews
 concurrency: preview-${{ github.ref }}
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - reopened
@@ -9,7 +9,7 @@ on:
       - closed
 permissions:
   contents: write
-  pages: write
+  pull-requests: write
 jobs:
   storybook:
     uses: Neovici/cfg/.github/workflows/preview.yml@master
