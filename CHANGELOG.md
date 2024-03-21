@@ -1,3 +1,12 @@
+## [8.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.1.0...v8.2.0) (2024-03-21)
+
+
+### Features
+
+* deploy storybook-static ([6c9f866](https://github.com/neovici/cosmoz-autocomplete/commit/6c9f866477fa538b47ac17dc0902ed3a3881d3a5))
+* preview prs ([7451f16](https://github.com/neovici/cosmoz-autocomplete/commit/7451f16e03c136a58d3d279b491378e65455cea7))
+* update preview ([fbaddc2](https://github.com/neovici/cosmoz-autocomplete/commit/fbaddc2113101f9d6d81cfef6e0850724daa6433))
+
 ## [8.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.0.0...v8.1.0) (2024-03-18)
 
 
