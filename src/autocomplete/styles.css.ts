@@ -5,7 +5,6 @@ export default css`
 		display: block;
 		position: relative;
 		min-width: 35px;
-		font-family: 'Inter', sans-serif;
 	}
 
 	cosmoz-input::part(control) {
