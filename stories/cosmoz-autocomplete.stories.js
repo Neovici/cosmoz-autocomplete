@@ -80,72 +80,79 @@ export const Basic = {
 	},
 };
 
-export const Single = Autocomplete.bind({});
-Single.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	limit: 1,
-	value: [colors[2]],
+export const Single = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		limit: 1,
+		value: [colors[2]],
+	},
 };
 
-export const HideEmpty = Autocomplete.bind({});
-HideEmpty.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	limit: 1,
-	value: [colors[2]],
-	hideEmpty: true,
+export const HideEmpty = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		limit: 1,
+		value: [colors[2]],
+		hideEmpty: true,
+	},
 };
 
-export const DefaultIndex = Autocomplete.bind({});
-DefaultIndex.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	limit: 1,
-	defaultIndex: -1,
+export const DefaultIndex = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		limit: 1,
+		defaultIndex: -1,
+	},
 };
 
-export const DefaultIndexSingleValue = Autocomplete.bind({});
-DefaultIndexSingleValue.args = {
-	label: 'Choose color (single value)',
-	source: colors.slice(0, 1),
-	textProperty: 'text',
-	limit: 1,
-	defaultIndex: -1,
+export const DefaultIndexSingleValue = {
+	args: {
+		label: 'Choose color (single value)',
+		source: colors.slice(0, 1),
+		textProperty: 'text',
+		limit: 1,
+		defaultIndex: -1,
+	},
 };
 
-export const Disabled = Autocomplete.bind({});
-Disabled.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	limit: 1,
-	value: colors[0],
-	disabled: true,
+export const Disabled = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		limit: 1,
+		value: colors[0],
+		disabled: true,
+	},
 };
 
-export const Placeholder = Autocomplete.bind({});
-Placeholder.args = {
-	placeholder: 'Choose color (placeholder text)',
-	source: colors,
-	limit: 1,
-	textProperty: 'text',
-	value: colors[0],
+export const Placeholder = {
+	args: {
+		placeholder: 'Choose color (placeholder text)',
+		source: colors,
+		limit: 1,
+		textProperty: 'text',
+		value: colors[0],
+	},
 };
 
-export const Select = Autocomplete.bind({});
-Select.args = {
-	label: 'Choose color',
-	source: colors,
-	limit: 1,
-	textProperty: 'text',
-	value: colors[2],
-	showSingle: true,
-	preserveOrder: true,
-	min: 1,
+export const Select = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		limit: 1,
+		textProperty: 'text',
+		value: colors[2],
+		showSingle: true,
+		preserveOrder: true,
+		min: 1,
+	},
 };
 
 const AutocompleteWithInlineCSS = ({
