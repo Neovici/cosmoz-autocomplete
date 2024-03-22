@@ -107,18 +107,21 @@ export const wrap = () =>
 			style="max-width: 170px"
 		></cosmoz-autocomplete>`;
 
-export const select = () => html` ${css}
+export const select = () => html`
+	${css}
 	<cosmoz-autocomplete
 		.label=${'Choose color'}
 		.source=${colors}
 		.limit=${1}
 		.textProperty=${'text'}
-		.value=${[colors[0], colors[1], colors[2]]}
-		wrap
-		style="max-width: 170px"
-	></cosmoz-autocomplete>`;
+		.value=${colors[2]}
+		show-single
+		preserve-order
+		.min=${1}
+	></cosmoz-autocomplete>
+`;
 
-export const contour = () => html`<style>
+export const contour = () => html`${css}<style>
 		cosmoz-autocomplete {
 			--cosmoz-input-color: #aeacac;
 			--cosmoz-input-border-radius: 4px;
