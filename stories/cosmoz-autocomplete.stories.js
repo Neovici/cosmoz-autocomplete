@@ -2,25 +2,6 @@ import { html } from 'lit-html';
 import '../src/autocomplete';
 import { colors } from './data';
 
-export default {
-	title: 'Autocomplete',
-	component: 'cosmoz-autocomplete',
-	tags: ['autodocs'],
-	argTypes: {
-		label: { control: 'text' },
-		textProperty: { control: 'text' },
-		limit: { control: 'number' },
-		defaultIndex: { control: 'number' },
-		hideEmpty: { control: 'boolean' },
-		disabled: { control: 'boolean' },
-		placeholder: { control: 'text' },
-		showSingle: { control: 'boolean' },
-		preserveOrder: { control: 'boolean' },
-		min: { control: 'number' },
-		wrap: { control: 'boolean' },
-	},
-};
-
 const CSS = html`
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
@@ -54,22 +35,49 @@ const Autocomplete = ({
 		.textProperty=${textProperty}
 		.limit=${limit}
 		.value=${value}
-		.hideEmpty=${hideEmpty}
-		.defaultIndex=${defaultIndex}
-		.disabled=${disabled}
-		.showSingle=${showSingle}
-		.preserveOrder=${preserveOrder}
 		.min=${min}
-		.wrap=${wrap}
+		.defaultIndex=${defaultIndex}
+		?hide-empty=${hideEmpty}
+		?disabled=${disabled}
+		?show-single=${showSingle}
+		?preserve-order=${preserveOrder}
+		?wrap=${wrap}
 	></cosmoz-autocomplete>
 `;
 
-export const Basic = Autocomplete.bind({});
-Basic.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	value: [colors[0], colors[3]],
+export default {
+	title: 'Autocomplete',
+	render: Autocomplete,
+	tags: ['autodocs'],
+	argTypes: {
+		label: { control: 'text' },
+		textProperty: { control: 'text' },
+		limit: { control: 'number' },
+		defaultIndex: { control: 'number' },
+		hideEmpty: { control: 'boolean' },
+		disabled: { control: 'boolean' },
+		placeholder: { control: 'text' },
+		showSingle: { control: 'boolean' },
+		preserveOrder: { control: 'boolean' },
+		min: { control: 'number' },
+		wrap: { control: 'boolean' },
+	},
+	parameters: {
+		docs: {
+			source: {
+				type: 'auto',
+			},
+		},
+	},
+};
+
+export const Basic = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		value: [colors[0], colors[3]],
+	},
 };
 
 export const Single = Autocomplete.bind({});
@@ -163,13 +171,13 @@ const AutocompleteWithInlineCSS = ({
 		.textProperty=${textProperty}
 		.limit=${limit}
 		.value=${value}
-		.hideEmpty=${hideEmpty}
-		.defaultIndex=${defaultIndex}
-		.disabled=${disabled}
-		.showSingle=${showSingle}
-		.preserveOrder=${preserveOrder}
 		.min=${min}
-		.wrap=${wrap}
+		.defaultIndex=${defaultIndex}
+		?hide-empty=${hideEmpty}
+		?disabled=${disabled}
+		?show-single=${showSingle}
+		?preserve-order=${preserveOrder}
+		?wrap=${wrap}
 		style="max-width: 170px"
 	></cosmoz-autocomplete>
 `;
