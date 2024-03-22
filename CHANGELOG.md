@@ -1,3 +1,10 @@
+## [8.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.3.0...v8.4.0) (2024-03-22)
+
+
+### Features
+
+* var for chip translate y amount ([2679182](https://github.com/neovici/cosmoz-autocomplete/commit/2679182772a1697ea5a5795adf038895fb58602b))
+
 ## [8.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.2.0...v8.3.0) (2024-03-21)
 
 
