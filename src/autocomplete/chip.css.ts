@@ -14,6 +14,7 @@ export default css`
 		padding: 0 4px 0 8px;
 		gap: 4px;
 		cursor: pointer;
+		transform: translateY(var(--cosmoz-autocomplete-chip-translate-y, 0));
 	}
 	.content {
 		color: var(--cosmoz-autocomplete-chip-color, #424242);

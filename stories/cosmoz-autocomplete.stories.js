@@ -120,3 +120,24 @@ export const select = () => html`
 		.min=${1}
 	></cosmoz-autocomplete>
 `;
+
+export const contour = () => html`${css}<style>
+		cosmoz-autocomplete {
+			--cosmoz-input-color: #aeacac;
+			--cosmoz-input-border-radius: 4px;
+			--cosmoz-input-padding: 12px;
+			--cosmoz-input-line-display: none;
+			--cosmoz-input-contour-size: 1px;
+			--cosmoz-input-label-translate-y: 10px;
+			--cosmoz-autocomplete-chip-translate-y: 8px;
+			--cosmoz-autocomplete-chip-border-radius: 4px;
+		}
+	</style>
+	<cosmoz-autocomplete
+		.label=${'Choose color'}
+		.source=${colors}
+		.textProperty=${'text'}
+		.value=${[colors[0], colors[1], colors[2]]}
+		wrap
+		style="max-width: 255px;"
+	></cosmoz-autocomplete> `;
