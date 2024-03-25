@@ -54,6 +54,59 @@ const Autocomplete = ({
 	`;
 };
 
+const ContourAutocomplete = ({
+	source,
+	limit,
+	textProperty,
+	min,
+	label = '',
+	value = [],
+	hideEmpty = false,
+	disabled = false,
+	placeholder = '',
+	defaultIndex = 0,
+	showSingle = false,
+	preserveOrder = false,
+	wrap = false,
+	overflowed = false,
+}) => {
+	const styles = {
+		maxWidth: overflowed ? '255px' : 'initial',
+	};
+
+	return html`
+		${CSS}
+		<style>
+			cosmoz-autocomplete {
+				--cosmoz-input-color: #aeacac;
+				--cosmoz-input-border-radius: 4px;
+				--cosmoz-input-padding: 12px;
+				--cosmoz-input-line-display: none;
+				--cosmoz-input-contour-size: 1px;
+				--cosmoz-input-label-translate-y: 10px;
+				--cosmoz-autocomplete-chip-translate-y: 8px;
+				--cosmoz-autocomplete-chip-border-radius: 4px;
+			}
+		</style>
+		<cosmoz-autocomplete
+			.label=${label}
+			.placeholder=${placeholder}
+			.source=${source}
+			.textProperty=${textProperty}
+			.limit=${limit}
+			.value=${value}
+			.min=${min}
+			.defaultIndex=${defaultIndex}
+			?hide-empty=${hideEmpty}
+			?disabled=${disabled}
+			?show-single=${showSingle}
+			?preserve-order=${preserveOrder}
+			?wrap=${wrap}
+			style=${styleMap(styles)}
+		></cosmoz-autocomplete>
+	`;
+};
+
 export default {
 	title: 'Autocomplete',
 	render: Autocomplete,
@@ -281,24 +334,19 @@ export const Wrap = {
 	},
 };
 
-export const Contour = () =>
-	html`${CSS}<style>
-			cosmoz-autocomplete {
-				--cosmoz-input-color: #aeacac;
-				--cosmoz-input-border-radius: 4px;
-				--cosmoz-input-padding: 12px;
-				--cosmoz-input-line-display: none;
-				--cosmoz-input-contour-size: 1px;
-				--cosmoz-input-label-translate-y: 10px;
-				--cosmoz-autocomplete-chip-translate-y: 8px;
-				--cosmoz-autocomplete-chip-border-radius: 4px;
-			}
-		</style>
-		<cosmoz-autocomplete
-			.label=${'Choose color'}
-			.source=${colors}
-			.textProperty=${'text'}
-			.value=${[colors[0], colors[1], colors[2]]}
-			wrap
-			style="max-width: 255px;"
-		></cosmoz-autocomplete> `;
+export const Contour = ContourAutocomplete.bind({});
+Contour.args = {
+	label: 'Choose color',
+	source: colors,
+	textProperty: 'text',
+	value: [colors[0], colors[1], colors[2]],
+	wrap: true,
+	overflowed: true,
+};
+Contour.parameters = {
+	docs: {
+		description: {
+			story: 'Contour and Wrapped variant',
+		},
+	},
+};
