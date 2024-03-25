@@ -8,12 +8,13 @@
 		"target": "esnext",
 		"allowJs": true,
 		"paths": {
-				"@neovici/cosmoz-utils/*": [
-					"./node_modules/@neovici/cosmoz-utils/dist/*"
-				],
-				"@neovici/cosmoz-dropdown/*": [
-					"./node_modules/@neovici/cosmoz-dropdown/dist/*"
-				]
-			}
-	}
+			"@neovici/cosmoz-utils/*": [
+				"./node_modules/@neovici/cosmoz-utils/dist/*"
+			],
+			"@neovici/cosmoz-dropdown/*": [
+				"./node_modules/@neovici/cosmoz-dropdown/dist/*"
+			]
+		}
+	},
+	"include": ["src"]
 }
