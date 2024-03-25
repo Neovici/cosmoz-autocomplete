@@ -1,5 +1,6 @@
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
+import { classMap } from 'lit-html/directives/class-map.js';
 import '../src/autocomplete';
 import { colors } from './data';
 
@@ -69,15 +70,20 @@ const ContourAutocomplete = ({
 	preserveOrder = false,
 	wrap = false,
 	overflowed = false,
+	forContour = false,
 }) => {
 	const styles = {
 		maxWidth: overflowed ? '255px' : 'initial',
 	};
 
+	const classes = {
+		'contour-autocomplete': forContour,
+	};
+
 	return html`
 		${CSS}
 		<style>
-			cosmoz-autocomplete {
+			.contour-autocomplete {
 				--cosmoz-input-color: #aeacac;
 				--cosmoz-input-border-radius: 4px;
 				--cosmoz-input-padding: 12px;
@@ -103,6 +109,7 @@ const ContourAutocomplete = ({
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
 			style=${styleMap(styles)}
+			class="${classMap(classes)}"
 		></cosmoz-autocomplete>
 	`;
 };
@@ -146,11 +153,12 @@ export default {
 		min: { control: 'number' },
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
+		forContour: { control: 'boolean' },
 	},
 	parameters: {
 		docs: {
 			controls: {
-				exclude: 'overflowed',
+				exclude: ['overflowed', 'forContour'],
 			},
 			description: {
 				component: 'The Cosmoz Autocomplete web component',
@@ -342,6 +350,7 @@ Contour.args = {
 	value: [colors[0], colors[1], colors[2]],
 	wrap: true,
 	overflowed: true,
+	forContour: true,
 };
 Contour.parameters = {
 	docs: {
