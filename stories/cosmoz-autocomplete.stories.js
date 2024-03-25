@@ -59,18 +59,50 @@ export default {
 	render: Autocomplete,
 	tags: ['autodocs'],
 	argTypes: {
-		label: { control: 'text' },
-		textProperty: { control: 'text' },
+		label: {
+			control: 'text',
+			description: 'The label displayed on the screen',
+		},
+		source: {
+			control: 'object',
+			description: 'The source for the values displayed in the dropdown',
+		},
+		textProperty: {
+			control: 'text',
+			description:
+				'The object property used to select the value from the source',
+		},
+		value: {
+			control: 'object',
+			description: 'The actual value of the Autocomplete',
+		},
 		limit: { control: 'number' },
-		defaultIndex: { control: 'number' },
+		defaultIndex: {
+			control: 'number',
+			description: 'The default index of the source array',
+		},
 		hideEmpty: { control: 'boolean' },
-		disabled: { control: 'boolean' },
+		disabled: {
+			control: 'boolean',
+			description:
+				'A boolean representing the disabled state of the Autocomplete',
+		},
 		placeholder: { control: 'text' },
 		showSingle: { control: 'boolean' },
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
+	},
+	parameters: {
+		docs: {
+			controls: {
+				exclude: 'overflowed',
+			},
+			description: {
+				component: 'The Cosmoz Autocomplete web component',
+			},
+		},
 	},
 };
 
@@ -81,6 +113,13 @@ export const Basic = {
 		textProperty: 'text',
 		value: [colors[0], colors[3]],
 	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'The basic version',
+			},
+		},
+	},
 };
 
 export const Single = {
@@ -90,6 +129,13 @@ export const Single = {
 		textProperty: 'text',
 		limit: 1,
 		value: [colors[2]],
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Choose a single value',
+			},
+		},
 	},
 };
 
@@ -102,6 +148,13 @@ export const HideEmpty = {
 		value: [colors[2]],
 		hideEmpty: true,
 	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Hide the empty value',
+			},
+		},
+	},
 };
 
 export const DefaultIndex = {
@@ -112,6 +165,13 @@ export const DefaultIndex = {
 		limit: 1,
 		defaultIndex: -1,
 	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Select a default index for the colors, in this case -1',
+			},
+		},
+	},
 };
 
 export const DefaultIndexSingleValue = {
@@ -121,6 +181,13 @@ export const DefaultIndexSingleValue = {
 		textProperty: 'text',
 		limit: 1,
 		defaultIndex: -1,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Select a default index for the color, in this case -1',
+			},
+		},
 	},
 };
 
@@ -133,6 +200,13 @@ export const Disabled = {
 		value: colors[0],
 		disabled: true,
 	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'The disabled version',
+			},
+		},
+	},
 };
 
 export const Placeholder = {
@@ -142,6 +216,13 @@ export const Placeholder = {
 		limit: 1,
 		textProperty: 'text',
 		value: colors[0],
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Use the placeholder instead of the label',
+			},
+		},
 	},
 };
 
@@ -156,6 +237,13 @@ export const Select = {
 		preserveOrder: true,
 		min: 1,
 	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Make it act like a Select component',
+			},
+		},
+	},
 };
 
 export const Overflown = {
@@ -165,6 +253,13 @@ export const Overflown = {
 		textProperty: 'text',
 		value: [colors[0], colors[1], colors[2]],
 		overflowed: true,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Overflown variant',
+			},
+		},
 	},
 };
 
@@ -177,4 +272,33 @@ export const Wrap = {
 		wrap: true,
 		overflowed: true,
 	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'Overflown and Wrapped variant',
+			},
+		},
+	},
 };
+
+export const Contour = () =>
+	html`${CSS}<style>
+			cosmoz-autocomplete {
+				--cosmoz-input-color: #aeacac;
+				--cosmoz-input-border-radius: 4px;
+				--cosmoz-input-padding: 12px;
+				--cosmoz-input-line-display: none;
+				--cosmoz-input-contour-size: 1px;
+				--cosmoz-input-label-translate-y: 10px;
+				--cosmoz-autocomplete-chip-translate-y: 8px;
+				--cosmoz-autocomplete-chip-border-radius: 4px;
+			}
+		</style>
+		<cosmoz-autocomplete
+			.label=${'Choose color'}
+			.source=${colors}
+			.textProperty=${'text'}
+			.value=${[colors[0], colors[1], colors[2]]}
+			wrap
+			style="max-width: 255px;"
+		></cosmoz-autocomplete> `;
