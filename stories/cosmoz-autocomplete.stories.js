@@ -1,4 +1,5 @@
 import { html } from 'lit-html';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import '../src/autocomplete';
 import { colors } from './data';
 
@@ -26,24 +27,32 @@ const Autocomplete = ({
 	showSingle = false,
 	preserveOrder = false,
 	wrap = false,
-}) => html`
-	${CSS}
-	<cosmoz-autocomplete
-		.label=${label}
-		.placeholder=${placeholder}
-		.source=${source}
-		.textProperty=${textProperty}
-		.limit=${limit}
-		.value=${value}
-		.min=${min}
-		.defaultIndex=${defaultIndex}
-		?hide-empty=${hideEmpty}
-		?disabled=${disabled}
-		?show-single=${showSingle}
-		?preserve-order=${preserveOrder}
-		?wrap=${wrap}
-	></cosmoz-autocomplete>
-`;
+	overflowed = false,
+}) => {
+	const styles = {
+		maxWidth: overflowed ? '170px' : 'initial',
+	};
+
+	return html`
+		${CSS}
+		<cosmoz-autocomplete
+			.label=${label}
+			.placeholder=${placeholder}
+			.source=${source}
+			.textProperty=${textProperty}
+			.limit=${limit}
+			.value=${value}
+			.min=${min}
+			.defaultIndex=${defaultIndex}
+			?hide-empty=${hideEmpty}
+			?disabled=${disabled}
+			?show-single=${showSingle}
+			?preserve-order=${preserveOrder}
+			?wrap=${wrap}
+			style=${styleMap(styles)}
+		></cosmoz-autocomplete>
+	`;
+};
 
 export default {
 	title: 'Autocomplete',
@@ -61,13 +70,7 @@ export default {
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
 		wrap: { control: 'boolean' },
-	},
-	parameters: {
-		docs: {
-			source: {
-				type: 'auto',
-			},
-		},
+		overflowed: { control: 'boolean' },
 	},
 };
 
@@ -155,53 +158,23 @@ export const Select = {
 	},
 };
 
-const AutocompleteWithInlineCSS = ({
-	source,
-	limit,
-	textProperty,
-	min,
-	label = '',
-	value = [],
-	hideEmpty = false,
-	disabled = false,
-	placeholder = '',
-	defaultIndex = 0,
-	showSingle = false,
-	preserveOrder = false,
-	wrap = false,
-}) => html`
-	${CSS}
-	<cosmoz-autocomplete
-		.label=${label}
-		.placeholder=${placeholder}
-		.source=${source}
-		.textProperty=${textProperty}
-		.limit=${limit}
-		.value=${value}
-		.min=${min}
-		.defaultIndex=${defaultIndex}
-		?hide-empty=${hideEmpty}
-		?disabled=${disabled}
-		?show-single=${showSingle}
-		?preserve-order=${preserveOrder}
-		?wrap=${wrap}
-		style="max-width: 170px"
-	></cosmoz-autocomplete>
-`;
-
-export const Overflown = AutocompleteWithInlineCSS.bind({});
-Overflown.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	value: [colors[0], colors[1], colors[2]],
+export const Overflown = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		value: [colors[0], colors[1], colors[2]],
+		overflowed: true,
+	},
 };
 
-export const Wrap = AutocompleteWithInlineCSS.bind({});
-Wrap.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	value: [colors[0], colors[1], colors[2]],
-	wrap: true,
+export const Wrap = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		value: [colors[0], colors[1], colors[2]],
+		wrap: true,
+		overflowed: true,
+	},
 };
