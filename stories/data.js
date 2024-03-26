@@ -6,7 +6,7 @@ const colors = [
 	'White',
 	'Brown',
 	'Aqua',
-	'Nothing'
-].map(text => ({ text }));
+	'Nothing',
+].map((text) => ({ text }));
 
 export { colors };

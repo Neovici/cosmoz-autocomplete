@@ -1,6 +1,8 @@
 node_modules/
 coverage/
+storybook-static/
 .eslintcache
 .DS_Store
 dist/
 storybook-static/
+demo-storybook/
