@@ -23,13 +23,14 @@
 	"scripts": {
 		"lint": "tsc && eslint --cache .",
 		"build": "tsc -p tsconfig.build.json",
-		"start": "wds",
+		"start": "npm run storybook:start",
 		"test": "wtr --coverage",
 		"test:watch": "wtr --watch",
 		"prepare": "husky",
 		"storybook:start": "storybook dev -p 8000",
 		"storybook:build": "storybook build",
-		"storybook:deploy": "storybook-to-ghpages"
+		"storybook:deploy": "storybook-to-ghpages",
+		"storybook:preview": "npm run storybook:build && http-server -d ./storybook-static/"
 	},
 	"release": {
 		"plugins": [
@@ -91,6 +92,7 @@
 		"@web/storybook-builder": "^0.1.9",
 		"@web/storybook-framework-web-components": "^0.1.1",
 		"esbuild": "^0.20.2",
+		"http-server": "^14.1.1",
 		"husky": "^9.0.0",
 		"rollup-plugin-esbuild": "^6.1.1",
 		"rollup-plugin-terser": "^7.0.2",
