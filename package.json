@@ -27,8 +27,8 @@
 		"test": "wtr --coverage",
 		"test:watch": "wtr --watch",
 		"prepare": "husky",
-		"storybook:start": "storybook dev -p 6006",
-		"storybook:build": "storybook build --output-dir demo-storybook",
+		"storybook:start": "storybook dev -p 8000",
+		"storybook:build": "storybook build",
 		"storybook:deploy": "storybook-to-ghpages"
 	},
 	"release": {
