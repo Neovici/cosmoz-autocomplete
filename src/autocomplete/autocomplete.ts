@@ -22,6 +22,8 @@ export interface Props<I> extends Base<I> {
 	showSingle?: boolean;
 	itemHeight?: number;
 	itemLimit?: number;
+	wrap?: boolean;
+	defaultIndex?: number;
 }
 
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
@@ -88,8 +90,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			[],
 		);
 
-		return html`
-			<cosmoz-input
+		return html` <cosmoz-input
 				id="input"
 				part="input"
 				.label=${label}
@@ -166,6 +167,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'item-height',
 		'item-limit',
 		'wrap',
-	];
+	] as const;
 
 export { autocomplete, Autocomplete, observedAttributes, style };
