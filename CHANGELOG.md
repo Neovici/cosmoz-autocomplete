@@ -1,3 +1,10 @@
+## [8.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.4.0...v8.5.0) (2024-04-01)
+
+
+### Features
+
+* rearrange repo and update storybook ([579abe9](https://github.com/neovici/cosmoz-autocomplete/commit/579abe933315d615cb1ad82797a2d8f810ec8855))
+
 ## [8.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.3.0...v8.4.0) (2024-03-22)
 
 
