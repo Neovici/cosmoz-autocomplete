@@ -117,7 +117,6 @@ const ContourAutocomplete = ({
 export default {
 	title: 'Autocomplete',
 	render: Autocomplete,
-	tags: ['autodocs'],
 	argTypes: {
 		label: {
 			control: 'text',
