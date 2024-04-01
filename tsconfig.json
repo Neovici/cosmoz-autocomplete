@@ -1,19 +1,15 @@
 {
-	"compilerOptions": {
-		"allowSyntheticDefaultImports": true,
-		"noEmit": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"strict": true,
-		"target": "esnext",
-		"allowJs": true,
-		"paths": {
-				"@neovici/cosmoz-utils/*": [
-					"./node_modules/@neovici/cosmoz-utils/dist/*"
-				],
-				"@neovici/cosmoz-dropdown/*": [
-					"./node_modules/@neovici/cosmoz-dropdown/dist/*"
-				]
-			}
-	}
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "target": "esnext",
+    "allowJs": true,
+    "types": [
+      "node",
+      "mocha"
+    ]
+  }
 }
