@@ -740,6 +740,7 @@ const styles$2 = tagged `
 			--cosmoz-input-focused-color,
 			var(--primary-color, #3f51b5)
 		);
+		--float-display: var(--cosmoz-input-float-display, block);
 		--contour-color: var(--line-color);
 		--contour-size: var(--cosmoz-input-contour-size);
 		--label-translate-y: var(--cosmoz-input-label-translate-y, 0%);
@@ -764,10 +765,11 @@ const styles$2 = tagged `
 	.float {
 		line-height: calc(var(--line-height) * var(--label-scale));
 		background-color: var(--cosmoz-input-float-bg-color, none);
+		display: var(--float-display);
 	}
 
 	.wrap {
-		padding: var(--cosmoz-input-padding, 0px);
+		padding: var(--cosmoz-input-wrap-padding, 0px);
 		display: flex;
 		align-items: center;
 		position: relative;
@@ -3825,7 +3827,7 @@ const ContourAutocomplete = ({
 			.contour-autocomplete {
 				--cosmoz-input-color: #aeacac;
 				--cosmoz-input-border-radius: 4px;
-				--cosmoz-input-padding: 12px;
+				--cosmoz-input-wrap-padding: 12px;
 				--cosmoz-input-line-display: none;
 				--cosmoz-input-contour-size: 1px;
 				--cosmoz-input-label-translate-y: 10px;
