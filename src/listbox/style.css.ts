@@ -13,8 +13,16 @@ const style = css`
 		font-family: var(--paper-font-subhead_-_font-family, initial);
 		background: #fff;
 		min-width: 72px;
-		box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12),
+		box-shadow:
+			0 3px 4px 0 rgba(0, 0, 0, 0.14),
+			0 1px 8px 0 rgba(0, 0, 0, 0.12),
 			0 3px 3px -2px rgba(0, 0, 0, 0.4);
+	}
+	:host(:popover-open) {
+		box-sizing: border-box;
+		display: block;
+		margin: 0;
+		border: 0;
 	}
 	.items {
 		position: relative;
