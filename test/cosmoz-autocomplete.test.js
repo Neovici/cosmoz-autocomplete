@@ -108,7 +108,12 @@ describe('cosmoz-autocomplete', () => {
 		el.shadowRoot.querySelector('cosmoz-input').focus();
 		await nextFrame();
 		await nextFrame();
-		document.body.querySelector('cosmoz-listbox').onSelect(source[1]);
+
+		const cosmozListboxElement =
+			document.body.querySelector('cosmoz-listbox') ??
+			el.shadowRoot.querySelector('cosmoz-listbox');
+
+		cosmozListboxElement.onSelect(source[1]);
 		expect(onChange).to.have.been.calledOnceWith([source[0], source[1]]);
 	});
 
@@ -133,7 +138,7 @@ describe('cosmoz-autocomplete', () => {
 	});
 
 	it('focus', async () => {
-		await fixture(html`
+		const el = await fixture(html`
 			<cosmoz-autocomplete
 				.source=${source}
 				.value=${source[0]}
@@ -145,6 +150,10 @@ describe('cosmoz-autocomplete', () => {
 		document.body.querySelector('cosmoz-autocomplete').focus();
 		await nextFrame();
 
-		expect(document.body.querySelector('cosmoz-listbox')).to.be.ok;
+		const cosmozListboxElement =
+			document.body.querySelector('cosmoz-listbox') ??
+			el.shadowRoot.querySelector('cosmoz-listbox');
+
+		expect(cosmozListboxElement).to.be.ok;
 	});
 });
