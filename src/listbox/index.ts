@@ -48,6 +48,19 @@ const Listbox = <I>(props: Props<I>) => {
 	</div>`;
 };
 
+const supportsPopover = () => {
+	// eslint-disable-next-line no-prototype-builtins
+	return HTMLElement.prototype.hasOwnProperty('popover');
+};
+
+const showPopover = (popover?: Element) => {
+	const popoverElement = popover as HTMLElement;
+
+	requestAnimationFrame(() => {
+		popoverElement?.showPopover();
+	});
+};
+
 customElements.define(
 	'cosmoz-listbox',
 	component<Props<unknown>>(Listbox, { styleSheets: [sheet(style)] }),
@@ -56,11 +69,22 @@ customElements.define(
 export const listbox = <I>({
 	multi,
 	...thru
-}: Props<I> & { multi?: boolean }) =>
-	portal(
+}: Props<I> & { multi?: boolean }) => {
+	if (supportsPopover()) {
+		return html`<cosmoz-listbox
+			${ref(showPopover)}
+			popover="manual"
+			part="listbox"
+			?multi=${multi}
+			...=${spreadProps(props(properties)(thru))}
+		></cosmoz-listbox>`;
+	}
+
+	return portal(
 		html`<cosmoz-listbox
 			part="listbox"
 			?multi=${multi}
 			...=${spreadProps(props(properties)(thru))}
 		></cosmoz-listbox>`,
 	);
+};
