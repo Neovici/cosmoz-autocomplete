@@ -1,3 +1,13 @@
+## [8.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.5.0...v8.6.0) (2024-04-10)
+
+
+### Features
+
+* add `package-lock.json` file ([1016f85](https://github.com/neovici/cosmoz-autocomplete/commit/1016f8565e8162ecbee9b97ffd6c105abfa2ea53))
+* make tests pass in both browsers ([f357e23](https://github.com/neovici/cosmoz-autocomplete/commit/f357e231fb5e51e7bc4c7a87b9dc7f22a3c8729e))
+* update `cosmoz-dropdown` dependency ([bc952fb](https://github.com/neovici/cosmoz-autocomplete/commit/bc952fba7267067d68e4ac990ac1b50f37888d5d))
+* use popover for cosmoz-listbox ([c977f5d](https://github.com/neovici/cosmoz-autocomplete/commit/c977f5dfe9cbc77f7a048d4932878fe9cf8868c2))
+
 ## [8.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.4.0...v8.5.0) (2024-04-01)
 
 
