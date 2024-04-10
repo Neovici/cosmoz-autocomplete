@@ -2433,8 +2433,16 @@ const style$1 = tagged`
 		font-family: var(--paper-font-subhead_-_font-family, initial);
 		background: #fff;
 		min-width: 72px;
-		box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12),
+		box-shadow:
+			0 3px 4px 0 rgba(0, 0, 0, 0.14),
+			0 1px 8px 0 rgba(0, 0, 0, 0.12),
 			0 3px 3px -2px rgba(0, 0, 0, 0.4);
+	}
+	:host(:popover-open) {
+		box-sizing: border-box;
+		display: block;
+		margin: 0;
+		border: 0;
 	}
 	.items {
 		position: relative;
@@ -2523,455 +2531,343 @@ const styles$1 = ({ index, height, itemHeight }) => tagged`
 	}
 `;
 
-var oppositeDirections = {
-  top: 'bottom',
-  bottom: 'top',
-  left: 'right',
-  right: 'left',
-  center: 'center'
+const oppositeDirections = {
+    top: 'bottom',
+    bottom: 'top',
+    left: 'right',
+    right: 'left',
+    center: 'center',
 };
-var clockwiseDirections = {
-  top: 'right',
-  right: 'bottom',
-  bottom: 'left',
-  left: 'top',
-  center: 'center'
-};
-
-var presets = {
-  center: {
-    popup: 'center',
-    anchor: 'center'
-  },
-  // clockwise
-  top: {
-    popup: 'bottom-center',
-    anchor: 'top-center'
-  },
-  right: {
-    popup: 'left-center',
-    anchor: 'right-center'
-  },
-  bottom: {
-    popup: 'top-center',
-    anchor: 'bottom-center'
-  },
-  left: {
-    popup: 'right-center',
-    anchor: 'left-center'
-  },
-  // clockwise
-  'top-left': {
-    popup: 'bottom-left',
-    anchor: 'top-left'
-  },
-  'right-top': {
-    popup: 'left-top',
-    anchor: 'right-top'
-  },
-  'bottom-right': {
-    popup: 'top-right',
-    anchor: 'bottom-right'
-  },
-  'left-bottom': {
-    popup: 'right-bottom',
-    anchor: 'left-bottom'
-  },
-  // clockwise
-  'top-right': {
-    popup: 'bottom-right',
-    anchor: 'top-right'
-  },
-  'right-bottom': {
-    popup: 'left-bottom',
-    anchor: 'right-bottom'
-  },
-  'bottom-left': {
-    popup: 'top-left',
-    anchor: 'bottom-left'
-  },
-  'left-top': {
-    popup: 'right-top',
-    anchor: 'left-top'
-  }
+const clockwiseDirections = {
+    top: 'right',
+    right: 'bottom',
+    bottom: 'left',
+    left: 'top',
+    center: 'center',
 };
 
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
+const presets = {
+    center: {
+        popup: 'center',
+        anchor: 'center',
+    },
+    // clockwise
+    top: {
+        popup: 'bottom-center',
+        anchor: 'top-center',
+    },
+    right: {
+        popup: 'left-center',
+        anchor: 'right-center',
+    },
+    bottom: {
+        popup: 'top-center',
+        anchor: 'bottom-center',
+    },
+    left: {
+        popup: 'right-center',
+        anchor: 'left-center',
+    },
+    // clockwise
+    'top-left': {
+        popup: 'bottom-left',
+        anchor: 'top-left',
+    },
+    'right-top': {
+        popup: 'left-top',
+        anchor: 'right-top',
+    },
+    'bottom-right': {
+        popup: 'top-right',
+        anchor: 'bottom-right',
+    },
+    'left-bottom': {
+        popup: 'right-bottom',
+        anchor: 'left-bottom',
+    },
+    // clockwise
+    'top-right': {
+        popup: 'bottom-right',
+        anchor: 'top-right',
+    },
+    'right-bottom': {
+        popup: 'left-bottom',
+        anchor: 'right-bottom',
+    },
+    'bottom-left': {
+        popup: 'top-left',
+        anchor: 'bottom-left',
+    },
+    'left-top': {
+        popup: 'right-top',
+        anchor: 'left-top',
+    },
+};
 
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-var Point =
-/*#__PURE__*/
-function () {
-  function Point(x, y) {
-    if (x === void 0) {
-      x = 0;
+class Point {
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
     }
-
-    if (y === void 0) {
-      y = 0;
+    add(point) {
+        return new Point(this.x + point.x, this.y + point.y);
     }
-
-    this.x = x;
-    this.y = y;
-  }
-
-  var _proto = Point.prototype;
-
-  _proto.add = function add(point) {
-    return new Point(this.x + point.x, this.y + point.y);
-  };
-
-  _proto.subtract = function subtract(point) {
-    return new Point(this.x - point.x, this.y - point.y);
-  };
-
-  _proto.negative = function negative() {
-    return new Point(-this.x, -this.y);
-  };
-
-  return Point;
-}();
-
+    subtract(point) {
+        return new Point(this.x - point.x, this.y - point.y);
+    }
+    negative() {
+        return new Point(-this.x, -this.y);
+    }
+}
 Point.Zero = new Point(0, 0);
 
-var max = Math.max,
-    min = Math.min;
+const { max, min } = Math;
+// prettier-ignore
+class Rect {
+    static fromBoundingClientRect(bcr) {
+        var _a, _b;
+        if (bcr.getBoundingClientRect) {
+            bcr = bcr.getBoundingClientRect();
+        }
+        // @ts-ignore
+        return new Rect((_a = bcr.x) !== null && _a !== void 0 ? _a : bcr.left, (_b = bcr.y) !== null && _b !== void 0 ? _b : bcr.top, bcr.width, bcr.height);
+    }
+    static fromRect(r) {
+        var _a, _b, _c, _d;
+        return new Rect((_a = r.x) !== null && _a !== void 0 ? _a : 0, (_b = r.y) !== null && _b !== void 0 ? _b : 0, (_c = r.width) !== null && _c !== void 0 ? _c : 0, (_d = r.height) !== null && _d !== void 0 ? _d : 0);
+    }
+    static intersect(a, b) {
+        const top = max(a.top, b.top);
+        const right = min(a.right, b.right);
+        const bottom = min(a.bottom, b.bottom);
+        const left = max(a.left, b.left);
+        const width = right - left;
+        const height = bottom - top;
+        if (width < 0 || height < 0) {
+            return null;
+        }
+        return new Rect(left, top, width, height);
+    }
+    static fromViewport() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        return new Rect(0, 0, width, height);
+    }
+    constructor(x = 0, y = 0, width = 0, height = 0) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    setLocation(point) {
+        this.x = point.x;
+        this.y = point.y;
+        return this;
+    }
+    contains(rect) {
+        return (this.left <= rect.left &&
+            this.top <= rect.top &&
+            this.right >= rect.right &&
+            this.bottom > rect.bottom);
+    }
+    translate(offset) {
+        return new Rect(offset.x, offset.y, this.width, this.height);
+    }
+    get area() {
+        return this.width * this.height;
+    }
+    get left() {
+        return this.x;
+    }
+    get top() {
+        return this.y;
+    }
+    get right() {
+        return this.x + this.width;
+    }
+    get bottom() {
+        return this.y + this.height;
+    }
+    get centerX() {
+        return this.x + this.width / 2;
+    }
+    get centerY() {
+        return this.y + this.height / 2;
+    }
+    get center() {
+        return new Point(this.centerX, this.centerY);
+    }
+    get topLeft() {
+        return new Point(this.left, this.top);
+    }
+    get topRight() {
+        return new Point(this.right, this.top);
+    }
+    get topCenter() {
+        return new Point(this.centerX, this.top);
+    }
+    get rightTop() {
+        return this.topRight;
+    }
+    get rightBottom() {
+        return new Point(this.right, this.bottom);
+    }
+    get rightCenter() {
+        return new Point(this.right, this.centerY);
+    }
+    get bottomLeft() {
+        return new Point(this.left, this.bottom);
+    }
+    get bottomRight() {
+        return this.rightBottom;
+    }
+    get bottomCenter() {
+        return new Point(this.centerX, this.bottom);
+    }
+    get leftTop() {
+        return this.topLeft;
+    }
+    get leftBottom() {
+        return this.bottomLeft;
+    }
+    get leftCenter() {
+        return new Point(this.left, this.centerY);
+    }
+    get centerTop() {
+        return this.topCenter;
+    }
+    get centerRight() {
+        return this.rightCenter;
+    }
+    get centerLeft() {
+        return this.leftCenter;
+    }
+    get centerBottom() {
+        return this.bottomCenter;
+    }
+    get centerCenter() {
+        return this.center;
+    }
+    toJSON() {
+        return {
+            x: this.x,
+            y: this.y,
+            width: this.width,
+            height: this.height,
+            top: this.top,
+            right: this.right,
+            bottom: this.bottom,
+            left: this.left,
+        };
+    }
+}
 
-var Rect =
-/*#__PURE__*/
-function () {
-  Rect.fromBoundingClientRect = function fromBoundingClientRect(bcr) {
-    if (bcr.getBoundingClientRect) {
-      bcr = bcr.getBoundingClientRect();
-    }
-
-    return new Rect(bcr.left, bcr.top, bcr.width, bcr.height);
-  };
-
-  Rect.intersect = function intersect(a, b) {
-    var top = max(a.top, b.top);
-    var right = min(a.right, b.right);
-    var bottom = min(a.bottom, b.bottom);
-    var left = max(a.left, b.left);
-    var width = right - left;
-    var height = bottom - top;
-
-    if (width < 0 || height < 0) {
-      return null;
-    }
-
-    return new Rect(left, top, width, height);
-  };
-
-  Rect.fromViewport = function fromViewport() {
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-    return new Rect(0, 0, width, height);
-  };
-
-  function Rect(x, y, width, height) {
-    if (x === void 0) {
-      x = 0;
-    }
-
-    if (y === void 0) {
-      y = 0;
-    }
-
-    if (width === void 0) {
-      width = 0;
-    }
-
-    if (height === void 0) {
-      height = 0;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-  }
-
-  var _proto = Rect.prototype;
-
-  _proto.setLocation = function setLocation(point) {
-    this.x = point.x;
-    this.y = point.y;
-    return this;
-  };
-
-  _proto.contains = function contains(rect) {
-    return this.left <= rect.left && this.top <= rect.top && this.right >= rect.right && this.bottom > rect.bottom;
-  };
-
-  _proto.translate = function translate(offset) {
-    return new Rect(offset.x, offset.y, this.width, this.height);
-  };
-
-  _createClass(Rect, [{
-    key: "area",
-    get: function get() {
-      return this.width * this.height;
-    }
-  }, {
-    key: "left",
-    get: function get() {
-      return this.x;
-    }
-  }, {
-    key: "top",
-    get: function get() {
-      return this.y;
-    }
-  }, {
-    key: "right",
-    get: function get() {
-      return this.x + this.width;
-    }
-  }, {
-    key: "bottom",
-    get: function get() {
-      return this.y + this.height;
-    }
-  }, {
-    key: "centerX",
-    get: function get() {
-      return this.x + this.width / 2;
-    }
-  }, {
-    key: "centerY",
-    get: function get() {
-      return this.y + this.height / 2;
-    }
-  }, {
-    key: "center",
-    get: function get() {
-      return new Point(this.centerX, this.centerY);
-    }
-  }, {
-    key: "topLeft",
-    get: function get() {
-      return new Point(this.left, this.top);
-    }
-  }, {
-    key: "topRight",
-    get: function get() {
-      return new Point(this.right, this.top);
-    }
-  }, {
-    key: "topCenter",
-    get: function get() {
-      return new Point(this.centerX, this.top);
-    }
-  }, {
-    key: "rightTop",
-    get: function get() {
-      return this.topRight;
-    }
-  }, {
-    key: "rightBottom",
-    get: function get() {
-      return new Point(this.right, this.bottom);
-    }
-  }, {
-    key: "rightCenter",
-    get: function get() {
-      return new Point(this.right, this.centerY);
-    }
-  }, {
-    key: "bottomLeft",
-    get: function get() {
-      return new Point(this.left, this.bottom);
-    }
-  }, {
-    key: "bottomRight",
-    get: function get() {
-      return this.rightBottom;
-    }
-  }, {
-    key: "bottomCenter",
-    get: function get() {
-      return new Point(this.centerX, this.bottom);
-    }
-  }, {
-    key: "leftTop",
-    get: function get() {
-      return this.topLeft;
-    }
-  }, {
-    key: "leftBottom",
-    get: function get() {
-      return this.bottomLeft;
-    }
-  }, {
-    key: "leftCenter",
-    get: function get() {
-      return new Point(this.left, this.centerY);
-    }
-  }, {
-    key: "centerTop",
-    get: function get() {
-      return this.topCenter;
-    }
-  }, {
-    key: "centerRight",
-    get: function get() {
-      return this.rightCenter;
-    }
-  }, {
-    key: "centerLeft",
-    get: function get() {
-      return this.leftCenter;
-    }
-  }, {
-    key: "centerBottom",
-    get: function get() {
-      return this.bottomCenter;
-    }
-  }, {
-    key: "centerCenter",
-    get: function get() {
-      return this.center;
-    }
-  }]);
-
-  return Rect;
-}();
-
-var canUseDOM = typeof window === 'object' && typeof document === 'object';
-var isWebkit = canUseDOM && navigator.userAgent.indexOf('AppleWebKit') > -1; // polyfill for document.scrollingElement
+const canUseDOM = typeof window === 'object' && typeof document === 'object';
+const isWebkit = canUseDOM && navigator.userAgent.indexOf('AppleWebKit') > -1;
+// polyfill for document.scrollingElement
 // @see https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/dom/getDocumentScrollElement.js
-
-var getDocumentScrollingElement = function getDocumentScrollingElement() {
-  if (!canUseDOM) return null;
-
-  if (document.scrollingElement) {
-    return document.scrollingElement;
-  }
-
-  return !isWebkit && document.compatMode === 'CSS1Compat' ? document.documentElement : document.body;
+const getDocumentScrollingElement = () => {
+    if (!canUseDOM)
+        return null;
+    if (document.scrollingElement) {
+        return document.scrollingElement;
+    }
+    return !isWebkit && document.compatMode === 'CSS1Compat'
+        ? document.documentElement
+        : document.body;
 };
-var toCamelCase = function toCamelCase(s) {
-  return s.replace(/([-_])([a-z])/g, function (s, a, b) {
-    return b.toUpperCase();
-  });
+const toCamelCase = (s) => s.replace(/([-_])([a-z])/g, (s, a, b) => b.toUpperCase());
+const parseCorner = (rect, placement) => {
+    if (!placement || typeof placement !== 'string') {
+        return null;
+    }
+    const point = rect[toCamelCase(placement)];
+    return point instanceof Point ? point : null;
 };
-var parseCorner = function parseCorner(rect, placement) {
-  if (!placement || typeof placement !== 'string') {
-    return null;
-  }
-
-  var point = rect[toCamelCase(placement)];
-  return point instanceof Point ? point : null;
+const parsePlacementPair = (placement) => {
+    if (typeof placement === 'string') {
+        return placement.split('-');
+    }
+    return [];
 };
-
-var parsePlacementPair = function parsePlacementPair(placement) {
-  if (typeof placement === 'string') {
-    return placement.split('-');
-  }
-
-  return [];
+const joinDirection = (main, sub) => sub ? `${main}-${sub}` : main;
+// 水平或垂直翻转，只需要倒转主方向；顺时针旋转两次，等同于同时倒转主次方向
+// @ts-expect-error
+const getOppositePlacement = (placement, all = false) => {
+    if (!placement) {
+        return null;
+    }
+    if (typeof placement === 'object') {
+        return {
+            // @ts-expect-error
+            popup: getOppositePlacement(placement.popup, all),
+            // @ts-expect-error
+            anchor: getOppositePlacement(placement.anchor, all),
+        };
+    }
+    // @ts-expect-error
+    const [main, sub] = parsePlacementPair(placement);
+    return joinDirection(
+    // @ts-expect-error
+    oppositeDirections[main], 
+    // @ts-expect-error
+    all ? oppositeDirections[sub] : sub);
 };
-
-var joinDirection = function joinDirection(main, sub) {
-  return sub ? main + "-" + sub : main;
-}; // 水平或垂直翻转，只需要倒转主方向；顺时针旋转两次，等同于同时倒转主次方向
-
-
-var getOppositePlacement = function getOppositePlacement(placement, all) {
-  if (all === void 0) {
-    all = false;
-  }
-
-  if (!placement) {
-    return null;
-  }
-
-  if (typeof placement === 'object') {
+// @ts-expect-error
+const getClockwisePlacement = (placement) => {
+    if (!placement) {
+        return null;
+    }
+    if (typeof placement === 'object') {
+        return {
+            // @ts-expect-error
+            popup: getClockwisePlacement(placement.popup),
+            // @ts-expect-error
+            anchor: getClockwisePlacement(placement.anchor),
+        };
+    }
+    // @ts-expect-error
+    const [main, sub] = parsePlacementPair(placement);
+    // @ts-expect-error
+    return joinDirection(clockwiseDirections[main], clockwiseDirections[sub]);
+};
+const getNativeScrollerOffset = (scroller) => {
+    const { scrollLeft, scrollTop } = scroller;
+    if (!isNaN(scrollLeft) && !isNaN(scrollTop)) {
+        return new Point(scrollLeft, scrollTop);
+    }
+    return Point.Zero;
+};
+const getScrollerBoundsAndOffset = ({ fixed, offsetParent, boundary, }) => {
+    if (boundary) {
+        // 固定定位始终使用视口坐标
+        return {
+            offset: Point.Zero,
+            bounds: Rect.fromRect(boundary),
+        };
+    }
+    // 固定定位始终使用视口坐标
+    if (fixed || !offsetParent) {
+        return {
+            offset: Point.Zero,
+            bounds: Rect.fromViewport(),
+        };
+    }
+    const nativeOffset = getNativeScrollerOffset(offsetParent);
+    // 以窗口滚动的绝对定位，把坐标转换到文档顶部
+    const useWindowAsScroller = offsetParent === getDocumentScrollingElement();
+    if (useWindowAsScroller) {
+        return {
+            offset: nativeOffset.negative(),
+            bounds: Rect.fromViewport().translate(nativeOffset),
+        };
+    }
+    // 自定义的滚动容器，使用它自身坐标
+    const bounds = Rect.fromBoundingClientRect(offsetParent);
     return {
-      popup: getOppositePlacement(placement.popup, all),
-      anchor: getOppositePlacement(placement.anchor, all)
+        offset: bounds.topLeft.subtract(nativeOffset),
+        bounds: bounds.translate(nativeOffset),
     };
-  }
-
-  var _parsePlacementPair = parsePlacementPair(placement),
-      main = _parsePlacementPair[0],
-      sub = _parsePlacementPair[1];
-
-  return joinDirection(oppositeDirections[main], all ? oppositeDirections[sub] : sub);
-};
-var getClockwisePlacement = function getClockwisePlacement(placement) {
-  if (!placement) {
-    return null;
-  }
-
-  if (typeof placement === 'object') {
-    return {
-      popup: getClockwisePlacement(placement.popup),
-      anchor: getClockwisePlacement(placement.anchor)
-    };
-  }
-
-  var _parsePlacementPair2 = parsePlacementPair(placement),
-      main = _parsePlacementPair2[0],
-      sub = _parsePlacementPair2[1];
-
-  return joinDirection(clockwiseDirections[main], clockwiseDirections[sub]);
-};
-
-var getNativeScrollerOffset = function getNativeScrollerOffset(scroller) {
-  var scrollLeft = scroller.scrollLeft,
-      scrollTop = scroller.scrollTop;
-
-  if (!isNaN(scrollLeft) && !isNaN(scrollTop)) {
-    return new Point(scrollLeft, scrollTop);
-  }
-
-  return Point.Zero;
-};
-
-var getScrollerBoundsAndOffset = function getScrollerBoundsAndOffset(_ref) {
-  var fixed = _ref.fixed,
-      offsetParent = _ref.offsetParent;
-
-  // 固定定位始终使用视口坐标
-  if (fixed || !offsetParent) {
-    return {
-      offset: Point.Zero,
-      bounds: Rect.fromViewport()
-    };
-  }
-
-  var nativeOffset = getNativeScrollerOffset(offsetParent); // 以窗口滚动的绝对定位，把坐标转换到文档顶部
-
-  var useWindowAsScroller = offsetParent === getDocumentScrollingElement();
-
-  if (useWindowAsScroller) {
-    return {
-      offset: nativeOffset.negative(),
-      bounds: Rect.fromViewport().translate(nativeOffset)
-    };
-  } // 自定义的滚动容器，使用它自身坐标
-
-
-  var bounds = Rect.fromBoundingClientRect(offsetParent);
-  return {
-    offset: bounds.topLeft.subtract(nativeOffset),
-    bounds: bounds.translate(nativeOffset)
-  };
 };
 /*
  * 箭头属于 popup，始终对齐到 anchor 的中间：
@@ -2993,174 +2889,125 @@ var getScrollerBoundsAndOffset = function getScrollerBoundsAndOffset(_ref) {
  *   [   ]      anchor
  *
  */
-
-var getArrowOffset = function getArrowOffset(popupRect, anchorRect, placement) {
-  var _parsePlacementPair3 = parsePlacementPair(placement),
-      main = _parsePlacementPair3[0];
-
-  if (main === 'top' || main === 'bottom') {
-    var top = main === 'top' ? '100%' : 0;
-    var narrowerRect = popupRect.width <= anchorRect.width ? popupRect : anchorRect;
-
-    if (narrowerRect === popupRect) {
-      return {
-        left: '50%',
-        top: top
-      };
+const getArrowOffset = (popupRect, anchorRect, placement) => {
+    const [main] = parsePlacementPair(placement);
+    if (main === 'top' || main === 'bottom') {
+        const top = main === 'top' ? '100%' : 0;
+        const narrowerRect = popupRect.width <= anchorRect.width ? popupRect : anchorRect;
+        if (narrowerRect === popupRect) {
+            return { left: '50%', top };
+        }
+        return {
+            left: anchorRect.left - popupRect.left + narrowerRect.width / 2,
+            top,
+        };
     }
+    else if (main === 'left' || main === 'right') {
+        const left = main === 'left' ? '100%' : 0;
+        const shorterRect = popupRect.height <= anchorRect.height ? popupRect : anchorRect;
+        if (shorterRect === popupRect) {
+            return { left, top: '50%' };
+        }
+        return {
+            left,
+            top: anchorRect.top - popupRect.top + shorterRect.height / 2,
+        };
+    }
+    return { left: 0, top: 0 };
+};
 
+const defaults = {
+    // use fixed or absolute position
+    fixed: false,
+    // any scroller element
+    offsetParent: getDocumentScrollingElement(),
+    // 'auto': adjusts horizontally or vertically, 'both': adjusts horizontally and vertically, defaults to 'none'
+    adjustXY: 'none',
+};
+const calculatePosition = (popup, anchor, placement, options = {}) => {
+    const anchorRect = Rect.fromBoundingClientRect(anchor);
+    const popupRect = Rect.fromBoundingClientRect(popup).setLocation(Point.Zero);
+    let corners = placement;
+    if (typeof placement === 'string') {
+        corners = presets[placement];
+    }
+    if (!corners) {
+        return null;
+    }
+    const popupCorner = parseCorner(popupRect, corners.popup);
+    const anchorCorner = parseCorner(anchorRect, corners.anchor);
+    if (!popupCorner || !anchorCorner) {
+        return null;
+    }
+    // relative to viewport
+    const fixedOffset = anchorCorner.subtract(popupCorner);
+    // relative to viewport
+    const fixedPopupRect = popupRect.translate(fixedOffset);
+    // relative to scroller
+    const offset = fixedOffset.subtract(getScrollerBoundsAndOffset(options).offset);
     return {
-      left: anchorRect.left - popupRect.left + narrowerRect.width / 2,
-      top: top
+        offset,
+        placement,
+        anchorRect,
+        popupRect: fixedPopupRect,
+        popupOffset: { left: offset.x, top: offset.y },
+        arrowOffset: getArrowOffset(fixedPopupRect, anchorRect, placement),
+        // compatible with v0.0.1
+        left: offset.x,
+        top: offset.y,
     };
-  } else if (main === 'left' || main === 'right') {
-    var left = main === 'left' ? '100%' : 0;
-    var shorterRect = popupRect.height <= anchorRect.height ? popupRect : anchorRect;
-
-    if (shorterRect === popupRect) {
-      return {
-        left: left,
-        top: '50%'
-      };
+};
+const calculateVisibleAreaRatio = (rect, bounds) => {
+    const intersectionRect = Rect.intersect(rect, bounds);
+    return intersectionRect ? intersectionRect.area / rect.area : 0;
+};
+const findProperPosition = (popup, anchor, placements, options = {}) => {
+    const { bounds } = getScrollerBoundsAndOffset(options);
+    const positionInfos = [];
+    for (const placement of placements) {
+        const positionInfo = calculatePosition(popup, anchor, placement, options);
+        if (!positionInfo) {
+            continue;
+        }
+        // relative to scroller
+        const positionedPopupRect = positionInfo.popupRect.translate(positionInfo.offset);
+        if (bounds.contains(positionedPopupRect)) {
+            return positionInfo;
+        }
+        const visibleAreaRatio = calculateVisibleAreaRatio(positionedPopupRect, bounds);
+        positionInfos.push(Object.assign(positionInfo, visibleAreaRatio && { visibleAreaRatio }));
     }
-
-    return {
-      left: left,
-      top: anchorRect.top - popupRect.top + shorterRect.height / 2
-    };
-  }
-
-  return {
-    left: 0,
-    top: 0
-  };
+    return (positionInfos
+        .filter(Boolean)
+        // @ts-expect-error possibly 'undefined'.
+        .sort((a, b) => b.visibleAreaRatio - a.visibleAreaRatio)[0] || null);
 };
-
-var defaults = {
-  // use fixed or absolute position
-  fixed: false,
-  // any scroller element
-  offsetParent: getDocumentScrollingElement(),
-  // 'auto': adjusts horizontally or vertically, 'both': adjusts horizontally and vertically, defaults to 'none'
-  adjustXY: 'none'
-};
-
-var calculatePosition = function calculatePosition(popup, anchor, placement, options) {
-  var anchorRect = Rect.fromBoundingClientRect(anchor);
-  var popupRect = Rect.fromBoundingClientRect(popup).setLocation(Point.Zero);
-  var corners = placement;
-
-  if (typeof placement === 'string') {
-    corners = presets[placement];
-  }
-
-  if (!corners) {
-    return null;
-  }
-
-  var popupCorner = parseCorner(popupRect, corners.popup);
-  var anchorCorner = parseCorner(anchorRect, corners.anchor);
-
-  if (!popupCorner || !anchorCorner) {
-    return null;
-  } // relative to viewport
-
-
-  var fixedOffset = anchorCorner.subtract(popupCorner); // relative to viewport
-
-  var fixedPopupRect = popupRect.translate(fixedOffset); // relative to scroller
-
-  var offset = fixedOffset.subtract(getScrollerBoundsAndOffset(options).offset);
-  return {
-    offset: offset,
-    placement: placement,
-    anchorRect: anchorRect,
-    popupRect: fixedPopupRect,
-    popupOffset: {
-      left: offset.x,
-      top: offset.y
-    },
-    arrowOffset: getArrowOffset(fixedPopupRect, anchorRect, placement),
-    // compatible with v0.0.1
-    left: offset.x,
-    top: offset.y
-  };
-};
-
-var calculateVisibleAreaRatio = function calculateVisibleAreaRatio(rect, bounds) {
-  var intersectionRect = Rect.intersect(rect, bounds);
-  return intersectionRect ? intersectionRect.area / rect.area : 0;
-};
-
-var findProperPosition = function findProperPosition(popup, anchor, placements, options) {
-  var _getScrollerBoundsAnd = getScrollerBoundsAndOffset(options),
-      bounds = _getScrollerBoundsAnd.bounds;
-
-  var positionInfos = [];
-
-  for (var _iterator = placements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-    var _ref;
-
-    if (_isArray) {
-      if (_i >= _iterator.length) break;
-      _ref = _iterator[_i++];
-    } else {
-      _i = _iterator.next();
-      if (_i.done) break;
-      _ref = _i.value;
+const position$1 = (popup, anchor, placement, options = {}) => {
+    options = Object.assign({}, defaults, options);
+    if (Array.isArray(placement)) {
+        return findProperPosition(popup, anchor, placement, options);
     }
-
-    var placement = _ref;
-    var positionInfo = calculatePosition(popup, anchor, placement, options);
-
-    if (!positionInfo) {
-      continue;
-    } // relative to scroller
-
-
-    var positionedPopupRect = positionInfo.popupRect.translate(positionInfo.offset);
-
-    if (bounds.contains(positionedPopupRect)) {
-      return positionInfo;
+    const { adjustXY } = options;
+    const adjustsHorizontallyOrVertically = adjustXY === 'auto';
+    const adjustsHorizontallyAndVertically = adjustXY === 'both';
+    if (placement !== 'center' &&
+        (adjustsHorizontallyOrVertically || adjustsHorizontallyAndVertically)) {
+        let placements = [];
+        if (adjustsHorizontallyOrVertically) {
+            placements = [placement, getOppositePlacement(placement)];
+        }
+        else if (adjustsHorizontallyAndVertically) {
+            const oppositePlacement = getOppositePlacement(placement, true);
+            placements = [
+                placement,
+                oppositePlacement,
+                getClockwisePlacement(placement),
+                getClockwisePlacement(oppositePlacement),
+            ];
+        }
+        return findProperPosition(popup, anchor, placements, options);
     }
-
-    var visibleAreaRatio = calculateVisibleAreaRatio(positionedPopupRect, bounds);
-    positionInfos.push(Object.assign(positionInfo, visibleAreaRatio && {
-      visibleAreaRatio: visibleAreaRatio
-    }));
-  }
-
-  return positionInfos.filter(Boolean).sort(function (a, b) {
-    return b.visibleAreaRatio - a.visibleAreaRatio;
-  })[0] || null;
-};
-
-var position$1 = function position(popup, anchor, placement, options) {
-  options = Object.assign({}, defaults, options);
-
-  if (Array.isArray(placement)) {
-    return findProperPosition(popup, anchor, placement, options);
-  }
-
-  var _options = options,
-      adjustXY = _options.adjustXY;
-  var adjustsHorizontallyOrVertically = adjustXY === 'auto';
-  var adjustsHorizontallyAndVertically = adjustXY === 'both';
-
-  if (placement !== 'center' && (adjustsHorizontallyOrVertically || adjustsHorizontallyAndVertically)) {
-    var placements = [];
-
-    if (adjustsHorizontallyOrVertically) {
-      placements = [placement, getOppositePlacement(placement)];
-    } else if (adjustsHorizontallyAndVertically) {
-      var oppositePlacement = getOppositePlacement(placement, true);
-      placements = [placement, oppositePlacement, getClockwisePlacement(placement), getClockwisePlacement(oppositePlacement)];
-    }
-
-    return findProperPosition(popup, anchor, placements, options);
-  }
-
-  return calculatePosition(popup, anchor, placement, options);
+    return calculatePosition(popup, anchor, placement, options);
 };
 
 /**
@@ -3415,12 +3262,32 @@ const Listbox = (props2) => {
   })}
 	</div>`;
 };
+const supportsPopover = () => {
+  return HTMLElement.prototype.hasOwnProperty("popover");
+};
+const showPopover = (popover) => {
+  const popoverElement = popover;
+  requestAnimationFrame(() => {
+    popoverElement?.showPopover();
+  });
+};
 customElements.define("cosmoz-listbox", component(Listbox, { styleSheets: [sheet(style$1)] }));
-const listbox = ({ multi, ...thru }) => portal(x`<cosmoz-listbox
+const listbox = ({ multi, ...thru }) => {
+  if (supportsPopover()) {
+    return x`<cosmoz-listbox
+			${n(showPopover)}
+			popover="manual"
+			part="listbox"
+			?multi=${multi}
+			...=${spreadProps(props(properties)(thru))}
+		></cosmoz-listbox>`;
+  }
+  return portal(x`<cosmoz-listbox
 			part="listbox"
 			?multi=${multi}
 			...=${spreadProps(props(properties)(thru))}
 		></cosmoz-listbox>`);
+};
 
 var style = tagged`
 	:host {
