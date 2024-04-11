@@ -1,3 +1,10 @@
+## [8.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.6.0...v8.7.0) (2024-04-11)
+
+
+### Features
+
+* remove portal call ([8800c33](https://github.com/neovici/cosmoz-autocomplete/commit/8800c331ce5b72c78eb5f69fb5a0ba20f8965265))
+
 ## [8.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.5.0...v8.6.0) (2024-04-10)
 
 
