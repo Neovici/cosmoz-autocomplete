@@ -1,4 +1,4 @@
-import { w, f as f$1, j, T, m as m$1, i as i$3, x, p, v, r as r$1, h as h$2, a as j$1 } from './lit-element-BpxOSt6g.js';
+import { w, f as f$1, j, T, m as m$1, i as i$3, x, p, v, r as r$1, h as h$2 } from './lit-element-CuHsopbm.js';
 
 /**
  * @license
@@ -2329,63 +2329,6 @@ class VirtualizeDirective extends f {
 }
 const virtualize = e$1(VirtualizeDirective);
 
-const createMarker = () => document.createComment(''), ChildPartC = j(T, new DocumentFragment())
-    .constructor;
-/**
- * Helper element with a customizable disconnect behavior.
- */
-class DisconnectObserver extends HTMLElement {
-    onDisconnect;
-    disconnectedCallback() {
-        this.onDisconnect?.();
-    }
-}
-customElements.define('disconnect-observer', DisconnectObserver);
-class PortalDirective extends f {
-    _op;
-    _outlet;
-    _content;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    render(content, outlet = document.body) {
-        return x `<disconnect-observer
-			.onDisconnect=${() => {
-            this.isConnected = false;
-            this.disconnected();
-        }}
-		></disconnect-observer>`;
-    }
-    update(part, [content, outlet = document.body]) {
-        this.updateOutlet(outlet, content);
-        return this.render(content, outlet);
-    }
-    updateOutlet(outlet, content) {
-        if (this._outlet !== outlet) {
-            this.clearOutlet();
-        }
-        this._outlet = outlet;
-        const part = (this._op ??= new ChildPartC(outlet.appendChild(createMarker()), outlet.appendChild(createMarker())));
-        v(part, (this._content = content));
-    }
-    clearOutlet() {
-        const part = this._op;
-        if (!part) {
-            return;
-        }
-        j$1(part);
-        h$2(part);
-        this._op = undefined;
-    }
-    disconnected() {
-        this.clearOutlet();
-    }
-    reconnected() {
-        if (this._outlet && this._content) {
-            this.updateOutlet(this._outlet, this._content);
-        }
-    }
-}
-const portal = e$1(PortalDirective);
-
 const undefs = (prev, obj) => {
     if (!prev || !obj) {
         return;
@@ -3267,26 +3210,21 @@ const supportsPopover = () => {
 };
 const showPopover = (popover) => {
   const popoverElement = popover;
-  requestAnimationFrame(() => {
-    popoverElement?.showPopover();
-  });
+  if (supportsPopover()) {
+    requestAnimationFrame(() => {
+      popoverElement?.showPopover();
+    });
+  }
 };
 customElements.define("cosmoz-listbox", component(Listbox, { styleSheets: [sheet(style$1)] }));
 const listbox = ({ multi, ...thru }) => {
-  if (supportsPopover()) {
-    return x`<cosmoz-listbox
-			${n(showPopover)}
-			popover="manual"
-			part="listbox"
-			?multi=${multi}
-			...=${spreadProps(props(properties)(thru))}
-		></cosmoz-listbox>`;
-  }
-  return portal(x`<cosmoz-listbox
-			part="listbox"
-			?multi=${multi}
-			...=${spreadProps(props(properties)(thru))}
-		></cosmoz-listbox>`);
+  return x`<cosmoz-listbox
+		${n(showPopover)}
+		popover="manual"
+		part="listbox"
+		?multi=${multi}
+		...=${spreadProps(props(properties)(thru))}
+	></cosmoz-listbox>`;
 };
 
 var style = tagged`

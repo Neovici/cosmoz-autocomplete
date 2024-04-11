@@ -11,7 +11,7 @@ if (SERVER_CHANNEL_URL) {
 }
 
 const importers = {
-  "./stories/cosmoz-autocomplete.stories.js": () => import('./cosmoz-autocomplete.stories-9fOSYjYc.js')
+  "./stories/cosmoz-autocomplete.stories.js": () => import('./cosmoz-autocomplete.stories-B-NRLR1h.js')
 };
 function importFn(path) {
   return importers[path]();
@@ -19,8 +19,8 @@ function importFn(path) {
 
 const getProjectAnnotations = async () => {
   const configs = await Promise.all([
-    import('./entry-preview-CwB58FIh.js'),
-    import('./entry-preview-docs-ByXYPd07.js'),
+    import('./entry-preview-CFHclMa0.js'),
+    import('./entry-preview-docs-CI6rfMYO.js'),
     import('./preview-BjLAXzdR.js'),
     import('./preview-CDPZr6ty.js'),
     import('./preview-Bf0d1tVO.js'),
