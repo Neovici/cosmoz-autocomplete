@@ -5,7 +5,6 @@ import {
 	virtualizerRef,
 } from '@lit-labs/virtualizer/virtualize.js';
 import { sheet } from '@neovici/cosmoz-utils';
-import { portal } from '@neovici/cosmoz-utils/directives/portal';
 import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
 import { useStyleSheet } from '@neovici/cosmoz-utils/hooks/use-stylesheet';
 import { props } from '@neovici/cosmoz-utils/object';
@@ -56,9 +55,11 @@ const supportsPopover = () => {
 const showPopover = (popover?: Element) => {
 	const popoverElement = popover as HTMLElement;
 
-	requestAnimationFrame(() => {
-		popoverElement?.showPopover();
-	});
+	if (supportsPopover()) {
+		requestAnimationFrame(() => {
+			popoverElement?.showPopover();
+		});
+	}
 };
 
 customElements.define(
@@ -70,21 +71,11 @@ export const listbox = <I>({
 	multi,
 	...thru
 }: Props<I> & { multi?: boolean }) => {
-	if (supportsPopover()) {
-		return html`<cosmoz-listbox
-			${ref(showPopover)}
-			popover="manual"
-			part="listbox"
-			?multi=${multi}
-			...=${spreadProps(props(properties)(thru))}
-		></cosmoz-listbox>`;
-	}
-
-	return portal(
-		html`<cosmoz-listbox
-			part="listbox"
-			?multi=${multi}
-			...=${spreadProps(props(properties)(thru))}
-		></cosmoz-listbox>`,
-	);
+	return html`<cosmoz-listbox
+		${ref(showPopover)}
+		popover="manual"
+		part="listbox"
+		?multi=${multi}
+		...=${spreadProps(props(properties)(thru))}
+	></cosmoz-listbox>`;
 };
