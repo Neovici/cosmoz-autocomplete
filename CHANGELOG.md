@@ -1,3 +1,10 @@
+## [8.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v8.7.0...v8.7.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* **dependencies:** newest cosmoz input needed in this repo ([ea60c7f](https://github.com/neovici/cosmoz-autocomplete/commit/ea60c7f61ce52ccb0194f40cabd075805d359b09))
+
 ## [8.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.6.0...v8.7.0) (2024-04-11)
 
 
