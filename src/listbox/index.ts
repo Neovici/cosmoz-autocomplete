@@ -12,6 +12,7 @@ import { component, html, useEffect, useMemo, useRef } from '@pionjs/pion';
 import { ref } from 'lit-html/directives/ref.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
+import { styleMap } from 'lit-html/directives/style-map.js';
 
 const Listbox = <I>(props: Props<I>) => {
 	const listRef = useRef<Element | undefined>(undefined);
@@ -36,7 +37,11 @@ const Listbox = <I>(props: Props<I>) => {
 		[itemHeight],
 	);
 
-	return html`<div class="items" ${ref((el) => (listRef.current = el))}>
+	return html`<div
+		class="items"
+		${ref((el) => (listRef.current = el))}
+		style="${styleMap({ minHeight: height + 'px' })}"
+	>
 		<div virtualizer-sizer></div>
 		${virtualize({
 			items,
