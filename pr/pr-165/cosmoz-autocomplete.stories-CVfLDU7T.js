@@ -3744,6 +3744,20 @@ const BasicWithAFewColors = {
     }
   }
 };
+const EmptySource = {
+  args: {
+    label: "Choose colors",
+    source: [],
+    textProperty: "text"
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "The empty source version"
+      }
+    }
+  }
+};
 const Single = {
   args: {
     label: "Choose color",
@@ -3911,6 +3925,6 @@ Contour.parameters = {
     }
   }
 };
-const __namedExportsOrder = ["Basic", "BasicWithAFewColors", "Single", "HideEmpty", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour"];
+const __namedExportsOrder = ["Basic", "BasicWithAFewColors", "EmptySource", "Single", "HideEmpty", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour"];
 
-export { Basic, BasicWithAFewColors, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, HideEmpty, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
+export { Basic, BasicWithAFewColors, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, EmptySource, HideEmpty, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
