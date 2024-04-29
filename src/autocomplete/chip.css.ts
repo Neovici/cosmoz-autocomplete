@@ -36,7 +36,7 @@ export default css`
 			--cosmoz-autocomplete-chip-clear-stroke,
 			var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb)
 		);
-		display: block;
+		display: var(--cosmoz-clear-icon-display, block);
 		flex: none;
 	}
 	.clear:hover {
