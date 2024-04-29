@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { classMap } from 'lit-html/directives/class-map.js';
@@ -194,6 +195,21 @@ export const BasicWithAFewColors = {
 			description: {
 				story:
 					'The basic version with a few items in the source, good for testing the smaller than 150px min height edge case',
+			},
+		},
+	},
+};
+
+export const EmptySource = {
+	args: {
+		label: 'Choose colors',
+		source: [],
+		textProperty: 'text',
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'The empty source version',
 			},
 		},
 	},
