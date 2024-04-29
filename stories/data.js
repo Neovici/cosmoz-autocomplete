@@ -9,4 +9,6 @@ const colors = [
 	'Nothing',
 ].map((text) => ({ text }));
 
-export { colors };
+const aFewColors = ['Red', 'Blue'];
+
+export { colors, aFewColors };
