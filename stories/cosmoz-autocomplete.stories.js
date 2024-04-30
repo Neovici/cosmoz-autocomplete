@@ -3,7 +3,7 @@ import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { classMap } from 'lit-html/directives/class-map.js';
 import '../src/autocomplete';
-import { colors, aFewColors } from './data';
+import { colors } from './data';
 
 const CSS = html`
 	<style>
@@ -178,38 +178,6 @@ export const Basic = {
 		docs: {
 			description: {
 				story: 'The basic version',
-			},
-		},
-	},
-};
-
-export const BasicWithAFewColors = {
-	args: {
-		label: 'Choose colors',
-		source: aFewColors,
-		textProperty: 'text',
-		value: [aFewColors[0], aFewColors[1]],
-	},
-	parameters: {
-		docs: {
-			description: {
-				story:
-					'The basic version with a few items in the source, good for testing the smaller than 150px min height edge case',
-			},
-		},
-	},
-};
-
-export const EmptySource = {
-	args: {
-		label: 'Choose colors',
-		source: [],
-		textProperty: 'text',
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'The empty source version',
 			},
 		},
 	},
