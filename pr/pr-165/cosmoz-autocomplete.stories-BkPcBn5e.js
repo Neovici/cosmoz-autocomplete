@@ -3199,7 +3199,7 @@ const Listbox = (props2) => {
   return x`<div
 		class="items"
 		${n((el) => listRef.current = el)}
-		style="${o$3({ minHeight: height + "px" })}"
+		style="min-height: ${height}px"
 	>
 		<div virtualizer-sizer></div>
 		${virtualize({
@@ -3340,7 +3340,7 @@ var styles = tagged`
 			--cosmoz-autocomplete-chip-clear-stroke,
 			var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb)
 		);
-		display: block;
+		display: var(--cosmoz-autocomplete-chip-clear-display, block);
 		flex: none;
 	}
 	.clear:hover {
