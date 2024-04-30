@@ -137,8 +137,13 @@ snapshots["cosmoz-autocomplete-ui render (listbox)"] =
     </span>
   </cosmoz-autocomplete-chip>
 </cosmoz-input>
-<disconnect-observer>
-</disconnect-observer>
+<cosmoz-listbox
+  multi=""
+  part="listbox"
+  popover="manual"
+  style="left: 8px; top: 68px; min-width: 784px;"
+>
+</cosmoz-listbox>
 `;
 /* end snapshot cosmoz-autocomplete-ui render (listbox) */
 
