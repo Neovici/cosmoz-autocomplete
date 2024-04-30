@@ -3333,7 +3333,7 @@ var styles = tagged`
 			--cosmoz-autocomplete-chip-clear-stroke,
 			var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb)
 		);
-		display: var(--cosmoz-clear-icon-display, block);
+		display: var(--cosmoz-autocomplete-chip-clear-display, block);
 		flex: none;
 	}
 	.clear:hover {
