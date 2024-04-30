@@ -1,3 +1,15 @@
+## [8.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.7.1...v8.8.0) (2024-04-30)
+
+
+### Features
+
+* **cosmoz-autocomplete:** add css var to hide clear icon ([207a726](https://github.com/neovici/cosmoz-autocomplete/commit/207a72668f799429d235eeb76aac434c30a55238))
+
+
+### Bug Fixes
+
+* update chip-clear css var after code review commit suggestion ([ad123cd](https://github.com/neovici/cosmoz-autocomplete/commit/ad123cdad5085831b5f53c83702f170f09d4b7d4))
+
 ## [8.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v8.7.0...v8.7.1) (2024-04-19)
 
 
