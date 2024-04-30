@@ -2385,6 +2385,9 @@ const style$1 = tagged`
 		margin: 0;
 		border: 0;
 	}
+	:host([popover]) {
+		padding: 0;
+	}
 	.items {
 		position: relative;
 		overflow-y: auto;
@@ -3193,7 +3196,11 @@ const Listbox = (props2) => {
   const layout = useMemo(() => ({
     _itemSize: { height: itemHeight - 1e-5 }
   }), [itemHeight]);
-  return x`<div class="items" ${n((el) => listRef.current = el)}>
+  return x`<div
+		class="items"
+		${n((el) => listRef.current = el)}
+		style="min-height: ${height}px"
+	>
 		<div virtualizer-sizer></div>
 		${virtualize({
     items,
