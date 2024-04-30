@@ -3559,7 +3559,6 @@ const colors = [
   "Aqua",
   "Nothing"
 ].map((text) => ({ text }));
-const aFewColors = ["Red", "Blue"];
 
 const CSS = x`
 	<style>
@@ -3725,35 +3724,6 @@ const Basic = {
     docs: {
       description: {
         story: "The basic version"
-      }
-    }
-  }
-};
-const BasicWithAFewColors = {
-  args: {
-    label: "Choose colors",
-    source: aFewColors,
-    textProperty: "text",
-    value: [aFewColors[0], aFewColors[1]]
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "The basic version with a few items in the source, good for testing the smaller than 150px min height edge case"
-      }
-    }
-  }
-};
-const EmptySource = {
-  args: {
-    label: "Choose colors",
-    source: [],
-    textProperty: "text"
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "The empty source version"
       }
     }
   }
@@ -3925,6 +3895,6 @@ Contour.parameters = {
     }
   }
 };
-const __namedExportsOrder = ["Basic", "BasicWithAFewColors", "EmptySource", "Single", "HideEmpty", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour"];
+const __namedExportsOrder = ["Basic", "Single", "HideEmpty", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour"];
 
-export { Basic, BasicWithAFewColors, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, EmptySource, HideEmpty, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
+export { Basic, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, HideEmpty, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
