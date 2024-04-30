@@ -1,3 +1,10 @@
+## [8.8.1](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.0...v8.8.1) (2024-04-30)
+
+
+### Bug Fixes
+
+* the list has too much scroll height when there are few items and extra padding  ([#165](https://github.com/neovici/cosmoz-autocomplete/issues/165)) ([40428f6](https://github.com/neovici/cosmoz-autocomplete/commit/40428f673ead5adf61602a1215f65d09070e0a6b))
+
 ## [8.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.7.1...v8.8.0) (2024-04-30)
 
 
