@@ -24,6 +24,9 @@ const style = css`
 		margin: 0;
 		border: 0;
 	}
+	:host([popover]) {
+		padding: 0;
+	}
 	.items {
 		position: relative;
 		overflow-y: auto;

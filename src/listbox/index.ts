@@ -36,7 +36,11 @@ const Listbox = <I>(props: Props<I>) => {
 		[itemHeight],
 	);
 
-	return html`<div class="items" ${ref((el) => (listRef.current = el))}>
+	return html`<div
+		class="items"
+		${ref((el) => (listRef.current = el))}
+		style="min-height: ${height}px"
+	>
 		<div virtualizer-sizer></div>
 		${virtualize({
 			items,

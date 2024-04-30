@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { classMap } from 'lit-html/directives/class-map.js';
