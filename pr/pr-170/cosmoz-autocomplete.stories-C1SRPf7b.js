@@ -2371,7 +2371,7 @@ const style$1 = tagged`
 	:host {
 		position: fixed;
 		z-index: 1000;
-		font-family: var(--paper-font-subhead_-_font-family, initial);
+		font-family: var(--paper-font-subhead_-_font-family, inherit);
 		background: #fff;
 		min-width: 72px;
 		box-shadow:
