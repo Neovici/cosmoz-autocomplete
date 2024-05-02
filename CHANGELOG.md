@@ -1,3 +1,10 @@
+## [8.8.2](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.1...v8.8.2) (2024-05-02)
+
+
+### Bug Fixes
+
+* **cosmoz-autocomplete:** export part wrap ([6471454](https://github.com/neovici/cosmoz-autocomplete/commit/6471454d13e454326ab32444efddae28844e8958))
+
 ## [8.8.1](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.0...v8.8.1) (2024-04-30)
 
 
