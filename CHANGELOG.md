@@ -1,3 +1,10 @@
+## [8.8.3](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.2...v8.8.3) (2024-05-02)
+
+
+### Bug Fixes
+
+* **cosmoz-listbox:** the font family gets reset ([381c03d](https://github.com/neovici/cosmoz-autocomplete/commit/381c03d0773a19d064cd53c83631e66fffa7060a))
+
 ## [8.8.2](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.1...v8.8.2) (2024-05-02)
 
 
