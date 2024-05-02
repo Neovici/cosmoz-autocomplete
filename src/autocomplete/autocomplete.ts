@@ -33,7 +33,7 @@ type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 
 const blank = () => nothing;
 
-const inputParts = ['input', 'control', 'label', 'line', 'error']
+const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
 
