@@ -6,3 +6,7 @@ storybook-static/
 dist/
 storybook-static/
 demo-storybook/
+
+# playwright
+test-results/
+playwright-report/
