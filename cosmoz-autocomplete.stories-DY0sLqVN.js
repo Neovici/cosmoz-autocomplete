@@ -3458,7 +3458,7 @@ const useOverflow = ({ value, active, wrap, limit }) => {
 };
 
 const blank = () => T;
-const inputParts = ["input", "control", "label", "line", "error"].map((part) => `${part}: input-${part}`).join();
+const inputParts = ["input", "control", "label", "line", "error", "wrap"].map((part) => `${part}: input-${part}`).join();
 const autocomplete = (props) => {
   const { invalid, errorMessage, label, placeholder, disabled, noLabelFloat, alwaysFloatLabel, textual, text, onText, onFocus, onClick, onDeselect, value, limit, min, showSingle, items$, values$ } = props, host = useHost(), isOne = limit == 1, isSingle = isOne && value?.[0] != null, anchor = useCallback(() => host.shadowRoot.querySelector("#input"), [host, value]), suggestions = m(items$.then((items) => n$1((!isSingle || showSingle) && items.length, () => listbox({
     ...props,
