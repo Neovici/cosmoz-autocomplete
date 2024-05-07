@@ -359,3 +359,22 @@ Contour.parameters = {
 		},
 	},
 };
+
+export const UppercaseDecorator = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		value: [colors[0], colors[3]],
+	},
+	decorators: [
+		(story) => html`<div style="text-transform: uppercase">${story()}</div>`,
+	],
+	parameters: {
+		docs: {
+			description: {
+				story: 'The uppercase decorator version',
+			},
+		},
+	},
+};
