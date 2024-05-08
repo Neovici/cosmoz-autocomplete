@@ -1,3 +1,11 @@
+## [8.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.3...v8.9.0) (2024-05-08)
+
+
+### Features
+
+* add a new CSS variable for listbox ([b75f043](https://github.com/neovici/cosmoz-autocomplete/commit/b75f04333583eaad7665f2cd0f10b09e361f8d1b))
+* add uppercase decorator story ([103f61f](https://github.com/neovici/cosmoz-autocomplete/commit/103f61f4f99a534e8a936378d42787cfff831b8f))
+
 ## [8.8.3](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.2...v8.8.3) (2024-05-02)
 
 
