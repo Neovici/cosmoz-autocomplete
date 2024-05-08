@@ -2378,6 +2378,7 @@ const style$1 = tagged`
 			0 3px 4px 0 rgba(0, 0, 0, 0.14),
 			0 1px 8px 0 rgba(0, 0, 0, 0.12),
 			0 3px 3px -2px rgba(0, 0, 0, 0.4);
+		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 	}
 	:host(:popover-open) {
 		box-sizing: border-box;
@@ -3895,6 +3896,24 @@ Contour.parameters = {
     }
   }
 };
-const __namedExportsOrder = ["Basic", "Single", "HideEmpty", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour"];
+const UppercaseDecorator = {
+  args: {
+    label: "Choose color",
+    source: colors,
+    textProperty: "text",
+    value: [colors[0], colors[3]]
+  },
+  decorators: [
+    (story) => x`<div style="text-transform: uppercase">${story()}</div>`
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: "The uppercase decorator version"
+      }
+    }
+  }
+};
+const __namedExportsOrder = ["Basic", "Single", "HideEmpty", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour", "UppercaseDecorator"];
 
-export { Basic, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, HideEmpty, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
+export { Basic, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, HideEmpty, Overflown, Placeholder, Select, Single, UppercaseDecorator, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
