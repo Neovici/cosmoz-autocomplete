@@ -4,14 +4,14 @@ export default css`
 	:host {
 		border-radius: var(--cosmoz-autocomplete-chip-border-radius, 500px);
 		background: var(--cosmoz-autocomplete-chip-bg-color, #cbcfdb);
-		margin: 0px 0 2px 0;
+		margin: var(--cosmoz-autocomplete-chip-margin, 0px 0 2px 0);
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		flex: 0.0001 1 fit-content;
 		max-width: 18ch;
 		min-width: 40px;
-		padding: 0 4px 0 8px;
+		padding: var(--cosmoz-autocomplete-chip-padding, 0 4px 0 8px);
 		gap: 4px;
 		cursor: pointer;
 		transform: translateY(var(--cosmoz-autocomplete-chip-translate-y, 0));
