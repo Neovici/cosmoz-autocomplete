@@ -2457,8 +2457,7 @@ const style$1 = tagged`
 		border: 2px solid #eee;
 	}
 	[virtualizer-sizer]:not(.sizer) {
-		max-height: 2px;
-		overflow: hidden;
+		line-height: 1;
 	}
 `;
 const styles$1 = ({ index, height, itemHeight }) => tagged`
