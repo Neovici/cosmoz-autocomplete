@@ -95,6 +95,9 @@ const style = css`
 		border-radius: 50%;
 		border: 2px solid #eee;
 	}
+	[virtualizer-sizer]:not(.sizer) {
+		line-height: 1;
+	}
 `;
 
 export default style;
