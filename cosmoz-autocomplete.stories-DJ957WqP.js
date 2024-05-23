@@ -2456,6 +2456,9 @@ const style$1 = tagged`
 		border-radius: 50%;
 		border: 2px solid #eee;
 	}
+	[virtualizer-sizer]:not(.sizer) {
+		line-height: 1;
+	}
 `;
 const styles$1 = ({ index, height, itemHeight }) => tagged`
 	:host {
