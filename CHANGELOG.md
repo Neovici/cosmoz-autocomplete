@@ -1,3 +1,10 @@
+## [8.9.1](https://github.com/neovici/cosmoz-autocomplete/compare/v8.9.0...v8.9.1) (2024-05-23)
+
+
+### Bug Fixes
+
+* make the sizer take no height ([#173](https://github.com/neovici/cosmoz-autocomplete/issues/173)) ([2e3c3de](https://github.com/neovici/cosmoz-autocomplete/commit/2e3c3de6359c83c99ff1819a7fd205a893a7c024))
+
 ## [8.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.8.3...v8.9.0) (2024-05-08)
 
 
