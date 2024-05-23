@@ -96,7 +96,7 @@ const style = css`
 		border: 2px solid #eee;
 	}
 	[virtualizer-sizer]:not(.sizer) {
-		height: 0;
+		max-height: 2px;
 		overflow: hidden;
 	}
 `;
