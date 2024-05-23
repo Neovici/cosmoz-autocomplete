@@ -96,8 +96,7 @@ const style = css`
 		border: 2px solid #eee;
 	}
 	[virtualizer-sizer]:not(.sizer) {
-		max-height: 2px;
-		overflow: hidden;
+		line-height: 1;
 	}
 `;
 
