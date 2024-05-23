@@ -95,6 +95,10 @@ const style = css`
 		border-radius: 50%;
 		border: 2px solid #eee;
 	}
+	[virtualizer-sizer]:not(.sizer) {
+		height: 0;
+		overflow: hidden;
+	}
 `;
 
 export default style;
