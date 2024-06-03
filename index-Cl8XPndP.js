@@ -1,7 +1,6 @@
-import { r as react_default } from './WithTooltip-V3YHNWJZ-bEUxcLQu.js';
-import './chunk-Y45DR3KI-BaGEHMUj.js';
+import { e as export_default } from './WithTooltip-V3YHNWJZ-Dh-rwz90.js';
+import './doctrine-DkksUk6K.js';
 import './index-BsZrCqfk.js';
-import './index-CcX3Wbqm.js';
 import './index-Kjm4kNkQ.js';
 
 /**
@@ -36,7 +35,7 @@ import './index-Kjm4kNkQ.js';
  *   Please use `useMDXComponents` to get context based components and
  *   `MDXProvider` to set context based components instead.
  */
-const MDXContext = react_default.createContext({});
+const MDXContext = export_default.createContext({});
 
 /**
  * Get current components from the MDX Context.
@@ -48,10 +47,10 @@ const MDXContext = react_default.createContext({});
  *   Current components.
  */
 function useMDXComponents(components) {
-  const contextComponents = react_default.useContext(MDXContext);
+  const contextComponents = export_default.useContext(MDXContext);
 
   // Memoize to avoid unnecessary top-level context changes
-  return react_default.useMemo(() => {
+  return export_default.useMemo(() => {
     // Custom merge via a function prop
     if (typeof components === 'function') {
       return components(contextComponents)
@@ -83,7 +82,7 @@ function MDXProvider({components, children, disableParentContext}) {
     allComponents = useMDXComponents(components);
   }
 
-  return react_default.createElement(
+  return export_default.createElement(
     MDXContext.Provider,
     {value: allComponents},
     children
