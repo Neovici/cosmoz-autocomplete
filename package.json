@@ -94,14 +94,13 @@
 		"@types/node": "^20.12.7",
 		"@web/storybook-builder": "^0.1.9",
 		"@web/storybook-framework-web-components": "^0.1.1",
-		"esbuild": "^0.20.2",
+		"esbuild": "^0.21.0",
 		"http-server": "^14.1.1",
 		"husky": "^9.0.0",
 		"rollup-plugin-esbuild": "^6.1.1",
 		"rollup-plugin-terser": "^7.0.2",
-		"semantic-release": "^23.0.0",
-		"sinon": "^17.0.0",
-		"storybook": "^7.6.17",
-		"typescript": "^5.0.0"
+		"semantic-release": "^24.0.0",
+		"sinon": "^18.0.0",
+		"storybook": "^7.6.17"
 	}
 }
