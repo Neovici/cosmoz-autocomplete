@@ -815,7 +815,10 @@ const styles$2 = tagged `
 		text-transform: var(--cosmoz-input-label-text-transform);
 		font-weight: var(--cosmoz-input-label-font-weight);
 	}
-
+	.wrap:has(#input:not(:placeholder-shown)) slot[name='suffix']::slotted(*),
+	.wrap:has(#input:not(:placeholder-shown)) slot[name='prefix']::slotted(*) {
+		transform: translateY(var(--label-translate-y));
+	}
 	:host([always-float-label]) label,
 	#input:not(:placeholder-shown) + label {
 		transform: translateY(
@@ -827,6 +830,11 @@ const styles$2 = tagged `
 
 	:host([always-float-label]) input,
 	#input:not(:placeholder-shown) {
+		transform: translateY(var(--label-translate-y));
+	}
+
+	:host([always-float-label]) slot[name='suffix']::slotted(*),
+	:host([always-float-label]) slot[name='prefix']::slotted(*) {
 		transform: translateY(var(--label-translate-y));
 	}
 
@@ -981,6 +989,9 @@ const observedAttributes$2 = [
 const Input = (host) => {
     const { type = 'text', pattern, allowedPattern, autocomplete, value, readonly, disabled, min, max, step, maxlength, } = host, { onChange, onFocus, onInput, onRef } = useInput(host);
     const onBeforeInput = useAllowedPattern(allowedPattern);
+    useImperativeApi({
+        focus: () => host.shadowRoot?.querySelector('#input')?.focus(),
+    }, []);
     return render(x `
 			<input
 				${n(onRef)}
