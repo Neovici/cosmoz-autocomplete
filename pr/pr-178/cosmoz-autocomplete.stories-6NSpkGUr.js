@@ -3248,15 +3248,6 @@ const listbox = ({ multi, ...thru }) => {
 };
 
 var style = tagged`
-	@keyframes rotateAnimation {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-	
 	:host {
 		display: block;
 		position: relative;
@@ -3309,12 +3300,16 @@ var style = tagged`
 	slot {
 		display: contents !important;
 	}
-
-	@keyframes rotating {
-		100% {
+	
+	@keyframes rotateAnimation {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
 			transform: rotate(360deg);
 		}
 	}
+
 	.spinner {
 		border-radius: 50%;
 		width: 22px;
