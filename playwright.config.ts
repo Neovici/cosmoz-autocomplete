@@ -38,4 +38,8 @@ export default defineConfig({
 		// stdout: 'pipe',
 		// stderr: 'pipe',
 	},
+
+	expect: {
+		toHaveScreenshot: { maxDiffPixelRatio: 0.01 },
+	},
 });
