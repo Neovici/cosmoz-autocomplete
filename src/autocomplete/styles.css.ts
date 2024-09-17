@@ -1,15 +1,6 @@
 import { tagged as css } from '@neovici/cosmoz-utils';
 
 export default css`
-	@keyframes rotateAnimation {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-	
 	:host {
 		display: block;
 		position: relative;
@@ -62,12 +53,16 @@ export default css`
 	slot {
 		display: contents !important;
 	}
-
-	@keyframes rotating {
-		100% {
+	
+	@keyframes rotateAnimation {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
 			transform: rotate(360deg);
 		}
 	}
+
 	.spinner {
 		border-radius: 50%;
 		width: 22px;
