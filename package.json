@@ -102,5 +102,8 @@
 		"semantic-release": "^24.0.0",
 		"sinon": "^18.0.0",
 		"storybook": "^7.6.17"
+	},
+	"overrides": {
+		"conventional-changelog-conventionalcommits": ">= 8.0.0"
 	}
 }
