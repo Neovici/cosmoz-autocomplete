@@ -1,3 +1,11 @@
+## [8.9.2](https://github.com/neovici/cosmoz-autocomplete/compare/v8.9.1...v8.9.2) (2024-09-20)
+
+### Bug Fixes
+
+* **dependencies:** latest input needed ([c53d8a3](https://github.com/neovici/cosmoz-autocomplete/commit/c53d8a339ec07dc461308461be554fc1f2d389e4))
+* **keyframes:** unused keyframes ([c6e3568](https://github.com/neovici/cosmoz-autocomplete/commit/c6e35686124cbd99d5910c38b811d9cdf3eb4aeb))
+* **spinner:** bounce effect removed ([9b6b575](https://github.com/neovici/cosmoz-autocomplete/commit/9b6b575c0426b7b5f34bb1de0036372cdca7ba70))
+
 ## [8.9.1](https://github.com/neovici/cosmoz-autocomplete/compare/v8.9.0...v8.9.1) (2024-05-23)
 
 
