@@ -83,7 +83,7 @@ export const useAutocomplete = <I>({
 			() =>
 				Promise.resolve(
 					typeof source === 'function' ? source({ query, active }) : source,
-				),
+				).then(normalize),
 			[source, active, query],
 		),
 		value = useMemo(() => array(_value), [_value]),
@@ -91,11 +91,8 @@ export const useAutocomplete = <I>({
 			() =>
 				source$.then((source) =>
 					preserveOrder
-						? normalize(source)
-						: [
-								...value,
-								...without(value, prop(valueProperty))(normalize(source)),
-							],
+						? source
+						: [...value, ...without(value, prop(valueProperty))(source)],
 				),
 			[source$, value, valueProperty],
 		);
