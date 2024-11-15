@@ -15,6 +15,12 @@ const CSS = html`
 	</style>
 `;
 
+const delay = (source, time) => {
+	if (time == null) return source;
+	return () =>
+		new Promise((resolve) => setTimeout(() => resolve(source), time));
+};
+
 const Autocomplete = ({
 	source,
 	limit,
@@ -29,18 +35,23 @@ const Autocomplete = ({
 	showSingle = false,
 	preserveOrder = false,
 	wrap = false,
+	keepOpened = false,
+	keepQuery = false,
 	overflowed = false,
+	responseTime,
 }) => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
 	};
+
+	const sourceDelayed = delay(source, responseTime);
 
 	return html`
 		${CSS}
 		<cosmoz-autocomplete
 			.label=${label}
 			.placeholder=${placeholder}
-			.source=${source}
+			.source=${sourceDelayed}
 			.textProperty=${textProperty}
 			.limit=${limit}
 			.value=${value}
@@ -51,6 +62,8 @@ const Autocomplete = ({
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
+			?keep-opened=${keepOpened}
+			?keep-query=${keepQuery}
 			style=${styleMap(styles)}
 		></cosmoz-autocomplete>
 	`;
@@ -149,11 +162,14 @@ export default {
 		},
 		placeholder: { control: 'text' },
 		showSingle: { control: 'boolean' },
+		keepOpened: { control: 'boolean' },
+		keepQuery: { control: 'boolean' },
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
 		forContour: { control: 'boolean' },
+		responseTime: { control: 'number' },
 	},
 	parameters: {
 		docs: {
