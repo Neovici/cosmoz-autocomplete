@@ -37,7 +37,6 @@ export interface Props<I> extends Base<I> {
 	textProperty?: string;
 	textual?: (prop?: string) => (i: I) => string;
 	valueProperty?: string;
-	hideEmpty?: boolean;
 	disabled?: boolean;
 	onFocus?: (focused?: boolean) => void;
 	preserveOrder?: boolean;
@@ -55,7 +54,6 @@ export const useAutocomplete = <I>({
 	textProperty,
 	textual: _textual,
 	valueProperty,
-	hideEmpty,
 	keepOpened,
 	keepQuery,
 	preserveOrder,
@@ -94,7 +92,6 @@ export const useAutocomplete = <I>({
 		empty,
 		limit,
 		value,
-		hideEmpty,
 		onChange,
 		onText,
 	});
@@ -122,9 +119,7 @@ export const useAutocomplete = <I>({
 		value,
 		source$,
 		items: useMemo(() => {
-			if (!active || (hideEmpty && empty)) {
-				return EMPTY;
-			}
+			if (!active) return EMPTY;
 
 			const items = preserveOrder
 				? options
@@ -136,7 +131,6 @@ export const useAutocomplete = <I>({
 			active,
 			query,
 			textual,
-			hideEmpty,
 			empty,
 			value,
 			preserveOrder,

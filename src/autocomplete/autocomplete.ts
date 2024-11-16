@@ -157,7 +157,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'preserve-order',
 		'keep-opened',
 		'keep-query',
-		'hide-empty',
 		'default-index',
 		'item-height',
 		'item-limit',

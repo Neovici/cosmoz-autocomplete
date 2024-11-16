@@ -30,7 +30,6 @@ const Autocomplete = ({
 	min,
 	label = '',
 	value = [],
-	hideEmpty = false,
 	disabled = false,
 	placeholder = '',
 	defaultIndex = 0,
@@ -59,7 +58,6 @@ const Autocomplete = ({
 			.value=${value}
 			.min=${min}
 			.defaultIndex=${defaultIndex}
-			?hide-empty=${hideEmpty}
 			?disabled=${disabled}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
@@ -78,7 +76,6 @@ const ContourAutocomplete = ({
 	min,
 	label = '',
 	value = [],
-	hideEmpty = false,
 	disabled = false,
 	placeholder = '',
 	defaultIndex = 0,
@@ -119,7 +116,6 @@ const ContourAutocomplete = ({
 			.value=${value}
 			.min=${min}
 			.defaultIndex=${defaultIndex}
-			?hide-empty=${hideEmpty}
 			?disabled=${disabled}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
@@ -156,7 +152,6 @@ export default {
 			control: 'number',
 			description: 'The default index of the source array',
 		},
-		hideEmpty: { control: 'boolean' },
 		disabled: {
 			control: 'boolean',
 			description:
@@ -213,24 +208,6 @@ export const Single = {
 		docs: {
 			description: {
 				story: 'Choose a single value',
-			},
-		},
-	},
-};
-
-export const HideEmpty = {
-	args: {
-		label: 'Choose color',
-		source: colors,
-		textProperty: 'text',
-		limit: 1,
-		value: [colors[2]],
-		hideEmpty: true,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Hide the empty value',
 			},
 		},
 	},
