@@ -17,8 +17,10 @@ const CSS = html`
 
 const delay = (source, time) => {
 	if (time == null) return source;
-	return () =>
-		new Promise((resolve) => setTimeout(() => resolve(source), time));
+	return ({ active }) =>
+		active
+			? new Promise((resolve) => setTimeout(() => resolve(source), time))
+			: undefined;
 };
 
 const Autocomplete = ({
