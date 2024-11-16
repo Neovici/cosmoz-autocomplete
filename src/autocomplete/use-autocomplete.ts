@@ -37,7 +37,6 @@ export interface Props<I> extends Base<I> {
 	textProperty?: string;
 	textual?: (prop?: string) => (i: I) => string;
 	valueProperty?: string;
-	external?: boolean;
 	hideEmpty?: boolean;
 	disabled?: boolean;
 	onFocus?: (focused?: boolean) => void;
@@ -56,7 +55,6 @@ export const useAutocomplete = <I>({
 	textProperty,
 	textual: _textual,
 	valueProperty,
-	external,
 	hideEmpty,
 	keepOpened,
 	keepQuery,
@@ -133,10 +131,10 @@ export const useAutocomplete = <I>({
 			if (!active || (hideEmpty && empty)) {
 				return EMPTY$;
 			}
-			return query && !external
+			return query
 				? values$.then((values) => search(values, query, textual))
 				: values$;
-		}, [values$, active, query, textual, external, hideEmpty, empty]),
+		}, [values$, active, query, textual, hideEmpty, empty]),
 		onClick: useCallback(() => setClosed(false), []),
 		onFocus,
 		onText: useCallback(
