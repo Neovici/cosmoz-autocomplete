@@ -1,11 +1,11 @@
-import { useCallback, useMemo, useEffect } from '@pionjs/pion';
+import { useCallback, useMemo, useEffect, useState } from '@pionjs/pion';
 import { without, array } from '@neovici/cosmoz-utils/array';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { useKeys } from './use-keys';
-import { search, normalize, notify, useNotify, EMPTY$ } from './util';
+import { search, normalize, notify, useNotify, EMPTY } from './util';
 
 type Source<I> = (opts: {
 	query: string;
@@ -77,6 +77,7 @@ export const useAutocomplete = <I>({
 			},
 			[_onChange],
 		),
+		[options, setOptions] = useState<I[]>([]),
 		source$ = useMemo(
 			() =>
 				Promise.resolve(
@@ -84,16 +85,9 @@ export const useAutocomplete = <I>({
 				).then(normalize),
 			[source, active, query],
 		),
-		value = useMemo(() => array(_value), [_value]),
-		values$ = useMemo(
-			() =>
-				source$.then((source) =>
-					preserveOrder
-						? source
-						: [...value, ...without(value, prop(valueProperty))(source)],
-				),
-			[source$, value, valueProperty],
-		);
+		value = useMemo(() => array(_value), [_value]);
+
+	useEffect(() => source$.then(setOptions), [source$]);
 
 	useKeys({
 		focused,
@@ -126,15 +120,28 @@ export const useAutocomplete = <I>({
 		query,
 		textual,
 		value,
-		values$,
-		items$: useMemo(() => {
+		source$,
+		items: useMemo(() => {
 			if (!active || (hideEmpty && empty)) {
-				return EMPTY$;
+				return EMPTY;
 			}
-			return query
-				? values$.then((values) => search(values, query, textual))
-				: values$;
-		}, [values$, active, query, textual, hideEmpty, empty]),
+
+			const items = preserveOrder
+				? options
+				: [...value, ...without(value, prop(valueProperty))(options)];
+
+			return search(items, query, textual);
+		}, [
+			options,
+			active,
+			query,
+			textual,
+			hideEmpty,
+			empty,
+			value,
+			preserveOrder,
+			valueProperty,
+		]),
 		onClick: useCallback(() => setClosed(false), []),
 		onFocus,
 		onText: useCallback(

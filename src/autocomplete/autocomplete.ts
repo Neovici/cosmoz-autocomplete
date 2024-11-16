@@ -56,8 +56,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				limit,
 				min,
 				showSingle,
-				items$,
-				values$,
+				items,
+				source$,
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
@@ -88,14 +88,14 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?readonly=${isSingle}
 				?disabled=${disabled}
 				?invalid=${until(
-					values$.then(
+					source$.then(
 						() => invalid,
 						() => true,
 					),
 					invalid,
 				)}
 				.errorMessage=${until(
-					values$.then(
+					source$.then(
 						() => errorMessage,
 						(e: { message?: string }) => e.message,
 					),
@@ -122,22 +122,18 @@ const autocomplete = <I>(props: AProps<I>) => {
 					disabled,
 				})}
 				${until(
-					values$.then(blank, blank),
+					source$.then(blank, blank),
 					html`<div slot="suffix" class="spinner"></div>`,
 				)}
 			</cosmoz-input>
 
-			${until(
-				items$.then((items: I[]) =>
-					when((!isSingle || showSingle) && items.length, () =>
-						listbox<I>({
-							...props,
-							anchor,
-							items,
-							multi: !isOne,
-						}),
-					),
-				),
+			${when((!isSingle || showSingle) && items.length, () =>
+				listbox<I>({
+					...props,
+					anchor,
+					items,
+					multi: !isOne,
+				}),
 			)}`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
