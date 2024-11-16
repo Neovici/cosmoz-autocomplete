@@ -66,18 +66,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 			anchor = useCallback(
 				() => host.shadowRoot!.querySelector<HTMLElement>('#input'),
 				[host, value],
-			),
-			suggestions = until(
-				items$.then((items: I[]) =>
-					when((!isSingle || showSingle) && items.length, () =>
-						listbox<I>({
-							...props,
-							anchor,
-							items,
-							multi: !isOne,
-						}),
-					),
-				),
 			);
 
 		useImperativeApi(
@@ -90,7 +78,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			[],
 		);
 
-		return html` <cosmoz-input
+		return html`<cosmoz-input
 				id="input"
 				part="input"
 				.label=${label}
@@ -139,7 +127,18 @@ const autocomplete = <I>(props: AProps<I>) => {
 				)}
 			</cosmoz-input>
 
-			${suggestions}`;
+			${until(
+				items$.then((items: I[]) =>
+					when((!isSingle || showSingle) && items.length, () =>
+						listbox<I>({
+							...props,
+							anchor,
+							items,
+							multi: !isOne,
+						}),
+					),
+				),
+			)}`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {
