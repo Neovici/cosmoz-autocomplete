@@ -21,8 +21,9 @@ describe('use-autocomplete', () => {
 					.textProperty=${'text'}
 				/>
 			`);
+
 		expect(result.current.query).to.equal('It');
-		expect(await result.current.items$).to.be.empty;
+		expect(result.current.items).to.be.empty;
 	});
 
 	it('focus', async () => {
@@ -38,10 +39,10 @@ describe('use-autocomplete', () => {
 				/>`,
 			);
 
-		expect(await result.current.items$).to.be.empty;
+		expect(result.current.items).to.be.empty;
 		result.current.onFocus({ currentTarget: { matches: () => true } });
 		await nextFrame();
-		expect(await result.current.items$).not.to.be.empty;
+		expect(result.current.items).not.to.be.empty;
 		expect(onFocus).to.have.been.calledOnceWith(true);
 	});
 
@@ -128,16 +129,16 @@ describe('use-autocomplete', () => {
 			result = await fixture(html`
 				<use-autocomplete
 					.source=${source}
-					.text=${'La'}
+					.text=${'1'}
 					.textProperty=${'text'}
 					.external=${true}
 				/>
 			`);
-		expect(result.current.query).to.equal('La');
+		expect(result.current.query).to.equal('1');
 		result.current.onFocus({ currentTarget: { matches: () => true } });
 		await nextFrame();
 
-		expect(await result.current.items$).to.have.lengthOf(2);
+		expect(result.current.items).to.have.lengthOf(1);
 	});
 
 	it('valueProperty', async () => {
@@ -158,6 +159,6 @@ describe('use-autocomplete', () => {
 		result.current.onFocus({ currentTarget: { matches: () => true } });
 		await nextFrame();
 
-		expect(await result.current.items$).to.be.deep.equal(source);
+		expect(result.current.items).to.be.deep.equal(source);
 	});
 });
