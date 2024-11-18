@@ -5,19 +5,13 @@ import { w, f as f$1, j, T, m as m$1, i as i$3, x, p, v, r as r$1, h as h$2 } fr
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const t={ATTRIBUTE:1,CHILD:2,PROPERTY:3,BOOLEAN_ATTRIBUTE:4,EVENT:5,ELEMENT:6},e$1=t=>(...e)=>({_$litDirective$:t,values:e});let i$2 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
+const t={ATTRIBUTE:1,CHILD:2,PROPERTY:3,BOOLEAN_ATTRIBUTE:4,EVENT:5,ELEMENT:6},e=t=>(...e)=>({_$litDirective$:t,values:e});let i$2 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
 
 /**
  * @license
  * Copyright 2018 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const n$4="important",i$1=" !"+n$4,o$3=e$1(class extends i$2{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"style"!==t$1.name||t$1.strings?.length>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(t){return Object.keys(t).reduce(((e,r)=>{const s=t[r];return null==s?e:e+`${r=r.includes("-")?r:r.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${s};`}),"")}update(e,[r]){const{style:s}=e.element;if(void 0===this.ft)return this.ft=new Set(Object.keys(r)),this.render(r);for(const t of this.ft)null==r[t]&&(this.ft.delete(t),t.includes("-")?s.removeProperty(t):s[t]=null);for(const t in r){const e=r[t];if(null!=e){this.ft.add(t);const r="string"==typeof e&&e.endsWith(i$1);t.includes("-")||r?s.setProperty(t,r?e.slice(0,-11):e,r?n$4:""):s[t]=e;}}return w}});
-
-/**
- * @license
- * Copyright 2018 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */const e=e$1(class extends i$2{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter((s=>t[s])).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return w}});
+ */const n$4="important",i$1=" !"+n$4,o$3=e(class extends i$2{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"style"!==t$1.name||t$1.strings?.length>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(t){return Object.keys(t).reduce(((e,r)=>{const s=t[r];return null==s?e:e+`${r=r.includes("-")?r:r.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${s};`}),"")}update(e,[r]){const{style:s}=e.element;if(void 0===this.ft)return this.ft=new Set(Object.keys(r)),this.render(r);for(const t of this.ft)null==r[t]&&(this.ft.delete(t),t.includes("-")?s.removeProperty(t):s[t]=null);for(const t in r){const e=r[t];if(null!=e){this.ft.add(t);const r="string"==typeof e&&e.endsWith(i$1);t.includes("-")||r?s.setProperty(t,r?e.slice(0,-11):e,r?n$4:""):s[t]=e;}}return w}});
 
 let current;
 let currentId = 0;
@@ -586,7 +580,7 @@ const { component, createContext } = pion({ render: j });
  * @license
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const l=e$1(class extends i$2{constructor(r){if(super(r),r.type!==t.PROPERTY&&r.type!==t.ATTRIBUTE&&r.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!f$1(r))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===w||t$1===T)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return w}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return w}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return w;return m$1(i),t$1}});
+ */const l=e(class extends i$2{constructor(r){if(super(r),r.type!==t.PROPERTY&&r.type!==t.ATTRIBUTE&&r.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!f$1(r))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===w||t$1===T)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return w}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return w}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return w;return m$1(i),t$1}});
 
 /**
  * @license
@@ -599,7 +593,7 @@ class s{constructor(t){this.Y=t;}disconnect(){this.Y=void 0;}reconnect(t){this.Y
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const n$2=t=>!i$3(t)&&"function"==typeof t.then,h=1073741823;let c$1 = class c extends f{constructor(){super(...arguments),this._$Cwt=h,this._$Cbt=[],this._$CK=new s(this),this._$CX=new i;}render(...s){return s.find((t=>!n$2(t)))??w}update(s,i){const e=this._$Cbt;let r=e.length;this._$Cbt=i;const o=this._$CK,c=this._$CX;this.isConnected||this.disconnected();for(let t=0;t<i.length&&!(t>this._$Cwt);t++){const s=i[t];if(!n$2(s))return this._$Cwt=t,s;t<r&&s===e[t]||(this._$Cwt=h,r=0,Promise.resolve(s).then((async t=>{for(;c.get();)await c.get();const i=o.deref();if(void 0!==i){const e=i._$Cbt.indexOf(s);e>-1&&e<i._$Cwt&&(i._$Cwt=e,i.setValue(t));}})));}return w}disconnected(){this._$CK.disconnect(),this._$CX.pause();}reconnected(){this._$CK.reconnect(this),this._$CX.resume();}};const m=e$1(c$1);
+ */const n$2=t=>!i$3(t)&&"function"==typeof t.then,h=1073741823;let c$1 = class c extends f{constructor(){super(...arguments),this._$Cwt=h,this._$Cbt=[],this._$CK=new s(this),this._$CX=new i;}render(...s){return s.find((t=>!n$2(t)))??w}update(s,i){const e=this._$Cbt;let r=e.length;this._$Cbt=i;const o=this._$CK,c=this._$CX;this.isConnected||this.disconnected();for(let t=0;t<i.length&&!(t>this._$Cwt);t++){const s=i[t];if(!n$2(s))return this._$Cwt=t,s;t<r&&s===e[t]||(this._$Cwt=h,r=0,Promise.resolve(s).then((async t=>{for(;c.get();)await c.get();const i=o.deref();if(void 0!==i){const e=i._$Cbt.indexOf(s);e>-1&&e<i._$Cwt&&(i._$Cwt=e,i.setValue(t));}})));}return w}disconnected(){this._$CK.disconnect(),this._$CX.pause();}reconnected(){this._$CK.reconnect(this),this._$CX.resume();}};const m=e(c$1);
 
 /**
  * @license
@@ -632,7 +626,7 @@ const useImperativeApi = hook(class extends Hook {
     }
 });
 
-const o$1=new WeakMap,n=e$1(class extends f{render(i){return T}update(i,[s]){const e=s!==this.Y;return e&&void 0!==this.Y&&this.rt(void 0),(e||this.lt!==this.ct)&&(this.Y=s,this.ht=i.options?.host,this.rt(this.ct=i.element)),T}rt(t){if("function"==typeof this.Y){const i=this.ht??globalThis;let s=o$1.get(i);void 0===s&&(s=new WeakMap,o$1.set(i,s)),void 0!==s.get(this.Y)&&this.Y.call(this.ht,void 0),s.set(this.Y,t),void 0!==t&&this.Y.call(this.ht,t);}else this.Y.value=t;}get lt(){return "function"==typeof this.Y?o$1.get(this.ht??globalThis)?.get(this.Y):this.Y?.value}disconnected(){this.lt===this.ct&&this.rt(void 0);}reconnected(){this.rt(this.ct);}});
+const o$1=new WeakMap,n=e(class extends f{render(i){return T}update(i,[s]){const e=s!==this.Y;return e&&void 0!==this.Y&&this.rt(void 0),(e||this.lt!==this.ct)&&(this.Y=s,this.ht=i.options?.host,this.rt(this.ct=i.element)),T}rt(t){if("function"==typeof this.Y){const i=this.ht??globalThis;let s=o$1.get(i);void 0===s&&(s=new WeakMap,o$1.set(i,s)),void 0!==s.get(this.Y)&&this.Y.call(this.ht,void 0),s.set(this.Y,t),void 0!==t&&this.Y.call(this.ht,t);}else this.Y.value=t;}get lt(){return "function"==typeof this.Y?o$1.get(this.ht??globalThis)?.get(this.Y):this.Y?.value}disconnected(){this.lt===this.ct&&this.rt(void 0);}reconnected(){this.rt(this.ct);}});
 
 /**
  * @license
@@ -1305,7 +1299,7 @@ const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _on
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const u=(e,s,t)=>{const r=new Map;for(let l=s;l<=t;l++)r.set(e[l],l);return r},c=e$1(class extends i$2{constructor(e){if(super(e),e.type!==t.CHILD)throw Error("repeat() can only be used in text expressions")}dt(e,s,t){let r;void 0===t?t=s:void 0!==s&&(r=s);const l=[],o=[];let i=0;for(const s of e)l[i]=r?r(s,i):i,o[i]=t(s,i),i++;return {values:o,keys:l}}render(e,s,t){return this.dt(e,s,t).values}update(s,[t,r,c]){const d=p(s),{values:p$1,keys:a}=this.dt(t,r,c);if(!Array.isArray(d))return this.ut=a,p$1;const h=this.ut??=[],v$1=[];let m,y,x=0,j=d.length-1,k=0,w$1=p$1.length-1;for(;x<=j&&k<=w$1;)if(null===d[x])x++;else if(null===d[j])j--;else if(h[x]===a[k])v$1[k]=v(d[x],p$1[k]),x++,k++;else if(h[j]===a[w$1])v$1[w$1]=v(d[j],p$1[w$1]),j--,w$1--;else if(h[x]===a[w$1])v$1[w$1]=v(d[x],p$1[w$1]),r$1(s,v$1[w$1+1],d[x]),x++,w$1--;else if(h[j]===a[k])v$1[k]=v(d[j],p$1[k]),r$1(s,d[x],d[j]),j--,k++;else if(void 0===m&&(m=u(a,k,w$1),y=u(h,x,j)),m.has(h[x]))if(m.has(h[j])){const e=y.get(a[k]),t=void 0!==e?d[e]:null;if(null===t){const e=r$1(s,d[x]);v(e,p$1[k]),v$1[k]=e;}else v$1[k]=v(t,p$1[k]),r$1(s,d[x],t),d[e]=null;k++;}else h$2(d[j]),j--;else h$2(d[x]),x++;for(;k<=w$1;){const e=r$1(s,v$1[w$1+1]);v(e,p$1[k]),v$1[k++]=e;}for(;x<=j;){const e=d[x++];null!==e&&h$2(e);}return this.ut=a,m$1(s,v$1),w}});
+const u=(e,s,t)=>{const r=new Map;for(let l=s;l<=t;l++)r.set(e[l],l);return r},c=e(class extends i$2{constructor(e){if(super(e),e.type!==t.CHILD)throw Error("repeat() can only be used in text expressions")}dt(e,s,t){let r;void 0===t?t=s:void 0!==s&&(r=s);const l=[],o=[];let i=0;for(const s of e)l[i]=r?r(s,i):i,o[i]=t(s,i),i++;return {values:o,keys:l}}render(e,s,t){return this.dt(e,s,t).values}update(s,[t,r,c]){const d=p(s),{values:p$1,keys:a}=this.dt(t,r,c);if(!Array.isArray(d))return this.ut=a,p$1;const h=this.ut??=[],v$1=[];let m,y,x=0,j=d.length-1,k=0,w$1=p$1.length-1;for(;x<=j&&k<=w$1;)if(null===d[x])x++;else if(null===d[j])j--;else if(h[x]===a[k])v$1[k]=v(d[x],p$1[k]),x++,k++;else if(h[j]===a[w$1])v$1[w$1]=v(d[j],p$1[w$1]),j--,w$1--;else if(h[x]===a[w$1])v$1[w$1]=v(d[x],p$1[w$1]),r$1(s,v$1[w$1+1],d[x]),x++,w$1--;else if(h[j]===a[k])v$1[k]=v(d[j],p$1[k]),r$1(s,d[x],d[j]),j--,k++;else if(void 0===m&&(m=u(a,k,w$1),y=u(h,x,j)),m.has(h[x]))if(m.has(h[j])){const e=y.get(a[k]),t=void 0!==e?d[e]:null;if(null===t){const e=r$1(s,d[x]);v(e,p$1[k]),v$1[k]=e;}else v$1[k]=v(t,p$1[k]),r$1(s,d[x],t),d[e]=null;k++;}else h$2(d[j]),j--;else h$2(d[x]),x++;for(;k<=w$1;){const e=r$1(s,v$1[w$1+1]);v(e,p$1[k]),v$1[k++]=e;}for(;x<=j;){const e=d[x++];null!==e&&h$2(e);}return this.ut=a,m$1(s,v$1),w}});
 
 /**
  * @license
@@ -2339,7 +2333,7 @@ class VirtualizeDirective extends f {
         this._virtualizer?.connected();
     }
 }
-const virtualize = e$1(VirtualizeDirective);
+const virtualize = e(VirtualizeDirective);
 
 const undefs = (prev, obj) => {
     if (!prev || !obj) {
@@ -2361,7 +2355,7 @@ class SpreadPropsDirective extends i$2 {
         return w;
     }
 }
-const spreadProps = e$1(SpreadPropsDirective);
+const spreadProps = e(SpreadPropsDirective);
 
 const useStyleSheet = (css) => {
     const host = useHost();
@@ -3404,7 +3398,12 @@ const clear = x`
 `;
 const Chip = ({ onClear, disabled }) => x`
 	<div class="content" part="content chip-text"><slot></slot></div>
-	${n$1(onClear && !disabled, () => x` <span class="clear" part="clear chip-clear" @click=${onClear}>
+	${n$1(onClear && !disabled, () => x`<span
+				class="clear"
+				part="clear chip-clear"
+				@mousedown=${(ev) => ev.preventDefault()}
+				@click=${onClear}
+			>
 				${clear}
 			</span>`)}
 `;
@@ -3592,6 +3591,17 @@ const CSS = x`
 		cosmoz-listbox {
 			font-family: 'Inter', sans-serif;
 		}
+
+		.contour {
+			--cosmoz-input-color: #aeacac;
+			--cosmoz-input-border-radius: 4px;
+			--cosmoz-input-wrap-padding: 12px;
+			--cosmoz-input-line-display: none;
+			--cosmoz-input-contour-size: 1px;
+			--cosmoz-input-label-translate-y: 10px;
+			--cosmoz-autocomplete-chip-translate-y: 8px;
+			--cosmoz-autocomplete-chip-border-radius: 4px;
+		}
 	</style>
 `;
 const delay = (source, time) => {
@@ -3614,7 +3624,8 @@ const Autocomplete = ({
   keepOpened = false,
   keepQuery = false,
   overflowed = false,
-  responseTime
+  responseTime,
+  contour
 }) => {
   const styles = {
     maxWidth: overflowed ? "170px" : "initial"
@@ -3623,6 +3634,7 @@ const Autocomplete = ({
   return x`
 		${CSS}
 		<cosmoz-autocomplete
+			class=${n$1(contour, () => "contour")}
 			.label=${label}
 			.placeholder=${placeholder}
 			.source=${sourceDelayed}
@@ -3638,60 +3650,6 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			style=${o$3(styles)}
-		></cosmoz-autocomplete>
-	`;
-};
-const ContourAutocomplete = ({
-  source,
-  limit,
-  textProperty,
-  min,
-  label = "",
-  value = [],
-  disabled = false,
-  placeholder = "",
-  defaultIndex = 0,
-  showSingle = false,
-  preserveOrder = false,
-  wrap = false,
-  overflowed = false,
-  forContour = false
-}) => {
-  const styles = {
-    maxWidth: overflowed ? "255px" : "initial"
-  };
-  const classes = {
-    "contour-autocomplete": forContour
-  };
-  return x`
-		${CSS}
-		<style>
-			.contour-autocomplete {
-				--cosmoz-input-color: #aeacac;
-				--cosmoz-input-border-radius: 4px;
-				--cosmoz-input-wrap-padding: 12px;
-				--cosmoz-input-line-display: none;
-				--cosmoz-input-contour-size: 1px;
-				--cosmoz-input-label-translate-y: 10px;
-				--cosmoz-autocomplete-chip-translate-y: 8px;
-				--cosmoz-autocomplete-chip-border-radius: 4px;
-			}
-		</style>
-		<cosmoz-autocomplete
-			.label=${label}
-			.placeholder=${placeholder}
-			.source=${source}
-			.textProperty=${textProperty}
-			.limit=${limit}
-			.value=${value}
-			.min=${min}
-			.defaultIndex=${defaultIndex}
-			?disabled=${disabled}
-			?show-single=${showSingle}
-			?preserve-order=${preserveOrder}
-			?wrap=${wrap}
-			style=${o$3(styles)}
-			class="${e(classes)}"
 		></cosmoz-autocomplete>
 	`;
 };
@@ -3732,13 +3690,21 @@ var cosmozAutocomplete_stories = {
     min: { control: "number" },
     wrap: { control: "boolean" },
     overflowed: { control: "boolean" },
-    forContour: { control: "boolean" },
-    responseTime: { control: "number" }
+    responseTime: { control: "number" },
+    uppercase: { control: "boolean" },
+    contour: { control: "boolean" }
   },
+  decorators: [
+    (story, { args }) => n$1(
+      args.uppercase,
+      () => x`<div style="text-transform: uppercase">${story()}</div>`,
+      () => story()
+    )
+  ],
   parameters: {
     docs: {
       controls: {
-        exclude: ["overflowed", "forContour"]
+        exclude: ["overflowed", "contour", "responseTime", "uppercase"]
       },
       description: {
         component: "The Cosmoz Autocomplete web component"
@@ -3894,41 +3860,6 @@ const Wrap = {
     }
   }
 };
-const Contour = ContourAutocomplete.bind({});
-Contour.args = {
-  label: "Choose color",
-  source: colors,
-  textProperty: "text",
-  value: [colors[0], colors[1], colors[2]],
-  wrap: true,
-  overflowed: true,
-  forContour: true
-};
-Contour.parameters = {
-  docs: {
-    description: {
-      story: "Contour and Wrapped variant"
-    }
-  }
-};
-const UppercaseDecorator = {
-  args: {
-    label: "Choose color",
-    source: colors,
-    textProperty: "text",
-    value: [colors[0], colors[3]]
-  },
-  decorators: [
-    (story) => x`<div style="text-transform: uppercase">${story()}</div>`
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: "The uppercase decorator version"
-      }
-    }
-  }
-};
-const __namedExportsOrder = ["Basic", "Single", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "Contour", "UppercaseDecorator"];
+const __namedExportsOrder = ["Basic", "Single", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap"];
 
-export { Basic, Contour, DefaultIndex, DefaultIndexSingleValue, Disabled, Overflown, Placeholder, Select, Single, UppercaseDecorator, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
+export { Basic, DefaultIndex, DefaultIndexSingleValue, Disabled, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
