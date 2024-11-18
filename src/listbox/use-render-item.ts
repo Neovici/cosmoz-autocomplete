@@ -5,6 +5,7 @@ import {
 	ItemRenderer,
 	Opts,
 } from './item-renderer';
+import { loadingSymbol } from './util';
 
 export const useRenderItem = <I>({
 	itemRenderer = mkItemRenderer<I>(),
@@ -12,7 +13,7 @@ export const useRenderItem = <I>({
 }: Opts<I> & { itemRenderer?: ItemRenderer<I> }) => {
 	const info = useMeta<Opts<I>>(meta);
 	return useCallback(
-		(item: I, i: number) => itemRenderer(item, i, info),
+		(item: I | typeof loadingSymbol, i: number) => itemRenderer(item, i, info),
 		[info, itemRenderer]
 	);
 };

@@ -1,8 +1,8 @@
-import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-newline
+import { html } from 'lit-html'; // eslint-disable-line object-curly-newline
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
-import { useCallback } from '@pionjs/pion';
+import { useCallback, useEffect, useState } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
 import '@neovici/cosmoz-input';
@@ -31,14 +31,13 @@ type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 		onInputRef?: (el?: Element) => void;
 	};
 
-const blank = () => nothing;
-
 const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
+				active,
 				invalid,
 				errorMessage,
 				label,
@@ -67,6 +66,14 @@ const autocomplete = <I>(props: AProps<I>) => {
 				() => host.shadowRoot!.querySelector<HTMLElement>('#input'),
 				[host, value],
 			);
+
+		const [loading, setLoading] = useState(false);
+		useEffect(() => {
+			// TODO: handle `source$` changes that occur while `loading`
+			setLoading(true);
+			const endLoading = setLoading.bind(null, false);
+			source$.then(endLoading, endLoading);
+		}, [source$]);
 
 		useImperativeApi(
 			{
@@ -121,18 +128,15 @@ const autocomplete = <I>(props: AProps<I>) => {
 					textual,
 					disabled,
 				})}
-				${until(
-					source$.then(blank, blank),
-					html`<div slot="suffix" class="spinner"></div>`,
-				)}
 			</cosmoz-input>
 
-			${when((!isSingle || showSingle) && items.length, () =>
+			${when(active && (loading || items.length > 0) && !(isSingle && !showSingle), () =>
 				listbox<I>({
 					...props,
 					anchor,
 					items,
 					multi: !isOne,
+					loading,
 				}),
 			)}`;
 	},

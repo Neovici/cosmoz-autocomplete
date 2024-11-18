@@ -1,7 +1,7 @@
 import { useMemo } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { usePosition, Placement } from '@neovici/cosmoz-dropdown/use-position';
-import { byValue } from './util';
+import { byValue, loadingSymbol } from './util';
 import { useItems } from './use-items';
 import { useRenderItem, ItemRenderer } from './use-render-item';
 
@@ -19,6 +19,7 @@ export const properties = [
 	'defaultIndex',
 	'value',
 	'valueProperty',
+	'loading',
 ];
 
 export interface Props<I> {
@@ -35,6 +36,7 @@ export interface Props<I> {
 	anchor?: () => HTMLElement | null;
 	confinement?: HTMLElement;
 	placement?: Placement;
+	loading?: boolean;
 }
 
 export const useListbox = <I>({
@@ -48,16 +50,21 @@ export const useListbox = <I>({
 	itemRenderer,
 	itemHeight = 40,
 	itemLimit = 5,
+	loading,
 	...thru
 }: Props<I>) => {
 	const isSelected = useMemo(
 			() => byValue(value, valueProperty),
-			[value, valueProperty]
+			[value, valueProperty],
 		),
 		// TODO: investigate if we can drop this
-		items = useMemo(() => _items.slice(), [_items, isSelected]),
+		__items = useMemo(() => _items.slice(), [_items, isSelected]),
+		items: (I | typeof loadingSymbol)[] = useMemo(
+			() => (loading ? [...__items, loadingSymbol] : __items),
+			[loading, __items],
+		),
 		{ position, highlight, select } = useItems({
-			items,
+			items: __items,
 			onSelect,
 			defaultIndex: isNaN(defaultIndex as number)
 				? undefined

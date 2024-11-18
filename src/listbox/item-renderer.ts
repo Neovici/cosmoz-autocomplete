@@ -1,6 +1,8 @@
-import { html, TemplateResult } from 'lit-html';
+import './skeleton-span';
+
 import { identity } from '@neovici/cosmoz-utils/function';
-import { mark } from './util';
+import { html, TemplateResult } from 'lit-html';
+import { loadingSymbol, mark } from './util';
 
 export interface Opts<I> {
 	highlight: (i: number) => void;
@@ -13,15 +15,15 @@ export interface Opts<I> {
 export type Render<I> = (content: unknown, item: I, i: number) => unknown;
 
 export type ItemRenderer<I> = (
-	item: I,
+	item: I | typeof loadingSymbol,
 	i: number,
-	opts: Opts<I>
+	opts: Opts<I>,
 ) => TemplateResult;
 
 export const itemRenderer =
 	<I>(render: Render<I> = identity) =>
 	(
-		item: I,
+		item: I | typeof loadingSymbol,
 		i: number,
 		{
 			highlight,
@@ -35,12 +37,17 @@ export const itemRenderer =
 			isSelected: (item: I) => void;
 			query: string;
 			textual: (i: I) => string;
-		}
+		},
 	): TemplateResult => {
+		if (item === loadingSymbol) {
+			return html`<div class="item">
+				<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>
+			</div>`;
+		}
+
 		const text = textual(item),
 			content = mark(text, query),
 			rendered = render(content, item, i);
-
 		return html` <div
 				class="item"
 				role="option"

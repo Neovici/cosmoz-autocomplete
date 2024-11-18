@@ -4,7 +4,7 @@ import { Rec } from '@neovici/cosmoz-utils/object';
 
 export const byValue = <K extends PropertyKey | undefined, T>(
 	value: T | T[],
-	valueProperty: K
+	valueProperty: K,
 ) => {
 	if (!valueProperty) {
 		return (item: T) => array(value).includes(item);
@@ -13,7 +13,7 @@ export const byValue = <K extends PropertyKey | undefined, T>(
 		array(value).find(
 			(value) =>
 				(value as Rec<NonNullable<K>>)[valueProperty] ===
-				(item as Rec<NonNullable<K>>)[valueProperty]
+				(item as Rec<NonNullable<K>>)[valueProperty],
 		);
 };
 export const mark = (text: string, query: string) => {
@@ -31,3 +31,5 @@ export const mark = (text: string, query: string) => {
 		text.slice(end),
 	];
 };
+
+export const loadingSymbol: unique symbol = Symbol('loading');
