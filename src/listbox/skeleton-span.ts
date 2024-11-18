@@ -10,7 +10,8 @@ const style = css`
 		background-position: right;
 		animation: sweep 1.5s cubic-bezier(0.3, 1, 0.3, 1) infinite;
 		border-radius: 3px;
-		width: 100px;
+		width: calc(100% - 35px);
+		max-width: 150px;
 		height: 20px;
 	}
 
