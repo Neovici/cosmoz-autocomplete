@@ -151,6 +151,19 @@ class BaseScheduler {
     }
 }
 
+const sheet$1 = (...styles) => {
+    const cs = new CSSStyleSheet();
+    cs.replaceSync(styles.join(""));
+    return cs;
+};
+const sheets = (styleSheets) => styleSheets.map((style) => {
+    if (typeof style === "string")
+        return sheet$1(style);
+    return style;
+});
+const tagged$1 = (strings, ...values) => strings.flatMap((s, i) => [s, values[i] || ""]).join("");
+const css = tagged$1;
+
 const toCamelCase$1 = (val = "") => val.replace(/-+([a-z])?/g, (_, char) => (char ? char.toUpperCase() : ""));
 function makeComponent(render) {
     class Scheduler extends BaseScheduler {
@@ -184,7 +197,7 @@ function makeComponent(render) {
                         ...shadowRootInit,
                     });
                     if (styleSheets)
-                        shadowRoot.adoptedStyleSheets = styleSheets;
+                        shadowRoot.adoptedStyleSheets = sheets(styleSheets);
                     this._scheduler = new Scheduler(renderer, shadowRoot, this);
                 }
             }
@@ -405,6 +418,7 @@ function makeContext(component) {
                 _value;
                 constructor() {
                     super();
+                    this.style.display = "contents";
                     this.listeners = new Set();
                     this.addEventListener(contextEvent, this);
                 }
@@ -494,7 +508,7 @@ const useLayoutEffect = createEffect(setLayoutEffects);
  * @function
  * @template {*} T
  * @param {T} [initialState] - Optional initial state
- * @return {readonly [state: T, updaterFn: StateUpdater<T>]} stateTuple - Tuple of current state and state updater function
+ * @return {StateTuple<T>} stateTuple - Tuple of current state and state updater function
  */
 const useState = hook(class extends Hook {
     args;
@@ -502,7 +516,8 @@ const useState = hook(class extends Hook {
         super(id, state);
         this.updater = this.updater.bind(this);
         if (typeof initialValue === "function") {
-            initialValue = initialValue();
+            const initFn = initialValue;
+            initialValue = initFn();
         }
         this.makeArgs(initialValue);
     }
@@ -553,6 +568,60 @@ hook(class extends Hook {
     dispatch(action) {
         this.currentState = this.reducer(this.currentState, action);
         this.state.update();
+    }
+});
+
+const UPPER$1 = /([A-Z])/gu;
+hook(class extends Hook {
+    property;
+    eventName;
+    constructor(id, state, property, initialValue) {
+        super(id, state);
+        if (this.state.virtual) {
+            throw new Error("Can't be used with virtual components.");
+        }
+        this.updater = this.updater.bind(this);
+        this.property = property;
+        this.eventName =
+            property.replace(UPPER$1, "-$1").toLowerCase() + "-changed";
+        // set the initial value only if it was not already set by the parent
+        if (this.state.host[this.property] != null)
+            return;
+        if (typeof initialValue === "function") {
+            const initFn = initialValue;
+            initialValue = initFn();
+        }
+        if (initialValue == null)
+            return;
+        this.updateProp(initialValue);
+    }
+    update(ignored, ignored2) {
+        return [this.state.host[this.property], this.updater];
+    }
+    updater(value) {
+        const previousValue = this.state.host[this.property];
+        if (typeof value === "function") {
+            const updaterFn = value;
+            value = updaterFn(previousValue);
+        }
+        if (Object.is(previousValue, value)) {
+            return;
+        }
+        this.updateProp(value);
+    }
+    updateProp(value) {
+        const ev = this.notify(value);
+        if (ev.defaultPrevented)
+            return;
+        this.state.host[this.property] = value;
+    }
+    notify(value) {
+        const ev = new CustomEvent(this.eventName, {
+            detail: { value, path: this.property },
+            cancelable: true,
+        });
+        this.state.host.dispatchEvent(ev);
+        return ev;
     }
 });
 
@@ -2375,7 +2444,7 @@ const svg = (
   /* eslint-disable quotes */
   "data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
 );
-const style$1 = tagged`
+const style$2 = tagged`
 	:host {
 		position: fixed;
 		z-index: 1000;
@@ -3071,6 +3140,7 @@ const mark = (text, query) => {
     text.slice(end)
   ];
 };
+const loadingSymbol = Symbol("loading");
 
 const useKeyboard = (handlers) => {
   const listeners = useMeta(handlers);
@@ -3129,7 +3199,36 @@ const useItems = ({ items, onSelect, defaultIndex = 0 }) => {
   };
 };
 
+const style$1 = css`
+	:host {
+		display: inline-block;
+		vertical-align: middle;
+		background-image: linear-gradient(90deg, #e0e0e0, #f5f5f5, #e0e0e0);
+		background-size: 1000%;
+		background-position: right;
+		animation: sweep 1.5s cubic-bezier(0.3, 1, 0.3, 1) infinite;
+		border-radius: 3px;
+		width: 100px;
+		height: 20px;
+	}
+
+	@keyframes sweep {
+		0% {
+			background-position: right;
+		}
+		100% {
+			background-position: left;
+		}
+	}
+`;
+customElements.define("cosmoz-autocomplete-skeleton-span", component(() => T, { styleSheets: [style$1] }));
+
 const itemRenderer = (render = identity) => (item, i, { highlight, select, textual = identity, query, isSelected }) => {
+  if (item === loadingSymbol) {
+    return x`<div class="item">
+				<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>
+			</div>`;
+  }
   const text = textual(item), content = mark(text, query), rendered = render(content, item, i);
   return x` <div
 				class="item"
@@ -3165,11 +3264,12 @@ const properties = [
   "itemRenderer",
   "defaultIndex",
   "value",
-  "valueProperty"
+  "valueProperty",
+  "loading"
 ];
-const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultIndex, query, textual, itemRenderer, itemHeight = 40, itemLimit = 5, ...thru }) => {
-  const isSelected = useMemo(() => byValue(value, valueProperty), [value, valueProperty]), items = useMemo(() => _items.slice(), [_items, isSelected]), { position, highlight, select } = useItems({
-    items,
+const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultIndex, query, textual, itemRenderer, itemHeight = 40, itemLimit = 5, loading, ...thru }) => {
+  const isSelected = useMemo(() => byValue(value, valueProperty), [value, valueProperty]), __items = useMemo(() => _items.slice(), [_items, isSelected]), items = useMemo(() => loading ? [...__items, loadingSymbol] : __items, [loading, __items]), { position, highlight, select } = useItems({
+    items: __items,
     onSelect,
     defaultIndex: isNaN(defaultIndex) ? void 0 : Number(defaultIndex)
   });
@@ -3236,7 +3336,7 @@ const showPopover = (popover) => {
     });
   }
 };
-customElements.define("cosmoz-listbox", component(Listbox, { styleSheets: [sheet(style$1)] }));
+customElements.define("cosmoz-listbox", component(Listbox, { styleSheets: [sheet(style$2)] }));
 const listbox = ({ multi, ...thru }) => {
   return x`<cosmoz-listbox
 		${n(showPopover)}
@@ -3299,28 +3399,6 @@ var style = tagged`
 
 	slot {
 		display: contents !important;
-	}
-	
-	@keyframes rotateAnimation {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-
-	.spinner {
-		border-radius: 50%;
-		width: 22px;
-		height: 22px;
-		border: 2px solid rgba(0, 0, 0, 0.1);
-		border-top: 2px solid #5f5a92;
-		animation: rotateAnimation 1.2s infinite
-			cubic-bezier(0.785, 0.135, 0.15, 0.86);
-		box-sizing: border-box;
-		margin-top: -3px;
-		flex: none;
 	}
 `;
 
@@ -3482,10 +3560,15 @@ const useOverflow = ({ value, active, wrap, limit }) => {
   useLayoutEffect(() => enabled ? doRaf() : void 0, [enabled, width, active, value]);
 };
 
-const blank = () => T;
 const inputParts = ["input", "control", "label", "line", "error", "wrap"].map((part) => `${part}: input-${part}`).join();
 const autocomplete = (props) => {
-  const { invalid, errorMessage, label, placeholder, disabled, noLabelFloat, alwaysFloatLabel, textual, text, onText, onFocus, onClick, onDeselect, value, limit, min, showSingle, items, source$ } = props, host = useHost(), isOne = limit == 1, isSingle = isOne && value?.[0] != null, anchor = useCallback(() => host.shadowRoot.querySelector("#input"), [host, value]);
+  const { active, invalid, errorMessage, label, placeholder, disabled, noLabelFloat, alwaysFloatLabel, textual, text, onText, onFocus, onClick, onDeselect, value, limit, min, showSingle, items, source$ } = props, host = useHost(), isOne = limit == 1, isSingle = isOne && value?.[0] != null, anchor = useCallback(() => host.shadowRoot.querySelector("#input"), [host, value]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    const endLoading = setLoading.bind(null, false);
+    source$.then(endLoading, endLoading);
+  }, [source$]);
   useImperativeApi({
     focus: () => host.shadowRoot?.querySelector("#input")?.focus()
   }, []);
@@ -3520,14 +3603,14 @@ const autocomplete = (props) => {
     textual,
     disabled
   })}
-				${m(source$.then(blank, blank), x`<div slot="suffix" class="spinner"></div>`)}
 			</cosmoz-input>
 
-			${n$1((!isSingle || showSingle) && items.length, () => listbox({
+			${n$1(active && (loading || items.length > 0) && !(isSingle && !showSingle), () => listbox({
     ...props,
     anchor,
     items,
-    multi: !isOne
+    multi: !isOne,
+    loading
   }))}`;
 }, Autocomplete$1 = (props) => {
   const thru = {
