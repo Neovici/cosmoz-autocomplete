@@ -31,5 +31,3 @@ export const mark = (text: string, query: string) => {
 		text.slice(end),
 	];
 };
-
-export const loadingSymbol: unique symbol = Symbol('loading');
