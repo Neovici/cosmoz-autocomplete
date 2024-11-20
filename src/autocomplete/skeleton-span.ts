@@ -10,10 +10,10 @@ const style = css`
 		background-position: right;
 		animation: sweep 1.5s cubic-bezier(0.3, 1, 0.3, 1) infinite;
 		border-radius: 3px;
-		width: calc(100% - 50px);
+		width: calc(100% - 20px);
 		max-width: 150px;
 		height: 20px;
-		margin: 10px 0 10px 33px;
+		margin: 10px;
 	}
 
 	:host-context([show-single]) {
