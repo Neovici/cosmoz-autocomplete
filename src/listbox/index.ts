@@ -37,18 +37,19 @@ const Listbox = <I>(props: Props<I>) => {
 	);
 
 	return html`<div
-		class="items"
-		${ref((el) => (listRef.current = el))}
-		style="min-height: ${height}px"
-	>
-		<div virtualizer-sizer></div>
-		${virtualize({
-			items,
-			renderItem,
-			scroller: true,
-			layout,
-		})}
-	</div>`;
+			class="items"
+			${ref((el) => (listRef.current = el))}
+			style="min-height: ${height}px"
+		>
+			<div virtualizer-sizer></div>
+			${virtualize({
+				items,
+				renderItem,
+				scroller: true,
+				layout,
+			})}
+		</div>
+		<slot></slot>`;
 };
 
 const supportsPopover = () => {
@@ -71,15 +72,15 @@ customElements.define(
 	component<Props<unknown>>(Listbox, { styleSheets: [sheet(style)] }),
 );
 
-export const listbox = <I>({
-	multi,
-	...thru
-}: Props<I> & { multi?: boolean }) => {
-	return html`<cosmoz-listbox
+export const listbox = <I>(
+	{ multi, ...thru }: Props<I> & { multi?: boolean },
+	content: unknown,
+) =>
+	html`<cosmoz-listbox
 		${ref(showPopover)}
 		popover="manual"
 		part="listbox"
 		?multi=${multi}
 		...=${spreadProps(props(properties)(thru))}
-	></cosmoz-listbox>`;
-};
+		>${content}</cosmoz-listbox
+	>`;

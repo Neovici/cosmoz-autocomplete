@@ -19,6 +19,7 @@ export const properties = [
 	'defaultIndex',
 	'value',
 	'valueProperty',
+	'loading',
 ];
 
 export interface Props<I> {
@@ -52,7 +53,7 @@ export const useListbox = <I>({
 }: Props<I>) => {
 	const isSelected = useMemo(
 			() => byValue(value, valueProperty),
-			[value, valueProperty]
+			[value, valueProperty],
 		),
 		// TODO: investigate if we can drop this
 		items = useMemo(() => _items.slice(), [_items, isSelected]),

@@ -38,7 +38,12 @@ export const Chip = ({ onClear, disabled }: Props) => html`
 	${when(
 		onClear && !disabled,
 		() =>
-			html` <span class="clear" part="clear chip-clear" @click=${onClear}>
+			html`<span
+				class="clear"
+				part="clear chip-clear"
+				@mousedown=${(ev: MouseEvent) => ev.preventDefault()}
+				@click=${onClear}
+			>
 				${clear}
 			</span>`,
 	)}

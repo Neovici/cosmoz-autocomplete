@@ -5,16 +5,15 @@ import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 export interface Props<I> {
 	focused?: boolean;
 	empty?: boolean;
-	hideEmpty?: boolean;
 	value: I | I[];
 	limit?: number;
 	onChange: (v: I[]) => void;
 	onText: (s: string) => void;
 }
 
-export const useKeys = <I>({ focused, empty, ...info }: Props<I>) => {
+export const useKeys = <I>({ focused, empty, ...rest }: Props<I>) => {
 	const enabled = focused && empty,
-		meta = useMeta(info);
+		meta = useMeta(rest);
 	useEffect(() => {
 		if (!enabled) {
 			return;
@@ -32,13 +31,6 @@ export const useKeys = <I>({ focused, empty, ...info }: Props<I>) => {
 				(key === 'Backspace' || (isOne && key.length === 1))
 			) {
 				return meta.onChange(values.slice(0, -1));
-			} else if (
-				meta.hideEmpty &&
-				values.length < 1 &&
-				['Up', 'ArrowUp', 'Down', 'ArrowDown'].includes(key)
-			) {
-				meta.onText(' ');
-				e.preventDefault();
 			}
 		};
 

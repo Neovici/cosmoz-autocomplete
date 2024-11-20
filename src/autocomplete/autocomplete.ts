@@ -1,15 +1,17 @@
+import '@neovici/cosmoz-input';
+import './skeleton-span';
+
+import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
+import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
+import { useCallback } from '@pionjs/pion';
 import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-newline
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
-import { useCallback } from '@pionjs/pion';
-import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
-import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
-import '@neovici/cosmoz-input';
-import { useAutocomplete, Props as Base, RProps } from './use-autocomplete';
 import { listbox } from '../listbox';
-import style from './styles.css';
 import { selection } from './selection';
+import style from './styles.css';
+import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
@@ -31,14 +33,15 @@ type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 		onInputRef?: (el?: Element) => void;
 	};
 
-const blank = () => nothing;
-
 const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
 
+const blank = () => nothing;
+
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
+				active,
 				invalid,
 				errorMessage,
 				label,
@@ -56,8 +59,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				limit,
 				min,
 				showSingle,
-				items$,
-				values$,
+				items,
+				source$,
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
@@ -66,18 +69,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 			anchor = useCallback(
 				() => host.shadowRoot!.querySelector<HTMLElement>('#input'),
 				[host, value],
-			),
-			suggestions = until(
-				items$.then((items: I[]) =>
-					when((!isSingle || showSingle) && items.length, () =>
-						listbox<I>({
-							...props,
-							anchor,
-							items,
-							multi: !isOne,
-						}),
-					),
-				),
 			);
 
 		useImperativeApi(
@@ -90,7 +81,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			[],
 		);
 
-		return html` <cosmoz-input
+		return html`<cosmoz-input
 				id="input"
 				part="input"
 				.label=${label}
@@ -100,14 +91,14 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?readonly=${isSingle}
 				?disabled=${disabled}
 				?invalid=${until(
-					values$.then(
+					source$.then(
 						() => invalid,
 						() => true,
 					),
 					invalid,
 				)}
 				.errorMessage=${until(
-					values$.then(
+					source$.then(
 						() => errorMessage,
 						(e: { message?: string }) => e.message,
 					),
@@ -133,13 +124,24 @@ const autocomplete = <I>(props: AProps<I>) => {
 					textual,
 					disabled,
 				})}
-				${until(
-					values$.then(blank, blank),
-					html`<div slot="suffix" class="spinner"></div>`,
-				)}
 			</cosmoz-input>
 
-			${suggestions}`;
+			${when(active && !(isSingle && !showSingle), () =>
+				listbox<I>(
+					{
+						...props,
+						anchor,
+						items,
+						multi: !isOne,
+					},
+					when(items.length < 5, () =>
+						until(
+							source$.then(blank, blank),
+							html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+						),
+					),
+				),
+			)}`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {
@@ -162,11 +164,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'preserve-order',
 		'keep-opened',
 		'keep-query',
-		'hide-empty',
 		'default-index',
 		'item-height',
 		'item-limit',
 		'wrap',
 	] as const;
 
-export { autocomplete, Autocomplete, observedAttributes, style };
+export { Autocomplete, autocomplete, observedAttributes, style };

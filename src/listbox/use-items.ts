@@ -24,7 +24,10 @@ export const useItems = <T>({
 		{ length } = items;
 
 	useEffect(() => {
-		setPosition({ index: defaultIndex, scroll: true });
+		setPosition({
+			index: Math.min(position.index, items.length - 1),
+			scroll: true,
+		});
 	}, [items, defaultIndex]);
 
 	useKeyboard({
@@ -34,7 +37,7 @@ export const useItems = <T>({
 					index: p!.index > 0 ? p!.index - 1 : length - 1,
 					scroll: true,
 				})),
-			[length]
+			[length],
 		),
 		onDown: useCallback(
 			() =>
@@ -42,11 +45,11 @@ export const useItems = <T>({
 					index: p!.index < length - 1 ? p!.index + 1 : 0,
 					scroll: true,
 				})),
-			[length]
+			[length],
 		),
 		onEnter: useCallback(
 			() => index > -1 && index < length && onSelect?.(items[index], index),
-			[index, items, onSelect]
+			[index, items, onSelect],
 		),
 	});
 

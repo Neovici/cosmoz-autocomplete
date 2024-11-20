@@ -3,25 +3,26 @@ import { useCallback } from '@pionjs/pion';
 export const search = <I>(
 	source: I[],
 	query: string,
-	textual: (i: I) => string
+	textual: (i: I) => string,
 ) => {
+	if(!query) return source;
 	const qry = query.toLowerCase();
 	const matches = [];
+
 	for (const item of source) {
 		const index = textual(item).toLowerCase().indexOf(qry);
+
 		if (index < 0) {
 			continue;
 		}
+
 		matches.push({
 			item,
 			index,
 		});
 	}
-	return matches
-		.sort((a, b) => {
-			return a.index - b.index;
-		})
-		.map(({ item }) => item);
+
+	return matches.sort((a, b) => a.index - b.index).map(({ item }) => item);
 };
 
 export const normalize = <I>(source: I[] | false | null) => {
@@ -35,18 +36,17 @@ export const notify = <T>(host: EventTarget, name: string, detail: T) =>
 export const useNotify = <V>(
 	host: EventTarget,
 	fn: undefined | ((v: V) => void),
-	name: string
+	name: string,
 ) =>
 	useCallback(
 		(val: V) => {
 			fn?.(val);
 			notify(host, name, val);
 		},
-		[fn]
+		[fn],
 	);
 
-export const EMPTY = [],
-	EMPTY$ = Promise.resolve(EMPTY);
+export const EMPTY = [];
 
 type Arr = unknown[];
 type ArrFn<T extends Arr> = (...args: T) => void;

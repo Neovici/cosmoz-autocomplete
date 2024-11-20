@@ -1,5 +1,5 @@
-import { html, TemplateResult } from 'lit-html';
 import { identity } from '@neovici/cosmoz-utils/function';
+import { html, TemplateResult } from 'lit-html';
 import { mark } from './util';
 
 export interface Opts<I> {
@@ -15,7 +15,7 @@ export type Render<I> = (content: unknown, item: I, i: number) => unknown;
 export type ItemRenderer<I> = (
 	item: I,
 	i: number,
-	opts: Opts<I>
+	opts: Opts<I>,
 ) => TemplateResult;
 
 export const itemRenderer =
@@ -35,12 +35,11 @@ export const itemRenderer =
 			isSelected: (item: I) => void;
 			query: string;
 			textual: (i: I) => string;
-		}
+		},
 	): TemplateResult => {
 		const text = textual(item),
 			content = mark(text, query),
 			rendered = render(content, item, i);
-
 		return html` <div
 				class="item"
 				role="option"

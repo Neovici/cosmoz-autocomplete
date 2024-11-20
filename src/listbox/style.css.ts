@@ -18,6 +18,7 @@ const style = css`
 			0 1px 8px 0 rgba(0, 0, 0, 0.12),
 			0 3px 3px -2px rgba(0, 0, 0, 0.4);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
+		overflow: hidden;
 	}
 	:host(:popover-open) {
 		box-sizing: border-box;
@@ -32,7 +33,6 @@ const style = css`
 		position: relative;
 		overflow-y: auto;
 		contain: layout paint !important;
-		height: 100%;
 	}
 	.item {
 		font-size: 14px;
@@ -112,8 +112,8 @@ export const styles = ({
 	itemHeight: number;
 }) => css`
 	:host {
-		min-height: ${itemHeight}px;
-		height: ${height}px;
+		xmin-height: ${itemHeight}px;
+		xheight: ${height}px;
 	}
 
 	.item {

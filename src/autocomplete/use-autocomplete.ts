@@ -1,11 +1,11 @@
-import { useCallback, useMemo, useEffect } from '@pionjs/pion';
+import { useCallback, useMemo, useEffect, useState } from '@pionjs/pion';
 import { without, array } from '@neovici/cosmoz-utils/array';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { useKeys } from './use-keys';
-import { search, normalize, notify, useNotify, EMPTY$ } from './util';
+import { search, normalize, notify, useNotify, EMPTY } from './util';
 
 type Source<I> = (opts: {
 	query: string;
@@ -37,8 +37,6 @@ export interface Props<I> extends Base<I> {
 	textProperty?: string;
 	textual?: (prop?: string) => (i: I) => string;
 	valueProperty?: string;
-	external?: boolean;
-	hideEmpty?: boolean;
 	disabled?: boolean;
 	onFocus?: (focused?: boolean) => void;
 	preserveOrder?: boolean;
@@ -56,8 +54,6 @@ export const useAutocomplete = <I>({
 	textProperty,
 	textual: _textual,
 	valueProperty,
-	external,
-	hideEmpty,
 	keepOpened,
 	keepQuery,
 	preserveOrder,
@@ -79,33 +75,23 @@ export const useAutocomplete = <I>({
 			},
 			[_onChange],
 		),
+		[options, setOptions] = useState<I[]>([]),
 		source$ = useMemo(
 			() =>
 				Promise.resolve(
 					typeof source === 'function' ? source({ query, active }) : source,
-				),
+				).then(normalize),
 			[source, active, query],
 		),
-		value = useMemo(() => array(_value), [_value]),
-		values$ = useMemo(
-			() =>
-				source$.then((source) =>
-					preserveOrder
-						? normalize(source)
-						: [
-								...value,
-								...without(value, prop(valueProperty))(normalize(source)),
-							],
-				),
-			[source$, value, valueProperty],
-		);
+		value = useMemo(() => array(_value), [_value]);
+
+	useEffect(() => source$.then(setOptions), [source$]);
 
 	useKeys({
 		focused,
 		empty,
 		limit,
 		value,
-		hideEmpty,
 		onChange,
 		onText,
 	});
@@ -131,15 +117,25 @@ export const useAutocomplete = <I>({
 		query,
 		textual,
 		value,
-		values$,
-		items$: useMemo(() => {
-			if (!active || (hideEmpty && empty)) {
-				return EMPTY$;
-			}
-			return query && !external
-				? values$.then((values) => search(values, query, textual))
-				: values$;
-		}, [values$, active, query, textual, external, hideEmpty, empty]),
+		source$,
+		items: useMemo(() => {
+			if (!active) return EMPTY;
+
+			const items = preserveOrder
+				? options
+				: [...value, ...without(value, prop(valueProperty))(options)];
+
+			return search(items, query, textual);
+		}, [
+			options,
+			active,
+			query,
+			textual,
+			empty,
+			value,
+			preserveOrder,
+			valueProperty,
+		]),
 		onClick: useCallback(() => setClosed(false), []),
 		onFocus,
 		onText: useCallback(

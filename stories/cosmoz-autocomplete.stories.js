@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
-import { classMap } from 'lit-html/directives/class-map.js';
 import '../src/autocomplete';
 import { colors } from './data';
+import { when } from 'lit-html/directives/when.js';
 
 const CSS = html`
 	<style>
@@ -12,8 +12,27 @@ const CSS = html`
 		cosmoz-listbox {
 			font-family: 'Inter', sans-serif;
 		}
+
+		.contour {
+			--cosmoz-input-color: #aeacac;
+			--cosmoz-input-border-radius: 4px;
+			--cosmoz-input-wrap-padding: 12px;
+			--cosmoz-input-line-display: none;
+			--cosmoz-input-contour-size: 1px;
+			--cosmoz-input-label-translate-y: 10px;
+			--cosmoz-autocomplete-chip-translate-y: 8px;
+			--cosmoz-autocomplete-chip-border-radius: 4px;
+		}
 	</style>
 `;
+
+const delay = (source, time) => {
+	if (time == null) return source;
+	return ({ active }) =>
+		active
+			? new Promise((resolve) => setTimeout(() => resolve(source), time))
+			: undefined;
+};
 
 const Autocomplete = ({
 	source,
@@ -22,95 +41,43 @@ const Autocomplete = ({
 	min,
 	label = '',
 	value = [],
-	hideEmpty = false,
 	disabled = false,
 	placeholder = '',
 	defaultIndex = 0,
 	showSingle = false,
 	preserveOrder = false,
 	wrap = false,
+	keepOpened = false,
+	keepQuery = false,
 	overflowed = false,
+	responseTime,
+	contour,
 }) => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
 	};
 
+	const sourceDelayed = delay(source, responseTime);
+
 	return html`
 		${CSS}
 		<cosmoz-autocomplete
+			class=${when(contour, () => 'contour')}
 			.label=${label}
 			.placeholder=${placeholder}
-			.source=${source}
+			.source=${sourceDelayed}
 			.textProperty=${textProperty}
 			.limit=${limit}
 			.value=${value}
 			.min=${min}
 			.defaultIndex=${defaultIndex}
-			?hide-empty=${hideEmpty}
 			?disabled=${disabled}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
+			?keep-opened=${keepOpened}
+			?keep-query=${keepQuery}
 			style=${styleMap(styles)}
-		></cosmoz-autocomplete>
-	`;
-};
-
-const ContourAutocomplete = ({
-	source,
-	limit,
-	textProperty,
-	min,
-	label = '',
-	value = [],
-	hideEmpty = false,
-	disabled = false,
-	placeholder = '',
-	defaultIndex = 0,
-	showSingle = false,
-	preserveOrder = false,
-	wrap = false,
-	overflowed = false,
-	forContour = false,
-}) => {
-	const styles = {
-		maxWidth: overflowed ? '255px' : 'initial',
-	};
-
-	const classes = {
-		'contour-autocomplete': forContour,
-	};
-
-	return html`
-		${CSS}
-		<style>
-			.contour-autocomplete {
-				--cosmoz-input-color: #aeacac;
-				--cosmoz-input-border-radius: 4px;
-				--cosmoz-input-wrap-padding: 12px;
-				--cosmoz-input-line-display: none;
-				--cosmoz-input-contour-size: 1px;
-				--cosmoz-input-label-translate-y: 10px;
-				--cosmoz-autocomplete-chip-translate-y: 8px;
-				--cosmoz-autocomplete-chip-border-radius: 4px;
-			}
-		</style>
-		<cosmoz-autocomplete
-			.label=${label}
-			.placeholder=${placeholder}
-			.source=${source}
-			.textProperty=${textProperty}
-			.limit=${limit}
-			.value=${value}
-			.min=${min}
-			.defaultIndex=${defaultIndex}
-			?hide-empty=${hideEmpty}
-			?disabled=${disabled}
-			?show-single=${showSingle}
-			?preserve-order=${preserveOrder}
-			?wrap=${wrap}
-			style=${styleMap(styles)}
-			class="${classMap(classes)}"
 		></cosmoz-autocomplete>
 	`;
 };
@@ -141,7 +108,6 @@ export default {
 			control: 'number',
 			description: 'The default index of the source array',
 		},
-		hideEmpty: { control: 'boolean' },
 		disabled: {
 			control: 'boolean',
 			description:
@@ -149,16 +115,28 @@ export default {
 		},
 		placeholder: { control: 'text' },
 		showSingle: { control: 'boolean' },
+		keepOpened: { control: 'boolean' },
+		keepQuery: { control: 'boolean' },
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
-		forContour: { control: 'boolean' },
+		responseTime: { control: 'number' },
+		uppercase: { control: 'boolean' },
+		contour: { control: 'boolean' },
 	},
+	decorators: [
+		(story, { args }) =>
+			when(
+				args.uppercase,
+				() => html`<div style="text-transform: uppercase">${story()}</div>`,
+				() => story(),
+			),
+	],
 	parameters: {
 		docs: {
 			controls: {
-				exclude: ['overflowed', 'forContour'],
+				exclude: ['overflowed', 'contour', 'responseTime', 'uppercase'],
 			},
 			description: {
 				component: 'The Cosmoz Autocomplete web component',
@@ -195,24 +173,6 @@ export const Single = {
 		docs: {
 			description: {
 				story: 'Choose a single value',
-			},
-		},
-	},
-};
-
-export const HideEmpty = {
-	args: {
-		label: 'Choose color',
-		source: colors,
-		textProperty: 'text',
-		limit: 1,
-		value: [colors[2]],
-		hideEmpty: true,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Hide the empty value',
 			},
 		},
 	},
@@ -337,43 +297,6 @@ export const Wrap = {
 		docs: {
 			description: {
 				story: 'Overflown and Wrapped variant',
-			},
-		},
-	},
-};
-
-export const Contour = ContourAutocomplete.bind({});
-Contour.args = {
-	label: 'Choose color',
-	source: colors,
-	textProperty: 'text',
-	value: [colors[0], colors[1], colors[2]],
-	wrap: true,
-	overflowed: true,
-	forContour: true,
-};
-Contour.parameters = {
-	docs: {
-		description: {
-			story: 'Contour and Wrapped variant',
-		},
-	},
-};
-
-export const UppercaseDecorator = {
-	args: {
-		label: 'Choose color',
-		source: colors,
-		textProperty: 'text',
-		value: [colors[0], colors[3]],
-	},
-	decorators: [
-		(story) => html`<div style="text-transform: uppercase">${story()}</div>`,
-	],
-	parameters: {
-		docs: {
-			description: {
-				story: 'The uppercase decorator version',
 			},
 		},
 	},
