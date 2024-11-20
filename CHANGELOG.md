@@ -1,3 +1,9 @@
+## [9.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v9.0.0...v9.0.1) (2024-11-20)
+
+### Bug Fixes
+
+* loader looks bad on very narrow inputs ([#181](https://github.com/neovici/cosmoz-autocomplete/issues/181)) ([1445751](https://github.com/neovici/cosmoz-autocomplete/commit/14457517a7380c346fd03000a7d02ef6e889f2dd))
+
 ## [9.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.9.2...v9.0.0) (2024-11-20)
 
 ### ⚠ BREAKING CHANGES
