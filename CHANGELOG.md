@@ -1,3 +1,14 @@
+## [9.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v8.9.2...v9.0.0) (2024-11-20)
+
+### ⚠ BREAKING CHANGES
+
+* property `external` has been removed
+* hide-empty has been removed
+
+### Features
+
+* ux improvements ([#180](https://github.com/neovici/cosmoz-autocomplete/issues/180)) ([1ef0817](https://github.com/neovici/cosmoz-autocomplete/commit/1ef0817b85971c9ca3a014da63f2a02abcd56c62)), closes [AB#17850](https://github.com/neovici/AB/issues/17850)
+
 ## [8.9.2](https://github.com/neovici/cosmoz-autocomplete/compare/v8.9.1...v8.9.2) (2024-09-20)
 
 ### Bug Fixes
