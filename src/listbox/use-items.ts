@@ -24,8 +24,12 @@ export const useItems = <T>({
 		{ length } = items;
 
 	useEffect(() => {
+		// whenever the items list is empty, reset the position to defaultIndex
 		setPosition({
-			index: Math.min(position.index, items.length - 1),
+			index:
+				position.index < 0
+					? defaultIndex
+					: Math.min(position.index, items.length - 1),
 			scroll: true,
 		});
 	}, [items, defaultIndex]);
