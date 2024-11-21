@@ -1,3 +1,9 @@
+## [9.0.2](https://github.com/neovici/cosmoz-autocomplete/compare/v9.0.1...v9.0.2) (2024-11-21)
+
+### Bug Fixes
+
+* select after query ([#182](https://github.com/neovici/cosmoz-autocomplete/issues/182)) ([ed7a1e4](https://github.com/neovici/cosmoz-autocomplete/commit/ed7a1e477894b838f6d23d53e54bb4fc24ba4538)), closes [AB#17933](https://github.com/neovici/AB/issues/17933)
+
 ## [9.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v9.0.0...v9.0.1) (2024-11-20)
 
 ### Bug Fixes
