@@ -40,6 +40,7 @@ export interface Props<I> extends Base<I> {
 	disabled?: boolean;
 	onFocus?: (focused?: boolean) => void;
 	preserveOrder?: boolean;
+	defaultIndex?: number;
 }
 
 export const useAutocomplete = <I>({
@@ -57,6 +58,7 @@ export const useAutocomplete = <I>({
 	keepOpened,
 	keepQuery,
 	preserveOrder,
+	defaultIndex,
 	...thru
 }: Props<I>) => {
 	const textual = useMemo(
@@ -178,6 +180,8 @@ export const useAutocomplete = <I>({
 			(val: I | I[]) => meta.onChange(without(val)(meta.value) as I[]),
 			[meta],
 		),
+		// whenever there is a query, override defaultIndex to 0, so the first result gets selected
+		defaultIndex: query?.length > 0 ? 0 : defaultIndex,
 	};
 };
 
