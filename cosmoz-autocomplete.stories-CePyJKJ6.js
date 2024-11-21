@@ -3030,7 +3030,7 @@ const useItems = ({ items, onSelect, defaultIndex = 0 }) => {
   }), { index } = position, { length } = items;
   useEffect(() => {
     setPosition({
-      index: Math.min(position.index, items.length - 1),
+      index: position.index < 0 ? defaultIndex : Math.min(position.index, items.length - 1),
       scroll: true
     });
   }, [items, defaultIndex]);
@@ -3445,7 +3445,7 @@ const raf = (fn) => (...args) => {
   return cleanup;
 };
 
-const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _onText, onSelect, limit, min, source, textProperty, textual: _textual, valueProperty, keepOpened, keepQuery, preserveOrder, ...thru }) => {
+const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _onText, onSelect, limit, min, source, textProperty, textual: _textual, valueProperty, keepOpened, keepQuery, preserveOrder, defaultIndex, ...thru }) => {
   const textual = useMemo(() => (_textual ?? strProp)(textProperty), [_textual, textProperty]), { active, focused, onFocus, setClosed } = useFocus(thru), empty = !text, query = useMemo(() => text?.trim(), [text]), host = useHost(), onText = useNotify(host, _onText, "text"), onChange = useCallback((val) => {
     _onChange?.(val, () => setClosed(true));
     notify(host, "value", val);
@@ -3513,7 +3513,9 @@ const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _on
         return;
       onChange2((deselect ? without(newVal)(value2) : [...value2, newVal]).slice(-limit2));
     }, [meta]),
-    onDeselect: useCallback((val) => meta.onChange(without(val)(meta.value)), [meta])
+    onDeselect: useCallback((val) => meta.onChange(without(val)(meta.value)), [meta]),
+    // whenever there is a query, override defaultIndex to 0, so the first result gets selected
+    defaultIndex: query?.length > 0 ? 0 : defaultIndex
   };
 };
 
