@@ -1,109 +1,109 @@
 {
-	"name": "@neovici/cosmoz-autocomplete",
-	"version": "9.0.2",
-	"description": "A autocomplete input web component",
-	"keywords": [
-		"lit-html",
-		"web-components"
-	],
-	"homepage": "https://github.com/neovici/cosmoz-autocomplete#readme",
-	"bugs": {
-		"url": "https://github.com/neovici/cosmoz-autocomplete/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/neovici/cosmoz-autocomplete.git"
-	},
-	"license": "Apache-2.0",
-	"author": "",
-	"main": "cosmoz-autocomplete.js",
-	"directories": {
-		"test": "test"
-	},
-	"scripts": {
-		"lint": "tsc && eslint --cache .",
-		"build": "tsc -p tsconfig.build.json",
-		"start": "npm run storybook:start",
-		"test": "wtr --coverage",
-		"test:watch": "wtr --watch",
-		"e2e": "playwright test",
-		"prepare": "husky",
-		"storybook:start": "storybook dev -p 8000",
-		"storybook:build": "storybook build",
-		"storybook:deploy": "storybook-to-ghpages",
-		"storybook:preview": "npm run storybook:build && http-server ./storybook-static/ --silent"
-	},
-	"release": {
-		"plugins": [
-			"@semantic-release/commit-analyzer",
-			"@semantic-release/release-notes-generator",
-			"@semantic-release/changelog",
-			"@semantic-release/github",
-			"@semantic-release/npm",
-			"@semantic-release/git"
-		],
-		"branch": "master",
-		"preset": "conventionalcommits"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"files": [
-		"dist/"
-	],
-	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		],
-		"rules": {
-			"body-max-line-length": [
-				1,
-				"always",
-				100
-			]
-		}
-	},
-	"exports": {
-		".": "./dist/index.js",
-		"./autocomplete": "./dist/autocomplete/index.js",
-		"./listbox": "./dist/listbox/index.js",
-		"./item-renderer": "./dist/listbox/item-renderer.js"
-	},
-	"dependencies": {
-		"@lit-labs/virtualizer": "^2.0.0",
-		"@neovici/cosmoz-dropdown": "^4.4.0",
-		"@neovici/cosmoz-input": "^5.0.2",
-		"@neovici/cosmoz-utils": "^6.0.0",
-		"@pionjs/pion": "^2.7.1",
-		"lit-html": "^2.0.0 || ^3.0.0"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "^19.0.0",
-		"@commitlint/config-conventional": "^19.0.0",
-		"@neovici/cfg": "^1.34.0",
-		"@open-wc/testing": "^4.0.0",
-		"@playwright/test": "^1.43.1",
-		"@semantic-release/changelog": "^6.0.0",
-		"@semantic-release/git": "^10.0.0",
-		"@storybook/addon-essentials": "^7.0.0",
-		"@storybook/addon-links": "^7.0.0",
-		"@storybook/builder-vite": "7.6.17",
-		"@storybook/storybook-deployer": "^2.8.5",
-		"@storybook/web-components": "7.6.17",
-		"@types/mocha": "^10.0.6",
-		"@types/node": "^20.12.7",
-		"@web/storybook-builder": "^0.1.9",
-		"@web/storybook-framework-web-components": "^0.1.1",
-		"esbuild": "^0.21.0",
-		"http-server": "^14.1.1",
-		"husky": "^9.0.0",
-		"rollup-plugin-esbuild": "^6.1.1",
-		"rollup-plugin-terser": "^7.0.2",
-		"semantic-release": "^24.0.0",
-		"sinon": "^18.0.0",
-		"storybook": "^7.6.17"
-	},
-	"overrides": {
-		"conventional-changelog-conventionalcommits": ">= 8.0.0"
-	}
+  "name": "@neovici/cosmoz-autocomplete",
+  "version": "9.0.2",
+  "description": "A autocomplete input web component",
+  "keywords": [
+    "lit-html",
+    "web-components"
+  ],
+  "homepage": "https://github.com/neovici/cosmoz-autocomplete#readme",
+  "bugs": {
+    "url": "https://github.com/neovici/cosmoz-autocomplete/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neovici/cosmoz-autocomplete.git"
+  },
+  "license": "Apache-2.0",
+  "author": "",
+  "main": "cosmoz-autocomplete.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "tsc && eslint --cache .",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "npm run storybook:start",
+    "test": "wtr --coverage",
+    "test:watch": "wtr --watch",
+    "e2e": "playwright test",
+    "prepare": "husky",
+    "storybook:start": "storybook dev -p 8000",
+    "storybook:build": "storybook build",
+    "storybook:deploy": "storybook-to-ghpages",
+    "storybook:preview": "npm run storybook:build && http-server ./storybook-static/ --silent"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/github",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "branch": "master",
+    "preset": "conventionalcommits"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        1,
+        "always",
+        100
+      ]
+    }
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./autocomplete": "./dist/autocomplete/index.js",
+    "./listbox": "./dist/listbox/index.js",
+    "./item-renderer": "./dist/listbox/item-renderer.js"
+  },
+  "dependencies": {
+    "@lit-labs/virtualizer": "^2.0.0",
+    "@neovici/cosmoz-dropdown": "^5.0.0",
+    "@neovici/cosmoz-input": "^5.0.2",
+    "@neovici/cosmoz-utils": "^6.0.0",
+    "@pionjs/pion": "^2.7.1",
+    "lit-html": "^2.0.0 || ^3.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@neovici/cfg": "^1.34.0",
+    "@open-wc/testing": "^4.0.0",
+    "@playwright/test": "^1.43.1",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@storybook/addon-essentials": "^7.0.0",
+    "@storybook/addon-links": "^7.0.0",
+    "@storybook/builder-vite": "7.6.17",
+    "@storybook/storybook-deployer": "^2.8.5",
+    "@storybook/web-components": "7.6.17",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^22.0.0",
+    "@web/storybook-builder": "^0.1.9",
+    "@web/storybook-framework-web-components": "^0.1.1",
+    "esbuild": "^0.24.0",
+    "http-server": "^14.1.1",
+    "husky": "^9.0.0",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "semantic-release": "^24.0.0",
+    "sinon": "^19.0.0",
+    "storybook": "^7.6.17"
+  },
+  "overrides": {
+    "conventional-changelog-conventionalcommits": ">= 8.0.0"
+  }
 }
