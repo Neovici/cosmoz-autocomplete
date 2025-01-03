@@ -1,3 +1,17 @@
+## [10.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v9.0.2...v10.0.0) (2025-01-03)
+
+### ⚠ BREAKING CHANGES
+
+* Update cosmoz-dropdown with floating-ui support
+
+* chore: update
+
+* chore(deps): upgrade
+
+### Features
+
+* update cosmoz-dropdown ([#184](https://github.com/neovici/cosmoz-autocomplete/issues/184)) ([940d96c](https://github.com/neovici/cosmoz-autocomplete/commit/940d96c16c47346cf1d6299e9496a49459a3682a))
+
 ## [9.0.2](https://github.com/neovici/cosmoz-autocomplete/compare/v9.0.1...v9.0.2) (2024-11-21)
 
 ### Bug Fixes
