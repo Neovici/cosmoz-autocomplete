@@ -12,6 +12,8 @@ import { component, html, useEffect, useMemo, useRef } from '@pionjs/pion';
 import { ref } from 'lit-html/directives/ref.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
+import { connectable } from '@neovici/cosmoz-dropdown/connectable';
+import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 
 const Listbox = <I>(props: Props<I>) => {
 	const listRef = useRef<Element | undefined>(undefined);
@@ -38,8 +40,8 @@ const Listbox = <I>(props: Props<I>) => {
 
 	return html`<div
 			class="items"
-			${ref((el) => (listRef.current = el))}
 			style="min-height: ${height}px"
+			${ref((el) => (listRef.current = el))}
 		>
 			<div virtualizer-sizer></div>
 			${virtualize({
@@ -52,35 +54,30 @@ const Listbox = <I>(props: Props<I>) => {
 		<slot></slot>`;
 };
 
-const supportsPopover = () => {
-	// eslint-disable-next-line no-prototype-builtins
-	return HTMLElement.prototype.hasOwnProperty('popover');
-};
-
-const showPopover = (popover?: Element) => {
-	const popoverElement = popover as HTMLElement;
-
-	if (supportsPopover()) {
-		requestAnimationFrame(() => {
-			popoverElement?.showPopover();
-		});
-	}
-};
-
 customElements.define(
 	'cosmoz-listbox',
-	component<Props<unknown>>(Listbox, { styleSheets: [sheet(style)] }),
+	connectable(
+		component<Props<unknown>>(Listbox, { styleSheets: [sheet(style)] }),
+	),
 );
 
+interface ListboxProps<I> extends Props<I> {
+	multi?: boolean;
+	setFloating: (el?: Element) => void;
+	styles: StyleInfo;
+}
+
 export const listbox = <I>(
-	{ multi, ...thru }: Props<I> & { multi?: boolean },
+	{ multi, setFloating, styles, ...thru }: ListboxProps<I>,
 	content: unknown,
 ) =>
 	html`<cosmoz-listbox
-		${ref(showPopover)}
+		style="${styleMap(styles)}"
+		@connected="${(e: Event) => (e.target as HTMLElement).showPopover?.()}"
 		popover="manual"
 		part="listbox"
 		?multi=${multi}
+		${ref(setFloating)}
 		...=${spreadProps(props(properties)(thru))}
 		>${content}</cosmoz-listbox
 	>`;

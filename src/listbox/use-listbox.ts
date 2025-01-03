@@ -1,6 +1,4 @@
 import { useMemo } from '@pionjs/pion';
-import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
-import { usePosition, Placement } from '@neovici/cosmoz-dropdown/use-position';
 import { byValue } from './util';
 import { useItems } from './use-items';
 import { useRenderItem, ItemRenderer } from './use-render-item';
@@ -11,8 +9,6 @@ export const properties = [
 	'onSelect',
 	'textual',
 	'anchor',
-	'confinement',
-	'placement',
 	'itemHeight',
 	'itemLimit',
 	'itemRenderer',
@@ -33,9 +29,6 @@ export interface Props<I> {
 	itemRenderer?: ItemRenderer<I>;
 	itemHeight?: number;
 	itemLimit?: number;
-	anchor?: () => HTMLElement | null;
-	confinement?: HTMLElement;
-	placement?: Placement;
 }
 
 export const useListbox = <I>({
@@ -49,7 +42,6 @@ export const useListbox = <I>({
 	itemRenderer,
 	itemHeight = 40,
 	itemLimit = 5,
-	...thru
 }: Props<I>) => {
 	const isSelected = useMemo(
 			() => byValue(value, valueProperty),
@@ -64,12 +56,6 @@ export const useListbox = <I>({
 				? undefined
 				: Number(defaultIndex),
 		});
-
-	usePosition({
-		host: useHost(),
-		...thru,
-		limit: true,
-	});
 
 	return {
 		position,

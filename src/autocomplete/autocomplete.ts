@@ -1,9 +1,7 @@
 import '@neovici/cosmoz-input';
 import './skeleton-span';
-
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
-import { useCallback } from '@pionjs/pion';
 import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-newline
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
@@ -13,6 +11,13 @@ import { selection } from './selection';
 import style from './styles.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useOverflow } from './use-overflow';
+import { ref } from 'lit-html/directives/ref.js';
+import {
+	useFloating,
+	Placement,
+	defaultMiddleware,
+	size,
+} from '@neovici/cosmoz-dropdown/use-floating';
 
 export interface Props<I> extends Base<I> {
 	invalid?: boolean;
@@ -26,6 +31,7 @@ export interface Props<I> extends Base<I> {
 	itemLimit?: number;
 	wrap?: boolean;
 	defaultIndex?: number;
+	placement?: Placement;
 }
 
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
@@ -38,6 +44,16 @@ const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
 	.join();
 
 const blank = () => nothing;
+const middleware = [
+	size({
+		apply({ rects, elements }) {
+			Object.assign(elements.floating.style, {
+				minWidth: `${Math.max(rects.reference.width, rects.floating.width)}px`,
+			});
+		},
+	}),
+	...defaultMiddleware,
+];
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
@@ -61,15 +77,16 @@ const autocomplete = <I>(props: AProps<I>) => {
 				showSingle,
 				items,
 				source$,
+				placement,
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
-			isSingle = isOne && value?.[0] != null,
-			// TODO: Refactor with ref or a state callback
-			anchor = useCallback(
-				() => host.shadowRoot!.querySelector<HTMLElement>('#input'),
-				[host, value],
-			);
+			isSingle = isOne && value?.[0] != null;
+
+		const { styles, setReference, setFloating } = useFloating({
+			placement,
+			middleware,
+		});
 
 		useImperativeApi(
 			{
@@ -84,6 +101,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		return html`<cosmoz-input
 				id="input"
 				part="input"
+				${ref(setReference)}
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
 				?no-label-float=${noLabelFloat}
@@ -130,9 +148,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 				listbox<I>(
 					{
 						...props,
-						anchor,
 						items,
 						multi: !isOne,
+						setFloating,
+						styles,
 					},
 					when(items.length < 5, () =>
 						until(
