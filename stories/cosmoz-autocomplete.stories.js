@@ -3,6 +3,8 @@ import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import '../src/autocomplete';
 import { colors } from './data';
+import { spanishWords } from './spanish-words';
+import { swedishWords } from './swedish-words';
 import { when } from 'lit-html/directives/when.js';
 
 const CSS = html`
@@ -297,6 +299,45 @@ export const Wrap = {
 		docs: {
 			description: {
 				story: 'Overflown and Wrapped variant',
+			},
+		},
+	},
+};
+
+export const AccentInsensitiveSearch = {
+	render: () => html`
+		${CSS}
+		<div>
+			<div style="margin: 2rem 0;">
+				<h3 style="margin-bottom: 10px; font-family: 'Inter', sans-serif;">
+					Spanish Words
+				</h3>
+				<cosmoz-autocomplete
+					label="Choose Spanish word"
+					.source=${spanishWords}
+					text-property="name"
+					.defaultIndex=${-1}
+				></cosmoz-autocomplete>
+			</div>
+			<div style="margin: 2rem 0;">
+				<h3 style="margin-bottom: 10px; font-family: 'Inter', sans-serif;">
+					Swedish Words
+				</h3>
+				<cosmoz-autocomplete
+					label="Choose Swedish word"
+					.source=${swedishWords}
+					text-property="name"
+					.defaultIndex=${-1}
+				></cosmoz-autocomplete>
+			</div>
+		</div>
+	`,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Test accent-insensitive search with Spanish and Swedish words. Try typing "medico", "telefono", or "musica" in ' +
+					'the Spanish component, or "forsok", "manad", "karlek" in the Swedish component to see how the search handles accented variants.',
 			},
 		},
 	},

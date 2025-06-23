@@ -1,8 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["cosmoz-autocomplete-ui render"] = 
-`<cosmoz-input
+snapshots['cosmoz-autocomplete-ui render'] = `<cosmoz-input
   always-float-label=""
   autocomplete="off"
   exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
@@ -52,8 +51,7 @@ snapshots["cosmoz-autocomplete-ui render"] =
 `;
 /* end snapshot cosmoz-autocomplete-ui render */
 
-snapshots["cosmoz-autocomplete-ui render (limit 1)"] = 
-`<cosmoz-input
+snapshots['cosmoz-autocomplete-ui render (limit 1)'] = `<cosmoz-input
   always-float-label=""
   autocomplete="off"
   data-one=""
@@ -97,8 +95,7 @@ snapshots["cosmoz-autocomplete-ui render (limit 1)"] =
 `;
 /* end snapshot cosmoz-autocomplete-ui render (limit 1) */
 
-snapshots["cosmoz-autocomplete-ui render (listbox)"] = 
-`<cosmoz-input
+snapshots['cosmoz-autocomplete-ui render (listbox)'] = `<cosmoz-input
   always-float-label=""
   autocomplete="off"
   exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
@@ -147,8 +144,7 @@ snapshots["cosmoz-autocomplete-ui render (listbox)"] =
 `;
 /* end snapshot cosmoz-autocomplete-ui render (listbox) */
 
-snapshots["cosmoz-autocomplete render"] = 
-`<cosmoz-input
+snapshots['cosmoz-autocomplete render'] = `<cosmoz-input
   always-float-label=""
   autocomplete="off"
   exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
@@ -189,8 +185,7 @@ snapshots["cosmoz-autocomplete render"] =
 `;
 /* end snapshot cosmoz-autocomplete render */
 
-snapshots["cosmoz-autocomplete render (deselect)"] = 
-`<cosmoz-input
+snapshots['cosmoz-autocomplete render (deselect)'] = `<cosmoz-input
   autocomplete="off"
   data-one=""
   exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
