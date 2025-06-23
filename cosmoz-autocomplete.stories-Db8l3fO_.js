@@ -2845,13 +2845,17 @@ const useKeys = ({ focused, empty, ...rest }) => {
   }, [enabled, meta]);
 };
 
+const removeAccents = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/gu, "");
+};
 const search = (source, query, textual) => {
   if (!query)
     return source;
-  const qry = query.toLowerCase();
+  const normalizedQuery = removeAccents(query.toLowerCase());
   const matches = [];
   for (const item of source) {
-    const index = textual(item).toLowerCase().indexOf(qry);
+    const normalizedText = removeAccents(textual(item).toLowerCase());
+    const index = normalizedText.indexOf(normalizedQuery);
     if (index < 0) {
       continue;
     }
@@ -4596,6 +4600,172 @@ const colors = [
   "Nothing"
 ].map((text) => ({ text }));
 
+const spanishWords = [
+  { id: 1, name: "camion" },
+  { id: 2, name: "cami\xF3n" },
+  { id: 3, name: "c\xE1mion" },
+  { id: 4, name: "cam\xEDon" },
+  { id: 5, name: "telefono" },
+  { id: 6, name: "tel\xE9fono" },
+  { id: 7, name: "t\xE9l\xE9fono" },
+  { id: 8, name: "telef\xF3no" },
+  { id: 9, name: "logico" },
+  { id: 10, name: "l\xF3gico" },
+  { id: 11, name: "l\xF3g\xEDco" },
+  { id: 12, name: "logic\xF3" },
+  { id: 13, name: "rapido" },
+  { id: 14, name: "r\xE1pido" },
+  { id: 15, name: "rap\xEDdo" },
+  { id: 16, name: "rapid\xF3" },
+  { id: 17, name: "musica" },
+  { id: 18, name: "m\xFAsica" },
+  { id: 19, name: "m\xFAs\xEDca" },
+  { id: 20, name: "mus\xEDca" },
+  { id: 21, name: "medico" },
+  { id: 22, name: "m\xE9dico" },
+  { id: 23, name: "med\xEDco" },
+  { id: 24, name: "medic\xF3" },
+  { id: 25, name: "nacion" },
+  { id: 26, name: "naci\xF3n" },
+  { id: 27, name: "n\xE1cion" },
+  { id: 28, name: "naci\xF3\u0144" },
+  { id: 29, name: "arboles" },
+  { id: 30, name: "\xE1rboles" },
+  { id: 31, name: "arb\xF3l\xE9s" },
+  { id: 32, name: "arb\xF3les" },
+  { id: 33, name: "facil" },
+  { id: 34, name: "f\xE1cil" },
+  { id: 35, name: "f\xE1c\xEDl" },
+  { id: 36, name: "fac\xEDl" },
+  { id: 37, name: "publico" },
+  { id: 38, name: "p\xFAblico" },
+  { id: 39, name: "publ\xEDco" },
+  { id: 40, name: "public\xF3" },
+  { id: 41, name: "tecnico" },
+  { id: 42, name: "t\xE9cnico" },
+  { id: 43, name: "tecn\xEDco" },
+  { id: 44, name: "tecnic\xF3" },
+  { id: 45, name: "heroe" },
+  { id: 46, name: "h\xE9roe" },
+  { id: 47, name: "her\xF3e" },
+  { id: 48, name: "h\xE9roe" },
+  { id: 49, name: "cancion" },
+  { id: 50, name: "canci\xF3n" },
+  { id: 51, name: "c\xE1ncion" },
+  { id: 52, name: "canci\xF2n" },
+  { id: 53, name: "reunion" },
+  { id: 54, name: "reuni\xF3n" },
+  { id: 55, name: "r\xE9union" },
+  { id: 56, name: "re\xFAni\xF4n" },
+  { id: 57, name: "opinion" },
+  { id: 58, name: "opini\xF3n" },
+  { id: 59, name: "\xF3pinion" },
+  { id: 60, name: "op\xEDn\xEDon" },
+  { id: 61, name: "sofisticado" },
+  { id: 62, name: "sof\xEDsticado" },
+  { id: 63, name: "sofisticad\xF3" },
+  { id: 64, name: "s\xF3fisticado" },
+  { id: 65, name: "especifico" },
+  { id: 66, name: "espec\xEDfico" },
+  { id: 67, name: "especif\xEDco" },
+  { id: 68, name: "especific\xF3" },
+  { id: 69, name: "analisis" },
+  { id: 70, name: "an\xE1lisis" },
+  { id: 71, name: "\xE1nalisis" },
+  { id: 72, name: "anal\xEDs\xEDs" },
+  { id: 73, name: "vehiculo" },
+  { id: 74, name: "veh\xEDculo" },
+  { id: 75, name: "v\xE9hiculo" },
+  { id: 76, name: "veh\xEDcul\xF3" },
+  { id: 77, name: "dificil" },
+  { id: 78, name: "dif\xEDcil" },
+  { id: 79, name: "d\xEDf\xEDcil" },
+  { id: 80, name: "dific\xEDl" }
+];
+
+const swedishWords = [
+  { id: 1, name: "forsok" },
+  { id: 2, name: "f\xF6rs\xF6k" },
+  { id: 3, name: "f\xF4rs\xF6k" },
+  { id: 4, name: "f\xF6rs\xF4k" },
+  { id: 5, name: "manad" },
+  { id: 6, name: "m\xE5nad" },
+  { id: 7, name: "m\xE5n\xE1d" },
+  { id: 8, name: "man\xE1d" },
+  { id: 9, name: "lagg" },
+  { id: 10, name: "l\xE4gg" },
+  { id: 11, name: "l\xE4g\u011F" },
+  { id: 12, name: "l\xE0gg" },
+  { id: 13, name: "karlek" },
+  { id: 14, name: "k\xE4rlek" },
+  { id: 15, name: "k\xE2rlek" },
+  { id: 16, name: "k\xE4rl\xE9k" },
+  { id: 17, name: "arbete" },
+  { id: 18, name: "arbet\xE9" },
+  { id: 19, name: "\xE2rbete" },
+  { id: 20, name: "\xE0rbete" },
+  { id: 21, name: "betyg" },
+  { id: 22, name: "b\xEAtyg" },
+  { id: 23, name: "b\xE9tyg" },
+  { id: 24, name: "b\xEBtyg" },
+  { id: 25, name: "skola" },
+  { id: 26, name: "sk\xF3la" },
+  { id: 27, name: "sk\xF4la" },
+  { id: 28, name: "skol\xE1" },
+  { id: 29, name: "vinter" },
+  { id: 30, name: "v\xEDnter" },
+  { id: 31, name: "v\xEEnt\xE9r" },
+  { id: 32, name: "vint\xEAr" },
+  { id: 33, name: "sommar" },
+  { id: 34, name: "s\xF4mmar" },
+  { id: 35, name: "somm\xE1r" },
+  { id: 36, name: "s\xF3mmar" },
+  { id: 37, name: "helgdag" },
+  { id: 38, name: "h\xE9lgdag" },
+  { id: 39, name: "h\xEAlgdag" },
+  { id: 40, name: "helgd\xE1g" },
+  { id: 41, name: "flygplan" },
+  { id: 42, name: "fl\xFDgplan" },
+  { id: 43, name: "fl\xFCgplan" },
+  { id: 44, name: "flygpl\xE2n" },
+  { id: 45, name: "studera" },
+  { id: 46, name: "st\xFBdera" },
+  { id: 47, name: "studer\xE1" },
+  { id: 48, name: "st\xFAd\xE9r\xE4" },
+  { id: 49, name: "huset" },
+  { id: 50, name: "h\xFBset" },
+  { id: 51, name: "h\xFAset" },
+  { id: 52, name: "hus\xE9t" },
+  { id: 53, name: "datorn" },
+  { id: 54, name: "d\xE2torn" },
+  { id: 55, name: "d\xE1torn" },
+  { id: 56, name: "d\u0103torn" },
+  { id: 57, name: "telefon" },
+  { id: 58, name: "t\xE9l\xE9fon" },
+  { id: 59, name: "telef\xF4n" },
+  { id: 60, name: "t\xE8lef\xF3n" },
+  { id: 61, name: "minuter" },
+  { id: 62, name: "m\xEDnuter" },
+  { id: 63, name: "m\xEEnuter" },
+  { id: 64, name: "min\xFBt\xE9r" },
+  { id: 65, name: "sverige" },
+  { id: 66, name: "sv\xE9rige" },
+  { id: 67, name: "sv\xEArige" },
+  { id: 68, name: "sv\xE9rig\xE9" },
+  { id: 69, name: "spraket" },
+  { id: 70, name: "spr\xE5ket" },
+  { id: 71, name: "spr\xE2ket" },
+  { id: 72, name: "spr\xE1k\xE9t" },
+  { id: 73, name: "gladje" },
+  { id: 74, name: "gl\xE4dje" },
+  { id: 75, name: "gl\xE1dje" },
+  { id: 76, name: "gl\xE4dj\xE9" },
+  { id: 77, name: "natten" },
+  { id: 78, name: "n\xE1tten" },
+  { id: 79, name: "n\xE4tt\xE9n" },
+  { id: 80, name: "n\xE2tten" }
+];
+
 const CSS$1 = x`
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
@@ -4872,6 +5042,42 @@ const Wrap = {
     }
   }
 };
-const __namedExportsOrder = ["Basic", "Single", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap"];
+const AccentInsensitiveSearch = {
+  render: () => x`
+		${CSS$1}
+		<div>
+			<div style="margin: 2rem 0;">
+				<h3 style="margin-bottom: 10px; font-family: 'Inter', sans-serif;">
+					Spanish Words
+				</h3>
+				<cosmoz-autocomplete
+					label="Choose Spanish word"
+					.source=${spanishWords}
+					text-property="name"
+					.defaultIndex=${-1}
+				></cosmoz-autocomplete>
+			</div>
+			<div style="margin: 2rem 0;">
+				<h3 style="margin-bottom: 10px; font-family: 'Inter', sans-serif;">
+					Swedish Words
+				</h3>
+				<cosmoz-autocomplete
+					label="Choose Swedish word"
+					.source=${swedishWords}
+					text-property="name"
+					.defaultIndex=${-1}
+				></cosmoz-autocomplete>
+			</div>
+		</div>
+	`,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Test accent-insensitive search with Spanish and Swedish words. Try typing "medico", "telefono", or "musica" in the Spanish component, or "forsok", "manad", "karlek" in the Swedish component to see how the search handles accented variants.'
+      }
+    }
+  }
+};
+const __namedExportsOrder = ["Basic", "Single", "DefaultIndex", "DefaultIndexSingleValue", "Disabled", "Placeholder", "Select", "Overflown", "Wrap", "AccentInsensitiveSearch"];
 
-export { Basic, DefaultIndex, DefaultIndexSingleValue, Disabled, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
+export { AccentInsensitiveSearch, Basic, DefaultIndex, DefaultIndexSingleValue, Disabled, Overflown, Placeholder, Select, Single, Wrap, __namedExportsOrder, cosmozAutocomplete_stories as default };
