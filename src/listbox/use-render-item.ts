@@ -13,7 +13,7 @@ export const useRenderItem = <I>({
 	const info = useMeta<Opts<I>>(meta);
 	return useCallback(
 		(item: I, i: number) => itemRenderer(item, i, info),
-		[info, itemRenderer]
+		[info, itemRenderer],
 	);
 };
 

@@ -1,5 +1,4 @@
-cosmoz-autocomplete
-==================
+# cosmoz-autocomplete
 
 [![Build Status](https://github.com/Neovici/cosmoz-autocomplete/workflows/Github%20CI/badge.svg)](https://github.com/Neovici/cosmoz-autocomplete/actions?workflow=Github+CI)
 [![Depfu](https://badges.depfu.com/badges/c887733c2e1b6c70285860279a80fa03/overview.svg)](https://depfu.com/github/Neovici/cosmoz-autocomplete?project_id=9639)
@@ -16,13 +15,14 @@ cosmoz-autocomplete
 ### Installing
 
 Using npm:
+
 ```bash
 npm install --save @neovici/cosmoz-autocomplete
 ```
 
 ### Usage
 
-``` javascript
+```javascript
 import { html } from 'lit-html';
-html`<cosmoz-autocomplete .source=${["A", "B","C", "D"]} />`;
+html`<cosmoz-autocomplete .source=${['A', 'B', 'C', 'D']} />`;
 ```

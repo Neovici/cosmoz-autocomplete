@@ -1,16 +1,29 @@
 import { useCallback } from '@pionjs/pion';
 
+/**
+ * @see https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript
+ * @see https://medium.com/nerd-for-tech/basics-of-javascript-string-normalize-method-f3241174c2d0
+ * @see https://www.codu.co/articles/remove-accents-from-a-javascript-string-skgp1inb
+ *
+ * @param {string} str string from which to remove accents
+ * @returns {string} string w/o accents
+ */
+const removeAccents = (str: string): string => {
+	return str.normalize('NFD').replace(/[\u0300-\u036f]/gu, '');
+};
+
 export const search = <I>(
 	source: I[],
 	query: string,
 	textual: (i: I) => string,
 ) => {
-	if(!query) return source;
-	const qry = query.toLowerCase();
+	if (!query) return source;
+	const normalizedQuery = removeAccents(query.toLowerCase());
 	const matches = [];
 
 	for (const item of source) {
-		const index = textual(item).toLowerCase().indexOf(qry);
+		const normalizedText = removeAccents(textual(item).toLowerCase());
+		const index = normalizedText.indexOf(normalizedQuery);
 
 		if (index < 0) {
 			continue;
