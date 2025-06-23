@@ -1,3 +1,9 @@
+## [10.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.0.0...v10.0.1) (2025-06-23)
+
+### Bug Fixes
+
+* 19206 normalize search and have it accent-insensitive ([bd92b77](https://github.com/neovici/cosmoz-autocomplete/commit/bd92b770f4833e14e6d31b421a42aa1657272593))
+
 ## [10.0.0](https://github.com/neovici/cosmoz-autocomplete/compare/v9.0.2...v10.0.0) (2025-01-03)
 
 ### ⚠ BREAKING CHANGES
