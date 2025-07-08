@@ -11,14 +11,17 @@ const style = css`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255,255,255,0.85));
+		background: var(
+			--cosmoz-autocomplete-listbox-bg,
+			rgba(255, 255, 255, 0.85)
+		);
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
 		border-radius: 6px;
 		box-shadow:
-			0 4px 24px 0 rgba(0,0,0,0.18),
-			0 1.5px 6px 0 rgba(0,0,0,0.10);
+			0 4px 24px 0 rgba(0, 0, 0, 0.18),
+			0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
 	}
@@ -26,7 +29,7 @@ const style = css`
 		box-sizing: border-box;
 		display: block;
 		margin: 0;
-		border: 1px solid rgba(200,200,200,0.25);
+		border: 1px solid rgba(200, 200, 200, 0.25);
 	}
 	:host([popover]) {
 		padding: 0;
