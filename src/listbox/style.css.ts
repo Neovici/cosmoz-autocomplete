@@ -26,7 +26,7 @@ const style = css`
 		box-sizing: border-box;
 		display: block;
 		margin: 0;
-	border: 1px solid rgba(200,200,200,0.25);
+		border: 1px solid rgba(200,200,200,0.25);
 	}
 	:host([popover]) {
 		padding: 0;
