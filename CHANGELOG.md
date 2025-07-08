@@ -1,3 +1,9 @@
+## [10.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.0.1...v10.1.0) (2025-07-08)
+
+### Features
+
+* add variables and improve styling ([#186](https://github.com/neovici/cosmoz-autocomplete/issues/186)) ([45e386a](https://github.com/neovici/cosmoz-autocomplete/commit/45e386a6da1dacfb68f241cbf203992c49d18977))
+
 ## [10.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.0.0...v10.0.1) (2025-06-23)
 
 ### Bug Fixes
