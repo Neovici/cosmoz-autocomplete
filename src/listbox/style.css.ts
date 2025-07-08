@@ -11,12 +11,17 @@ const style = css`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: #fff;
-		min-width: 72px;
+		background: var(
+			--cosmoz-autocomplete-listbox-bg,
+			rgba(255, 255, 255, 0.85)
+		);
+		min-width: 50px;
+		backdrop-filter: blur(16px) saturate(180%);
+		-webkit-backdrop-filter: blur(16px) saturate(180%);
+		border-radius: 6px;
 		box-shadow:
-			0 3px 4px 0 rgba(0, 0, 0, 0.14),
-			0 1px 8px 0 rgba(0, 0, 0, 0.12),
-			0 3px 3px -2px rgba(0, 0, 0, 0.4);
+			0 4px 24px 0 rgba(0, 0, 0, 0.18),
+			0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
 	}
@@ -24,7 +29,7 @@ const style = css`
 		box-sizing: border-box;
 		display: block;
 		margin: 0;
-		border: 0;
+		border: 1px solid rgba(200, 200, 200, 0.25);
 	}
 	:host([popover]) {
 		padding: 0;
@@ -33,10 +38,11 @@ const style = css`
 		position: relative;
 		overflow-y: auto;
 		contain: layout paint !important;
+		padding-bottom: var(--cosmoz-autocomplete-listbox-padding-bottom, 8px);
 	}
 	.item {
-		font-size: 14px;
-		padding: 0 20px;
+		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
+		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
 		cursor: pointer;
