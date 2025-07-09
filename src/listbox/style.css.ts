@@ -15,7 +15,7 @@ const style = css`
 			--cosmoz-autocomplete-listbox-bg,
 			rgba(255, 255, 255, 0.85)
 		);
-		min-width: 50px;
+		min-width: 120px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
 		border-radius: 6px;
@@ -99,7 +99,6 @@ const style = css`
 		box-sizing: border-box;
 		vertical-align: middle;
 		border-radius: 50%;
-		border: 2px solid #eee;
 	}
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
