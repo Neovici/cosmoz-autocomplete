@@ -2309,6 +2309,7 @@ const style$1 = tagged`
 	}
 	.item {
 		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
+		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
 		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
@@ -2636,7 +2637,9 @@ var styles = tagged`
 	}
 	.content {
 		color: var(--cosmoz-autocomplete-chip-color, #424242);
+		font-family: var(--cosmoz-autocomplete-chip-text-font-family, 'Inter', sans-serif);
 		font-size: var(--cosmoz-autocomplete-chip-text-font-size, 12px);
+		font-weight: var(--cosmoz-autocomplete-chip-text-font-weight, 400);
 		line-height: var(--cosmoz-autocomplete-chip-text-line-height, 22px);
 		overflow: hidden;
 		text-overflow: ellipsis;
