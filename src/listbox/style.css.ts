@@ -42,6 +42,7 @@ const style = css`
 	}
 	.item {
 		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
+		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
 		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
