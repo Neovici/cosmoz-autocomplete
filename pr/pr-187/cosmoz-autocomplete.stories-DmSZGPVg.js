@@ -2834,7 +2834,7 @@ const useFocus = ({ disabled, onFocus }) => {
 };
 
 const useKeys = ({ focused, empty, ...rest }) => {
-  const enabled = focused && empty, meta = useMeta(rest);
+  const enabled = focused && empty && !(rest.limit === 1), meta = useMeta(rest);
   useEffect(() => {
     if (!enabled) {
       return;
