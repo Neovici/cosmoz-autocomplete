@@ -2280,7 +2280,7 @@ const style$1 = tagged`
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
 		background: var(
 			--cosmoz-autocomplete-listbox-bg,
-			rgba(255, 255, 255, 0.85)
+			rgba(255, 255, 255, 0.2)
 		);
 		min-width: 120px;
 		backdrop-filter: blur(16px) saturate(180%);
