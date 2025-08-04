@@ -1,3 +1,9 @@
+## [10.2.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.0...v10.2.1) (2025-08-04)
+
+### Bug Fixes
+
+* automerge workflow ([5f24a0b](https://github.com/neovici/cosmoz-autocomplete/commit/5f24a0bc56c65946cc84804bd47cdf32a76eeac2))
+
 ## [10.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.1.0...v10.2.0) (2025-07-21)
 
 ### Features
