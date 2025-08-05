@@ -1,3 +1,9 @@
+## [10.2.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.1...v10.2.2) (2025-08-05)
+
+### Bug Fixes
+
+* **deps:** bump cosmoz-dropdown 5.3.0 to 6.2.1 ([56e64d2](https://github.com/neovici/cosmoz-autocomplete/commit/56e64d2f5f23cc499337d0bd50915975395d7693))
+
 ## [10.2.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.0...v10.2.1) (2025-08-04)
 
 ### Bug Fixes
