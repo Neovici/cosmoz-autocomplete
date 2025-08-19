@@ -1,3 +1,9 @@
+## [10.2.3](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.2...v10.2.3) (2025-08-19)
+
+### Bug Fixes
+
+* don't show listbox dropdown when there's no value ([#191](https://github.com/neovici/cosmoz-autocomplete/issues/191)) ([430efa3](https://github.com/neovici/cosmoz-autocomplete/commit/430efa3ca3dde5627d67b53eea63ef150db3aa66))
+
 ## [10.2.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.1...v10.2.2) (2025-08-05)
 
 ### Bug Fixes
