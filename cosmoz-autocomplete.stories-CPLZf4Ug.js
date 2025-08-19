@@ -2305,7 +2305,6 @@ const style$1 = tagged`
 		position: relative;
 		overflow-y: auto;
 		contain: layout paint !important;
-		padding-bottom: var(--cosmoz-autocomplete-listbox-padding-bottom, 8px);
 	}
 	.item {
 		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
