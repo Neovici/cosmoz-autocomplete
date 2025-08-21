@@ -1,3 +1,9 @@
+## [10.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.3...v10.3.0) (2025-08-21)
+
+### Features
+
+* labels styling ([#187](https://github.com/neovici/cosmoz-autocomplete/issues/187)) ([ff9efc2](https://github.com/neovici/cosmoz-autocomplete/commit/ff9efc2e55bb565d1a5bfeb1cfa13409d37d5b9f))
+
 ## [10.2.3](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.2...v10.2.3) (2025-08-19)
 
 ### Bug Fixes
