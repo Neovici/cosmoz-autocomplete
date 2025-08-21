@@ -13,7 +13,7 @@ const style = css`
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
 		background: var(
 			--cosmoz-autocomplete-listbox-bg,
-			rgba(255, 255, 255, 0.85)
+			rgba(255, 255, 255, 0.2)
 		);
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
@@ -41,6 +41,7 @@ const style = css`
 	}
 	.item {
 		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
+		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
 		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
@@ -98,7 +99,6 @@ const style = css`
 		box-sizing: border-box;
 		vertical-align: middle;
 		border-radius: 50%;
-		border: 2px solid #eee;
 	}
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;

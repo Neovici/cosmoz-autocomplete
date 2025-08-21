@@ -18,7 +18,9 @@ export default css`
 	}
 	.content {
 		color: var(--cosmoz-autocomplete-chip-color, #424242);
+		font-family: var(--cosmoz-autocomplete-chip-text-font-family, 'Inter', sans-serif);
 		font-size: var(--cosmoz-autocomplete-chip-text-font-size, 12px);
+		font-weight: var(--cosmoz-autocomplete-chip-text-font-weight, 400);
 		line-height: var(--cosmoz-autocomplete-chip-text-line-height, 22px);
 		overflow: hidden;
 		text-overflow: ellipsis;

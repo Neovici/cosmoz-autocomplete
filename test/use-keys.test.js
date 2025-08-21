@@ -20,7 +20,7 @@ describe('use-backspace', () => {
 		expect(onChange).to.have.been.calledOnce;
 	});
 
-	it('handles basic keys', async () => {
+	it('does not handle keys when limit is 1', async () => {
 		const onChange = spy();
 		await fixture(
 			html` <use-backspace
@@ -32,6 +32,6 @@ describe('use-backspace', () => {
 			></use-backspace>`,
 		);
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'p' }));
-		expect(onChange).to.have.been.calledOnce;
+		expect(onChange).to.not.have.been.called;
 	});
 });

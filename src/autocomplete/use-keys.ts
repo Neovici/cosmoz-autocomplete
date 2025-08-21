@@ -12,7 +12,7 @@ export interface Props<I> {
 }
 
 export const useKeys = <I>({ focused, empty, ...rest }: Props<I>) => {
-	const enabled = focused && empty,
+	const enabled = focused && empty && rest.limit !== 1,
 		meta = useMeta(rest);
 	useEffect(() => {
 		if (!enabled) {
