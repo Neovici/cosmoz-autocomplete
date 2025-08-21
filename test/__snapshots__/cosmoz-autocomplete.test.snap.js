@@ -216,3 +216,53 @@ snapshots['cosmoz-autocomplete render (deselect)'] = `<cosmoz-input
 </cosmoz-input>
 `;
 /* end snapshot cosmoz-autocomplete render (deselect) */
+snapshots["cosmoz-autocomplete-ui render (listbox)"] = 
+`<cosmoz-input
+  always-float-label=""
+  autocomplete="off"
+  exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
+  id="input"
+  part="input"
+>
+  <slot
+    name="prefix"
+    slot="prefix"
+  >
+  </slot>
+  <slot
+    name="suffix"
+    slot="suffix"
+  >
+  </slot>
+  <cosmoz-autocomplete-chip
+    class="chip"
+    exportparts="chip-text, chip-clear"
+    part="chip"
+    slot="control"
+    title="Item 1"
+  >
+    Item 1
+  </cosmoz-autocomplete-chip>
+  <cosmoz-autocomplete-chip
+    class="badge"
+    disabled=""
+    exportparts="chip-text, chip-clear"
+    hidden=""
+    part="chip"
+    slot="control"
+  >
+    <span>
+      +0
+    </span>
+  </cosmoz-autocomplete-chip>
+</cosmoz-input>
+<cosmoz-listbox
+  multi=""
+  part="listbox"
+  popover="manual"
+  style="min-width: 784px; left: 8px; top: 68px;"
+>
+</cosmoz-listbox>
+`;
+/* end snapshot cosmoz-autocomplete-ui render (listbox) */
+
