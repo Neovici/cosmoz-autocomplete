@@ -11,7 +11,7 @@ if (SERVER_CHANNEL_URL) {
 }
 
 const importers = {
-  "./stories/cosmoz-autocomplete.stories.js": () => import('./cosmoz-autocomplete.stories-3WbE_Lk_.js')
+  "./stories/cosmoz-autocomplete.stories.js": () => import('./cosmoz-autocomplete.stories-tDtpfIDa.js')
 };
 function importFn(path) {
   return importers[path]();
