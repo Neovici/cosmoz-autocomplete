@@ -2280,7 +2280,7 @@ const style$1 = tagged`
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
 		background: var(
 			--cosmoz-autocomplete-listbox-bg,
-			rgba(255, 255, 255, 0.85)
+			rgba(255, 255, 255, 0.2)
 		);
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
@@ -2308,6 +2308,7 @@ const style$1 = tagged`
 	}
 	.item {
 		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
+		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
 		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
@@ -2365,7 +2366,6 @@ const style$1 = tagged`
 		box-sizing: border-box;
 		vertical-align: middle;
 		border-radius: 50%;
-		border: 2px solid #eee;
 	}
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
@@ -2636,7 +2636,9 @@ var styles = tagged`
 	}
 	.content {
 		color: var(--cosmoz-autocomplete-chip-color, #424242);
+		font-family: var(--cosmoz-autocomplete-chip-text-font-family, 'Inter', sans-serif);
 		font-size: var(--cosmoz-autocomplete-chip-text-font-size, 12px);
+		font-weight: var(--cosmoz-autocomplete-chip-text-font-weight, 400);
 		line-height: var(--cosmoz-autocomplete-chip-text-line-height, 22px);
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -2831,7 +2833,7 @@ const useFocus = ({ disabled, onFocus }) => {
 };
 
 const useKeys = ({ focused, empty, ...rest }) => {
-  const enabled = focused && empty, meta = useMeta(rest);
+  const enabled = focused && empty && rest.limit !== 1, meta = useMeta(rest);
   useEffect(() => {
     if (!enabled) {
       return;
