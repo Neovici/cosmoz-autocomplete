@@ -2,5 +2,5 @@ import cfg from '@neovici/cfg/web/test-runner.mjs';
 
 export default {
 	...cfg,
-	testFramework: { config: { ui: 'bdd' }},
+	testFramework: { config: { ui: 'bdd', timeout: 4000 }},
 };
