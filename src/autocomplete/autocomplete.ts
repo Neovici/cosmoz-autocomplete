@@ -31,6 +31,7 @@ export interface Props<I> extends Base<I> {
 	itemLimit?: number;
 	wrap?: boolean;
 	defaultIndex?: number;
+	externalSearch?: boolean;
 	placement?: Placement;
 }
 
@@ -184,6 +185,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'keep-opened',
 		'keep-query',
 		'default-index',
+		'external-search',
 		'item-height',
 		'item-limit',
 		'wrap',
