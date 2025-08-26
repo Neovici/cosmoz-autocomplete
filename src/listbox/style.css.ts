@@ -1,4 +1,5 @@
 import { tagged as css } from '@neovici/cosmoz-utils';
+import { when } from 'lit-html/directives/when.js';
 
 const svg =
 	/* eslint-disable quotes */
@@ -11,10 +12,7 @@ const style = css`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(
-			--cosmoz-autocomplete-listbox-bg,
-			rgba(255, 255, 255, 0.2)
-		);
+		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255, 255, 255, 0.2));
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -92,17 +90,22 @@ export default style;
 
 export const styles = ({
 	index,
-	height,
 	itemHeight,
+	auto
 }: {
 	index?: number;
-	height: number;
 	itemHeight: number;
+	auto: boolean;
 }) => css`
-	.item {
-		line-height: ${itemHeight}px;
-		height: ${itemHeight}px;
-	}
+	${when(
+		!auto,
+		() => css`
+			.item {
+				line-height: ${itemHeight}px;
+				height: ${itemHeight}px;
+			}
+		`,
+	)}
 
 	.item[data-index='${index || '0'}'] {
 		background: var(

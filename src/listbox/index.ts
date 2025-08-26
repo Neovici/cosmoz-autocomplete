@@ -1,23 +1,23 @@
 import {
-	VirtualizeDirectiveConfig,
 	VirtualizerHostElement,
 	virtualize,
 	virtualizerRef,
 } from '@lit-labs/virtualizer/virtualize.js';
+import { connectable } from '@neovici/cosmoz-dropdown/connectable';
 import { sheet } from '@neovici/cosmoz-utils';
 import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
 import { useStyleSheet } from '@neovici/cosmoz-utils/hooks/use-stylesheet';
 import { props } from '@neovici/cosmoz-utils/object';
-import { component, html, useEffect, useMemo, useRef } from '@pionjs/pion';
+import { component, html, useEffect, useRef } from '@pionjs/pion';
 import { ref } from 'lit-html/directives/ref.js';
+import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
-import { connectable } from '@neovici/cosmoz-dropdown/connectable';
-import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 
 const Listbox = <I>(props: Props<I>) => {
 	const listRef = useRef<Element | undefined>(undefined);
-	const { position, items, renderItem, height, itemHeight } = useListbox(props);
+	const { position, items, renderItem, height, itemHeight, setItemHeight } =
+		useListbox(props);
 
 	useEffect(() => {
 		if (!position.scroll) return;
@@ -25,17 +25,14 @@ const Listbox = <I>(props: Props<I>) => {
 			virtualizerRef
 		];
 		if (!vl?.['_layout']) return;
+		vl.layoutComplete.then(() =>
+			setItemHeight(vl['_layout']._metricsCache.averageChildSize),
+		);
 		vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
 	}, [position]);
 
-	useStyleSheet(styles({ ...position, height, itemHeight }));
-
-	const layout = useMemo(
-		() =>
-			({
-				_itemSize: { height: itemHeight - 0.00001 },
-			}) as VirtualizeDirectiveConfig<unknown>['layout'],
-		[itemHeight],
+	useStyleSheet(
+		styles({ ...position, itemHeight, auto: props.itemHeight === 'auto' }),
 	);
 
 	return html`<div
@@ -48,7 +45,6 @@ const Listbox = <I>(props: Props<I>) => {
 				items,
 				renderItem,
 				scroller: true,
-				layout,
 			})}
 		</div>
 		<slot></slot>`;

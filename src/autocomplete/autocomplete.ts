@@ -27,7 +27,7 @@ export interface Props<I> extends Base<I> {
 	noLabelFloat?: boolean;
 	alwaysFloatLabel?: boolean;
 	showSingle?: boolean;
-	itemHeight?: number;
+	itemHeight?: number | 'auto';
 	itemLimit?: number;
 	wrap?: boolean;
 	defaultIndex?: number;
