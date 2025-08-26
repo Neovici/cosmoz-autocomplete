@@ -41,6 +41,7 @@ export interface Props<I> extends Base<I> {
 	onFocus?: (focused?: boolean) => void;
 	preserveOrder?: boolean;
 	defaultIndex?: number;
+	externalSearch?: boolean;
 }
 
 export const useAutocomplete = <I>({
@@ -59,6 +60,7 @@ export const useAutocomplete = <I>({
 	keepQuery,
 	preserveOrder,
 	defaultIndex,
+	externalSearch,
 	...thru
 }: Props<I>) => {
 	const textual = useMemo(
@@ -127,7 +129,7 @@ export const useAutocomplete = <I>({
 				? options
 				: [...value, ...without(value, prop(valueProperty))(options)];
 
-			return search(items, query, textual);
+			return externalSearch ? items : search(items, query, textual);
 		}, [
 			options,
 			active,
@@ -137,6 +139,7 @@ export const useAutocomplete = <I>({
 			value,
 			preserveOrder,
 			valueProperty,
+			externalSearch,
 		]),
 		onClick: useCallback(() => setClosed(false), []),
 		onFocus,
