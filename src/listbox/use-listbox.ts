@@ -2,6 +2,7 @@ import { useMemo } from '@pionjs/pion';
 import { byValue } from './util';
 import { useItems } from './use-items';
 import { useRenderItem, ItemRenderer } from './use-render-item';
+import { useItemHeight } from './use-item-height';
 
 export const properties = [
 	'query',
@@ -27,7 +28,7 @@ export interface Props<I> {
 	query: string;
 	textual: (i: I) => string;
 	itemRenderer?: ItemRenderer<I>;
-	itemHeight?: number;
+	itemHeight?: number | 'auto';
 	itemLimit?: number;
 }
 
@@ -40,7 +41,7 @@ export const useListbox = <I>({
 	query,
 	textual,
 	itemRenderer,
-	itemHeight = 40,
+	itemHeight: _itemHeight = 40,
 	itemLimit = 5,
 }: Props<I>) => {
 	const isSelected = useMemo(
@@ -55,7 +56,8 @@ export const useListbox = <I>({
 			defaultIndex: isNaN(defaultIndex as number)
 				? undefined
 				: Number(defaultIndex),
-		});
+		}),
+		[itemHeight, setItemHeight] = useItemHeight(_itemHeight);
 
 	return {
 		position,
@@ -64,6 +66,7 @@ export const useListbox = <I>({
 		highlight,
 		select,
 		itemHeight,
+		setItemHeight,
 		renderItem: useRenderItem({
 			itemRenderer,
 			highlight,
