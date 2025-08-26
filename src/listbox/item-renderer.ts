@@ -18,6 +18,14 @@ export type ItemRenderer<I> = (
 	opts: Opts<I>,
 ) => TemplateResult;
 
+export type ItemRendererOpts<I> = {
+	highlight: (i: number) => void;
+	select: (item: I) => void;
+	isSelected: (item: I) => void;
+	query: string;
+	textual: (i: I) => string;
+};
+
 export const itemRenderer =
 	<I>(render: Render<I> = identity) =>
 	(
@@ -29,13 +37,7 @@ export const itemRenderer =
 			textual = identity as () => string,
 			query,
 			isSelected,
-		}: {
-			highlight: (i: number) => void;
-			select: (item: I) => void;
-			isSelected: (item: I) => void;
-			query: string;
-			textual: (i: I) => string;
-		},
+		}: ItemRendererOpts<I>,
 	): TemplateResult => {
 		const text = textual(item),
 			content = mark(text, query),
