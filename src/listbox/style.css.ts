@@ -99,11 +99,6 @@ export const styles = ({
 	height: number;
 	itemHeight: number;
 }) => css`
-	:host {
-		xmin-height: ${itemHeight}px;
-		xheight: ${height}px;
-	}
-
 	.item {
 		line-height: ${itemHeight}px;
 		height: ${itemHeight}px;
