@@ -2893,7 +2893,7 @@ const raf = (fn) => (...args) => {
   return cleanup;
 };
 
-const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _onText, onSelect, limit, min, source, textProperty, textual: _textual, valueProperty, keepOpened, keepQuery, preserveOrder, defaultIndex, ...thru }) => {
+const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _onText, onSelect, limit, min, source, textProperty, textual: _textual, valueProperty, keepOpened, keepQuery, preserveOrder, defaultIndex, externalSearch, ...thru }) => {
   const textual = useMemo(() => (_textual ?? strProp)(textProperty), [_textual, textProperty]), { active, focused, onFocus, setClosed } = useFocus(thru), empty = !text, query = useMemo(() => text?.trim(), [text]), host = useHost(), onText = useNotify(host, _onText, "text"), onChange = useCallback((val) => {
     _onChange?.(val, () => setClosed(true));
     notify(host, "value", val);
@@ -2932,7 +2932,7 @@ const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _on
       if (!active)
         return EMPTY;
       const items = preserveOrder ? options : [...value, ...without(value, prop(valueProperty))(options)];
-      return search(items, query, textual);
+      return externalSearch ? items : search(items, query, textual);
     }, [
       options,
       active,
@@ -2941,7 +2941,8 @@ const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _on
       empty,
       value,
       preserveOrder,
-      valueProperty
+      valueProperty,
+      externalSearch
     ]),
     onClick: useCallback(() => setClosed(false), []),
     onFocus,
@@ -4569,6 +4570,7 @@ const autocomplete = (props) => {
   "keep-opened",
   "keep-query",
   "default-index",
+  "external-search",
   "item-height",
   "item-limit",
   "wrap"
