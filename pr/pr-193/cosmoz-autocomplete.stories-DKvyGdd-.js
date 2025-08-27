@@ -2562,19 +2562,31 @@ const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultInde
   };
 };
 
-const Listbox = (props2) => {
+const Listbox = (host) => {
   const listRef = useRef(void 0);
-  const { position, items, renderItem, height, itemHeight, setItemHeight } = useListbox(props2);
+  const { position, items, renderItem, height, itemHeight, setItemHeight } = useListbox(host);
+  useEffect(() => {
+    const vl = listRef.current?.[virtualizerRef];
+    if (!vl)
+      return;
+    vl.layoutComplete.then(() => {
+      host.dispatchEvent(new CustomEvent("layout-complete"));
+      return setItemHeight(vl["_layout"]._metricsCache.averageChildSize);
+    });
+  }, [items]);
   useEffect(() => {
     if (!position.scroll)
       return;
     const vl = listRef.current?.[virtualizerRef];
-    if (!vl?.["_layout"])
+    if (!vl)
       return;
-    vl.layoutComplete.then(() => setItemHeight(vl["_layout"]._metricsCache.averageChildSize));
+    if (!vl?.["_layout"]) {
+      vl.layoutComplete.then(() => vl.element(position.index)?.scrollIntoView({ block: "nearest" }));
+      return;
+    }
     vl.element(position.index)?.scrollIntoView({ block: "nearest" });
   }, [position]);
-  useStyleSheet(styles$1({ ...position, itemHeight, auto: props2.itemHeight === "auto" }));
+  useStyleSheet(styles$1({ ...position, itemHeight, auto: host.itemHeight === "auto" }));
   return x`<div
 			class="items"
 			style="min-height: ${height}px"
