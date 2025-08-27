@@ -20,14 +20,21 @@ const Listbox = <I>(props: Props<I>) => {
 		useListbox(props);
 
 	useEffect(() => {
+		const vl = (listRef.current as VirtualizerHostElement | undefined)?.[
+			virtualizerRef
+		];
+		if (!vl) return;
+		vl.layoutComplete.then(() =>
+			setItemHeight(vl['_layout']._metricsCache.averageChildSize),
+		);
+	}, [items]);
+
+	useEffect(() => {
 		if (!position.scroll) return;
 		const vl = (listRef.current as VirtualizerHostElement | undefined)?.[
 			virtualizerRef
 		];
-		if (!vl?.['_layout']) return;
-		vl.layoutComplete.then(() =>
-			setItemHeight(vl['_layout']._metricsCache.averageChildSize),
-		);
+		if (!vl) return;
 		vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
 	}, [position]);
 
