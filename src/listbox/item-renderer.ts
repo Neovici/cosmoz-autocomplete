@@ -1,8 +1,10 @@
 import { identity } from '@neovici/cosmoz-utils/function';
 import { html, TemplateResult } from 'lit-html';
 import { mark } from './util';
+import { Position } from './use-items';
 
-export interface Opts<I> {
+export interface ItemRendererOpts<I> {
+	position: Position;
 	highlight: (i: number) => void;
 	select: (item: I) => void;
 	isSelected: (item: I) => void;
@@ -15,16 +17,8 @@ export type Render<I> = (content: unknown, item: I, i: number) => unknown;
 export type ItemRenderer<I> = (
 	item: I,
 	i: number,
-	opts: Opts<I>,
+	opts: ItemRendererOpts<I>,
 ) => TemplateResult;
-
-export type ItemRendererOpts<I> = {
-	highlight: (i: number) => void;
-	select: (item: I) => void;
-	isSelected: (item: I) => void;
-	query: string;
-	textual: (i: I) => string;
-};
 
 export const itemRenderer =
 	<I>(render: Render<I> = identity) =>
