@@ -62,6 +62,20 @@ const style = css`
 		overflow: hidden;
 	}
 
+	.sizer {
+		position: relative;
+		visibility: hidden;
+		opacity: 0;
+		pointer-events: none;
+		z-index: -1;
+		height: 0;
+		width: auto;
+		padding: 0 20px;
+		overflow: hidden;
+		max-width: inherit;
+		font-size: 14px;
+	}
+
 	:host(:not([multi])) .item[aria-selected] {
 		background: var(--cosmoz-listbox-single-selection-color, #dadada);
 	}
@@ -84,6 +98,9 @@ const style = css`
 		/* prettier-ignore */
 		background: url("${svg}") #5881f6 no-repeat 50%;
 	}
+	:host([multi]) .sizer {
+		padding-left: 33px;
+	}
 	.swatch {
 		width: 18px;
 		height: 18px;
@@ -92,7 +109,7 @@ const style = css`
 		vertical-align: middle;
 		border-radius: 50%;
 	}
-	[virtualizer-sizer] {
+	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
 `;

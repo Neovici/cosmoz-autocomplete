@@ -37,18 +37,19 @@ export const itemRenderer =
 			content = mark(text, query),
 			rendered = render(content, item, i);
 		return html`<div
-			class="item"
-			role="option"
-			part="option"
-			?aria-selected=${isSelected(item)}
-			data-index=${i}
-			@mouseenter=${() => highlight(i)}
-			@click=${() => select(item)}
-			@mousedown=${(e: Event) => e.preventDefault()}
-			title=${text}
-		>
-			${rendered}
-		</div>`;
+				class="item"
+				role="option"
+				part="option"
+				?aria-selected=${isSelected(item)}
+				data-index=${i}
+				@mouseenter=${() => highlight(i)}
+				@click=${() => select(item)}
+				@mousedown=${(e: Event) => e.preventDefault()}
+				title=${text}
+			>
+				${rendered}
+			</div>
+			<div class="sizer" virtualizer-sizer>${rendered}</div>`;
 	};
 
 export default itemRenderer();
