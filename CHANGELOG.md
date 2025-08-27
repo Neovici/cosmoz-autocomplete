@@ -1,3 +1,18 @@
+## [10.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.3.0...v10.4.0) (2025-08-27)
+
+### Features
+
+* expose ItemRendererOpts ([2d1016b](https://github.com/neovici/cosmoz-autocomplete/commit/2d1016b5204590de8f88be5335cf88b43980fb9c))
+* external-search attribute ([ca338bd](https://github.com/neovici/cosmoz-autocomplete/commit/ca338bd92c49e5bfb6e824181ccc01f0269737ad))
+* itemRenderer also receives the position information ([b8ba73e](https://github.com/neovici/cosmoz-autocomplete/commit/b8ba73ee53de43f5cc3295aeed93b9f31e2f8e11))
+* layout-complete event for when items are finished rendering in proper place ([b78985a](https://github.com/neovici/cosmoz-autocomplete/commit/b78985a0c6b0b5c55ceda6e890a102165aa40271))
+* support for item-height="auto" ([baec7c2](https://github.com/neovici/cosmoz-autocomplete/commit/baec7c2e8075f07c1fc9b0f0220321abe7fb106f))
+
+### Bug Fixes
+
+* more reliable scroll to selected item ([4383219](https://github.com/neovici/cosmoz-autocomplete/commit/4383219d94f13f4df888d2ad9b5bf0b03bccb7f4))
+* sizer in item renderer is useless ([8e25878](https://github.com/neovici/cosmoz-autocomplete/commit/8e25878c408dd44253da3e87b65fc2fa821ffcc5)), closes [packages/labs/virtualizer/src/Virtualizer.ts#L375](https://github.com/packages/labs/virtualizer/src/Virtualizer.ts/issues/L375) [src/listbox/index.ts#L46](https://github.com/src/listbox/index.ts/issues/L46)
+
 ## [10.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.3...v10.3.0) (2025-08-21)
 
 ### Features
