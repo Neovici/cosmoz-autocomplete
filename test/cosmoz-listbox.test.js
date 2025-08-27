@@ -4,7 +4,7 @@ import '../src/listbox';
 import { spy } from 'sinon';
 
 const ready = async (el) => {
-	await oneEvent(el.shadowRoot.querySelector('.items'), 'rangeChanged');
+	await oneEvent(el, 'layout-complete');
 	await nextFrame();
 };
 
