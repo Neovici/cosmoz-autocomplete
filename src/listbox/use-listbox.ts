@@ -69,6 +69,7 @@ export const useListbox = <I>({
 		setItemHeight,
 		renderItem: useRenderItem({
 			itemRenderer,
+			position,
 			highlight,
 			select,
 			textual,
