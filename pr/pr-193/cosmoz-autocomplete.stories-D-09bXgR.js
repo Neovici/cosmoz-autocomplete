@@ -2552,6 +2552,7 @@ const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultInde
     setItemHeight,
     renderItem: useRenderItem({
       itemRenderer,
+      position,
       highlight,
       select,
       textual,
