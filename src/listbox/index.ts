@@ -14,19 +14,20 @@ import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
 
-const Listbox = <I>(props: Props<I>) => {
+const Listbox = <I>(host: HTMLElement & Props<I>) => {
 	const listRef = useRef<Element | undefined>(undefined);
 	const { position, items, renderItem, height, itemHeight, setItemHeight } =
-		useListbox(props);
+		useListbox(host);
 
 	useEffect(() => {
 		const vl = (listRef.current as VirtualizerHostElement | undefined)?.[
 			virtualizerRef
 		];
 		if (!vl) return;
-		vl.layoutComplete.then(() =>
-			setItemHeight(vl['_layout']._metricsCache.averageChildSize),
-		);
+		vl.layoutComplete.then(() => {
+			host.dispatchEvent(new CustomEvent('layout-complete'));
+			return setItemHeight(vl['_layout']._metricsCache.averageChildSize);
+		});
 	}, [items]);
 
 	useEffect(() => {
@@ -35,11 +36,17 @@ const Listbox = <I>(props: Props<I>) => {
 			virtualizerRef
 		];
 		if (!vl) return;
+		if (!vl?.['_layout']) {
+			vl.layoutComplete.then(() =>
+				vl.element(position.index)?.scrollIntoView({ block: 'nearest' }),
+			);
+			return;
+		}
 		vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
 	}, [position]);
 
 	useStyleSheet(
-		styles({ ...position, itemHeight, auto: props.itemHeight === 'auto' }),
+		styles({ ...position, itemHeight, auto: host.itemHeight === 'auto' }),
 	);
 
 	return html`<div
