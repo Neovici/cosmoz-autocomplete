@@ -2205,6 +2205,17 @@ class VirtualizeDirective extends f {
 }
 const virtualize = e(VirtualizeDirective);
 
+const connectable = (base = HTMLElement) => class extends base {
+    connectedCallback() {
+        super.connectedCallback?.();
+        this.dispatchEvent(new CustomEvent('connected'));
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback?.();
+        this.dispatchEvent(new CustomEvent('disconnected'));
+    }
+};
+
 const undefs = (prev, obj) => {
     if (!prev || !obj) {
         return;
@@ -2278,10 +2289,7 @@ const style$1 = tagged`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(
-			--cosmoz-autocomplete-listbox-bg,
-			rgba(255, 255, 255, 0.2)
-		);
+		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255, 255, 255, 0.2));
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -2320,20 +2328,6 @@ const style$1 = tagged`
 		overflow: hidden;
 	}
 
-	.sizer {
-		position: relative;
-		visibility: hidden;
-		opacity: 0;
-		pointer-events: none;
-		z-index: -1;
-		height: 0;
-		width: auto;
-		padding: 0 20px;
-		overflow: hidden;
-		max-width: inherit;
-		font-size: 14px;
-	}
-
 	:host(:not([multi])) .item[aria-selected] {
 		background: var(--cosmoz-listbox-single-selection-color, #dadada);
 	}
@@ -2356,9 +2350,6 @@ const style$1 = tagged`
 		/* prettier-ignore */
 		background: url("${svg}") #5881f6 no-repeat 50%;
 	}
-	:host([multi]) .sizer {
-		padding-left: 33px;
-	}
 	.swatch {
 		width: 18px;
 		height: 18px;
@@ -2367,20 +2358,17 @@ const style$1 = tagged`
 		vertical-align: middle;
 		border-radius: 50%;
 	}
-	[virtualizer-sizer]:not(.sizer) {
+	[virtualizer-sizer] {
 		line-height: 1;
 	}
 `;
-const styles$1 = ({ index, height, itemHeight }) => tagged`
-	:host {
-		xmin-height: ${itemHeight}px;
-		xheight: ${height}px;
-	}
-
-	.item {
-		line-height: ${itemHeight}px;
-		height: ${itemHeight}px;
-	}
+const styles$1 = ({ index, itemHeight, auto }) => tagged`
+	${n$1(!auto, () => tagged`
+			.item {
+				line-height: ${itemHeight}px;
+				height: ${itemHeight}px;
+			}
+		`)}
 
 	.item[data-index='${index || "0"}'] {
 		background: var(
@@ -2506,25 +2494,32 @@ const useItems = ({ items, onSelect, defaultIndex = 0 }) => {
 
 const itemRenderer = (render = identity) => (item, i, { highlight, select, textual = identity, query, isSelected }) => {
   const text = textual(item), content = mark(text, query), rendered = render(content, item, i);
-  return x` <div
-				class="item"
-				role="option"
-				part="option"
-				?aria-selected=${isSelected(item)}
-				data-index=${i}
-				@mouseenter=${() => highlight(i)}
-				@click=${() => select(item)}
-				@mousedown=${(e) => e.preventDefault()}
-				title=${text}
-			>
-				${rendered}
-			</div>
-			<div class="sizer" virtualizer-sizer>${rendered}</div>`;
+  return x`<div
+			class="item"
+			role="option"
+			part="option"
+			?aria-selected=${isSelected(item)}
+			data-index=${i}
+			@mouseenter=${() => highlight(i)}
+			@click=${() => select(item)}
+			@mousedown=${(e) => e.preventDefault()}
+			title=${text}
+		>
+			${rendered}
+		</div>`;
 };
 
 const useRenderItem = ({ itemRenderer: itemRenderer$1 = itemRenderer(), ...meta }) => {
   const info = useMeta(meta);
   return useCallback((item, i) => itemRenderer$1(item, i, info), [info, itemRenderer$1]);
+};
+
+const useItemHeight = (initialItemHeight) => {
+  const auto = initialItemHeight === "auto", [itemHeight, setItemHeight] = useState(auto ? 40 : initialItemHeight);
+  return [
+    itemHeight,
+    (v) => auto ? setItemHeight(v) : void 0
+  ];
 };
 
 const properties = [
@@ -2541,12 +2536,12 @@ const properties = [
   "valueProperty",
   "loading"
 ];
-const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultIndex, query, textual, itemRenderer, itemHeight = 40, itemLimit = 5 }) => {
+const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultIndex, query, textual, itemRenderer, itemHeight: _itemHeight = 40, itemLimit = 5 }) => {
   const isSelected = useMemo(() => byValue(value, valueProperty), [value, valueProperty]), items = useMemo(() => _items.slice(), [_items, isSelected]), { position, highlight, select } = useItems({
     items,
     onSelect,
     defaultIndex: isNaN(defaultIndex) ? void 0 : Number(defaultIndex)
-  });
+  }), [itemHeight, setItemHeight] = useItemHeight(_itemHeight);
   return {
     position,
     items,
@@ -2554,8 +2549,10 @@ const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultInde
     highlight,
     select,
     itemHeight,
+    setItemHeight,
     renderItem: useRenderItem({
       itemRenderer,
+      position,
       highlight,
       select,
       textual,
@@ -2565,32 +2562,31 @@ const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultInde
   };
 };
 
-const connectable = (base = HTMLElement) => class extends base {
-    connectedCallback() {
-        super.connectedCallback?.();
-        this.dispatchEvent(new CustomEvent('connected'));
-    }
-    disconnectedCallback() {
-        super.disconnectedCallback?.();
-        this.dispatchEvent(new CustomEvent('disconnected'));
-    }
-};
-
-const Listbox = (props2) => {
+const Listbox = (host) => {
   const listRef = useRef(void 0);
-  const { position, items, renderItem, height, itemHeight } = useListbox(props2);
+  const { position, items, renderItem, height, itemHeight, setItemHeight } = useListbox(host);
+  useEffect(() => {
+    const vl = listRef.current?.[virtualizerRef];
+    if (!vl)
+      return;
+    vl.layoutComplete.then(() => {
+      host.dispatchEvent(new CustomEvent("layout-complete"));
+      return setItemHeight(vl["_layout"]._metricsCache.averageChildSize);
+    });
+  }, [items]);
   useEffect(() => {
     if (!position.scroll)
       return;
     const vl = listRef.current?.[virtualizerRef];
-    if (!vl?.["_layout"])
+    if (!vl)
       return;
+    if (!vl?.["_layout"]) {
+      vl.layoutComplete.then(() => vl.element(position.index)?.scrollIntoView({ block: "nearest" }));
+      return;
+    }
     vl.element(position.index)?.scrollIntoView({ block: "nearest" });
   }, [position]);
-  useStyleSheet(styles$1({ ...position, height, itemHeight }));
-  const layout = useMemo(() => ({
-    _itemSize: { height: itemHeight - 1e-5 }
-  }), [itemHeight]);
+  useStyleSheet(styles$1({ ...position, itemHeight, auto: host.itemHeight === "auto" }));
   return x`<div
 			class="items"
 			style="min-height: ${height}px"
@@ -2600,8 +2596,7 @@ const Listbox = (props2) => {
 			${virtualize({
     items,
     renderItem,
-    scroller: true,
-    layout
+    scroller: true
   })}
 		</div>
 		<slot></slot>`;
