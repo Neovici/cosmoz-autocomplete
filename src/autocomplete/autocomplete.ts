@@ -145,7 +145,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				})}
 			</cosmoz-input>
 
-			${when(active && !(isSingle && !showSingle), () =>
+			${when(active && !(isSingle && !showSingle) && items.length > 0, () =>
 				listbox<I>(
 					{
 						...props,
