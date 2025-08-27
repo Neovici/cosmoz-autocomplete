@@ -1,4 +1,4 @@
-import { tagged as css } from '@neovici/cosmoz-utils';
+import { css } from '@pionjs/pion';
 import { when } from 'lit-html/directives/when.js';
 
 const svg =
@@ -22,12 +22,23 @@ const style = css`
 			0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
+		transition:
+			opacity 150ms ease-in-out,
+			transform 100ms ease-in-out;
 	}
 	:host(:popover-open) {
 		box-sizing: border-box;
 		display: block;
 		margin: 0;
 		border: 1px solid rgba(200, 200, 200, 0.25);
+
+		opacity: 1;
+		transform: translateY(0);
+
+		@starting-style {
+			opacity: 0;
+			transform: translateY(-50px);
+		}
 	}
 	:host([popover]) {
 		padding: 0;
@@ -91,7 +102,7 @@ export default style;
 export const styles = ({
 	index,
 	itemHeight,
-	auto
+	auto,
 }: {
 	index?: number;
 	itemHeight: number;
