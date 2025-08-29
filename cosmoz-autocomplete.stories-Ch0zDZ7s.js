@@ -2284,7 +2284,7 @@ const svg = (
   /* eslint-disable quotes */
   "data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
 );
-const style$1 = tagged`
+const style$1 = css`
 	:host {
 		position: fixed;
 		z-index: 1000;
@@ -2299,12 +2299,23 @@ const style$1 = tagged`
 			0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
+		transition:
+			opacity 150ms ease-in-out,
+			transform 100ms ease-in-out;
 	}
 	:host(:popover-open) {
 		box-sizing: border-box;
 		display: block;
 		margin: 0;
 		border: 1px solid rgba(200, 200, 200, 0.25);
+
+		opacity: 1;
+		transform: translateY(0);
+
+		@starting-style {
+			opacity: 0;
+			transform: translateY(-50px);
+		}
 	}
 	:host([popover]) {
 		padding: 0;
@@ -2362,8 +2373,8 @@ const style$1 = tagged`
 		line-height: 1;
 	}
 `;
-const styles$1 = ({ index, itemHeight, auto }) => tagged`
-	${n$1(!auto, () => tagged`
+const styles$1 = ({ index, itemHeight, auto }) => css`
+	${n$1(!auto, () => css`
 			.item {
 				line-height: ${itemHeight}px;
 				height: ${itemHeight}px;
@@ -4542,7 +4553,7 @@ const autocomplete = (props) => {
   })}
 			</cosmoz-input>
 
-			${n$1(active && !(isSingle && !showSingle), () => listbox({
+			${n$1(active && !(isSingle && !showSingle) && items.length > 0, () => listbox({
     ...props,
     items,
     multi: !isOne,
