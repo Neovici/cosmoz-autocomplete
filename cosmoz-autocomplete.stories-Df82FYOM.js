@@ -2339,6 +2339,20 @@ const style$1 = css`
 		overflow: hidden;
 	}
 
+	.sizer {
+		position: relative;
+		visibility: hidden;
+		opacity: 0;
+		pointer-events: none;
+		z-index: -1;
+		height: 0;
+		width: auto;
+		padding: 0 20px;
+		overflow: hidden;
+		max-width: inherit;
+		font-size: 14px;
+	}
+
 	:host(:not([multi])) .item[aria-selected] {
 		background: var(--cosmoz-listbox-single-selection-color, #dadada);
 	}
@@ -2361,6 +2375,9 @@ const style$1 = css`
 		/* prettier-ignore */
 		background: url("${svg}") #5881f6 no-repeat 50%;
 	}
+	:host([multi]) .sizer {
+		padding-left: 33px;
+	}
 	.swatch {
 		width: 18px;
 		height: 18px;
@@ -2369,7 +2386,7 @@ const style$1 = css`
 		vertical-align: middle;
 		border-radius: 50%;
 	}
-	[virtualizer-sizer] {
+	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
 `;
@@ -2506,18 +2523,19 @@ const useItems = ({ items, onSelect, defaultIndex = 0 }) => {
 const itemRenderer = (render = identity) => (item, i, { highlight, select, textual = identity, query, isSelected }) => {
   const text = textual(item), content = mark(text, query), rendered = render(content, item, i);
   return x`<div
-			class="item"
-			role="option"
-			part="option"
-			?aria-selected=${isSelected(item)}
-			data-index=${i}
-			@mouseenter=${() => highlight(i)}
-			@click=${() => select(item)}
-			@mousedown=${(e) => e.preventDefault()}
-			title=${text}
-		>
-			${rendered}
-		</div>`;
+				class="item"
+				role="option"
+				part="option"
+				?aria-selected=${isSelected(item)}
+				data-index=${i}
+				@mouseenter=${() => highlight(i)}
+				@click=${() => select(item)}
+				@mousedown=${(e) => e.preventDefault()}
+				title=${text}
+			>
+				${rendered}
+			</div>
+			<div class="sizer" virtualizer-sizer>${rendered}</div>`;
 };
 
 const useRenderItem = ({ itemRenderer: itemRenderer$1 = itemRenderer(), ...meta }) => {
