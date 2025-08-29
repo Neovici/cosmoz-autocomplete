@@ -1,3 +1,13 @@
+## [10.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.4.0...v10.5.0) (2025-08-29)
+
+### Features
+
+* open animation ([c8611c4](https://github.com/neovici/cosmoz-autocomplete/commit/c8611c419d044fdb99ae675ddebb20402bd8c900))
+
+### Bug Fixes
+
+* items are not rendered fully ([ceb40c3](https://github.com/neovici/cosmoz-autocomplete/commit/ceb40c33b6006db451cdd5644a17a8e7ba8f8d55))
+
 ## [10.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.3.0...v10.4.0) (2025-08-27)
 
 ### Features
