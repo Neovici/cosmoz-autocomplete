@@ -18,6 +18,7 @@ import {
 	defaultMiddleware,
 	size,
 } from '@neovici/cosmoz-dropdown/use-floating';
+import { useEffect } from '@pionjs/pion';
 
 export interface Props<I> extends Base<I> {
 	invalid?: boolean;
@@ -89,6 +90,15 @@ const autocomplete = <I>(props: AProps<I>) => {
 			middleware,
 		});
 
+		useEffect(() => {
+			host.addEventListener('focusin', onFocus);
+			host.addEventListener('focusout', onFocus);
+			return () => {
+				host.removeEventListener('focusin', onFocus);
+				host.removeEventListener('focusout', onFocus);
+			};
+		}, [onFocus]);
+
 		useImperativeApi(
 			{
 				focus: () =>
@@ -125,8 +135,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 				)}
 				.value=${live(text)}
 				@value-changed=${onText}
-				@focusin=${onFocus}
-				@focusout=${onFocus}
 				@click=${onClick}
 				autocomplete="off"
 				exportparts=${inputParts}
