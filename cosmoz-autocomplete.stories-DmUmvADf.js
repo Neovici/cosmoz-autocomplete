@@ -2584,6 +2584,7 @@ const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultInde
     setItemHeight,
     renderItem: useRenderItem({
       itemRenderer,
+      items,
       position,
       highlight,
       select,
