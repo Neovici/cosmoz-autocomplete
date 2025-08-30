@@ -4617,6 +4617,14 @@ const autocomplete = (props) => {
     placement,
     middleware
   });
+  useEffect(() => {
+    host.addEventListener("focusin", onFocus);
+    host.addEventListener("focusout", onFocus);
+    return () => {
+      host.removeEventListener("focusin", onFocus);
+      host.removeEventListener("focusout", onFocus);
+    };
+  }, [onFocus]);
   useImperativeApi({
     focus: () => host.shadowRoot?.querySelector("#input")?.focus()
   }, []);
@@ -4634,8 +4642,6 @@ const autocomplete = (props) => {
 				.errorMessage=${m(source$.then(() => errorMessage, (e) => e.message), errorMessage)}
 				.value=${l(text)}
 				@value-changed=${onText}
-				@focusin=${onFocus}
-				@focusout=${onFocus}
 				@click=${onClick}
 				autocomplete="off"
 				exportparts=${inputParts}
