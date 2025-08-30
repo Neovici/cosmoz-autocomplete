@@ -2252,7 +2252,10 @@ const useStyleSheet = (css) => {
     }, [css]);
 };
 
-const identity = (obj) => obj;
+function constant(v) {
+    return () => v;
+}
+const constUndefined = constant(), noop = constUndefined, identity = (obj) => obj;
 
 /* eslint-disable no-use-before-define, import/group-exports */
 function prop(key) {
@@ -2591,6 +2594,7 @@ const useListbox = ({ value, valueProperty, items: _items, onSelect, defaultInde
   };
 };
 
+const ignore = noop;
 const Listbox = (host) => {
   const listRef = useRef(void 0);
   const { position, items, renderItem, height, itemHeight, setItemHeight } = useListbox(host);
@@ -2601,7 +2605,7 @@ const Listbox = (host) => {
     vl.layoutComplete.then(() => {
       host.dispatchEvent(new CustomEvent("layout-complete"));
       return setItemHeight(vl["_layout"]._metricsCache.averageChildSize);
-    });
+    }, ignore);
   }, [items]);
   useEffect(() => {
     if (!position.scroll)
@@ -2610,7 +2614,7 @@ const Listbox = (host) => {
     if (!vl)
       return;
     if (!vl?.["_layout"]) {
-      vl.layoutComplete.then(() => vl.element(position.index)?.scrollIntoView({ block: "nearest" }));
+      vl.layoutComplete.then(() => vl.element(position.index)?.scrollIntoView({ block: "nearest" }), ignore);
       return;
     }
     vl.element(position.index)?.scrollIntoView({ block: "nearest" });
