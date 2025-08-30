@@ -553,7 +553,7 @@ const useState = hook(class extends Hook {
  * @param {(init: I) => S} [init=undefined] - Optional initializer function, called on initialState if provided
  * @return {readonly [S, (action: A) => void]}
  */
-hook(class extends Hook {
+const useReducer = hook(class extends Hook {
     reducer;
     currentState;
     constructor(id, state, _, initialState, init) {
@@ -2922,6 +2922,77 @@ const raf = (fn) => (...args) => {
   return cleanup;
 };
 
+const action = (type, create = () => ({})) => {
+    const common = {
+        type,
+        toString() {
+            return type;
+        },
+    }, callable = (...args) => Object.assign(create(...args), common);
+    return Object.assign(callable, common);
+}, type = (action) => action.type || action.toString();
+
+const ensureArray = x => Array.isArray(x) ? x : [x], reduce = (initial, handle) => {
+    const handles = ensureArray(handle), handlers = (handles.every(Array.isArray) ? handles : [handles]).map(([actions, handle]) => ({
+        actions: ensureArray(actions).map(type),
+        handle
+    }));
+    return (state = initial, action) => {
+        const handler = handlers.find(h => h.actions.includes(type(action)));
+        return handler ? handler.handle(state, action) : state;
+    };
+};
+
+const states = {
+    pending: 'pending',
+    rejected: 'rejected',
+    resolved: 'resolved',
+}, initial = {
+    error: undefined,
+    result: undefined,
+    state: states.pending,
+}, pending = action(states.pending), resolved = action(states.resolved, (result) => ({ result })), rejected = action(states.rejected, (error) => ({ error })), reducer = reduce(initial, [
+    [
+        pending,
+        () => ({
+            error: undefined,
+            result: undefined,
+            state: states.pending,
+        }),
+    ],
+    [
+        resolved,
+        (state, { result }) => ({
+            error: undefined,
+            result,
+            state: states.resolved,
+        }),
+    ],
+    [
+        rejected,
+        (state, { error }) => ({
+            error,
+            result: undefined,
+            state: states.rejected,
+        }),
+    ],
+]);
+const usePromise = (promise) => {
+    const [{ error, result, state }, dispatch] = useReducer(reducer, initial);
+    useEffect(() => {
+        if (!promise) {
+            return;
+        }
+        let canceled = false;
+        dispatch(pending());
+        promise.then((result) => !canceled && dispatch(resolved(result)), (error) => !canceled && dispatch(rejected(error)));
+        return () => {
+            canceled = true;
+        };
+    }, [promise]);
+    return [result, error, state];
+};
+
 const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _onText, onSelect, limit, min, source, textProperty, textual: _textual, valueProperty, keepOpened, keepQuery, preserveOrder, defaultIndex, externalSearch, ...thru }) => {
   const textual = useMemo(() => (_textual ?? strProp)(textProperty), [_textual, textProperty]), { active, focused, onFocus, setClosed } = useFocus(thru), empty = !text, query = useMemo(() => text?.trim(), [text]), host = useHost(), onText = useNotify(host, _onText, "text"), onChange = useCallback((val) => {
     _onChange?.(val, () => setClosed(true));
@@ -2951,12 +3022,14 @@ const useAutocomplete = ({ value: _value, text, onChange: _onChange, onText: _on
     setClosed,
     onSelect
   });
+  const [, , state] = usePromise(source$);
   return {
     active,
     query,
     textual,
     value,
     source$,
+    loading: state === "pending",
     items: useMemo(() => {
       if (!active)
         return EMPTY;
@@ -4517,7 +4590,6 @@ const useFloating = ({ placement = 'bottom-start', strategy, middleware = defaul
 };
 
 const inputParts = ["input", "control", "label", "line", "error", "wrap"].map((part) => `${part}: input-${part}`).join();
-const blank = () => E;
 const middleware = [
   size({
     apply({ rects, elements }) {
@@ -4528,8 +4600,15 @@ const middleware = [
   }),
   ...defaultMiddleware
 ];
+const shouldShowDropdown = ({ active, loading, items, text, isSingle, showSingle }) => {
+  if (!active)
+    return false;
+  const hasResultsOrQuery = loading || items.length > 0 || text.length > 0;
+  const disallowedSingle = isSingle && !showSingle;
+  return hasResultsOrQuery && !disallowedSingle;
+};
 const autocomplete = (props) => {
-  const { active, invalid, errorMessage, label, placeholder, disabled, noLabelFloat, alwaysFloatLabel, textual, text, onText, onFocus, onClick, onDeselect, value, limit, min, showSingle, items, source$, placement } = props, host = useHost(), isOne = limit == 1, isSingle = isOne && value?.[0] != null;
+  const { active, invalid, errorMessage, label, placeholder, disabled, noLabelFloat, alwaysFloatLabel, textual, text, onText, onFocus, onClick, onDeselect, value, limit, min, showSingle, items, source$, placement, loading } = props, host = useHost(), isOne = limit == 1, isSingle = isOne && value?.[0] != null;
   const { styles, setReference, setFloating } = useFloating({
     placement,
     middleware
@@ -4571,13 +4650,20 @@ const autocomplete = (props) => {
   })}
 			</cosmoz-input>
 
-			${n$1(active && !(isSingle && !showSingle) && items.length > 0, () => listbox({
+			${n$1(shouldShowDropdown({
+    active,
+    loading,
+    items,
+    text,
+    isSingle,
+    showSingle
+  }), () => listbox({
     ...props,
     items,
     multi: !isOne,
     setFloating,
     styles
-  }, n$1(items.length < 5, () => m(source$.then(blank, blank), x`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`))))}`;
+  }, n$1(loading, () => x`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`, () => n$1(text.length > 0 && items.length === 0, () => x`<slot name="no-result"></slot>`))))}`;
 }, Autocomplete$1 = (props) => {
   const thru = {
     ...props,
