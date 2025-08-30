@@ -2624,7 +2624,6 @@ const Listbox = (host) => {
   useStyleSheet(styles$1({ ...position, itemHeight, auto: host.itemHeight === "auto" }));
   return x`<div
 			class="items"
-			part="items"
 			style="min-height: ${height}px"
 			${n$2((el) => listRef.current = el)}
 		>
