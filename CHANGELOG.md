@@ -1,3 +1,15 @@
+## [10.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.5.0...v10.6.0) (2025-08-30)
+
+### Features
+
+* itemRenderer can access the items list ([488c790](https://github.com/neovici/cosmoz-autocomplete/commit/488c7905b30fe1a9df30d4fbffb84d5e1a1f5485))
+
+### Bug Fixes
+
+* dropdown is not displayed while the source is loading ([b1fda76](https://github.com/neovici/cosmoz-autocomplete/commit/b1fda76e7ab951a58df8c2f09d91add67ae7cf93))
+* error in console if listbox is closed before layout completes ([389f86f](https://github.com/neovici/cosmoz-autocomplete/commit/389f86f5478040ef43bf5f382f244a8bda2a1f49))
+* listbox closes when focus moves into it ([edbfb60](https://github.com/neovici/cosmoz-autocomplete/commit/edbfb606568c17c298e90cc3b07a1e51fb18df9d))
+
 ## [10.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.4.0...v10.5.0) (2025-08-29)
 
 ### Features
