@@ -2,7 +2,7 @@ import '@neovici/cosmoz-input';
 import './skeleton-span';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
-import { html, nothing } from 'lit-html'; // eslint-disable-line object-curly-newline
+import { html } from 'lit-html';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
@@ -44,7 +44,6 @@ const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
 
-const blank = () => nothing;
 const middleware = [
 	size({
 		apply({ rects, elements }) {
@@ -55,6 +54,24 @@ const middleware = [
 	}),
 	...defaultMiddleware,
 ];
+
+const shouldShowDropdown = <I>({
+	active,
+	loading,
+	items,
+	text,
+	isSingle,
+	showSingle,
+}: Pick<AProps<I>, 'active' | 'loading' | 'items' | 'text' | 'showSingle'> & {
+	isSingle: boolean;
+}) => {
+	if (!active) return false;
+
+	const hasResultsOrQuery = loading || items.length > 0 || text.length > 0;
+	const disallowedSingle = isSingle && !showSingle;
+
+	return hasResultsOrQuery && !disallowedSingle;
+};
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
@@ -79,6 +96,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				items,
 				source$,
 				placement,
+				loading,
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
@@ -145,22 +163,35 @@ const autocomplete = <I>(props: AProps<I>) => {
 				})}
 			</cosmoz-input>
 
-			${when(active && !(isSingle && !showSingle) && items.length > 0, () =>
-				listbox<I>(
-					{
-						...props,
-						items,
-						multi: !isOne,
-						setFloating,
-						styles,
-					},
-					when(items.length < 5, () =>
-						until(
-							source$.then(blank, blank),
-							html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+			${when(
+				shouldShowDropdown({
+					active,
+					loading,
+					items,
+					text,
+					isSingle,
+					showSingle,
+				}),
+				() =>
+					listbox<I>(
+						{
+							...props,
+							items,
+							multi: !isOne,
+							setFloating,
+							styles,
+						},
+						when(
+							loading,
+							() =>
+								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+							() =>
+								when(
+									text.length > 0 && items.length === 0,
+									() => html`<slot name="no-result"></slot>`,
+								),
 						),
 					),
-				),
 			)}`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
