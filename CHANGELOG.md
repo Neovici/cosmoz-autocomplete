@@ -1,3 +1,9 @@
+## [10.6.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.6.0...v10.6.1) (2025-08-30)
+
+### Bug Fixes
+
+* margin is not taken into account when item-size="auto" ([b98c21c](https://github.com/neovici/cosmoz-autocomplete/commit/b98c21c3a467f78d768b2764f93a7f1331e9f81d))
+
 ## [10.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.5.0...v10.6.0) (2025-08-30)
 
 ### Features
