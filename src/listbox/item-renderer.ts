@@ -4,6 +4,7 @@ import { mark } from './util';
 import { Position } from './use-items';
 
 export interface ItemRendererOpts<I> {
+	items: I[];
 	position: Position;
 	highlight: (i: number) => void;
 	select: (item: I) => void;
