@@ -6,6 +6,7 @@ import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { useKeys } from './use-keys';
 import { search, normalize, notify, useNotify, EMPTY } from './util';
+import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 
 type Source<I> = (opts: {
 	query: string;
@@ -116,12 +117,15 @@ export const useAutocomplete = <I>({
 		onSelect,
 	});
 
+	const [, , state] = usePromise(source$);
+
 	return {
 		active,
 		query,
 		textual,
 		value,
 		source$,
+		loading: state === 'pending',
 		items: useMemo(() => {
 			if (!active) return EMPTY;
 
