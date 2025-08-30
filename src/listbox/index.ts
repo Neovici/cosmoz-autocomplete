@@ -13,6 +13,9 @@ import { ref } from 'lit-html/directives/ref.js';
 import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
+import { noop } from '@neovici/cosmoz-utils/function';
+
+const ignore = noop;
 
 const Listbox = <I>(host: HTMLElement & Props<I>) => {
 	const listRef = useRef<Element | undefined>(undefined);
@@ -27,7 +30,7 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 		vl.layoutComplete.then(() => {
 			host.dispatchEvent(new CustomEvent('layout-complete'));
 			return setItemHeight(vl['_layout']._metricsCache.averageChildSize);
-		});
+		}, ignore);
 	}, [items]);
 
 	useEffect(() => {
@@ -37,8 +40,9 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 		];
 		if (!vl) return;
 		if (!vl?.['_layout']) {
-			vl.layoutComplete.then(() =>
-				vl.element(position.index)?.scrollIntoView({ block: 'nearest' }),
+			vl.layoutComplete.then(
+				() => vl.element(position.index)?.scrollIntoView({ block: 'nearest' }),
+				ignore,
 			);
 			return;
 		}
