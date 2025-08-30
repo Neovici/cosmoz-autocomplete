@@ -29,7 +29,9 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 		if (!vl) return;
 		vl.layoutComplete.then(() => {
 			host.dispatchEvent(new CustomEvent('layout-complete'));
-			return setItemHeight(vl['_layout']._metricsCache.averageChildSize);
+			const { averageChildSize, averageMarginSize } =
+				vl['_layout']._metricsCache;
+			return setItemHeight(averageChildSize + averageMarginSize * 2);
 		}, ignore);
 	}, [items]);
 
