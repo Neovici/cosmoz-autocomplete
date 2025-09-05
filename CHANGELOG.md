@@ -1,3 +1,9 @@
+## [10.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.6.1...v10.7.0) (2025-09-05)
+
+### Features
+
+* adjust opacity for listbox ([#202](https://github.com/neovici/cosmoz-autocomplete/issues/202)) ([f117038](https://github.com/neovici/cosmoz-autocomplete/commit/f1170381493db05aeafe5d2c8641d3776070c90a))
+
 ## [10.6.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.6.0...v10.6.1) (2025-08-30)
 
 ### Bug Fixes
