@@ -12,7 +12,7 @@ const style = css`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255, 255, 255, 0.2));
+		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255, 255, 255, 0.75));
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
