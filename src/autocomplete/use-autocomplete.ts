@@ -33,7 +33,7 @@ interface Meta<I> extends Omit<Base<I>, 'value'> {
 }
 
 export interface Props<I> extends Base<I> {
-	text: string;
+	text?: string;
 	source: I[] | Source<I>;
 	textProperty?: string;
 	textual?: (prop?: string) => (i: I) => string;
@@ -70,7 +70,7 @@ export const useAutocomplete = <I>({
 		),
 		{ active, focused, onFocus, setClosed } = useFocus(thru),
 		empty = !text,
-		query = useMemo(() => text?.trim(), [text]),
+		query = useMemo(() => text?.trim() ?? '', [text]),
 		host = useHost(),
 		onText = useNotify(host, _onText, 'text'),
 		onChange = useCallback(
