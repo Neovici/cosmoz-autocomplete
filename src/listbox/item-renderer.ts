@@ -9,7 +9,7 @@ export interface ItemRendererOpts<I> {
 	highlight: (i: number) => void;
 	select: (item: I) => void;
 	isSelected: (item: I) => void;
-	query: string;
+	query?: string;
 	textual: (i: I) => string;
 }
 

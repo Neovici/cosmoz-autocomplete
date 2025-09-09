@@ -2,6 +2,7 @@ import { useLayoutEffect, useState, useMemo } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { raf } from './util';
 
+// eslint-disable-next-line max-statements
 const overflow = (host: HTMLElement) => {
 	const chips = host.shadowRoot!.querySelectorAll<HTMLElement>('.chip');
 	const badge = host.shadowRoot!.querySelector<HTMLElement>('.badge')!;

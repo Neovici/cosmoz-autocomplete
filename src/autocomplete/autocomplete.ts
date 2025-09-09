@@ -68,7 +68,8 @@ const shouldShowDropdown = <I>({
 }) => {
 	if (!active) return false;
 
-	const hasResultsOrQuery = loading || items.length > 0 || text.length > 0;
+	const hasResultsOrQuery =
+		loading || items.length > 0 || (text != null && text.length > 0);
 	const disallowedSingle = isSingle && !showSingle;
 
 	return hasResultsOrQuery && !disallowedSingle;
@@ -195,7 +196,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
 							() =>
 								when(
-									text.length > 0 && items.length === 0,
+									text != null && text.length > 0 && items.length === 0,
 									() => html`<slot name="no-result"></slot>`,
 								),
 						),

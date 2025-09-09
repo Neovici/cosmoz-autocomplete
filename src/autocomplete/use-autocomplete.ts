@@ -9,7 +9,7 @@ import { search, normalize, notify, useNotify, EMPTY } from './util';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 
 type Source<I> = (opts: {
-	query: string;
+	query?: string;
 	active?: boolean;
 }) => PromiseLike<I[]>;
 
@@ -33,7 +33,7 @@ interface Meta<I> extends Omit<Base<I>, 'value'> {
 }
 
 export interface Props<I> extends Base<I> {
-	text: string;
+	text?: string;
 	source: I[] | Source<I>;
 	textProperty?: string;
 	textual?: (prop?: string) => (i: I) => string;
@@ -188,7 +188,7 @@ export const useAutocomplete = <I>({
 			[meta],
 		),
 		// whenever there is a query, override defaultIndex to 0, so the first result gets selected
-		defaultIndex: query?.length > 0 ? 0 : defaultIndex,
+		defaultIndex: (query !== undefined && query?.length > 0) ? 0 : defaultIndex,
 	};
 };
 
