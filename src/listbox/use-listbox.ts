@@ -25,7 +25,7 @@ export interface Props<I> {
 	items: I[];
 	onSelect: (i: I) => void;
 	defaultIndex?: number;
-	query: string;
+	query?: string;
 	textual: (i: I) => string;
 	itemRenderer?: ItemRenderer<I>;
 	itemHeight?: number | 'auto';

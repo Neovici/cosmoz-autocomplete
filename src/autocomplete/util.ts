@@ -14,7 +14,7 @@ const removeAccents = (str: string): string => {
 
 export const search = <I>(
 	source: I[],
-	query: string,
+	query: string | undefined,
 	textual: (i: I) => string,
 ) => {
 	if (!query) return source;

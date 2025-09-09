@@ -9,7 +9,7 @@ import { search, normalize, notify, useNotify, EMPTY } from './util';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 
 type Source<I> = (opts: {
-	query: string;
+	query?: string;
 	active?: boolean;
 }) => PromiseLike<I[]>;
 
@@ -70,7 +70,7 @@ export const useAutocomplete = <I>({
 		),
 		{ active, focused, onFocus, setClosed } = useFocus(thru),
 		empty = !text,
-		query = useMemo(() => text?.trim() ?? '', [text]),
+		query = useMemo(() => text?.trim(), [text]),
 		host = useHost(),
 		onText = useNotify(host, _onText, 'text'),
 		onChange = useCallback(
@@ -188,7 +188,7 @@ export const useAutocomplete = <I>({
 			[meta],
 		),
 		// whenever there is a query, override defaultIndex to 0, so the first result gets selected
-		defaultIndex: query?.length > 0 ? 0 : defaultIndex,
+		defaultIndex: (query !== undefined && query?.length > 0) ? 0 : defaultIndex,
 	};
 };
 

@@ -16,7 +16,7 @@ export const byValue = <K extends PropertyKey | undefined, T>(
 				(item as Rec<NonNullable<K>>)[valueProperty],
 		);
 };
-export const mark = (text: string, query: string) => {
+export const mark = (text: string, query: string | undefined) => {
 	if (!query || !text) {
 		return text;
 	}
