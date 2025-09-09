@@ -1,3 +1,9 @@
+## [10.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.0...v10.7.1) (2025-09-09)
+
+### Bug Fixes
+
+* fatal error when text is undefined ([#204](https://github.com/neovici/cosmoz-autocomplete/issues/204)) ([efeb5df](https://github.com/neovici/cosmoz-autocomplete/commit/efeb5dff206d437bc61a7b9df8ba023b0d863f72))
+
 ## [10.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.6.1...v10.7.0) (2025-09-05)
 
 ### Features
