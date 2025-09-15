@@ -18,7 +18,7 @@ import {
 	defaultMiddleware,
 	size,
 } from '@neovici/cosmoz-dropdown/use-floating';
-import { useEffect } from '@pionjs/pion';
+import { useEffect, useMemo } from '@pionjs/pion';
 
 export interface Props<I> extends Base<I> {
 	invalid?: boolean;
@@ -77,34 +77,37 @@ const shouldShowDropdown = <I>({
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
-				active,
-				invalid,
-				errorMessage,
-				label,
-				placeholder,
-				disabled,
-				noLabelFloat,
-				alwaysFloatLabel,
-				textual,
-				text,
-				onText,
-				onFocus,
-				onClick,
-				onDeselect,
-				value,
-				limit,
-				min,
-				showSingle,
-				items,
-				source$,
-				placement,
-				loading,
-			} = props,
-			host = useHost(),
-			isOne = limit == 1, // eslint-disable-line eqeqeq
-			isSingle = isOne && value?.[0] != null;
+			active,
+			invalid,
+			errorMessage,
+			label,
+			placeholder,
+			disabled,
+			noLabelFloat,
+			alwaysFloatLabel,
+			textual,
+			text,
+			onText,
+			onFocus,
+			onClick,
+			onDeselect,
+			value,
+			limit,
+			min,
+			showSingle,
+			items,
+			source$,
+			placement,
+			loading,
+		} = props,
+		host = useHost(),
+		isOne = limit == 1, // eslint-disable-line eqeqeq
+		isSingle = isOne && value?.[0] != null;
 
-		const { styles, setReference, setFloating } = useFloating({
+	// Generate a unique ID for this autocomplete instance to prevent DOM conflicts
+	const inputId = useMemo(() => `input-${Math.random().toString(36).substr(2, 9)}`, []);
+
+	const { styles, setReference, setFloating } = useFloating({
 			placement,
 			middleware,
 		});
@@ -118,19 +121,19 @@ const autocomplete = <I>(props: AProps<I>) => {
 			};
 		}, [onFocus]);
 
-		useImperativeApi(
-			{
-				focus: () =>
-					(
-						host.shadowRoot?.querySelector('#input') as HTMLInputElement
-					)?.focus(),
-			},
-			[],
-		);
+	useImperativeApi(
+		{
+			focus: () =>
+				(
+					host.shadowRoot?.querySelector(`#${inputId}`) as HTMLInputElement
+				)?.focus(),
+		},
+		[inputId],
+	);
 
-		return html`<cosmoz-input
-				id="input"
-				part="input"
+	return html`<cosmoz-input
+			id=${inputId}
+			part="input"
 				${ref(setReference)}
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
