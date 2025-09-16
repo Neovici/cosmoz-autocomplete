@@ -1,3 +1,9 @@
+## [10.7.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.1...v10.7.2) (2025-09-16)
+
+### Bug Fixes
+
+* keyboard navigation stops working ([75345b0](https://github.com/neovici/cosmoz-autocomplete/commit/75345b09c2a939f6f42fb734add873e5965b17ed))
+
 ## [10.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.0...v10.7.1) (2025-09-09)
 
 ### Bug Fixes
