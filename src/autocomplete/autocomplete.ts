@@ -58,21 +58,16 @@ const middleware = [
 
 const shouldShowDropdown = <I>({
 	active,
-	loading,
-	items,
-	text,
 	isSingle,
 	showSingle,
-}: Pick<AProps<I>, 'active' | 'loading' | 'items' | 'text' | 'showSingle'> & {
+}: Pick<AProps<I>, 'active' | 'showSingle'> & {
 	isSingle: boolean;
 }) => {
 	if (!active) return false;
 
-	const hasResultsOrQuery =
-		loading || items.length > 0 || (text != null && text.length > 0);
 	const disallowedSingle = isSingle && !showSingle;
 
-	return hasResultsOrQuery && !disallowedSingle;
+	return !disallowedSingle;
 };
 
 const autocomplete = <I>(props: AProps<I>) => {
@@ -128,6 +123,9 @@ const autocomplete = <I>(props: AProps<I>) => {
 			[],
 		);
 
+		const hasResultsOrQuery =
+			loading || items.length > 0 || (text != null && text.length > 0);
+
 		return html`<cosmoz-input
 				id="input"
 				part="input"
@@ -175,9 +173,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 			${when(
 				shouldShowDropdown({
 					active,
-					loading,
-					items,
-					text,
 					isSingle,
 					showSingle,
 				}),
@@ -188,7 +183,12 @@ const autocomplete = <I>(props: AProps<I>) => {
 							items,
 							multi: !isOne,
 							setFloating,
-							styles,
+							styles: {
+								...styles,
+								// WORKAROUND: hide the listbox if there are no results, don't remove it from DOM
+								// TODO: revert https://github.com/Neovici/cosmoz-autocomplete/pull/206 after https://github.com/pionjs/pion/issues/64 is fixed
+								display: hasResultsOrQuery ? undefined : 'none',
+							},
 						},
 						when(
 							loading,
