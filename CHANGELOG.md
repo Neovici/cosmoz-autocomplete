@@ -1,3 +1,9 @@
+## [10.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.2...v10.8.0) (2025-10-24)
+
+### Features
+
+* useProperty value ([17ea59e](https://github.com/neovici/cosmoz-autocomplete/commit/17ea59e3b44c7bddd6a38cab5f1ff51a57df9d28))
+
 ## [10.7.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.1...v10.7.2) (2025-09-16)
 
 ### Bug Fixes
