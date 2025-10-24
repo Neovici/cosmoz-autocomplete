@@ -14,7 +14,7 @@ type Source<I> = (opts: {
 }) => PromiseLike<I[]>;
 
 interface Base<I> {
-	value: I | I[];
+	value?: I | I[];
 	limit?: number;
 	min?: number;
 
