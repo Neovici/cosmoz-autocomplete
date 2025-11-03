@@ -1,10 +1,16 @@
 import { css } from '@pionjs/pion';
 import { when } from 'lit-html/directives/when.js';
 
-const svg =
+const checkSVG =
 	/* eslint-disable quotes */
 	"data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath " +
 	"d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+/* eslint-enable quotes */
+
+const clearSVG =
+	/* eslint-disable quotes */
+	"data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath " +
+	"d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E";
 /* eslint-enable quotes */
 
 const style = css`
@@ -12,7 +18,10 @@ const style = css`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255, 255, 255, 0.75));
+		background: var(
+			--cosmoz-autocomplete-listbox-bg,
+			rgba(255, 255, 255, 0.75)
+		);
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -83,6 +92,7 @@ const style = css`
 	:host([multi]) .item {
 		padding-left: 0;
 	}
+
 	:host([multi]) .item::before {
 		content: '';
 		font-size: 0;
@@ -93,14 +103,27 @@ const style = css`
 		border-radius: 4px;
 		vertical-align: top;
 	}
+
 	:host([multi]) .item[aria-selected]::before {
 		border-color: #5881f6;
 		/* prettier-ignore */
-		background: url("${svg}") #5881f6 no-repeat 50%;
+		background: url("${checkSVG}") #5881f6 no-repeat 50%;
 	}
+
+	:host([multi]) .item[data-state='excluded']::before {
+		border-color: #f44336;
+		/* prettier-ignore */
+		background: url("${clearSVG}") #f44336 no-repeat 50%;
+	}
+
+	// :host([multi]) .item[data-state='excluded']:hover {
+	// 	background-color: rgba(244, 67, 54, 0.1);
+	// }
+
 	:host([multi]) .sizer {
 		padding-left: 33px;
 	}
+
 	.swatch {
 		width: 18px;
 		height: 18px;
@@ -109,6 +132,7 @@ const style = css`
 		vertical-align: middle;
 		border-radius: 50%;
 	}
+
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
@@ -139,6 +163,13 @@ export const styles = ({
 		background: var(
 			--cosmoz-listbox-active-color,
 			var(--cosmoz-selection-color, rgba(58, 145, 226, 0.1))
+		);
+	}
+
+	.item[data-index='${index || '0'}'][data-state='excluded'] {
+		background: var(
+			--cosmoz-listbox-active-color,
+			var(--cosmoz-selection-color, rgba(244, 67, 54, 0.1))
 		);
 	}
 `;
