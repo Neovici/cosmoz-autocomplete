@@ -116,10 +116,6 @@ const style = css`
 		background: url("${clearSVG}") #f44336 no-repeat 50%;
 	}
 
-	// :host([multi]) .item[data-state='excluded']:hover {
-	// 	background-color: rgba(244, 67, 54, 0.1);
-	// }
-
 	:host([multi]) .sizer {
 		padding-left: 33px;
 	}

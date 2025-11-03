@@ -3,8 +3,6 @@ import { component, html, lift, StateUpdater, useProperty } from '@pionjs/pion';
 import '../autocomplete';
 import { observedAttributes, Props } from '../autocomplete/autocomplete';
 import { ItemRendererOpts } from '../listbox/item-renderer';
-import { checkIcon, clearIcon } from '@neovici/cosmoz-icons';
-import { nothing } from 'lit-html';
 
 interface WrappedItem<I> {
 	item: I;
