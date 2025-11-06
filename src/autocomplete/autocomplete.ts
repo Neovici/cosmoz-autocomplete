@@ -19,6 +19,7 @@ import {
 	size,
 } from '@neovici/cosmoz-dropdown/use-floating';
 import { useEffect } from '@pionjs/pion';
+import { chip } from './chip';
 
 export interface Props<I> extends Base<I> {
 	invalid?: boolean;
@@ -34,6 +35,8 @@ export interface Props<I> extends Base<I> {
 	defaultIndex?: number;
 	externalSearch?: boolean;
 	placement?: Placement;
+	chipRenderer?: typeof chip;
+	chipItem?: unknown;
 }
 
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
@@ -94,6 +97,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				source$,
 				placement,
 				loading,
+				chipRenderer,
+				chipItem,
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
@@ -167,6 +172,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 					onDeselect,
 					textual,
 					disabled,
+					chipRenderer,
+					chipItem,
 				})}
 			</cosmoz-input>
 

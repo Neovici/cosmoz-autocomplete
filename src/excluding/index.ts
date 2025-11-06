@@ -1,8 +1,11 @@
 import { invoke } from '@neovici/cosmoz-utils/function';
 import { component, html, lift, StateUpdater, useProperty } from '@pionjs/pion';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import '../autocomplete';
 import { observedAttributes, Props } from '../autocomplete/autocomplete';
+import { ChipProps } from '../autocomplete/chip';
 import { ItemRendererOpts } from '../listbox/item-renderer';
+import { nothing } from 'lit-html';
 
 interface WrappedItem<I> {
 	item: I;
@@ -39,7 +42,8 @@ const useExcludingSelection = <I>(property: string) => {
 
 const AutocompleteExcluding = <I>(props: Props<I>) => {
 	const [value, setValue] = useExcludingSelection<I>('value');
-
+	const isItemExcluded = (item: unknown) =>
+		value?.some((v) => v.item === item && v.excluded);
 	return html`<cosmoz-autocomplete
 		.label=${props.label}
 		.source=${props.source}
@@ -70,9 +74,6 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 			{ highlight, select, textual, isSelected }: ItemRendererOpts<I>,
 		) => {
 			const rendered = textual(item);
-			// const isItemSelected = value?.some((v) => v.item === item && !v.excluded);
-
-			const isItemExcluded = value?.some((v) => v.item === item && v.excluded);
 
 			return html`<div
 					class="item"
@@ -80,7 +81,7 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 					part="option"
 					?aria-selected=${isSelected(item)}
 					data-index=${i}
-					data-state=${isItemExcluded ? 'excluded' : undefined}
+					data-state=${isItemExcluded(item) ? 'excluded' : nothing}
 					@mouseenter=${() => highlight(i)}
 					@click=${() => select(item)}
 					@mousedown=${(e: Event) => e.preventDefault()}
@@ -89,10 +90,33 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 				</div>
 				<div class="sizer" virtualizer-sizer>${rendered}</div>`;
 		}}
+		.chipRenderer=${({
+			content,
+			disabled,
+			hidden,
+			className,
+			slot,
+			chipItem,
+		}: ChipProps) =>
+			html`<cosmoz-autocomplete-chip
+				class=${ifDefined(className)}
+				slot=${ifDefined(slot)}
+				part="chip"
+				exportparts="chip-text, chip-clear"
+				data-state=${isItemExcluded(chipItem) ? 'excluded' : 'included'}
+				?disabled=${disabled}
+				?hidden=${hidden}
+				title=${ifDefined(typeof content === 'string' ? content : undefined)}
+				.chipItem=${chipItem}
+			>
+				${content}
+			</cosmoz-autocomplete-chip>`}
 	></cosmoz-autocomplete>`;
 };
 
 customElements.define(
 	'cosmoz-autocomplete-excluding',
-	component(AutocompleteExcluding, { observedAttributes }),
+	component(AutocompleteExcluding, {
+		observedAttributes,
+	}),
 );

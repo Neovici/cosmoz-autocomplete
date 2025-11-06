@@ -11,6 +11,8 @@ interface Props<I> {
 	onDeselect: Deselect<I>;
 	textual: (i: I) => string;
 	disabled?: boolean;
+	chipRenderer?: typeof chip;
+	chipItem: unknown;
 }
 
 export const selection = <I>({
@@ -19,16 +21,18 @@ export const selection = <I>({
 	onDeselect,
 	textual,
 	disabled,
+	chipRenderer = chip,
 }: Props<I>) => [
 	...values.filter(Boolean).map((value) =>
-		chip({
+		chipRenderer({
 			content: textual(value),
 			onClear: values.length > min && (() => onDeselect(value)),
 			disabled,
 			slot: 'control',
+			chipItem: value,
 		}),
 	),
-	chip({
+	chipRenderer({
 		content: html`<span></span>`,
 		className: 'badge',
 		disabled: true,
