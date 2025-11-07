@@ -1,25 +1,26 @@
-import '@neovici/cosmoz-input';
-import './skeleton-span';
-import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
-import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
-import { html } from 'lit-html';
-import { live } from 'lit-html/directives/live.js';
-import { until } from 'lit-html/directives/until.js';
-import { when } from 'lit-html/directives/when.js';
-import { listbox } from '../listbox';
-import { selection } from './selection';
-import style from './styles.css';
-import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
-import { useOverflow } from './use-overflow';
-import { ref } from 'lit-html/directives/ref.js';
 import {
-	useFloating,
 	Placement,
 	defaultMiddleware,
 	size,
+	useFloating,
 } from '@neovici/cosmoz-dropdown/use-floating';
+import '@neovici/cosmoz-input';
+import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
+import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
 import { useEffect } from '@pionjs/pion';
+import { html } from 'lit-html';
+import { live } from 'lit-html/directives/live.js';
+import { ref } from 'lit-html/directives/ref.js';
+import { until } from 'lit-html/directives/until.js';
+import { when } from 'lit-html/directives/when.js';
+import { listbox } from '../listbox';
+import { ItemRenderer } from '../listbox/item-renderer';
 import { chip } from './chip';
+import { selection } from './selection';
+import './skeleton-span';
+import style from './styles.css';
+import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
+import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	invalid?: boolean;
@@ -35,6 +36,7 @@ export interface Props<I> extends Base<I> {
 	defaultIndex?: number;
 	externalSearch?: boolean;
 	placement?: Placement;
+	itemRenderer?: ItemRenderer<I>;
 	chipRenderer?: typeof chip;
 	chipItem?: unknown;
 }

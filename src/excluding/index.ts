@@ -1,12 +1,23 @@
 import { invoke } from '@neovici/cosmoz-utils/function';
-import { component, html, lift, StateUpdater, useProperty } from '@pionjs/pion';
+import {
+	component,
+	html,
+	StateUpdater,
+	useCallback,
+	useProperty,
+} from '@pionjs/pion';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
 import '../autocomplete';
-import { observedAttributes, Props } from '../autocomplete/autocomplete';
+import {
+	Autocomplete,
+	observedAttributes,
+	Props,
+	style,
+} from '../autocomplete/autocomplete';
 import { ChipProps } from '../autocomplete/chip';
 import { ItemRendererOpts } from '../listbox/item-renderer';
 import { nothing } from 'lit-html';
-
+import { sheet } from '@neovici/cosmoz-utils';
 interface WrappedItem<I> {
 	item: I;
 	excluded: boolean;
@@ -40,35 +51,32 @@ const useExcludingSelection = <I>(property: string) => {
 	return [value, setExcludingValue] as const;
 };
 
-const AutocompleteExcluding = <I>(props: Props<I>) => {
+const Standalone = <I>(host: HTMLElement & Props<I>) => {
+	const { onChange, onText, ...props } = host;
+
 	const [value, setValue] = useExcludingSelection<I>('value');
+
 	const isItemExcluded = (item: unknown) =>
 		value?.some((v) => v.item === item && v.excluded);
-	return html`<cosmoz-autocomplete
-		.label=${props.label}
-		.source=${props.source}
-		.textProperty=${props.textProperty}
-		.valueProperty=${props.valueProperty}
-		.keepOpened=${props.keepOpened}
-		.showSingle=${props.showSingle}
-		.preserveOrder=${props.preserveOrder}
-		.keepQuery=${props.keepQuery}
-		.limit=${props.limit}
-		.min=${props.min}
-		.errorMessage=${props.errorMessage}
-		.itemHeight=${props.itemHeight}
-		.itemLimit=${props.itemLimit}
-		.defaultIndex=${props.defaultIndex}
-		.placement=${props.placement}
-		?disabled=${props.disabled}
-		?invalid=${props.invalid}
-		?no-label-float=${props.noLabelFloat}
-		?always-float-label=${props.alwaysFloatLabel}
-		?external-search=${props.externalSearch}
-		?wrap=${props.wrap}
-		.value=${value?.map(unwrap)}
-		@value-changed=${lift(setValue)}
-		.itemRenderer=${(
+
+	return Autocomplete({
+		...props,
+		value: value?.map(unwrap),
+		onChange: useCallback(
+			(value: I[], ...args) => {
+				setValue(value);
+				onChange?.(value, ...args);
+			},
+			[onChange],
+		),
+		onText: useCallback(
+			(text: string) => {
+				host.text = text;
+				onText?.(text);
+			},
+			[onText],
+		),
+		itemRenderer: (
 			item: I,
 			i: number,
 			{ highlight, select, textual, isSelected }: ItemRendererOpts<I>,
@@ -89,8 +97,8 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 					${rendered}
 				</div>
 				<div class="sizer" virtualizer-sizer>${rendered}</div>`;
-		}}
-		.chipRenderer=${({
+		},
+		chipRenderer: ({
 			content,
 			disabled,
 			hidden,
@@ -110,13 +118,15 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 				.chipItem=${chipItem}
 			>
 				${content}
-			</cosmoz-autocomplete-chip>`}
-	></cosmoz-autocomplete>`;
+			</cosmoz-autocomplete-chip>`,
+	});
 };
+const styleSheets = [sheet(style)];
 
 customElements.define(
 	'cosmoz-autocomplete-excluding',
-	component(AutocompleteExcluding, {
+	component(Standalone, {
 		observedAttributes,
+		styleSheets,
 	}),
 );
