@@ -15,8 +15,7 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
-import { chip } from './chip';
-import { selection } from './selection';
+import { ChipRenderer, selection } from './selection';
 import './skeleton-span';
 import style from './styles.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
@@ -37,8 +36,7 @@ export interface Props<I> extends Base<I> {
 	externalSearch?: boolean;
 	placement?: Placement;
 	itemRenderer?: ItemRenderer<I>;
-	chipRenderer?: typeof chip;
-	chipItem?: unknown;
+	chipRenderer?: ChipRenderer<I>;
 }
 
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
@@ -100,7 +98,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 				placement,
 				loading,
 				chipRenderer,
-				chipItem,
 			} = props,
 			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
@@ -175,7 +172,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 					textual,
 					disabled,
 					chipRenderer,
-					chipItem,
 				})}
 			</cosmoz-input>
 

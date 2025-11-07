@@ -57,22 +57,21 @@ customElements.define(
 	}),
 );
 
-export interface ChipProps extends Props {
+export interface ChipProps<I> extends Props {
+	item: I | null;
 	slot?: string;
 	className?: string;
 	content: unknown;
 	hidden?: boolean;
-	chipItem?: unknown;
 }
-export const chip = ({
+export const chip = <I>({
 	content,
 	onClear,
 	disabled,
 	hidden,
 	className = 'chip',
 	slot,
-	chipItem,
-}: ChipProps) =>
+}: ChipProps<I>) =>
 	html`<cosmoz-autocomplete-chip
 		class=${ifDefined(className)}
 		slot=${ifDefined(slot)}
@@ -82,6 +81,5 @@ export const chip = ({
 		?hidden=${hidden}
 		.onClear=${onClear}
 		title=${ifDefined(typeof content === 'string' ? content : undefined)}
-		.chipItem=${chipItem}
 		>${content}</cosmoz-autocomplete-chip
 	>`;
