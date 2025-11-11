@@ -43,12 +43,15 @@ const Autocomplete = ({
 }) => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
+		'--cosmoz-autocomplete-excluded-chip-bg-color': 'rgb(255, 152, 0)',
+		'--cosmoz-listbox-excluded-active-color': 'rgba(255, 152, 0, 0.1)',
 	};
 
 	const sourceDelayed = delay(source, responseTime);
 
 	return html`
 		${CSS}
+
 		<cosmoz-autocomplete-excluding
 			class=${when(contour, () => 'contour')}
 			.label=${label}

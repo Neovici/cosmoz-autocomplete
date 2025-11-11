@@ -17,11 +17,7 @@ export default css`
 	}
 
 	:host([data-state='excluded']) {
-		--cosmoz-autocomplete-chip-bg-color: #f44336;
-
-		&::part(content) {
-			color: #fff;
-		}
+		background: var(--cosmoz-autocomplete-excluded-chip-bg-color, #f44336);
 	}
 
 	.content {
@@ -41,6 +37,11 @@ export default css`
 		min-width: 16px;
 		text-align: center;
 	}
+
+	:host([data-state='excluded']) .content {
+		color: var(--cosmoze-autocomplete-excluded-chip-text-color, #fff);
+	}
+
 	.clear {
 		background-color: var(--cosmoz-autocomplete-chip-clear-bg-color, #81899b);
 		border-radius: 50%;
@@ -55,6 +56,18 @@ export default css`
 		display: var(--cosmoz-autocomplete-chip-clear-display, block);
 		flex: none;
 	}
+
+	:host([data-state='excluded']) .clear {
+		background-color: var(
+			--cosmoz-autocomplete-excluded-chip-clear-bg-color,
+			#fff
+		);
+		stroke: var(
+			--cosmoz-autocomplete-excluded-chip-bg-color,
+			var(--cosmoz-autocomplete-excluded-chip-icon-bg-color, #81899b)
+		);
+	}
+
 	.clear:hover {
 		filter: brightness(90%);
 	}

@@ -111,9 +111,12 @@ const style = css`
 	}
 
 	:host([multi]) .item[data-state='excluded']::before {
-		border-color: #f44336;
+		border-color: var(
+			--cosmoz-autocomplete-excluded-chip-bg-color,
+			rgb(244, 64, 52)
+		);
 		/* prettier-ignore */
-		background: url("${clearSVG}") #f44336 no-repeat 50%;
+		background: url("${clearSVG}") var(--cosmoz-autocomplete-excluded-chip-bg-color, rgb(244, 64, 52)) no-repeat 50%;
 	}
 
 	:host([multi]) .sizer {
@@ -164,8 +167,8 @@ export const styles = ({
 
 	.item[data-index='${index || '0'}'][data-state='excluded'] {
 		background: var(
-			--cosmoz-listbox-active-color,
-			var(--cosmoz-selection-color, rgba(244, 67, 54, 0.1))
+			--cosmoz-listbox-excluded-active-color,
+			rgba(244, 67, 54, 0.1)
 		);
 	}
 `;
