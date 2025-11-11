@@ -1,4 +1,4 @@
-import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as ht,M as jt,_ as zn}from"./iframe-C51lQJzq.js";/**
+import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as ht,M as jt,_ as zn}from"./iframe-BRm-BSgf.js";/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -427,9 +427,12 @@ import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as
 	}
 
 	:host([multi]) .item[data-state='excluded']::before {
-		border-color: #f44336;
+		border-color: var(
+			--cosmoz-autocomplete-excluded-chip-bg-color,
+			rgb(244, 64, 52)
+		);
 		/* prettier-ignore */
-		background: url("${hs}") #f44336 no-repeat 50%;
+		background: url("${hs}") var(--cosmoz-autocomplete-excluded-chip-bg-color, rgb(244, 64, 52)) no-repeat 50%;
 	}
 
 	:host([multi]) .sizer {
@@ -465,8 +468,8 @@ import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as
 
 	.item[data-index='${e||"0"}'][data-state='excluded'] {
 		background: var(
-			--cosmoz-listbox-active-color,
-			var(--cosmoz-selection-color, rgba(244, 67, 54, 0.1))
+			--cosmoz-listbox-excluded-active-color,
+			rgba(244, 67, 54, 0.1)
 		);
 	}
 `,ps=e=>typeof e=="object"&&e!==null&&Symbol.iterator in e;function ot(e){return e==null?[]:Array.isArray(e)?e:typeof e=="string"?[e]:ps(e)?Array.from(e):[e]}const qt=(e,t=Lt)=>n=>{const i=ot(e).map(t);return ot(n).filter(s=>!i.includes(t(s)))},ms=(e,t)=>t?n=>ot(e).find(i=>i[t]===n[t]):n=>ot(e).includes(n),gs=(e,t)=>{if(!t||!e)return e;const n=e.toLowerCase().indexOf(t.toLowerCase());if(n<0)return e;const i=n+t.length;return[e.slice(0,n),E`<mark>${e.slice(n,i)}</mark>`,e.slice(i)]},_t=e=>{const t=R(()=>({}),[]);return R(()=>Object.assign(t,e),[t,...Object.values(e)])},bs=e=>{const t=_t(e);S(()=>{const n=i=>{if(!(i.ctrlKey&&i.altKey||i.defaultPrevented))switch(i.key){case"Up":case"ArrowUp":i.preventDefault(),t.onUp();break;case"Down":case"ArrowDown":i.preventDefault(),t.onDown();break;case"Enter":i.preventDefault(),t.onEnter();break}};return document.addEventListener("keydown",n,!0),()=>document.removeEventListener("keydown",n,!0)},[t])},vs=({items:e,onSelect:t,defaultIndex:n=0})=>{const[i,s]=Q({index:n}),{index:o}=i,{length:r}=e;return S(()=>{s({index:i.index<0?n:Math.min(i.index,e.length-1),scroll:!0})},[e,n]),bs({onUp:x(()=>s(l=>({index:l.index>0?l.index-1:r-1,scroll:!0})),[r]),onDown:x(()=>s(l=>({index:l.index<r-1?l.index+1:0,scroll:!0})),[r]),onEnter:x(()=>o>-1&&o<r&&t?.(e[o],o),[o,e,t])}),{position:i,highlight:x(l=>s({index:l}),[]),select:x(l=>t?.(l),[t])}},_s=(e=Lt)=>(t,n,{highlight:i,select:s,textual:o=Lt,query:r,isSelected:l})=>{const a=o(t),c=gs(a,r),h=e(c,t,n);return E`<div
@@ -516,11 +519,7 @@ import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as
 	}
 
 	:host([data-state='excluded']) {
-		--cosmoz-autocomplete-chip-bg-color: #f44336;
-
-		&::part(content) {
-			color: #fff;
-		}
+		background: var(--cosmoz-autocomplete-excluded-chip-bg-color, #f44336);
 	}
 
 	.content {
@@ -540,6 +539,11 @@ import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as
 		min-width: 16px;
 		text-align: center;
 	}
+
+	:host([data-state='excluded']) .content {
+		color: var(--cosmoze-autocomplete-excluded-chip-text-color, #fff);
+	}
+
 	.clear {
 		background-color: var(--cosmoz-autocomplete-chip-clear-bg-color, #81899b);
 		border-radius: 50%;
@@ -554,6 +558,18 @@ import{T as D,f as Ie,B as Cn,E as pt,m as Fe,x as E,i as En,p as Sn,v as J,r as
 		display: var(--cosmoz-autocomplete-chip-clear-display, block);
 		flex: none;
 	}
+
+	:host([data-state='excluded']) .clear {
+		background-color: var(
+			--cosmoz-autocomplete-excluded-chip-clear-bg-color,
+			#fff
+		);
+		stroke: var(
+			--cosmoz-autocomplete-excluded-chip-bg-color,
+			var(--cosmoz-autocomplete-excluded-chip-icon-bg-color, #81899b)
+		);
+	}
+
 	.clear:hover {
 		filter: brightness(90%);
 	}
