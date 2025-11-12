@@ -51,6 +51,18 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 		vl.element(position.index)?.scrollIntoView({ block: 'nearest' });
 	}, [position]);
 
+	useEffect(() => {
+		const handleEscape = (e: KeyboardEvent) => {
+			if (e.key === 'Escape' && !e.defaultPrevented) {
+				e.preventDefault();
+				host.hidePopover?.();
+			}
+		};
+
+		document.addEventListener('keydown', handleEscape, true);
+		return () => document.removeEventListener('keydown', handleEscape, true);
+	}, []);
+
 	useStyleSheet(
 		styles({ ...position, itemHeight, auto: host.itemHeight === 'auto' }),
 	);
