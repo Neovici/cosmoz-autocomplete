@@ -1,7 +1,7 @@
 import { css } from '@pionjs/pion';
 import { when } from 'lit-html/directives/when.js';
 
-const svg =
+const checkSVG =
 	/* eslint-disable quotes */
 	"data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath " +
 	"d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
@@ -12,7 +12,10 @@ const style = css`
 		position: fixed;
 		z-index: 1000;
 		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(--cosmoz-autocomplete-listbox-bg, rgba(255, 255, 255, 0.75));
+		background: var(
+			--cosmoz-autocomplete-listbox-bg,
+			rgba(255, 255, 255, 0.75)
+		);
 		min-width: 50px;
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -83,6 +86,7 @@ const style = css`
 	:host([multi]) .item {
 		padding-left: 0;
 	}
+
 	:host([multi]) .item::before {
 		content: '';
 		font-size: 0;
@@ -93,14 +97,17 @@ const style = css`
 		border-radius: 4px;
 		vertical-align: top;
 	}
+
 	:host([multi]) .item[aria-selected]::before {
 		border-color: #5881f6;
 		/* prettier-ignore */
-		background: url("${svg}") #5881f6 no-repeat 50%;
+		background: url("${checkSVG}") #5881f6 no-repeat 50%;
 	}
+
 	:host([multi]) .sizer {
 		padding-left: 33px;
 	}
+
 	.swatch {
 		width: 18px;
 		height: 18px;
@@ -109,6 +116,7 @@ const style = css`
 		vertical-align: middle;
 		border-radius: 50%;
 	}
+
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
