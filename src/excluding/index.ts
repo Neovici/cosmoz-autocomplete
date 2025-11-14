@@ -13,6 +13,7 @@ import { ItemRendererOpts } from '../listbox/item-renderer';
 import { WrappedItem } from './types';
 import { useExcludingSelection } from './use-excluding-selection';
 import { unwrap } from './utils';
+import excludingStyle from './style.css';
 
 const isItemExcluded = <I>(value: WrappedItem<I>[] | undefined, item: I) =>
 	value?.some((v) => v.item === item && v.excluded);
@@ -34,10 +35,9 @@ const mkItemRenderer =
 		return html`<div
 				class="item"
 				role="option"
-				part="option"
+				part="option ${excludedState(value, item)}"
 				?aria-selected=${isSelected(item)}
 				data-index=${i}
-				data-state=${excludedState(value, item)}
 				@mouseenter=${() => highlight(i)}
 				@click=${() => select(item)}
 				@mousedown=${(e: Event) => e.preventDefault()}
@@ -49,7 +49,14 @@ const mkItemRenderer =
 
 const mkChipRenderer =
 	<I>(value: WrappedItem<I>[] | undefined, onClear: (item: I | null) => void) =>
-	({ item, content, disabled, hidden, className, slot }: ChipProps<I>) =>
+	({
+		item,
+		content,
+		disabled,
+		hidden,
+		className = 'chip',
+		slot,
+	}: ChipProps<I>) =>
 		html`<cosmoz-autocomplete-chip
 			class=${ifDefined(className)}
 			slot=${ifDefined(slot)}
@@ -93,6 +100,6 @@ customElements.define(
 	'cosmoz-autocomplete-excluding',
 	component(AutocompleteExcluding, {
 		observedAttributes,
-		styleSheets: [style],
+		styleSheets: [style, excludingStyle],
 	}),
 );

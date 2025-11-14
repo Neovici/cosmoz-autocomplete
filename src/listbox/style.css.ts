@@ -7,12 +7,6 @@ const checkSVG =
 	"d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 /* eslint-enable quotes */
 
-const clearSVG =
-	/* eslint-disable quotes */
-	"data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath " +
-	"d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E";
-/* eslint-enable quotes */
-
 const style = css`
 	:host {
 		position: fixed;
@@ -110,15 +104,6 @@ const style = css`
 		background: url("${checkSVG}") #5881f6 no-repeat 50%;
 	}
 
-	:host([multi]) .item[data-state='excluded']::before {
-		border-color: var(
-			--cosmoz-autocomplete-excluded-chip-bg-color,
-			rgb(244, 64, 52)
-		);
-		/* prettier-ignore */
-		background: url("${clearSVG}") var(--cosmoz-autocomplete-excluded-chip-bg-color, rgb(244, 64, 52)) no-repeat 50%;
-	}
-
 	:host([multi]) .sizer {
 		padding-left: 33px;
 	}
@@ -162,13 +147,6 @@ export const styles = ({
 		background: var(
 			--cosmoz-listbox-active-color,
 			var(--cosmoz-selection-color, rgba(58, 145, 226, 0.1))
-		);
-	}
-
-	.item[data-index='${index || '0'}'][data-state='excluded'] {
-		background: var(
-			--cosmoz-listbox-excluded-active-color,
-			rgba(244, 67, 54, 0.1)
 		);
 	}
 `;

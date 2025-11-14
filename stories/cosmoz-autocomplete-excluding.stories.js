@@ -40,11 +40,21 @@ const Autocomplete = ({
 	overflowed = false,
 	responseTime,
 	contour,
+	excludedChipBgColor = '#8b5cf6',
+	excludedChipColor = '#ffffff',
+	excludedChipClearBgColor = '#6d28d9',
+	excludedChipIconBgColor = '#7c3aed',
+	excludedListboxActiveColor = 'rgba(139, 92, 246, 0.1)',
 }) => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
-		'--cosmoz-autocomplete-excluded-chip-bg-color': 'rgb(255, 152, 0)',
-		'--cosmoz-listbox-excluded-active-color': 'rgba(255, 152, 0, 0.1)',
+		'--cosmoz-autocomplete-excluded-bg-color': excludedChipBgColor,
+		'--cosmoze-autocomplete-excluded-chip-color': excludedChipColor,
+		'--cosmoz-autocomplete-excluded-chip-clear-bg-color':
+			excludedChipClearBgColor,
+		'--cosmoz-autocomplete-excluded-chip-icon-bg-color':
+			excludedChipIconBgColor,
+		'--cosmoz-listbox-excluded-active-color': excludedListboxActiveColor,
 	};
 
 	const sourceDelayed = delay(source, responseTime);
@@ -115,6 +125,46 @@ export default {
 		responseTime: { control: 'number' },
 		uppercase: { control: 'boolean' },
 		contour: { control: 'boolean' },
+		excludedChipBgColor: {
+			control: 'color',
+			description: 'Background color for excluded chip/items',
+			table: {
+				category: 'Styling',
+				defaultValue: { summary: '#8b5cf6' },
+			},
+		},
+		excludedChipColor: {
+			control: 'color',
+			description: 'Text color for excluded chips',
+			table: {
+				category: 'Styling',
+				defaultValue: { summary: '#ffffff' },
+			},
+		},
+		excludedChipClearBgColor: {
+			control: 'color',
+			description: 'Background color for clear button on hover',
+			table: {
+				category: 'Styling',
+				defaultValue: { summary: '#6d28d9' },
+			},
+		},
+		excludedChipIconBgColor: {
+			control: 'color',
+			description: 'Background color for chip icons',
+			table: {
+				category: 'Styling',
+				defaultValue: { summary: '#7c3aed' },
+			},
+		},
+		excludedListboxActiveColor: {
+			control: 'color',
+			description: 'Background color for excluded items on hover/active',
+			table: {
+				category: 'Styling',
+				defaultValue: { summary: 'rgba(139, 92, 246, 0.1)' },
+			},
+		},
 	},
 	decorators: [
 		(story, { args }) =>
