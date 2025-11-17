@@ -125,9 +125,9 @@ export default {
 		responseTime: { control: 'number' },
 		uppercase: { control: 'boolean' },
 		contour: { control: 'boolean' },
-		excludedChipBgColor: {
+		excludedBgColor: {
 			control: 'color',
-			description: 'Background color for excluded chip/items',
+			description: 'Background color for excluded chip/listbox items',
 			table: {
 				category: 'Styling',
 				defaultValue: { summary: '#8b5cf6' },
@@ -145,7 +145,7 @@ export default {
 		},
 		excludedChipClearBgColor: {
 			control: 'color',
-			description: 'Background color for clear button on hover',
+			description: 'Background color for clear button',
 			table: {
 				category: 'Styling',
 				defaultValue: { summary: '#6d28d9' },
@@ -163,7 +163,8 @@ export default {
 		},
 		excludedListboxActiveColor: {
 			control: 'color',
-			description: 'Background color for excluded items on hover/active',
+			description:
+				'Background color for excluded listbox items on hover/active',
 			table: {
 				category: 'Styling',
 				defaultValue: { summary: 'rgba(139, 92, 246, 0.1)' },
