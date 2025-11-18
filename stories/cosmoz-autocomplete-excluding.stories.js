@@ -43,7 +43,7 @@ const Autocomplete = ({
 	excludedBgColor,
 	excludedChipColor,
 	excludedChipClearBgColor,
-	excludedChipIconBgColor,
+	excludedChipClearStrokeColor,
 	excludedListboxActiveColor,
 }) => {
 	const styles = {
@@ -52,8 +52,8 @@ const Autocomplete = ({
 		'--cosmoz-autocomplete-excluded-chip-color': excludedChipColor,
 		'--cosmoz-autocomplete-excluded-chip-clear-bg-color':
 			excludedChipClearBgColor,
-		'--cosmoz-autocomplete-excluded-chip-icon-bg-color':
-			excludedChipIconBgColor,
+		'--cosmoz-autocomplete-excluded-chip-clear-stroke':
+			excludedChipClearStrokeColor,
 		'--cosmoz-listbox-excluded-active-color': excludedListboxActiveColor,
 	};
 
@@ -130,7 +130,7 @@ export default {
 			description: 'Background color for excluded chip/listbox items',
 			table: {
 				category: 'Styling',
-				defaultValue: { summary: '#8b5cf6' },
+				defaultValue: { summary: 'rgb(244, 67, 54)' },
 			},
 			name: '--cosmoz-autocomplete-excluded-bg-color',
 		},
@@ -148,18 +148,18 @@ export default {
 			description: 'Background color for clear button',
 			table: {
 				category: 'Styling',
-				defaultValue: { summary: '#6d28d9' },
+				defaultValue: { summary: '#ffffff' },
 			},
 			name: '--cosmoz-autocomplete-excluded-chip-clear-bg-color',
 		},
-		excludedChipIconBgColor: {
+		excludedChipClearStrokeColor: {
 			control: 'color',
 			description: 'Background color for chip icons',
 			table: {
 				category: 'Styling',
-				defaultValue: { summary: '#7c3aed' },
+				defaultValue: { summary: 'rgb(244, 67, 54)' },
 			},
-			name: '--cosmoz-autocomplete-excluded-chip-icon-bg-color',
+			name: '--cosmoz-autocomplete-excluded-chip-clear-stroke',
 		},
 		excludedListboxActiveColor: {
 			control: 'color',
@@ -167,7 +167,7 @@ export default {
 				'Background color for excluded listbox items on hover/active',
 			table: {
 				category: 'Styling',
-				defaultValue: { summary: 'rgba(139, 92, 246, 0.1)' },
+				defaultValue: { summary: 'rgba(244, 67, 54, 0.1)' },
 			},
 			name: '--cosmoz-listbox-excluded-active-color',
 		},

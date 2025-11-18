@@ -21,8 +21,8 @@ const excludingStyle = css`
 			#fff
 		);
 		stroke: var(
-			--cosmoz-autocomplete-excluded-chip-icon-bg-color,
-			var(--cosmoz-autocomplete-excluded-bg-color, #81899b)
+			--cosmoz-autocomplete-excluded-chip-clear-stroke,
+			var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54))
 		);
 	}
 
