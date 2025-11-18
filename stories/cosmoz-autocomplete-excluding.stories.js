@@ -40,11 +40,11 @@ const Autocomplete = ({
 	overflowed = false,
 	responseTime,
 	contour,
-	excludedBgColor = '#8b5cf6',
-	excludedChipColor = '#ffffff',
-	excludedChipClearBgColor = '#6d28d9',
-	excludedChipIconBgColor = '#7c3aed',
-	excludedListboxActiveColor = 'rgba(139, 92, 246, 0.1)',
+	excludedBgColor,
+	excludedChipColor,
+	excludedChipClearBgColor,
+	excludedChipIconBgColor,
+	excludedListboxActiveColor,
 }) => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
