@@ -29,5 +29,5 @@ export const useExcludingSelection = <I>(property: string) => {
 		[],
 	);
 
-	return [value, setExcludingValue, setValue] as const;
+	return {value, setExcludingValue, setValue} as const;
 };

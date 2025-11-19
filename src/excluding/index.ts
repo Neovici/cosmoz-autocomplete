@@ -1,4 +1,10 @@
-import { component, html, useCallback, useProperty } from '@pionjs/pion';
+import {
+	component,
+	html,
+	useCallback,
+	useMemo,
+	useProperty,
+} from '@pionjs/pion';
 import { nothing } from 'lit-html';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
 import '../autocomplete';
@@ -72,27 +78,31 @@ const mkChipRenderer =
 		</cosmoz-autocomplete-chip>`;
 
 const AutocompleteExcluding = <I>(props: Props<I>) => {
-	const [value, setValue, setValueOriginal] = useExcludingSelection<I>('value');
+	const { value, setValue, setExcludingValue } =
+		useExcludingSelection<I>('value');
 	const [text, setText] = useProperty<string>('text');
 
 	const onClear = useCallback(
 		(item: I | null) =>
-			setValueOriginal((values) => values?.filter((i) => i.item !== item)),
+			setValue((values) => values?.filter((i) => i.item !== item)),
 		[],
 	);
 
 	return Autocomplete({
 		...props,
-		value: value?.map(unwrap),
+		value: useMemo(() => value?.map(unwrap), [value]),
 		onChange: useCallback((value: I[]) => {
-			setValue(value);
+			setExcludingValue(value);
 		}, []),
 		text,
 		onText: useCallback((text: string) => {
 			setText(text);
 		}, []),
-		itemRenderer: mkItemRenderer(value),
-		chipRenderer: mkChipRenderer(value, onClear),
+		itemRenderer: useMemo(() => mkItemRenderer(value), [value]),
+		chipRenderer: useMemo(
+			() => mkChipRenderer(value, onClear),
+			[value, onClear],
+		),
 	});
 };
 
