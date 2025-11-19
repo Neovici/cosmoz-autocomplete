@@ -198,7 +198,7 @@ export const Basic = {
 		source: colors,
 		textProperty: 'text',
 		value: [
-			{ item: colors[0], excluded: false },
+			{ item: colors[0], excluded: true },
 			{ item: colors[3], excluded: false },
 		],
 		keepOpened: true,
