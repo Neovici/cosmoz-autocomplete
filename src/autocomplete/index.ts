@@ -9,9 +9,7 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 	useEffect(() => {
 		if (host.onChange == null) return;
 		// eslint-disable-next-line no-console
-		console.warn(
-			'onChange is deprecated; use value-changed and lift instead',
-		);
+		console.warn('onChange is deprecated; use value-changed and lift instead');
 	}, []);
 
 	return Autocomplete({

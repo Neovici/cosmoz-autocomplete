@@ -1,8 +1,10 @@
 import { html } from 'lit-html';
-import { chip } from './chip';
+import { chip as defaultChipRenderer } from './chip';
 import type { RProps } from './use-autocomplete';
 
 type Deselect<I> = RProps<I>['onDeselect'];
+
+export type ChipRenderer<I> = typeof defaultChipRenderer<I>;
 
 interface Props<I> {
 	value: I[];
@@ -11,6 +13,7 @@ interface Props<I> {
 	onDeselect: Deselect<I>;
 	textual: (i: I) => string;
 	disabled?: boolean;
+	chipRenderer?: ChipRenderer<I>;
 }
 
 export const selection = <I>({
@@ -19,16 +22,19 @@ export const selection = <I>({
 	onDeselect,
 	textual,
 	disabled,
+	chipRenderer = defaultChipRenderer,
 }: Props<I>) => [
 	...values.filter(Boolean).map((value) =>
-		chip({
+		chipRenderer({
+			item: value,
 			content: textual(value),
 			onClear: values.length > min && (() => onDeselect(value)),
 			disabled,
 			slot: 'control',
 		}),
 	),
-	chip({
+	chipRenderer({
+		item: null,
 		content: html`<span></span>`,
 		className: 'badge',
 		disabled: true,
