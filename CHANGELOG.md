@@ -1,3 +1,9 @@
+## [10.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.8.0...v10.9.0) (2025-11-20)
+
+### Features
+
+* cosmoz-autocomplete-excluding ([#210](https://github.com/neovici/cosmoz-autocomplete/issues/210)) ([de607f1](https://github.com/neovici/cosmoz-autocomplete/commit/de607f1226f149289b3f9e8be9181e0689c1b971)), closes [#209](https://github.com/neovici/cosmoz-autocomplete/issues/209)
+
 ## [10.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.2...v10.8.0) (2025-10-24)
 
 ### Features
