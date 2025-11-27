@@ -11,7 +11,7 @@ import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 export type Source<I> = (opts: {
 	query?: string;
 	active?: boolean;
-}) => PromiseLike<I[]>;
+}) => PromiseLike<I[]> | undefined;
 
 interface Base<I> {
 	value?: I | I[];
