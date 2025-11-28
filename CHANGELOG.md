@@ -1,3 +1,9 @@
+## [10.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.9.0...v10.10.0) (2025-11-28)
+
+### Features
+
+* export Source ([#212](https://github.com/neovici/cosmoz-autocomplete/issues/212)) ([578de55](https://github.com/neovici/cosmoz-autocomplete/commit/578de55efe73305486470da7019be4479135c99d))
+
 ## [10.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.8.0...v10.9.0) (2025-11-20)
 
 ### Features
