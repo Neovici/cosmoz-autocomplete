@@ -38,7 +38,7 @@ export const search = <I>(
 	return matches.sort((a, b) => a.index - b.index).map(({ item }) => item);
 };
 
-export const normalize = <I>(source: I[] | false | null) => {
+export const normalize = <I>(source: I[] | false | null | undefined) => {
 	if (source === false || source == null) return [];
 	return source;
 };

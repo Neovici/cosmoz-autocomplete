@@ -8,10 +8,10 @@ import { useKeys } from './use-keys';
 import { search, normalize, notify, useNotify, EMPTY } from './util';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 
-type Source<I> = (opts: {
+export type Source<I> = (opts: {
 	query?: string;
 	active?: boolean;
-}) => PromiseLike<I[]>;
+}) => PromiseLike<I[]> | undefined;
 
 interface Base<I> {
 	value?: I | I[];
@@ -188,7 +188,7 @@ export const useAutocomplete = <I>({
 			[meta],
 		),
 		// whenever there is a query, override defaultIndex to 0, so the first result gets selected
-		defaultIndex: (query !== undefined && query?.length > 0) ? 0 : defaultIndex,
+		defaultIndex: query !== undefined && query?.length > 0 ? 0 : defaultIndex,
 	};
 };
 
