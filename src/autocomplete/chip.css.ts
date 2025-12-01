@@ -31,7 +31,6 @@ export default css`
 		white-space: nowrap;
 		flex: auto;
 		min-width: 16px;
-		text-align: center;
 	}
 
 	.clear {
