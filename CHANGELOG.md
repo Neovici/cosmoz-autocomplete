@@ -1,3 +1,9 @@
+## [10.10.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.0...v10.10.1) (2025-12-01)
+
+### Bug Fixes
+
+* chip alignment ([#213](https://github.com/neovici/cosmoz-autocomplete/issues/213)) ([f3e166a](https://github.com/neovici/cosmoz-autocomplete/commit/f3e166afa9a7bd37f526f0ec281811d032cc81c3))
+
 ## [10.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.9.0...v10.10.0) (2025-11-28)
 
 ### Features
