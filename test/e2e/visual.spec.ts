@@ -21,7 +21,9 @@ test('basic render', async ({ page }) => {
 });
 
 test('basic excluding', async ({ page }) => {
-	await page.goto('iframe.html?id=autocomplete-excluding--basic&viewMode=story/');
+	await page.goto(
+		'iframe.html?id=autocomplete-excluding--basic&viewMode=story/',
+	);
 	await expect(page).toHaveScreenshot();
 
 	await page.click('cosmoz-autocomplete-excluding');
@@ -34,5 +36,16 @@ test('basic excluding', async ({ page }) => {
 	await expect(page).toHaveScreenshot();
 
 	await page.getByTitle('Red').locator('span').click();
+	await expect(page).toHaveScreenshot();
+});
+
+test('basic select', async ({ page }) => {
+	await page.goto('iframe.html?id=autocomplete--select&viewMode=story/');
+	await expect(page).toHaveScreenshot();
+
+	await page.getByText('Choose color').click();
+	await expect(page).toHaveScreenshot();
+
+	await page.getByRole('option', { name: 'Blue' }).click();
 	await expect(page).toHaveScreenshot();
 });
