@@ -1,3 +1,9 @@
+## [10.10.3](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.2...v10.10.3) (2026-01-19)
+
+### Bug Fixes
+
+* test npm publishing ([6bf18ea](https://github.com/neovici/cosmoz-autocomplete/commit/6bf18ea6f202d772ef3bb3dc7f05b0860631c71a))
+
 ## [10.10.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.1...v10.10.2) (2026-01-19)
 
 ### Bug Fixes
