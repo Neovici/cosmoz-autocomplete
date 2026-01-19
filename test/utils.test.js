@@ -1,5 +1,5 @@
-import { expect } from '@open-wc/testing';
 import { strProp } from '@neovici/cosmoz-utils/object';
+import { expect } from '@open-wc/testing';
 import { search } from '../src/autocomplete/util';
 import { mark } from '../src/listbox/util';
 
@@ -15,11 +15,13 @@ describe('utils', () => {
 			).to.deep.equal([{ text: 'bc' }, { text: 'abc' }]);
 		});
 	});
+
 	describe('mark', () => {
 		it('handles RegExp chars', () => {
 			expect(mark('asd', '[q')).to.equal('asd');
 			expect(mark('txt', '[=?')).to.equal('txt');
 		});
+
 		it('marks RegExp chars', () => {
 			const marked = mark('txt[qasd', '[q');
 			expect(marked).to.have.lengthOf(3);

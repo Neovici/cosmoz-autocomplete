@@ -1,5 +1,5 @@
+import { expect, fixture, html } from '@open-wc/testing';
 import { component } from '@pionjs/pion';
-import { expect, html, fixture } from '@open-wc/testing';
 import { spy } from 'sinon';
 import { useKeys } from '../src/autocomplete/use-keys';
 

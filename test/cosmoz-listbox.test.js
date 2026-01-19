@@ -1,7 +1,7 @@
-import { expect, html, fixture, nextFrame, oneEvent } from '@open-wc/testing';
 import { prop } from '@neovici/cosmoz-utils/object';
-import '../src/listbox';
+import { expect, fixture, html, nextFrame, oneEvent } from '@open-wc/testing';
 import { spy } from 'sinon';
+import '../src/listbox';
 
 const ready = async (el) => {
 	await oneEvent(el, 'layout-complete');

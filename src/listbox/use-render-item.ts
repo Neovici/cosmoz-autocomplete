@@ -1,9 +1,9 @@
-import { useCallback } from '@pionjs/pion';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
+import { useCallback } from '@pionjs/pion';
 import {
-	itemRenderer as mkItemRenderer,
 	ItemRenderer,
 	ItemRendererOpts,
+	itemRenderer as mkItemRenderer,
 } from './item-renderer';
 
 export const useRenderItem = <I>({

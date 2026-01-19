@@ -1,7 +1,7 @@
 import { identity } from '@neovici/cosmoz-utils/function';
 import { html, TemplateResult } from 'lit-html';
-import { mark } from './util';
 import { Position } from './use-items';
+import { mark } from './util';
 
 export interface ItemRendererOpts<I> {
 	items: I[];

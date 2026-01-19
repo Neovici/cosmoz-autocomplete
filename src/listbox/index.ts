@@ -6,6 +6,7 @@ import {
 import { connectable } from '@neovici/cosmoz-dropdown/connectable';
 import { sheet } from '@neovici/cosmoz-utils';
 import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
+import { noop } from '@neovici/cosmoz-utils/function';
 import { useStyleSheet } from '@neovici/cosmoz-utils/hooks/use-stylesheet';
 import { props } from '@neovici/cosmoz-utils/object';
 import { component, html, useEffect, useRef } from '@pionjs/pion';
@@ -13,7 +14,6 @@ import { ref } from 'lit-html/directives/ref.js';
 import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
-import { noop } from '@neovici/cosmoz-utils/function';
 
 const ignore = noop;
 

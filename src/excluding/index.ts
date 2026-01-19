@@ -16,10 +16,10 @@ import {
 } from '../autocomplete/autocomplete';
 import { ChipProps } from '../autocomplete/chip';
 import { ItemRendererOpts } from '../listbox/item-renderer';
+import excludingStyle from './style.css';
 import { WrappedItem } from './types';
 import { useExcludingSelection } from './use-excluding-selection';
 import { unwrap } from './utils';
-import excludingStyle from './style.css';
 
 const isItemExcluded = <I>(value: WrappedItem<I>[] | undefined, item: I) =>
 	value?.some((v) => v.item === item && v.excluded);

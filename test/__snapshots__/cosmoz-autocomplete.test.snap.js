@@ -216,8 +216,7 @@ snapshots['cosmoz-autocomplete render (deselect)'] = `<cosmoz-input
 </cosmoz-input>
 `;
 /* end snapshot cosmoz-autocomplete render (deselect) */
-snapshots["cosmoz-autocomplete-ui render (listbox)"] = 
-`<cosmoz-input
+snapshots['cosmoz-autocomplete-ui render (listbox)'] = `<cosmoz-input
   always-float-label=""
   autocomplete="off"
   exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
@@ -265,4 +264,3 @@ snapshots["cosmoz-autocomplete-ui render (listbox)"] =
 </cosmoz-listbox>
 `;
 /* end snapshot cosmoz-autocomplete-ui render (listbox) */
-
