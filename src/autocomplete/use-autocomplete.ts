@@ -102,8 +102,8 @@ export const useAutocomplete = <I>({
 	});
 
 	useEffect(() => {
-		if (!focused) onText('');
-	}, [focused]);
+		if (!focused && !keepQuery) onText('');
+	}, [focused, keepQuery]);
 
 	const meta = useMeta<Meta<I>>({
 		onText,
