@@ -1,5 +1,5 @@
-import { useLayoutEffect, useState, useMemo } from '@pionjs/pion';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
+import { useLayoutEffect, useMemo, useState } from '@pionjs/pion';
 import { raf } from './util';
 
 // eslint-disable-next-line max-statements

@@ -1,5 +1,5 @@
-import { useEffect } from '@pionjs/pion';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
+import { useEffect } from '@pionjs/pion';
 
 type Handler = () => void;
 

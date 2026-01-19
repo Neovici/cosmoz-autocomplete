@@ -1,12 +1,12 @@
-import { useCallback, useMemo, useEffect, useState } from '@pionjs/pion';
-import { without, array } from '@neovici/cosmoz-utils/array';
-import { prop, strProp } from '@neovici/cosmoz-utils/object';
+import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
+import { array, without } from '@neovici/cosmoz-utils/array';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
-import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
-import { useKeys } from './use-keys';
-import { search, normalize, notify, useNotify, EMPTY } from './util';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
+import { prop, strProp } from '@neovici/cosmoz-utils/object';
+import { useCallback, useEffect, useMemo, useState } from '@pionjs/pion';
+import { useKeys } from './use-keys';
+import { EMPTY, normalize, notify, search, useNotify } from './util';
 
 export type Source<I> = (opts: {
 	query?: string;
@@ -23,7 +23,7 @@ interface Base<I> {
 
 	onText: (text: string) => void;
 	onChange: (value: I[], done?: () => void) => void;
-	// eslint-disable-next-line no-use-before-define
+	 
 	onSelect: (value: I, meta: Meta<I>) => void;
 }
 

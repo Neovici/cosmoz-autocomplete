@@ -1,9 +1,9 @@
-/* eslint-disable max-lines */
+ 
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
+import { when } from 'lit-html/directives/when.js';
 import '../src/excluding';
 import { colors } from './data';
-import { when } from 'lit-html/directives/when.js';
 
 const CSS = html`
 	<style>

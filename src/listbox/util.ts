@@ -1,6 +1,6 @@
-import { html } from 'lit-html';
 import { array } from '@neovici/cosmoz-utils/array';
 import { Rec } from '@neovici/cosmoz-utils/object';
+import { html } from 'lit-html';
 
 export const byValue = <K extends PropertyKey | undefined, T>(
 	value: T | T[],

@@ -1,6 +1,6 @@
+import { expect, fixture, html, nextFrame } from '@open-wc/testing';
 import { component } from '@pionjs/pion';
-import { expect, html, fixture, nextFrame } from '@open-wc/testing';
-import { spy, match as sinonMatch } from 'sinon';
+import { match as sinonMatch, spy } from 'sinon';
 import { useAutocomplete } from '../src/autocomplete/use-autocomplete';
 
 customElements.define(

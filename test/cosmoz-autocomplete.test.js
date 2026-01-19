@@ -1,22 +1,24 @@
+import { expect, fixture, html, nextFrame } from '@open-wc/testing';
 import '../src/autocomplete';
-import { expect, html, fixture, nextFrame } from '@open-wc/testing';
 
 import { spy } from 'sinon';
 
-before(() => {
-	const e = window.onerror;
-	window.onerror = function (err) {
-		if (err.startsWith('ResizeObserver loop')) {
-			// eslint-disable-next-line no-console
-			console.warn(`[ignored] ${err}`);
-			return false;
-		}
-		return e(...arguments);
-	};
-});
+describe('cosmoz-autocomplete tests', () => {
+	before(() => {
+		const e = window.onerror;
+		window.onerror = function (err) {
+			if (err.startsWith('ResizeObserver loop')) {
+				// eslint-disable-next-line no-console
+				console.warn(`[ignored] ${err}`);
+				return false;
+			}
+			return e(...arguments);
+		};
+	});
 
-const source = [{ text: 'Item 1' }, { text: 'Item 2' }, { text: 'Item 3' }];
-describe('cosmoz-autocomplete-ui', () => {
+	const source = [{ text: 'Item 1' }, { text: 'Item 2' }, { text: 'Item 3' }];
+
+	describe('cosmoz-autocomplete-ui', () => {
 	it('render', async () => {
 		const el = await fixture(html`
 				<cosmoz-autocomplete-ui
@@ -156,4 +158,5 @@ describe('cosmoz-autocomplete', () => {
 
 		expect(cosmozListboxElement).to.be.ok;
 	});
+});
 });

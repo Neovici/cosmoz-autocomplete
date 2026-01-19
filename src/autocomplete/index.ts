@@ -1,6 +1,6 @@
+import { sheet } from '@neovici/cosmoz-utils';
 import { component, useCallback, useEffect, useProperty } from '@pionjs/pion';
 import { Autocomplete, observedAttributes, Props, style } from './autocomplete';
-import { sheet } from '@neovici/cosmoz-utils';
 
 const Standalone = <I>(host: HTMLElement & Props<I>) => {
 	const { onChange, onText, ...props } = host;

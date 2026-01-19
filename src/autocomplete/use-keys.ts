@@ -1,6 +1,6 @@
-import { useEffect } from '@pionjs/pion';
 import { array } from '@neovici/cosmoz-utils/array';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
+import { useEffect } from '@pionjs/pion';
 
 export interface Props<I> {
 	focused?: boolean;
