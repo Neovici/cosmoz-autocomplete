@@ -1,3 +1,12 @@
+## [10.10.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.1...v10.10.2) (2026-01-19)
+
+### Bug Fixes
+
+* adjust packages ([7436903](https://github.com/neovici/cosmoz-autocomplete/commit/7436903f51e4afd7fd03106c2ea0906e4e292f76))
+* don't clear input when allow manual input is true ([#214](https://github.com/neovici/cosmoz-autocomplete/issues/214)) ([92b84ee](https://github.com/neovici/cosmoz-autocomplete/commit/92b84ee06fe335701b74427f03dc5ac07dfcfe4c))
+* test npm publishing ([be68a67](https://github.com/neovici/cosmoz-autocomplete/commit/be68a678a6451911d24e387dc757709ed821d54c))
+* update semantic-release ([a928aa4](https://github.com/neovici/cosmoz-autocomplete/commit/a928aa4597fb7dc71831c1d624a75f03372abdc4))
+
 ## [10.10.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.0...v10.10.1) (2025-12-01)
 
 ### Bug Fixes
