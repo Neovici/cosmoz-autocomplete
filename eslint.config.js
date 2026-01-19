@@ -11,6 +11,6 @@ export default [
 			'max-lines-per-function': 0,
 			'import/group-exports': 0,
 		},
-		ignores: ['dist/', 'coverage/', 'storybook-static/'],
+		ignores: ['dist/', 'coverage/', 'storybook-static/', '__snapshots__/'],
 	},
 ];
