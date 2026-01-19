@@ -1,3 +1,9 @@
+## [10.10.4](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.10.3...v10.10.4) (2026-01-19)
+
+### Bug Fixes
+
+* correct repository URL case to match GitHub canonical name ([71df999](https://github.com/Neovici/cosmoz-autocomplete/commit/71df999a1c0335cb2414addece9e2a1ac7b92096))
+
 ## [10.10.3](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.2...v10.10.3) (2026-01-19)
 
 ### Bug Fixes
