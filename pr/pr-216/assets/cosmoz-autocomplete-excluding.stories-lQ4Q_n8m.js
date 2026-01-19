@@ -1,4 +1,4 @@
-import{A as R,b as i}from"./iframe-C5P1NRwf.js";import{u as h,a as m,i as _,c as j,b as L,s as M,o as D,A as q,d as x,e as f,n as v,f as b,g as G}from"./data-1uDNpf43.js";const g=o=>({item:o,excluded:!1}),y=o=>o.item,Q=o=>{const[e,t]=h(o),r=m(a=>t(s=>{const l=_(a,s?.map(y));if(!l)return;if(!s)return l.map(g);const c=s.reduce((n,d)=>l.includes(d.item)?[...n,d]:d.excluded?n:[...n,{...d,excluded:!0}],[]),u=l.filter(n=>!s.some(d=>d.item===n)).map(g);return[...c,...u]}),[]);return{value:e,setExcludingValue:r,setValue:t}},W="data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E",F=j`
+import{A as R,b as i}from"./iframe-Dybw0J_m.js";import{c as _,u as h,a as m,i as j,b as L,s as M,o as D,A as q,d as x,e as f,n as v,f as b,g as G}from"./data-DUrwq-wY.js";const Q="data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E",W=_`
 	.chip[data-state='excluded'] {
 		background: var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54));
 	}
@@ -24,7 +24,7 @@ import{A as R,b as i}from"./iframe-C5P1NRwf.js";import{u as h,a as m,i as _,c as
 			rgb(244, 67, 54)
 		);
 		/* prettier-ignore */
-		background: url("${W}") var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54)) no-repeat 50%;
+		background: url("${Q}") var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54)) no-repeat 50%;
 	}
 
 	cosmoz-listbox::part(excluded):hover {
@@ -33,7 +33,7 @@ import{A as R,b as i}from"./iframe-C5P1NRwf.js";import{u as h,a as m,i as _,c as
 			rgba(244, 67, 54, 0.1)
 		);
 	}
-`,H=(o,e)=>o?.some(t=>t.item===e&&t.excluded),$=(o,e)=>e&&H(o,e)?"excluded":R,J=o=>(e,t,{highlight:r,select:a,textual:s,isSelected:l})=>{const c=s(e);return i`<div
+`,g=o=>({item:o,excluded:!1}),y=o=>o.item,F=o=>{const[e,t]=h(o),r=m(a=>t(s=>{const l=j(a,s?.map(y));if(!l)return;if(!s)return l.map(g);const c=s.reduce((n,d)=>l.includes(d.item)?[...n,d]:d.excluded?n:[...n,{...d,excluded:!0}],[]),u=l.filter(n=>!s.some(d=>d.item===n)).map(g);return[...c,...u]}),[]);return{value:e,setExcludingValue:r,setValue:t}},H=(o,e)=>o?.some(t=>t.item===e&&t.excluded),$=(o,e)=>e&&H(o,e)?"excluded":R,J=o=>(e,t,{highlight:r,select:a,textual:s,isSelected:l})=>{const c=s(e);return i`<div
 				class="item"
 				role="option"
 				part="option ${$(o,e)}"
@@ -57,7 +57,7 @@ import{A as R,b as i}from"./iframe-C5P1NRwf.js";import{u as h,a as m,i as _,c as
 			title=${f(typeof r=="string"?r:void 0)}
 		>
 			${r}
-		</cosmoz-autocomplete-chip>`,N=o=>{const{value:e,setValue:t,setExcludingValue:r}=Q("value"),[a,s]=h("text"),l=m(c=>t(u=>u?.filter(n=>n.item!==c)),[]);return q({...o,value:x(()=>e?.map(y),[e]),onChange:m(c=>{r(c)},[]),text:a,onText:m(c=>{s(c)},[]),itemRenderer:x(()=>J(e),[e]),chipRenderer:x(()=>K(e,l),[e,l])})};customElements.define("cosmoz-autocomplete-excluding",L(N,{observedAttributes:D,styleSheets:[M,F]}));const U=i`
+		</cosmoz-autocomplete-chip>`,N=o=>{const{value:e,setValue:t,setExcludingValue:r}=F("value"),[a,s]=h("text"),l=m(c=>t(u=>u?.filter(n=>n.item!==c)),[]);return q({...o,value:x(()=>e?.map(y),[e]),onChange:m(c=>{r(c)},[]),text:a,onText:m(c=>{s(c)},[]),itemRenderer:x(()=>J(e),[e]),chipRenderer:x(()=>K(e,l),[e,l])})};customElements.define("cosmoz-autocomplete-excluding",L(N,{observedAttributes:D,styleSheets:[M,W]}));const U=i`
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
         html {
