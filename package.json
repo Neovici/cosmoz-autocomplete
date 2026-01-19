@@ -7,13 +7,13 @@
 		"lit-html",
 		"web-components"
 	],
-	"homepage": "https://github.com/neovici/cosmoz-autocomplete#readme",
+	"homepage": "https://github.com/Neovici/cosmoz-autocomplete#readme",
 	"bugs": {
-		"url": "https://github.com/neovici/cosmoz-autocomplete/issues"
+		"url": "https://github.com/Neovici/cosmoz-autocomplete/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/neovici/cosmoz-autocomplete.git"
+		"url": "git+https://github.com/Neovici/cosmoz-autocomplete.git"
 	},
 	"license": "Apache-2.0",
 	"author": "",
