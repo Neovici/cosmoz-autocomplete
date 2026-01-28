@@ -202,7 +202,11 @@ const autocomplete = <I>(props: AProps<I>) => {
 							() =>
 								when(
 									text != null && text.length > 0 && items.length === 0,
-									() => html`<slot name="no-result"></slot>`,
+									() =>
+									html`<slot name="no-result">
+												No results found
+										</slot
+									>`,
 								),
 						),
 					),
