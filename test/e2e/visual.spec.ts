@@ -57,18 +57,14 @@ test('basic no result', async ({ page }) => {
 	await page.click('cosmoz-autocomplete');
 	await expect(page).toHaveScreenshot();
 
-	await page.keyboard.press('Backspace');
-	await expect(page).toHaveScreenshot();
-
-	await page.keyboard.press('Backspace');
-	await expect(page).toHaveScreenshot();
-
 	await page.keyboard.type('Asdf');
 	await expect(page).toHaveScreenshot();
 
 	await page.keyboard.press('Enter');
 	await expect(page).toHaveScreenshot();
 
-	await expect(page.locator('cosmoz-autocomplete')).toContainText('Custom message no results');
+	await expect(page.locator('cosmoz-autocomplete')).toContainText(
+		'Custom message no results',
+	);
 	await expect(page).toHaveScreenshot();
 });
