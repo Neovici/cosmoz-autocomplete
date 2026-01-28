@@ -26,7 +26,6 @@ const CSS = html`
 			--cosmoz-autocomplete-chip-border-radius: 4px;
 		}
 
-		cosmoz-autocomplete::part(no-result) {background-color:red}
 	</style>
 `;
 
