@@ -1,4 +1,4 @@
- 
+
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
@@ -25,6 +25,8 @@ const CSS = html`
 			--cosmoz-autocomplete-chip-translate-y: 8px;
 			--cosmoz-autocomplete-chip-border-radius: 4px;
 		}
+
+		cosmoz-autocomplete::part(no-result) {background-color:red}
 	</style>
 `;
 
@@ -80,7 +82,9 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			style=${styleMap(styles)}
-		></cosmoz-autocomplete>
+		>
+			<span slot="no-result">Custom message no results</span>
+		</cosmoz-autocomplete>
 	`;
 };
 
