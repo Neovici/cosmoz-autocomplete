@@ -1,3 +1,9 @@
+## [10.11.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.10.4...v10.11.0) (2026-01-28)
+
+### Features
+
+* add duplicate web component check ([#219](https://github.com/Neovici/cosmoz-autocomplete/issues/219)) ([00bedf2](https://github.com/Neovici/cosmoz-autocomplete/commit/00bedf2630533a0a643274c27ac0ced1ad283919))
+
 ## [10.10.4](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.10.3...v10.10.4) (2026-01-19)
 
 ### Bug Fixes
