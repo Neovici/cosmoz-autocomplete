@@ -1,4 +1,3 @@
- 
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
@@ -10,6 +9,12 @@ const CSS = html`
 		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
 		html {
 			font-family: 'Inter', sans-serif;
+		}
+
+		.custom-message {
+			font-size: 14px;
+			font-weight: 500;
+			padding: 0 22px;
 		}
 	</style>
 `;
@@ -79,7 +84,9 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			style=${styleMap(styles)}
-		></cosmoz-autocomplete-excluding>
+		>
+			<p slot="no-result" class="custom-message">Custom message no results</p>
+		</cosmoz-autocomplete-excluding>
 	`;
 };
 
