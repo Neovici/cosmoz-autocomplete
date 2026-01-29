@@ -1,3 +1,9 @@
+## [10.11.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.11.0...v10.11.1) (2026-01-29)
+
+### Bug Fixes
+
+* support cosmoz-dropdown v7 ([#221](https://github.com/Neovici/cosmoz-autocomplete/issues/221)) ([161fa8c](https://github.com/Neovici/cosmoz-autocomplete/commit/161fa8ce87aff96b9722fd1044a21eec284e35cd))
+
 ## [10.11.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.10.4...v10.11.0) (2026-01-28)
 
 ### Features
