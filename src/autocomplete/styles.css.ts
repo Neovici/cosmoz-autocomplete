@@ -53,4 +53,11 @@ export default css`
 	slot {
 		display: contents !important;
 	}
+
+	.no-result {
+		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
+		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
+		padding: 0 22px;
+		color: var(--cosmoz-listbox-color, #101010);
+	}
 `;

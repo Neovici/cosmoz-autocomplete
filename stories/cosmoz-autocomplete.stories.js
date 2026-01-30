@@ -1,4 +1,4 @@
- 
+import i18next from 'i18next';
 import { html } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
@@ -6,6 +6,17 @@ import '../src/autocomplete';
 import { colors } from './data';
 import { spanishWords } from './spanish-words';
 import { swedishWords } from './swedish-words';
+
+i18next.init({
+	lng: 'en',
+	resources: {
+		en: {
+			translation: {
+				'No results found': 'No results found',
+			},
+		},
+	},
+});
 
 const CSS = html`
 	<style>
@@ -80,7 +91,8 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			style=${styleMap(styles)}
-		></cosmoz-autocomplete>
+		>
+		</cosmoz-autocomplete>
 	`;
 };
 

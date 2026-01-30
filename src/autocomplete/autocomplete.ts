@@ -8,6 +8,7 @@ import '@neovici/cosmoz-input';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
 import { useEffect } from '@pionjs/pion';
+import { t } from 'i18next';
 import { html } from 'lit-html';
 import { live } from 'lit-html/directives/live.js';
 import { ref } from 'lit-html/directives/ref.js';
@@ -202,7 +203,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 							() =>
 								when(
 									text != null && text.length > 0 && items.length === 0,
-									() => html`<slot name="no-result"></slot>`,
+									() =>
+										html`<slot name="no-result">
+											<p class="no-result">${t('No results found')}</p>
+										</slot>`,
 								),
 						),
 					),
