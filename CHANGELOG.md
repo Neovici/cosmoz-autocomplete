@@ -1,3 +1,9 @@
+## [10.12.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.11.1...v10.12.0) (2026-01-30)
+
+### Features
+
+* set fallback message for no-result search ([#218](https://github.com/Neovici/cosmoz-autocomplete/issues/218)) ([ffb4343](https://github.com/Neovici/cosmoz-autocomplete/commit/ffb434386b010f402ace059fb0199e3cf35c46b4))
+
 ## [10.11.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.11.0...v10.11.1) (2026-01-29)
 
 ### Bug Fixes
