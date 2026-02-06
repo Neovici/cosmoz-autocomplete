@@ -1,3 +1,9 @@
+## [10.12.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.12.0...v10.12.1) (2026-02-06)
+
+### Bug Fixes
+
+* migrate connectable import to cosmoz-utils ([#222](https://github.com/Neovici/cosmoz-autocomplete/issues/222)) ([b8840eb](https://github.com/Neovici/cosmoz-autocomplete/commit/b8840eb480f6e15ab7f956ba8c697cbf72a034cb))
+
 ## [10.12.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.11.1...v10.12.0) (2026-01-30)
 
 ### Features
