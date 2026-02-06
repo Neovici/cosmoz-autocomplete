@@ -3,7 +3,7 @@ import {
 	virtualize,
 	virtualizerRef,
 } from '@lit-labs/virtualizer/virtualize.js';
-import { connectable } from '@neovici/cosmoz-dropdown/connectable';
+import { connectable } from '@neovici/cosmoz-utils/connectable';
 import { sheet } from '@neovici/cosmoz-utils';
 import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
 import { noop } from '@neovici/cosmoz-utils/function';
