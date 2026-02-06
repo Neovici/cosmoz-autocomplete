@@ -77,7 +77,7 @@
 		"@lit-labs/virtualizer": "^2.0.0",
 		"@neovici/cosmoz-dropdown": "^6.0.0 || ^7.0.0",
 		"@neovici/cosmoz-input": "^5.0.2",
-		"@neovici/cosmoz-utils": "^6.0.0",
+		"@neovici/cosmoz-utils": "^6.19.0",
 		"@pionjs/pion": "^2.7.1",
 		"i18next": "^23.16.8",
 		"lit-html": "^2.0.0 || ^3.0.0"
