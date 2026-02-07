@@ -26,7 +26,7 @@
 		"build": "tsc -p tsconfig.build.json",
 		"check:duplicates": "check-duplicate-components",
 		"start": "npm run storybook:start",
-		"test": "vitest --project=storybook --run",
+		"test": "vitest --project=storybook --run && playwright test",
 		"test:watch": "vitest --project=storybook",
 		"e2e": "playwright test",
 		"prepare": "husky",
