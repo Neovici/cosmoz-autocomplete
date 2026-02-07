@@ -96,10 +96,12 @@ export const useAutocomplete = <I>({
 
 	useEffect(() => source$.then(setOptions), [source$]);
 
-	// Handle focus/blur events
+	// Handle focus/blur events - check :focus-within on the target element
 	const onFocus = useCallback(
 		(e: FocusEvent) => {
-			const isFocused = e.type === 'focusin';
+			const isFocused = (e.currentTarget as HTMLElement).matches(
+				':focus-within',
+			);
 			setFocused(isFocused);
 			if (isFocused) {
 				setClosed(false);
