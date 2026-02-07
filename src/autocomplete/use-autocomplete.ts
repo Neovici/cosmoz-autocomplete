@@ -1,4 +1,3 @@
-import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { array, without } from '@neovici/cosmoz-utils/array';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
@@ -23,7 +22,7 @@ interface Base<I> {
 
 	onText: (text: string) => void;
 	onChange: (value: I[], done?: () => void) => void;
-	 
+
 	onSelect: (value: I, meta: Meta<I>) => void;
 }
 
@@ -62,16 +61,21 @@ export const useAutocomplete = <I>({
 	preserveOrder,
 	defaultIndex,
 	externalSearch,
-	...thru
+	onFocus: _onFocus,
 }: Props<I>) => {
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
 		),
-		{ active, focused, onFocus, setClosed } = useFocus(thru),
+		host = useHost(),
+		// Track focused state for query management and useKeys
+		[focused, setFocused] = useState(false),
+		// Track active state (dropdown is open) - derived from focused state
+		// The dropdown will be shown when focused, hidden when closed
+		[closed, setClosed] = useState(true),
+		active = focused && !closed,
 		empty = !text,
 		query = useMemo(() => text?.trim(), [text]),
-		host = useHost(),
 		onText = useNotify(host, _onText, 'text'),
 		onChange = useCallback(
 			(val: I[]) => {
@@ -91,6 +95,21 @@ export const useAutocomplete = <I>({
 		value = useMemo(() => array(_value), [_value]);
 
 	useEffect(() => source$.then(setOptions), [source$]);
+
+	// Handle focus/blur events - check :focus-within on the target element
+	const onFocus = useCallback(
+		(e: FocusEvent) => {
+			const isFocused = (e.currentTarget as HTMLElement).matches(
+				':focus-within',
+			);
+			setFocused(isFocused);
+			if (isFocused) {
+				setClosed(false);
+			}
+			_onFocus?.(isFocused);
+		},
+		[_onFocus],
+	);
 
 	useKeys({
 		focused,

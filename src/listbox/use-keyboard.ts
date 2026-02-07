@@ -1,5 +1,10 @@
-import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
-import { useEffect } from '@pionjs/pion';
+import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
+import { useActivity } from '@neovici/cosmoz-utils/keybindings';
+import {
+	AUTOCOMPLETE_NAVIGATE_DOWN,
+	AUTOCOMPLETE_NAVIGATE_UP,
+	AUTOCOMPLETE_SELECT,
+} from '../autocomplete/autocomplete-keybindings';
 
 type Handler = () => void;
 
@@ -9,35 +14,39 @@ export interface Handlers {
 	onEnter: Handler;
 }
 
-export const useKeyboard = (handlers: Handlers) => {
-	const listeners = useMeta(handlers);
+export const useKeyboard = ({ onUp, onDown, onEnter }: Handlers) => {
+	const host = useHost();
 
-	useEffect(() => {
-		const handler = (e: KeyboardEvent) => {
-			if ((e.ctrlKey && e.altKey) || e.defaultPrevented) {
-				return;
-			}
-			switch (e.key) {
-				case 'Up':
-				case 'ArrowUp':
-					e.preventDefault();
-					listeners.onUp();
-					break;
-				case 'Down':
-				case 'ArrowDown':
-					e.preventDefault();
-					listeners.onDown();
-					break;
-				case 'Enter':
-					e.preventDefault();
-					listeners.onEnter();
-					break;
-				default:
-					break;
-			}
-		};
+	// Check if the listbox is visible (popover is open)
+	const isVisible = () => host.matches(':popover-open');
 
-		document.addEventListener('keydown', handler, true);
-		return () => document.removeEventListener('keydown', handler, true);
-	}, [listeners]);
+	useActivity(
+		{
+			activity: AUTOCOMPLETE_NAVIGATE_UP,
+			callback: onUp,
+			check: isVisible,
+			element: () => host,
+		},
+		[onUp],
+	);
+
+	useActivity(
+		{
+			activity: AUTOCOMPLETE_NAVIGATE_DOWN,
+			callback: onDown,
+			check: isVisible,
+			element: () => host,
+		},
+		[onDown],
+	);
+
+	useActivity(
+		{
+			activity: AUTOCOMPLETE_SELECT,
+			callback: onEnter,
+			check: isVisible,
+			element: () => host,
+		},
+		[onEnter],
+	);
 };

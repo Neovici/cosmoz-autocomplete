@@ -264,3 +264,236 @@ snapshots['cosmoz-autocomplete-ui render (listbox)'] = `<cosmoz-input
 </cosmoz-listbox>
 `;
 /* end snapshot cosmoz-autocomplete-ui render (listbox) */
+snapshots['cosmoz-autocomplete tests cosmoz-autocomplete-ui render'] =
+	`<cosmoz-dropdown-next open-on-focus="">
+  <cosmoz-input
+    always-float-label=""
+    autocomplete="off"
+    exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
+    id="input"
+    part="input"
+    slot="button"
+  >
+    <slot
+      name="prefix"
+      slot="prefix"
+    >
+    </slot>
+    <slot
+      name="suffix"
+      slot="suffix"
+    >
+    </slot>
+    <cosmoz-autocomplete-chip
+      class="chip"
+      exportparts="chip-text, chip-clear"
+      part="chip"
+      slot="control"
+      title="Item 1"
+    >
+      Item 1
+    </cosmoz-autocomplete-chip>
+    <cosmoz-autocomplete-chip
+      class="chip"
+      exportparts="chip-text, chip-clear"
+      part="chip"
+      slot="control"
+      title="Item 2"
+    >
+      Item 2
+    </cosmoz-autocomplete-chip>
+    <cosmoz-autocomplete-chip
+      class="badge"
+      disabled=""
+      exportparts="chip-text, chip-clear"
+      hidden=""
+      part="chip"
+      slot="control"
+    >
+      <span>
+      </span>
+    </cosmoz-autocomplete-chip>
+  </cosmoz-input>
+</cosmoz-dropdown-next>
+`;
+/* end snapshot cosmoz-autocomplete tests cosmoz-autocomplete-ui render */
+
+snapshots['cosmoz-autocomplete tests cosmoz-autocomplete-ui render (limit 1)'] =
+	`<cosmoz-dropdown-next open-on-focus="">
+  <cosmoz-input
+    always-float-label=""
+    autocomplete="off"
+    data-one=""
+    data-single=""
+    exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
+    id="input"
+    part="input"
+    readonly=""
+    slot="button"
+  >
+    <slot
+      name="prefix"
+      slot="prefix"
+    >
+    </slot>
+    <slot
+      name="suffix"
+      slot="suffix"
+    >
+    </slot>
+    <cosmoz-autocomplete-chip
+      class="chip"
+      exportparts="chip-text, chip-clear"
+      part="chip"
+      slot="control"
+      title="Item 1"
+    >
+      Item 1
+    </cosmoz-autocomplete-chip>
+    <cosmoz-autocomplete-chip
+      class="badge"
+      disabled=""
+      exportparts="chip-text, chip-clear"
+      hidden=""
+      part="chip"
+      slot="control"
+    >
+      <span>
+      </span>
+    </cosmoz-autocomplete-chip>
+  </cosmoz-input>
+</cosmoz-dropdown-next>
+`;
+/* end snapshot cosmoz-autocomplete tests cosmoz-autocomplete-ui render (limit 1) */
+
+snapshots['cosmoz-autocomplete tests cosmoz-autocomplete-ui render (listbox)'] =
+	`<cosmoz-dropdown-next open-on-focus="">
+  <cosmoz-input
+    always-float-label=""
+    autocomplete="off"
+    exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
+    id="input"
+    part="input"
+    slot="button"
+  >
+    <slot
+      name="prefix"
+      slot="prefix"
+    >
+    </slot>
+    <slot
+      name="suffix"
+      slot="suffix"
+    >
+    </slot>
+    <cosmoz-autocomplete-chip
+      class="chip"
+      exportparts="chip-text, chip-clear"
+      part="chip"
+      slot="control"
+      title="Item 1"
+    >
+      Item 1
+    </cosmoz-autocomplete-chip>
+    <cosmoz-autocomplete-chip
+      class="badge"
+      disabled=""
+      exportparts="chip-text, chip-clear"
+      hidden=""
+      part="chip"
+      slot="control"
+    >
+      <span>
+        +0
+      </span>
+    </cosmoz-autocomplete-chip>
+  </cosmoz-input>
+  <cosmoz-listbox
+    multi=""
+    part="listbox"
+  >
+  </cosmoz-listbox>
+</cosmoz-dropdown-next>
+`;
+/* end snapshot cosmoz-autocomplete tests cosmoz-autocomplete-ui render (listbox) */
+
+snapshots['cosmoz-autocomplete tests cosmoz-autocomplete render'] =
+	`<cosmoz-dropdown-next open-on-focus="">
+  <cosmoz-input
+    always-float-label=""
+    autocomplete="off"
+    exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
+    id="input"
+    part="input"
+    slot="button"
+  >
+    <slot
+      name="prefix"
+      slot="prefix"
+    >
+    </slot>
+    <slot
+      name="suffix"
+      slot="suffix"
+    >
+    </slot>
+    <cosmoz-autocomplete-chip
+      class="chip"
+      exportparts="chip-text, chip-clear"
+      part="chip"
+      slot="control"
+      title="Item 1"
+    >
+      Item 1
+    </cosmoz-autocomplete-chip>
+    <cosmoz-autocomplete-chip
+      class="badge"
+      disabled=""
+      exportparts="chip-text, chip-clear"
+      hidden=""
+      part="chip"
+      slot="control"
+    >
+      <span>
+      </span>
+    </cosmoz-autocomplete-chip>
+  </cosmoz-input>
+</cosmoz-dropdown-next>
+`;
+/* end snapshot cosmoz-autocomplete tests cosmoz-autocomplete render */
+
+snapshots['cosmoz-autocomplete tests cosmoz-autocomplete render (deselect)'] =
+	`<cosmoz-dropdown-next open-on-focus="">
+  <cosmoz-input
+    autocomplete="off"
+    data-one=""
+    exportparts="input: input-input,control: input-control,label: input-label,line: input-line,error: input-error,wrap: input-wrap"
+    id="input"
+    part="input"
+    slot="button"
+  >
+    <slot
+      name="prefix"
+      slot="prefix"
+    >
+    </slot>
+    <slot
+      name="suffix"
+      slot="suffix"
+    >
+    </slot>
+    <cosmoz-autocomplete-chip
+      class="badge"
+      disabled=""
+      exportparts="chip-text, chip-clear"
+      hidden=""
+      part="chip"
+      slot="control"
+    >
+      <span>
+      </span>
+    </cosmoz-autocomplete-chip>
+  </cosmoz-input>
+</cosmoz-dropdown-next>
+`;
+/* end snapshot cosmoz-autocomplete tests cosmoz-autocomplete render (deselect) */
