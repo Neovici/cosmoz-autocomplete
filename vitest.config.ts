@@ -11,7 +11,18 @@ export default defineConfig({
 		include: ['storybook/test'],
 	},
 	test: {
+		// Two test projects: unit (fast, jsdom) and storybook (browser-based)
 		projects: [
+			// Unit tests: pure logic, utilities
+			{
+				extends: true,
+				test: {
+					name: 'unit',
+					include: ['test/**/*.test.ts'],
+					environment: 'jsdom',
+				},
+			},
+			// Storybook tests: component rendering and interactions
 			{
 				extends: true,
 				plugins: [

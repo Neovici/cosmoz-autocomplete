@@ -17,4 +17,11 @@ export default [
 			'max-lines': 'off',
 		},
 	},
+	{
+		files: ['test/**/*.test.ts'],
+		rules: {
+			'max-lines': 'off',
+			'max-lines-per-function': 'off',
+		},
+	},
 ];

@@ -19,7 +19,7 @@ export default {
 	parameters: {
 		options: {
 			storySort: {
-				order: ['Autocomplete', 'Autocomplete Excluding'],
+				order: ['Autocomplete', 'Autocomplete Excluding', 'Tests'],
 			},
 		},
 		docs: {
