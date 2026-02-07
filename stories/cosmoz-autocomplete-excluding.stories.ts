@@ -1,16 +1,44 @@
-import { html } from 'lit-html';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html, TemplateResult } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
+import { expect } from 'storybook/test';
 import '../src/excluding';
 import { colors } from './data';
 
+interface ExcludingValue {
+	item: { text: string };
+	excluded: boolean;
+}
+
+interface AutocompleteExcludingArgs {
+	source: { text: string }[];
+	limit?: number;
+	textProperty: string;
+	min?: number;
+	label?: string;
+	value?: ExcludingValue[];
+	disabled?: boolean;
+	placeholder?: string;
+	defaultIndex?: number;
+	showSingle?: boolean;
+	preserveOrder?: boolean;
+	wrap?: boolean;
+	keepOpened?: boolean;
+	keepQuery?: boolean;
+	overflowed?: boolean;
+	responseTime?: number;
+	contour?: boolean;
+	uppercase?: boolean;
+	excludedBgColor?: string;
+	excludedChipColor?: string;
+	excludedChipClearBgColor?: string;
+	excludedChipClearStrokeColor?: string;
+	excludedListboxActiveColor?: string;
+}
+
 const CSS = html`
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
-		html {
-			font-family: 'Inter', sans-serif;
-		}
-
 		.custom-message {
 			font-size: 14px;
 			font-weight: 500;
@@ -19,7 +47,10 @@ const CSS = html`
 	</style>
 `;
 
-const delay = (source, time) => {
+const delay = <T>(
+	source: T,
+	time?: number,
+): T | (({ active }: { active: boolean }) => Promise<T> | undefined) => {
 	if (time == null) return source;
 	return ({ active }) =>
 		active
@@ -50,7 +81,7 @@ const Autocomplete = ({
 	excludedChipClearBgColor,
 	excludedChipClearStrokeColor,
 	excludedListboxActiveColor,
-}) => {
+}: AutocompleteExcludingArgs): TemplateResult => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
 		'--cosmoz-autocomplete-excluded-bg-color': excludedBgColor,
@@ -90,7 +121,7 @@ const Autocomplete = ({
 	`;
 };
 
-export default {
+const meta: Meta<AutocompleteExcludingArgs> = {
 	title: 'Autocomplete Excluding',
 	render: Autocomplete,
 	argTypes: {
@@ -199,7 +230,10 @@ export default {
 	},
 };
 
-export const Basic = {
+export default meta;
+type Story = StoryObj<AutocompleteExcludingArgs>;
+
+export const Basic: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -216,5 +250,19 @@ export const Basic = {
 				story: 'The basic version',
 			},
 		},
+	},
+	play: async ({ canvas, step }) => {
+		await step('Renders with chips showing excluded state', async () => {
+			// Should render the autocomplete-excluding with chips
+			await canvas.findByShadowText(/Red/u);
+			await canvas.findByShadowText(/Blue/u);
+		});
+
+		await step('Has the autocomplete-excluding element', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete-excluding',
+			);
+			expect(autocomplete).toBeTruthy();
+		});
 	},
 };

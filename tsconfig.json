@@ -8,6 +8,7 @@
 		"strict": true,
 		"target": "esnext",
 		"allowJs": true,
-		"types": ["node", "mocha"]
-	}
+		"types": ["node"]
+	},
+	"exclude": ["node_modules", "dist", "coverage", "storybook-static", "stories"]
 }

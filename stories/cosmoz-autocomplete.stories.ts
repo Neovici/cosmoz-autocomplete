@@ -1,31 +1,36 @@
-import i18next from 'i18next';
-import { html } from 'lit-html';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html, TemplateResult } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
+import { expect } from 'storybook/test';
 import '../src/autocomplete';
 import { colors } from './data';
 import { spanishWords } from './spanish-words';
 import { swedishWords } from './swedish-words';
 
-i18next.init({
-	lng: 'en',
-	resources: {
-		en: {
-			translation: {
-				'No results found': 'No results found',
-			},
-		},
-	},
-});
+interface AutocompleteArgs {
+	source: { text: string }[];
+	limit?: number;
+	textProperty: string;
+	min?: number;
+	label?: string;
+	value?: { text: string }[] | { text: string };
+	disabled?: boolean;
+	placeholder?: string;
+	defaultIndex?: number;
+	showSingle?: boolean;
+	preserveOrder?: boolean;
+	wrap?: boolean;
+	keepOpened?: boolean;
+	keepQuery?: boolean;
+	overflowed?: boolean;
+	responseTime?: number;
+	contour?: boolean;
+	uppercase?: boolean;
+}
 
 const CSS = html`
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
-		cosmoz-autocomplete,
-		cosmoz-listbox {
-			font-family: 'Inter', sans-serif;
-		}
-
 		.contour {
 			--cosmoz-input-color: #aeacac;
 			--cosmoz-input-border-radius: 4px;
@@ -39,7 +44,10 @@ const CSS = html`
 	</style>
 `;
 
-const delay = (source, time) => {
+const delay = <T>(
+	source: T,
+	time?: number,
+): T | (({ active }: { active: boolean }) => Promise<T> | undefined) => {
 	if (time == null) return source;
 	return ({ active }) =>
 		active
@@ -65,11 +73,8 @@ const Autocomplete = ({
 	overflowed = false,
 	responseTime,
 	contour,
-}) => {
-	const styles = {
-		maxWidth: overflowed ? '170px' : 'initial',
-	};
-
+}: AutocompleteArgs): TemplateResult => {
+	const styles = { maxWidth: overflowed ? '170px' : 'initial' };
 	const sourceDelayed = delay(source, responseTime);
 
 	return html`
@@ -91,12 +96,11 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			style=${styleMap(styles)}
-		>
-		</cosmoz-autocomplete>
+		></cosmoz-autocomplete>
 	`;
 };
 
-export default {
+const meta: Meta<AutocompleteArgs> = {
 	title: 'Autocomplete',
 	render: Autocomplete,
 	argTypes: {
@@ -104,29 +108,12 @@ export default {
 			control: 'text',
 			description: 'The label displayed on the screen',
 		},
-		source: {
-			control: 'object',
-			description: 'The source for the values displayed in the dropdown',
-		},
-		textProperty: {
-			control: 'text',
-			description:
-				'The object property used to select the value from the source',
-		},
-		value: {
-			control: 'object',
-			description: 'The actual value of the Autocomplete',
-		},
+		source: { control: 'object', description: 'The source for the values' },
+		textProperty: { control: 'text', description: 'Property to select value' },
+		value: { control: 'object', description: 'The actual value' },
 		limit: { control: 'number' },
-		defaultIndex: {
-			control: 'number',
-			description: 'The default index of the source array',
-		},
-		disabled: {
-			control: 'boolean',
-			description:
-				'A boolean representing the disabled state of the Autocomplete',
-		},
+		defaultIndex: { control: 'number', description: 'Default index of source' },
+		disabled: { control: 'boolean', description: 'Disabled state' },
 		placeholder: { control: 'text' },
 		showSingle: { control: 'boolean' },
 		keepOpened: { control: 'boolean' },
@@ -152,30 +139,39 @@ export default {
 			controls: {
 				exclude: ['overflowed', 'contour', 'responseTime', 'uppercase'],
 			},
-			description: {
-				component: 'The Cosmoz Autocomplete web component',
-			},
+			description: { component: 'The Cosmoz Autocomplete web component' },
 		},
 	},
 };
 
-export const Basic = {
+export default meta;
+type Story = StoryObj<AutocompleteArgs>;
+
+export const Basic: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
 		textProperty: 'text',
 		value: [colors[0], colors[3]],
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'The basic version',
-			},
-		},
+	play: async ({ canvas, step }) => {
+		await step('Renders with chips', async () => {
+			await canvas.findByShadowText(/Red/u);
+			await canvas.findByShadowText(/Blue/u);
+		});
+		await step('Has input field', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			);
+			expect(autocomplete).toBeTruthy();
+			expect(
+				autocomplete?.shadowRoot?.querySelector('cosmoz-input'),
+			).toBeTruthy();
+		});
 	},
 };
 
-export const Single = {
+export const Single: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -183,16 +179,12 @@ export const Single = {
 		limit: 1,
 		value: [colors[2]],
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Choose a single value',
-			},
-		},
+	play: async ({ canvas }) => {
+		await canvas.findByShadowText(/Purple/u);
 	},
 };
 
-export const DefaultIndex = {
+export const DefaultIndex: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -200,16 +192,19 @@ export const DefaultIndex = {
 		limit: 1,
 		defaultIndex: -1,
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Select a default index for the colors, in this case -1',
-			},
-		},
+	play: async ({ step }) => {
+		await step('Renders with no initial selection', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			);
+			expect(
+				autocomplete?.shadowRoot?.querySelectorAll('.chip')?.length ?? 0,
+			).toBe(0);
+		});
 	},
 };
 
-export const DefaultIndexSingleValue = {
+export const DefaultIndexSingleValue: Story = {
 	args: {
 		label: 'Choose color (single value)',
 		source: colors.slice(0, 1),
@@ -217,16 +212,9 @@ export const DefaultIndexSingleValue = {
 		limit: 1,
 		defaultIndex: -1,
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Select a default index for the color, in this case -1',
-			},
-		},
-	},
 };
 
-export const Disabled = {
+export const Disabled: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -235,16 +223,15 @@ export const Disabled = {
 		value: colors[0],
 		disabled: true,
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'The disabled version',
-			},
-		},
+	play: async () => {
+		const autocomplete = document.querySelector<HTMLElement>(
+			'cosmoz-autocomplete',
+		);
+		expect(autocomplete?.hasAttribute('disabled')).toBe(true);
 	},
 };
 
-export const Placeholder = {
+export const Placeholder: Story = {
 	args: {
 		placeholder: 'Choose color (placeholder text)',
 		source: colors,
@@ -252,16 +239,9 @@ export const Placeholder = {
 		textProperty: 'text',
 		value: colors[0],
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Use the placeholder instead of the label',
-			},
-		},
-	},
 };
 
-export const Select = {
+export const Select: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -272,16 +252,12 @@ export const Select = {
 		preserveOrder: true,
 		min: 1,
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Make it act like a Select component',
-			},
-		},
+	play: async ({ canvas }) => {
+		await canvas.findByShadowText(/Purple/u);
 	},
 };
 
-export const Overflown = {
+export const Overflown: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -289,16 +265,15 @@ export const Overflown = {
 		value: [colors[0], colors[1], colors[2]],
 		overflowed: true,
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Overflown variant',
-			},
-		},
+	play: async () => {
+		const autocomplete = document.querySelector<HTMLElement>(
+			'cosmoz-autocomplete',
+		);
+		expect(autocomplete?.style.maxWidth).toBe('170px');
 	},
 };
 
-export const Wrap = {
+export const Wrap: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -307,23 +282,19 @@ export const Wrap = {
 		wrap: true,
 		overflowed: true,
 	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Overflown and Wrapped variant',
-			},
-		},
+	play: async () => {
+		const autocomplete = document.querySelector<HTMLElement>(
+			'cosmoz-autocomplete',
+		);
+		expect(autocomplete?.hasAttribute('wrap')).toBe(true);
 	},
 };
 
-export const AccentInsensitiveSearch = {
+export const AccentInsensitiveSearch: Story = {
 	render: () => html`
-		${CSS}
 		<div>
 			<div style="margin: 2rem 0;">
-				<h3 style="margin-bottom: 10px; font-family: 'Inter', sans-serif;">
-					Spanish Words
-				</h3>
+				<h3 style="margin-bottom: 10px;">Spanish Words</h3>
 				<cosmoz-autocomplete
 					label="Choose Spanish word"
 					.source=${spanishWords}
@@ -332,9 +303,7 @@ export const AccentInsensitiveSearch = {
 				></cosmoz-autocomplete>
 			</div>
 			<div style="margin: 2rem 0;">
-				<h3 style="margin-bottom: 10px; font-family: 'Inter', sans-serif;">
-					Swedish Words
-				</h3>
+				<h3 style="margin-bottom: 10px;">Swedish Words</h3>
 				<cosmoz-autocomplete
 					label="Choose Swedish word"
 					.source=${swedishWords}
@@ -344,13 +313,29 @@ export const AccentInsensitiveSearch = {
 			</div>
 		</div>
 	`,
-	parameters: {
-		docs: {
-			description: {
-				story:
-					'Test accent-insensitive search with Spanish and Swedish words. Try typing "medico", "telefono", or "musica" in ' +
-					'the Spanish component, or "forsok", "manad", "karlek" in the Swedish component to see how the search handles accented variants.',
-			},
-		},
+};
+
+export const InteractionTest: Story = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		value: [colors[0]],
+	},
+	play: async ({ step }) => {
+		await step('Renders with initial value', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			);
+			expect(autocomplete).toBeTruthy();
+
+			// Verify chip is rendered
+			const chip = autocomplete?.shadowRoot?.querySelector('.chip');
+			expect(chip).toBeTruthy();
+
+			// Verify input is present
+			const input = autocomplete?.shadowRoot?.querySelector('cosmoz-input');
+			expect(input).toBeTruthy();
+		});
 	},
 };
