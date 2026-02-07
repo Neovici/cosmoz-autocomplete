@@ -11,4 +11,10 @@ export default [
 			'import/group-exports': 0,
 		},
 	},
+	{
+		files: ['stories/**/*.ts'],
+		rules: {
+			'max-lines': 'off',
+		},
+	},
 ];

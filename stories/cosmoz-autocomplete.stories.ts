@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, TemplateResult } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
-import { expect } from 'storybook/test';
+import { expect, userEvent } from 'storybook/test';
 import '../src/autocomplete';
 import { colors } from './data';
 import { spanishWords } from './spanish-words';
@@ -252,8 +252,20 @@ export const Select: Story = {
 		preserveOrder: true,
 		min: 1,
 	},
-	play: async ({ canvas }) => {
-		await canvas.findByShadowText(/Purple/u);
+	play: async ({ canvas, step }) => {
+		await step('Renders with initial selection', async () => {
+			await canvas.findByShadowText(/Purple/u);
+		});
+
+		await step('Select Blue option', async () => {
+			const label = await canvas.findByShadowText(/Choose color/u);
+			await userEvent.click(label);
+			const blueOption = await canvas.findByShadowRole('option', {
+				name: 'Blue',
+			});
+			await userEvent.click(blueOption);
+			await canvas.findByShadowText(/Blue/u);
+		});
 	},
 };
 
@@ -320,22 +332,33 @@ export const InteractionTest: Story = {
 		label: 'Choose color',
 		source: colors,
 		textProperty: 'text',
-		value: [colors[0]],
+		value: [colors[0], colors[3]],
 	},
-	play: async ({ step }) => {
+	play: async ({ canvas, step }) => {
 		await step('Renders with initial value', async () => {
 			const autocomplete = document.querySelector<HTMLElement>(
 				'cosmoz-autocomplete',
 			);
 			expect(autocomplete).toBeTruthy();
+			await canvas.findByShadowText(/Red/u);
+			await canvas.findByShadowText(/Blue/u);
+		});
 
-			// Verify chip is rendered
-			const chip = autocomplete?.shadowRoot?.querySelector('.chip');
-			expect(chip).toBeTruthy();
+		await step('Remove chips and select new item', async () => {
+			const input = await canvas.findByShadowRole('textbox');
+			await userEvent.click(input);
+			await userEvent.keyboard('{Backspace}{Backspace}');
+			await userEvent.type(input, 'Wh');
+			await userEvent.keyboard('{Enter}');
+			await canvas.findByShadowText(/White/u);
+		});
 
-			// Verify input is present
-			const input = autocomplete?.shadowRoot?.querySelector('cosmoz-input');
-			expect(input).toBeTruthy();
+		await step('No results message', async () => {
+			const input = await canvas.findByShadowRole('textbox');
+			await userEvent.click(input);
+			await userEvent.tripleClick(input);
+			await userEvent.type(input, 'Asdf');
+			await canvas.findByShadowText(/No results found/u);
 		});
 	},
 };
