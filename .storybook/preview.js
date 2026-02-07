@@ -35,6 +35,7 @@ customElements.define(
 );
 
 export default {
+	tags: ['autodocs'],
 	parameters: {
 		options: {
 			storySort: {
