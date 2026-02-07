@@ -1,4 +1,4 @@
-import{c as I,u as b,a as h,i as L,d as M,e as w,b as m,A as j}from"./iframe-CXlGyGIC.js";import{s as D,a as F,A as N,b as y,c as p,n as v,o as G}from"./data-BN0pEI96.js";import"./preload-helper-PPVm8Dsz.js";const K="data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E",Q=I`
+import{u as b,a as w,b as m,A as I}from"./iframe-Bqd4JqMi.js";import{a as L,u as h,i as M,b as j,s as D,d as F,A as N,e as y,c as p,n as v,o as G}from"./data-mndGIFjn.js";import"./preload-helper-PPVm8Dsz.js";const K="data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E",Q=L`
 	.chip[data-state='excluded'] {
 		background: var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54));
 	}
@@ -33,7 +33,7 @@ import{c as I,u as b,a as h,i as L,d as M,e as w,b as m,A as j}from"./iframe-CXl
 			rgba(244, 67, 54, 0.1)
 		);
 	}
-`,f=o=>({item:o,excluded:!1}),T=o=>o.item,U=o=>{const[e,t]=b(o),c=h(r=>t(s=>{const l=L(r,s?.map(T));if(!l)return;if(!s)return l.map(f);const a=s.reduce((n,u)=>l.includes(u.item)?[...n,u]:u.excluded?n:[...n,{...u,excluded:!0}],[]),i=l.filter(n=>!s.some(u=>u.item===n)).map(f);return[...a,...i]}),[]);return{value:e,setExcludingValue:c,setValue:t}},W=(o,e)=>o?.some(t=>t.item===e&&t.excluded),k=(o,e)=>e&&W(o,e)?"excluded":j,Y=o=>(e,t,{highlight:c,select:r,textual:s,isSelected:l})=>{const a=s(e);return m`<div
+`,f=o=>({item:o,excluded:!1}),T=o=>o.item,U=o=>{const[e,t]=b(o),c=h(r=>t(s=>{const l=M(r,s?.map(T));if(!l)return;if(!s)return l.map(f);const a=s.reduce((n,u)=>l.includes(u.item)?[...n,u]:u.excluded?n:[...n,{...u,excluded:!0}],[]),i=l.filter(n=>!s.some(u=>u.item===n)).map(f);return[...a,...i]}),[]);return{value:e,setExcludingValue:c,setValue:t}},W=(o,e)=>o?.some(t=>t.item===e&&t.excluded),k=(o,e)=>e&&W(o,e)?"excluded":I,Y=o=>(e,t,{highlight:c,select:r,textual:s,isSelected:l})=>{const a=s(e);return m`<div
 				class="item"
 				role="option"
 				part="option ${k(o,e)}"
@@ -57,7 +57,7 @@ import{c as I,u as b,a as h,i as L,d as M,e as w,b as m,A as j}from"./iframe-CXl
 			title=${y(typeof c=="string"?c:void 0)}
 		>
 			${c}
-		</cosmoz-autocomplete-chip>`,X=o=>{const{value:e,setValue:t,setExcludingValue:c}=U("value"),[r,s]=b("text"),l=h(a=>t(i=>i?.filter(n=>n.item!==a)),[]);return N({...o,value:w(()=>e?.map(T),[e]),onChange:h(a=>{c(a)},[]),text:r,onText:h(a=>{s(a)},[]),itemRenderer:w(()=>Y(e),[e]),chipRenderer:w(()=>J(e,l),[e,l])})};customElements.define("cosmoz-autocomplete-excluding",M(X,{observedAttributes:F,styleSheets:[D,Q]}));const{expect:S,userEvent:d,waitFor:Z}=__STORYBOOK_MODULE_TEST__,ee=m`
+		</cosmoz-autocomplete-chip>`,X=o=>{const{value:e,setValue:t,setExcludingValue:c}=U("value"),[r,s]=b("text"),l=h(a=>t(i=>i?.filter(n=>n.item!==a)),[]);return N({...o,value:w(()=>e?.map(T),[e]),onChange:h(a=>{c(a)},[]),text:r,onText:h(a=>{s(a)},[]),itemRenderer:w(()=>Y(e),[e]),chipRenderer:w(()=>J(e,l),[e,l])})};customElements.define("cosmoz-autocomplete-excluding",j(X,{observedAttributes:F,styleSheets:[D,Q]}));const{expect:S,userEvent:d,waitFor:Z}=__STORYBOOK_MODULE_TEST__,ee=m`
     <style>
         .custom-message {
             font-size: 14px;
