@@ -36,6 +36,11 @@ customElements.define(
 
 export default {
 	parameters: {
+		options: {
+			storySort: {
+				order: ['Autocomplete', 'Autocomplete Excluding'],
+			},
+		},
 		docs: {
 			source: {
 				excludeDecorators: true,
