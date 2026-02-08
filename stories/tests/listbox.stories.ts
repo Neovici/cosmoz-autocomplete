@@ -173,3 +173,163 @@ export const DefaultIndex: Story = {
 		});
 	},
 };
+
+export const KeyboardDownCycling: Story = {
+	args: {
+		items: ['Item 0', 'Item 1', 'Item 2'],
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+
+		// ArrowDown 3 times: index 0 → 1 → 2 → wraps to 0
+		await userEvent.keyboard('{ArrowDown}');
+		await userEvent.keyboard('{ArrowDown}');
+		await userEvent.keyboard('{ArrowDown}');
+		await userEvent.keyboard('{Enter}');
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 0', 0);
+		});
+	},
+};
+
+export const KeyboardUpNavigation: Story = {
+	args: {
+		items: ['Item 0', 'Item 1', 'Item 2'],
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+
+		// ArrowDown to index 1, then ArrowUp back to index 0
+		await userEvent.keyboard('{ArrowDown}');
+		await userEvent.keyboard('{ArrowUp}');
+		await userEvent.keyboard('{Enter}');
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 0', 0);
+		});
+	},
+};
+
+export const HighlightAndEnter: Story = {
+	args: {
+		items: ['Item 0', 'Item 1', 'Item 2', 'Item 3'],
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+
+		const listbox = document.querySelector('cosmoz-listbox')!;
+		const items = listbox.shadowRoot?.querySelectorAll('.item[role="option"]');
+		const targetItem = items?.[2];
+		expect(targetItem).toBeTruthy();
+
+		// Dispatch mouseenter to highlight item at index 2
+		targetItem!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+
+		// Enter should select the highlighted item
+		await userEvent.keyboard('{Enter}');
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 2', 2);
+		});
+	},
+};
+
+export const EnterDefaultIndex0: Story = {
+	args: {
+		items: ['Item 0', 'Item 1', 'Item 2'],
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+
+		// With default defaultIndex (0), Enter immediately selects first item
+		await userEvent.keyboard('{Enter}');
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 0', 0);
+		});
+	},
+};
+
+export const CtrlAltIgnoresKeys: Story = {
+	args: {
+		items: ['Item 0', 'Item 1', 'Item 2'],
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+
+		// Ctrl+Alt+ArrowDown should be ignored by the keyboard handler
+		document.dispatchEvent(
+			new KeyboardEvent('keydown', {
+				key: 'ArrowDown',
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+			}),
+		);
+		// Ctrl+Alt+Enter should also be ignored
+		document.dispatchEvent(
+			new KeyboardEvent('keydown', {
+				key: 'Enter',
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+			}),
+		);
+
+		// onSelect should NOT have been called
+		expect(args.onSelect).not.toHaveBeenCalled();
+
+		// Now press Enter without modifiers — should select default index 0
+		await userEvent.keyboard('{Enter}');
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 0', 0);
+		});
+	},
+};
+
+export const LegacyKeyNames: Story = {
+	args: {
+		items: ['Item 0', 'Item 1', 'Item 2'],
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+
+		// Use legacy 'Down' key name (without 'Arrow' prefix)
+		document.dispatchEvent(
+			new KeyboardEvent('keydown', {
+				key: 'Down',
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		// Small delay to allow state update between key events
+		await new Promise((r) => setTimeout(r, 50));
+		document.dispatchEvent(
+			new KeyboardEvent('keydown', {
+				key: 'Down',
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		await new Promise((r) => setTimeout(r, 50));
+		document.dispatchEvent(
+			new KeyboardEvent('keydown', {
+				key: 'Enter',
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 2', 2);
+		});
+	},
+};

@@ -4,12 +4,14 @@ import { expect, fn, userEvent, waitFor } from 'storybook/test';
 import '../../src/autocomplete';
 
 interface AutocompleteArgs {
-	source: { text: string }[];
-	value?: { text: string }[];
+	source: { text: string; id?: number }[];
+	value?: { text: string; id?: number }[];
 	limit?: number;
 	textProperty?: string;
+	valueProperty?: string;
 	onChange?: (v: unknown[]) => void;
 	onText?: (t: string) => void;
+	onSelect?: (v: unknown, meta: unknown) => void;
 	disabled?: boolean;
 	defaultIndex?: number;
 	text?: string;
@@ -22,8 +24,10 @@ const AutocompleteTest = ({
 	value,
 	limit,
 	textProperty = 'text',
+	valueProperty,
 	onChange,
 	onText,
+	onSelect,
 	disabled,
 	defaultIndex,
 	text,
@@ -35,8 +39,10 @@ const AutocompleteTest = ({
 		.value=${value}
 		.limit=${limit}
 		.textProperty=${textProperty}
+		.valueProperty=${valueProperty}
 		.onChange=${onChange}
 		.onText=${onText}
+		.onSelect=${onSelect}
 		.defaultIndex=${defaultIndex}
 		.text=${text}
 		?disabled=${disabled}
@@ -264,5 +270,99 @@ export const TextValueEffects: Story = {
 
 		// The input should show the text property
 		expect(input).toBeTruthy();
+	},
+};
+
+export const ExternalSearchMode: Story = {
+	args: {
+		source: colors,
+		value: [],
+		externalSearch: true,
+		keepOpened: true,
+	},
+	play: async ({ canvas }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		// Type a query that would normally filter items
+		await userEvent.type(input, 'Red');
+
+		// With externalSearch=true, all items should still appear (no client-side filtering)
+		await waitFor(() => {
+			const autocomplete = document.querySelector('cosmoz-autocomplete')!;
+			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
+			const options = listbox?.shadowRoot?.querySelectorAll(
+				'.item[role="option"]',
+			);
+			expect(options?.length).toBe(4);
+		});
+	},
+};
+
+export const ValueProperty: Story = {
+	args: {
+		source: [
+			{ id: 1, text: 'Item 1' },
+			{ id: 2, text: 'Item 2' },
+		],
+		value: [{ id: 1, text: 'Item 1' }],
+		valueProperty: 'id',
+		keepOpened: true,
+	},
+	play: async ({ canvas }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		// Both items should appear in the listbox — the value item is deduplicated by id
+		await waitFor(() => {
+			const autocomplete = document.querySelector('cosmoz-autocomplete')!;
+			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
+			const options = listbox?.shadowRoot?.querySelectorAll(
+				'.item[role="option"]',
+			);
+			expect(options?.length).toBe(2);
+		});
+	},
+};
+
+export const OnSelectCallback: Story = {
+	args: {
+		source: colors,
+		value: [],
+		onSelect: fn(),
+		keepOpened: true,
+	},
+	play: async ({ canvas, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		const option = await canvas.findByShadowRole('option', { name: /Red/u });
+		await userEvent.click(option);
+
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith(colors[0], expect.any(Object));
+		});
+	},
+};
+
+export const Limit1DisablesBackspace: Story = {
+	args: {
+		source: colors,
+		value: [colors[0]],
+		limit: 1,
+		onChange: fn(),
+	},
+	play: async ({ canvas, args }) => {
+		await canvas.findByShadowText(/Red/u);
+
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		// Backspace when limit=1 should NOT remove the chip (use-keys disables handler)
+		await userEvent.keyboard('{Backspace}');
+
+		// Wait a tick to ensure no async callback fires
+		await new Promise((r) => setTimeout(r, 200));
+		expect(args.onChange).not.toHaveBeenCalled();
 	},
 };
