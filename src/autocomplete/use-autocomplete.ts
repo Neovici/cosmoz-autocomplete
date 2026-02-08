@@ -6,7 +6,20 @@ import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useCallback, useEffect, useMemo, useState } from '@pionjs/pion';
 import { useKeys } from './use-keys';
-import { EMPTY, normalize, notify, search, useNotify } from './util';
+import { EMPTY, normalize, notify, search } from './util';
+
+const useNotify = <V>(
+	host: EventTarget,
+	fn: undefined | ((v: V) => void),
+	name: string,
+) =>
+	useCallback(
+		(val: V) => {
+			fn?.(val);
+			host.dispatchEvent(new CustomEvent(name, { detail: val }));
+		},
+		[fn],
+	);
 
 export type Source<I> = (opts: {
 	query?: string;
@@ -23,7 +36,7 @@ interface Base<I> {
 
 	onText: (text: string) => void;
 	onChange: (value: I[], done?: () => void) => void;
-	 
+
 	onSelect: (value: I, meta: Meta<I>) => void;
 }
 

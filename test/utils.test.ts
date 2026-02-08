@@ -1,6 +1,6 @@
 import { strProp } from '@neovici/cosmoz-utils/object';
 import { describe, expect, it } from 'vitest';
-import { search } from '../src/autocomplete/pure';
+import { search } from '../src/autocomplete/util';
 import { mark } from '../src/listbox/util';
 
 describe('search', () => {
