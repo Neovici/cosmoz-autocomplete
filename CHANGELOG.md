@@ -1,3 +1,62 @@
+## [11.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.12.1...v11.0.0) (2026-02-09)
+
+### ⚠ BREAKING CHANGES
+
+* Test infrastructure changed from web-test-runner to Vitest
+
+* chore: include e2e tests in npm test script
+
+* feat: add interaction tests to story play functions
+
+- Add userEvent interactions to test keyboard navigation and selection
+- Create InteractionTest stories for comprehensive E2E-style tests
+- Keep Basic stories with read-only assertions for visual regression tests
+- Add eslint override to disable max-lines for stories folder
+- Test coverage: chip removal, item selection, no-results message, exclude toggle
+
+* chore: enable autodocs for all stories
+
+* chore: reorder stories - Autocomplete before Excluding
+
+* fix: enable autodocs via tags for Storybook 10
+
+* refactor: remove keybindings infrastructure (to be added later)
+
+* test: migrate removed tests to Vitest unit tests and Storybook interaction tests
+
+- Add unit tests for pure functions (search, mark) in test/utils.test.ts (11 tests)
+- Extract pure functions to src/autocomplete/pure.ts for jsdom testability
+- Add Storybook test stories for listbox (7 tests) and autocomplete (11 tests)
+- Configure vitest with 'unit' project for jsdom-based tests
+- Add jsdom dependency for unit testing pure functions
+- Update eslint config for test files
+
+* test: add missing coverage for external search, valueProperty, onSelect, keyboard edge cases
+
+Add 10 new test stories to close coverage gaps from the @web/test-runner migration:
+
+Autocomplete (4 stories):
+- ExternalSearchMode: verifies client-side filtering is bypassed
+- ValueProperty: verifies deduplication by valueProperty (id)
+- OnSelectCallback: verifies onSelect receives (item, meta)
+- Limit1DisablesBackspace: verifies use-keys disables when limit=1
+
+Listbox (6 stories):
+- KeyboardDownCycling: ArrowDown wraps from last to first item
+- KeyboardUpNavigation: ArrowDown then ArrowUp returns to original
+- HighlightAndEnter: mouseenter sets highlight, Enter selects it
+- EnterDefaultIndex0: Enter with implicit defaultIndex=0
+- CtrlAltIgnoresKeys: Ctrl+Alt modifier combo is ignored
+- LegacyKeyNames: legacy 'Down'/'Up' key names are handled
+
+* ci: remove separate playwright workflow, run e2e via npm test
+
+* refactor: merge pure.ts back into util.ts, move useNotify into use-autocomplete
+
+### Miscellaneous Chores
+
+* migrate tests to Vitest with Storybook interaction tests ([#224](https://github.com/Neovici/cosmoz-autocomplete/issues/224)) ([923d855](https://github.com/Neovici/cosmoz-autocomplete/commit/923d85530c621ec36217bb00cae0a0c8b4568c19))
+
 ## [10.12.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.12.0...v10.12.1) (2026-02-06)
 
 ### Bug Fixes
