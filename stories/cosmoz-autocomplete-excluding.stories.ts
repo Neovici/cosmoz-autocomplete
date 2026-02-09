@@ -1,16 +1,44 @@
-import { html } from 'lit-html';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html, TemplateResult } from 'lit-html';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
+import { expect, userEvent, waitFor } from 'storybook/test';
 import '../src/excluding';
 import { colors } from './data';
 
+interface ExcludingValue {
+	item: { text: string };
+	excluded: boolean;
+}
+
+interface AutocompleteExcludingArgs {
+	source: { text: string }[];
+	limit?: number;
+	textProperty: string;
+	min?: number;
+	label?: string;
+	value?: ExcludingValue[];
+	disabled?: boolean;
+	placeholder?: string;
+	defaultIndex?: number;
+	showSingle?: boolean;
+	preserveOrder?: boolean;
+	wrap?: boolean;
+	keepOpened?: boolean;
+	keepQuery?: boolean;
+	overflowed?: boolean;
+	responseTime?: number;
+	contour?: boolean;
+	uppercase?: boolean;
+	excludedBgColor?: string;
+	excludedChipColor?: string;
+	excludedChipClearBgColor?: string;
+	excludedChipClearStrokeColor?: string;
+	excludedListboxActiveColor?: string;
+}
+
 const CSS = html`
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
-		html {
-			font-family: 'Inter', sans-serif;
-		}
-
 		.custom-message {
 			font-size: 14px;
 			font-weight: 500;
@@ -19,7 +47,10 @@ const CSS = html`
 	</style>
 `;
 
-const delay = (source, time) => {
+const delay = <T>(
+	source: T,
+	time?: number,
+): T | (({ active }: { active: boolean }) => Promise<T> | undefined) => {
 	if (time == null) return source;
 	return ({ active }) =>
 		active
@@ -50,7 +81,7 @@ const Autocomplete = ({
 	excludedChipClearBgColor,
 	excludedChipClearStrokeColor,
 	excludedListboxActiveColor,
-}) => {
+}: AutocompleteExcludingArgs): TemplateResult => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
 		'--cosmoz-autocomplete-excluded-bg-color': excludedBgColor,
@@ -90,7 +121,7 @@ const Autocomplete = ({
 	`;
 };
 
-export default {
+const meta: Meta<AutocompleteExcludingArgs> = {
 	title: 'Autocomplete Excluding',
 	render: Autocomplete,
 	argTypes: {
@@ -199,7 +230,10 @@ export default {
 	},
 };
 
-export const Basic = {
+export default meta;
+type Story = StoryObj<AutocompleteExcludingArgs>;
+
+export const Basic: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
@@ -216,5 +250,69 @@ export const Basic = {
 				story: 'The basic version',
 			},
 		},
+	},
+	play: async ({ canvas, step }) => {
+		await step('Renders with chips showing excluded state', async () => {
+			await canvas.findByShadowText(/Red/u);
+			await canvas.findByShadowText(/Blue/u);
+		});
+
+		await step('Has the autocomplete-excluding element', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete-excluding',
+			);
+			expect(autocomplete).toBeTruthy();
+		});
+	},
+};
+
+export const InteractionTest: Story = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		value: [
+			{ item: colors[0], excluded: true },
+			{ item: colors[3], excluded: false },
+		],
+		keepOpened: true,
+	},
+	play: async ({ canvas, step }) => {
+		await step('Renders with chips showing excluded state', async () => {
+			await canvas.findByShadowText(/Red/u);
+			await canvas.findByShadowText(/Blue/u);
+		});
+
+		await step('Toggle exclude state via listbox', async () => {
+			const input = await canvas.findByShadowRole('textbox');
+			await userEvent.click(input);
+			const blueOption = await canvas.findByShadowRole('option', {
+				name: /Blue/u,
+			});
+			await userEvent.click(blueOption); // Select Blue
+			await userEvent.click(blueOption); // Toggle to excluded
+		});
+
+		await step('Toggle exclude state via chip', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete-excluding',
+			)!;
+			const redChipToggle =
+				autocomplete.shadowRoot!.querySelector('[title="Red"] span');
+			await userEvent.click(redChipToggle!);
+		});
+
+		await step('No results custom message', async () => {
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete-excluding',
+			)!;
+			const input = await canvas.findByShadowRole('textbox');
+			await userEvent.click(input);
+			await userEvent.tripleClick(input);
+			await userEvent.type(input, 'Asdf');
+			await waitFor(() =>
+				expect(autocomplete).toHaveTextContent('Custom message no results'),
+			);
+		});
 	},
 };
