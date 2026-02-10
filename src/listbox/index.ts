@@ -3,7 +3,6 @@ import {
 	virtualize,
 	virtualizerRef,
 } from '@lit-labs/virtualizer/virtualize.js';
-import { connectable } from '@neovici/cosmoz-utils/connectable';
 import { sheet } from '@neovici/cosmoz-utils';
 import { spreadProps } from '@neovici/cosmoz-utils/directives/spread-props';
 import { noop } from '@neovici/cosmoz-utils/function';
@@ -11,7 +10,6 @@ import { useStyleSheet } from '@neovici/cosmoz-utils/hooks/use-stylesheet';
 import { props } from '@neovici/cosmoz-utils/object';
 import { component, html, useEffect, useRef } from '@pionjs/pion';
 import { ref } from 'lit-html/directives/ref.js';
-import { StyleInfo, styleMap } from 'lit-html/directives/style-map.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
 
@@ -72,28 +70,20 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 
 customElements.define(
 	'cosmoz-listbox',
-	connectable(
-		component<Props<unknown>>(Listbox, { styleSheets: [sheet(style)] }),
-	),
+	component<Props<unknown>>(Listbox, { styleSheets: [sheet(style)] }),
 );
 
 interface ListboxProps<I> extends Props<I> {
 	multi?: boolean;
-	setFloating: (el?: Element) => void;
-	styles: StyleInfo;
 }
 
 export const listbox = <I>(
-	{ multi, setFloating, styles, ...thru }: ListboxProps<I>,
+	{ multi, ...thru }: ListboxProps<I>,
 	content: unknown,
 ) =>
 	html`<cosmoz-listbox
-		style="${styleMap(styles)}"
-		@connected="${(e: Event) => (e.target as HTMLElement).showPopover?.()}"
-		popover="manual"
 		part="listbox"
 		?multi=${multi}
-		${ref(setFloating)}
 		...=${spreadProps(props(properties)(thru))}
 		>${content}</cosmoz-listbox
 	>`;

@@ -106,10 +106,13 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 	});
 };
 
+const shadowRootInit = { mode: 'open' as const, delegatesFocus: true };
+
 customElements.define(
 	'cosmoz-autocomplete-excluding',
 	component(AutocompleteExcluding, {
 		observedAttributes,
 		styleSheets: [style, excludingStyle],
+		shadowRootInit,
 	}),
 );

@@ -1,6 +1,8 @@
-import { html } from '@pionjs/pion';
+import { useKeybindings } from '@neovici/cosmoz-utils/keybindings';
+import { component, html } from '@pionjs/pion';
 import i18next from 'i18next';
 import { within as withinShadow } from 'shadow-dom-testing-library';
+import { autocompleteKeybindings } from '../src/autocomplete/autocomplete-keybindings';
 
 // Initialize i18next for the autocomplete component
 i18next.init({
@@ -13,6 +15,24 @@ i18next.init({
 		},
 	},
 });
+
+/**
+ * Component that provides keybindings context for all stories.
+ * Uses children prop instead of slot since shadow DOM is disabled
+ * to allow context events to bubble up to the provider.
+ */
+customElements.define(
+	'storybook-keybindings',
+	component(
+		(props) => {
+			const register = useKeybindings(autocompleteKeybindings);
+			return html`<cosmoz-keybinding-provider .value=${register}>
+				${props.content}
+			</cosmoz-keybinding-provider>`;
+		},
+		{ useShadowDOM: false },
+	),
+);
 
 export default {
 	tags: ['autodocs'],
@@ -55,7 +75,9 @@ export default {
 						font-family: 'Inter', sans-serif;
 					}
 				</style>
-				<div class="story-root">${story()}</div>
+				<storybook-keybindings
+					.content=${html`<div class="story-root">${story()}</div>`}
+				></storybook-keybindings>
 			`;
 		},
 	],

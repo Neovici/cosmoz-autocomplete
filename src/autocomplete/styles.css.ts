@@ -7,6 +7,10 @@ export default css`
 		min-width: 35px;
 	}
 
+	cosmoz-dropdown-next {
+		display: block;
+	}
+
 	cosmoz-input::part(control) {
 		display: flex;
 		gap: 4px;

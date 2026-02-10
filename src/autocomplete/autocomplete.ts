@@ -1,17 +1,8 @@
-import {
-	Placement,
-	defaultMiddleware,
-	size,
-	useFloating,
-} from '@neovici/cosmoz-dropdown/use-floating';
+import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
 import '@neovici/cosmoz-input';
-import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
-import { useImperativeApi } from '@neovici/cosmoz-utils/hooks/use-imperative-api';
-import { useEffect } from '@pionjs/pion';
 import { t } from 'i18next';
 import { html } from 'lit-html';
 import { live } from 'lit-html/directives/live.js';
-import { ref } from 'lit-html/directives/ref.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { listbox } from '../listbox';
@@ -35,7 +26,6 @@ export interface Props<I> extends Base<I> {
 	wrap?: boolean;
 	defaultIndex?: number;
 	externalSearch?: boolean;
-	placement?: Placement;
 	itemRenderer?: ItemRenderer<I>;
 	chipRenderer?: ChipRenderer<I>;
 }
@@ -49,34 +39,23 @@ const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
 
-const middleware = [
-	size({
-		apply({ rects, elements }) {
-			Object.assign(elements.floating.style, {
-				minWidth: `${Math.max(rects.reference.width, rects.floating.width)}px`,
-			});
-		},
-	}),
-	...defaultMiddleware,
-];
-
 const shouldShowDropdown = <I>({
-	active,
+	opened,
 	isSingle,
 	showSingle,
-}: Pick<AProps<I>, 'active' | 'showSingle'> & {
+	hasResultsOrQuery,
+}: Pick<AProps<I>, 'opened' | 'showSingle'> & {
 	isSingle: boolean;
+	hasResultsOrQuery: boolean;
 }) => {
-	if (!active) return false;
-
-	const disallowedSingle = isSingle && !showSingle;
-
-	return !disallowedSingle;
+	if (!opened) return false;
+	if (isSingle && !showSingle) return false;
+	return hasResultsOrQuery;
 };
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
-				active,
+				opened,
 				invalid,
 				errorMessage,
 				label,
@@ -87,8 +66,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				textual,
 				text,
 				onText,
-				onFocus,
-				onClick,
+				onToggle,
 				onDeselect,
 				value,
 				limit,
@@ -96,45 +74,23 @@ const autocomplete = <I>(props: AProps<I>) => {
 				showSingle,
 				items,
 				source$,
-				placement,
 				loading,
 				chipRenderer,
 			} = props,
-			host = useHost(),
 			isOne = limit == 1, // eslint-disable-line eqeqeq
 			isSingle = isOne && value?.[0] != null;
-
-		const { styles, setReference, setFloating } = useFloating({
-			placement,
-			middleware,
-		});
-
-		useEffect(() => {
-			host.addEventListener('focusin', onFocus);
-			host.addEventListener('focusout', onFocus);
-			return () => {
-				host.removeEventListener('focusin', onFocus);
-				host.removeEventListener('focusout', onFocus);
-			};
-		}, [onFocus]);
-
-		useImperativeApi(
-			{
-				focus: () =>
-					(
-						host.shadowRoot?.querySelector('#input') as HTMLInputElement
-					)?.focus(),
-			},
-			[],
-		);
 
 		const hasResultsOrQuery =
 			loading || items.length > 0 || (text != null && text.length > 0);
 
-		return html`<cosmoz-input
+		return html`<cosmoz-dropdown-next
+			open-on-focus
+			@dropdown-toggle=${onToggle}
+		>
+			<cosmoz-input
+				slot="button"
 				id="input"
 				part="input"
-				${ref(setReference)}
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
 				?no-label-float=${noLabelFloat}
@@ -157,7 +113,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 				)}
 				.value=${live(text)}
 				@value-changed=${onText}
-				@click=${onClick}
 				autocomplete="off"
 				exportparts=${inputParts}
 				?data-one=${isOne}
@@ -178,9 +133,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 
 			${when(
 				shouldShowDropdown({
-					active,
+					opened,
 					isSingle,
 					showSingle,
+					hasResultsOrQuery,
 				}),
 				() =>
 					listbox<I>(
@@ -188,13 +144,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 							...props,
 							items,
 							multi: !isOne,
-							setFloating,
-							styles: {
-								...styles,
-								// WORKAROUND: hide the listbox if there are no results, don't remove it from DOM
-								// TODO: revert https://github.com/Neovici/cosmoz-autocomplete/pull/206 after https://github.com/pionjs/pion/issues/64 is fixed
-								display: hasResultsOrQuery ? undefined : 'none',
-							},
 						},
 						when(
 							loading,
@@ -210,7 +159,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 								),
 						),
 					),
-			)}`;
+			)}
+		</cosmoz-dropdown-next>`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {

@@ -35,12 +35,12 @@ const overflow = (host: HTMLElement) => {
 
 export const useOverflow = <I>({
 	value,
-	active,
+	opened,
 	wrap,
 	limit,
 }: {
 	value: I[];
-	active?: boolean;
+	opened?: boolean;
 	wrap?: boolean;
 	limit?: number;
 }) => {
@@ -62,6 +62,6 @@ export const useOverflow = <I>({
 
 	useLayoutEffect(
 		() => (enabled ? doRaf() : undefined),
-		[enabled, width, active, value],
+		[enabled, width, opened, value],
 	);
 };
