@@ -1,4 +1,4 @@
-import{p as h}from"./index-Bc9w9qKN.js";import{b as k}from"./iframe-Bmge3YME.js";import"./preload-helper-PPVm8Dsz.js";const{expect:t,fn:n,userEvent:a,waitFor:s}=__STORYBOOK_MODULE_TEST__,B=({items:e,textual:o,query:g,onSelect:i,value:S,valueProperty:E,defaultIndex:v})=>k`
+import{p as h}from"./index-BRgu5H9a.js";import{b as k}from"./iframe-BkQ9fBFD.js";import"./preload-helper-PPVm8Dsz.js";const{expect:t,fn:n,userEvent:a,waitFor:s}=__STORYBOOK_MODULE_TEST__,B=({items:e,textual:o,query:g,onSelect:i,value:S,valueProperty:E,defaultIndex:v})=>k`
     <cosmoz-listbox
         .items=${e}
         .textual=${o}
