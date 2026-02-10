@@ -1,7 +1,7 @@
 <!doctype html>
 <!--suppress HtmlUnknownTarget -->
 <html lang="en">
-  <head>
+  <head><script type="module" src="/vite-inject-mocker-entry.js"></script>
     <meta charset="utf-8" />
     <title>Storybook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,7 +47,7 @@
       window.CHANNEL_OPTIONS = {};
       window.FEATURES = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true,"viewport":true,"highlight":true,"controls":true,"interactions":true,"actions":true,"backgrounds":true,"outline":true,"measure":true,"sidebarOnboardingChecklist":true};
       window.STORIES = [{"titlePrefix":"","directory":"./stories","files":"**/*.stories.@(js|jsx|mjs|ts|tsx)","importPathMatcher":"^\\.[\\\\/](?:stories(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|mjs|ts|tsx))$"}];
-      window.DOCS_OPTIONS = {"autodocs":"tag"};
+      window.DOCS_OPTIONS = {"defaultName":"Docs","autodocs":true};
       window.TAGS_OPTIONS = {};
 
       
@@ -547,7 +547,8 @@
   }
 </script>
 
-    <script type="module" crossorigin src="./assets/iframe-yA40cBYt.js"></script>
+    <script type="module" crossorigin src="./assets/iframe-Bmge3YME.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-PPVm8Dsz.js">
   </head>
 
   <body>
