@@ -33,12 +33,13 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 };
 
 const styleSheets = [sheet(style)];
+const shadowRootInit = { mode: 'open' as const, delegatesFocus: true };
 
 customElements.define(
 	'cosmoz-autocomplete-ui',
-	component(Autocomplete, { observedAttributes, styleSheets }),
+	component(Autocomplete, { observedAttributes, styleSheets, shadowRootInit }),
 );
 customElements.define(
 	'cosmoz-autocomplete',
-	component(Standalone, { observedAttributes, styleSheets }),
+	component(Standalone, { observedAttributes, styleSheets, shadowRootInit }),
 );

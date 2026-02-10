@@ -1,11 +1,11 @@
-import { useFocus } from '@neovici/cosmoz-dropdown/use-focus';
 import { array, without } from '@neovici/cosmoz-utils/array';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
+import { useActivity } from '@neovici/cosmoz-utils/keybindings';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import { useCallback, useEffect, useMemo, useState } from '@pionjs/pion';
-import { useKeys } from './use-keys';
+import { AUTOCOMPLETE_DESELECT_LAST } from './autocomplete-keybindings';
 import { EMPTY, normalize, notify, search } from './util';
 
 const useNotify = <V>(
@@ -41,7 +41,7 @@ interface Base<I> {
 }
 
 interface Meta<I> extends Omit<Base<I>, 'value'> {
-	setClosed: (closed: boolean) => void;
+	setOpened: (opened: boolean) => void;
 	value: I[];
 }
 
@@ -52,7 +52,6 @@ export interface Props<I> extends Base<I> {
 	textual?: (prop?: string) => (i: I) => string;
 	valueProperty?: string;
 	disabled?: boolean;
-	onFocus?: (focused?: boolean) => void;
 	preserveOrder?: boolean;
 	defaultIndex?: number;
 	externalSearch?: boolean;
@@ -75,20 +74,20 @@ export const useAutocomplete = <I>({
 	preserveOrder,
 	defaultIndex,
 	externalSearch,
-	...thru
 }: Props<I>) => {
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
 		),
-		{ active, focused, onFocus, setClosed } = useFocus(thru),
+		host = useHost(),
+		// Popover open/close state, synced from cosmoz-dropdown-next's dropdown-toggle event
+		[opened, setOpened] = useState(false),
 		empty = !text,
 		query = useMemo(() => text?.trim(), [text]),
-		host = useHost(),
 		onText = useNotify(host, _onText, 'text'),
 		onChange = useCallback(
 			(val: I[]) => {
-				_onChange?.(val, () => setClosed(true));
+				_onChange?.(val, () => setOpened(false));
 				notify(host, 'value', val);
 			},
 			[_onChange],
@@ -97,26 +96,36 @@ export const useAutocomplete = <I>({
 		source$ = useMemo(
 			() =>
 				Promise.resolve(
-					typeof source === 'function' ? source({ query, active }) : source,
+					typeof source === 'function'
+						? source({ query, active: opened })
+						: source,
 				).then(normalize),
-			[source, active, query],
+			[source, opened, query],
 		),
 		value = useMemo(() => array(_value), [_value]);
 
 	useEffect(() => source$.then(setOptions), [source$]);
 
-	useKeys({
-		focused,
-		empty,
-		limit,
-		value,
-		onChange,
-		onText,
-	});
+	// Backspace to deselect last chip (when input is empty and multi-select)
+	useActivity(
+		{
+			activity: AUTOCOMPLETE_DESELECT_LAST,
+			callback: () => {
+				const values = array(value);
+				if (values.length > 0) {
+					onChange(values.slice(0, -1));
+				}
+			},
+			check: () => empty && limit !== 1 && host.matches(':focus-within'),
+			element: () => host,
+		},
+		[],
+	);
 
+	// Clear query when popover closes
 	useEffect(() => {
-		if (!focused && !keepQuery) onText('');
-	}, [focused, keepQuery]);
+		if (!opened && !keepQuery) onText('');
+	}, [opened, keepQuery]);
 
 	const meta = useMeta<Meta<I>>({
 		onText,
@@ -126,21 +135,21 @@ export const useAutocomplete = <I>({
 		min,
 		keepQuery,
 		keepOpened,
-		setClosed,
+		setOpened,
 		onSelect,
 	});
 
 	const [, , state] = usePromise(source$);
 
 	return {
-		active,
+		opened,
 		query,
 		textual,
 		value,
 		source$,
 		loading: state === 'pending',
 		items: useMemo(() => {
-			if (!active) return EMPTY;
+			if (!opened) return EMPTY;
 
 			const items = preserveOrder
 				? options
@@ -149,7 +158,7 @@ export const useAutocomplete = <I>({
 			return externalSearch ? items : search(items, query, textual);
 		}, [
 			options,
-			active,
+			opened,
 			query,
 			textual,
 			empty,
@@ -158,14 +167,16 @@ export const useAutocomplete = <I>({
 			valueProperty,
 			externalSearch,
 		]),
-		onClick: useCallback(() => setClosed(false), []),
-		onFocus,
+		// Sync opened state from cosmoz-dropdown-next's composed dropdown-toggle event
+		onToggle: useCallback((e: Event) => {
+			setOpened((e as ToggleEvent).newState === 'open');
+		}, []),
 		onText: useCallback(
 			(e: InputEvent) => {
 				onText((e.target as HTMLInputElement).value);
-				setClosed(false);
+				setOpened(true);
 			},
-			[onText, text, setClosed],
+			[onText, text, setOpened],
 		),
 		onSelect: useCallback(
 			(newVal: I) => {
@@ -178,10 +189,10 @@ export const useAutocomplete = <I>({
 					value: val,
 					keepQuery,
 					keepOpened,
-					setClosed,
+					setOpened,
 				} = meta;
 				if (!keepQuery) onText('');
-				if (!keepOpened) setClosed(true);
+				if (!keepOpened) setOpened(false);
 				const value = array(val),
 					deselect = value.includes(newVal);
 
