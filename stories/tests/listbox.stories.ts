@@ -12,6 +12,7 @@ interface ListboxArgs {
 	value?: unknown;
 	valueProperty?: string;
 	defaultIndex?: number;
+	itemLimit?: number;
 }
 
 const ListboxTest = ({
@@ -22,6 +23,7 @@ const ListboxTest = ({
 	value,
 	valueProperty,
 	defaultIndex,
+	itemLimit,
 }: ListboxArgs): TemplateResult => html`
 	<cosmoz-listbox
 		.items=${items}
@@ -31,6 +33,7 @@ const ListboxTest = ({
 		.value=${value}
 		.valueProperty=${valueProperty}
 		.defaultIndex=${defaultIndex}
+		.itemLimit=${itemLimit}
 	></cosmoz-listbox>
 `;
 
@@ -249,6 +252,53 @@ export const EnterDefaultIndex0: Story = {
 		// With default defaultIndex (0), Enter immediately selects first item
 		await userEvent.keyboard('{Enter}');
 
+		await waitFor(() => {
+			expect(args.onSelect).toHaveBeenCalledWith('Item 0', 0);
+		});
+	},
+};
+
+const getHighlightedIndex = (listbox: Element) => {
+	const items = listbox.shadowRoot!.querySelectorAll('.item[role="option"]');
+	for (const item of items) {
+		const bg = getComputedStyle(item).backgroundColor;
+		if (bg !== 'rgba(0, 0, 0, 0)')
+			{return Number(item.getAttribute('data-index'));}
+	}
+	return -1;
+};
+
+export const KeyboardFullCycle: Story = {
+	args: {
+		items: Array.from({ length: 10 }, (_, i) => `Item ${i}`),
+		itemLimit: 5,
+		onSelect: fn(),
+	},
+	play: async ({ args }) => {
+		await waitForLayout();
+		const listbox = document.querySelector('cosmoz-listbox')!;
+
+		// Initial highlight should be on index 0
+		await waitFor(() => {
+			expect(getHighlightedIndex(listbox)).toBe(0);
+		});
+
+		// Arrow down through all items, verifying highlight at each step
+		for (let i = 1; i < 10; i++) {
+			await userEvent.keyboard('{ArrowDown}');
+			await waitFor(() => {
+				expect(getHighlightedIndex(listbox)).toBe(i);
+			});
+		}
+
+		// One more ArrowDown wraps back to 0
+		await userEvent.keyboard('{ArrowDown}');
+		await waitFor(() => {
+			expect(getHighlightedIndex(listbox)).toBe(0);
+		});
+
+		// Enter selects the wrapped-around item
+		await userEvent.keyboard('{Enter}');
 		await waitFor(() => {
 			expect(args.onSelect).toHaveBeenCalledWith('Item 0', 0);
 		});
