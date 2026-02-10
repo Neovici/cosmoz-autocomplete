@@ -1,3 +1,25 @@
+## [12.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v11.0.0...v12.0.0) (2026-02-10)
+
+### ⚠ BREAKING CHANGES
+
+* Keyboard navigation and selection now use the
+useActivity() keybindings system instead of global document keydown
+listeners. Consumers must register autocompleteKeybindings (or the
+individual listboxKeybindings + autocomplete bindings) via
+useKeybindings() at the app level for keyboard interaction to work.
+
+* test: add KeyboardFullCycle story for virtualized scroll navigation
+
+* test: force e2e snapshot failure to validate CI
+
+* Revert "test: force e2e snapshot failure to validate CI"
+
+This reverts commit 00e8a27808839f2e0f0facbf8c51653dd768e834.
+
+### Features
+
+* migrate to cosmoz-dropdown-next and keybindings ([#223](https://github.com/Neovici/cosmoz-autocomplete/issues/223)) ([77e6094](https://github.com/Neovici/cosmoz-autocomplete/commit/77e6094caa67f621f1efbc0f32a20265dc9e260e))
+
 ## [11.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.12.1...v11.0.0) (2026-02-09)
 
 ### ⚠ BREAKING CHANGES
