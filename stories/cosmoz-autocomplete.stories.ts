@@ -23,6 +23,7 @@ interface AutocompleteArgs {
 	wrap?: boolean;
 	keepOpened?: boolean;
 	keepQuery?: boolean;
+	opened?: boolean;
 	overflowed?: boolean;
 	responseTime?: number;
 	contour?: boolean;
@@ -70,6 +71,7 @@ const Autocomplete = ({
 	wrap = false,
 	keepOpened = false,
 	keepQuery = false,
+	opened = false,
 	overflowed = false,
 	responseTime,
 	contour,
@@ -89,6 +91,7 @@ const Autocomplete = ({
 			.value=${value}
 			.min=${min}
 			.defaultIndex=${defaultIndex}
+			.opened=${opened}
 			?disabled=${disabled}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
@@ -118,6 +121,10 @@ const meta: Meta<AutocompleteArgs> = {
 		showSingle: { control: 'boolean' },
 		keepOpened: { control: 'boolean' },
 		keepQuery: { control: 'boolean' },
+		opened: {
+			control: 'boolean',
+			description: 'Programmatically open/close the dropdown',
+		},
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
 		wrap: { control: 'boolean' },
