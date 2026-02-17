@@ -20,6 +20,8 @@ export default css`
 		flex-wrap: wrap;
 		gap: 4px;
 		min-width: 35px;
+	}
+	cosmoz-input:not([data-one])::part(control) {
 		overflow: hidden;
 		max-height: calc(var(--cosmoz-autocomplete-chip-row-height) + 2px + 4px);
 	}
