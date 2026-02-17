@@ -4,7 +4,13 @@ import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
 import { useActivity } from '@neovici/cosmoz-utils/keybindings';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
-import { useCallback, useEffect, useMemo, useState } from '@pionjs/pion';
+import {
+	useCallback,
+	useEffect,
+	useMemo,
+	useProperty,
+	useState,
+} from '@pionjs/pion';
 import { AUTOCOMPLETE_DESELECT_LAST } from './autocomplete-keybindings';
 import { EMPTY, normalize, notify, search } from './util';
 
@@ -80,8 +86,7 @@ export const useAutocomplete = <I>({
 			[_textual, textProperty],
 		),
 		host = useHost(),
-		// Popover open/close state, synced from cosmoz-dropdown-next's dropdown-toggle event
-		[opened, setOpened] = useState(false),
+		[opened, setOpened] = useProperty<boolean>('opened', false),
 		empty = !text,
 		query = useMemo(() => text?.trim(), [text]),
 		onText = useNotify(host, _onText, 'text'),
@@ -127,6 +132,11 @@ export const useAutocomplete = <I>({
 		if (!opened && !keepQuery) onText('');
 	}, [opened, keepQuery]);
 
+	// Reflect opened state to host attribute for CSS :host([opened]) selectors
+	useEffect(() => {
+		host.toggleAttribute('opened', !!opened);
+	}, [opened]);
+
 	const meta = useMeta<Meta<I>>({
 		onText,
 		onChange,
@@ -167,7 +177,6 @@ export const useAutocomplete = <I>({
 			valueProperty,
 			externalSearch,
 		]),
-		// Sync opened state from cosmoz-dropdown-next's composed dropdown-toggle event
 		onToggle: useCallback((e: Event) => {
 			setOpened((e as ToggleEvent).newState === 'open');
 		}, []),

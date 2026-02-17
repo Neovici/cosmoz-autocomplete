@@ -345,6 +345,71 @@ export const OnSelectCallback: Story = {
 	},
 };
 
+export const ProgrammaticOpen: Story = {
+	args: {
+		source: colors,
+		value: [],
+	},
+	play: async ({ canvas }) => {
+		const autocomplete = document.querySelector<
+			HTMLElement & { opened: boolean }
+		>('cosmoz-autocomplete')!;
+
+		expect(autocomplete.opened).toBeFalsy();
+		expect(autocomplete.hasAttribute('opened')).toBe(false);
+
+		autocomplete.opened = true;
+
+		await canvas.findByShadowRole('option', { name: /Red/u });
+		expect(autocomplete.hasAttribute('opened')).toBe(true);
+	},
+};
+
+export const ProgrammaticClose: Story = {
+	args: {
+		source: colors,
+		value: [],
+	},
+	play: async ({ canvas }) => {
+		const autocomplete = document.querySelector<
+			HTMLElement & { opened: boolean }
+		>('cosmoz-autocomplete')!;
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+		await canvas.findByShadowRole('option', { name: /Red/u });
+
+		autocomplete.opened = false;
+
+		await waitFor(() => {
+			expect(autocomplete.hasAttribute('opened')).toBe(false);
+			expect(autocomplete.opened).toBe(false);
+		});
+	},
+};
+
+export const OpenedChangedEvent: Story = {
+	args: {
+		source: colors,
+		value: [],
+	},
+	play: async ({ canvas }) => {
+		const autocomplete = document.querySelector<
+			HTMLElement & { opened: boolean }
+		>('cosmoz-autocomplete')!;
+		const events: boolean[] = [];
+		autocomplete.addEventListener('opened-changed', ((e: CustomEvent) => {
+			events.push(e.detail.value);
+		}) as EventListener);
+
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		await waitFor(() => {
+			expect(events).toContain(true);
+		});
+	},
+};
+
 export const Limit1DisablesBackspace: Story = {
 	args: {
 		source: colors,
