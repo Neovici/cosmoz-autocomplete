@@ -1,3 +1,14 @@
+## [13.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v12.0.0...v13.0.0) (2026-02-17)
+
+### ⚠ BREAKING CHANGES
+
+* opened is now a reflected public property. Code that
+set or read a property named opened on these elements may be affected.
+
+### Features
+
+* expose the opened property of the dropdown ([#225](https://github.com/Neovici/cosmoz-autocomplete/issues/225)) ([49bf4e9](https://github.com/Neovici/cosmoz-autocomplete/commit/49bf4e957245b6861f59c65d2239d5f2fb87305e))
+
 ## [12.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v11.0.0...v12.0.0) (2026-02-10)
 
 ### ⚠ BREAKING CHANGES
