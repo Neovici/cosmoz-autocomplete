@@ -55,14 +55,7 @@ const mkItemRenderer =
 
 const mkChipRenderer =
 	<I>(value: WrappedItem<I>[] | undefined, onClear: (item: I | null) => void) =>
-	({
-		item,
-		content,
-		disabled,
-		hidden,
-		className = 'chip',
-		slot,
-	}: ChipProps<I>) =>
+	({ item, content, disabled, className = 'chip', slot }: ChipProps<I>) =>
 		html`<cosmoz-autocomplete-chip
 			class=${ifDefined(className)}
 			slot=${ifDefined(slot)}
@@ -70,7 +63,6 @@ const mkChipRenderer =
 			exportparts="chip-text, chip-clear"
 			data-state=${excludedState(value, item)}
 			?disabled=${disabled}
-			?hidden=${hidden}
 			.onClear=${() => onClear(item)}
 			title=${ifDefined(typeof content === 'string' ? content : undefined)}
 		>
