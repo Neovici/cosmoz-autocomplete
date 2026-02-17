@@ -1,4 +1,4 @@
-import{f as g,c as M,d as $,u as Z,a as h,b as f,A as X,r as Le,E as j,p as Pe,e as R,h as Ie,H as Ye,s as ie,n as je,g as Fe,j as le,k as Be,l as Me,t as qe}from"./iframe-DmOlgqGO.js";import{u as G,a as K,e as ce,i as De,t as Y,n as x,f as He,s as pe,b as Ne,c as de,d as N,g as Ue,w as U,p as Ze,l as Xe}from"./index-Bh_R0YZt.js";const q=(e,...t)=>e.flatMap((o,n)=>[o,t[n]??""]).join(""),Ge=({host:e,popoverRef:t,openOnHover:o,openOnFocus:n,open:s,close:r})=>{const a=G(),l=()=>clearTimeout(a.current),i=()=>{clearTimeout(a.current),a.current=setTimeout(()=>{const c=t.current;o&&(e.matches(":hover")||c?.matches(":hover"))||n&&(e.matches(":focus-within")||c?.matches(":focus-within"))||r()},100)},p=()=>{l(),s()};g(()=>{if(o)return e.addEventListener("pointerenter",p),e.addEventListener("pointerleave",i),()=>{l(),e.removeEventListener("pointerenter",p),e.removeEventListener("pointerleave",i)}},[o,e]),g(()=>{if(n)return e.addEventListener("focusin",p),e.addEventListener("focusout",i),()=>{l(),e.removeEventListener("focusin",p),e.removeEventListener("focusout",i)}},[n,e])},Ke=e=>{if(e.newState!=="open")return;const n=e.target.querySelector("slot:not([name])")?.assignedElements({flatten:!0})??[];for(const s of n){const r=s.matches("[autofocus]")?s:s.querySelector("[autofocus]");if(r instanceof HTMLElement){r.focus();break}}},Qe=M`
+import{f as g,c as M,d as $,u as Z,a as h,b as f,A as X,r as Le,E as j,p as Pe,e as R,h as Ie,H as Ye,s as ie,n as je,g as Fe,j as le,k as Be,l as Me,t as qe}from"./iframe-DWcztEsv.js";import{u as G,a as K,e as ce,i as De,t as Y,n as x,f as He,s as pe,b as Ne,c as de,d as N,g as Ue,w as U,p as Ze,l as Xe}from"./index-j7rR8Ut4.js";const q=(e,...t)=>e.flatMap((o,n)=>[o,t[n]??""]).join(""),Ge=({host:e,popoverRef:t,openOnHover:o,openOnFocus:n,open:s,close:r})=>{const a=G(),l=()=>clearTimeout(a.current),i=()=>{clearTimeout(a.current),a.current=setTimeout(()=>{const c=t.current;o&&(e.matches(":hover")||c?.matches(":hover"))||n&&(e.matches(":focus-within")||c?.matches(":focus-within"))||r()},100)},p=()=>{l(),s()};g(()=>{if(o)return e.addEventListener("pointerenter",p),e.addEventListener("pointerleave",i),()=>{l(),e.removeEventListener("pointerenter",p),e.removeEventListener("pointerleave",i)}},[o,e]),g(()=>{if(n)return e.addEventListener("focusin",p),e.addEventListener("focusout",i),()=>{l(),e.removeEventListener("focusin",p),e.removeEventListener("focusout",i)}},[n,e])},Ke=e=>{if(e.newState!=="open")return;const n=e.target.querySelector("slot:not([name])")?.assignedElements({flatten:!0})??[];for(const s of n){const r=s.matches("[autofocus]")?s:s.querySelector("[autofocus]");if(r instanceof HTMLElement){r.focus();break}}},Qe=M`
 	:host {
 		display: inline-block;
 		anchor-name: --dropdown-anchor;
@@ -584,9 +584,6 @@ import{f as g,c as M,d as $,u as Z,a as h,b as f,A as X,r as Le,E as j,p as Pe,e
 		flex-wrap: wrap;
 		gap: 4px;
 		min-width: 35px;
-	}
-	cosmoz-input:not([data-one])::part(control) {
-		overflow: hidden;
 		max-height: calc(var(--cosmoz-autocomplete-chip-row-height) + 2px + 4px);
 	}
 	cosmoz-input::part(input) {
@@ -621,9 +618,7 @@ import{f as g,c as M,d as $,u as Z,a as h,b as f,A as X,r as Le,E as j,p as Pe,e
 	}
 
 	:host([wrap]) cosmoz-input::part(control) {
-		flex-wrap: wrap;
 		max-height: none;
-		overflow: visible;
 	}
 	:host([wrap]) .chip {
 		max-width: 100%;
