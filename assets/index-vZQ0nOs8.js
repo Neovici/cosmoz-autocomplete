@@ -1,4 +1,4 @@
-import{c as f,u as g,a as i,i as z,d as $,e as m,b as h,A as k}from"./iframe-BPVfX7h5.js";import{s as w,o as E,A as C,a as p}from"./index-CvzsQB0d.js";const y="data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E",A=f`
+import{c as f,u as g,a as i,i as z,d as $,e as m,b as h,A as k}from"./iframe-CnxkTwbi.js";import{s as w,o as E,A as C,a as p}from"./index-DHb7sCRo.js";const y="data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L8.5 8.5M8.5 2.5L2.5 8.5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E",A=f`
 	.chip[data-state='excluded'] {
 		background: var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54));
 	}
