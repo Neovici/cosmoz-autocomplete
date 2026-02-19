@@ -1,3 +1,9 @@
+## [13.1.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.0.1...v13.1.0) (2026-02-19)
+
+### Features
+
+* expose dropdown part ([eb6ae46](https://github.com/Neovici/cosmoz-autocomplete/commit/eb6ae46544ee900cf032fc064f13177918e8a3ff))
+
 ## [13.0.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.0.0...v13.0.1) (2026-02-19)
 
 ### Bug Fixes
