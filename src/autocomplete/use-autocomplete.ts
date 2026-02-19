@@ -80,6 +80,7 @@ export const useAutocomplete = <I>({
 	preserveOrder,
 	defaultIndex,
 	externalSearch,
+	disabled,
 }: Props<I>) => {
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
@@ -121,7 +122,8 @@ export const useAutocomplete = <I>({
 					onChange(values.slice(0, -1));
 				}
 			},
-			check: () => empty && limit !== 1 && host.matches(':focus-within'),
+			check: () =>
+				!disabled && empty && limit !== 1 && host.matches(':focus-within'),
 			element: () => host,
 		},
 		[],
@@ -177,18 +179,24 @@ export const useAutocomplete = <I>({
 			valueProperty,
 			externalSearch,
 		]),
-		onToggle: useCallback((e: Event) => {
-			setOpened((e as ToggleEvent).newState === 'open');
-		}, []),
+		onToggle: useCallback(
+			(e: Event) => {
+				if (disabled) return;
+				setOpened((e as ToggleEvent).newState === 'open');
+			},
+			[disabled],
+		),
 		onText: useCallback(
 			(e: InputEvent) => {
+				if (disabled) return;
 				onText((e.target as HTMLInputElement).value);
 				setOpened(true);
 			},
-			[onText, text, setOpened],
+			[disabled, onText, text, setOpened],
 		),
 		onSelect: useCallback(
 			(newVal: I) => {
+				if (disabled) return;
 				meta.onSelect?.(newVal, meta);
 				const {
 					onChange,
@@ -214,11 +222,14 @@ export const useAutocomplete = <I>({
 					).slice(-limit!),
 				);
 			},
-			[meta],
+			[disabled, meta],
 		),
 		onDeselect: useCallback(
-			(val: I | I[]) => meta.onChange(without(val)(meta.value) as I[]),
-			[meta],
+			(val: I | I[]) => {
+				if (disabled) return;
+				meta.onChange(without(val)(meta.value) as I[]);
+			},
+			[disabled, meta],
 		),
 		// whenever there is a query, override defaultIndex to 0, so the first result gets selected
 		defaultIndex: query !== undefined && query?.length > 0 ? 0 : defaultIndex,
