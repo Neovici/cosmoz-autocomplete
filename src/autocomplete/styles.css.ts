@@ -8,7 +8,7 @@ export default css`
 	}
 
 	cosmoz-dropdown-next {
-		display: block;
+		display: flex;
 	}
 
 	cosmoz-input::part(control) {
