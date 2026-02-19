@@ -86,6 +86,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 
 		return html`<cosmoz-dropdown-next
 			open-on-focus
+			?disabled=${disabled}
 			.opened=${opened}
 			@dropdown-toggle=${onToggle}
 			part="dropdown"
