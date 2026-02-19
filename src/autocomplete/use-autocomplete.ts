@@ -77,6 +77,7 @@ export const useAutocomplete = <I>({
 	externalSearch,
 	...thru
 }: Props<I>) => {
+	const { disabled } = thru;
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
@@ -158,17 +159,22 @@ export const useAutocomplete = <I>({
 			valueProperty,
 			externalSearch,
 		]),
-		onClick: useCallback(() => setClosed(false), []),
+		onClick: useCallback(() => {
+			if (disabled) return;
+			setClosed(false);
+		}, [disabled]),
 		onFocus,
 		onText: useCallback(
 			(e: InputEvent) => {
+				if (disabled) return;
 				onText((e.target as HTMLInputElement).value);
 				setClosed(false);
 			},
-			[onText, text, setClosed],
+			[disabled, onText, text, setClosed],
 		),
 		onSelect: useCallback(
 			(newVal: I) => {
+				if (disabled) return;
 				meta.onSelect?.(newVal, meta);
 				const {
 					onChange,
@@ -194,11 +200,14 @@ export const useAutocomplete = <I>({
 					).slice(-limit!),
 				);
 			},
-			[meta],
+			[disabled, meta],
 		),
 		onDeselect: useCallback(
-			(val: I | I[]) => meta.onChange(without(val)(meta.value) as I[]),
-			[meta],
+			(val: I | I[]) => {
+				if (disabled) return;
+				meta.onChange(without(val)(meta.value) as I[]);
+			},
+			[disabled, meta],
 		),
 		// whenever there is a query, override defaultIndex to 0, so the first result gets selected
 		defaultIndex: query !== undefined && query?.length > 0 ? 0 : defaultIndex,

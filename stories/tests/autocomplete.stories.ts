@@ -241,15 +241,26 @@ export const DisabledState: Story = {
 		source: colors,
 		value: [colors[0]],
 		disabled: true,
+		onChange: fn(),
 	},
-	play: async ({ canvas }) => {
+	play: async ({ canvas, args }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = document.querySelector('cosmoz-autocomplete');
-		expect(autocomplete?.hasAttribute('disabled')).toBe(true);
+		const autocomplete = document.querySelector('cosmoz-autocomplete')!;
+		expect(autocomplete.hasAttribute('disabled')).toBe(true);
 
-		const input = autocomplete?.shadowRoot?.querySelector('cosmoz-input');
+		const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
 		expect(input?.hasAttribute('disabled')).toBe(true);
+
+		// Clicking should NOT open the listbox
+		await userEvent.click(input!);
+		await new Promise((r) => setTimeout(r, 200));
+
+		const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
+		expect(listbox).toBeFalsy();
+
+		// onChange should NOT have been called
+		expect(args.onChange).not.toHaveBeenCalled();
 	},
 };
 
