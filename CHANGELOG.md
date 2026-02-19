@@ -1,3 +1,9 @@
+## [13.1.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.1.0...v13.1.1) (2026-02-19)
+
+### Bug Fixes
+
+* disabled inputs are not actually disabled ([#231](https://github.com/Neovici/cosmoz-autocomplete/issues/231)) ([15fb0e4](https://github.com/Neovici/cosmoz-autocomplete/commit/15fb0e405df3c02f9396b009bc0e73d14e5c6d0f)), closes [Neovici/cosmoz-dropdown#55](https://github.com/Neovici/cosmoz-dropdown/issues/55)
+
 ## [13.1.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.0.1...v13.1.0) (2026-02-19)
 
 ### Features
