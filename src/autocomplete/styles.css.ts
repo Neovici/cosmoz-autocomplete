@@ -9,6 +9,7 @@ export default css`
 
 	cosmoz-dropdown-next {
 		display: flex;
+		flex-direction: column;
 	}
 
 	cosmoz-input::part(control) {
