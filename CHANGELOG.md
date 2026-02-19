@@ -1,3 +1,9 @@
+## [13.0.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.0.0...v13.0.1) (2026-02-19)
+
+### Bug Fixes
+
+* add guard directive to prevent unnecessary re-renders ([#227](https://github.com/Neovici/cosmoz-autocomplete/issues/227)) ([250cb0d](https://github.com/Neovici/cosmoz-autocomplete/commit/250cb0d55ee37984abf0193cfe51efae23dd7c55))
+
 ## [13.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v12.0.0...v13.0.0) (2026-02-17)
 
 ### ⚠ BREAKING CHANGES

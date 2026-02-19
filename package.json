@@ -1,6 +1,6 @@
 {
 	"name": "@neovici/cosmoz-autocomplete",
-	"version": "13.0.0",
+	"version": "13.0.1",
 	"type": "module",
 	"description": "A autocomplete input web component",
 	"keywords": [
