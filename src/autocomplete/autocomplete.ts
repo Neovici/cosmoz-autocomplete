@@ -88,6 +88,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			open-on-focus
 			.opened=${opened}
 			@dropdown-toggle=${onToggle}
+			part="dropdown"
 		>
 			<cosmoz-input
 				slot="button"
