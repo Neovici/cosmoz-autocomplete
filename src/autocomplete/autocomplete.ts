@@ -2,6 +2,7 @@ import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
+import { guard } from 'lit-html/directives/guard.js';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
@@ -98,19 +99,23 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?always-float-label=${value?.length > 0 || alwaysFloatLabel}
 				?readonly=${isSingle}
 				?disabled=${disabled}
-				?invalid=${until(
-					source$.then(
-						() => invalid,
-						() => true,
+				?invalid=${guard([source$], () =>
+					until(
+						source$.then(
+							() => invalid,
+							() => true,
+						),
+						invalid,
 					),
-					invalid,
 				)}
-				.errorMessage=${until(
-					source$.then(
-						() => errorMessage,
-						(e: { message?: string }) => e.message,
+				.errorMessage=${guard([source$], () =>
+					until(
+						source$.then(
+							() => errorMessage,
+							(e: { message?: string }) => e.message,
+						),
+						errorMessage,
 					),
-					errorMessage,
 				)}
 				.value=${live(text)}
 				@value-changed=${onText}
