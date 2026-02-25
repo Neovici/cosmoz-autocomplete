@@ -28,6 +28,7 @@ interface AutocompleteArgs {
 	responseTime?: number;
 	contour?: boolean;
 	uppercase?: boolean;
+	lazyOpen?: boolean;
 }
 
 const CSS = html`
@@ -75,6 +76,7 @@ const Autocomplete = ({
 	overflowed = false,
 	responseTime,
 	contour,
+	lazyOpen,
 }: AutocompleteArgs): TemplateResult => {
 	const styles = { maxWidth: overflowed ? '170px' : 'initial' };
 	const sourceDelayed = delay(source, responseTime);
@@ -92,6 +94,7 @@ const Autocomplete = ({
 			.min=${min}
 			.defaultIndex=${defaultIndex}
 			.opened=${opened}
+			?lazy-open=${lazyOpen}
 			?disabled=${disabled}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
@@ -127,6 +130,10 @@ const meta: Meta<AutocompleteArgs> = {
 		},
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
+		lazyOpen: {
+			control: 'boolean',
+			description: 'Suppress results until the user types at least 1 character',
+		},
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
 		responseTime: { control: 'number' },
@@ -367,5 +374,14 @@ export const InteractionTest: Story = {
 			await userEvent.type(input, 'Asdf');
 			await canvas.findByShadowText(/No results found/u);
 		});
+	},
+};
+
+export const LazyOpen: Story = {
+	args: {
+		label: 'Start typing to see results',
+		source: colors,
+		textProperty: 'text',
+		lazyOpen: true,
 	},
 };
