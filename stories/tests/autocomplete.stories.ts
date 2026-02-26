@@ -511,29 +511,32 @@ export const LazyOpenHidesItems: Story = {
 
 export const LazyOpenSuppressesSource: Story = {
 	args: {
-		source: fn().mockImplementation(() => Promise.resolve(colors)),
 		value: [],
 		lazyOpen: true,
 		keepOpened: true,
 	},
-	play: async ({ canvas, args }) => {
-		const sourceSpy = args.source as ReturnType<typeof fn>;
+	play: async ({ canvas, canvasElement }) => {
+		const calls: unknown[] = [];
+		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
+		autocomplete.source = (opts: unknown) => {
+			calls.push(opts);
+			return Promise.resolve(colors);
+		};
 
 		const input = await canvas.findByShadowRole('textbox');
 		await userEvent.click(input);
 
 		// Source function should NOT be called when query is empty
 		await new Promise((r) => setTimeout(r, 200));
-		expect(sourceSpy).not.toHaveBeenCalled();
+		expect(calls.length).toBe(0);
 
 		// Type 1 character — threshold met, source should be called and items appear
 		await userEvent.type(input, 'R');
 		await waitFor(() => {
-			expect(sourceSpy).toHaveBeenCalled();
+			expect(calls.length).toBeGreaterThan(0);
 		});
 
 		await waitFor(() => {
-			const autocomplete = document.querySelector('cosmoz-autocomplete')!;
 			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
 			const options = listbox?.shadowRoot?.querySelectorAll(
 				'.item[role="option"]',
