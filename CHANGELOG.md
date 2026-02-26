@@ -1,3 +1,9 @@
+## [13.2.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.1.1...v13.2.0) (2026-02-26)
+
+### Features
+
+* add `lazy-open` attribute to suppress results until user starts typing ([#232](https://github.com/Neovici/cosmoz-autocomplete/issues/232)) ([d583596](https://github.com/Neovici/cosmoz-autocomplete/commit/d583596ef9233398f7630223432a98ce5f50bc35))
+
 ## [13.1.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.1.0...v13.1.1) (2026-02-19)
 
 ### Bug Fixes
