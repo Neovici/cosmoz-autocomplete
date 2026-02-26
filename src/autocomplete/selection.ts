@@ -1,4 +1,3 @@
-import { html } from 'lit-html';
 import { chip as defaultChipRenderer } from './chip';
 import type { RProps } from './use-autocomplete';
 
@@ -23,8 +22,8 @@ export const selection = <I>({
 	textual,
 	disabled,
 	chipRenderer = defaultChipRenderer,
-}: Props<I>) => [
-	...values.filter(Boolean).map((value) =>
+}: Props<I>) =>
+	values.filter(Boolean).map((value) =>
 		chipRenderer({
 			item: value,
 			content: textual(value),
@@ -32,13 +31,4 @@ export const selection = <I>({
 			disabled,
 			slot: 'control',
 		}),
-	),
-	chipRenderer({
-		item: null,
-		content: html`<span></span>`,
-		className: 'badge',
-		disabled: true,
-		slot: 'control',
-		hidden: true,
-	}),
-];
+	);

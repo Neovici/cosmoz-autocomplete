@@ -56,24 +56,3 @@ export const notify = <T>(host: EventTarget, name: string, detail: T) =>
 	host.dispatchEvent(new CustomEvent(name, { detail }));
 
 export const EMPTY: never[] = [];
-
-type Arr = unknown[];
-type ArrFn<T extends Arr> = (...args: T) => void;
-
-/**
- * Request animation frame wrapper with cleanup.
- */
-export const raf =
-	<A extends Arr, F extends ArrFn<A> = ArrFn<A>>(fn: F) =>
-	(...args: A) => {
-		let id: number | undefined;
-		const cleanup = () => {
-			if (id) cancelAnimationFrame(id);
-		};
-		cleanup();
-		id = requestAnimationFrame(() => {
-			id = undefined;
-			fn(...args);
-		});
-		return cleanup;
-	};

@@ -5,6 +5,10 @@ export default css`
 		display: block;
 		position: relative;
 		min-width: 35px;
+		--cosmoz-autocomplete-chip-row-height: var(
+			--cosmoz-autocomplete-chip-text-line-height,
+			22px
+		);
 	}
 
 	cosmoz-dropdown-next {
@@ -13,8 +17,10 @@ export default css`
 
 	cosmoz-input::part(control) {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 4px;
 		min-width: 35px;
+		max-height: calc(var(--cosmoz-autocomplete-chip-row-height) + 2px + 4px);
 	}
 	cosmoz-input::part(input) {
 		flex: 1 24px;
@@ -48,7 +54,7 @@ export default css`
 	}
 
 	:host([wrap]) cosmoz-input::part(control) {
-		flex-wrap: wrap;
+		max-height: none;
 	}
 	:host([wrap]) .chip {
 		max-width: 100%;

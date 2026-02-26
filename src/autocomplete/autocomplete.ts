@@ -34,6 +34,7 @@ export interface Props<I> extends Base<I> {
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 	RProps<I> & {
 		onInputRef?: (el?: Element) => void;
+		overflowCount?: number;
 	};
 
 const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
@@ -77,6 +78,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				source$,
 				loading,
 				chipRenderer,
+				overflowCount = 0,
 			} = props,
 			isOne = limit == 1, // eslint-disable-line eqeqeq
 			isSingle = isOne && value?.[0] != null;
@@ -137,6 +139,17 @@ const autocomplete = <I>(props: AProps<I>) => {
 					disabled,
 					chipRenderer,
 				})}
+				${when(
+					overflowCount > 0,
+					() =>
+						html`<cosmoz-autocomplete-chip
+							class="badge"
+							slot="control"
+							part="chip badge"
+						>
+							+${overflowCount}
+						</cosmoz-autocomplete-chip>`,
+				)}
 			</cosmoz-input>
 
 			${when(
@@ -175,8 +188,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 			...props,
 			...useAutocomplete(props),
 		};
-		useOverflow(thru);
-		return autocomplete(thru);
+		const { overflowCount } = useOverflow(thru);
+		return autocomplete({ ...thru, overflowCount });
 	},
 	observedAttributes = [
 		'disabled',

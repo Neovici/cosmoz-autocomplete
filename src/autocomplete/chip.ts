@@ -62,13 +62,11 @@ export interface ChipProps<I> extends Props {
 	slot?: string;
 	className?: string;
 	content: unknown;
-	hidden?: boolean;
 }
 export const chip = <I>({
 	content,
 	onClear,
 	disabled,
-	hidden,
 	className = 'chip',
 	slot,
 }: ChipProps<I>) =>
@@ -78,7 +76,6 @@ export const chip = <I>({
 		part="chip"
 		exportparts="chip-text, chip-clear"
 		?disabled=${disabled}
-		?hidden=${hidden}
 		.onClear=${onClear}
 		title=${ifDefined(typeof content === 'string' ? content : undefined)}
 		>${content}</cosmoz-autocomplete-chip
