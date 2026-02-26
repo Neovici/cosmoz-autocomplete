@@ -61,6 +61,7 @@ export interface Props<I> extends Base<I> {
 	preserveOrder?: boolean;
 	defaultIndex?: number;
 	externalSearch?: boolean;
+	lazyOpen?: boolean;
 }
 
 export const useAutocomplete = <I>({
@@ -81,6 +82,7 @@ export const useAutocomplete = <I>({
 	defaultIndex,
 	externalSearch,
 	disabled,
+	lazyOpen,
 }: Props<I>) => {
 	const textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
@@ -99,14 +101,17 @@ export const useAutocomplete = <I>({
 			[_onChange],
 		),
 		[options, setOptions] = useState<I[]>([]),
+		belowMinLength = Boolean(lazyOpen && !query),
 		source$ = useMemo(
 			() =>
-				Promise.resolve(
-					typeof source === 'function'
-						? source({ query, active: opened })
-						: source,
-				).then(normalize),
-			[source, opened, query],
+				belowMinLength
+					? Promise.resolve([] as I[])
+					: Promise.resolve(
+							typeof source === 'function'
+								? source({ query, active: opened })
+								: source,
+						).then(normalize),
+			[source, opened, query, belowMinLength],
 		),
 		value = useMemo(() => array(_value), [_value]);
 
@@ -162,6 +167,7 @@ export const useAutocomplete = <I>({
 		loading: state === 'pending',
 		items: useMemo(() => {
 			if (!opened) return EMPTY;
+			if (belowMinLength) return EMPTY;
 
 			const items = preserveOrder
 				? options
@@ -178,6 +184,7 @@ export const useAutocomplete = <I>({
 			preserveOrder,
 			valueProperty,
 			externalSearch,
+			belowMinLength,
 		]),
 		onToggle: useCallback(
 			(e: Event) => {

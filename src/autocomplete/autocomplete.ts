@@ -196,6 +196,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'item-height',
 		'item-limit',
 		'wrap',
+		'lazy-open',
 	] as const;
 
 export { Autocomplete, autocomplete, observedAttributes, style };
