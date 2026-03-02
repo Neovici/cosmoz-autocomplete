@@ -1,3 +1,9 @@
+## [13.2.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.2.0...v13.2.1) (2026-03-02)
+
+### Bug Fixes
+
+* propagate external invalid and errorMessage changes to inner input ([#233](https://github.com/Neovici/cosmoz-autocomplete/issues/233)) ([72f3e6f](https://github.com/Neovici/cosmoz-autocomplete/commit/72f3e6f860e7e186df2db203e815a5e4ea7f5c6e))
+
 ## [13.2.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.1.1...v13.2.0) (2026-02-26)
 
 ### Features
