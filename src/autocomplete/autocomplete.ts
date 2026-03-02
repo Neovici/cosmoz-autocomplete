@@ -101,7 +101,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?always-float-label=${value?.length > 0 || alwaysFloatLabel}
 				?readonly=${isSingle}
 				?disabled=${disabled}
-				?invalid=${guard([source$], () =>
+				?invalid=${guard([source$, invalid], () =>
 					until(
 						source$.then(
 							() => invalid,
@@ -110,7 +110,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 						invalid,
 					),
 				)}
-				.errorMessage=${guard([source$], () =>
+				.errorMessage=${guard([source$, errorMessage], () =>
 					until(
 						source$.then(
 							() => errorMessage,
