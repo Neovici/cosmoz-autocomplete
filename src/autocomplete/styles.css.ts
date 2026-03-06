@@ -9,6 +9,11 @@ export default css`
 
 	cosmoz-dropdown-next {
 		display: block;
+		width: 100%;
+	}
+
+	cosmoz-input {
+		box-sizing: border-box;
 	}
 
 	cosmoz-input::part(control) {
