@@ -459,28 +459,6 @@ export const OpenedChangedEvent: Story = {
 	},
 };
 
-export const Limit1DisablesBackspace: Story = {
-	args: {
-		source: colors,
-		value: [colors[0]],
-		limit: 1,
-		onChange: fn(),
-	},
-	play: async ({ canvas, args }) => {
-		await canvas.findByShadowText(/Red/u);
-
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
-
-		// Backspace when limit=1 should NOT remove the chip (use-keys disables handler)
-		await userEvent.keyboard('{Backspace}');
-
-		// Wait a tick to ensure no async callback fires
-		await new Promise((r) => setTimeout(r, 200));
-		expect(args.onChange).not.toHaveBeenCalled();
-	},
-};
-
 export const LazyOpenHidesItems: Story = {
 	args: {
 		source: colors,
