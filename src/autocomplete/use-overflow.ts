@@ -45,8 +45,7 @@ export const useOverflow = <I>({
 	limit?: number;
 }) => {
 	const host = useHost();
-	// eslint-disable-next-line eqeqeq
-	const enabled = !(wrap || limit == 1);
+	const enabled = !(wrap || limit === 1);
 	const doRaf = useMemo(() => raf(() => overflow(host)), []);
 	const [width, setWidth] = useState(0);
 

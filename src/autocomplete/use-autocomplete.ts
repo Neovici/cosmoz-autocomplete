@@ -117,7 +117,7 @@ export const useAutocomplete = <I>({
 
 	useEffect(() => source$.then(setOptions), [source$]);
 
-	// Backspace to deselect last chip (when input is empty and multi-select)
+	// Backspace to deselect last chip (when input is empty)
 	useActivity(
 		{
 			activity: AUTOCOMPLETE_DESELECT_LAST,
@@ -127,8 +127,7 @@ export const useAutocomplete = <I>({
 					onChange(values.slice(0, -1));
 				}
 			},
-			check: () =>
-				!disabled && empty && limit !== 1 && host.matches(':focus-within'),
+			check: () => !disabled && empty && host.matches(':focus-within'),
 			element: () => host,
 		},
 		[],

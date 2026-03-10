@@ -78,7 +78,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				loading,
 				chipRenderer,
 			} = props,
-			isOne = limit == 1, // eslint-disable-line eqeqeq
+			isOne = limit === 1,
 			isSingle = isOne && value?.[0] != null;
 
 		const hasResultsOrQuery =
@@ -174,6 +174,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		const thru = {
 			...props,
 			...useAutocomplete(props),
+			limit: props.limit != null ? Number(props.limit) : undefined,
 		};
 		useOverflow(thru);
 		return autocomplete(thru);
