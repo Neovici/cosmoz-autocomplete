@@ -174,7 +174,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 		const thru = {
 			...props,
 			...useAutocomplete(props),
-			limit: props.limit != null ? Number(props.limit) : undefined,
 		};
 		useOverflow(thru);
 		return autocomplete(thru);
