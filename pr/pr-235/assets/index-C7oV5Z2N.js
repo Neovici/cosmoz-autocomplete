@@ -1,4 +1,4 @@
-import{f as v,c as D,d as R,u as G,a as m,b as f,A as K,r as De,E as T,p as Me,e as A,h as Ne,H as He,s as me,n as Ue,g as Xe,j as fe,k as Ze,l as Ge,m as oe,t as Ke}from"./iframe-CgrH0tGB.js";import{u as Q,a as W,e as J,i as ge,t as B,n as S,f as Qe,s as ve,b as We,c as be,d as X,g as Je,w as Z,p as Ve,l as et}from"./index-BtzNxUZ4.js";const M=(e,...t)=>e.flatMap((o,n)=>[o,t[n]??""]).join(""),tt=({host:e,popoverRef:t,disabled:o,openOnHover:n,openOnFocus:r,open:s,close:a})=>{const l=Q(),i=()=>clearTimeout(l.current),p=()=>{clearTimeout(l.current),l.current=setTimeout(()=>{const h=t.current;n&&(e.matches(":hover")||h?.matches(":hover"))||e.matches(":focus-within")||h?.matches(":focus-within")||a()},100)},c=()=>{o||(i(),s())};return v(()=>{if(!(!n||o))return e.addEventListener("pointerenter",c),e.addEventListener("pointerleave",p),()=>{i(),e.removeEventListener("pointerenter",c),e.removeEventListener("pointerleave",p)}},[n,o,e]),v(()=>{if(!(!r||o))return e.addEventListener("focusin",c),e.addEventListener("focusout",p),()=>{i(),e.removeEventListener("focusin",c),e.removeEventListener("focusout",p)}},[r,o,e]),{scheduleClose:p,cancelClose:i}},ot=e=>{if(e.newState!=="open")return;const n=e.target.querySelector("slot:not([name])")?.assignedElements({flatten:!0})??[];for(const r of n){const s=r.matches("[autofocus]")?r:r.querySelector("[autofocus]");if(s instanceof HTMLElement){s.focus();break}}},nt=D`
+import{f as v,c as D,d as R,u as G,a as m,b as f,A as K,r as De,E as T,p as Me,e as A,h as Ne,H as He,s as me,n as Ue,g as Xe,j as fe,k as Ze,l as Ge,m as oe,t as Ke}from"./iframe-Cu9cjp5d.js";import{u as Q,a as W,e as J,i as ge,t as B,n as S,f as Qe,s as ve,b as We,c as be,d as X,g as Je,w as Z,p as Ve,l as et}from"./index-DxXYoGgc.js";const M=(e,...t)=>e.flatMap((o,n)=>[o,t[n]??""]).join(""),tt=({host:e,popoverRef:t,disabled:o,openOnHover:n,openOnFocus:r,open:s,close:a})=>{const l=Q(),i=()=>clearTimeout(l.current),p=()=>{clearTimeout(l.current),l.current=setTimeout(()=>{const h=t.current;n&&(e.matches(":hover")||h?.matches(":hover"))||e.matches(":focus-within")||h?.matches(":focus-within")||a()},100)},c=()=>{o||(i(),s())};return v(()=>{if(!(!n||o))return e.addEventListener("pointerenter",c),e.addEventListener("pointerleave",p),()=>{i(),e.removeEventListener("pointerenter",c),e.removeEventListener("pointerleave",p)}},[n,o,e]),v(()=>{if(!(!r||o))return e.addEventListener("focusin",c),e.addEventListener("focusout",p),()=>{i(),e.removeEventListener("focusin",c),e.removeEventListener("focusout",p)}},[r,o,e]),{scheduleClose:p,cancelClose:i}},ot=e=>{if(e.newState!=="open")return;const n=e.target.querySelector("slot:not([name])")?.assignedElements({flatten:!0})??[];for(const r of n){const s=r.matches("[autofocus]")?r:r.querySelector("[autofocus]");if(s instanceof HTMLElement){s.focus();break}}},nt=D`
 	:host {
 		display: inline-block;
 		anchor-name: --dropdown-anchor;
@@ -521,7 +521,13 @@ import{f as v,c as D,d as R,u as G,a as m,b as f,A as K,r as De,E as T,p as Me,e
 		/>
 	</svg>
 `,kt=({onClear:e,disabled:t})=>f`
-	<div class="content" part="content chip-text"><slot></slot></div>
+	<div
+		class="content"
+		part="content chip-text"
+		@mousedown=${o=>o.preventDefault()}
+	>
+		<slot></slot>
+	</div>
 	${S(e&&!t,()=>f`<span
 				class="clear"
 				part="clear chip-clear"
