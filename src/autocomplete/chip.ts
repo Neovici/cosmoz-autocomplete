@@ -34,7 +34,13 @@ interface Props {
 	disabled?: boolean;
 }
 export const Chip = ({ onClear, disabled }: Props) => html`
-	<div class="content" part="content chip-text"><slot></slot></div>
+	<div
+		class="content"
+		part="content chip-text"
+		@mousedown=${(ev: MouseEvent) => ev.preventDefault()}
+	>
+		<slot></slot>
+	</div>
 	${when(
 		onClear && !disabled,
 		() =>
