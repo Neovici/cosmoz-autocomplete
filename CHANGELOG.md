@@ -1,3 +1,9 @@
+## [13.3.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.2.1...v13.3.0) (2026-03-11)
+
+### Features
+
+* backspace delete without limit check ([#235](https://github.com/Neovici/cosmoz-autocomplete/issues/235)) ([00172d1](https://github.com/Neovici/cosmoz-autocomplete/commit/00172d1eb2bad09c0d67e0e63ef315e9e32cc3a6))
+
 ## [13.2.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.2.0...v13.2.1) (2026-03-02)
 
 ### Bug Fixes
