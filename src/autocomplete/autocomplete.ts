@@ -78,7 +78,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				loading,
 				chipRenderer,
 			} = props,
-			isOne = limit == 1, // eslint-disable-line eqeqeq
+			isOne = limit === 1,
 			isSingle = isOne && value?.[0] != null;
 
 		const hasResultsOrQuery =

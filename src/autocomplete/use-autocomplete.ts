@@ -34,7 +34,7 @@ export type Source<I> = (opts: {
 
 interface Base<I> {
 	value?: I | I[];
-	limit?: number;
+	limit?: number | string;
 	min?: number;
 
 	keepOpened?: boolean;
@@ -70,7 +70,7 @@ export const useAutocomplete = <I>({
 	onChange: _onChange,
 	onText: _onText,
 	onSelect,
-	limit,
+	limit: _limit,
 	min,
 	source,
 	textProperty,
@@ -84,7 +84,8 @@ export const useAutocomplete = <I>({
 	disabled,
 	lazyOpen,
 }: Props<I>) => {
-	const textual = useMemo(
+	const limit = _limit != null ? Number(_limit) : undefined,
+		textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
 		),
@@ -117,7 +118,7 @@ export const useAutocomplete = <I>({
 
 	useEffect(() => source$.then(setOptions), [source$]);
 
-	// Backspace to deselect last chip (when input is empty and multi-select)
+	// Backspace to deselect last chip (when input is empty)
 	useActivity(
 		{
 			activity: AUTOCOMPLETE_DESELECT_LAST,
@@ -127,8 +128,7 @@ export const useAutocomplete = <I>({
 					onChange(values.slice(0, -1));
 				}
 			},
-			check: () =>
-				!disabled && empty && limit !== 1 && host.matches(':focus-within'),
+			check: () => !disabled && empty && host.matches(':focus-within'),
 			element: () => host,
 		},
 		[],
@@ -159,6 +159,7 @@ export const useAutocomplete = <I>({
 	const [, , state] = usePromise(source$);
 
 	return {
+		limit,
 		opened,
 		query,
 		textual,
