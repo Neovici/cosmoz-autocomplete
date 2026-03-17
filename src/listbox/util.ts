@@ -7,9 +7,10 @@ export const byValue = <K extends PropertyKey | undefined, T>(
 	valueProperty: K,
 ) => {
 	if (!valueProperty) {
-		return (item: T) => array(value).includes(item);
+		return (item: T) => item != null && array(value).includes(item);
 	}
 	return (item: T) =>
+		item != null &&
 		array(value).find(
 			(value) =>
 				(value as Rec<NonNullable<K>>)[valueProperty] ===
