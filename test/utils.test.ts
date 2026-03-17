@@ -1,7 +1,7 @@
 import { strProp } from '@neovici/cosmoz-utils/object';
 import { describe, expect, it } from 'vitest';
 import { search } from '../src/autocomplete/util';
-import { mark } from '../src/listbox/util';
+import { byValue, mark } from '../src/listbox/util';
 
 describe('search', () => {
 	const textual = strProp('text');
@@ -72,5 +72,68 @@ describe('mark', () => {
 
 	it('returns original text when text is empty', () => {
 		expect(mark('', 'query')).toBe('');
+	});
+});
+
+describe('byValue', () => {
+	describe('without valueProperty', () => {
+		it('returns truthy when item is in value array', () => {
+			const item1 = { id: 1 };
+			const item2 = { id: 2 };
+			const isSelected = byValue([item1, item2], undefined);
+			expect(isSelected(item1)).toBeTruthy();
+			expect(isSelected(item2)).toBeTruthy();
+		});
+
+		it('returns falsy when item is not in value array', () => {
+			const isSelected = byValue([{ id: 1 }], undefined);
+			expect(isSelected({ id: 2 })).toBeFalsy();
+		});
+
+		it('returns false for null item', () => {
+			const isSelected = byValue([{ id: 1 }], undefined);
+			// @ts-expect-error - testing runtime behavior with null
+			expect(isSelected(null)).toBe(false);
+		});
+
+		it('returns false for undefined item', () => {
+			const isSelected = byValue([{ id: 1 }], undefined);
+			// @ts-expect-error - testing runtime behavior with undefined
+			expect(isSelected(undefined)).toBe(false);
+		});
+	});
+
+	describe('with valueProperty', () => {
+		it('returns truthy when item matches by valueProperty', () => {
+			const isSelected = byValue([{ name: 'a' }, { name: 'b' }], 'name');
+			expect(isSelected({ name: 'a' })).toBeTruthy();
+			expect(isSelected({ name: 'b' })).toBeTruthy();
+		});
+
+		it('returns falsy when item does not match', () => {
+			const isSelected = byValue([{ name: 'a' }], 'name');
+			expect(isSelected({ name: 'x' })).toBeFalsy();
+		});
+
+		it('returns false for null item', () => {
+			const isSelected = byValue([{ name: 'a' }], 'name');
+			// @ts-expect-error - testing runtime behavior with null
+			expect(isSelected(null)).toBe(false);
+		});
+
+		it('returns false for undefined item', () => {
+			const isSelected = byValue([{ name: 'a' }], 'name');
+			// @ts-expect-error - testing runtime behavior with undefined
+			expect(isSelected(undefined)).toBe(false);
+		});
+
+		it('handles lit-virtualizer passing null during render cycle', () => {
+			const isSelected = byValue([{ id: 1, name: 'test' }], 'id');
+			// This is the actual bug scenario - lit-virtualizer passes null
+			// @ts-expect-error - testing runtime behavior with null
+			expect(() => isSelected(null)).not.toThrow();
+			// @ts-expect-error - testing runtime behavior with null
+			expect(isSelected(null)).toBe(false);
+		});
 	});
 });
