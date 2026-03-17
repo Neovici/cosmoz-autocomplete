@@ -1,3 +1,9 @@
+## [13.3.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.3.0...v13.3.1) (2026-03-17)
+
+### Bug Fixes
+
+* **listbox:** guard byValue against nullish items from lit-virtualizer ([#236](https://github.com/Neovici/cosmoz-autocomplete/issues/236)) ([9f5c853](https://github.com/Neovici/cosmoz-autocomplete/commit/9f5c8535f50dff3c0562a35945f6d91e8494406a))
+
 ## [13.3.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.2.1...v13.3.0) (2026-03-11)
 
 ### Features
