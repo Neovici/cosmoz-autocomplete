@@ -1,3 +1,9 @@
+## [13.4.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.3.1...v13.4.0) (2026-03-24)
+
+### Features
+
+* add new keybinding that clears the input when you start typing ([#237](https://github.com/Neovici/cosmoz-autocomplete/issues/237)) ([60fed44](https://github.com/Neovici/cosmoz-autocomplete/commit/60fed4411a0af8dbda985d52d5af5737e67e6033))
+
 ## [13.3.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.3.0...v13.3.1) (2026-03-17)
 
 ### Bug Fixes
