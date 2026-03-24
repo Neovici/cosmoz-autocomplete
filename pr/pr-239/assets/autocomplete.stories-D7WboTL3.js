@@ -1,4 +1,4 @@
-import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./preload-helper-PPVm8Dsz.js";import"./index-BMNS2hb_.js";const{expect:a,fn:p,userEvent:c,waitFor:i}=__STORYBOOK_MODULE_TEST__,K=({source:e,value:o,limit:t,textProperty:n="text",valueProperty:l,onChange:r,onText:u,onSelect:H,disabled:G,defaultIndex:L,text:N,keepOpened:V,externalSearch:$,lazyOpen:M,preserveOrder:_})=>j`
+import{b as j}from"./iframe-33s_BJI2.js";import"./index-5-Qat5lk.js";import"./preload-helper-PPVm8Dsz.js";import"./index-BUbtMxzr.js";const{expect:a,fn:p,userEvent:c,waitFor:i}=__STORYBOOK_MODULE_TEST__,K=({source:e,value:o,limit:t,textProperty:n="text",valueProperty:l,onChange:r,onText:u,onSelect:H,disabled:G,defaultIndex:L,text:N,keepOpened:V,externalSearch:$,lazyOpen:M,preserveOrder:_})=>j`
     <cosmoz-autocomplete
         .source=${e}
         .value=${o}
@@ -16,7 +16,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
         ?external-search=${$}
         ?preserve-order=${_}
     ></cosmoz-autocomplete>
-`,X={title:"Tests/Autocomplete",render:K,tags:["!autodocs"]},s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],d={args:{source:s,value:[s[0],s[2]]},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Blue/u);const t=o.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length).toBe(2)}},m={args:{source:s,value:[s[1]],limit:1},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Green/u);const t=o.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length).toBe(1)}},h={args:{source:s,value:[]},play:async({canvas:e})=>{const o=await e.findByShadowRole("textbox");await c.click(o);const t=await e.findByShadowRole("option",{name:/Red/u});a(t).toBeTruthy()}},w={args:{source:s,value:[s[0]],onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip")?.shadowRoot?.querySelector(".clear");a(r).toBeTruthy(),await c.click(r),await i(()=>{a(t.onChange).toHaveBeenCalledWith([],a.any(Function))})}},y={args:{source:s,value:[],onChange:p(),keepOpened:!0},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Red/u});await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([s[0]],a.any(Function))})}},v={args:{source:s,value:[],onText:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.type(t,"Gre"),await i(()=>{a(o.onText).toHaveBeenCalledWith("Gre")})}},x={args:{source:s,value:[s[0],s[1]],onChange:p()},play:async({canvas:e,args:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const t=await e.findByShadowRole("textbox");await c.click(t),await c.keyboard("{Backspace}"),await i(()=>{a(o.onChange).toHaveBeenCalledWith([s[0]],a.any(Function))})}},S={args:{source:s,value:[],onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await e.findByShadowRole("option",{name:/Red/u}),await c.keyboard("{ArrowDown}"),await c.keyboard("{Enter}"),await i(()=>{a(o.onChange).toHaveBeenCalled()})}},B={args:{source:s,value:[],defaultIndex:-1},play:async({canvasElement:e})=>{const o=e.querySelector("cosmoz-autocomplete");a(o?.shadowRoot?.querySelectorAll(".chip").length??0).toBe(0)}},g={args:{source:s,value:[s[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const n=o.querySelector("cosmoz-autocomplete");a(n.hasAttribute("disabled")).toBe(!0);const l=n.shadowRoot?.querySelector("cosmoz-input");a(l?.hasAttribute("disabled")).toBe(!0);const r=n.shadowRoot?.querySelector("cosmoz-dropdown-next");a(r?.hasAttribute("disabled")).toBe(!0),await c.click(l),await new Promise(H=>setTimeout(H,200));const u=n.shadowRoot?.querySelector("cosmoz-listbox");a(u).toBeFalsy(),a(t.onChange).not.toHaveBeenCalled()}},b={args:{source:s,value:[s[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const l=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip");a(l).toBeTruthy();const r=l?.shadowRoot?.querySelector(".clear");a(r).toBeFalsy(),a(t.onChange).not.toHaveBeenCalled()}},f={args:{source:s,value:[s[0]],text:"initial"},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const n=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-input");a(n).toBeTruthy()}},R={args:{source:s,value:[],externalSearch:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await c.type(t,"Red"),await i(()=>{const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length).toBe(4)})}},k={args:{source:[{id:1,text:"Item 1"},{id:2,text:"Item 2"}],value:[{id:1,text:"Item 1"}],valueProperty:"id",keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await i(()=>{const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length).toBe(2)})}},q={args:{source:s,value:[],onSelect:p(),keepOpened:!0},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Red/u});await c.click(n),await i(()=>{a(o.onSelect).toHaveBeenCalledWith(s[0],a.any(Object))})}},C={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete");a(t.opened).toBeFalsy(),a(t.hasAttribute("opened")).toBe(!1),t.opened=!0,await e.findByShadowRole("option",{name:/Red/u}),a(t.hasAttribute("opened")).toBe(!0)}},T={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete"),n=await e.findByShadowRole("textbox");await c.click(n),await e.findByShadowRole("option",{name:/Red/u}),t.opened=!1,await i(()=>{a(t.hasAttribute("opened")).toBe(!1),a(t.opened).toBe(!1)})}},E={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete"),n=[];t.addEventListener("opened-changed",(r=>{n.push(r.detail.value)}));const l=await e.findByShadowRole("textbox");await c.click(l),await i(()=>{a(n).toContain(!0)})}},z={args:{source:s,value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await new Promise(u=>setTimeout(u,200));const n=o.querySelector("cosmoz-autocomplete");let l=n.shadowRoot?.querySelector("cosmoz-listbox"),r=l?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length??0).toBe(0),await c.type(t,"R"),await i(()=>{l=n.shadowRoot?.querySelector("cosmoz-listbox"),r=l?.shadowRoot?.querySelectorAll('.item[role="option"]'),a(r?.length).toBeGreaterThan(0)})}},O={args:{value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=[],n=o.querySelector("cosmoz-autocomplete");n.source=r=>(t.push(r),Promise.resolve(s));const l=await e.findByShadowRole("textbox");await c.click(l),await new Promise(r=>setTimeout(r,200)),a(t.length).toBe(0),await c.type(l,"R"),await i(()=>{a(t.length).toBeGreaterThan(0)}),await i(()=>{const u=n.shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(u?.length).toBeGreaterThan(0)})}},A={args:{source:s,value:[s[0]],limit:1},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(1);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("G"),await i(()=>{const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(0)})}},F={args:{source:s,value:[s[0],s[1]]},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(2);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("B"),await new Promise(u=>setTimeout(u,100));const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(2)}},P={args:{source:s,value:[s[0]],limit:1,disabled:!0},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(1);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("G"),await new Promise(u=>setTimeout(u,100));const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(1)}},D=[{id:1,text:"Item 1"},{id:2,text:"Item 2"},{id:3,text:"Item 3"}],W={args:{source:D,value:[{id:1,text:"Item 1"}],valueProperty:"id",preserveOrder:!0,keepOpened:!0,onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Item 1/u});a(n).toBeTruthy(),await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}},I={args:{source:D,value:[{id:1,text:"Item 1"}],valueProperty:"id",preserveOrder:!1,keepOpened:!0,onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Item 1/u});a(n).toBeTruthy(),await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+`,X={title:"Tests/Autocomplete",render:K,tags:["!autodocs"]},s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],d={args:{source:s,value:[s[0],s[2]]},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Blue/u);const t=o.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length).toBe(2)}},m={args:{source:s,value:[s[1]],limit:1},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Green/u);const t=o.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length).toBe(1)}},h={args:{source:s,value:[]},play:async({canvas:e})=>{const o=await e.findByShadowRole("textbox");await c.click(o);const t=await e.findByShadowRole("option",{name:/Red/u});a(t).toBeTruthy()}},y={args:{source:s,value:[s[0]],onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip")?.shadowRoot?.querySelector(".clear");a(r).toBeTruthy(),await c.click(r),await i(()=>{a(t.onChange).toHaveBeenCalledWith([],a.any(Function))})}},w={args:{source:s,value:[],onChange:p(),keepOpened:!0},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Red/u});await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([s[0]],a.any(Function))})}},x={args:{source:s,value:[],onText:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.type(t,"Gre"),await i(()=>{a(o.onText).toHaveBeenCalledWith("Gre")})}},v={args:{source:s,value:[s[0],s[1]],onChange:p()},play:async({canvas:e,args:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const t=await e.findByShadowRole("textbox");await c.click(t),await c.keyboard("{Backspace}"),await i(()=>{a(o.onChange).toHaveBeenCalledWith([s[0]],a.any(Function))})}},S={args:{source:s,value:[],onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await e.findByShadowRole("option",{name:/Red/u}),await c.keyboard("{ArrowDown}"),await c.keyboard("{Enter}"),await i(()=>{a(o.onChange).toHaveBeenCalled()})}},B={args:{source:s,value:[],defaultIndex:-1},play:async({canvasElement:e})=>{const o=e.querySelector("cosmoz-autocomplete");a(o?.shadowRoot?.querySelectorAll(".chip").length??0).toBe(0)}},g={args:{source:s,value:[s[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const n=o.querySelector("cosmoz-autocomplete");a(n.hasAttribute("disabled")).toBe(!0);const l=n.shadowRoot?.querySelector("cosmoz-input");a(l?.hasAttribute("disabled")).toBe(!0);const r=n.shadowRoot?.querySelector("cosmoz-dropdown-next");a(r?.hasAttribute("disabled")).toBe(!0),await c.click(l),await new Promise(H=>setTimeout(H,200));const u=n.shadowRoot?.querySelector("cosmoz-listbox");a(u).toBeFalsy(),a(t.onChange).not.toHaveBeenCalled()}},R={args:{source:s,value:[s[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const l=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip");a(l).toBeTruthy();const r=l?.shadowRoot?.querySelector(".clear");a(r).toBeFalsy(),a(t.onChange).not.toHaveBeenCalled()}},b={args:{source:s,value:[s[0]],text:"initial"},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const n=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-input");a(n).toBeTruthy()}},f={args:{source:s,value:[],externalSearch:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await c.type(t,"Red"),await i(()=>{const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length).toBe(4)})}},q={args:{source:[{id:1,text:"Item 1"},{id:2,text:"Item 2"}],value:[{id:1,text:"Item 1"}],valueProperty:"id",keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await i(()=>{const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length).toBe(2)})}},k={args:{source:s,value:[],onSelect:p(),keepOpened:!0},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Red/u});await c.click(n),await i(()=>{a(o.onSelect).toHaveBeenCalledWith(s[0],a.any(Object))})}},C={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete");a(t.opened).toBeFalsy(),a(t.hasAttribute("opened")).toBe(!1),t.opened=!0,await e.findByShadowRole("option",{name:/Red/u}),a(t.hasAttribute("opened")).toBe(!0)}},E={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete"),n=await e.findByShadowRole("textbox");await c.click(n),await e.findByShadowRole("option",{name:/Red/u}),t.opened=!1,await i(()=>{a(t.hasAttribute("opened")).toBe(!1),a(t.opened).toBe(!1)})}},T={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete"),n=[];t.addEventListener("opened-changed",(r=>{n.push(r.detail.value)}));const l=await e.findByShadowRole("textbox");await c.click(l),await i(()=>{a(n).toContain(!0)})}},z={args:{source:s,value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await new Promise(u=>setTimeout(u,200));const n=o.querySelector("cosmoz-autocomplete");let l=n.shadowRoot?.querySelector("cosmoz-listbox"),r=l?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length??0).toBe(0),await c.type(t,"R"),await i(()=>{l=n.shadowRoot?.querySelector("cosmoz-listbox"),r=l?.shadowRoot?.querySelectorAll('.item[role="option"]'),a(r?.length).toBeGreaterThan(0)})}},A={args:{value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=[],n=o.querySelector("cosmoz-autocomplete");n.source=r=>(t.push(r),Promise.resolve(s));const l=await e.findByShadowRole("textbox");await c.click(l),await new Promise(r=>setTimeout(r,200)),a(t.length).toBe(0),await c.type(l,"R"),await i(()=>{a(t.length).toBeGreaterThan(0)}),await i(()=>{const u=n.shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(u?.length).toBeGreaterThan(0)})}},O={args:{source:s,value:[s[0]],limit:1},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(1);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("G"),await i(()=>{const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(0)})}},F={args:{source:s,value:[s[0],s[1]]},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(2);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("B"),await new Promise(u=>setTimeout(u,100));const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(2)}},P={args:{source:s,value:[s[0]],limit:1,disabled:!0},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(1);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("G"),await new Promise(u=>setTimeout(u,100));const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(1)}},D=[{id:1,text:"Item 1"},{id:2,text:"Item 2"},{id:3,text:"Item 3"}],W={args:{source:D,value:[{id:1,text:"Item 1"}],valueProperty:"id",preserveOrder:!0,keepOpened:!0,onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Item 1/u});a(n).toBeTruthy(),await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}},I={args:{source:D,value:[{id:1,text:"Item 1"}],valueProperty:"id",preserveOrder:!1,keepOpened:!0,onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Item 1/u});a(n).toBeTruthy(),await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0], colors[2]]
@@ -61,7 +61,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
     });
     expect(option).toBeTruthy();
   }
-}`,...h.parameters?.docs?.source}}};w.parameters={...w.parameters,docs:{...w.parameters?.docs,source:{originalSource:`{
+}`,...h.parameters?.docs?.source}}};y.parameters={...y.parameters,docs:{...y.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0]],
@@ -82,7 +82,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
     });
   }
-}`,...w.parameters?.docs?.source}}};y.parameters={...y.parameters,docs:{...y.parameters?.docs,source:{originalSource:`{
+}`,...y.parameters?.docs?.source}}};w.parameters={...w.parameters,docs:{...w.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -105,7 +105,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(args.onChange).toHaveBeenCalledWith([colors[0]], expect.any(Function));
     });
   }
-}`,...y.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`{
+}`,...w.parameters?.docs?.source}}};x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -121,7 +121,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(args.onText).toHaveBeenCalledWith('Gre');
     });
   }
-}`,...v.parameters?.docs?.source}}};x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`{
+}`,...x.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0], colors[1]],
@@ -142,7 +142,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(args.onChange).toHaveBeenCalledWith([colors[0]], expect.any(Function));
     });
   }
-}`,...x.parameters?.docs?.source}}};S.parameters={...S.parameters,docs:{...S.parameters?.docs,source:{originalSource:`{
+}`,...v.parameters?.docs?.source}}};S.parameters={...S.parameters,docs:{...S.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -208,7 +208,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
     // onChange should NOT have been called
     expect(args.onChange).not.toHaveBeenCalled();
   }
-}`,...g.parameters?.docs?.source}}};b.parameters={...b.parameters,docs:{...b.parameters?.docs,source:{originalSource:`{
+}`,...g.parameters?.docs?.source}}};R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0]],
@@ -232,7 +232,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
     // onChange should NOT have been called
     expect(args.onChange).not.toHaveBeenCalled();
   }
-}`,...b.parameters?.docs?.source}}};f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+}`,...R.parameters?.docs?.source}}};b.parameters={...b.parameters,docs:{...b.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0]],
@@ -250,7 +250,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
     // The input should show the text property
     expect(input).toBeTruthy();
   }
-}`,...f.parameters?.docs?.source}}};R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
+}`,...b.parameters?.docs?.source}}};f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -275,7 +275,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(options?.length).toBe(4);
     });
   }
-}`,...R.parameters?.docs?.source}}};k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`{
+}`,...f.parameters?.docs?.source}}};q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
   args: {
     source: [{
       id: 1,
@@ -306,7 +306,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(options?.length).toBe(2);
     });
   }
-}`,...k.parameters?.docs?.source}}};q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
+}`,...q.parameters?.docs?.source}}};k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -327,7 +327,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(args.onSelect).toHaveBeenCalledWith(colors[0], expect.any(Object));
     });
   }
-}`,...q.parameters?.docs?.source}}};C.parameters={...C.parameters,docs:{...C.parameters?.docs,source:{originalSource:`{
+}`,...k.parameters?.docs?.source}}};C.parameters={...C.parameters,docs:{...C.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: []
@@ -347,7 +347,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
     });
     expect(autocomplete.hasAttribute('opened')).toBe(true);
   }
-}`,...C.parameters?.docs?.source}}};T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`{
+}`,...C.parameters?.docs?.source}}};E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: []
@@ -370,7 +370,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(autocomplete.opened).toBe(false);
     });
   }
-}`,...T.parameters?.docs?.source}}};E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
+}`,...E.parameters?.docs?.source}}};T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: []
@@ -392,7 +392,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(events).toContain(true);
     });
   }
-}`,...E.parameters?.docs?.source}}};z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+}`,...T.parameters?.docs?.source}}};z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -421,7 +421,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(options?.length).toBeGreaterThan(0);
     });
   }
-}`,...z.parameters?.docs?.source}}};O.parameters={...O.parameters,docs:{...O.parameters?.docs,source:{originalSource:`{
+}`,...z.parameters?.docs?.source}}};A.parameters={...A.parameters,docs:{...A.parameters?.docs,source:{originalSource:`{
   args: {
     value: [],
     lazyOpen: true,
@@ -455,7 +455,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(options?.length).toBeGreaterThan(0);
     });
   }
-}`,...O.parameters?.docs?.source}}};A.parameters={...A.parameters,docs:{...A.parameters?.docs,source:{originalSource:`{
+}`,...A.parameters?.docs?.source}}};O.parameters={...O.parameters,docs:{...O.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0]],
@@ -477,7 +477,7 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
       expect(chipsAfter?.length).toBe(0);
     });
   }
-}`,...A.parameters?.docs?.source}}};F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
+}`,...O.parameters?.docs?.source}}};F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0], colors[1]]
@@ -583,11 +583,8 @@ import{b as j}from"./iframe-BevY7tJm.js";import"./index-DvSw-fMx.js";import"./pr
 
     // Click the already-selected item to deselect it
     await userEvent.click(option);
-
-    // This works because preserveOrder=false spreads value items into the dropdown,
-    // so the clicked item shares the same object reference as the value
     await waitFor(() => {
       expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
     });
   }
-}`,...I.parameters?.docs?.source}}};const Z=["RenderWithValue","RenderLimit1","FocusOpensListbox","DeselectChip","OnChangeCallback","OnTextCallback","BackspaceRemovesChip","KeyboardSelectItem","DefaultIndexNegative","DisabledState","DisabledNoChipClear","TextValueEffects","ExternalSearchMode","ValueProperty","OnSelectCallback","ProgrammaticOpen","ProgrammaticClose","OpenedChangedEvent","LazyOpenHidesItems","LazyOpenSuppressesSource","TypingClearsValueWhenSelected","TypingDoesNotClearValueWhenMultiSelect","TypingDoesNotClearWhenDisabled","DeselectWithPreserveOrderAndValueProperty","DeselectWithValuePropertyWithoutPreserveOrder"];export{x as BackspaceRemovesChip,B as DefaultIndexNegative,w as DeselectChip,W as DeselectWithPreserveOrderAndValueProperty,I as DeselectWithValuePropertyWithoutPreserveOrder,b as DisabledNoChipClear,g as DisabledState,R as ExternalSearchMode,h as FocusOpensListbox,S as KeyboardSelectItem,z as LazyOpenHidesItems,O as LazyOpenSuppressesSource,y as OnChangeCallback,q as OnSelectCallback,v as OnTextCallback,E as OpenedChangedEvent,T as ProgrammaticClose,C as ProgrammaticOpen,m as RenderLimit1,d as RenderWithValue,f as TextValueEffects,A as TypingClearsValueWhenSelected,F as TypingDoesNotClearValueWhenMultiSelect,P as TypingDoesNotClearWhenDisabled,k as ValueProperty,Z as __namedExportsOrder,X as default};
+}`,...I.parameters?.docs?.source}}};const Z=["RenderWithValue","RenderLimit1","FocusOpensListbox","DeselectChip","OnChangeCallback","OnTextCallback","BackspaceRemovesChip","KeyboardSelectItem","DefaultIndexNegative","DisabledState","DisabledNoChipClear","TextValueEffects","ExternalSearchMode","ValueProperty","OnSelectCallback","ProgrammaticOpen","ProgrammaticClose","OpenedChangedEvent","LazyOpenHidesItems","LazyOpenSuppressesSource","TypingClearsValueWhenSelected","TypingDoesNotClearValueWhenMultiSelect","TypingDoesNotClearWhenDisabled","DeselectWithPreserveOrderAndValueProperty","DeselectWithValuePropertyWithoutPreserveOrder"];export{v as BackspaceRemovesChip,B as DefaultIndexNegative,y as DeselectChip,W as DeselectWithPreserveOrderAndValueProperty,I as DeselectWithValuePropertyWithoutPreserveOrder,R as DisabledNoChipClear,g as DisabledState,f as ExternalSearchMode,h as FocusOpensListbox,S as KeyboardSelectItem,z as LazyOpenHidesItems,A as LazyOpenSuppressesSource,w as OnChangeCallback,k as OnSelectCallback,x as OnTextCallback,T as OpenedChangedEvent,E as ProgrammaticClose,C as ProgrammaticOpen,m as RenderLimit1,d as RenderWithValue,b as TextValueEffects,O as TypingClearsValueWhenSelected,F as TypingDoesNotClearValueWhenMultiSelect,P as TypingDoesNotClearWhenDisabled,q as ValueProperty,Z as __namedExportsOrder,X as default};
