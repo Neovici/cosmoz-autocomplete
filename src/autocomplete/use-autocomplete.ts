@@ -11,7 +11,10 @@ import {
 	useProperty,
 	useState,
 } from '@pionjs/pion';
-import { AUTOCOMPLETE_DESELECT_LAST } from './autocomplete-keybindings';
+import {
+	AUTOCOMPLETE_DESELECT_LAST,
+	AUTOCOMPLETE_SEARCH_WHEN_SELECTED,
+} from './autocomplete-keybindings';
 import { EMPTY, normalize, notify, search } from './util';
 
 const useNotify = <V>(
@@ -132,6 +135,23 @@ export const useAutocomplete = <I>({
 			element: () => host,
 		},
 		[],
+	);
+
+	useActivity(
+		{
+			activity: AUTOCOMPLETE_SEARCH_WHEN_SELECTED,
+			callback: (ev) => {
+				const values = array(value);
+				const isOne = limit === 1;
+				if (values.length > 0 && isOne && ev.key.length === 1) {
+					onChange(values.slice(0, -1));
+				}
+			},
+			allowDefault: true,
+			check: () => !disabled && empty && host.matches(':focus-within'),
+			element: () => host,
+		},
+		[limit],
 	);
 
 	// Clear query when popover closes
