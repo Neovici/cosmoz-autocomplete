@@ -52,6 +52,7 @@ interface Base<I> {
 interface Meta<I> extends Omit<Base<I>, 'value'> {
 	setOpened: (opened: boolean) => void;
 	value: I[];
+	valueProperty?: string;
 }
 
 export interface Props<I> extends Base<I> {
@@ -174,6 +175,7 @@ export const useAutocomplete = <I>({
 		keepOpened,
 		setOpened,
 		onSelect,
+		valueProperty,
 	});
 
 	const [, , state] = usePromise(source$);
@@ -235,17 +237,19 @@ export const useAutocomplete = <I>({
 					keepQuery,
 					keepOpened,
 					setOpened,
+					valueProperty,
 				} = meta;
 				if (!keepQuery) onText('');
 				if (!keepOpened) setOpened(false);
 				const value = array(val),
-					deselect = value.includes(newVal);
+					predicate = prop(valueProperty),
+					deselect = value.some((v) => predicate(v) === predicate(newVal));
 
 				if (deselect && value.length === min) return;
 
 				onChange(
 					(deselect
-						? (without(newVal)(value) as I[])
+						? (without(newVal, predicate)(value) as I[])
 						: [...value, newVal]
 					).slice(-limit!),
 				);
@@ -255,7 +259,9 @@ export const useAutocomplete = <I>({
 		onDeselect: useCallback(
 			(val: I | I[]) => {
 				if (disabled) return;
-				meta.onChange(without(val)(meta.value) as I[]);
+				meta.onChange(
+					without(val, prop(meta.valueProperty))(meta.value) as I[],
+				);
 			},
 			[disabled, meta],
 		),
