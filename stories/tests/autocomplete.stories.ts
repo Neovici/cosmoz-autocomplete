@@ -663,8 +663,6 @@ export const DeselectWithValuePropertyWithoutPreserveOrder: Story = {
 		// Click the already-selected item to deselect it
 		await userEvent.click(option);
 
-		// This works because preserveOrder=false spreads value items into the dropdown,
-		// so the clicked item shares the same object reference as the value
 		await waitFor(() => {
 			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
 		});
