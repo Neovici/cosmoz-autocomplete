@@ -600,8 +600,7 @@ export const TypingDoesNotClearWhenDisabled: Story = {
 	},
 };
 
-// FE-419: deselect does not work when preserveOrder is on and valueProperty is used.
-// The source and value items have the same valueProperty but different object references,
+// Source and value items with the same valueProperty but different object references,
 // mimicking the real-world scenario where options come from an API response.
 const itemsWithId = [
 	{ id: 1, text: 'Item 1' },
