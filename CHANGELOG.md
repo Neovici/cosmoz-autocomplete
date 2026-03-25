@@ -1,3 +1,9 @@
+## [13.4.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.4.0...v13.4.1) (2026-03-25)
+
+### Bug Fixes
+
+* deselect with preserveOrder and valueProperty ([#239](https://github.com/Neovici/cosmoz-autocomplete/issues/239)) ([b7c5cdc](https://github.com/Neovici/cosmoz-autocomplete/commit/b7c5cdc70ac75700d3d04484085139a2cbcc34c6))
+
 ## [13.4.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.3.1...v13.4.0) (2026-03-24)
 
 ### Features
