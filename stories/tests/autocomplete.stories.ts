@@ -23,6 +23,7 @@ interface AutocompleteArgs {
 	keepOpened?: boolean;
 	externalSearch?: boolean;
 	lazyOpen?: boolean;
+	preserveOrder?: boolean;
 }
 
 const AutocompleteTest = ({
@@ -40,6 +41,7 @@ const AutocompleteTest = ({
 	keepOpened,
 	externalSearch,
 	lazyOpen,
+	preserveOrder,
 }: AutocompleteArgs): TemplateResult => html`
 	<cosmoz-autocomplete
 		.source=${source}
@@ -56,6 +58,7 @@ const AutocompleteTest = ({
 		?disabled=${disabled}
 		?keep-opened=${keepOpened}
 		?external-search=${externalSearch}
+		?preserve-order=${preserveOrder}
 	></cosmoz-autocomplete>
 `;
 
@@ -594,5 +597,73 @@ export const TypingDoesNotClearWhenDisabled: Story = {
 
 		const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
 		expect(chipsAfter?.length).toBe(1);
+	},
+};
+
+// Source and value items with the same valueProperty but different object references,
+// mimicking the real-world scenario where options come from an API response.
+const itemsWithId = [
+	{ id: 1, text: 'Item 1' },
+	{ id: 2, text: 'Item 2' },
+	{ id: 3, text: 'Item 3' },
+];
+
+export const DeselectWithPreserveOrderAndValueProperty: Story = {
+	args: {
+		source: itemsWithId,
+		// Different object reference with same id — simulates value stored from a previous selection
+		// while source items come from a fresh API response
+		value: [{ id: 1, text: 'Item 1' }],
+		valueProperty: 'id',
+		preserveOrder: true,
+		keepOpened: true,
+		onChange: fn(),
+	},
+	play: async ({ canvas, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		// Item 1 should appear as selected (checked) in the dropdown
+		const option = await canvas.findByShadowRole('option', {
+			name: /Item 1/u,
+		});
+		expect(option).toBeTruthy();
+
+		// Click the already-selected item to deselect it
+		await userEvent.click(option);
+
+		// onChange should be called with an empty array (deselect), not a duplicate
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
+		});
+	},
+};
+
+export const DeselectWithValuePropertyWithoutPreserveOrder: Story = {
+	args: {
+		source: itemsWithId,
+		// Different object reference with same id — same scenario as above
+		value: [{ id: 1, text: 'Item 1' }],
+		valueProperty: 'id',
+		preserveOrder: false,
+		keepOpened: true,
+		onChange: fn(),
+	},
+	play: async ({ canvas, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		// Item 1 should appear as selected in the dropdown
+		const option = await canvas.findByShadowRole('option', {
+			name: /Item 1/u,
+		});
+		expect(option).toBeTruthy();
+
+		// Click the already-selected item to deselect it
+		await userEvent.click(option);
+
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
+		});
 	},
 };
