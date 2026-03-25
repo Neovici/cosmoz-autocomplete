@@ -1,21 +1,22 @@
-import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./preload-helper-PPVm8Dsz.js";import"./index-DDNf_N6S.js";const{expect:a,fn:p,userEvent:r,waitFor:i}=__STORYBOOK_MODULE_TEST__,V=({source:e,value:t,limit:o,textProperty:c="text",valueProperty:l,onChange:s,onText:u,onSelect:P,disabled:G,defaultIndex:W,text:D,keepOpened:L,externalSearch:I,lazyOpen:N})=>$`
+import{b as j}from"./iframe-33s_BJI2.js";import"./index-5-Qat5lk.js";import"./preload-helper-PPVm8Dsz.js";import"./index-BUbtMxzr.js";const{expect:a,fn:p,userEvent:c,waitFor:i}=__STORYBOOK_MODULE_TEST__,K=({source:e,value:o,limit:t,textProperty:n="text",valueProperty:l,onChange:r,onText:u,onSelect:H,disabled:G,defaultIndex:L,text:N,keepOpened:V,externalSearch:$,lazyOpen:M,preserveOrder:_})=>j`
     <cosmoz-autocomplete
         .source=${e}
-        .value=${t}
-        .limit=${o}
-        .textProperty=${c}
+        .value=${o}
+        .limit=${t}
+        .textProperty=${n}
         .valueProperty=${l}
-        .onChange=${s}
+        .onChange=${r}
         .onText=${u}
-        .onSelect=${P}
-        .defaultIndex=${W}
-        .text=${D}
-        ?lazy-open=${N}
+        .onSelect=${H}
+        .defaultIndex=${L}
+        .text=${N}
+        ?lazy-open=${M}
         ?disabled=${G}
-        ?keep-opened=${L}
-        ?external-search=${I}
+        ?keep-opened=${V}
+        ?external-search=${$}
+        ?preserve-order=${_}
     ></cosmoz-autocomplete>
-`,Y={title:"Tests/Autocomplete",render:V,tags:["!autodocs"]},n=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],d={args:{source:n,value:[n[0],n[2]]},play:async({canvas:e,canvasElement:t})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Blue/u);const o=t.querySelector("cosmoz-autocomplete");a(o?.shadowRoot?.querySelectorAll(".chip").length).toBe(2)}},m={args:{source:n,value:[n[1]],limit:1},play:async({canvas:e,canvasElement:t})=>{await e.findByShadowText(/Green/u);const o=t.querySelector("cosmoz-autocomplete");a(o?.shadowRoot?.querySelectorAll(".chip").length).toBe(1)}},h={args:{source:n,value:[]},play:async({canvas:e})=>{const t=await e.findByShadowRole("textbox");await r.click(t);const o=await e.findByShadowRole("option",{name:/Red/u});a(o).toBeTruthy()}},y={args:{source:n,value:[n[0]],onChange:p()},play:async({canvas:e,canvasElement:t,args:o})=>{await e.findByShadowText(/Red/u);const s=t.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip")?.shadowRoot?.querySelector(".clear");a(s).toBeTruthy(),await r.click(s),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}},w={args:{source:n,value:[],onChange:p(),keepOpened:!0},play:async({canvas:e,args:t})=>{const o=await e.findByShadowRole("textbox");await r.click(o);const c=await e.findByShadowRole("option",{name:/Red/u});await r.click(c),await i(()=>{a(t.onChange).toHaveBeenCalledWith([n[0]],a.any(Function))})}},x={args:{source:n,value:[],onText:p()},play:async({canvas:e,args:t})=>{const o=await e.findByShadowRole("textbox");await r.type(o,"Gre"),await i(()=>{a(t.onText).toHaveBeenCalledWith("Gre")})}},S={args:{source:n,value:[n[0],n[1]],onChange:p()},play:async({canvas:e,args:t})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const o=await e.findByShadowRole("textbox");await r.click(o),await r.keyboard("{Backspace}"),await i(()=>{a(t.onChange).toHaveBeenCalledWith([n[0]],a.any(Function))})}},v={args:{source:n,value:[],onChange:p()},play:async({canvas:e,args:t})=>{const o=await e.findByShadowRole("textbox");await r.click(o),await e.findByShadowRole("option",{name:/Red/u}),await r.keyboard("{ArrowDown}"),await r.keyboard("{Enter}"),await i(()=>{a(t.onChange).toHaveBeenCalled()})}},B={args:{source:n,value:[],defaultIndex:-1},play:async({canvasElement:e})=>{const t=e.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length??0).toBe(0)}},g={args:{source:n,value:[n[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:t,args:o})=>{await e.findByShadowText(/Red/u);const c=t.querySelector("cosmoz-autocomplete");a(c.hasAttribute("disabled")).toBe(!0);const l=c.shadowRoot?.querySelector("cosmoz-input");a(l?.hasAttribute("disabled")).toBe(!0);const s=c.shadowRoot?.querySelector("cosmoz-dropdown-next");a(s?.hasAttribute("disabled")).toBe(!0),await r.click(l),await new Promise(P=>setTimeout(P,200));const u=c.shadowRoot?.querySelector("cosmoz-listbox");a(u).toBeFalsy(),a(o.onChange).not.toHaveBeenCalled()}},R={args:{source:n,value:[n[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:t,args:o})=>{await e.findByShadowText(/Red/u);const l=t.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip");a(l).toBeTruthy();const s=l?.shadowRoot?.querySelector(".clear");a(s).toBeFalsy(),a(o.onChange).not.toHaveBeenCalled()}},b={args:{source:n,value:[n[0]],text:"initial"},play:async({canvas:e,canvasElement:t})=>{await e.findByShadowText(/Red/u);const c=t.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-input");a(c).toBeTruthy()}},f={args:{source:n,value:[],externalSearch:!0,keepOpened:!0},play:async({canvas:e,canvasElement:t})=>{const o=await e.findByShadowRole("textbox");await r.click(o),await r.type(o,"Red"),await i(()=>{const s=t.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(s?.length).toBe(4)})}},q={args:{source:[{id:1,text:"Item 1"},{id:2,text:"Item 2"}],value:[{id:1,text:"Item 1"}],valueProperty:"id",keepOpened:!0},play:async({canvas:e,canvasElement:t})=>{const o=await e.findByShadowRole("textbox");await r.click(o),await i(()=>{const s=t.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(s?.length).toBe(2)})}},E={args:{source:n,value:[],onSelect:p(),keepOpened:!0},play:async({canvas:e,args:t})=>{const o=await e.findByShadowRole("textbox");await r.click(o);const c=await e.findByShadowRole("option",{name:/Red/u});await r.click(c),await i(()=>{a(t.onSelect).toHaveBeenCalledWith(n[0],a.any(Object))})}},T={args:{source:n,value:[]},play:async({canvas:e,canvasElement:t})=>{const o=t.querySelector("cosmoz-autocomplete");a(o.opened).toBeFalsy(),a(o.hasAttribute("opened")).toBe(!1),o.opened=!0,await e.findByShadowRole("option",{name:/Red/u}),a(o.hasAttribute("opened")).toBe(!0)}},k={args:{source:n,value:[]},play:async({canvas:e,canvasElement:t})=>{const o=t.querySelector("cosmoz-autocomplete"),c=await e.findByShadowRole("textbox");await r.click(c),await e.findByShadowRole("option",{name:/Red/u}),o.opened=!1,await i(()=>{a(o.hasAttribute("opened")).toBe(!1),a(o.opened).toBe(!1)})}},C={args:{source:n,value:[]},play:async({canvas:e,canvasElement:t})=>{const o=t.querySelector("cosmoz-autocomplete"),c=[];o.addEventListener("opened-changed",(s=>{c.push(s.detail.value)}));const l=await e.findByShadowRole("textbox");await r.click(l),await i(()=>{a(c).toContain(!0)})}},z={args:{source:n,value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:t})=>{const o=await e.findByShadowRole("textbox");await r.click(o),await new Promise(u=>setTimeout(u,200));const c=t.querySelector("cosmoz-autocomplete");let l=c.shadowRoot?.querySelector("cosmoz-listbox"),s=l?.shadowRoot?.querySelectorAll('.item[role="option"]');a(s?.length??0).toBe(0),await r.type(o,"R"),await i(()=>{l=c.shadowRoot?.querySelector("cosmoz-listbox"),s=l?.shadowRoot?.querySelectorAll('.item[role="option"]'),a(s?.length).toBeGreaterThan(0)})}},A={args:{value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:t})=>{const o=[],c=t.querySelector("cosmoz-autocomplete");c.source=s=>(o.push(s),Promise.resolve(n));const l=await e.findByShadowRole("textbox");await r.click(l),await new Promise(s=>setTimeout(s,200)),a(o.length).toBe(0),await r.type(l,"R"),await i(()=>{a(o.length).toBeGreaterThan(0)}),await i(()=>{const u=c.shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(u?.length).toBeGreaterThan(0)})}},O={args:{source:n,value:[n[0]],limit:1},play:async({canvas:e,canvasElement:t})=>{await e.findByShadowText(/Red/u);const o=t.querySelector("cosmoz-autocomplete"),c=o.shadowRoot?.querySelectorAll(".chip");a(c?.length).toBe(1);const l=await e.findByShadowRole("textbox");await r.click(l),await r.keyboard("G"),await i(()=>{const s=o.shadowRoot?.querySelectorAll(".chip");a(s?.length).toBe(0)})}},F={args:{source:n,value:[n[0],n[1]]},play:async({canvas:e,canvasElement:t})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const o=t.querySelector("cosmoz-autocomplete"),c=o.shadowRoot?.querySelectorAll(".chip");a(c?.length).toBe(2);const l=await e.findByShadowRole("textbox");await r.click(l),await r.keyboard("B"),await new Promise(u=>setTimeout(u,100));const s=o.shadowRoot?.querySelectorAll(".chip");a(s?.length).toBe(2)}},H={args:{source:n,value:[n[0]],limit:1,disabled:!0},play:async({canvas:e,canvasElement:t})=>{await e.findByShadowText(/Red/u);const o=t.querySelector("cosmoz-autocomplete"),c=o.shadowRoot?.querySelectorAll(".chip");a(c?.length).toBe(1);const l=await e.findByShadowRole("textbox");await r.click(l),await r.keyboard("G"),await new Promise(u=>setTimeout(u,100));const s=o.shadowRoot?.querySelectorAll(".chip");a(s?.length).toBe(1)}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+`,X={title:"Tests/Autocomplete",render:K,tags:["!autodocs"]},s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],d={args:{source:s,value:[s[0],s[2]]},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Blue/u);const t=o.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length).toBe(2)}},m={args:{source:s,value:[s[1]],limit:1},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Green/u);const t=o.querySelector("cosmoz-autocomplete");a(t?.shadowRoot?.querySelectorAll(".chip").length).toBe(1)}},h={args:{source:s,value:[]},play:async({canvas:e})=>{const o=await e.findByShadowRole("textbox");await c.click(o);const t=await e.findByShadowRole("option",{name:/Red/u});a(t).toBeTruthy()}},y={args:{source:s,value:[s[0]],onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip")?.shadowRoot?.querySelector(".clear");a(r).toBeTruthy(),await c.click(r),await i(()=>{a(t.onChange).toHaveBeenCalledWith([],a.any(Function))})}},w={args:{source:s,value:[],onChange:p(),keepOpened:!0},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Red/u});await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([s[0]],a.any(Function))})}},x={args:{source:s,value:[],onText:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.type(t,"Gre"),await i(()=>{a(o.onText).toHaveBeenCalledWith("Gre")})}},v={args:{source:s,value:[s[0],s[1]],onChange:p()},play:async({canvas:e,args:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const t=await e.findByShadowRole("textbox");await c.click(t),await c.keyboard("{Backspace}"),await i(()=>{a(o.onChange).toHaveBeenCalledWith([s[0]],a.any(Function))})}},S={args:{source:s,value:[],onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await e.findByShadowRole("option",{name:/Red/u}),await c.keyboard("{ArrowDown}"),await c.keyboard("{Enter}"),await i(()=>{a(o.onChange).toHaveBeenCalled()})}},B={args:{source:s,value:[],defaultIndex:-1},play:async({canvasElement:e})=>{const o=e.querySelector("cosmoz-autocomplete");a(o?.shadowRoot?.querySelectorAll(".chip").length??0).toBe(0)}},g={args:{source:s,value:[s[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const n=o.querySelector("cosmoz-autocomplete");a(n.hasAttribute("disabled")).toBe(!0);const l=n.shadowRoot?.querySelector("cosmoz-input");a(l?.hasAttribute("disabled")).toBe(!0);const r=n.shadowRoot?.querySelector("cosmoz-dropdown-next");a(r?.hasAttribute("disabled")).toBe(!0),await c.click(l),await new Promise(H=>setTimeout(H,200));const u=n.shadowRoot?.querySelector("cosmoz-listbox");a(u).toBeFalsy(),a(t.onChange).not.toHaveBeenCalled()}},R={args:{source:s,value:[s[0]],disabled:!0,onChange:p()},play:async({canvas:e,canvasElement:o,args:t})=>{await e.findByShadowText(/Red/u);const l=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-autocomplete-chip");a(l).toBeTruthy();const r=l?.shadowRoot?.querySelector(".clear");a(r).toBeFalsy(),a(t.onChange).not.toHaveBeenCalled()}},b={args:{source:s,value:[s[0]],text:"initial"},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const n=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-input");a(n).toBeTruthy()}},f={args:{source:s,value:[],externalSearch:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await c.type(t,"Red"),await i(()=>{const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length).toBe(4)})}},q={args:{source:[{id:1,text:"Item 1"},{id:2,text:"Item 2"}],value:[{id:1,text:"Item 1"}],valueProperty:"id",keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await i(()=>{const r=o.querySelector("cosmoz-autocomplete").shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length).toBe(2)})}},k={args:{source:s,value:[],onSelect:p(),keepOpened:!0},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Red/u});await c.click(n),await i(()=>{a(o.onSelect).toHaveBeenCalledWith(s[0],a.any(Object))})}},C={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete");a(t.opened).toBeFalsy(),a(t.hasAttribute("opened")).toBe(!1),t.opened=!0,await e.findByShadowRole("option",{name:/Red/u}),a(t.hasAttribute("opened")).toBe(!0)}},E={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete"),n=await e.findByShadowRole("textbox");await c.click(n),await e.findByShadowRole("option",{name:/Red/u}),t.opened=!1,await i(()=>{a(t.hasAttribute("opened")).toBe(!1),a(t.opened).toBe(!1)})}},T={args:{source:s,value:[]},play:async({canvas:e,canvasElement:o})=>{const t=o.querySelector("cosmoz-autocomplete"),n=[];t.addEventListener("opened-changed",(r=>{n.push(r.detail.value)}));const l=await e.findByShadowRole("textbox");await c.click(l),await i(()=>{a(n).toContain(!0)})}},z={args:{source:s,value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t),await new Promise(u=>setTimeout(u,200));const n=o.querySelector("cosmoz-autocomplete");let l=n.shadowRoot?.querySelector("cosmoz-listbox"),r=l?.shadowRoot?.querySelectorAll('.item[role="option"]');a(r?.length??0).toBe(0),await c.type(t,"R"),await i(()=>{l=n.shadowRoot?.querySelector("cosmoz-listbox"),r=l?.shadowRoot?.querySelectorAll('.item[role="option"]'),a(r?.length).toBeGreaterThan(0)})}},A={args:{value:[],lazyOpen:!0,keepOpened:!0},play:async({canvas:e,canvasElement:o})=>{const t=[],n=o.querySelector("cosmoz-autocomplete");n.source=r=>(t.push(r),Promise.resolve(s));const l=await e.findByShadowRole("textbox");await c.click(l),await new Promise(r=>setTimeout(r,200)),a(t.length).toBe(0),await c.type(l,"R"),await i(()=>{a(t.length).toBeGreaterThan(0)}),await i(()=>{const u=n.shadowRoot?.querySelector("cosmoz-listbox")?.shadowRoot?.querySelectorAll('.item[role="option"]');a(u?.length).toBeGreaterThan(0)})}},O={args:{source:s,value:[s[0]],limit:1},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(1);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("G"),await i(()=>{const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(0)})}},F={args:{source:s,value:[s[0],s[1]]},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u),await e.findByShadowText(/Green/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(2);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("B"),await new Promise(u=>setTimeout(u,100));const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(2)}},P={args:{source:s,value:[s[0]],limit:1,disabled:!0},play:async({canvas:e,canvasElement:o})=>{await e.findByShadowText(/Red/u);const t=o.querySelector("cosmoz-autocomplete"),n=t.shadowRoot?.querySelectorAll(".chip");a(n?.length).toBe(1);const l=await e.findByShadowRole("textbox");await c.click(l),await c.keyboard("G"),await new Promise(u=>setTimeout(u,100));const r=t.shadowRoot?.querySelectorAll(".chip");a(r?.length).toBe(1)}},D=[{id:1,text:"Item 1"},{id:2,text:"Item 2"},{id:3,text:"Item 3"}],W={args:{source:D,value:[{id:1,text:"Item 1"}],valueProperty:"id",preserveOrder:!0,keepOpened:!0,onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Item 1/u});a(n).toBeTruthy(),await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}},I={args:{source:D,value:[{id:1,text:"Item 1"}],valueProperty:"id",preserveOrder:!1,keepOpened:!0,onChange:p()},play:async({canvas:e,args:o})=>{const t=await e.findByShadowRole("textbox");await c.click(t);const n=await e.findByShadowRole("option",{name:/Item 1/u});a(n).toBeTruthy(),await c.click(n),await i(()=>{a(o.onChange).toHaveBeenCalledWith([],a.any(Function))})}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0], colors[2]]
@@ -120,7 +121,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(args.onText).toHaveBeenCalledWith('Gre');
     });
   }
-}`,...x.parameters?.docs?.source}}};S.parameters={...S.parameters,docs:{...S.parameters?.docs,source:{originalSource:`{
+}`,...x.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0], colors[1]],
@@ -141,7 +142,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(args.onChange).toHaveBeenCalledWith([colors[0]], expect.any(Function));
     });
   }
-}`,...S.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`{
+}`,...v.parameters?.docs?.source}}};S.parameters={...S.parameters,docs:{...S.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -166,7 +167,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(args.onChange).toHaveBeenCalled();
     });
   }
-}`,...v.parameters?.docs?.source}}};B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
+}`,...S.parameters?.docs?.source}}};B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -305,7 +306,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(options?.length).toBe(2);
     });
   }
-}`,...q.parameters?.docs?.source}}};E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
+}`,...q.parameters?.docs?.source}}};k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -326,7 +327,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(args.onSelect).toHaveBeenCalledWith(colors[0], expect.any(Object));
     });
   }
-}`,...E.parameters?.docs?.source}}};T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`{
+}`,...k.parameters?.docs?.source}}};C.parameters={...C.parameters,docs:{...C.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: []
@@ -346,7 +347,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
     });
     expect(autocomplete.hasAttribute('opened')).toBe(true);
   }
-}`,...T.parameters?.docs?.source}}};k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`{
+}`,...C.parameters?.docs?.source}}};E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: []
@@ -369,7 +370,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(autocomplete.opened).toBe(false);
     });
   }
-}`,...k.parameters?.docs?.source}}};C.parameters={...C.parameters,docs:{...C.parameters?.docs,source:{originalSource:`{
+}`,...E.parameters?.docs?.source}}};T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: []
@@ -391,7 +392,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
       expect(events).toContain(true);
     });
   }
-}`,...C.parameters?.docs?.source}}};z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+}`,...T.parameters?.docs?.source}}};z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [],
@@ -497,7 +498,7 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
     const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
     expect(chipsAfter?.length).toBe(2);
   }
-}`,...F.parameters?.docs?.source}}};H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
+}`,...F.parameters?.docs?.source}}};P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     value: [colors[0]],
@@ -519,4 +520,71 @@ import{b as $}from"./iframe-_s_9tAvp.js";import"./index-BLByWh8c.js";import"./pr
     const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
     expect(chipsAfter?.length).toBe(1);
   }
-}`,...H.parameters?.docs?.source}}};const U=["RenderWithValue","RenderLimit1","FocusOpensListbox","DeselectChip","OnChangeCallback","OnTextCallback","BackspaceRemovesChip","KeyboardSelectItem","DefaultIndexNegative","DisabledState","DisabledNoChipClear","TextValueEffects","ExternalSearchMode","ValueProperty","OnSelectCallback","ProgrammaticOpen","ProgrammaticClose","OpenedChangedEvent","LazyOpenHidesItems","LazyOpenSuppressesSource","TypingClearsValueWhenSelected","TypingDoesNotClearValueWhenMultiSelect","TypingDoesNotClearWhenDisabled"];export{S as BackspaceRemovesChip,B as DefaultIndexNegative,y as DeselectChip,R as DisabledNoChipClear,g as DisabledState,f as ExternalSearchMode,h as FocusOpensListbox,v as KeyboardSelectItem,z as LazyOpenHidesItems,A as LazyOpenSuppressesSource,w as OnChangeCallback,E as OnSelectCallback,x as OnTextCallback,C as OpenedChangedEvent,k as ProgrammaticClose,T as ProgrammaticOpen,m as RenderLimit1,d as RenderWithValue,b as TextValueEffects,O as TypingClearsValueWhenSelected,F as TypingDoesNotClearValueWhenMultiSelect,H as TypingDoesNotClearWhenDisabled,q as ValueProperty,U as __namedExportsOrder,Y as default};
+}`,...P.parameters?.docs?.source}}};W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
+  args: {
+    source: itemsWithId,
+    // Different object reference with same id — simulates value stored from a previous selection
+    // while source items come from a fresh API response
+    value: [{
+      id: 1,
+      text: 'Item 1'
+    }],
+    valueProperty: 'id',
+    preserveOrder: true,
+    keepOpened: true,
+    onChange: fn()
+  },
+  play: async ({
+    canvas,
+    args
+  }) => {
+    const input = await canvas.findByShadowRole('textbox');
+    await userEvent.click(input);
+
+    // Item 1 should appear as selected (checked) in the dropdown
+    const option = await canvas.findByShadowRole('option', {
+      name: /Item 1/u
+    });
+    expect(option).toBeTruthy();
+
+    // Click the already-selected item to deselect it
+    await userEvent.click(option);
+
+    // onChange should be called with an empty array (deselect), not a duplicate
+    await waitFor(() => {
+      expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
+    });
+  }
+}`,...W.parameters?.docs?.source}}};I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
+  args: {
+    source: itemsWithId,
+    // Different object reference with same id — same scenario as above
+    value: [{
+      id: 1,
+      text: 'Item 1'
+    }],
+    valueProperty: 'id',
+    preserveOrder: false,
+    keepOpened: true,
+    onChange: fn()
+  },
+  play: async ({
+    canvas,
+    args
+  }) => {
+    const input = await canvas.findByShadowRole('textbox');
+    await userEvent.click(input);
+
+    // Item 1 should appear as selected in the dropdown
+    const option = await canvas.findByShadowRole('option', {
+      name: /Item 1/u
+    });
+    expect(option).toBeTruthy();
+
+    // Click the already-selected item to deselect it
+    await userEvent.click(option);
+    await waitFor(() => {
+      expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
+    });
+  }
+}`,...I.parameters?.docs?.source}}};const Z=["RenderWithValue","RenderLimit1","FocusOpensListbox","DeselectChip","OnChangeCallback","OnTextCallback","BackspaceRemovesChip","KeyboardSelectItem","DefaultIndexNegative","DisabledState","DisabledNoChipClear","TextValueEffects","ExternalSearchMode","ValueProperty","OnSelectCallback","ProgrammaticOpen","ProgrammaticClose","OpenedChangedEvent","LazyOpenHidesItems","LazyOpenSuppressesSource","TypingClearsValueWhenSelected","TypingDoesNotClearValueWhenMultiSelect","TypingDoesNotClearWhenDisabled","DeselectWithPreserveOrderAndValueProperty","DeselectWithValuePropertyWithoutPreserveOrder"];export{v as BackspaceRemovesChip,B as DefaultIndexNegative,y as DeselectChip,W as DeselectWithPreserveOrderAndValueProperty,I as DeselectWithValuePropertyWithoutPreserveOrder,R as DisabledNoChipClear,g as DisabledState,f as ExternalSearchMode,h as FocusOpensListbox,S as KeyboardSelectItem,z as LazyOpenHidesItems,A as LazyOpenSuppressesSource,w as OnChangeCallback,k as OnSelectCallback,x as OnTextCallback,T as OpenedChangedEvent,E as ProgrammaticClose,C as ProgrammaticOpen,m as RenderLimit1,d as RenderWithValue,b as TextValueEffects,O as TypingClearsValueWhenSelected,F as TypingDoesNotClearValueWhenMultiSelect,P as TypingDoesNotClearWhenDisabled,q as ValueProperty,Z as __namedExportsOrder,X as default};
