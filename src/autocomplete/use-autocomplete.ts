@@ -38,7 +38,7 @@ export type Source<I> = (opts: {
 interface Base<I> {
 	value?: I | I[];
 	limit?: number | string;
-	min?: number;
+	min?: number | string;
 
 	keepOpened?: boolean;
 	keepQuery?: boolean;
@@ -75,7 +75,7 @@ export const useAutocomplete = <I>({
 	onText: _onText,
 	onSelect,
 	limit: _limit,
-	min,
+	min: _min,
 	source,
 	textProperty,
 	textual: _textual,
@@ -89,6 +89,7 @@ export const useAutocomplete = <I>({
 	lazyOpen,
 }: Props<I>) => {
 	const limit = _limit != null ? Number(_limit) : undefined,
+		min = _min != null ? Number(_min) : undefined,
 		textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
@@ -128,7 +129,7 @@ export const useAutocomplete = <I>({
 			activity: AUTOCOMPLETE_DESELECT_LAST,
 			callback: () => {
 				const values = array(value);
-				if (values.length > 0) {
+				if (values.length > (min ?? 0)) {
 					onChange(values.slice(0, -1));
 				}
 			},
