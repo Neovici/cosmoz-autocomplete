@@ -38,7 +38,7 @@ export type Source<I> = (opts: {
 interface Base<I> {
 	value?: I | I[];
 	limit?: number | string;
-	min?: number | string;
+	min?: number;
 
 	keepOpened?: boolean;
 	keepQuery?: boolean;
