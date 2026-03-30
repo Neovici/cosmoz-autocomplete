@@ -19,7 +19,7 @@ import { ItemRendererOpts } from '../listbox/item-renderer';
 import excludingStyle from './style.css';
 import { WrappedItem } from './types';
 import { useExcludingSelection } from './use-excluding-selection';
-import { unwrap } from './utils';
+import { applyExcluding, unwrap } from './utils';
 
 const isItemExcluded = <I>(value: WrappedItem<I>[] | undefined, item: I) =>
 	value?.some((v) => v.item === item && v.excluded);
@@ -77,7 +77,7 @@ const mkChipRenderer =
 			${content}
 		</cosmoz-autocomplete-chip>`;
 
-const AutocompleteExcluding = <I>(props: Props<I>) => {
+const AutocompleteExcludingStandalone = <I>(props: Props<I>) => {
 	const { value, setValue, setExcludingValue } =
 		useExcludingSelection<I>('value');
 	const [text, setText] = useProperty<string>('text');
@@ -106,13 +106,53 @@ const AutocompleteExcluding = <I>(props: Props<I>) => {
 	});
 };
 
+interface ExcludingProps<I> extends Omit<Props<I>, 'value' | 'onChange'> {
+	value?: WrappedItem<I>[];
+	onChange?: (value: WrappedItem<I>[] | undefined) => void;
+}
+
+const AutocompleteExcluding = <I>(props: ExcludingProps<I>) => {
+	const { value, onChange: _onChange, ...rest } = props;
+
+	const onClear = useCallback(
+		(item: I | null) => _onChange?.(value?.filter((i) => i.item !== item)),
+		[value, _onChange],
+	);
+
+	return Autocomplete({
+		...rest,
+		value: useMemo(() => value?.map(unwrap), [value]),
+		onChange: useCallback(
+			(nextItems: I[]) => {
+				_onChange?.(applyExcluding(value, nextItems));
+			},
+			[value, _onChange],
+		),
+		itemRenderer: useMemo(() => mkItemRenderer(value), [value]),
+		chipRenderer: useMemo(
+			() => mkChipRenderer(value, onClear),
+			[value, onClear],
+		),
+	});
+};
+
 const shadowRootInit = { mode: 'open' as const, delegatesFocus: true };
+const styleSheets = [style, excludingStyle];
 
 customElements.define(
 	'cosmoz-autocomplete-excluding',
+	component(AutocompleteExcludingStandalone, {
+		observedAttributes,
+		styleSheets,
+		shadowRootInit,
+	}),
+);
+
+customElements.define(
+	'cosmoz-autocomplete-excluding-ui',
 	component(AutocompleteExcluding, {
 		observedAttributes,
-		styleSheets: [style, excludingStyle],
+		styleSheets,
 		shadowRootInit,
 	}),
 );
