@@ -1,3 +1,9 @@
+## [13.5.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.5.0...v13.5.1) (2026-03-31)
+
+### Bug Fixes
+
+* **min:** coerce min and respect min limit on backspace deselect ([#241](https://github.com/Neovici/cosmoz-autocomplete/issues/241)) ([d048b91](https://github.com/Neovici/cosmoz-autocomplete/commit/d048b915fb2fe8d8760160458afd8eafc9b01f49))
+
 ## [13.5.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.4.1...v13.5.0) (2026-03-31)
 
 ### Features
