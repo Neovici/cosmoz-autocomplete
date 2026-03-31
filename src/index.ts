@@ -1,4 +1,5 @@
 import './autocomplete/';
+import './excluding/';
 export {
 	AUTOCOMPLETE_DESELECT_LAST,
 	autocompleteKeybindings,
