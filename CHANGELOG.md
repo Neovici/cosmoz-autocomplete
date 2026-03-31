@@ -1,3 +1,9 @@
+## [13.5.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.4.1...v13.5.0) (2026-03-31)
+
+### Features
+
+* import excluding in index ([#242](https://github.com/Neovici/cosmoz-autocomplete/issues/242)) ([7217825](https://github.com/Neovici/cosmoz-autocomplete/commit/7217825e54d36d7ac10396428fa1714ce56d0d93))
+
 ## [13.4.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.4.0...v13.4.1) (2026-03-25)
 
 ### Bug Fixes
