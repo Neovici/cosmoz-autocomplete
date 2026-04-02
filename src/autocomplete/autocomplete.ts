@@ -3,6 +3,7 @@ import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
 import { guard } from 'lit-html/directives/guard.js';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
@@ -15,12 +16,12 @@ import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
+	variant?: undefined | 'cell' | 'inline';
 	invalid?: boolean;
 	errorMessage?: string;
+	hint?: string;
 	label?: string;
 	placeholder?: string;
-	noLabelFloat?: boolean;
-	alwaysFloatLabel?: boolean;
 	showSingle?: boolean;
 	itemHeight?: number | 'auto';
 	itemLimit?: number;
@@ -56,14 +57,14 @@ const shouldShowDropdown = <I>({
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
+				variant,
 				opened,
 				invalid,
 				errorMessage,
+				hint,
 				label,
 				placeholder,
 				disabled,
-				noLabelFloat,
-				alwaysFloatLabel,
 				textual,
 				text,
 				onText,
@@ -97,8 +98,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				part="input"
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
-				?no-label-float=${noLabelFloat}
-				?always-float-label=${value?.length > 0 || alwaysFloatLabel}
+				hint=${ifDefined(hint)}
+				variant=${variant}
 				?readonly=${isSingle}
 				?disabled=${disabled}
 				?invalid=${guard([source$, invalid], () =>
@@ -179,10 +180,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 		return autocomplete(thru);
 	},
 	observedAttributes = [
+		'variant',
 		'disabled',
 		'invalid',
-		'no-label-float',
-		'always-float-label',
+		'hint',
 		'text-property',
 		'value-property',
 		'limit',
