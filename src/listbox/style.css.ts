@@ -18,19 +18,22 @@ const style = css`
 		box-shadow: 0 0 0 1px var(--cz-color-border-primary);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
+		padding-block: var(--cz-spacing);
 	}
 	.items {
 		position: relative;
 		overflow-y: auto;
+		scrollbar-width: thin;
 		contain: layout paint !important;
+		padding-inline: calc(var(--cz-spacing) * 1.5);
 	}
 	.item {
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);
 		font-weight: var(--cz-font-weight-regular);
-		padding: 0 calc(var(--cz-spacing) * 5.5);
 		box-sizing: border-box;
-		width: 100%;
+		border-radius: var(--cz-radius-sm);
+		width: calc(100% - var(--cz-spacing) * 3);
 		cursor: pointer;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -58,10 +61,6 @@ const style = css`
 		background: var(--cz-color-bg-secondary);
 	}
 
-	:host([multi]) .item {
-		padding-left: 0;
-	}
-
 	:host([multi]) .item::before {
 		content: '';
 		font-size: 0;
@@ -77,10 +76,6 @@ const style = css`
 		border-color: var(--cz-color-bg-brand-solid);
 		/* prettier-ignore */
 		background: url("${checkSVG}") var(--cz-color-bg-brand-solid) no-repeat 50%;
-	}
-
-	:host([multi]) .sizer {
-		padding-left: 33px;
 	}
 
 	[virtualizer-sizer]:not(.sizer) {
@@ -108,8 +103,10 @@ export const styles = ({
 			}
 		`,
 	)}
-
 	.item[data-index='${index || '0'}'] {
-		background: rgba(58, 145, 226, 0.1);
+		background: rgba(73, 109, 172, 0.15);
+	}
+	.item[data-index='${index || '0'}'][part~='error'] {
+		background: var(--cz-color-bg-error);
 	}
 `;

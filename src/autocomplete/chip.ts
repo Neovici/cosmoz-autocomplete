@@ -28,7 +28,7 @@ export const chip = <I>({
 		exportparts="chip-text, chip-clear"
 		?disabled=${disabled}
 		?hidden=${hidden}
-		?removable=${!!onClear}
+		?removable=${!!onClear && !disabled}
 		@remove=${onClear}
 		title=${ifDefined(typeof content === 'string' ? content : undefined)}
 		>${content}</cosmoz-tag

@@ -11,12 +11,12 @@ import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
 import { ChipRenderer, selection } from './selection';
 import './skeleton-span';
-import style from './styles.css';
+import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
-	variant?: undefined | 'cell' | 'inline';
+	variant?: 'default' | 'cell' | 'inline';
 	invalid?: boolean;
 	errorMessage?: string;
 	hint?: string;
@@ -99,7 +99,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
 				hint=${ifDefined(hint)}
-				variant=${variant}
+				variant=${ifDefined(variant)}
 				?readonly=${isSingle}
 				?disabled=${disabled}
 				?invalid=${guard([source$, invalid], () =>
@@ -163,7 +163,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 									text != null && text.length > 0 && items.length === 0,
 									() =>
 										html`<slot name="no-result">
-											<p class="no-result">${t('No results found')}</p>
+											<span class="no-result">${t('No results found')}</span>
 										</slot>`,
 								),
 						),

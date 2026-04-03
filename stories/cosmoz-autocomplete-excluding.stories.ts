@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, TemplateResult } from 'lit-html';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
 import { expect, userEvent, waitFor } from 'storybook/test';
@@ -13,10 +14,12 @@ interface ExcludingValue {
 
 interface AutocompleteExcludingArgs {
 	source: { text: string }[];
+	variant?: 'default' | 'cell' | 'inline';
 	limit?: number;
 	textProperty: string;
 	min?: number;
 	label?: string;
+	hint?: string;
 	value?: ExcludingValue[];
 	disabled?: boolean;
 	placeholder?: string;
@@ -29,24 +32,11 @@ interface AutocompleteExcludingArgs {
 	opened?: boolean;
 	overflowed?: boolean;
 	responseTime?: number;
-	contour?: boolean;
 	uppercase?: boolean;
-	excludedBgColor?: string;
-	excludedChipColor?: string;
-	excludedChipClearBgColor?: string;
-	excludedChipClearStrokeColor?: string;
-	excludedListboxActiveColor?: string;
+	lazyOpen?: boolean;
+	invalid?: boolean;
+	errorMessage?: string;
 }
-
-const CSS = html`
-	<style>
-		.custom-message {
-			font-size: 14px;
-			font-weight: 500;
-			padding: 0 22px;
-		}
-	</style>
-`;
 
 const delay = <T>(
 	source: T,
@@ -60,11 +50,13 @@ const delay = <T>(
 };
 
 const Autocomplete = ({
+	variant,
 	source,
 	limit,
 	textProperty,
 	min,
 	label = '',
+	hint,
 	value = [],
 	disabled = false,
 	placeholder = '',
@@ -77,32 +69,21 @@ const Autocomplete = ({
 	opened = false,
 	overflowed = false,
 	responseTime,
-	contour,
-	excludedBgColor,
-	excludedChipColor,
-	excludedChipClearBgColor,
-	excludedChipClearStrokeColor,
-	excludedListboxActiveColor,
+	lazyOpen,
+	invalid,
+	errorMessage,
 }: AutocompleteExcludingArgs): TemplateResult => {
 	const styles = {
 		maxWidth: overflowed ? '170px' : 'initial',
-		'--cosmoz-autocomplete-excluded-bg-color': excludedBgColor,
-		'--cosmoz-autocomplete-excluded-chip-color': excludedChipColor,
-		'--cosmoz-autocomplete-excluded-chip-clear-bg-color':
-			excludedChipClearBgColor,
-		'--cosmoz-autocomplete-excluded-chip-clear-stroke':
-			excludedChipClearStrokeColor,
-		'--cosmoz-listbox-excluded-active-color': excludedListboxActiveColor,
 	};
 
 	const sourceDelayed = delay(source, responseTime);
 
 	return html`
-		${CSS}
-
 		<cosmoz-autocomplete-excluding
-			class=${when(contour, () => 'contour')}
+			variant=${ifDefined(variant)}
 			.label=${label}
+			hint=${ifDefined(hint)}
 			.placeholder=${placeholder}
 			.source=${sourceDelayed}
 			.textProperty=${textProperty}
@@ -111,15 +92,17 @@ const Autocomplete = ({
 			.min=${min}
 			.defaultIndex=${defaultIndex}
 			.opened=${opened}
+			?lazy-open=${lazyOpen}
 			?disabled=${disabled}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
+			?invalid=${invalid}
+			.errorMessage=${errorMessage}
 			style=${styleMap(styles)}
-		>
-			<p slot="no-result" class="custom-message">Custom message no results</p>
+			><p slot="no-result" class="custom-message">Custom message no results</p>
 		</cosmoz-autocomplete-excluding>
 	`;
 };
@@ -169,52 +152,27 @@ const meta: Meta<AutocompleteExcludingArgs> = {
 		overflowed: { control: 'boolean' },
 		responseTime: { control: 'number' },
 		uppercase: { control: 'boolean' },
-		contour: { control: 'boolean' },
-		excludedBgColor: {
-			control: 'color',
-			description: 'Background color for excluded chip/listbox items',
-			table: {
-				category: 'Styling',
-				defaultValue: { summary: 'rgb(244, 67, 54)' },
-			},
-			name: '--cosmoz-autocomplete-excluded-bg-color',
+		variant: {
+			control: 'select',
+			options: ['default', 'inline', 'cell'],
+			description: 'Visual variant',
+			table: { defaultValue: { summary: 'default' } },
 		},
-		excludedChipColor: {
-			control: 'color',
-			description: 'Text color for excluded chips',
-			table: {
-				category: 'Styling',
-				defaultValue: { summary: '#ffffff' },
-			},
-			name: '--cosmoz-autocomplete-excluded-chip-color',
+		hint: {
+			control: 'text',
+			description: 'Hint text displayed below the input',
 		},
-		excludedChipClearBgColor: {
-			control: 'color',
-			description: 'Background color for clear button',
-			table: {
-				category: 'Styling',
-				defaultValue: { summary: '#ffffff' },
-			},
-			name: '--cosmoz-autocomplete-excluded-chip-clear-bg-color',
+		lazyOpen: {
+			control: 'boolean',
+			description: 'Suppress results until the user types at least 1 character',
 		},
-		excludedChipClearStrokeColor: {
-			control: 'color',
-			description: 'Background color for chip icons',
-			table: {
-				category: 'Styling',
-				defaultValue: { summary: 'rgb(244, 67, 54)' },
-			},
-			name: '--cosmoz-autocomplete-excluded-chip-clear-stroke',
+		invalid: {
+			control: 'boolean',
+			description: 'Invalid state',
 		},
-		excludedListboxActiveColor: {
-			control: 'color',
-			description:
-				'Background color for excluded listbox items on hover/active',
-			table: {
-				category: 'Styling',
-				defaultValue: { summary: 'rgba(244, 67, 54, 0.1)' },
-			},
-			name: '--cosmoz-listbox-excluded-active-color',
+		errorMessage: {
+			control: 'text',
+			description: 'Error message displayed when invalid',
 		},
 	},
 	decorators: [
@@ -228,25 +186,30 @@ const meta: Meta<AutocompleteExcludingArgs> = {
 	parameters: {
 		docs: {
 			controls: {
-				exclude: ['overflowed', 'contour', 'responseTime', 'uppercase'],
+				exclude: ['overflowed', 'responseTime', 'uppercase'],
 			},
 			description: {
-				component: 'The Cosmoz Autocomplete web component',
+				component: 'The Cosmoz Autocomplete Excluding web component',
 			},
 		},
+		layout: 'fullscreen',
 	},
 };
 
 export default meta;
 type Story = StoryObj<AutocompleteExcludingArgs>;
 
-export const Basic: Story = {
+// =====================================================================
+// Playground
+// =====================================================================
+
+export const Playground: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
 		textProperty: 'text',
 		value: [
-			{ item: colors[0], excluded: true },
+			{ item: colors[1], excluded: true },
 			{ item: colors[3], excluded: false },
 		],
 		keepOpened: true,
@@ -254,24 +217,111 @@ export const Basic: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'The basic version',
+				story:
+					'Interactive playground — use the controls to explore all props.',
 			},
 		},
 	},
-	play: async ({ canvas, step }) => {
-		await step('Renders with chips showing excluded state', async () => {
-			await canvas.findByShadowText(/Red/u);
-			await canvas.findByShadowText(/Blue/u);
-		});
-
-		await step('Has the autocomplete-excluding element', async () => {
-			const autocomplete = document.querySelector<HTMLElement>(
-				'cosmoz-autocomplete-excluding',
-			);
-			expect(autocomplete).toBeTruthy();
-		});
-	},
 };
+
+// =====================================================================
+// States
+// =====================================================================
+
+export const States: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Excluding states</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Empty</div>
+					<cosmoz-autocomplete-excluding
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.defaultIndex=${-1}
+					></cosmoz-autocomplete-excluding>
+				</div>
+				<div>
+					<div class="story-label">Included & excluded</div>
+					<cosmoz-autocomplete-excluding
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${[
+							{ item: colors[0], excluded: true },
+							{ item: colors[1], excluded: false },
+							{ item: colors[3], excluded: true },
+						]}
+					></cosmoz-autocomplete-excluding>
+				</div>
+				<div>
+					<div class="story-label">All included</div>
+					<cosmoz-autocomplete-excluding
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${[
+							{ item: colors[0], excluded: false },
+							{ item: colors[2], excluded: false },
+						]}
+					></cosmoz-autocomplete-excluding>
+				</div>
+				<div>
+					<div class="story-label">All excluded</div>
+					<cosmoz-autocomplete-excluding
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${[
+							{ item: colors[0], excluded: true },
+							{ item: colors[1], excluded: true },
+						]}
+					></cosmoz-autocomplete-excluding>
+				</div>
+				<div>
+					<div class="story-label">Disabled</div>
+					<cosmoz-autocomplete-excluding
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						disabled
+						.value=${[
+							{ item: colors[0], excluded: true },
+							{ item: colors[3], excluded: false },
+						]}
+					></cosmoz-autocomplete-excluding>
+				</div>
+			</div>
+		</div>
+	`,
+};
+
+// =====================================================================
+// Excluding with dropdown open
+// =====================================================================
+
+export const DropdownOpen: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Dropdown with excluded items</h1>
+			<cosmoz-autocomplete-excluding
+				.label=${'Choose color'}
+				.source=${colors}
+				text-property="text"
+				keep-opened
+				.value=${[
+					{ item: colors[0], excluded: true },
+					{ item: colors[3], excluded: false },
+				]}
+			></cosmoz-autocomplete-excluding>
+		</div>
+	`,
+};
+
+// =====================================================================
+// Interaction tests
+// =====================================================================
 
 export const InteractionTest: Story = {
 	args: {

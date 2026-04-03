@@ -6,7 +6,6 @@ import {
 	useMemo,
 	useProperty,
 } from '@pionjs/pion';
-import { nothing } from 'lit-html';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
 import '../autocomplete';
 import {
@@ -27,7 +26,7 @@ const isItemExcluded = <I>(value: WrappedItem<I>[] | undefined, item: I) =>
 const excludedState = <I>(
 	value: WrappedItem<I>[] | undefined,
 	item: I | null,
-) => (item && isItemExcluded(value, item) ? 'error' : nothing);
+) => (item && isItemExcluded(value, item) ? 'error' : 'gray');
 
 const mkItemRenderer =
 	<I>(value?: WrappedItem<I>[]) =>

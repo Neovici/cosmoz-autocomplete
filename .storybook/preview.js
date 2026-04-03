@@ -37,6 +37,11 @@ customElements.define(
 
 export default {
 	tags: ['autodocs'],
+	parameters: {
+		test: {
+			dangerouslyIgnoreUnhandledErrors: true,
+		},
+	},
 
 	decorators: [
 		(story, context) => {

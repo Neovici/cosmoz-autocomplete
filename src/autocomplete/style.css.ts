@@ -10,27 +10,32 @@ export default css`
 	cosmoz-dropdown-next {
 		display: block;
 	}
+
+	cosmoz-input[hint] ~ cosmoz-listbox {
+		margin-top: calc((var(--cz-spacing) * -6));
+	}
 	cosmoz-tag {
 		align-items: center;
-		margin-left: 4px;
+		margin-left: calc(var(--cz-spacing) * 2);
 	}
 	cosmoz-input::part(control) {
 		display: flex;
 		min-width: 35px;
 	}
-	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label) {
-		transform: translateY(-75%) scale(0.85);
+	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
+	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag)::part(label) {
+		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
 
 	cosmoz-input:not([data-one])::part(input):focus {
 		flex: 4 0.00001 50px;
-		min-width: 20px;
+		min-width: calc(var(--cz-spacing) * 5);
 	}
 	.badge {
 		min-width: initial;
 		flex: none;
 		text-align: center;
-		padding: 0 4px;
+		padding: 0 var(--cz-spacing);
 	}
 
 	[data-single]::part(input) {
@@ -57,7 +62,7 @@ export default css`
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);
 		font-weight: var(--cz-font-weight-regular);
-		padding: 0 22px;
+		padding: 0 calc(var(--cz-spacing) * 3);
 		color: var(--cz-color-text-secondary);
 	}
 `;
