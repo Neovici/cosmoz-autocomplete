@@ -1,11 +1,11 @@
-import{b as p}from"./iframe-DtHNtJAn.js";import"./index-DRAQDmhn.js";import"./preload-helper-PPVm8Dsz.js";import"./index-Dw5aN5xx.js";import"./index-2x3Acxsj.js";const{expect:c,userEvent:l,waitFor:d}=__STORYBOOK_MODULE_TEST__,s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],i=({source:t,textProperty:e="text",value:o=[],keepOpened:r})=>p`
+import{b as l}from"./iframe-BzpxJ5fZ.js";import"./index-B6SzgDsu.js";import"./preload-helper-PPVm8Dsz.js";import"./index-BToE4fu4.js";import"./index-B8Jb78p-.js";const{expect:c,userEvent:p,waitFor:d}=__STORYBOOK_MODULE_TEST__,s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],i=({source:t,textProperty:e="text",value:o=[],keepOpened:r})=>l`
     <cosmoz-autocomplete-excluding
         .source=${t}
         .textProperty=${e}
         .value=${o}
         ?keep-opened=${r}
     ></cosmoz-autocomplete-excluding>
-`,w={title:"Tests/Autocomplete Excluding",render:i,tags:["!autodocs"]},n={args:{source:s,textProperty:"text",value:[{item:s[0],excluded:!0}]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding");await t.findByShadowText(/Red/u),c(e.opened).toBeFalsy(),c(e.hasAttribute("opened")).toBe(!1),e.opened=!0,await t.findByShadowRole("option",{name:/Green/u}),c(e.hasAttribute("opened")).toBe(!0)}},a={args:{source:s,textProperty:"text",value:[]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding"),o=[];e.addEventListener("opened-changed",(u=>{o.push(u.detail.value)}));const r=await t.findByShadowRole("textbox");await l.click(r),await d(()=>{c(o).toContain(!0)})}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
+`,w={title:"Tests/Autocomplete Excluding",render:i,tags:["!autodocs"],parameters:{layout:"fullscreen"}},n={args:{source:s,textProperty:"text",value:[{item:s[0],excluded:!0}]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding");await t.findByShadowText(/Red/u),c(e.opened).toBeFalsy(),c(e.hasAttribute("opened")).toBe(!1),e.opened=!0,await t.findByShadowRole("option",{name:/Green/u}),c(e.hasAttribute("opened")).toBe(!0)}},a={args:{source:s,textProperty:"text",value:[]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding"),o=[];e.addEventListener("opened-changed",(u=>{o.push(u.detail.value)}));const r=await t.findByShadowRole("textbox");await p.click(r),await d(()=>{c(o).toContain(!0)})}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     textProperty: 'text',
