@@ -40,6 +40,8 @@ const style = css`
 		transition: background 0.25s;
 		color: var(--cz-color-text-primary);
 		overflow: hidden;
+		padding-inline: calc(var(--cz-spacing) * 2);
+		margin-block: 1px;
 	}
 
 	.sizer {
@@ -58,14 +60,14 @@ const style = css`
 	}
 
 	:host(:not([multi])) .item[aria-selected] {
-		background: var(--cz-color-bg-secondary);
+		background: rgba(73, 109, 172, 0.25);
 	}
 
 	:host([multi]) .item::before {
 		content: '';
 		font-size: 0;
-		padding: 7.5px;
-		margin: 0 calc(var(--cz-spacing) * 2);
+		padding: calc(var(--cz-spacing) * 2);
+		margin-right: calc(var(--cz-spacing) * 2);
 		background: var(--cz-color-bg-tertiary);
 		border: 1px solid var(--cz-color-bg-quaternary);
 		border-radius: var(--cz-radius-xs);
