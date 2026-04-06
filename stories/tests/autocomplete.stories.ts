@@ -66,6 +66,9 @@ const meta: Meta<AutocompleteArgs> = {
 	title: 'Tests/Autocomplete',
 	render: AutocompleteTest,
 	tags: ['!autodocs'],
+	parameters: {
+		layout: 'fullscreen',
+	},
 };
 
 export default meta;
@@ -131,10 +134,9 @@ export const DeselectChip: Story = {
 		await canvas.findByShadowText(/Red/u);
 
 		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chip = autocomplete.shadowRoot?.querySelector(
-			'cosmoz-autocomplete-chip',
-		);
-		const clearButton = chip?.shadowRoot?.querySelector('.clear');
+		const chip = autocomplete.shadowRoot?.querySelector('cosmoz-tag');
+		const clearButton =
+			chip?.shadowRoot?.querySelector<HTMLElement>('button.close');
 		expect(clearButton).toBeTruthy();
 
 		await userEvent.click(clearButton!);
@@ -291,13 +293,12 @@ export const DisabledNoChipClear: Story = {
 		await canvas.findByShadowText(/Red/u);
 
 		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chip = autocomplete.shadowRoot?.querySelector(
-			'cosmoz-autocomplete-chip',
-		);
+		const chip = autocomplete.shadowRoot?.querySelector('cosmoz-tag');
 		expect(chip).toBeTruthy();
 
 		// Clear button should NOT be present when disabled
-		const clearButton = chip?.shadowRoot?.querySelector('.clear');
+		const clearButton =
+			chip?.shadowRoot?.querySelector<HTMLElement>('button.close');
 		expect(clearButton).toBeFalsy();
 
 		// onChange should NOT have been called

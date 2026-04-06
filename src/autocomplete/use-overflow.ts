@@ -5,7 +5,8 @@ import { raf } from './util';
 // eslint-disable-next-line max-statements
 const overflow = (host: HTMLElement) => {
 	const chips = host.shadowRoot!.querySelectorAll<HTMLElement>('.chip');
-	const badge = host.shadowRoot!.querySelector<HTMLElement>('.badge')!;
+	const badge = host.shadowRoot!.querySelector<HTMLElement>('.badge');
+	if (!badge) return;
 	badge.hidden = true;
 	for (const chip of chips) {
 		chip.hidden = false;

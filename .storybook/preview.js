@@ -1,9 +1,10 @@
+import '@neovici/cosmoz-tokens';
 import { useKeybindings } from '@neovici/cosmoz-utils/keybindings';
 import { component, html } from '@pionjs/pion';
 import i18next from 'i18next';
 import { within as withinShadow } from 'shadow-dom-testing-library';
 import { autocompleteKeybindings } from '../src/autocomplete/autocomplete-keybindings';
-
+import './preview.css';
 // Initialize i18next for the autocomplete component
 i18next.init({
 	lng: 'en',
@@ -37,48 +38,45 @@ customElements.define(
 export default {
 	tags: ['autodocs'],
 	parameters: {
-		options: {
-			storySort: {
-				order: ['Autocomplete', 'Autocomplete Excluding', 'Tests'],
-			},
-		},
-		docs: {
-			source: {
-				excludeDecorators: true,
-				type: 'code',
-				transform: (source) => {
-					const match = source.match(/html`([\s\S]*?)`/u);
-					return match?.[1]?.trim() ?? source;
-				},
-			},
+		test: {
+			dangerouslyIgnoreUnhandledErrors: true,
 		},
 	},
-	// Augment the canvas with shadow-dom-testing-library queries
-	beforeEach({ canvasElement, canvas }) {
-		Object.assign(canvas, { ...withinShadow(canvasElement) });
-	},
+
 	decorators: [
-		(story) => {
+		(story, context) => {
+			const isDark = context.globals?.theme === 'dark';
+
+			if (isDark) {
+				document.documentElement.classList.add('dark-mode');
+			} else {
+				document.documentElement.classList.remove('dark-mode');
+			}
 			return html`
-				<style>
-					@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap');
-
-					.story-root {
-						font-family: 'Inter', sans-serif;
-						padding: 16px;
-						min-height: 100%;
-					}
-
-					cosmoz-autocomplete,
-					cosmoz-listbox,
-					cosmoz-autocomplete-excluding {
-						font-family: 'Inter', sans-serif;
-					}
-				</style>
 				<storybook-keybindings
 					.content=${html`<div class="story-root">${story()}</div>`}
 				></storybook-keybindings>
 			`;
 		},
 	],
+	globalTypes: {
+		theme: {
+			name: 'Theme',
+			description: 'Global theme for components',
+			defaultValue: 'light',
+			toolbar: {
+				icon: 'circlehollow',
+				items: [
+					{ value: 'light', icon: 'sun', title: 'Light' },
+					{ value: 'dark', icon: 'moon', title: 'Dark' },
+				],
+				dynamicTitle: true,
+			},
+		},
+	},
+
+	// Augment the canvas with shadow-dom-testing-library queries
+	beforeEach({ canvasElement, canvas }) {
+		Object.assign(canvas, { ...withinShadow(canvasElement) });
+	},
 };

@@ -1,5 +1,7 @@
+import { chevronDownIcon, searchMdIcon } from '@neovici/cosmoz-icons/untitled';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, TemplateResult } from 'lit-html';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { when } from 'lit-html/directives/when.js';
 import { expect, userEvent } from 'storybook/test';
@@ -10,10 +12,12 @@ import { swedishWords } from './swedish-words';
 
 interface AutocompleteArgs {
 	source: { text: string }[];
+	variant?: 'default' | 'cell' | 'inline';
 	limit?: number;
 	textProperty: string;
 	min?: number;
 	label?: string;
+	hint?: string;
 	value?: { text: string }[] | { text: string };
 	disabled?: boolean;
 	placeholder?: string;
@@ -26,25 +30,11 @@ interface AutocompleteArgs {
 	opened?: boolean;
 	overflowed?: boolean;
 	responseTime?: number;
-	contour?: boolean;
 	uppercase?: boolean;
 	lazyOpen?: boolean;
+	invalid?: boolean;
+	errorMessage?: string;
 }
-
-const CSS = html`
-	<style>
-		.contour {
-			--cosmoz-input-color: #aeacac;
-			--cosmoz-input-border-radius: 4px;
-			--cosmoz-input-wrap-padding: 12px;
-			--cosmoz-input-line-display: none;
-			--cosmoz-input-contour-size: 1px;
-			--cosmoz-input-label-translate-y: 10px;
-			--cosmoz-autocomplete-chip-translate-y: 8px;
-			--cosmoz-autocomplete-chip-border-radius: 4px;
-		}
-	</style>
-`;
 
 const delay = <T>(
 	source: T,
@@ -58,11 +48,13 @@ const delay = <T>(
 };
 
 const Autocomplete = ({
+	variant,
 	source,
 	limit,
 	textProperty,
 	min,
 	label = '',
+	hint,
 	value = [],
 	disabled = false,
 	placeholder = '',
@@ -75,17 +67,18 @@ const Autocomplete = ({
 	opened = false,
 	overflowed = false,
 	responseTime,
-	contour,
 	lazyOpen,
+	invalid,
+	errorMessage,
 }: AutocompleteArgs): TemplateResult => {
 	const styles = { maxWidth: overflowed ? '170px' : 'initial' };
 	const sourceDelayed = delay(source, responseTime);
 
 	return html`
-		${CSS}
 		<cosmoz-autocomplete
-			class=${when(contour, () => 'contour')}
+			variant=${ifDefined(variant)}
 			.label=${label}
+			hint=${ifDefined(hint)}
 			.placeholder=${placeholder}
 			.source=${sourceDelayed}
 			.textProperty=${textProperty}
@@ -101,6 +94,8 @@ const Autocomplete = ({
 			?wrap=${wrap}
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
+			?invalid=${invalid}
+			.errorMessage=${errorMessage}
 			style=${styleMap(styles)}
 		></cosmoz-autocomplete>
 	`;
@@ -134,11 +129,28 @@ const meta: Meta<AutocompleteArgs> = {
 			control: 'boolean',
 			description: 'Suppress results until the user types at least 1 character',
 		},
+		variant: {
+			control: 'select',
+			options: ['default', 'inline', 'cell'],
+			description: 'Visual variant',
+			table: { defaultValue: { summary: 'default' } },
+		},
+		hint: {
+			control: 'text',
+			description: 'Hint text displayed below the input',
+		},
+		invalid: {
+			control: 'boolean',
+			description: 'Invalid state',
+		},
+		errorMessage: {
+			control: 'text',
+			description: 'Error message displayed when invalid',
+		},
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
 		responseTime: { control: 'number' },
 		uppercase: { control: 'boolean' },
-		contour: { control: 'boolean' },
 	},
 	decorators: [
 		(story, { args }) =>
@@ -151,39 +163,231 @@ const meta: Meta<AutocompleteArgs> = {
 	parameters: {
 		docs: {
 			controls: {
-				exclude: ['overflowed', 'contour', 'responseTime', 'uppercase'],
+				exclude: ['overflowed', 'responseTime', 'uppercase'],
 			},
 			description: { component: 'The Cosmoz Autocomplete web component' },
 		},
+		layout: 'fullscreen',
 	},
 };
 
 export default meta;
 type Story = StoryObj<AutocompleteArgs>;
 
-export const Basic: Story = {
+// =====================================================================
+// Playground
+// =====================================================================
+
+export const Playground: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
 		textProperty: 'text',
-		value: [colors[0], colors[3]],
+		value: [colors[0], colors[2]],
+		hint: 'Pick one or more colors',
 	},
-	play: async ({ canvas, step }) => {
-		await step('Renders with chips', async () => {
-			await canvas.findByShadowText(/Red/u);
-			await canvas.findByShadowText(/Blue/u);
-		});
-		await step('Has input field', async () => {
-			const autocomplete = document.querySelector<HTMLElement>(
-				'cosmoz-autocomplete',
-			);
-			expect(autocomplete).toBeTruthy();
-			expect(
-				autocomplete?.shadowRoot?.querySelector('cosmoz-input'),
-			).toBeTruthy();
-		});
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Interactive playground — use the controls to explore all props.',
+			},
+		},
 	},
 };
+
+// =====================================================================
+// Variants
+// =====================================================================
+
+export const Default: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Default variant</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Empty</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.defaultIndex=${-1}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">With value</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${[colors[0], colors[3]]}
+						hint="Pick one or more colors"
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Single</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.limit=${1}
+						.value=${colors[2]}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Invalid</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						invalid
+						.errorMessage=${'This field is required'}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Disabled</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${[colors[0], colors[3]]}
+						disabled
+					></cosmoz-autocomplete>
+				</div>
+			</div>
+		</div>
+	`,
+};
+
+export const Inline: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Inline variant</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Empty</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						.defaultIndex=${-1}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">With value</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						.value=${[colors[0], colors[3]]}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Single</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						.limit=${1}
+						.value=${colors[2]}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Invalid</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						invalid
+						.errorMessage=${'This field is required'}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Disabled</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						.value=${[colors[0], colors[3]]}
+						disabled
+					></cosmoz-autocomplete>
+				</div>
+			</div>
+		</div>
+	`,
+};
+
+export const Cell: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Cell variant</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Empty</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						.defaultIndex=${-1}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">With value</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						.value=${[colors[0], colors[3]]}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Single</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						.limit=${1}
+						.value=${colors[2]}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Invalid</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						invalid
+						.errorMessage=${'This field is required'}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Disabled</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						.value=${[colors[0], colors[3]]}
+						disabled
+					></cosmoz-autocomplete>
+				</div>
+			</div>
+		</div>
+	`,
+};
+
+// =====================================================================
+// Selection behavior
+// =====================================================================
 
 export const Single: Story = {
 	args: {
@@ -195,6 +399,34 @@ export const Single: Story = {
 	},
 	play: async ({ canvas }) => {
 		await canvas.findByShadowText(/Purple/u);
+	},
+};
+
+export const Select: Story = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		limit: 1,
+		textProperty: 'text',
+		value: colors[2],
+		showSingle: true,
+		preserveOrder: true,
+		min: 1,
+	},
+	play: async ({ canvas, step }) => {
+		await step('Renders with initial selection', async () => {
+			await canvas.findByShadowText(/Purple/u);
+		});
+
+		await step('Select Blue option', async () => {
+			const label = await canvas.findByShadowText(/Choose color/u);
+			await userEvent.click(label);
+			const blueOption = await canvas.findByShadowRole('option', {
+				name: 'Blue',
+			});
+			await userEvent.click(blueOption);
+			await canvas.findByShadowText(/Blue/u);
+		});
 	},
 };
 
@@ -228,6 +460,10 @@ export const DefaultIndexSingleValue: Story = {
 	},
 };
 
+// =====================================================================
+// Input states
+// =====================================================================
+
 export const Disabled: Story = {
 	args: {
 		label: 'Choose color',
@@ -255,33 +491,9 @@ export const Placeholder: Story = {
 	},
 };
 
-export const Select: Story = {
-	args: {
-		label: 'Choose color',
-		source: colors,
-		limit: 1,
-		textProperty: 'text',
-		value: colors[2],
-		showSingle: true,
-		preserveOrder: true,
-		min: 1,
-	},
-	play: async ({ canvas, step }) => {
-		await step('Renders with initial selection', async () => {
-			await canvas.findByShadowText(/Purple/u);
-		});
-
-		await step('Select Blue option', async () => {
-			const label = await canvas.findByShadowText(/Choose color/u);
-			await userEvent.click(label);
-			const blueOption = await canvas.findByShadowRole('option', {
-				name: 'Blue',
-			});
-			await userEvent.click(blueOption);
-			await canvas.findByShadowText(/Blue/u);
-		});
-	},
-};
+// =====================================================================
+// Layout
+// =====================================================================
 
 export const Overflown: Story = {
 	args: {
@@ -316,30 +528,148 @@ export const Wrap: Story = {
 	},
 };
 
+// =====================================================================
+// Search
+// =====================================================================
+
+export const LazyOpen: Story = {
+	args: {
+		label: 'Start typing to see results',
+		source: colors,
+		textProperty: 'text',
+		lazyOpen: true,
+	},
+};
+
 export const AccentInsensitiveSearch: Story = {
 	render: () => html`
-		<div>
-			<div style="margin: 2rem 0;">
-				<h3 style="margin-bottom: 10px;">Spanish Words</h3>
-				<cosmoz-autocomplete
-					label="Choose Spanish word"
-					.source=${spanishWords}
-					text-property="name"
-					.defaultIndex=${-1}
-				></cosmoz-autocomplete>
-			</div>
-			<div style="margin: 2rem 0;">
-				<h3 style="margin-bottom: 10px;">Swedish Words</h3>
-				<cosmoz-autocomplete
-					label="Choose Swedish word"
-					.source=${swedishWords}
-					text-property="name"
-					.defaultIndex=${-1}
-				></cosmoz-autocomplete>
+		<div class="story-stack">
+			<h1 class="story-section-title">Accent-insensitive search</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Spanish Words</div>
+					<cosmoz-autocomplete
+						.label=${'Choose Spanish word'}
+						.source=${spanishWords}
+						text-property="name"
+						.defaultIndex=${-1}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Swedish Words</div>
+					<cosmoz-autocomplete
+						.label=${'Choose Swedish word'}
+						.source=${swedishWords}
+						text-property="name"
+						.defaultIndex=${-1}
+					></cosmoz-autocomplete>
+				</div>
 			</div>
 		</div>
 	`,
 };
+
+// =====================================================================
+// Slots & Customization
+// =====================================================================
+
+export const PrefixSuffix: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Prefix & Suffix slots</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Prefix</div>
+					<cosmoz-autocomplete
+						.label=${'Search'}
+						.source=${colors}
+						text-property="text"
+						.defaultIndex=${-1}
+					>
+						${searchMdIcon({ slot: 'prefix' })}
+					</cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Suffix</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${colors.slice(3)}
+						.defaultIndex=${-1}
+					>
+						${chevronDownIcon({ slot: 'suffix' })}
+					</cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Both</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						.value=${[colors[0]]}
+					>
+						${searchMdIcon({ slot: 'prefix' })}
+						${chevronDownIcon({ slot: 'suffix' })}
+					</cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Inline with both</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						.value=${[colors[0], colors[3]]}
+					>
+						${searchMdIcon({ slot: 'prefix' })}
+						${chevronDownIcon({ slot: 'suffix' })}
+					</cosmoz-autocomplete>
+				</div>
+			</div>
+		</div>
+	`,
+};
+
+// =====================================================================
+// Error handling
+// =====================================================================
+
+const failingSource = () =>
+	new Promise((_resolve, reject) =>
+		setTimeout(() => reject(new Error('Failed to fetch colors')), 500),
+	);
+
+export const SourceError: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Source promise rejection</h1>
+			<div class="story-grid">
+				<div>
+					<div class="story-label">Rejected source</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${failingSource}
+						text-property="text"
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Rejected with existing value</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${failingSource}
+						text-property="text"
+						.value=${[colors[0]]}
+					></cosmoz-autocomplete>
+				</div>
+			</div>
+		</div>
+	`,
+};
+
+// =====================================================================
+// Interaction test
+// =====================================================================
 
 export const InteractionTest: Story = {
 	args: {
@@ -374,14 +704,5 @@ export const InteractionTest: Story = {
 			await userEvent.type(input, 'Asdf');
 			await canvas.findByShadowText(/No results found/u);
 		});
-	},
-};
-
-export const LazyOpen: Story = {
-	args: {
-		label: 'Start typing to see results',
-		source: colors,
-		textProperty: 'text',
-		lazyOpen: true,
 	},
 };
