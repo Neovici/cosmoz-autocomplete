@@ -11,32 +11,35 @@ export default css`
 		display: block;
 	}
 
+	cosmoz-input[hint] ~ cosmoz-listbox {
+		margin-top: calc((var(--cz-spacing) * -6));
+	}
+	cosmoz-tag {
+		align-items: center;
+		margin-left: calc(var(--cz-spacing) * 2);
+	}
 	cosmoz-input::part(control) {
 		display: flex;
-		gap: 4px;
 		min-width: 35px;
 	}
-	cosmoz-input::part(input) {
-		flex: 1 24px;
-		min-width: 0;
+	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
+	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag)::part(label) {
+		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
+
 	cosmoz-input:not([data-one])::part(input):focus {
 		flex: 4 0.00001 50px;
-		min-width: 20px;
+		min-width: calc(var(--cz-spacing) * 5);
 	}
 	.badge {
 		min-width: initial;
 		flex: none;
 		text-align: center;
-		padding: 0 4px;
+		padding: 0 var(--cz-spacing);
 	}
 
 	[data-single]::part(input) {
 		flex: 0;
-	}
-	[data-one] .chip {
-		max-width: initial;
-		flex: 1;
 	}
 
 	[data-one] .badge {
@@ -50,18 +53,16 @@ export default css`
 	:host([wrap]) cosmoz-input::part(control) {
 		flex-wrap: wrap;
 	}
-	:host([wrap]) .chip {
-		max-width: 100%;
-	}
 
 	slot {
 		display: contents !important;
 	}
 
 	.no-result {
-		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
-		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
-		padding: 0 22px;
-		color: var(--cosmoz-listbox-color, #101010);
+		font-size: var(--cz-text-sm);
+		line-height: var(--cz-text-sm-line-height);
+		font-weight: var(--cz-font-weight-regular);
+		padding: 0 calc(var(--cz-spacing) * 3);
+		color: var(--cz-color-text-secondary);
 	}
 `;

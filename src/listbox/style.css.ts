@@ -10,37 +10,35 @@ const checkSVG =
 const style = css`
 	:host {
 		display: block;
-		font-family: var(--paper-font-subhead_-_font-family, inherit);
-		background: var(
-			--cosmoz-autocomplete-listbox-bg,
-			rgba(255, 255, 255, 0.75)
-		);
+		font-family: var(--cz-font-body);
+		background: var(--cz-color-bg-primary);
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
-		border-radius: 6px;
-		box-shadow:
-			0 4px 24px 0 rgba(0, 0, 0, 0.18),
-			0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
-		border: 1px solid rgba(200, 200, 200, 0.25);
+		border-radius: var(--cz-radius-md);
+		box-shadow: 0 0 0 1px var(--cz-color-border-primary);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
+		padding-block: var(--cz-spacing);
 	}
 	.items {
 		position: relative;
 		overflow-y: auto;
+		scrollbar-width: thin;
 		contain: layout paint !important;
+		padding-inline: calc(var(--cz-spacing) * 1.5);
 	}
 	.item {
-		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
-		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
-		padding: 0 22px;
+		font-size: var(--cz-text-sm);
+		line-height: var(--cz-text-sm-line-height);
+		font-weight: var(--cz-font-weight-regular);
 		box-sizing: border-box;
-		width: 100%;
+		border-radius: var(--cz-radius-sm);
+		width: calc(100% - var(--cz-spacing) * 3);
 		cursor: pointer;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		transition: background 0.2s;
-		color: var(--cosmoz-listbox-color, #101010);
+		transition: background 0.25s;
+		color: var(--cz-color-text-primary);
 		overflow: hidden;
 	}
 
@@ -52,39 +50,32 @@ const style = css`
 		z-index: -1;
 		height: 0;
 		width: auto;
-		padding: 0 20px;
+		padding: 0 calc(var(--cz-spacing) * 5);
 		overflow: hidden;
 		max-width: inherit;
-		font-size: 14px;
+		font-size: var(--cz-text-sm);
+		line-height: var(--cz-text-sm-line-height);
 	}
 
 	:host(:not([multi])) .item[aria-selected] {
-		background: var(--cosmoz-listbox-single-selection-color, #dadada);
-	}
-
-	:host([multi]) .item {
-		padding-left: 0;
+		background: var(--cz-color-bg-secondary);
 	}
 
 	:host([multi]) .item::before {
 		content: '';
 		font-size: 0;
 		padding: 7.5px;
-		margin: 0 8px;
-		background: #fff;
-		border: 1px solid #d6d6d5;
-		border-radius: 4px;
+		margin: 0 calc(var(--cz-spacing) * 2);
+		background: var(--cz-color-bg-tertiary);
+		border: 1px solid var(--cz-color-bg-quaternary);
+		border-radius: var(--cz-radius-xs);
 		vertical-align: top;
 	}
 
 	:host([multi]) .item[aria-selected]::before {
-		border-color: #5881f6;
+		border-color: var(--cz-color-bg-brand-solid);
 		/* prettier-ignore */
-		background: url("${checkSVG}") #5881f6 no-repeat 50%;
-	}
-
-	:host([multi]) .sizer {
-		padding-left: 33px;
+		background: url("${checkSVG}") var(--cz-color-bg-brand-solid) no-repeat 50%;
 	}
 
 	[virtualizer-sizer]:not(.sizer) {
@@ -112,11 +103,10 @@ export const styles = ({
 			}
 		`,
 	)}
-
 	.item[data-index='${index || '0'}'] {
-		background: var(
-			--cosmoz-listbox-active-color,
-			var(--cosmoz-selection-color, rgba(58, 145, 226, 0.1))
-		);
+		background: rgba(73, 109, 172, 0.15);
+	}
+	.item[data-index='${index || '0'}'][part~='error'] {
+		background: var(--cz-color-bg-error);
 	}
 `;
