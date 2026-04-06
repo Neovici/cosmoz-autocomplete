@@ -27,10 +27,16 @@ export default css`
 		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
 
+	cosmoz-input::part(input) {
+		flex: 1 calc(var(--cz-spacing) * 6);
+		min-width: 0;
+	}
+
 	cosmoz-input:not([data-one])::part(input):focus {
 		flex: 4 0.00001 50px;
 		min-width: calc(var(--cz-spacing) * 5);
 	}
+
 	.badge {
 		min-width: initial;
 		flex: none;
@@ -52,6 +58,11 @@ export default css`
 
 	:host([wrap]) cosmoz-input::part(control) {
 		flex-wrap: wrap;
+		padding-right: calc(var(--cz-spacing) * 2);
+	}
+
+	:host([wrap]) cosmoz-tag {
+		padding-block: calc(var(--cz-spacing) * 1.5);
 	}
 
 	slot {
