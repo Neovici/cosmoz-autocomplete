@@ -106,7 +106,9 @@ export const styles = ({
 		`,
 	)}
 	.item[data-index='${index || '0'}'] {
-		background: rgba(73, 109, 172, 0.15);
+		background: rgb(
+			from var(--cz-color-bg-brand-solid) r g b / calc(alpha * 0.15)
+		);
 	}
 	.item[data-index='${index || '0'}'][part~='error'] {
 		background: var(--cz-color-bg-error);
