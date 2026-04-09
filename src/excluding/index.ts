@@ -54,8 +54,16 @@ const mkItemRenderer =
 
 const mkChipRenderer =
 	<I>(value: WrappedItem<I>[] | undefined, onClear: (item: I | null) => void) =>
-	({ item, content, disabled, hidden, slot }: ChipProps<I>) =>
+	({
+		item,
+		content,
+		disabled,
+		hidden,
+		className = 'chip',
+		slot,
+	}: ChipProps<I>) =>
 		html`<cosmoz-tag
+			class=${ifDefined(className)}
 			slot=${ifDefined(slot)}
 			exportparts="chip-text, chip-clear"
 			color=${excludedState(value, item)}

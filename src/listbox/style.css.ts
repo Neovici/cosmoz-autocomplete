@@ -27,6 +27,13 @@ const style = css`
 		contain: layout paint !important;
 		padding-inline: calc(var(--cz-spacing) * 1.5);
 	}
+	:host(:focus-within) {
+		outline: none;
+		box-shadow: var(--cz-focus-ring);
+	}
+	.items:focus-visible {
+		outline: none;
+	}
 	.item {
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);

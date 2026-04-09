@@ -184,6 +184,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'disabled',
 		'invalid',
 		'hint',
+		'error-message',
 		'text-property',
 		'value-property',
 		'limit',
