@@ -60,7 +60,9 @@ const style = css`
 	}
 
 	:host(:not([multi])) .item[aria-selected] {
-		background: rgba(73, 109, 172, 0.25);
+		background: rgb(
+			from var(--cz-color-bg-brand-solid) r g b / calc(alpha * 0.25)
+		);
 	}
 
 	:host([multi]) .item::before {
