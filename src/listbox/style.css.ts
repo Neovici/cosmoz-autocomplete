@@ -27,6 +27,13 @@ const style = css`
 		contain: layout paint !important;
 		padding-inline: calc(var(--cz-spacing) * 1.5);
 	}
+	:host(:focus-within) {
+		outline: none;
+		box-shadow: var(--cz-focus-ring);
+	}
+	.items:focus-visible {
+		outline: none;
+	}
 	.item {
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);
@@ -40,6 +47,8 @@ const style = css`
 		transition: background 0.25s;
 		color: var(--cz-color-text-primary);
 		overflow: hidden;
+		padding-inline: calc(var(--cz-spacing) * 2);
+		margin-block: 1px;
 	}
 
 	.sizer {
@@ -58,14 +67,16 @@ const style = css`
 	}
 
 	:host(:not([multi])) .item[aria-selected] {
-		background: var(--cz-color-bg-secondary);
+		background: rgb(
+			from var(--cz-color-bg-brand-solid) r g b / calc(alpha * 0.25)
+		);
 	}
 
 	:host([multi]) .item::before {
 		content: '';
 		font-size: 0;
-		padding: 7.5px;
-		margin: 0 calc(var(--cz-spacing) * 2);
+		padding: calc(var(--cz-spacing) * 2);
+		margin-right: calc(var(--cz-spacing) * 2);
 		background: var(--cz-color-bg-tertiary);
 		border: 1px solid var(--cz-color-bg-quaternary);
 		border-radius: var(--cz-radius-xs);
@@ -104,7 +115,9 @@ export const styles = ({
 		`,
 	)}
 	.item[data-index='${index || '0'}'] {
-		background: rgba(73, 109, 172, 0.15);
+		background: rgb(
+			from var(--cz-color-bg-brand-solid) r g b / calc(alpha * 0.15)
+		);
 	}
 	.item[data-index='${index || '0'}'][part~='error'] {
 		background: var(--cz-color-bg-error);
