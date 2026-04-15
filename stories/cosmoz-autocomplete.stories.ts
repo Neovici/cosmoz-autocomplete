@@ -79,6 +79,7 @@ const Autocomplete = ({
 			variant=${ifDefined(variant)}
 			.label=${label}
 			hint=${ifDefined(hint)}
+			error-message=${ifDefined(errorMessage)}
 			.placeholder=${placeholder}
 			.source=${sourceDelayed}
 			.textProperty=${textProperty}
@@ -95,7 +96,6 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			?invalid=${invalid}
-			.errorMessage=${errorMessage}
 			style=${styleMap(styles)}
 		></cosmoz-autocomplete>
 	`;
@@ -221,7 +221,7 @@ export const Default: Story = {
 						.source=${colors}
 						text-property="text"
 						.value=${[colors[0], colors[3]]}
-						hint="Pick one or more colors"
+						hint=${'Pick one or more colors'}
 					></cosmoz-autocomplete>
 				</div>
 				<div>
@@ -241,7 +241,7 @@ export const Default: Story = {
 						.source=${colors}
 						text-property="text"
 						invalid
-						.errorMessage=${'This field is required'}
+						error-message=${'This field is required'}
 					></cosmoz-autocomplete>
 				</div>
 				<div>
@@ -295,17 +295,7 @@ export const Inline: Story = {
 						.value=${colors[2]}
 					></cosmoz-autocomplete>
 				</div>
-				<div>
-					<div class="story-label">Invalid</div>
-					<cosmoz-autocomplete
-						.label=${'Choose color'}
-						.source=${colors}
-						text-property="text"
-						variant="inline"
-						invalid
-						.errorMessage=${'This field is required'}
-					></cosmoz-autocomplete>
-				</div>
+
 				<div>
 					<div class="story-label">Disabled</div>
 					<cosmoz-autocomplete
@@ -366,7 +356,7 @@ export const Cell: Story = {
 						text-property="text"
 						variant="cell"
 						invalid
-						.errorMessage=${'This field is required'}
+						error-message=${'This field is required'}
 					></cosmoz-autocomplete>
 				</div>
 				<div>
