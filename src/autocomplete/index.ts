@@ -19,7 +19,6 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 			limit: 1,
 			min: 1,
 			showSingle: true,
-			preserveOrder: true,
 		}),
 		mode,
 		value,

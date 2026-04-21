@@ -407,6 +407,7 @@ export const Select: Story = {
 		textProperty: 'text',
 		value: colors[2],
 		mode: 'select',
+		preserveOrder: true,
 	},
 	play: async ({ canvas, step }) => {
 		await step('Renders with initial selection', async () => {
