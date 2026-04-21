@@ -7,24 +7,34 @@ export default css`
 		min-width: calc(var(--cz-spacing) * 9);
 	}
 
+	:host([mode='select']) {
+		--cosmoz-badge-border-color: transparent;
+		--cosmoz-badge-bg-color: transparent;
+	}
+
 	cosmoz-dropdown-next {
 		display: block;
 	}
+
 	:host(:not([variant='inline'])) cosmoz-listbox {
 		margin-top: var(--cz-spacing);
 	}
+
 	:host([error-message]) cosmoz-listbox,
 	:host([hint]) cosmoz-listbox {
 		margin-top: calc((var(--cz-spacing) * -5));
 	}
+
 	cosmoz-tag {
 		align-items: center;
 		margin-left: calc(var(--cz-spacing) * 2);
 	}
+
 	cosmoz-input::part(control) {
 		display: flex;
 		min-width: calc(var(--cz-spacing) * 9);
 	}
+
 	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
 	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag)::part(label) {
 		transform: translate(var(--cz-spacing), -75%) scale(0.85);
