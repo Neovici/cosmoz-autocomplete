@@ -39,7 +39,7 @@ test.describe('autocomplete basic', () => {
 });
 
 test('autocomplete select', async ({ page }) => {
-	await page.goto('iframe.html?id=autocomplete--playground&viewMode=story/');
+	await page.goto('iframe.html?id=autocomplete--select&viewMode=story/');
 	await expect(page).toHaveScreenshot();
 
 	await page.getByText('Choose color').click();

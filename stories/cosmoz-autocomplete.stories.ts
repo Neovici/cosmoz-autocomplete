@@ -16,6 +16,7 @@ interface AutocompleteArgs {
 	limit?: number;
 	textProperty: string;
 	min?: number;
+	mode?: 'select';
 	label?: string;
 	hint?: string;
 	value?: { text: string }[] | { text: string };
@@ -70,6 +71,7 @@ const Autocomplete = ({
 	lazyOpen,
 	invalid,
 	errorMessage,
+	mode,
 }: AutocompleteArgs): TemplateResult => {
 	const styles = { maxWidth: overflowed ? '170px' : 'initial' };
 	const sourceDelayed = delay(source, responseTime);
@@ -77,6 +79,7 @@ const Autocomplete = ({
 	return html`
 		<cosmoz-autocomplete
 			variant=${ifDefined(variant)}
+			mode=${ifDefined(mode)}
 			.label=${label}
 			hint=${ifDefined(hint)}
 			error-message=${ifDefined(errorMessage)}
@@ -151,6 +154,11 @@ const meta: Meta<AutocompleteArgs> = {
 		overflowed: { control: 'boolean' },
 		responseTime: { control: 'number' },
 		uppercase: { control: 'boolean' },
+		mode: {
+			control: 'select',
+			options: ['select'],
+			description: 'Selection behavior mode',
+		},
 	},
 	decorators: [
 		(story, { args }) =>
@@ -396,12 +404,9 @@ export const Select: Story = {
 	args: {
 		label: 'Choose color',
 		source: colors,
-		limit: 1,
 		textProperty: 'text',
 		value: colors[2],
-		showSingle: true,
-		preserveOrder: true,
-		min: 1,
+		mode: 'select',
 	},
 	play: async ({ canvas, step }) => {
 		await step('Renders with initial selection', async () => {
@@ -615,42 +620,6 @@ export const PrefixSuffix: Story = {
 						${searchMdIcon({ slot: 'prefix' })}
 						${chevronDownIcon({ slot: 'suffix' })}
 					</cosmoz-autocomplete>
-				</div>
-			</div>
-		</div>
-	`,
-};
-
-// =====================================================================
-// Error handling
-// =====================================================================
-
-const failingSource = () =>
-	new Promise((_resolve, reject) =>
-		setTimeout(() => reject(new Error('Failed to fetch colors')), 500),
-	);
-
-export const SourceError: Story = {
-	render: () => html`
-		<div class="story-stack">
-			<h1 class="story-section-title">Source promise rejection</h1>
-			<div class="story-grid">
-				<div>
-					<div class="story-label">Rejected source</div>
-					<cosmoz-autocomplete
-						.label=${'Choose color'}
-						.source=${failingSource}
-						text-property="text"
-					></cosmoz-autocomplete>
-				</div>
-				<div>
-					<div class="story-label">Rejected with existing value</div>
-					<cosmoz-autocomplete
-						.label=${'Choose color'}
-						.source=${failingSource}
-						text-property="text"
-						.value=${[colors[0]]}
-					></cosmoz-autocomplete>
 				</div>
 			</div>
 		</div>

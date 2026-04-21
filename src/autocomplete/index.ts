@@ -3,7 +3,8 @@ import { component, useCallback, useEffect, useProperty } from '@pionjs/pion';
 import { Autocomplete, observedAttributes, Props, style } from './autocomplete';
 
 const Standalone = <I>(host: HTMLElement & Props<I>) => {
-	const { onChange, onText, ...props } = host;
+	const { onChange, onText, mode, ...props } = host;
+	const isSelect = mode === 'select';
 	const [value, setValue] = useProperty<I | I[]>('value');
 
 	useEffect(() => {
@@ -14,6 +15,13 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 
 	return Autocomplete({
 		...props,
+		...(isSelect && {
+			limit: 1,
+			min: 1,
+			showSingle: true,
+			preserveOrder: true,
+		}),
+		mode,
 		value,
 		onChange: useCallback(
 			(value: I[], ...args) => {
