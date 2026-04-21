@@ -1,4 +1,5 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
+import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
@@ -16,6 +17,7 @@ import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
+	mode?: 'select';
 	variant?: 'default' | 'cell' | 'inline';
 	invalid?: boolean;
 	errorMessage?: string;
@@ -78,6 +80,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				source$,
 				loading,
 				chipRenderer,
+				mode,
 			} = props,
 			isOne = limit === 1,
 			isSingle = isOne && value?.[0] != null;
@@ -128,7 +131,16 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?data-single=${isSingle}
 			>
 				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix"></slot>
+				<slot name="suffix" slot="suffix">
+					${when(mode === 'select', () =>
+						chevronDownIcon({
+							styles:
+								'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
+							width: '16',
+							height: '16',
+						}),
+					)}
+				</slot>
 				${selection({
 					value,
 					min,
@@ -199,6 +211,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'item-limit',
 		'wrap',
 		'lazy-open',
+		'mode',
 	] as const;
 
 export { Autocomplete, autocomplete, observedAttributes, style };
