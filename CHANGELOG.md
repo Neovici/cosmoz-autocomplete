@@ -1,3 +1,9 @@
+## [13.6.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.5.1...v13.6.0) (2026-05-07)
+
+### Features
+
+* expand i18next range to >=23.0.0 <27.0.0 ([#246](https://github.com/Neovici/cosmoz-autocomplete/issues/246)) ([14880ea](https://github.com/Neovici/cosmoz-autocomplete/commit/14880ea2b1544f13d94710fcbd68a6624ed7a9de))
+
 ## [13.5.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.5.0...v13.5.1) (2026-03-31)
 
 ### Bug Fixes
