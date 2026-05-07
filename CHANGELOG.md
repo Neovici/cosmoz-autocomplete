@@ -1,3 +1,11 @@
+## [13.7.0-beta.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.1...v13.7.0-beta.1) (2026-05-07)
+
+### Features
+
+* add variant and hint props, adopt cosmoz-tag and refresh stories ([#243](https://github.com/Neovici/cosmoz-autocomplete/issues/243)) ([2baf0b4](https://github.com/Neovici/cosmoz-autocomplete/commit/2baf0b4e7405d2e44c47a019d87ab852a62e754e))
+* fix design issues ([#245](https://github.com/Neovici/cosmoz-autocomplete/issues/245)) ([afeb485](https://github.com/Neovici/cosmoz-autocomplete/commit/afeb48556c95c7db2878ce37d58188d906bb046c))
+* select mode and design update ([e340f0a](https://github.com/Neovici/cosmoz-autocomplete/commit/e340f0a87cc9cc2b9c38110759283c75344d92e1))
+
 ## [13.6.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.0...v13.6.1) (2026-05-07)
 
 ### Bug Fixes
