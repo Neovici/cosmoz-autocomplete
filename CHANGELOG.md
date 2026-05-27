@@ -1,3 +1,9 @@
+## [13.7.0-beta.2](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.7.0-beta.1...v13.7.0-beta.2) (2026-05-27)
+
+### Features
+
+* adapt to cosmoz-input@beta.4 error-message API change ([#250](https://github.com/Neovici/cosmoz-autocomplete/issues/250)) ([40857b5](https://github.com/Neovici/cosmoz-autocomplete/commit/40857b58fe10a9b1de14fcd34ca453a2bea25ff0))
+
 ## [13.7.0-beta.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.1...v13.7.0-beta.1) (2026-05-07)
 
 ### Features
