@@ -20,11 +20,6 @@ export default css`
 		margin-top: var(--cz-spacing);
 	}
 
-	:host([error-message]) cosmoz-listbox,
-	:host([hint]) cosmoz-listbox {
-		margin-top: calc((var(--cz-spacing) * -5));
-	}
-
 	cosmoz-tag {
 		align-items: center;
 		margin-left: calc(var(--cz-spacing) * 2);
