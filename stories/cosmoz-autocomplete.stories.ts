@@ -82,7 +82,7 @@ const Autocomplete = ({
 			mode=${ifDefined(mode)}
 			.label=${label}
 			hint=${ifDefined(hint)}
-			error-message=${ifDefined(errorMessage)}
+			.errorMessage=${ifDefined(errorMessage)}
 			.placeholder=${placeholder}
 			.source=${sourceDelayed}
 			.textProperty=${textProperty}
@@ -249,7 +249,7 @@ export const Default: Story = {
 						.source=${colors}
 						text-property="text"
 						invalid
-						error-message=${'This field is required'}
+						.errorMessage=${'This field is required'}
 					></cosmoz-autocomplete>
 				</div>
 				<div>
@@ -364,7 +364,7 @@ export const Cell: Story = {
 						text-property="text"
 						variant="cell"
 						invalid
-						error-message=${'This field is required'}
+						.errorMessage=${'This field is required'}
 					></cosmoz-autocomplete>
 				</div>
 				<div>
