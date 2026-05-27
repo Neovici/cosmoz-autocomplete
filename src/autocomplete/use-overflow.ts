@@ -5,6 +5,7 @@ import { raf } from './util';
 // eslint-disable-next-line max-statements
 const overflow = (host: HTMLElement) => {
 	const chips = host.shadowRoot!.querySelectorAll<HTMLElement>('.chip');
+	if (chips.length === 0) return;
 	const badge = host.shadowRoot!.querySelector<HTMLElement>('.badge');
 	if (!badge) return;
 	badge.hidden = true;
@@ -46,7 +47,7 @@ export const useOverflow = <I>({
 	limit?: number;
 }) => {
 	const host = useHost();
-	const enabled = !(wrap || limit === 1);
+	const enabled = !(wrap || limit === 1) && value.length > 0;
 	const doRaf = useMemo(() => raf(() => overflow(host)), []);
 	const [width, setWidth] = useState(0);
 
