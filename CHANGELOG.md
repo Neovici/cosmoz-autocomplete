@@ -1,3 +1,9 @@
+## [13.6.2](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.1...v13.6.2) (2026-05-27)
+
+### Bug Fixes
+
+* skip resize observer and reflow when no value selected ([#249](https://github.com/Neovici/cosmoz-autocomplete/issues/249)) ([f03da74](https://github.com/Neovici/cosmoz-autocomplete/commit/f03da7437dec196813aa91340ab63f5197c24978))
+
 ## [13.6.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.0...v13.6.1) (2026-05-07)
 
 ### Bug Fixes
