@@ -35,6 +35,7 @@ interface AutocompleteArgs {
 	lazyOpen?: boolean;
 	invalid?: boolean;
 	errorMessage?: string;
+	required?: boolean;
 }
 
 const delay = <T>(
@@ -71,6 +72,7 @@ const Autocomplete = ({
 	lazyOpen,
 	invalid,
 	errorMessage,
+	required,
 	mode,
 }: AutocompleteArgs): TemplateResult => {
 	const styles = { maxWidth: overflowed ? '170px' : 'initial' };
@@ -99,6 +101,7 @@ const Autocomplete = ({
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			?invalid=${invalid}
+			?required=${required}
 			style=${styleMap(styles)}
 		></cosmoz-autocomplete>
 	`;
@@ -149,6 +152,10 @@ const meta: Meta<AutocompleteArgs> = {
 		errorMessage: {
 			control: 'text',
 			description: 'Error message displayed when invalid',
+		},
+		required: {
+			control: 'boolean',
+			description: 'Required state (shows asterisk on label)',
 		},
 		wrap: { control: 'boolean' },
 		overflowed: { control: 'boolean' },
@@ -459,6 +466,16 @@ export const DefaultIndexSingleValue: Story = {
 // =====================================================================
 // Input states
 // =====================================================================
+
+export const Required: Story = {
+	args: {
+		label: 'Choose color',
+		source: colors,
+		textProperty: 'text',
+		required: true,
+		hint: 'This field is required',
+	},
+};
 
 export const Disabled: Story = {
 	args: {
