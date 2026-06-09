@@ -24,6 +24,7 @@ interface AutocompleteArgs {
 	externalSearch?: boolean;
 	lazyOpen?: boolean;
 	preserveOrder?: boolean;
+	required?: boolean;
 }
 
 const AutocompleteTest = ({
@@ -42,6 +43,7 @@ const AutocompleteTest = ({
 	externalSearch,
 	lazyOpen,
 	preserveOrder,
+	required,
 }: AutocompleteArgs): TemplateResult => html`
 	<cosmoz-autocomplete
 		.source=${source}
@@ -56,6 +58,7 @@ const AutocompleteTest = ({
 		.text=${text}
 		?lazy-open=${lazyOpen}
 		?disabled=${disabled}
+		?required=${required}
 		?keep-opened=${keepOpened}
 		?external-search=${externalSearch}
 		?preserve-order=${preserveOrder}
@@ -666,5 +669,21 @@ export const DeselectWithValuePropertyWithoutPreserveOrder: Story = {
 		await waitFor(() => {
 			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
 		});
+	},
+};
+
+export const Required: Story = {
+	args: {
+		source: colors,
+		required: true,
+	},
+	play: async ({ canvas }) => {
+		const autocomplete = document.querySelector<HTMLElement>(
+			'cosmoz-autocomplete',
+		);
+		expect(autocomplete?.hasAttribute('required')).toBe(true);
+
+		const input = await canvas.findByShadowRole('textbox');
+		expect(input.hasAttribute('required')).toBe(true);
 	},
 };
