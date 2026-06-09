@@ -1,3 +1,9 @@
+## [13.7.0-beta.3](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.7.0-beta.2...v13.7.0-beta.3) (2026-06-09)
+
+### Features
+
+* support required prop ([#251](https://github.com/Neovici/cosmoz-autocomplete/issues/251)) ([39dbb98](https://github.com/Neovici/cosmoz-autocomplete/commit/39dbb98ee81d061a7ead531eefb564193f1c54da))
+
 ## [13.7.0-beta.2](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.7.0-beta.1...v13.7.0-beta.2) (2026-05-27)
 
 ### Features
