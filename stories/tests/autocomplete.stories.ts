@@ -25,6 +25,7 @@ interface AutocompleteArgs {
 	lazyOpen?: boolean;
 	preserveOrder?: boolean;
 	required?: boolean;
+	mode?: 'select';
 }
 
 const AutocompleteTest = ({
@@ -44,6 +45,7 @@ const AutocompleteTest = ({
 	lazyOpen,
 	preserveOrder,
 	required,
+	mode,
 }: AutocompleteArgs): TemplateResult => html`
 	<cosmoz-autocomplete
 		.source=${source}
@@ -62,6 +64,7 @@ const AutocompleteTest = ({
 		?keep-opened=${keepOpened}
 		?external-search=${externalSearch}
 		?preserve-order=${preserveOrder}
+		.mode=${mode}
 	></cosmoz-autocomplete>
 `;
 
@@ -685,5 +688,63 @@ export const Required: Story = {
 
 		const input = await canvas.findByShadowRole('textbox');
 		expect(input.hasAttribute('required')).toBe(true);
+	},
+};
+
+export const SelectModeValueIsSingleItem: Story = {
+	args: {
+		source: colors,
+		mode: 'select',
+		onChange: fn(),
+	},
+	play: async ({ canvas, canvasElement, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		const option = await canvas.findByShadowRole('option', { name: /Red/u });
+		await userEvent.click(option);
+
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith(
+				[colors[0]],
+				expect.any(Function),
+			);
+		});
+
+		const autocomplete = canvasElement.querySelector<
+			HTMLElement & { value: unknown }
+		>('cosmoz-autocomplete')!;
+		const { value } = autocomplete;
+		expect(Array.isArray(value)).toBe(false);
+		expect(value).toEqual(colors[0]);
+	},
+};
+
+export const MultiModeValueIsArray: Story = {
+	args: {
+		source: colors,
+		limit: 1,
+		onChange: fn(),
+	},
+	play: async ({ canvas, canvasElement, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		const option = await canvas.findByShadowRole('option', { name: /Red/u });
+		await userEvent.click(option);
+
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith(
+				[colors[0]],
+				expect.any(Function),
+			);
+		});
+
+		const autocomplete = canvasElement.querySelector<
+			HTMLElement & { value: unknown }
+		>('cosmoz-autocomplete')!;
+		const { value } = autocomplete;
+		expect(Array.isArray(value)).toBe(true);
+		expect(value).toEqual([colors[0]]);
 	},
 };
