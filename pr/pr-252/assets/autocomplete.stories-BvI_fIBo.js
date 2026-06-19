@@ -1,4 +1,4 @@
-import{b as Q}from"./iframe-CtrRL-Pq.js";import"./index-Bz2WneQV.js";import"./preload-helper-PPVm8Dsz.js";import"./index-BmwUeC92.js";const{expect:o,fn:p,userEvent:c,waitFor:i}=__STORYBOOK_MODULE_TEST__,X=({source:e,value:a,limit:t,textProperty:s="text",valueProperty:l,onChange:r,onText:u,onSelect:G,disabled:V,defaultIndex:$,text:N,keepOpened:_,externalSearch:j,lazyOpen:K,preserveOrder:Y,required:U,mode:J})=>Q`
+import{b as Q}from"./iframe-ChfaxQrn.js";import"./index-DtVkY9on.js";import"./preload-helper-PPVm8Dsz.js";import"./index-_uW43pbN.js";const{expect:o,fn:p,userEvent:c,waitFor:i}=__STORYBOOK_MODULE_TEST__,X=({source:e,value:a,limit:t,textProperty:s="text",valueProperty:l,onChange:r,onText:u,onSelect:G,disabled:V,defaultIndex:$,text:N,keepOpened:_,externalSearch:j,lazyOpen:K,preserveOrder:Y,required:U,mode:J})=>Q`
     <cosmoz-autocomplete
         .source=${e}
         .value=${a}
