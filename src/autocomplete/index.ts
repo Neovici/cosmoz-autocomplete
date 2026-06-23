@@ -24,10 +24,10 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 		value,
 		onChange: useCallback(
 			(value: I[], ...args) => {
-				setValue(value);
+				setValue(isSelect ? value[0] : value);
 				onChange?.(value, ...args);
 			},
-			[onChange],
+			[onChange, isSelect],
 		),
 		onText: useCallback(
 			(text: string) => {
