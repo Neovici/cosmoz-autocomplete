@@ -1,164 +1,172 @@
 ## [13.6.2](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.1...v13.6.2) (2026-05-27)
 
+## 13.6.3
+
+### Patch Changes
+
+- 84c9ac1: Migrate release automation from semantic-release to changesets.
+
 ### Bug Fixes
 
-* skip resize observer and reflow when no value selected ([#249](https://github.com/Neovici/cosmoz-autocomplete/issues/249)) ([f03da74](https://github.com/Neovici/cosmoz-autocomplete/commit/f03da7437dec196813aa91340ab63f5197c24978))
+- skip resize observer and reflow when no value selected ([#249](https://github.com/Neovici/cosmoz-autocomplete/issues/249)) ([f03da74](https://github.com/Neovici/cosmoz-autocomplete/commit/f03da7437dec196813aa91340ab63f5197c24978))
 
 ## [13.6.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.0...v13.6.1) (2026-05-07)
 
 ### Bug Fixes
 
-* correct i18next range to >=23.0.0 <27.0.0 ([#247](https://github.com/Neovici/cosmoz-autocomplete/issues/247)) ([dbc217a](https://github.com/Neovici/cosmoz-autocomplete/commit/dbc217ae64fe5088413666711f8c02cc67819966))
+- correct i18next range to >=23.0.0 <27.0.0 ([#247](https://github.com/Neovici/cosmoz-autocomplete/issues/247)) ([dbc217a](https://github.com/Neovici/cosmoz-autocomplete/commit/dbc217ae64fe5088413666711f8c02cc67819966))
 
 ## [13.6.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.5.1...v13.6.0) (2026-05-07)
 
 ### Features
 
-* expand i18next range to >=23.0.0 <27.0.0 ([#246](https://github.com/Neovici/cosmoz-autocomplete/issues/246)) ([14880ea](https://github.com/Neovici/cosmoz-autocomplete/commit/14880ea2b1544f13d94710fcbd68a6624ed7a9de))
+- expand i18next range to >=23.0.0 <27.0.0 ([#246](https://github.com/Neovici/cosmoz-autocomplete/issues/246)) ([14880ea](https://github.com/Neovici/cosmoz-autocomplete/commit/14880ea2b1544f13d94710fcbd68a6624ed7a9de))
 
 ## [13.5.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.5.0...v13.5.1) (2026-03-31)
 
 ### Bug Fixes
 
-* **min:** coerce min and respect min limit on backspace deselect ([#241](https://github.com/Neovici/cosmoz-autocomplete/issues/241)) ([d048b91](https://github.com/Neovici/cosmoz-autocomplete/commit/d048b915fb2fe8d8760160458afd8eafc9b01f49))
+- **min:** coerce min and respect min limit on backspace deselect ([#241](https://github.com/Neovici/cosmoz-autocomplete/issues/241)) ([d048b91](https://github.com/Neovici/cosmoz-autocomplete/commit/d048b915fb2fe8d8760160458afd8eafc9b01f49))
 
 ## [13.5.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.4.1...v13.5.0) (2026-03-31)
 
 ### Features
 
-* import excluding in index ([#242](https://github.com/Neovici/cosmoz-autocomplete/issues/242)) ([7217825](https://github.com/Neovici/cosmoz-autocomplete/commit/7217825e54d36d7ac10396428fa1714ce56d0d93))
+- import excluding in index ([#242](https://github.com/Neovici/cosmoz-autocomplete/issues/242)) ([7217825](https://github.com/Neovici/cosmoz-autocomplete/commit/7217825e54d36d7ac10396428fa1714ce56d0d93))
 
 ## [13.4.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.4.0...v13.4.1) (2026-03-25)
 
 ### Bug Fixes
 
-* deselect with preserveOrder and valueProperty ([#239](https://github.com/Neovici/cosmoz-autocomplete/issues/239)) ([b7c5cdc](https://github.com/Neovici/cosmoz-autocomplete/commit/b7c5cdc70ac75700d3d04484085139a2cbcc34c6))
+- deselect with preserveOrder and valueProperty ([#239](https://github.com/Neovici/cosmoz-autocomplete/issues/239)) ([b7c5cdc](https://github.com/Neovici/cosmoz-autocomplete/commit/b7c5cdc70ac75700d3d04484085139a2cbcc34c6))
 
 ## [13.4.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.3.1...v13.4.0) (2026-03-24)
 
 ### Features
 
-* add new keybinding that clears the input when you start typing ([#237](https://github.com/Neovici/cosmoz-autocomplete/issues/237)) ([60fed44](https://github.com/Neovici/cosmoz-autocomplete/commit/60fed4411a0af8dbda985d52d5af5737e67e6033))
+- add new keybinding that clears the input when you start typing ([#237](https://github.com/Neovici/cosmoz-autocomplete/issues/237)) ([60fed44](https://github.com/Neovici/cosmoz-autocomplete/commit/60fed4411a0af8dbda985d52d5af5737e67e6033))
 
 ## [13.3.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.3.0...v13.3.1) (2026-03-17)
 
 ### Bug Fixes
 
-* **listbox:** guard byValue against nullish items from lit-virtualizer ([#236](https://github.com/Neovici/cosmoz-autocomplete/issues/236)) ([9f5c853](https://github.com/Neovici/cosmoz-autocomplete/commit/9f5c8535f50dff3c0562a35945f6d91e8494406a))
+- **listbox:** guard byValue against nullish items from lit-virtualizer ([#236](https://github.com/Neovici/cosmoz-autocomplete/issues/236)) ([9f5c853](https://github.com/Neovici/cosmoz-autocomplete/commit/9f5c8535f50dff3c0562a35945f6d91e8494406a))
 
 ## [13.3.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.2.1...v13.3.0) (2026-03-11)
 
 ### Features
 
-* backspace delete without limit check ([#235](https://github.com/Neovici/cosmoz-autocomplete/issues/235)) ([00172d1](https://github.com/Neovici/cosmoz-autocomplete/commit/00172d1eb2bad09c0d67e0e63ef315e9e32cc3a6))
+- backspace delete without limit check ([#235](https://github.com/Neovici/cosmoz-autocomplete/issues/235)) ([00172d1](https://github.com/Neovici/cosmoz-autocomplete/commit/00172d1eb2bad09c0d67e0e63ef315e9e32cc3a6))
 
 ## [13.2.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.2.0...v13.2.1) (2026-03-02)
 
 ### Bug Fixes
 
-* propagate external invalid and errorMessage changes to inner input ([#233](https://github.com/Neovici/cosmoz-autocomplete/issues/233)) ([72f3e6f](https://github.com/Neovici/cosmoz-autocomplete/commit/72f3e6f860e7e186df2db203e815a5e4ea7f5c6e))
+- propagate external invalid and errorMessage changes to inner input ([#233](https://github.com/Neovici/cosmoz-autocomplete/issues/233)) ([72f3e6f](https://github.com/Neovici/cosmoz-autocomplete/commit/72f3e6f860e7e186df2db203e815a5e4ea7f5c6e))
 
 ## [13.2.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.1.1...v13.2.0) (2026-02-26)
 
 ### Features
 
-* add `lazy-open` attribute to suppress results until user starts typing ([#232](https://github.com/Neovici/cosmoz-autocomplete/issues/232)) ([d583596](https://github.com/Neovici/cosmoz-autocomplete/commit/d583596ef9233398f7630223432a98ce5f50bc35))
+- add `lazy-open` attribute to suppress results until user starts typing ([#232](https://github.com/Neovici/cosmoz-autocomplete/issues/232)) ([d583596](https://github.com/Neovici/cosmoz-autocomplete/commit/d583596ef9233398f7630223432a98ce5f50bc35))
 
 ## [13.1.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.1.0...v13.1.1) (2026-02-19)
 
 ### Bug Fixes
 
-* disabled inputs are not actually disabled ([#231](https://github.com/Neovici/cosmoz-autocomplete/issues/231)) ([15fb0e4](https://github.com/Neovici/cosmoz-autocomplete/commit/15fb0e405df3c02f9396b009bc0e73d14e5c6d0f)), closes [Neovici/cosmoz-dropdown#55](https://github.com/Neovici/cosmoz-dropdown/issues/55)
+- disabled inputs are not actually disabled ([#231](https://github.com/Neovici/cosmoz-autocomplete/issues/231)) ([15fb0e4](https://github.com/Neovici/cosmoz-autocomplete/commit/15fb0e405df3c02f9396b009bc0e73d14e5c6d0f)), closes [Neovici/cosmoz-dropdown#55](https://github.com/Neovici/cosmoz-dropdown/issues/55)
 
 ## [13.1.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.0.1...v13.1.0) (2026-02-19)
 
 ### Features
 
-* expose dropdown part ([eb6ae46](https://github.com/Neovici/cosmoz-autocomplete/commit/eb6ae46544ee900cf032fc064f13177918e8a3ff))
+- expose dropdown part ([eb6ae46](https://github.com/Neovici/cosmoz-autocomplete/commit/eb6ae46544ee900cf032fc064f13177918e8a3ff))
 
 ## [13.0.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.0.0...v13.0.1) (2026-02-19)
 
 ### Bug Fixes
 
-* add guard directive to prevent unnecessary re-renders ([#227](https://github.com/Neovici/cosmoz-autocomplete/issues/227)) ([250cb0d](https://github.com/Neovici/cosmoz-autocomplete/commit/250cb0d55ee37984abf0193cfe51efae23dd7c55))
+- add guard directive to prevent unnecessary re-renders ([#227](https://github.com/Neovici/cosmoz-autocomplete/issues/227)) ([250cb0d](https://github.com/Neovici/cosmoz-autocomplete/commit/250cb0d55ee37984abf0193cfe51efae23dd7c55))
 
 ## [13.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v12.0.0...v13.0.0) (2026-02-17)
 
 ### ⚠ BREAKING CHANGES
 
-* opened is now a reflected public property. Code that
-set or read a property named opened on these elements may be affected.
+- opened is now a reflected public property. Code that
+  set or read a property named opened on these elements may be affected.
 
 ### Features
 
-* expose the opened property of the dropdown ([#225](https://github.com/Neovici/cosmoz-autocomplete/issues/225)) ([49bf4e9](https://github.com/Neovici/cosmoz-autocomplete/commit/49bf4e957245b6861f59c65d2239d5f2fb87305e))
+- expose the opened property of the dropdown ([#225](https://github.com/Neovici/cosmoz-autocomplete/issues/225)) ([49bf4e9](https://github.com/Neovici/cosmoz-autocomplete/commit/49bf4e957245b6861f59c65d2239d5f2fb87305e))
 
 ## [12.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v11.0.0...v12.0.0) (2026-02-10)
 
 ### ⚠ BREAKING CHANGES
 
-* Keyboard navigation and selection now use the
-useActivity() keybindings system instead of global document keydown
-listeners. Consumers must register autocompleteKeybindings (or the
-individual listboxKeybindings + autocomplete bindings) via
-useKeybindings() at the app level for keyboard interaction to work.
+- Keyboard navigation and selection now use the
+  useActivity() keybindings system instead of global document keydown
+  listeners. Consumers must register autocompleteKeybindings (or the
+  individual listboxKeybindings + autocomplete bindings) via
+  useKeybindings() at the app level for keyboard interaction to work.
 
-* test: add KeyboardFullCycle story for virtualized scroll navigation
+- test: add KeyboardFullCycle story for virtualized scroll navigation
 
-* test: force e2e snapshot failure to validate CI
+- test: force e2e snapshot failure to validate CI
 
-* Revert "test: force e2e snapshot failure to validate CI"
+- Revert "test: force e2e snapshot failure to validate CI"
 
 This reverts commit 00e8a27808839f2e0f0facbf8c51653dd768e834.
 
 ### Features
 
-* migrate to cosmoz-dropdown-next and keybindings ([#223](https://github.com/Neovici/cosmoz-autocomplete/issues/223)) ([77e6094](https://github.com/Neovici/cosmoz-autocomplete/commit/77e6094caa67f621f1efbc0f32a20265dc9e260e))
+- migrate to cosmoz-dropdown-next and keybindings ([#223](https://github.com/Neovici/cosmoz-autocomplete/issues/223)) ([77e6094](https://github.com/Neovici/cosmoz-autocomplete/commit/77e6094caa67f621f1efbc0f32a20265dc9e260e))
 
 ## [11.0.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.12.1...v11.0.0) (2026-02-09)
 
 ### ⚠ BREAKING CHANGES
 
-* Test infrastructure changed from web-test-runner to Vitest
+- Test infrastructure changed from web-test-runner to Vitest
 
-* chore: include e2e tests in npm test script
+- chore: include e2e tests in npm test script
 
-* feat: add interaction tests to story play functions
+- feat: add interaction tests to story play functions
 
-- Add userEvent interactions to test keyboard navigation and selection
-- Create InteractionTest stories for comprehensive E2E-style tests
-- Keep Basic stories with read-only assertions for visual regression tests
-- Add eslint override to disable max-lines for stories folder
-- Test coverage: chip removal, item selection, no-results message, exclude toggle
+* Add userEvent interactions to test keyboard navigation and selection
+* Create InteractionTest stories for comprehensive E2E-style tests
+* Keep Basic stories with read-only assertions for visual regression tests
+* Add eslint override to disable max-lines for stories folder
+* Test coverage: chip removal, item selection, no-results message, exclude toggle
 
-* chore: enable autodocs for all stories
+- chore: enable autodocs for all stories
 
-* chore: reorder stories - Autocomplete before Excluding
+- chore: reorder stories - Autocomplete before Excluding
 
-* fix: enable autodocs via tags for Storybook 10
+- fix: enable autodocs via tags for Storybook 10
 
-* refactor: remove keybindings infrastructure (to be added later)
+- refactor: remove keybindings infrastructure (to be added later)
 
-* test: migrate removed tests to Vitest unit tests and Storybook interaction tests
+- test: migrate removed tests to Vitest unit tests and Storybook interaction tests
 
-- Add unit tests for pure functions (search, mark) in test/utils.test.ts (11 tests)
-- Extract pure functions to src/autocomplete/pure.ts for jsdom testability
-- Add Storybook test stories for listbox (7 tests) and autocomplete (11 tests)
-- Configure vitest with 'unit' project for jsdom-based tests
-- Add jsdom dependency for unit testing pure functions
-- Update eslint config for test files
+* Add unit tests for pure functions (search, mark) in test/utils.test.ts (11 tests)
+* Extract pure functions to src/autocomplete/pure.ts for jsdom testability
+* Add Storybook test stories for listbox (7 tests) and autocomplete (11 tests)
+* Configure vitest with 'unit' project for jsdom-based tests
+* Add jsdom dependency for unit testing pure functions
+* Update eslint config for test files
 
-* test: add missing coverage for external search, valueProperty, onSelect, keyboard edge cases
+- test: add missing coverage for external search, valueProperty, onSelect, keyboard edge cases
 
 Add 10 new test stories to close coverage gaps from the @web/test-runner migration:
 
 Autocomplete (4 stories):
+
 - ExternalSearchMode: verifies client-side filtering is bypassed
 - ValueProperty: verifies deduplication by valueProperty (id)
 - OnSelectCallback: verifies onSelect receives (item, meta)
 - Limit1DisablesBackspace: verifies use-keys disables when limit=1
 
 Listbox (6 stories):
+
 - KeyboardDownCycling: ArrowDown wraps from last to first item
 - KeyboardUpNavigation: ArrowDown then ArrowUp returns to original
 - HighlightAndEnter: mouseenter sets highlight, Enter selects it
@@ -172,173 +180,173 @@ Listbox (6 stories):
 
 ### Miscellaneous Chores
 
-* migrate tests to Vitest with Storybook interaction tests ([#224](https://github.com/Neovici/cosmoz-autocomplete/issues/224)) ([923d855](https://github.com/Neovici/cosmoz-autocomplete/commit/923d85530c621ec36217bb00cae0a0c8b4568c19))
+- migrate tests to Vitest with Storybook interaction tests ([#224](https://github.com/Neovici/cosmoz-autocomplete/issues/224)) ([923d855](https://github.com/Neovici/cosmoz-autocomplete/commit/923d85530c621ec36217bb00cae0a0c8b4568c19))
 
 ## [10.12.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.12.0...v10.12.1) (2026-02-06)
 
 ### Bug Fixes
 
-* migrate connectable import to cosmoz-utils ([#222](https://github.com/Neovici/cosmoz-autocomplete/issues/222)) ([b8840eb](https://github.com/Neovici/cosmoz-autocomplete/commit/b8840eb480f6e15ab7f956ba8c697cbf72a034cb))
+- migrate connectable import to cosmoz-utils ([#222](https://github.com/Neovici/cosmoz-autocomplete/issues/222)) ([b8840eb](https://github.com/Neovici/cosmoz-autocomplete/commit/b8840eb480f6e15ab7f956ba8c697cbf72a034cb))
 
 ## [10.12.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.11.1...v10.12.0) (2026-01-30)
 
 ### Features
 
-* set fallback message for no-result search ([#218](https://github.com/Neovici/cosmoz-autocomplete/issues/218)) ([ffb4343](https://github.com/Neovici/cosmoz-autocomplete/commit/ffb434386b010f402ace059fb0199e3cf35c46b4))
+- set fallback message for no-result search ([#218](https://github.com/Neovici/cosmoz-autocomplete/issues/218)) ([ffb4343](https://github.com/Neovici/cosmoz-autocomplete/commit/ffb434386b010f402ace059fb0199e3cf35c46b4))
 
 ## [10.11.1](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.11.0...v10.11.1) (2026-01-29)
 
 ### Bug Fixes
 
-* support cosmoz-dropdown v7 ([#221](https://github.com/Neovici/cosmoz-autocomplete/issues/221)) ([161fa8c](https://github.com/Neovici/cosmoz-autocomplete/commit/161fa8ce87aff96b9722fd1044a21eec284e35cd))
+- support cosmoz-dropdown v7 ([#221](https://github.com/Neovici/cosmoz-autocomplete/issues/221)) ([161fa8c](https://github.com/Neovici/cosmoz-autocomplete/commit/161fa8ce87aff96b9722fd1044a21eec284e35cd))
 
 ## [10.11.0](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.10.4...v10.11.0) (2026-01-28)
 
 ### Features
 
-* add duplicate web component check ([#219](https://github.com/Neovici/cosmoz-autocomplete/issues/219)) ([00bedf2](https://github.com/Neovici/cosmoz-autocomplete/commit/00bedf2630533a0a643274c27ac0ced1ad283919))
+- add duplicate web component check ([#219](https://github.com/Neovici/cosmoz-autocomplete/issues/219)) ([00bedf2](https://github.com/Neovici/cosmoz-autocomplete/commit/00bedf2630533a0a643274c27ac0ced1ad283919))
 
 ## [10.10.4](https://github.com/Neovici/cosmoz-autocomplete/compare/v10.10.3...v10.10.4) (2026-01-19)
 
 ### Bug Fixes
 
-* correct repository URL case to match GitHub canonical name ([71df999](https://github.com/Neovici/cosmoz-autocomplete/commit/71df999a1c0335cb2414addece9e2a1ac7b92096))
+- correct repository URL case to match GitHub canonical name ([71df999](https://github.com/Neovici/cosmoz-autocomplete/commit/71df999a1c0335cb2414addece9e2a1ac7b92096))
 
 ## [10.10.3](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.2...v10.10.3) (2026-01-19)
 
 ### Bug Fixes
 
-* test npm publishing ([6bf18ea](https://github.com/neovici/cosmoz-autocomplete/commit/6bf18ea6f202d772ef3bb3dc7f05b0860631c71a))
+- test npm publishing ([6bf18ea](https://github.com/neovici/cosmoz-autocomplete/commit/6bf18ea6f202d772ef3bb3dc7f05b0860631c71a))
 
 ## [10.10.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.1...v10.10.2) (2026-01-19)
 
 ### Bug Fixes
 
-* adjust packages ([7436903](https://github.com/neovici/cosmoz-autocomplete/commit/7436903f51e4afd7fd03106c2ea0906e4e292f76))
-* don't clear input when allow manual input is true ([#214](https://github.com/neovici/cosmoz-autocomplete/issues/214)) ([92b84ee](https://github.com/neovici/cosmoz-autocomplete/commit/92b84ee06fe335701b74427f03dc5ac07dfcfe4c))
-* test npm publishing ([be68a67](https://github.com/neovici/cosmoz-autocomplete/commit/be68a678a6451911d24e387dc757709ed821d54c))
-* update semantic-release ([a928aa4](https://github.com/neovici/cosmoz-autocomplete/commit/a928aa4597fb7dc71831c1d624a75f03372abdc4))
+- adjust packages ([7436903](https://github.com/neovici/cosmoz-autocomplete/commit/7436903f51e4afd7fd03106c2ea0906e4e292f76))
+- don't clear input when allow manual input is true ([#214](https://github.com/neovici/cosmoz-autocomplete/issues/214)) ([92b84ee](https://github.com/neovici/cosmoz-autocomplete/commit/92b84ee06fe335701b74427f03dc5ac07dfcfe4c))
+- test npm publishing ([be68a67](https://github.com/neovici/cosmoz-autocomplete/commit/be68a678a6451911d24e387dc757709ed821d54c))
+- update semantic-release ([a928aa4](https://github.com/neovici/cosmoz-autocomplete/commit/a928aa4597fb7dc71831c1d624a75f03372abdc4))
 
 ## [10.10.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.10.0...v10.10.1) (2025-12-01)
 
 ### Bug Fixes
 
-* chip alignment ([#213](https://github.com/neovici/cosmoz-autocomplete/issues/213)) ([f3e166a](https://github.com/neovici/cosmoz-autocomplete/commit/f3e166afa9a7bd37f526f0ec281811d032cc81c3))
+- chip alignment ([#213](https://github.com/neovici/cosmoz-autocomplete/issues/213)) ([f3e166a](https://github.com/neovici/cosmoz-autocomplete/commit/f3e166afa9a7bd37f526f0ec281811d032cc81c3))
 
 ## [10.10.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.9.0...v10.10.0) (2025-11-28)
 
 ### Features
 
-* export Source ([#212](https://github.com/neovici/cosmoz-autocomplete/issues/212)) ([578de55](https://github.com/neovici/cosmoz-autocomplete/commit/578de55efe73305486470da7019be4479135c99d))
+- export Source ([#212](https://github.com/neovici/cosmoz-autocomplete/issues/212)) ([578de55](https://github.com/neovici/cosmoz-autocomplete/commit/578de55efe73305486470da7019be4479135c99d))
 
 ## [10.9.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.8.0...v10.9.0) (2025-11-20)
 
 ### Features
 
-* cosmoz-autocomplete-excluding ([#210](https://github.com/neovici/cosmoz-autocomplete/issues/210)) ([de607f1](https://github.com/neovici/cosmoz-autocomplete/commit/de607f1226f149289b3f9e8be9181e0689c1b971)), closes [#209](https://github.com/neovici/cosmoz-autocomplete/issues/209)
+- cosmoz-autocomplete-excluding ([#210](https://github.com/neovici/cosmoz-autocomplete/issues/210)) ([de607f1](https://github.com/neovici/cosmoz-autocomplete/commit/de607f1226f149289b3f9e8be9181e0689c1b971)), closes [#209](https://github.com/neovici/cosmoz-autocomplete/issues/209)
 
 ## [10.8.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.2...v10.8.0) (2025-10-24)
 
 ### Features
 
-* useProperty value ([17ea59e](https://github.com/neovici/cosmoz-autocomplete/commit/17ea59e3b44c7bddd6a38cab5f1ff51a57df9d28))
+- useProperty value ([17ea59e](https://github.com/neovici/cosmoz-autocomplete/commit/17ea59e3b44c7bddd6a38cab5f1ff51a57df9d28))
 
 ## [10.7.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.1...v10.7.2) (2025-09-16)
 
 ### Bug Fixes
 
-* keyboard navigation stops working ([75345b0](https://github.com/neovici/cosmoz-autocomplete/commit/75345b09c2a939f6f42fb734add873e5965b17ed))
+- keyboard navigation stops working ([75345b0](https://github.com/neovici/cosmoz-autocomplete/commit/75345b09c2a939f6f42fb734add873e5965b17ed))
 
 ## [10.7.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.7.0...v10.7.1) (2025-09-09)
 
 ### Bug Fixes
 
-* fatal error when text is undefined ([#204](https://github.com/neovici/cosmoz-autocomplete/issues/204)) ([efeb5df](https://github.com/neovici/cosmoz-autocomplete/commit/efeb5dff206d437bc61a7b9df8ba023b0d863f72))
+- fatal error when text is undefined ([#204](https://github.com/neovici/cosmoz-autocomplete/issues/204)) ([efeb5df](https://github.com/neovici/cosmoz-autocomplete/commit/efeb5dff206d437bc61a7b9df8ba023b0d863f72))
 
 ## [10.7.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.6.1...v10.7.0) (2025-09-05)
 
 ### Features
 
-* adjust opacity for listbox ([#202](https://github.com/neovici/cosmoz-autocomplete/issues/202)) ([f117038](https://github.com/neovici/cosmoz-autocomplete/commit/f1170381493db05aeafe5d2c8641d3776070c90a))
+- adjust opacity for listbox ([#202](https://github.com/neovici/cosmoz-autocomplete/issues/202)) ([f117038](https://github.com/neovici/cosmoz-autocomplete/commit/f1170381493db05aeafe5d2c8641d3776070c90a))
 
 ## [10.6.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.6.0...v10.6.1) (2025-08-30)
 
 ### Bug Fixes
 
-* margin is not taken into account when item-size="auto" ([b98c21c](https://github.com/neovici/cosmoz-autocomplete/commit/b98c21c3a467f78d768b2764f93a7f1331e9f81d))
+- margin is not taken into account when item-size="auto" ([b98c21c](https://github.com/neovici/cosmoz-autocomplete/commit/b98c21c3a467f78d768b2764f93a7f1331e9f81d))
 
 ## [10.6.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.5.0...v10.6.0) (2025-08-30)
 
 ### Features
 
-* itemRenderer can access the items list ([488c790](https://github.com/neovici/cosmoz-autocomplete/commit/488c7905b30fe1a9df30d4fbffb84d5e1a1f5485))
+- itemRenderer can access the items list ([488c790](https://github.com/neovici/cosmoz-autocomplete/commit/488c7905b30fe1a9df30d4fbffb84d5e1a1f5485))
 
 ### Bug Fixes
 
-* dropdown is not displayed while the source is loading ([b1fda76](https://github.com/neovici/cosmoz-autocomplete/commit/b1fda76e7ab951a58df8c2f09d91add67ae7cf93))
-* error in console if listbox is closed before layout completes ([389f86f](https://github.com/neovici/cosmoz-autocomplete/commit/389f86f5478040ef43bf5f382f244a8bda2a1f49))
-* listbox closes when focus moves into it ([edbfb60](https://github.com/neovici/cosmoz-autocomplete/commit/edbfb606568c17c298e90cc3b07a1e51fb18df9d))
+- dropdown is not displayed while the source is loading ([b1fda76](https://github.com/neovici/cosmoz-autocomplete/commit/b1fda76e7ab951a58df8c2f09d91add67ae7cf93))
+- error in console if listbox is closed before layout completes ([389f86f](https://github.com/neovici/cosmoz-autocomplete/commit/389f86f5478040ef43bf5f382f244a8bda2a1f49))
+- listbox closes when focus moves into it ([edbfb60](https://github.com/neovici/cosmoz-autocomplete/commit/edbfb606568c17c298e90cc3b07a1e51fb18df9d))
 
 ## [10.5.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.4.0...v10.5.0) (2025-08-29)
 
 ### Features
 
-* open animation ([c8611c4](https://github.com/neovici/cosmoz-autocomplete/commit/c8611c419d044fdb99ae675ddebb20402bd8c900))
+- open animation ([c8611c4](https://github.com/neovici/cosmoz-autocomplete/commit/c8611c419d044fdb99ae675ddebb20402bd8c900))
 
 ### Bug Fixes
 
-* items are not rendered fully ([ceb40c3](https://github.com/neovici/cosmoz-autocomplete/commit/ceb40c33b6006db451cdd5644a17a8e7ba8f8d55))
+- items are not rendered fully ([ceb40c3](https://github.com/neovici/cosmoz-autocomplete/commit/ceb40c33b6006db451cdd5644a17a8e7ba8f8d55))
 
 ## [10.4.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.3.0...v10.4.0) (2025-08-27)
 
 ### Features
 
-* expose ItemRendererOpts ([2d1016b](https://github.com/neovici/cosmoz-autocomplete/commit/2d1016b5204590de8f88be5335cf88b43980fb9c))
-* external-search attribute ([ca338bd](https://github.com/neovici/cosmoz-autocomplete/commit/ca338bd92c49e5bfb6e824181ccc01f0269737ad))
-* itemRenderer also receives the position information ([b8ba73e](https://github.com/neovici/cosmoz-autocomplete/commit/b8ba73ee53de43f5cc3295aeed93b9f31e2f8e11))
-* layout-complete event for when items are finished rendering in proper place ([b78985a](https://github.com/neovici/cosmoz-autocomplete/commit/b78985a0c6b0b5c55ceda6e890a102165aa40271))
-* support for item-height="auto" ([baec7c2](https://github.com/neovici/cosmoz-autocomplete/commit/baec7c2e8075f07c1fc9b0f0220321abe7fb106f))
+- expose ItemRendererOpts ([2d1016b](https://github.com/neovici/cosmoz-autocomplete/commit/2d1016b5204590de8f88be5335cf88b43980fb9c))
+- external-search attribute ([ca338bd](https://github.com/neovici/cosmoz-autocomplete/commit/ca338bd92c49e5bfb6e824181ccc01f0269737ad))
+- itemRenderer also receives the position information ([b8ba73e](https://github.com/neovici/cosmoz-autocomplete/commit/b8ba73ee53de43f5cc3295aeed93b9f31e2f8e11))
+- layout-complete event for when items are finished rendering in proper place ([b78985a](https://github.com/neovici/cosmoz-autocomplete/commit/b78985a0c6b0b5c55ceda6e890a102165aa40271))
+- support for item-height="auto" ([baec7c2](https://github.com/neovici/cosmoz-autocomplete/commit/baec7c2e8075f07c1fc9b0f0220321abe7fb106f))
 
 ### Bug Fixes
 
-* more reliable scroll to selected item ([4383219](https://github.com/neovici/cosmoz-autocomplete/commit/4383219d94f13f4df888d2ad9b5bf0b03bccb7f4))
-* sizer in item renderer is useless ([8e25878](https://github.com/neovici/cosmoz-autocomplete/commit/8e25878c408dd44253da3e87b65fc2fa821ffcc5)), closes [packages/labs/virtualizer/src/Virtualizer.ts#L375](https://github.com/packages/labs/virtualizer/src/Virtualizer.ts/issues/L375) [src/listbox/index.ts#L46](https://github.com/src/listbox/index.ts/issues/L46)
+- more reliable scroll to selected item ([4383219](https://github.com/neovici/cosmoz-autocomplete/commit/4383219d94f13f4df888d2ad9b5bf0b03bccb7f4))
+- sizer in item renderer is useless ([8e25878](https://github.com/neovici/cosmoz-autocomplete/commit/8e25878c408dd44253da3e87b65fc2fa821ffcc5)), closes [packages/labs/virtualizer/src/Virtualizer.ts#L375](https://github.com/packages/labs/virtualizer/src/Virtualizer.ts/issues/L375) [src/listbox/index.ts#L46](https://github.com/src/listbox/index.ts/issues/L46)
 
 ## [10.3.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.3...v10.3.0) (2025-08-21)
 
 ### Features
 
-* labels styling ([#187](https://github.com/neovici/cosmoz-autocomplete/issues/187)) ([ff9efc2](https://github.com/neovici/cosmoz-autocomplete/commit/ff9efc2e55bb565d1a5bfeb1cfa13409d37d5b9f))
+- labels styling ([#187](https://github.com/neovici/cosmoz-autocomplete/issues/187)) ([ff9efc2](https://github.com/neovici/cosmoz-autocomplete/commit/ff9efc2e55bb565d1a5bfeb1cfa13409d37d5b9f))
 
 ## [10.2.3](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.2...v10.2.3) (2025-08-19)
 
 ### Bug Fixes
 
-* don't show listbox dropdown when there's no value ([#191](https://github.com/neovici/cosmoz-autocomplete/issues/191)) ([430efa3](https://github.com/neovici/cosmoz-autocomplete/commit/430efa3ca3dde5627d67b53eea63ef150db3aa66))
+- don't show listbox dropdown when there's no value ([#191](https://github.com/neovici/cosmoz-autocomplete/issues/191)) ([430efa3](https://github.com/neovici/cosmoz-autocomplete/commit/430efa3ca3dde5627d67b53eea63ef150db3aa66))
 
 ## [10.2.2](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.1...v10.2.2) (2025-08-05)
 
 ### Bug Fixes
 
-* **deps:** bump cosmoz-dropdown 5.3.0 to 6.2.1 ([56e64d2](https://github.com/neovici/cosmoz-autocomplete/commit/56e64d2f5f23cc499337d0bd50915975395d7693))
+- **deps:** bump cosmoz-dropdown 5.3.0 to 6.2.1 ([56e64d2](https://github.com/neovici/cosmoz-autocomplete/commit/56e64d2f5f23cc499337d0bd50915975395d7693))
 
 ## [10.2.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.2.0...v10.2.1) (2025-08-04)
 
 ### Bug Fixes
 
-* automerge workflow ([5f24a0b](https://github.com/neovici/cosmoz-autocomplete/commit/5f24a0bc56c65946cc84804bd47cdf32a76eeac2))
+- automerge workflow ([5f24a0b](https://github.com/neovici/cosmoz-autocomplete/commit/5f24a0bc56c65946cc84804bd47cdf32a76eeac2))
 
 ## [10.2.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.1.0...v10.2.0) (2025-07-21)
 
 ### Features
 
-* new automerge workflow ([85eda6d](https://github.com/neovici/cosmoz-autocomplete/commit/85eda6d5853e8d2ca26aca5d5263e0c582d1eb86))
+- new automerge workflow ([85eda6d](https://github.com/neovici/cosmoz-autocomplete/commit/85eda6d5853e8d2ca26aca5d5263e0c582d1eb86))
 
 ## [10.1.0](https://github.com/neovici/cosmoz-autocomplete/compare/v10.0.1...v10.1.0) (2025-07-08)
 
 ### Features
 
-* add variables and improve styling ([#186](https://github.com/neovici/cosmoz-autocomplete/issues/186)) ([45e386a](https://github.com/neovici/cosmoz-autocomplete/commit/45e386a6da1dacfb68f241cbf203992c49d18977))
+- add variables and improve styling ([#186](https://github.com/neovici/cosmoz-autocomplete/issues/186)) ([45e386a](https://github.com/neovici/cosmoz-autocomplete/commit/45e386a6da1dacfb68f241cbf203992c49d18977))
 
 ## [10.0.1](https://github.com/neovici/cosmoz-autocomplete/compare/v10.0.0...v10.0.1) (2025-06-23)
 
