@@ -80,7 +80,7 @@
 		"@commitlint/cli": "^20.0.0",
 		"@commitlint/config-conventional": "^20.0.0",
 		"@neovici/cfg": "^2.8.0",
-		"@playwright/test": "^1.60.0",
+		"@playwright/test": "1.60.0",
 		"@storybook/addon-docs": "^10.0.0",
 		"@storybook/addon-vitest": "^10.0.0",
 		"@storybook/web-components-vite": "^10.0.0",
@@ -101,7 +101,6 @@
 		"vitest": "^4.0.0"
 	},
 	"overrides": {
-		"conventional-changelog-conventionalcommits": ">= 8.0.0",
-		"playwright": "1.60.0"
+		"conventional-changelog-conventionalcommits": ">= 8.0.0"
 	}
 }
