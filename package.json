@@ -90,7 +90,7 @@
 		"@commitlint/cli": "^20.0.0",
 		"@commitlint/config-conventional": "^20.0.0",
 		"@neovici/cfg": "^2.8.0",
-		"@playwright/test": "^1.43.1",
+		"@playwright/test": "^1.60.0",
 		"@semantic-release/changelog": "^6.0.0",
 		"@semantic-release/git": "^10.0.0",
 		"@storybook/addon-docs": "^10.0.0",
