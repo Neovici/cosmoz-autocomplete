@@ -20,6 +20,15 @@ export default css`
 		margin-top: var(--cz-spacing);
 	}
 
+	cosmoz-input[variant='inline'] cosmoz-tag {
+		align-items: center;
+		margin-left: var(--cz-spacing);
+	}
+
+	cosmoz-input[variant='inline'] cosmoz-tag:first-of-type {
+		margin-left: 0;
+	}
+
 	cosmoz-tag {
 		align-items: center;
 		margin-left: calc(var(--cz-spacing) * 2);
