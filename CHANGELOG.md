@@ -1,5 +1,11 @@
 ## [13.7.0-beta.4](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.7.0-beta.3...v13.7.0-beta.4) (2026-06-23)
 
+## 13.7.0-beta.5
+
+### Patch Changes
+
+- 4cc0639: Promote to stable: add changeset
+
 ### Features
 
 - unwrap value to single item in select mode ([#252](https://github.com/Neovici/cosmoz-autocomplete/issues/252)) ([66e50df](https://github.com/Neovici/cosmoz-autocomplete/commit/66e50df9530e43caa50ed75a138a05483266d09d))
