@@ -1,5 +1,11 @@
 ## [13.7.0-beta.4](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.7.0-beta.3...v13.7.0-beta.4) (2026-06-23)
 
+## 13.7.0-beta.6
+
+### Patch Changes
+
+- 1c490bf: Add listbox min-width and remove margin left for variant inline
+
 ## 13.7.0-beta.5
 
 ### Patch Changes
