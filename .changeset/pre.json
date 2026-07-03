@@ -1,8 +1,10 @@
 {
-	"mode": "pre",
-	"tag": "beta",
-	"initialVersions": {
-		"@neovici/cosmoz-autocomplete": "13.7.0-beta.4"
-	},
-	"changesets": []
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@neovici/cosmoz-autocomplete": "13.7.0-beta.4"
+  },
+  "changesets": [
+    "rare-carrots-join"
+  ]
 }
