@@ -29,7 +29,9 @@ const style = css`
 		position: relative;
 		overflow-y: auto;
 		contain: layout paint !important;
+		min-width: calc(var(--cz-spacing, 4px) * 20);
 	}
+
 	.item {
 		font-size: var(--cosmoz-autocomplete-listbox-font-size, 13px);
 		font-weight: var(--cosmoz-autocomplete-listbox-font-weight, 400);
