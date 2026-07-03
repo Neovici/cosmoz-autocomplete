@@ -26,6 +26,7 @@ const style = css`
 		scrollbar-width: thin;
 		contain: layout paint !important;
 		padding-inline: calc(var(--cz-spacing) * 1.5);
+		min-width: calc(var(--cz-spacing) * 20);
 	}
 	:host(:focus-within) {
 		outline: none;
