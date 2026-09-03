@@ -1,3 +1,21 @@
+## 14.0.0
+
+### Major Changes
+
+- b976c37: Select mode and design refresh: add `mode="select"` for a single-value autocomplete with unwrapped value, adopt `cosmoz-tag` for chips, migrate styles to `--cz-*` tokens from Untitled UI, and add `variant` and `hint` props
+
+### Minor Changes
+
+- b976c37: Add `required` prop
+
+### Patch Changes
+
+- b976c37: Add listbox min-width and remove margin left for variant inline
+- b976c37: Update `@neovici/cosmoz-input` to stable `^6.0.0` and `@neovici/cosmoz-dropdown` to `^8.0.0`
+- b976c37: Adapt to cosmoz-input error-message API change
+- b976c37: Add listbox min-width and remove margin left for variant inline
+- b976c37: Promote to stable: add changeset
+
 ## 13.6.3
 
 ### Patch Changes
