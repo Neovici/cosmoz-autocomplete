@@ -1,11 +1,4 @@
 {
-  "mode": "pre",
-  "tag": "beta",
-  "initialVersions": {
-    "@neovici/cosmoz-autocomplete": "13.7.0-beta.4"
-  },
-  "changesets": [
-    "calm-tools-thank",
-    "rare-carrots-join"
-  ]
+  "mode": "exit",
+  "tag": "beta"
 }
