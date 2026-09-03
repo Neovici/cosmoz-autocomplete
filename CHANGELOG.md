@@ -1,5 +1,3 @@
-## [13.6.2](https://github.com/Neovici/cosmoz-autocomplete/compare/v13.6.1...v13.6.2) (2026-05-27)
-
 ## 13.6.3
 
 ### Patch Changes

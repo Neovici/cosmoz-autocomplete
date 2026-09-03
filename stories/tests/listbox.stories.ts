@@ -50,6 +50,9 @@ const meta: Meta<ListboxArgs> = {
 	title: 'Tests/Listbox',
 	render: ListboxTest,
 	tags: ['!autodocs'],
+	parameters: {
+		layout: 'fullscreen',
+	},
 };
 
 export default meta;
@@ -262,8 +265,9 @@ const getHighlightedIndex = (listbox: Element) => {
 	const items = listbox.shadowRoot!.querySelectorAll('.item[role="option"]');
 	for (const item of items) {
 		const bg = getComputedStyle(item).backgroundColor;
-		if (bg !== 'rgba(0, 0, 0, 0)')
-			{return Number(item.getAttribute('data-index'));}
+		if (bg !== 'rgba(0, 0, 0, 0)') {
+			return Number(item.getAttribute('data-index'));
+		}
 	}
 	return -1;
 };

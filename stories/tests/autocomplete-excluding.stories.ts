@@ -35,6 +35,9 @@ const meta: Meta<ExcludingArgs> = {
 	title: 'Tests/Autocomplete Excluding',
 	render: ExcludingTest,
 	tags: ['!autodocs'],
+	parameters: {
+		layout: 'fullscreen',
+	},
 };
 
 export default meta;

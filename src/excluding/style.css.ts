@@ -7,39 +7,14 @@ const clearSVG =
 /* eslint-enable quotes */
 
 const excludingStyle = css`
-	.chip[data-state='excluded'] {
-		background: var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54));
-	}
-
-	cosmoz-autocomplete-chip[data-state='excluded']::part(content) {
-		color: var(--cosmoz-autocomplete-excluded-chip-color, #fff);
-	}
-
-	cosmoz-autocomplete-chip[data-state='excluded']::part(clear) {
-		background-color: var(
-			--cosmoz-autocomplete-excluded-chip-clear-bg-color,
-			#fff
-		);
-		stroke: var(
-			--cosmoz-autocomplete-excluded-chip-clear-stroke,
-			var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54))
-		);
-	}
-
-	cosmoz-listbox::part(excluded)::before {
-		border-color: var(
-			--cosmoz-autocomplete-excluded-bg-color,
-			rgb(244, 67, 54)
-		);
+	cosmoz-listbox::part(error)::before {
+		border-color: var(--cz-color-border-error);
 		/* prettier-ignore */
-		background: url("${clearSVG}") var(--cosmoz-autocomplete-excluded-bg-color, rgb(244, 67, 54)) no-repeat 50%;
+		background: url("${clearSVG}") var(--cz-color-border-error) no-repeat 50%;
 	}
 
-	cosmoz-listbox::part(excluded):hover {
-		background: var(
-			--cosmoz-listbox-excluded-active-color,
-			rgba(244, 67, 54, 0.1)
-		);
+	cosmoz-listbox::part(error):hover {
+		background: var(--cz-color-bg-error);
 	}
 `;
 

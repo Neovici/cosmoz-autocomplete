@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('autocomplete basic', () => {
 	test('pick an item', async ({ page }) => {
-		await page.goto('iframe.html?id=autocomplete--basic&viewMode=story/');
+		await page.goto('iframe.html?id=autocomplete--playground&viewMode=story/');
 		await expect(page).toHaveScreenshot();
 
 		await page.click('cosmoz-autocomplete');
@@ -22,7 +22,7 @@ test.describe('autocomplete basic', () => {
 	});
 
 	test('no results default message', async ({ page }) => {
-		await page.goto('iframe.html?id=autocomplete--basic&viewMode=story/');
+		await page.goto('iframe.html?id=autocomplete--playground&viewMode=story/');
 		await expect(page).toHaveScreenshot();
 
 		await page.click('cosmoz-autocomplete');
@@ -52,7 +52,7 @@ test('autocomplete select', async ({ page }) => {
 test.describe('autocomplete excluding', () => {
 	test('pick an item', async ({ page }) => {
 		await page.goto(
-			'iframe.html?id=autocomplete-excluding--basic&viewMode=story/',
+			'iframe.html?id=autocomplete-excluding--playground&viewMode=story/',
 		);
 		await expect(page).toHaveScreenshot();
 
@@ -65,13 +65,13 @@ test.describe('autocomplete excluding', () => {
 		await page.getByRole('option', { name: 'Blue' }).click();
 		await expect(page).toHaveScreenshot();
 
-		await page.getByTitle('Red').locator('span').click();
+		await page.getByRole('option', { name: 'Red' }).click();
 		await expect(page).toHaveScreenshot();
 	});
 
 	test('no result custom message', async ({ page }) => {
 		await page.goto(
-			'iframe.html?id=autocomplete-excluding--basic&viewMode=story/',
+			'iframe.html?id=autocomplete-excluding--playground&viewMode=story/',
 		);
 		await expect(page).toHaveScreenshot();
 

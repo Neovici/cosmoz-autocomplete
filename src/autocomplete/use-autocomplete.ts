@@ -61,6 +61,7 @@ export interface Props<I> extends Base<I> {
 	textProperty?: string;
 	textual?: (prop?: string) => (i: I) => string;
 	valueProperty?: string;
+	mode?: 'select';
 	disabled?: boolean;
 	preserveOrder?: boolean;
 	defaultIndex?: number;
@@ -71,6 +72,7 @@ export interface Props<I> extends Base<I> {
 export const useAutocomplete = <I>({
 	value: _value,
 	text,
+	mode,
 	onChange: _onChange,
 	onText: _onText,
 	onSelect,
@@ -90,6 +92,7 @@ export const useAutocomplete = <I>({
 }: Props<I>) => {
 	const limit = _limit != null ? Number(_limit) : undefined,
 		min = _min != null ? Number(_min) : undefined,
+		isSelect = mode === 'select',
 		textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
@@ -102,7 +105,9 @@ export const useAutocomplete = <I>({
 		onChange = useCallback(
 			(val: I[]) => {
 				_onChange?.(val, () => setOpened(false));
-				notify(host, 'value', val);
+				const detail = isSelect ? val[0] : val;
+
+				notify(host, 'value', detail);
 			},
 			[_onChange],
 		),

@@ -1,3 +1,4 @@
+import '@neovici/cosmoz-tag';
 import {
 	component,
 	html,
@@ -5,7 +6,6 @@ import {
 	useMemo,
 	useProperty,
 } from '@pionjs/pion';
-import { nothing } from 'lit-html';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
 import '../autocomplete';
 import {
@@ -20,14 +20,13 @@ import excludingStyle from './style.css';
 import { WrappedItem } from './types';
 import { useExcludingSelection } from './use-excluding-selection';
 import { unwrap } from './utils';
-
 const isItemExcluded = <I>(value: WrappedItem<I>[] | undefined, item: I) =>
 	value?.some((v) => v.item === item && v.excluded);
 
 const excludedState = <I>(
 	value: WrappedItem<I>[] | undefined,
 	item: I | null,
-) => (item && isItemExcluded(value, item) ? 'excluded' : nothing);
+) => (item && isItemExcluded(value, item) ? 'error' : 'gray');
 
 const mkItemRenderer =
 	<I>(value?: WrappedItem<I>[]) =>
@@ -63,19 +62,19 @@ const mkChipRenderer =
 		className = 'chip',
 		slot,
 	}: ChipProps<I>) =>
-		html`<cosmoz-autocomplete-chip
+		html`<cosmoz-tag
 			class=${ifDefined(className)}
 			slot=${ifDefined(slot)}
-			part="chip"
 			exportparts="chip-text, chip-clear"
-			data-state=${excludedState(value, item)}
+			color=${excludedState(value, item)}
 			?disabled=${disabled}
 			?hidden=${hidden}
-			.onClear=${() => onClear(item)}
+			?removable=${!!item}
+			@remove=${() => onClear(item)}
 			title=${ifDefined(typeof content === 'string' ? content : undefined)}
 		>
 			${content}
-		</cosmoz-autocomplete-chip>`;
+		</cosmoz-tag>`;
 
 const AutocompleteExcluding = <I>(props: Props<I>) => {
 	const { value, setValue, setExcludingValue } =

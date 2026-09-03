@@ -24,6 +24,8 @@ interface AutocompleteArgs {
 	externalSearch?: boolean;
 	lazyOpen?: boolean;
 	preserveOrder?: boolean;
+	required?: boolean;
+	mode?: 'select';
 }
 
 const AutocompleteTest = ({
@@ -42,6 +44,8 @@ const AutocompleteTest = ({
 	externalSearch,
 	lazyOpen,
 	preserveOrder,
+	required,
+	mode,
 }: AutocompleteArgs): TemplateResult => html`
 	<cosmoz-autocomplete
 		.source=${source}
@@ -56,9 +60,11 @@ const AutocompleteTest = ({
 		.text=${text}
 		?lazy-open=${lazyOpen}
 		?disabled=${disabled}
+		?required=${required}
 		?keep-opened=${keepOpened}
 		?external-search=${externalSearch}
 		?preserve-order=${preserveOrder}
+		.mode=${mode}
 	></cosmoz-autocomplete>
 `;
 
@@ -66,6 +72,9 @@ const meta: Meta<AutocompleteArgs> = {
 	title: 'Tests/Autocomplete',
 	render: AutocompleteTest,
 	tags: ['!autodocs'],
+	parameters: {
+		layout: 'fullscreen',
+	},
 };
 
 export default meta;
@@ -131,10 +140,9 @@ export const DeselectChip: Story = {
 		await canvas.findByShadowText(/Red/u);
 
 		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chip = autocomplete.shadowRoot?.querySelector(
-			'cosmoz-autocomplete-chip',
-		);
-		const clearButton = chip?.shadowRoot?.querySelector('.clear');
+		const chip = autocomplete.shadowRoot?.querySelector('cosmoz-tag');
+		const clearButton =
+			chip?.shadowRoot?.querySelector<HTMLElement>('button.close');
 		expect(clearButton).toBeTruthy();
 
 		await userEvent.click(clearButton!);
@@ -291,13 +299,12 @@ export const DisabledNoChipClear: Story = {
 		await canvas.findByShadowText(/Red/u);
 
 		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chip = autocomplete.shadowRoot?.querySelector(
-			'cosmoz-autocomplete-chip',
-		);
+		const chip = autocomplete.shadowRoot?.querySelector('cosmoz-tag');
 		expect(chip).toBeTruthy();
 
 		// Clear button should NOT be present when disabled
-		const clearButton = chip?.shadowRoot?.querySelector('.clear');
+		const clearButton =
+			chip?.shadowRoot?.querySelector<HTMLElement>('button.close');
 		expect(clearButton).toBeFalsy();
 
 		// onChange should NOT have been called
@@ -665,5 +672,79 @@ export const DeselectWithValuePropertyWithoutPreserveOrder: Story = {
 		await waitFor(() => {
 			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
 		});
+	},
+};
+
+export const Required: Story = {
+	args: {
+		source: colors,
+		required: true,
+	},
+	play: async ({ canvas }) => {
+		const autocomplete = document.querySelector<HTMLElement>(
+			'cosmoz-autocomplete',
+		);
+		expect(autocomplete?.hasAttribute('required')).toBe(true);
+
+		const input = await canvas.findByShadowRole('textbox');
+		expect(input.hasAttribute('required')).toBe(true);
+	},
+};
+
+export const SelectModeValueIsSingleItem: Story = {
+	args: {
+		source: colors,
+		mode: 'select',
+		onChange: fn(),
+	},
+	play: async ({ canvas, canvasElement, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		const option = await canvas.findByShadowRole('option', { name: /Red/u });
+		await userEvent.click(option);
+
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith(
+				[colors[0]],
+				expect.any(Function),
+			);
+		});
+
+		const autocomplete = canvasElement.querySelector<
+			HTMLElement & { value: unknown }
+		>('cosmoz-autocomplete')!;
+		const { value } = autocomplete;
+		expect(Array.isArray(value)).toBe(false);
+		expect(value).toEqual(colors[0]);
+	},
+};
+
+export const MultiModeValueIsArray: Story = {
+	args: {
+		source: colors,
+		limit: 1,
+		onChange: fn(),
+	},
+	play: async ({ canvas, canvasElement, args }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+
+		const option = await canvas.findByShadowRole('option', { name: /Red/u });
+		await userEvent.click(option);
+
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith(
+				[colors[0]],
+				expect.any(Function),
+			);
+		});
+
+		const autocomplete = canvasElement.querySelector<
+			HTMLElement & { value: unknown }
+		>('cosmoz-autocomplete')!;
+		const { value } = autocomplete;
+		expect(Array.isArray(value)).toBe(true);
+		expect(value).toEqual([colors[0]]);
 	},
 };

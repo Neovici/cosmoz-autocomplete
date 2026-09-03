@@ -1,8 +1,10 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
+import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
 import { guard } from 'lit-html/directives/guard.js';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
@@ -10,17 +12,19 @@ import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
 import { ChipRenderer, selection } from './selection';
 import './skeleton-span';
-import style from './styles.css';
+import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
+	mode?: 'select';
+	variant?: 'default' | 'cell' | 'inline';
 	invalid?: boolean;
 	errorMessage?: string;
+	hint?: string;
 	label?: string;
 	placeholder?: string;
-	noLabelFloat?: boolean;
-	alwaysFloatLabel?: boolean;
+	required?: boolean;
 	showSingle?: boolean;
 	itemHeight?: number | 'auto';
 	itemLimit?: number;
@@ -56,14 +60,15 @@ const shouldShowDropdown = <I>({
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
+				variant,
 				opened,
 				invalid,
 				errorMessage,
+				hint,
 				label,
 				placeholder,
+				required,
 				disabled,
-				noLabelFloat,
-				alwaysFloatLabel,
 				textual,
 				text,
 				onText,
@@ -77,6 +82,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				source$,
 				loading,
 				chipRenderer,
+				mode,
 			} = props,
 			isOne = limit === 1,
 			isSingle = isOne && value?.[0] != null;
@@ -97,10 +103,11 @@ const autocomplete = <I>(props: AProps<I>) => {
 				part="input"
 				.label=${label}
 				.placeholder=${isSingle ? undefined : placeholder}
-				?no-label-float=${noLabelFloat}
-				?always-float-label=${value?.length > 0 || alwaysFloatLabel}
+				hint=${ifDefined(hint)}
+				variant=${ifDefined(variant)}
 				?readonly=${isSingle}
 				?disabled=${disabled}
+				?required=${required}
 				?invalid=${guard([source$, invalid], () =>
 					until(
 						source$.then(
@@ -127,7 +134,16 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?data-single=${isSingle}
 			>
 				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix"></slot>
+				<slot name="suffix" slot="suffix">
+					${when(mode === 'select', () =>
+						chevronDownIcon({
+							styles:
+								'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
+							width: '16',
+							height: '16',
+						}),
+					)}
+				</slot>
 				${selection({
 					value,
 					min,
@@ -162,7 +178,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 									text != null && text.length > 0 && items.length === 0,
 									() =>
 										html`<slot name="no-result">
-											<p class="no-result">${t('No results found')}</p>
+											<span class="no-result">${t('No results found')}</span>
 										</slot>`,
 								),
 						),
@@ -179,10 +195,11 @@ const autocomplete = <I>(props: AProps<I>) => {
 		return autocomplete(thru);
 	},
 	observedAttributes = [
+		'variant',
 		'disabled',
 		'invalid',
-		'no-label-float',
-		'always-float-label',
+		'required',
+		'hint',
 		'text-property',
 		'value-property',
 		'limit',
@@ -197,6 +214,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'item-limit',
 		'wrap',
 		'lazy-open',
+		'mode',
 	] as const;
 
 export { Autocomplete, autocomplete, observedAttributes, style };
