@@ -1,4 +1,4 @@
-import{A as W,s as J,c as L,d as S,b as h,w as le,f as $,u as de,a as w,r as Je,E as N,p as et,D as tt,g as pe,e as _,h as ot,H as nt,n as rt,j as st,k as it,l as at,m as ct,o as me,t as lt}from"./iframe-CJp0n4Qw.js";import{n as x,u as B,a as U,e as ue,i as Ae,t as H,f as dt,s as pt,b as Se,c as Q,d as ve,w as ie,p as ae,l as ut,g as ht}from"./index-C8jS_333.js";const b=e=>e??W,ee=J(L`
+import{A as W,s as J,c as L,d as S,b as h,w as le,f as $,u as de,a as w,r as Je,E as N,p as et,D as tt,g as pe,e as _,h as ot,H as nt,n as rt,j as st,k as it,l as at,m as ct,o as me,t as lt}from"./iframe-Y31WyeZD.js";import{n as x,u as B,a as U,e as ue,i as Ae,t as H,f as dt,s as pt,b as Se,c as Q,d as ve,w as ie,p as ae,l as ut,g as ht}from"./index-BVYaekC2.js";const b=e=>e??W,ee=J(L`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1285,7 +1285,9 @@ import{A as W,s as J,c as L,d as S,b as h,w as le,f as $,u as de,a as w,r as Je,
 	}
 
 	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
-	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag)::part(label) {
+	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag:not([hidden]))::part(
+			label
+		) {
 		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
 

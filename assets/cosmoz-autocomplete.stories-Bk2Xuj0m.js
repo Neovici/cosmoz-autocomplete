@@ -1,4 +1,4 @@
-import{b as s,w as G}from"./iframe-CJp0n4Qw.js";import{o as l,c as B}from"./index-Dz9j4huA.js";import{n as T}from"./index-C8jS_333.js";import{c as e,o as J}from"./data-DhpX43LO.js";import"./preload-helper-PPVm8Dsz.js";const P=({slot:o,title:t,className:a,width:r="24",height:k="24",styles:I}={})=>s`
+import{b as s,w as G}from"./iframe-Y31WyeZD.js";import{o as l,c as B}from"./index-CVt3PN94.js";import{n as T}from"./index-BVYaekC2.js";import{c as e,o as J}from"./data-BOE7tk7g.js";import"./preload-helper-PPVm8Dsz.js";const P=({slot:o,title:t,className:a,width:r="24",height:k="24",styles:I}={})=>s`
   <svg
     slot=${l(o)}
     class=${`search-md-icon ${a??""}`}
@@ -142,6 +142,17 @@ import{b as s,w as G}from"./iframe-CJp0n4Qw.js";import{o as l,c as B}from"./inde
                         text-property="text"
                         variant="inline"
                         .value=${[e[0],e[3]]}
+                        disabled
+                    ></cosmoz-autocomplete>
+                </div>
+                <div>
+                    <div class="story-label">Disabled</div>
+                    <cosmoz-autocomplete
+                        .label=${"Choose color"}
+                        .source=${e}
+                        text-property="text"
+                        variant="inline"
+                        .value=${[]}
                         disabled
                     ></cosmoz-autocomplete>
                 </div>
@@ -401,6 +412,17 @@ import{b as s,w as G}from"./iframe-CJp0n4Qw.js";import{o as l,c as B}from"./inde
                         text-property="text"
                         variant="inline"
                         .value=\${[colors[0], colors[3]]}
+                        disabled
+                    ></cosmoz-autocomplete>
+                </div>
+                <div>
+                    <div class="story-label">Disabled</div>
+                    <cosmoz-autocomplete
+                        .label=\${'Choose color'}
+                        .source=\${colors}
+                        text-property="text"
+                        variant="inline"
+                        .value=\${[]}
                         disabled
                     ></cosmoz-autocomplete>
                 </div>
