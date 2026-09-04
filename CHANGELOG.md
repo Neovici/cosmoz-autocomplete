@@ -1,3 +1,9 @@
+## 14.0.1
+
+### Patch Changes
+
+- b9532c9: Fix the float label issue for variant inline when there is no items
+
 ## 14.0.0
 
 ### Major Changes
