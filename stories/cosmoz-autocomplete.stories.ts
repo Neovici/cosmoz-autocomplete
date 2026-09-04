@@ -322,6 +322,17 @@ export const Inline: Story = {
 						disabled
 					></cosmoz-autocomplete>
 				</div>
+				<div>
+					<div class="story-label">Disabled</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="inline"
+						.value=${[]}
+						disabled
+					></cosmoz-autocomplete>
+				</div>
 			</div>
 		</div>
 	`,

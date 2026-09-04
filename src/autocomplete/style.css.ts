@@ -40,7 +40,9 @@ export default css`
 	}
 
 	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
-	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag)::part(label) {
+	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag:not([hidden]))::part(
+			label
+		) {
 		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
 
