@@ -1,3 +1,9 @@
+## 14.0.2
+
+### Patch Changes
+
+- c1296df: Set max-width to data-one prop to prevent overflow
+
 ## 14.0.1
 
 ### Patch Changes
