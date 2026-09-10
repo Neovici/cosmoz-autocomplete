@@ -1,4 +1,4 @@
-import{b as s,w as G}from"./iframe-Y31WyeZD.js";import{o as l,c as B}from"./index-CVt3PN94.js";import{n as T}from"./index-BVYaekC2.js";import{c as e,o as J}from"./data-BOE7tk7g.js";import"./preload-helper-PPVm8Dsz.js";const P=({slot:o,title:t,className:a,width:r="24",height:k="24",styles:I}={})=>s`
+import{b as s,w as G}from"./iframe-B88VgoNI.js";import{o as l,c as B}from"./index-C7089jMS.js";import{n as T}from"./index-CWKkv1bj.js";import{c as e,o as J}from"./data-CUN6e7-g.js";import"./preload-helper-PPVm8Dsz.js";const P=({slot:o,title:t,className:a,width:r="24",height:k="24",styles:I}={})=>s`
   <svg
     slot=${l(o)}
     class=${`search-md-icon ${a??""}`}

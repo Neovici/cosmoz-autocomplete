@@ -1,4 +1,4 @@
-import{A as W,s as J,c as L,d as S,b as h,w as le,f as $,u as de,a as w,r as Je,E as N,p as et,D as tt,g as pe,e as _,h as ot,H as nt,n as rt,j as st,k as it,l as at,m as ct,o as me,t as lt}from"./iframe-Y31WyeZD.js";import{n as x,u as B,a as U,e as ue,i as Ae,t as H,f as dt,s as pt,b as Se,c as Q,d as ve,w as ie,p as ae,l as ut,g as ht}from"./index-BVYaekC2.js";const b=e=>e??W,ee=J(L`
+import{A as W,s as J,c as L,d as S,b as h,w as le,f as $,u as de,a as w,r as Je,E as N,p as et,D as tt,g as pe,e as _,h as ot,H as nt,n as rt,j as st,k as it,l as at,m as ct,o as me,t as lt}from"./iframe-B88VgoNI.js";import{n as x,u as B,a as U,e as ue,i as Ae,t as H,f as dt,s as pt,b as Se,c as Q,d as ve,w as ie,p as ae,l as ut,g as ht}from"./index-CWKkv1bj.js";const b=e=>e??W,ee=J(L`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1294,6 +1294,10 @@ import{A as W,s as J,c as L,d as S,b as h,w as le,f as $,u as de,a as w,r as Je,
 	cosmoz-input::part(input) {
 		flex: 1 calc(var(--cz-spacing) * 6);
 		min-width: 0;
+	}
+
+	cosmoz-input[data-one] cosmoz-tag {
+		max-width: calc(100% - 16px);
 	}
 
 	cosmoz-input:not([data-one])::part(input):focus {
