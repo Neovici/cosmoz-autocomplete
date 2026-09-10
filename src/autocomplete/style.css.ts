@@ -51,6 +51,10 @@ export default css`
 		min-width: 0;
 	}
 
+	cosmoz-input[data-one] cosmoz-tag {
+		max-width: calc(100% - 16px);
+	}
+
 	cosmoz-input:not([data-one])::part(input):focus {
 		flex: 4 0.00001 calc(var(--cz-spacing) * 12.5);
 		min-width: calc(var(--cz-spacing) * 5);
