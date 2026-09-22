@@ -1,3 +1,9 @@
+## 14.1.0
+
+### Minor Changes
+
+- 6d059df: Forward the compact prop to the internal cosmoz-input in autocomplete components.
+
 ## 14.0.2
 
 ### Patch Changes
