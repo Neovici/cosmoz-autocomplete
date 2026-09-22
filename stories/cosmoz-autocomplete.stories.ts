@@ -21,6 +21,7 @@ interface AutocompleteArgs {
 	hint?: string;
 	value?: { text: string }[] | { text: string };
 	disabled?: boolean;
+	compact?: boolean;
 	placeholder?: string;
 	defaultIndex?: number;
 	showSingle?: boolean;
@@ -59,6 +60,7 @@ const Autocomplete = ({
 	hint,
 	value = [],
 	disabled = false,
+	compact = false,
 	placeholder = '',
 	defaultIndex = 0,
 	showSingle = false,
@@ -95,6 +97,7 @@ const Autocomplete = ({
 			.opened=${opened}
 			?lazy-open=${lazyOpen}
 			?disabled=${disabled}
+			?compact=${compact}
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
@@ -121,6 +124,7 @@ const meta: Meta<AutocompleteArgs> = {
 		limit: { control: 'number' },
 		defaultIndex: { control: 'number', description: 'Default index of source' },
 		disabled: { control: 'boolean', description: 'Disabled state' },
+		compact: { control: 'boolean', description: 'Compact input density' },
 		placeholder: { control: 'text' },
 		showSingle: { control: 'boolean' },
 		keepOpened: { control: 'boolean' },

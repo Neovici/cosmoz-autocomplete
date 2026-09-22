@@ -24,6 +24,7 @@ export interface Props<I> extends Base<I> {
 	hint?: string;
 	label?: string;
 	placeholder?: string;
+	compact?: boolean;
 	required?: boolean;
 	showSingle?: boolean;
 	itemHeight?: number | 'auto';
@@ -67,6 +68,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				hint,
 				label,
 				placeholder,
+				compact,
 				required,
 				disabled,
 				textual,
@@ -105,6 +107,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				.placeholder=${isSingle ? undefined : placeholder}
 				hint=${ifDefined(hint)}
 				variant=${ifDefined(variant)}
+				?compact=${compact}
 				?readonly=${isSingle}
 				?disabled=${disabled}
 				?required=${required}
@@ -199,6 +202,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'disabled',
 		'invalid',
 		'required',
+		'compact',
 		'hint',
 		'text-property',
 		'value-property',

@@ -18,6 +18,7 @@ interface AutocompleteArgs {
 	onText?: (t: string) => void;
 	onSelect?: (v: unknown, meta: unknown) => void;
 	disabled?: boolean;
+	compact?: boolean;
 	defaultIndex?: number;
 	text?: string;
 	keepOpened?: boolean;
@@ -38,6 +39,7 @@ const AutocompleteTest = ({
 	onText,
 	onSelect,
 	disabled,
+	compact,
 	defaultIndex,
 	text,
 	keepOpened,
@@ -60,6 +62,7 @@ const AutocompleteTest = ({
 		.text=${text}
 		?lazy-open=${lazyOpen}
 		?disabled=${disabled}
+		?compact=${compact}
 		?required=${required}
 		?keep-opened=${keepOpened}
 		?external-search=${externalSearch}
@@ -285,6 +288,19 @@ export const DisabledState: Story = {
 
 		// onChange should NOT have been called
 		expect(args.onChange).not.toHaveBeenCalled();
+	},
+};
+
+export const CompactState: Story = {
+	args: {
+		source: colors,
+		compact: true,
+	},
+	play: async ({ canvasElement }) => {
+		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
+
+		expect(input?.hasAttribute('compact')).toBe(true);
 	},
 };
 
