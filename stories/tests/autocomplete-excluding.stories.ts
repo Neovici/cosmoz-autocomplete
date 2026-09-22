@@ -7,6 +7,7 @@ interface ExcludingArgs {
 	source: { text: string }[];
 	textProperty: string;
 	value?: { item: { text: string }; excluded: boolean }[];
+	compact?: boolean;
 	keepOpened?: boolean;
 }
 
@@ -21,12 +22,14 @@ const ExcludingTest = ({
 	source,
 	textProperty = 'text',
 	value = [],
+	compact,
 	keepOpened,
 }: ExcludingArgs): TemplateResult => html`
 	<cosmoz-autocomplete-excluding
 		.source=${source}
 		.textProperty=${textProperty}
 		.value=${value}
+		?compact=${compact}
 		?keep-opened=${keepOpened}
 	></cosmoz-autocomplete-excluding>
 `;
@@ -86,5 +89,21 @@ export const OpenedChangedEvent: Story = {
 		await waitFor(() => {
 			expect(events).toContain(true);
 		});
+	},
+};
+
+export const CompactState: Story = {
+	args: {
+		source: colors,
+		textProperty: 'text',
+		compact: true,
+	},
+	play: async () => {
+		const autocomplete = document.querySelector(
+			'cosmoz-autocomplete-excluding',
+		)!;
+		const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
+
+		expect(input?.hasAttribute('compact')).toBe(true);
 	},
 };
