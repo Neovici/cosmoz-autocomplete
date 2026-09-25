@@ -8,12 +8,13 @@ import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
-import { listbox } from '../listbox';
+import { useListboxView } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
 import { ChipRenderer, selection } from './selection';
 import './skeleton-span';
 import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
+import { useCombobox } from './use-combobox';
 import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
@@ -38,7 +39,9 @@ export interface Props<I> extends Base<I> {
 
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 	RProps<I> & {
-		onInputRef?: (el?: Element) => void;
+		expanded: boolean;
+		renderListbox: (content: unknown) => unknown;
+		onKeyDown: (e: KeyboardEvent) => void;
 	};
 
 const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
@@ -79,18 +82,17 @@ const autocomplete = <I>(props: AProps<I>) => {
 				value,
 				limit,
 				min,
-				showSingle,
 				items,
 				source$,
 				loading,
 				chipRenderer,
 				mode,
+				expanded,
+				renderListbox,
+				onKeyDown,
 			} = props,
 			isOne = limit === 1,
 			isSingle = isOne && value?.[0] != null;
-
-		const hasResultsOrQuery =
-			loading || items.length > 0 || (text != null && text.length > 0);
 
 		return html`<cosmoz-dropdown-next
 			open-on-focus
@@ -130,6 +132,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				)}
 				.value=${live(text)}
 				@value-changed=${onText}
+				@keydown=${onKeyDown}
 				autocomplete="off"
 				exportparts=${inputParts}
 				?data-one=${isOne}
@@ -157,44 +160,73 @@ const autocomplete = <I>(props: AProps<I>) => {
 				})}
 			</cosmoz-input>
 
-			${when(
-				shouldShowDropdown({
-					opened,
-					isSingle,
-					showSingle,
-					hasResultsOrQuery,
-				}),
-				() =>
-					listbox<I>(
-						{
-							...props,
-							items,
-							multi: !isOne,
-						},
-						when(
-							loading,
-							() =>
-								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
-							() =>
-								when(
-									text != null && text.length > 0 && items.length === 0,
-									() =>
-										html`<slot name="no-result">
-											<span class="no-result">${t('No results found')}</span>
-										</slot>`,
-								),
-						),
+			${when(expanded, () =>
+				renderListbox(
+					when(
+						loading,
+						() =>
+							html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+						() =>
+							when(
+								text != null && text.length > 0 && items.length === 0,
+								() =>
+									html`<slot name="no-result">
+										<span class="no-result">${t('No results found')}</span>
+									</slot>`,
+							),
 					),
+				),
 			)}
 		</cosmoz-dropdown-next>`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {
-			...props,
-			...useAutocomplete(props),
-		};
+				...props,
+				...useAutocomplete(props),
+			},
+			{ opened, limit, value, showSingle, loading, items, text, label } = thru,
+			isOne = limit === 1,
+			isSingle = isOne && value?.[0] != null,
+			expanded = shouldShowDropdown({
+				opened,
+				isSingle,
+				showSingle,
+				hasResultsOrQuery:
+					loading || items.length > 0 || (text != null && text.length > 0),
+			}),
+			combobox = useCombobox({
+				items,
+				expanded,
+				setOpened: thru.setOpened,
+				onSelect: thru.onSelect,
+				onChipKeys: thru.onChipKeys,
+				defaultIndex: thru.defaultIndex,
+				itemLimit: thru.itemLimit,
+				readonly: isSingle,
+			}),
+			renderListbox = useListboxView({
+				value,
+				valueProperty: thru.valueProperty,
+				items,
+				onSelect: thru.onSelect,
+				activeIndex: combobox.activeIndex,
+				onHighlight: combobox.onHighlight,
+				onRangeChanged: combobox.onRangeChanged,
+				query: thru.query,
+				textual: thru.textual,
+				itemRenderer: thru.itemRenderer,
+				itemHeight: thru.itemHeight,
+				itemLimit: thru.itemLimit,
+				multi: !isOne,
+				label,
+			});
 		useOverflow(thru);
-		return autocomplete(thru);
+		return autocomplete({
+			...thru,
+			expanded,
+			renderListbox,
+			onKeyDown: combobox.onKeyDown,
+		});
 	},
 	observedAttributes = [
 		'variant',

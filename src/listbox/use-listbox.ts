@@ -1,6 +1,5 @@
 import { useMemo } from '@pionjs/pion';
 import { useItemHeight } from './use-item-height';
-import { useItems } from './use-items';
 import { ItemRenderer, useRenderItem } from './use-render-item';
 import { byValue } from './util';
 
@@ -23,8 +22,9 @@ export interface Props<I> {
 	value: I | I[];
 	valueProperty?: string;
 	items: I[];
-	onSelect: (i: I) => void;
-	defaultIndex?: number;
+	onSelect: (item: I, index?: number) => void;
+	activeIndex: number;
+	onHighlight: (index: number) => void;
 	query?: string;
 	textual: (i: I) => string;
 	itemRenderer?: ItemRenderer<I>;
@@ -37,7 +37,8 @@ export const useListbox = <I>({
 	valueProperty,
 	items: _items,
 	onSelect,
-	defaultIndex,
+	activeIndex,
+	onHighlight,
 	query,
 	textual,
 	itemRenderer,
@@ -50,29 +51,21 @@ export const useListbox = <I>({
 		),
 		// TODO: investigate if we can drop this
 		items = useMemo(() => _items.slice(), [_items, isSelected]),
-		{ position, highlight, select } = useItems({
-			items,
-			onSelect,
-			defaultIndex: isNaN(defaultIndex as number)
-				? undefined
-				: Number(defaultIndex),
-		}),
+		position = useMemo(() => ({ index: activeIndex }), [activeIndex]),
 		[itemHeight, setItemHeight] = useItemHeight(_itemHeight);
 
 	return {
 		position,
 		items,
 		height: Math.min(itemLimit, items.length) * itemHeight,
-		highlight,
-		select,
 		itemHeight,
 		setItemHeight,
 		renderItem: useRenderItem({
 			itemRenderer,
 			items,
 			position,
-			highlight,
-			select,
+			highlight: onHighlight,
+			select: onSelect,
 			textual,
 			query,
 			isSelected,
