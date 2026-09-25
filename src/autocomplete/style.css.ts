@@ -92,6 +92,15 @@ export default css`
 		display: contents !important;
 	}
 
+	.status {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
 	.no-result {
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);
