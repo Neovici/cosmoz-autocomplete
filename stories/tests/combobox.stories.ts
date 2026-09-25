@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, TemplateResult } from 'lit-html';
 import { expect, userEvent, waitFor } from 'storybook/test';
 import '../../src/autocomplete';
+import {
+	ItemRendererOpts,
+	optionAttributes,
+} from '../../src/listbox/item-renderer';
 
 // Combobox contract (WAI-ARIA combobox pattern, as implemented by Base UI's
 // Combobox): roles, reflected references and keyboard behaviour.
@@ -251,5 +255,45 @@ export const KeysGoToTheFocusedCombobox: Story = {
 			).toContain('Green'),
 		);
 		expect(first.host.shadowRoot!.querySelector('.chip')).toBeNull();
+	},
+};
+
+export const CustomRendererWithOptionAttributes: Story = {
+	render: (args) =>
+		html`<cosmoz-autocomplete
+			label="Color"
+			text-property="text"
+			.source=${colors}
+			.value=${args.value}
+			.itemRenderer=${(
+				item: { text: string },
+				i: number,
+				opts: ItemRendererOpts<{ text: string }>,
+			) =>
+				html`<div
+					class="item custom"
+					part="option"
+					${optionAttributes(item, i, opts)}
+					@mouseenter=${() => opts.highlight(i)}
+				>
+					<b>${item.text}</b>
+				</div>`}
+		></cosmoz-autocomplete>`,
+	args: { value: [colors[1]] },
+	play: async ({ canvasElement }) => {
+		const { input, option, highlighted } = await parts(canvasElement);
+		await open(input());
+		await waitFor(() =>
+			expect(input().ariaActiveDescendantElement).toBe(option(0)),
+		);
+		expect(option(0)!.classList.contains('custom')).toBe(true);
+		expect(option(0)!.getAttribute('aria-selected')).toBe('true');
+		expect(option(0)!.getAttribute('aria-posinset')).toBe('1');
+		expect(option(0)!.getAttribute('aria-setsize')).toBe('6');
+
+		await userEvent.keyboard('{ArrowDown}');
+		await waitFor(() => expect(highlighted()).toBe(option(1)));
+		expect(option(0)!.hasAttribute('data-highlighted')).toBe(false);
+		expect(input().ariaActiveDescendantElement).toBe(option(1));
 	},
 };

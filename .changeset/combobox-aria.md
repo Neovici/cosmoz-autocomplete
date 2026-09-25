@@ -14,4 +14,4 @@ Breaking changes:
 - `part="listbox"` is now a `div` in the autocomplete's shadow root; CSS targeting `cosmoz-listbox` inside the autocomplete no longer applies. Options are reachable as `::part(option)`.
 - The autocomplete no longer registers keybinding activities. `autocompleteKeybindings` is still exported for the standalone `cosmoz-listbox`, which keeps using them.
 - The `autocomplete()` template function takes new props (`expanded`, `renderListbox`, `onKeyDown`); use the `Autocomplete` component instead.
-- Custom item renderers should render options with the new `renderOption` export (from `@neovici/cosmoz-autocomplete/item-renderer`) so they carry the ARIA attributes. `Position` no longer has `scroll`.
+- Custom item renderers must mark their options up for the combobox, otherwise they lose the highlight (now styled by `data-highlighted`) and the ARIA attributes. Use `renderOption` for a standard option, or put `${optionAttributes(item, i, opts)}` on your own option element (both from `@neovici/cosmoz-autocomplete/item-renderer`). `Position` no longer has `scroll`.
