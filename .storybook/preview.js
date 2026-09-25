@@ -8,6 +8,8 @@ import './preview.css';
 // Initialize i18next for the autocomplete component
 i18next.init({
 	lng: 'en',
+	// Same as the cosmoz-frontend app (cz-start)
+	interpolation: { prefix: '{', suffix: '}' },
 	resources: {
 		en: {
 			translation: {
