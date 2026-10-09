@@ -68,9 +68,7 @@ const style = css`
 	}
 
 	:host(:not([multi])) .item[aria-selected] {
-		background: rgb(
-			from var(--cz-color-bg-brand-solid) r g b / calc(alpha * 0.25)
-		);
+		background: rgb(from var(--cz-color-alpha-black) r g b / 0.22);
 	}
 
 	:host([multi]) .item::before {
@@ -116,9 +114,7 @@ export const styles = ({
 		`,
 	)}
 	.item[data-index='${index || '0'}'] {
-		background: rgb(
-			from var(--cz-color-bg-brand-solid) r g b / calc(alpha * 0.15)
-		);
+		background: rgb(from var(--cz-color-alpha-black) r g b / 0.14);
 	}
 	.item[data-index='${index || '0'}'][part~='error'] {
 		background: var(--cz-color-bg-error);

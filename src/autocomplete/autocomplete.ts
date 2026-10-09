@@ -108,7 +108,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				hint=${ifDefined(hint)}
 				variant=${ifDefined(variant)}
 				?compact=${compact}
-				?readonly=${isSingle}
+				.readonly=${isSingle}
 				?disabled=${disabled}
 				?required=${required}
 				?invalid=${guard([source$, invalid], () =>
