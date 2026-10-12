@@ -1,3 +1,10 @@
+## 14.1.1
+
+### Patch Changes
+
+- 8ff51d7: Make the listbox highlight and selection visible in dark mode. A filled single-select no longer looks read-only, and typing over its selection keeps the first character
+- b338089: Cmd/Ctrl shortcuts no longer clear a single-select's selection. Text input (typing, paste, IME) replaces the selection instead of any keydown, and the catch-all `ANY_KEY` keybinding (`AUTOCOMPLETE_SEARCH_WHEN_SELECTED`) is removed
+
 ## 14.1.0
 
 ### Minor Changes
