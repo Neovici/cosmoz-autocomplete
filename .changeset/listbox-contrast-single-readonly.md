@@ -2,4 +2,4 @@
 '@neovici/cosmoz-autocomplete': patch
 ---
 
-Make the listbox highlight and selection visible in dark mode, and stop a filled single-select from looking read-only
+Make the listbox highlight and selection visible in dark mode. A filled single-select no longer looks read-only, and typing over its selection keeps the first character

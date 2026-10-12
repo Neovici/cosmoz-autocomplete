@@ -118,7 +118,7 @@ export const RenderLimit1: Story = {
 	},
 };
 
-export const SingleValueBlocksTypingWithoutReadonlyStyling: Story = {
+export const SingleValueIsNotReadonly: Story = {
 	args: {
 		source: colors,
 		value: [colors[1]],
@@ -131,7 +131,7 @@ export const SingleValueBlocksTypingWithoutReadonlyStyling: Story = {
 			.querySelector('cosmoz-autocomplete')
 			?.shadowRoot?.querySelector('cosmoz-input');
 		expect(input?.hasAttribute('readonly')).toBe(false);
-		expect(input?.shadowRoot?.querySelector('input')?.readOnly).toBe(true);
+		expect(input?.shadowRoot?.querySelector('input')?.readOnly).toBe(false);
 	},
 };
 
@@ -588,6 +588,7 @@ export const TypingClearsValueWhenSelected: Story = {
 			const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
 			expect(chipsAfter?.length).toBe(0);
 		});
+		expect((input as HTMLInputElement).value).toBe('G');
 	},
 };
 
