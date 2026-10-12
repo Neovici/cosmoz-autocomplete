@@ -592,6 +592,57 @@ export const TypingClearsValueWhenSelected: Story = {
 	},
 };
 
+export const ShortcutDoesNotClearValueWhenSelected: Story = {
+	args: {
+		source: colors,
+		value: [colors[0]],
+		limit: 1,
+	},
+	play: async ({ canvas, canvasElement }) => {
+		await canvas.findByShadowText(/Red/u);
+
+		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const input = await canvas.findByShadowRole('textbox');
+		await userEvent.click(input);
+		input.dispatchEvent(
+			new KeyboardEvent('keydown', {
+				key: 'c',
+				metaKey: true,
+				bubbles: true,
+				composed: true,
+			}),
+		);
+		await new Promise((resolve) => setTimeout(resolve, 100));
+
+		expect(autocomplete.shadowRoot?.querySelectorAll('.chip').length).toBe(1);
+	},
+};
+
+export const InputWithoutKeydownClearsValueWhenSelected: Story = {
+	args: {
+		source: colors,
+		value: [colors[0]],
+		limit: 1,
+	},
+	play: async ({ canvas, canvasElement }) => {
+		await canvas.findByShadowText(/Red/u);
+
+		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const input = (await canvas.findByShadowRole(
+			'textbox',
+		)) as HTMLInputElement;
+		await userEvent.click(input);
+		// paste, IME and Android keyboards change the text without a usable keydown
+		input.value = 'Bl';
+		input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+
+		await waitFor(() => {
+			expect(autocomplete.shadowRoot?.querySelectorAll('.chip').length).toBe(0);
+		});
+		expect(input.value).toBe('Bl');
+	},
+};
+
 export const TypingDoesNotClearValueWhenMultiSelect: Story = {
 	args: {
 		source: colors,
