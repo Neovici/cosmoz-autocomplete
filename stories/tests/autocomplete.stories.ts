@@ -833,3 +833,44 @@ export const MultiModeValueIsArray: Story = {
 		expect(value).toEqual([colors[0]]);
 	},
 };
+
+const cellError = (el: Element) =>
+	el
+		.shadowRoot!.querySelector('cosmoz-input')!
+		.shadowRoot!.querySelector<HTMLElement>('[part="error"]')!;
+
+export const CellErrorBehindValue: Story = {
+	render: ({ value }) => html`
+		<cosmoz-autocomplete
+			variant="cell"
+			invalid
+			.errorMessage=${'Invalid value'}
+			.source=${colors}
+			.textProperty=${'text'}
+			.limit=${1}
+			.value=${value}
+		></cosmoz-autocomplete>
+	`,
+	args: { value: [colors[0]] },
+	play: async () => {
+		const autocomplete = document.querySelector('cosmoz-autocomplete')!;
+		await waitFor(() =>
+			expect(getComputedStyle(cellError(autocomplete)).visibility).toBe(
+				'hidden',
+			),
+		);
+	},
+};
+
+export const CellErrorWithoutValue: Story = {
+	...CellErrorBehindValue,
+	args: { value: [] },
+	play: async () => {
+		const autocomplete = document.querySelector('cosmoz-autocomplete')!;
+		await waitFor(() =>
+			expect(getComputedStyle(cellError(autocomplete)).visibility).toBe(
+				'visible',
+			),
+		);
+	},
+};
