@@ -134,6 +134,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				exportparts=${inputParts}
 				?data-one=${isOne}
 				?data-single=${isSingle}
+				?data-has-value=${!!value?.length}
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix">
