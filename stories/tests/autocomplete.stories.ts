@@ -118,6 +118,23 @@ export const RenderLimit1: Story = {
 	},
 };
 
+export const SingleValueIsNotReadonly: Story = {
+	args: {
+		source: colors,
+		value: [colors[1]],
+		limit: 1,
+	},
+	play: async ({ canvas, canvasElement }) => {
+		await canvas.findByShadowText(/Green/u);
+
+		const input = canvasElement
+			.querySelector('cosmoz-autocomplete')
+			?.shadowRoot?.querySelector('cosmoz-input');
+		expect(input?.hasAttribute('readonly')).toBe(false);
+		expect(input?.shadowRoot?.querySelector('input')?.readOnly).toBe(false);
+	},
+};
+
 export const FocusOpensListbox: Story = {
 	args: {
 		source: colors,
@@ -571,6 +588,7 @@ export const TypingClearsValueWhenSelected: Story = {
 			const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
 			expect(chipsAfter?.length).toBe(0);
 		});
+		expect((input as HTMLInputElement).value).toBe('G');
 	},
 };
 
