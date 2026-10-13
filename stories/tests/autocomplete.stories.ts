@@ -833,3 +833,20 @@ export const MultiModeValueIsArray: Story = {
 		expect(value).toEqual([colors[0]]);
 	},
 };
+
+export const LabelAndPlaceholderAttributes: Story = {
+	render: () =>
+		html`<cosmoz-autocomplete
+			.source=${colors}
+			text-property="text"
+			label="Color"
+			placeholder="Pick a color"
+		></cosmoz-autocomplete>`,
+	play: async ({ canvas }) => {
+		const input = await canvas.findByShadowRole('textbox');
+		await waitFor(() => {
+			expect(input.getAttribute('placeholder')).toBe('Pick a color');
+		});
+		expect(await canvas.findByShadowLabelText('Color')).toBe(input);
+	},
+};
