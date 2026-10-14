@@ -7,13 +7,13 @@ const clearSVG =
 /* eslint-enable quotes */
 
 const excludingStyle = css`
-	cosmoz-listbox::part(error)::before {
+	.listbox[data-multi] .item[part~='error'][aria-selected]::before {
 		border-color: var(--cz-color-border-error);
 		/* prettier-ignore */
 		background: url("${clearSVG}") var(--cz-color-border-error) no-repeat 50%;
 	}
 
-	cosmoz-listbox::part(error):hover {
+	.listbox .item[part~='error']:hover {
 		background: var(--cz-color-bg-error);
 	}
 `;

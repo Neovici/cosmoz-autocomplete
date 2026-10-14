@@ -1,5 +1,6 @@
 import { sheet } from '@neovici/cosmoz-utils';
 import { component, useCallback, useEffect, useProperty } from '@pionjs/pion';
+import { style as listboxStyle } from '../listbox';
 import { Autocomplete, observedAttributes, Props, style } from './autocomplete';
 
 const Standalone = <I>(host: HTMLElement & Props<I>) => {
@@ -39,7 +40,7 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 	});
 };
 
-const styleSheets = [sheet(style)];
+const styleSheets = [sheet(style), sheet(listboxStyle)];
 const shadowRootInit = { mode: 'open' as const, delegatesFocus: true };
 
 customElements.define(

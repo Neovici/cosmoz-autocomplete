@@ -11,9 +11,10 @@ export const useRenderItem = <I>({
 	...meta
 }: ItemRendererOpts<I> & { itemRenderer?: ItemRenderer<I> }) => {
 	const info = useMeta<ItemRendererOpts<I>>(meta);
+	// A new callback per highlight makes the virtualizer re-render the options.
 	return useCallback(
 		(item: I, i: number) => itemRenderer(item, i, info),
-		[info, itemRenderer],
+		[info, itemRenderer, meta.position],
 	);
 };
 
