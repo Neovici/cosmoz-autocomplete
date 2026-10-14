@@ -11,6 +11,7 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { useListboxView } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
+import { CreateProps, useCreatable } from './create';
 import { ChipRenderer, selection } from './selection';
 import './skeleton-span';
 import style from './style.css';
@@ -18,7 +19,7 @@ import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
 import { useCombobox } from './use-combobox';
 import { useOverflow } from './use-overflow';
 
-export interface Props<I> extends Base<I> {
+export interface Props<I> extends Base<I>, CreateProps<I> {
 	mode?: 'select';
 	variant?: 'default' | 'cell' | 'inline';
 	invalid?: boolean;
@@ -214,11 +215,20 @@ const autocomplete = <I>(props: AProps<I>) => {
 				hasResultsOrQuery:
 					loading || items.length > 0 || (text != null && text.length > 0),
 			}),
-			combobox = useCombobox({
+			creatable = useCreatable({
 				items,
+				query: thru.query,
+				textual: thru.textual,
+				onSelect: thru.onSelect,
+				itemRenderer: thru.itemRenderer,
+				onCreate: thru.onCreate,
+				createLabel: thru.createLabel,
+			}),
+			combobox = useCombobox({
+				items: creatable.items,
 				expanded,
 				setOpened: thru.setOpened,
-				onSelect: thru.onSelect,
+				onSelect: creatable.onSelect,
 				onChipKeys: thru.onChipKeys,
 				defaultIndex: thru.defaultIndex,
 				itemLimit: thru.itemLimit,
@@ -230,14 +240,14 @@ const autocomplete = <I>(props: AProps<I>) => {
 			renderListbox = useListboxView({
 				value,
 				valueProperty: thru.valueProperty,
-				items,
-				onSelect: thru.onSelect,
+				items: creatable.items,
+				onSelect: creatable.onSelect,
 				activeIndex: combobox.activeIndex,
 				onHighlight: combobox.onHighlight,
 				onRangeChanged: combobox.onRangeChanged,
 				query: thru.query,
 				textual: thru.textual,
-				itemRenderer: thru.itemRenderer,
+				itemRenderer: creatable.itemRenderer,
 				itemHeight: thru.itemHeight,
 				itemLimit: thru.itemLimit,
 				multi: !isOne,
@@ -246,6 +256,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		useOverflow(thru);
 		return autocomplete({
 			...thru,
+			items: creatable.items,
 			expanded,
 			announcement,
 			renderListbox,
