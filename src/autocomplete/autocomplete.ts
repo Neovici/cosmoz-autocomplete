@@ -1,3 +1,4 @@
+import { useAnnouncer } from '@neovici/cosmoz-utils/hooks/use-announcer';
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
 import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
@@ -40,6 +41,7 @@ export interface Props<I> extends Base<I> {
 type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
 	RProps<I> & {
 		expanded: boolean;
+		announcement: string;
 		renderListbox: (content: unknown) => unknown;
 		onKeyDown: (e: KeyboardEvent) => void;
 	};
@@ -60,6 +62,22 @@ const shouldShowDropdown = <I>({
 	if (!opened) return false;
 	if (isSingle && !showSingle) return false;
 	return hasResultsOrQuery;
+};
+
+const statusMessage = ({
+	expanded,
+	loading,
+	count,
+	text,
+}: {
+	expanded: boolean;
+	loading: boolean;
+	count: number;
+	text?: string;
+}) => {
+	if (!expanded || loading) return '';
+	if (count === 0) return text ? t('No results found') : '';
+	return count === 1 ? t('1 result') : t('{0} results', { 0: count });
 };
 
 const autocomplete = <I>(props: AProps<I>) => {
@@ -88,6 +106,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				chipRenderer,
 				mode,
 				expanded,
+				announcement,
 				renderListbox,
 				onKeyDown,
 			} = props,
@@ -95,89 +114,90 @@ const autocomplete = <I>(props: AProps<I>) => {
 			isSingle = isOne && value?.[0] != null;
 
 		return html`<cosmoz-dropdown-next
-			open-on-focus
-			?disabled=${disabled}
-			.opened=${opened}
-			@dropdown-toggle=${onToggle}
-			part="dropdown"
-		>
-			<cosmoz-input
-				slot="button"
-				id="input"
-				part="input"
-				.label=${label}
-				.placeholder=${isSingle ? undefined : placeholder}
-				hint=${ifDefined(hint)}
-				variant=${ifDefined(variant)}
-				?compact=${compact}
+				open-on-focus
 				?disabled=${disabled}
-				?required=${required}
-				?invalid=${guard([source$, invalid], () =>
-					until(
-						source$.then(
-							() => invalid,
-							() => true,
-						),
-						invalid,
-					),
-				)}
-				.errorMessage=${guard([source$, errorMessage], () =>
-					until(
-						source$.then(
-							() => errorMessage,
-							(e: { message?: string }) => e.message,
-						),
-						errorMessage,
-					),
-				)}
-				.value=${live(text)}
-				@value-changed=${onText}
-				@keydown=${onKeyDown}
-				autocomplete="off"
-				exportparts=${inputParts}
-				?data-one=${isOne}
-				?data-single=${isSingle}
+				.opened=${opened}
+				@dropdown-toggle=${onToggle}
+				part="dropdown"
 			>
-				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix">
-					${when(mode === 'select', () =>
-						chevronDownIcon({
-							styles:
-								'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
-							width: '16',
-							height: '16',
-						}),
-					)}
-				</slot>
-				${selection({
-					value,
-					min,
-					isOne,
-					onDeselect,
-					textual,
-					disabled,
-					chipRenderer,
-				})}
-			</cosmoz-input>
-
-			${when(expanded, () =>
-				renderListbox(
-					when(
-						loading,
-						() =>
-							html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
-						() =>
-							when(
-								text != null && text.length > 0 && items.length === 0,
-								() =>
-									html`<slot name="no-result">
-										<span class="no-result">${t('No results found')}</span>
-									</slot>`,
+				<cosmoz-input
+					slot="button"
+					id="input"
+					part="input"
+					.label=${label}
+					.placeholder=${isSingle ? undefined : placeholder}
+					hint=${ifDefined(hint)}
+					variant=${ifDefined(variant)}
+					?compact=${compact}
+					?disabled=${disabled}
+					?required=${required}
+					?invalid=${guard([source$, invalid], () =>
+						until(
+							source$.then(
+								() => invalid,
+								() => true,
 							),
+							invalid,
+						),
+					)}
+					.errorMessage=${guard([source$, errorMessage], () =>
+						until(
+							source$.then(
+								() => errorMessage,
+								(e: { message?: string }) => e.message,
+							),
+							errorMessage,
+						),
+					)}
+					.value=${live(text)}
+					@value-changed=${onText}
+					@keydown=${onKeyDown}
+					autocomplete="off"
+					exportparts=${inputParts}
+					?data-one=${isOne}
+					?data-single=${isSingle}
+				>
+					<slot name="prefix" slot="prefix"></slot>
+					<slot name="suffix" slot="suffix">
+						${when(mode === 'select', () =>
+							chevronDownIcon({
+								styles:
+									'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
+								width: '16',
+								height: '16',
+							}),
+						)}
+					</slot>
+					${selection({
+						value,
+						min,
+						isOne,
+						onDeselect,
+						textual,
+						disabled,
+						chipRenderer,
+					})}
+				</cosmoz-input>
+
+				${when(expanded, () =>
+					renderListbox(
+						when(
+							loading,
+							() =>
+								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+							() =>
+								when(
+									text != null && text.length > 0 && items.length === 0,
+									() =>
+										html`<slot name="no-result">
+											<span class="no-result">${t('No results found')}</span>
+										</slot>`,
+								),
+						),
 					),
-				),
-			)}
-		</cosmoz-dropdown-next>`;
+				)}
+			</cosmoz-dropdown-next>
+			<span class="status" aria-live="polite">${announcement}</span>`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {
@@ -204,6 +224,9 @@ const autocomplete = <I>(props: AProps<I>) => {
 				itemLimit: thru.itemLimit,
 				readonly: isSingle,
 			}),
+			announcement = useAnnouncer(
+				statusMessage({ expanded, loading, count: items.length, text }),
+			),
 			renderListbox = useListboxView({
 				value,
 				valueProperty: thru.valueProperty,
@@ -224,6 +247,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		return autocomplete({
 			...thru,
 			expanded,
+			announcement,
 			renderListbox,
 			onKeyDown: combobox.onKeyDown,
 		});
@@ -250,6 +274,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'wrap',
 		'lazy-open',
 		'mode',
+		'debounce',
 	] as const;
 
 export { Autocomplete, autocomplete, observedAttributes, style };
