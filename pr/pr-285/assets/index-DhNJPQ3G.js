@@ -1,4 +1,4 @@
-import{A as Z,s as re,c as C,d as A,b as h,w as he,f as $,u as ne,a as x,r as ot,E as L,p as rt,D as nt,g as ue,e as Y,h as st,H as at,i as be,n as it,j as lt,k as ct,l as dt,m as pt,t as ze}from"./iframe-rjqpiyA_.js";import{n as E,u as D,a as V,e as se,i as Le,t as H,p as oe,f as Pe,s as K,b as ht,c as ut,d as ce,g as gt,w as de,l as vt}from"./index-BGRszXGh.js";const b=e=>e??Z,G=re(C`
+import{A as Z,s as re,c as C,d as A,b as h,w as he,f as $,u as ne,a as x,r as ot,E as L,p as rt,D as nt,g as ue,e as Y,h as st,H as at,i as be,n as it,j as lt,k as ct,l as dt,m as pt,t as ze}from"./iframe-CSKIzjBh.js";import{n as E,u as D,a as V,e as se,i as Le,t as H,p as oe,f as Pe,s as K,b as ht,c as ut,d as ce,g as gt,w as de,l as vt}from"./index-Qbhibi24.js";const b=e=>e??Z,G=re(C`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1372,7 +1372,7 @@ import{A as Z,s as re,c as C,d as A,b as h,w as he,f as $,u as ne,a as x,r as ot
 	slot[name='chips'] {
 		flex: 0 1 auto;
 		min-width: 0;
-		max-height: 27px; /* one chip row: the cosmoz-tag pill */
+		max-height: calc(1lh + var(--cz-spacing) * 4); /* one filled chip row */
 	}
 
 	/* wrap mode: chips wrap to real rows and the field grows */
@@ -1384,6 +1384,9 @@ import{A as Z,s as re,c as C,d as A,b as h,w as he,f as $,u as ne,a as x,r as ot
 	::slotted(cosmoz-tag) {
 		align-items: center;
 		flex: none;
+		min-height: calc(
+			1lh + var(--cz-spacing) * 4
+		); /* fill the row like the old input did */
 		max-width: calc(100% - calc(var(--cz-spacing) * 2));
 		margin-left: calc(var(--cz-spacing) * 2);
 	}
@@ -1405,10 +1408,6 @@ import{A as Z,s as re,c as C,d as A,b as h,w as he,f as $,u as ne,a as x,r as ot
 
 	::slotted([hidden]) {
 		display: none;
-	}
-
-	:host([data-wrap]) ::slotted(cosmoz-tag) {
-		padding-block: calc(var(--cz-spacing) * 1.5);
 	}
 `,io=e=>h`<slot
 			name="chips"
