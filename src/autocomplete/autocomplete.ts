@@ -104,7 +104,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 					),
 				)}
 				variant=${ifDefined(variant)}
-				placeholder=${ifDefined(placeholder)}
+				.placeholder=${placeholder}
 				?compact=${compact}
 				?disabled=${disabled}
 				?required=${required}
