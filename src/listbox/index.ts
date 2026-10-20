@@ -53,7 +53,8 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 		styles({ ...position, itemHeight, auto: host.itemHeight === 'auto' }),
 	);
 
-	return html`<div
+	return html`<slot name="search"></slot>
+		<div
 			class="items"
 			style="min-height: ${height}px"
 			${ref((el) => (listRef.current = el))}

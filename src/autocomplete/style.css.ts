@@ -16,16 +16,16 @@ export default css`
 		display: block;
 	}
 
-	:host(:not([variant='inline'])) cosmoz-listbox {
-		margin-top: var(--cz-spacing);
+	cosmoz-autocomplete-trigger {
+		display: block;
 	}
 
-	cosmoz-input[variant='inline'] cosmoz-tag {
+	cosmoz-autocomplete-trigger[variant='inline'] cosmoz-tag {
 		align-items: center;
 		margin-left: var(--cz-spacing);
 	}
 
-	cosmoz-input[variant='inline'] cosmoz-tag:first-of-type {
+	cosmoz-autocomplete-trigger[variant='inline'] cosmoz-tag:first-of-type {
 		margin-left: 0;
 	}
 
@@ -34,30 +34,17 @@ export default css`
 		margin-left: calc(var(--cz-spacing) * 2);
 	}
 
-	cosmoz-input::part(control) {
+	cosmoz-autocomplete-trigger::part(control) {
 		display: flex;
 		min-width: calc(var(--cz-spacing) * 9);
 	}
 
-	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
-	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag:not([hidden]))::part(
-			label
-		) {
-		transform: translate(var(--cz-spacing), -75%) scale(0.85);
+	cosmoz-listbox cosmoz-input {
+		margin: calc(var(--cz-spacing) * 1.5);
 	}
 
-	cosmoz-input::part(input) {
-		flex: 1 calc(var(--cz-spacing) * 6);
-		min-width: 0;
-	}
-
-	cosmoz-input[data-one] cosmoz-tag {
+	cosmoz-autocomplete-trigger[data-one] cosmoz-tag {
 		max-width: calc(100% - 16px);
-	}
-
-	cosmoz-input:not([data-one])::part(input):focus {
-		flex: 4 0.00001 calc(var(--cz-spacing) * 12.5);
-		min-width: calc(var(--cz-spacing) * 5);
 	}
 
 	.badge {
@@ -65,10 +52,6 @@ export default css`
 		flex: none;
 		text-align: center;
 		padding: 0 var(--cz-spacing);
-	}
-
-	[data-single]::part(input) {
-		flex: 0;
 	}
 
 	[data-one] .badge {
@@ -79,7 +62,7 @@ export default css`
 		display: none;
 	}
 
-	:host([wrap]) cosmoz-input::part(control) {
+	:host([wrap]) cosmoz-autocomplete-trigger::part(control) {
 		flex-wrap: wrap;
 		padding-right: calc(var(--cz-spacing) * 2);
 	}

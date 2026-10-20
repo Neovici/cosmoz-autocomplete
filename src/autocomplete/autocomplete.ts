@@ -1,4 +1,5 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
+import './trigger';
 import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
@@ -23,9 +24,11 @@ export interface Props<I> extends Base<I> {
 	errorMessage?: string;
 	hint?: string;
 	label?: string;
+	/** @deprecated search happens in the dropdown; kept for API compatibility */
 	placeholder?: string;
 	compact?: boolean;
 	required?: boolean;
+	/** @deprecated the dropdown opens regardless of a filled single-select */
 	showSingle?: boolean;
 	itemHeight?: number | 'auto';
 	itemLimit?: number;
@@ -36,28 +39,11 @@ export interface Props<I> extends Base<I> {
 	chipRenderer?: ChipRenderer<I>;
 }
 
-type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
-	RProps<I> & {
-		onInputRef?: (el?: Element) => void;
-	};
+type AProps<I> = Omit<Props<I>, keyof RProps<I>> & RProps<I>;
 
-const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
+const inputParts = ['control', 'label', 'hint', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
-
-const shouldShowDropdown = <I>({
-	opened,
-	isSingle,
-	showSingle,
-	hasResultsOrQuery,
-}: Pick<AProps<I>, 'opened' | 'showSingle'> & {
-	isSingle: boolean;
-	hasResultsOrQuery: boolean;
-}) => {
-	if (!opened) return false;
-	if (isSingle && !showSingle) return false;
-	return hasResultsOrQuery;
-};
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
@@ -79,18 +65,13 @@ const autocomplete = <I>(props: AProps<I>) => {
 				value,
 				limit,
 				min,
-				showSingle,
 				items,
 				source$,
 				loading,
 				chipRenderer,
 				mode,
 			} = props,
-			isOne = limit === 1,
-			isSingle = isOne && value?.[0] != null;
-
-		const hasResultsOrQuery =
-			loading || items.length > 0 || (text != null && text.length > 0);
+			isOne = limit === 1;
 
 		return html`<cosmoz-dropdown-next
 			open-on-focus
@@ -99,26 +80,11 @@ const autocomplete = <I>(props: AProps<I>) => {
 			@dropdown-toggle=${onToggle}
 			part="dropdown"
 		>
-			<cosmoz-input
+			<cosmoz-autocomplete-trigger
 				slot="button"
-				id="input"
 				part="input"
 				.label=${label}
-				.placeholder=${isSingle ? undefined : placeholder}
-				hint=${ifDefined(hint)}
-				variant=${ifDefined(variant)}
-				?compact=${compact}
-				?disabled=${disabled}
-				?required=${required}
-				?invalid=${guard([source$, invalid], () =>
-					until(
-						source$.then(
-							() => invalid,
-							() => true,
-						),
-						invalid,
-					),
-				)}
+				.hint=${hint}
 				.errorMessage=${guard([source$, errorMessage], () =>
 					until(
 						source$.then(
@@ -128,12 +94,28 @@ const autocomplete = <I>(props: AProps<I>) => {
 						errorMessage,
 					),
 				)}
-				.value=${live(text)}
-				@value-changed=${onText}
-				autocomplete="off"
+				?invalid=${guard([source$, invalid], () =>
+					until(
+						source$.then(
+							() => invalid,
+							() => true,
+						),
+						invalid,
+					),
+				)}
+				variant=${ifDefined(variant)}
+				placeholder=${ifDefined(placeholder)}
+				?compact=${compact}
+				?disabled=${disabled}
+				?required=${required}
+				?has-value=${value.length > 0}
 				exportparts=${inputParts}
+				role="button"
+				tabindex=${disabled ? -1 : 0}
+				aria-haspopup="listbox"
+				aria-expanded=${opened ? 'true' : 'false'}
 				?data-one=${isOne}
-				?data-single=${isSingle}
+				?data-single=${isOne && value[0] != null}
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix">
@@ -155,15 +137,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 					disabled,
 					chipRenderer,
 				})}
-			</cosmoz-input>
+			</cosmoz-autocomplete-trigger>
 
 			${when(
-				shouldShowDropdown({
-					opened,
-					isSingle,
-					showSingle,
-					hasResultsOrQuery,
-				}),
+				opened,
 				() =>
 					listbox<I>(
 						{
@@ -171,19 +148,30 @@ const autocomplete = <I>(props: AProps<I>) => {
 							items,
 							multi: !isOne,
 						},
-						when(
-							loading,
-							() =>
-								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
-							() =>
-								when(
-									text != null && text.length > 0 && items.length === 0,
-									() =>
-										html`<slot name="no-result">
-											<span class="no-result">${t('No results found')}</span>
-										</slot>`,
-								),
-						),
+						html`<cosmoz-input
+								slot="search"
+								id="search"
+								part="search-input"
+								placeholder=${t('Search')}
+								.value=${live(text)}
+								@value-changed=${onText}
+								@select=${(e: Event) => e.stopPropagation()}
+								autocomplete="off"
+							></cosmoz-input>
+							${when(
+								loading,
+								() =>
+									html`<cosmoz-autocomplete-skeleton-span
+								></cosmoz-autocomplete-skeleton-span>`,
+								() =>
+									when(
+										text != null && text.length > 0 && items.length === 0,
+										() =>
+											html`<slot name="no-result">
+												<span class="no-result">${t('No results found')}</span>
+											</slot>`,
+									),
+							)}`,
 					),
 			)}
 		</cosmoz-dropdown-next>`;

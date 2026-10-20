@@ -55,6 +55,17 @@ export const normalize = <I>(source: I[] | false | null | undefined) => {
 export const notify = <T>(host: EventTarget, name: string, detail: T) =>
 	host.dispatchEvent(new CustomEvent(name, { detail }));
 
+/**
+ * The focused element, traversing into open shadow roots.
+ */
+export const deepActiveElement = (
+	root: Document | ShadowRoot = document,
+): Element | null => {
+	const el = root.activeElement;
+	if (!el) return null;
+	return el.shadowRoot ? deepActiveElement(el.shadowRoot) : el;
+};
+
 export const EMPTY: never[] = [];
 
 type Arr = unknown[];

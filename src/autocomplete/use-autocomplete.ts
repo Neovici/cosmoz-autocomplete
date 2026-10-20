@@ -7,12 +7,13 @@ import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import {
 	useCallback,
 	useEffect,
+	useLayoutEffect,
 	useMemo,
 	useProperty,
 	useState,
 } from '@pionjs/pion';
 import { AUTOCOMPLETE_DESELECT_LAST } from './autocomplete-keybindings';
-import { EMPTY, normalize, notify, search } from './util';
+import { EMPTY, deepActiveElement, normalize, notify, search } from './util';
 
 const useNotify = <V>(
 	host: EventTarget,
@@ -150,6 +151,14 @@ export const useAutocomplete = <I>({
 	useEffect(() => {
 		host.toggleAttribute('opened', !!opened);
 	}, [opened]);
+
+	// Focus the search input when the popup opens so typing starts right away.
+	// Skipped when a chip's remove button was clicked - focus should stay there.
+	useLayoutEffect(() => {
+		if (!opened || disabled) return;
+		if (deepActiveElement()?.closest?.('cosmoz-tag')) return;
+		host.shadowRoot?.querySelector<HTMLElement>('#search')?.focus();
+	}, [opened, disabled]);
 
 	const meta = useMeta<Meta<I>>({
 		onText,

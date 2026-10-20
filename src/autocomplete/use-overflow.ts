@@ -11,15 +11,16 @@ const overflow = (host: HTMLElement) => {
 	for (const chip of chips) {
 		chip.hidden = false;
 	}
-	const input = host.shadowRoot!.querySelector('cosmoz-input')!;
-	const limit = input.shadowRoot
+	const trigger = host.shadowRoot!.querySelector('cosmoz-autocomplete-trigger')!;
+	const limit = trigger.shadowRoot
 		?.querySelector('.control')
 		?.getBoundingClientRect();
+	if (!limit) return;
 	let i;
 	for (i = 0; i < chips.length; i++) {
 		const chip = chips[i];
 		const bounds = chip.getBoundingClientRect();
-		const isIn = bounds.x + bounds.width <= limit!.x + limit!.width - 24;
+		const isIn = bounds.x + bounds.width <= limit.x + limit.width - 24;
 		if (!isIn) {
 			break;
 		}
@@ -36,7 +37,6 @@ const overflow = (host: HTMLElement) => {
 
 export const useOverflow = <I>({
 	value,
-	opened,
 	wrap,
 	limit,
 }: {
@@ -52,16 +52,18 @@ export const useOverflow = <I>({
 
 	useLayoutEffect(() => {
 		if (!enabled) return;
-		const input = host.shadowRoot!.querySelector('cosmoz-input')!;
+		const trigger = host.shadowRoot!.querySelector(
+			'cosmoz-autocomplete-trigger',
+		)!;
 		const observer = new ResizeObserver((e) => {
 			setWidth(e[0].contentRect.width);
 		});
-		observer.observe(input);
+		observer.observe(trigger);
 		return () => observer.disconnect();
 	}, [enabled]);
 
 	useLayoutEffect(
 		() => (enabled ? doRaf() : undefined),
-		[enabled, width, opened, value],
+		[enabled, width, value],
 	);
 };
