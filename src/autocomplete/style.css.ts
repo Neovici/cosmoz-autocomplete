@@ -25,6 +25,15 @@ export default css`
 		margin-left: 0;
 	}
 
+	cosmoz-autocomplete-trigger[variant='inline']:has(
+			cosmoz-tag[removable]
+		)::part(label),
+	cosmoz-autocomplete-trigger[variant='inline'][disabled]:has(
+			cosmoz-tag:not([hidden])
+		)::part(label) {
+		transform: translate(var(--cz-spacing), -75%) scale(0.85);
+	}
+
 	cosmoz-tag {
 		align-items: center;
 		margin-left: calc(var(--cz-spacing) * 2);
