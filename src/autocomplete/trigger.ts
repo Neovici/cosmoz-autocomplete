@@ -50,9 +50,14 @@ const fieldFocus = css`
 		background: var(--cz-color-bg-quaternary);
 	}
 
-	/* Size the field like #input: text line + padding-block * 2 */
+	/* Size the field like the input's text line; fall back to 1lh for
+	   consumers that haven't resolved tokens >= 3.5 yet */
 	.control {
-		min-height: calc(var(--cz-text-base-line-height) + var(--cz-spacing) * 4);
+		min-height: var(--cz-control-height-md, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([variant='cell']) .control {
+		min-height: var(--cz-control-height-sm, calc(1lh + var(--cz-spacing) * 4));
 	}
 
 	/* Variant: inline hides the placeholder, like #input::placeholder */
