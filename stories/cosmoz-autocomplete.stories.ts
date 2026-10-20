@@ -390,6 +390,19 @@ export const Cell: Story = {
 					></cosmoz-autocomplete>
 				</div>
 				<div>
+					<div class="story-label">Invalid with value</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						.limit=${1}
+						.value=${colors[2]}
+						invalid
+						.errorMessage=${'This field is required'}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
 					<div class="story-label">Disabled</div>
 					<cosmoz-autocomplete
 						.label=${'Choose color'}

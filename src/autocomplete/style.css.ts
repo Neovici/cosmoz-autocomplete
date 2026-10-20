@@ -34,11 +34,6 @@ export default css`
 		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
 
-	cosmoz-tag {
-		align-items: center;
-		margin-left: calc(var(--cz-spacing) * 2);
-	}
-
 	cosmoz-autocomplete-trigger::part(control) {
 		display: flex;
 		align-items: center;
@@ -49,32 +44,9 @@ export default css`
 		margin: calc(var(--cz-spacing) * 1.5);
 	}
 
-	cosmoz-autocomplete-trigger[data-one] cosmoz-tag {
-		max-width: calc(100% - 16px);
-	}
-
-	.badge {
-		min-width: initial;
-		flex: none;
-		text-align: center;
-		padding: 0 var(--cz-spacing);
-	}
-
-	[data-one] .badge {
-		display: none;
-	}
-
-	[hidden] {
-		display: none;
-	}
-
 	:host([wrap]) cosmoz-autocomplete-trigger::part(control) {
 		flex-wrap: wrap;
 		padding-right: calc(var(--cz-spacing) * 2);
-	}
-
-	:host([wrap]) cosmoz-tag {
-		padding-block: calc(var(--cz-spacing) * 1.5);
 	}
 
 	slot {

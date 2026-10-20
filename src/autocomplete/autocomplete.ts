@@ -11,11 +11,12 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
-import { ChipRenderer, selection } from './selection';
+import './selection';
+// eslint-disable-next-line no-duplicate-imports
+import type { ChipRenderer } from './selection';
 import './skeleton-span';
 import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
-import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
@@ -69,6 +70,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				source$,
 				loading,
 				chipRenderer,
+				wrap,
 				mode,
 			} = props,
 			isOne = limit === 1;
@@ -128,15 +130,18 @@ const autocomplete = <I>(props: AProps<I>) => {
 						}),
 					)}
 				</slot>
-				${selection({
-					value,
-					min,
-					isOne,
-					onDeselect,
-					textual,
-					disabled,
-					chipRenderer,
-				})}
+				<cosmoz-selection
+					slot="control"
+					.value=${value}
+					.limit=${limit}
+					.min=${min}
+					.variant=${variant}
+					.textual=${textual}
+					.onDeselect=${onDeselect}
+					.disabled=${disabled}
+					.chipRenderer=${chipRenderer}
+					.wrap=${wrap}
+				></cosmoz-selection>
 			</cosmoz-autocomplete-trigger>
 
 			${when(
@@ -181,7 +186,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 			...props,
 			...useAutocomplete(props),
 		};
-		useOverflow(thru);
 		return autocomplete(thru);
 	},
 	observedAttributes = [
