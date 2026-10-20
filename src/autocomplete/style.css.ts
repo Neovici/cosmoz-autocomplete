@@ -60,13 +60,6 @@ export default css`
 		min-width: calc(var(--cz-spacing) * 5);
 	}
 
-	.badge {
-		min-width: initial;
-		flex: none;
-		text-align: center;
-		padding: 0 var(--cz-spacing);
-	}
-
 	[data-single]::part(input) {
 		flex: 0;
 	}
@@ -82,10 +75,6 @@ export default css`
 	:host([wrap]) cosmoz-input::part(control) {
 		flex-wrap: wrap;
 		padding-right: calc(var(--cz-spacing) * 2);
-	}
-
-	:host([wrap]) cosmoz-tag {
-		padding-block: calc(var(--cz-spacing) * 1.5);
 	}
 
 	slot {

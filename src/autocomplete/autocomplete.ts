@@ -14,7 +14,6 @@ import { ChipRenderer, selection } from './selection';
 import './skeleton-span';
 import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
-import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
@@ -62,6 +61,7 @@ const shouldShowDropdown = <I>({
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
 				variant,
+				wrap,
 				opened,
 				invalid,
 				errorMessage,
@@ -146,15 +146,21 @@ const autocomplete = <I>(props: AProps<I>) => {
 						}),
 					)}
 				</slot>
-				${selection({
-					value,
-					min,
-					isOne,
-					onDeselect,
-					textual,
-					disabled,
-					chipRenderer,
-				})}
+				<cosmoz-autocomplete-chips
+					slot="control"
+					?data-wrap=${wrap}
+					?data-one=${isOne}
+					.chipRenderer=${chipRenderer}
+				>
+					${selection({
+						value,
+						min,
+						onDeselect,
+						textual,
+						disabled,
+						chipRenderer,
+					})}
+				</cosmoz-autocomplete-chips>
 			</cosmoz-input>
 
 			${when(
@@ -193,7 +199,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 			...props,
 			...useAutocomplete(props),
 		};
-		useOverflow(thru);
 		return autocomplete(thru);
 	},
 	observedAttributes = [
