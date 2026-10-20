@@ -13,6 +13,10 @@ const config = {
 	docs: {
 		autodocs: true,
 	},
+	viteFinal: (config) => ({
+		...config,
+		server: { ...config.server, allowedHosts: true, host: '0.0.0.0' },
+	}),
 };
 
 export default config;
