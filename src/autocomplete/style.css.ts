@@ -16,10 +16,6 @@ export default css`
 		display: block;
 	}
 
-	cosmoz-autocomplete-trigger {
-		display: block;
-	}
-
 	cosmoz-autocomplete-trigger[variant='inline'] cosmoz-tag {
 		align-items: center;
 		margin-left: var(--cz-spacing);
