@@ -1,0 +1,22 @@
+diff --git a/node_modules/@neovici/cosmoz-input/dist/styles.js b/node_modules/@neovici/cosmoz-input/dist/styles.js
+index 1ae2a45..d3ab305 100644
+--- a/node_modules/@neovici/cosmoz-input/dist/styles.js
++++ b/node_modules/@neovici/cosmoz-input/dist/styles.js
+@@ -215,7 +215,7 @@ export const styles = css `
+ 		line-height: var(--cz-text-sm-line-height);
+ 	}
+ 
+-	:host([variant='cell']) .wrap:has(#input) {
++	:host([variant='cell']) .wrap {
+ 		border: 0.5px solid var(--cz-color-bg-quaternary);
+ 		border-radius: 0;
+ 		box-shadow: none;
+@@ -225,7 +225,7 @@ export const styles = css `
+ 		background: var(--cz-color-bg-quaternary);
+ 	}
+ 
+-	:host([variant='cell'][invalid]) .wrap:has(#input) {
++	:host([variant='cell'][invalid]) .wrap {
+ 		border-color: var(--cz-color-border-error);
+ 		box-shadow: none;
+ 	}
