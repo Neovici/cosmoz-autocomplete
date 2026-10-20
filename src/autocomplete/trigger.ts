@@ -1,6 +1,6 @@
 import { render, styles } from '@neovici/cosmoz-input';
+import { tagged as css, sheet } from '@neovici/cosmoz-utils';
 import { component, useEffect } from '@pionjs/pion';
-import { sheet, tagged as css } from '@neovici/cosmoz-utils';
 import { html } from 'lit-html';
 
 export interface TriggerProps {
@@ -61,11 +61,49 @@ const fieldFocus = css`
 	/* Size the field like the input's text line; fall back to 1lh for
 	   consumers that haven't resolved tokens >= 3.5 yet */
 	.control {
-		min-height: var(--cz-control-height-md, calc(1lh + var(--cz-spacing) * 4));
+		height: var(--cz-control-height-md, calc(1lh + var(--cz-spacing) * 4));
 	}
 
 	:host([variant='cell']) .control {
+		height: var(--cz-control-height-sm, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	/* Chips wrap mode: let the control chrome grow to the wrapped rows */
+	:host([data-wrap]) .control {
+		height: auto;
+		min-height: var(--cz-control-height-md, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([variant='cell'][data-wrap]) .control {
 		min-height: var(--cz-control-height-sm, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	/* Size attribute: mirrors a real cosmoz-input's size ladder */
+	:host([size='sm']) .control {
+		height: var(--cz-control-height-sm, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([size='lg']) .control {
+		height: var(--cz-control-height-lg, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([size='xl']) .control {
+		height: var(--cz-control-height-xl, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([size='sm'][data-wrap]) .control {
+		height: auto;
+		min-height: var(--cz-control-height-sm, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([size='lg'][data-wrap]) .control {
+		height: auto;
+		min-height: var(--cz-control-height-lg, calc(1lh + var(--cz-spacing) * 4));
+	}
+
+	:host([size='xl'][data-wrap]) .control {
+		height: auto;
+		min-height: var(--cz-control-height-xl, calc(1lh + var(--cz-spacing) * 4));
 	}
 
 	/* Variant: inline hides the placeholder, like #input::placeholder */
@@ -90,15 +128,15 @@ const fieldFocus = css`
 
 const Trigger = (host: HTMLElement & TriggerProps) => {
 	const {
-			label,
-			hint,
-			errorMessage,
-			invalid,
-			placeholder,
-			compact,
-			required,
-			hasValue,
-		} = host;
+		label,
+		hint,
+		errorMessage,
+		invalid,
+		placeholder,
+		compact,
+		required,
+		hasValue,
+	} = host;
 
 	useEffect(() => {
 		const onKeydown = (e: KeyboardEvent) => {
@@ -119,7 +157,14 @@ const Trigger = (host: HTMLElement & TriggerProps) => {
 		placeholder != null && !hasValue
 			? html`<span class="placeholder">${placeholder}</span>`
 			: html``,
-		{ label, hint, invalid, errorMessage, compact: !!compact, required: !!required },
+		{
+			label,
+			hint,
+			invalid,
+			errorMessage,
+			compact: !!compact,
+			required: !!required,
+		},
 	);
 };
 

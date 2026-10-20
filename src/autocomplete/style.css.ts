@@ -45,7 +45,6 @@ export default css`
 	}
 
 	:host([wrap]) cosmoz-autocomplete-trigger::part(control) {
-		flex-wrap: wrap;
 		padding-right: calc(var(--cz-spacing) * 2);
 	}
 

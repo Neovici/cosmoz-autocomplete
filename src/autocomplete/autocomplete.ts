@@ -1,5 +1,4 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
-import './trigger';
 import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
@@ -12,7 +11,8 @@ import { when } from 'lit-html/directives/when.js';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
 import './selection';
-// eslint-disable-next-line no-duplicate-imports
+import './trigger';
+
 import type { ChipRenderer } from './selection';
 import './skeleton-span';
 import style from './style.css';
@@ -34,6 +34,7 @@ export interface Props<I> extends Base<I> {
 	itemHeight?: number | 'auto';
 	itemLimit?: number;
 	wrap?: boolean;
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	defaultIndex?: number;
 	externalSearch?: boolean;
 	itemRenderer?: ItemRenderer<I>;
@@ -70,6 +71,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				source$,
 				loading,
 				chipRenderer,
+				size,
 				wrap,
 				mode,
 			} = props,
@@ -116,8 +118,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				tabindex=${disabled ? -1 : 0}
 				aria-haspopup="listbox"
 				aria-expanded=${opened ? 'true' : 'false'}
-				?data-one=${isOne}
-				?data-single=${isOne && value[0] != null}
+				?data-wrap=${wrap}
+				size=${ifDefined(size === 'md' ? undefined : size)}
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix">
@@ -130,10 +132,9 @@ const autocomplete = <I>(props: AProps<I>) => {
 						}),
 					)}
 				</slot>
-				<cosmoz-selection
+				<cosmoz-autocomplete-chips
 					slot="control"
 					.value=${value}
-					.limit=${limit}
 					.min=${min}
 					.variant=${variant}
 					.textual=${textual}
@@ -141,43 +142,41 @@ const autocomplete = <I>(props: AProps<I>) => {
 					.disabled=${disabled}
 					.chipRenderer=${chipRenderer}
 					.wrap=${wrap}
-				></cosmoz-selection>
+					.size=${size}
+				></cosmoz-autocomplete-chips>
 			</cosmoz-autocomplete-trigger>
 
-			${when(
-				opened,
-				() =>
-					listbox<I>(
-						{
-							...props,
-							items,
-							multi: !isOne,
-						},
-						html`<cosmoz-input
-								slot="search"
-								id="search"
-								part="search-input"
-								placeholder=${t('Search')}
-								.value=${live(text)}
-								@value-changed=${onText}
-								@select=${(e: Event) => e.stopPropagation()}
-								autocomplete="off"
-							></cosmoz-input>
-							${when(
-								loading,
-								() =>
-									html`<cosmoz-autocomplete-skeleton-span
-								></cosmoz-autocomplete-skeleton-span>`,
-								() =>
-									when(
-										text != null && text.length > 0 && items.length === 0,
-										() =>
-											html`<slot name="no-result">
-												<span class="no-result">${t('No results found')}</span>
-											</slot>`,
-									),
-							)}`,
-					),
+			${when(opened, () =>
+				listbox<I>(
+					{
+						...props,
+						items,
+						multi: !isOne,
+					},
+					html`<cosmoz-input
+							slot="search"
+							id="search"
+							part="search-input"
+							placeholder=${t('Search')}
+							.value=${live(text)}
+							@value-changed=${onText}
+							@select=${(e: Event) => e.stopPropagation()}
+							autocomplete="off"
+						></cosmoz-input>
+						${when(
+							loading,
+							() =>
+								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+							() =>
+								when(
+									text != null && text.length > 0 && items.length === 0,
+									() =>
+										html`<slot name="no-result">
+											<span class="no-result">${t('No results found')}</span>
+										</slot>`,
+								),
+						)}`,
+				),
 			)}
 		</cosmoz-dropdown-next>`;
 	},
@@ -205,6 +204,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'keep-query',
 		'default-index',
 		'external-search',
+		'size',
 		'item-height',
 		'item-limit',
 		'wrap',

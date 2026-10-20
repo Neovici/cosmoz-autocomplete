@@ -5,6 +5,7 @@ import { ifDefined } from 'lit-html/directives/if-defined.js';
 interface Props {
 	onClear?: false | (() => void);
 	disabled?: boolean;
+	size?: string;
 }
 
 export interface ChipProps<I> extends Props {
@@ -21,10 +22,12 @@ export const chip = <I>({
 	className = 'chip',
 	hidden,
 	slot,
+	size,
 }: ChipProps<I>) =>
 	html`<cosmoz-tag
 		class=${ifDefined(className)}
 		slot=${ifDefined(slot)}
+		size=${ifDefined(size)}
 		exportparts="chip-text, chip-clear"
 		?disabled=${disabled}
 		?hidden=${hidden}

@@ -27,6 +27,7 @@ interface AutocompleteArgs {
 	showSingle?: boolean;
 	preserveOrder?: boolean;
 	wrap?: boolean;
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	keepOpened?: boolean;
 	keepQuery?: boolean;
 	opened?: boolean;
@@ -66,6 +67,7 @@ const Autocomplete = ({
 	showSingle = false,
 	preserveOrder = false,
 	wrap = false,
+	size,
 	keepOpened = false,
 	keepQuery = false,
 	opened = false,
@@ -101,6 +103,7 @@ const Autocomplete = ({
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
+			.size=${size}
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			?invalid=${invalid}
@@ -135,6 +138,12 @@ const meta: Meta<AutocompleteArgs> = {
 		},
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
+		size: {
+			control: 'select',
+			options: ['sm', 'md', 'lg', 'xl'],
+			description: 'Control height for the input chrome and the chips',
+			table: { defaultValue: { summary: 'md' } },
+		},
 		lazyOpen: {
 			control: 'boolean',
 			description: 'Suppress results until the user types at least 1 character',
