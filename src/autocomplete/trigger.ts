@@ -45,9 +45,26 @@ const fieldFocus = css`
 		transform: translateY(var(--label-translate-y));
 	}
 
-	/* Variant: cell */
+	/* Variant: cell — the shared sheet keys these on #input selectors */
+	:host([variant='cell']) .wrap {
+		border: 0.5px solid var(--cz-color-bg-quaternary);
+		border-radius: 0;
+		box-shadow: none;
+	}
+
 	:host([variant='cell']:focus-within) .wrap {
 		background: var(--cz-color-bg-quaternary);
+		box-shadow: none;
+	}
+
+	:host([variant='cell'][invalid]) .wrap {
+		border-color: var(--cz-color-border-error);
+	}
+
+	:host([variant='cell'][invalid]:focus-within) .wrap {
+		background: var(--cz-color-bg-error);
+		border: 0.5px solid transparent;
+		box-shadow: none;
 	}
 
 	/* Size the field like the input's text line; fall back to 1lh for
@@ -63,6 +80,10 @@ const fieldFocus = css`
 	/* Variant: inline hides the placeholder, like #input::placeholder */
 	:host([variant='inline']) {
 		cursor: default;
+	}
+
+	:host([variant='inline']:focus-within) .wrap {
+		box-shadow: none;
 	}
 
 	:host([variant='inline']) .placeholder {
