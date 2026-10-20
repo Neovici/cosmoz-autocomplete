@@ -1,4 +1,4 @@
-import{A as J,s as W,c as R,d as A,b as d,w as ce,f as $,u as de,a as w,r as et,E as L,p as tt,D as ot,g as pe,e as j,h as nt,H as rt,n as st,j as it,k as at,l as lt,t as ct}from"./iframe-DyN_zltl.js";import{n as x,u as B,a as G,e as ee,i as Ae,t as V,f as Se,s as he,b as dt,c as pt,d as se,g as ht,w as ie,p as ae,l as ut}from"./index-D8EVdRw1.js";const f=e=>e??J,te=W(R`
+import{A as J,s as W,c as R,d as A,b as d,w as ce,f as $,u as de,a as w,r as et,E as L,p as tt,D as ot,g as pe,e as j,h as nt,H as rt,n as st,j as it,k as at,l as lt,t as ct}from"./iframe-C_URfFL8.js";import{n as x,u as B,a as G,e as ee,i as Ae,t as V,f as Se,s as he,b as dt,c as pt,d as se,g as ht,w as ie,p as ae,l as ut}from"./index-CA1nwtei.js";const f=e=>e??J,te=W(R`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1290,7 +1290,7 @@ import{A as J,s as W,c as R,d as A,b as d,w as ce,f as $,u as de,a as w,r as et,
 	[hidden] {
 		display: none;
 	}
-`;customElements.define("cosmoz-selection",A(Wt,{styleSheets:[he(eo),Gt]}));const to=R`
+`;customElements.define("cosmoz-autocomplete-chips",A(Wt,{styleSheets:[he(eo),Gt]}));const to=R`
 	:host {
 		display: inline-block;
 		vertical-align: middle;
@@ -1436,14 +1436,14 @@ import{A as J,s as W,c as R,d as A,b as d,w as ce,f as $,u as de,a as w,r as et,
 				<slot name="suffix" slot="suffix">
 					${x(O==="select",()=>vt({styles:"margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);",width:"16",height:"16"}))}
 				</slot>
-				<cosmoz-selection
+				<cosmoz-autocomplete-chips
 					slot="control"
 					?data-wrap=${o}
 					?data-one=${q}
 					.chipRenderer=${v}
 				>
 					${Jt({value:b,min:P,onDeselect:m,textual:E,disabled:p,chipRenderer:v})}
-				</cosmoz-selection>
+				</cosmoz-autocomplete-chips>
 			</cosmoz-input>
 
 			${x(uo({opened:n,isSingle:T,showSingle:Y,hasResultsOrQuery:H}),()=>ut({...e,items:_,multi:!q},x(y,()=>d`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,()=>x(h!=null&&h.length>0&&_.length===0,()=>d`<slot name="no-result">
