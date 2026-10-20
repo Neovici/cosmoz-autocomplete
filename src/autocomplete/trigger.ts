@@ -50,6 +50,11 @@ const fieldFocus = css`
 		background: var(--cz-color-bg-quaternary);
 	}
 
+	/* Size the field like #input: text line + padding-block * 2 */
+	.control {
+		min-height: calc(var(--cz-text-base-line-height) + var(--cz-spacing) * 4);
+	}
+
 	/* Variant: inline hides the placeholder, like #input::placeholder */
 	:host([variant='inline']) {
 		cursor: default;

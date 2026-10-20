@@ -32,6 +32,7 @@ export default css`
 
 	cosmoz-autocomplete-trigger::part(control) {
 		display: flex;
+		align-items: center;
 		min-width: calc(var(--cz-spacing) * 9);
 	}
 
