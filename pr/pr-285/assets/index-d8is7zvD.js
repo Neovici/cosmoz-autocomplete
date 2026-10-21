@@ -1,4 +1,4 @@
-import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De,w as ve,E as R,i as ue,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as ut,m as pt,t as we}from"./iframe-D1C0CI8t.js";import{u as N,n as E,a as V,e as G,f as ae,i as qe,t as U,p as re,s as K,b as gt,c as vt,d as de,g as mt,w as he,l as ft}from"./index-v2U48CON.js";const h=e=>e??Z,X=ne(S`
+import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De,w as ve,E as R,i as ue,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as ut,m as pt,t as we}from"./iframe-CjfZ5QMd.js";import{u as N,n as E,a as V,e as G,f as ae,i as qe,t as U,p as re,s as K,b as gt,c as vt,d as de,g as mt,w as he,l as ft}from"./index-GKoy6NJ6.js";const h=e=>e??Z,X=ne(S`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1742,14 +1742,14 @@ import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De
 		@remove=${t}
 		title=${h(typeof e=="string"?e:void 0)}
 		>${e}</cosmoz-tag
-	>`,fo=e=>{const{value:t,min:o=0,wrap:r,variant:n,textual:s,onDeselect:l,disabled:c,chipRenderer:i=mo}=e,[a,d]=ge(0);return g`<cosmoz-selection-row
+	>`,fo=e=>{const{value:t,min:o=0,wrap:r,variant:n,textual:s,onDeselect:l,disabled:c,chipRenderer:i=mo}=e,[a,d]=ge(0);return g`<cosmoz-autocomplete-chips-row
 		.overflow=${{onOverflow:m=>d(m.size)}}
 		?data-wrap=${r}
 		variant=${h(n)}
 	>
 		${t.filter(Boolean).map(m=>i({item:m,content:s(m),onClear:t.length>o&&(()=>l(m)),disabled:c,slot:"chips"}))}
 		${i({item:null,content:g`<span>${a>0?"+"+a:""}</span>`,className:"badge",disabled:!0,slot:"badge",hidden:a<1})}
-	</cosmoz-selection-row>`},bo=Q`
+	</cosmoz-autocomplete-chips-row>`},bo=Q`
 	:host {
 		display: contents;
 	}
@@ -1813,7 +1813,7 @@ import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De
 			class="cz-overflow-band"
 			${vo(e.overflow)}
 		></slot>
-		<slot name="badge"></slot>`;customElements.define("cosmoz-selection-row",C(wo,{styleSheets:[K(zo),uo]}));customElements.define("cosmoz-autocomplete-chips",C(fo,{styleSheets:[K(bo)]}));const yo=new Set(["Enter"," ","ArrowDown","ArrowUp"]),xo=Q`
+		<slot name="badge"></slot>`;customElements.define("cosmoz-autocomplete-chips-row",C(wo,{styleSheets:[K(zo),uo]}));customElements.define("cosmoz-autocomplete-chips",C(fo,{styleSheets:[K(bo)]}));const yo=new Set(["Enter"," ","ArrowDown","ArrowUp"]),xo=Q`
 	:host {
 		cursor: pointer;
 	}
