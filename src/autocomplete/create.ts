@@ -49,7 +49,14 @@ export const useCreatable = <I>({
 		return { [CREATE]: query } as CreateItem;
 	}, [onCreate, query, items, textual]);
 
+	const created = createItem?.[CREATE],
+		label = created && createLabel?.(created);
+
 	return {
+		/** Announced instead of "No results"; falls back to the default for non-string labels. */
+		createText:
+			created &&
+			(typeof label === 'string' ? label : t('Create "{0}"', { 0: created })),
 		items: useMemo(
 			() => (createItem ? [...items, createItem as I] : items),
 			[items, createItem],

@@ -1,7 +1,7 @@
-import { useAnnouncer } from '@neovici/cosmoz-utils/hooks/use-announcer';
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
 import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
+import { useAnnouncer } from '@neovici/cosmoz-utils/hooks/use-announcer';
 import { t } from 'i18next';
 import { html } from 'lit-html';
 import { guard } from 'lit-html/directives/guard.js';
@@ -70,14 +70,16 @@ const statusMessage = ({
 	loading,
 	count,
 	text,
+	createText,
 }: {
 	expanded: boolean;
 	loading: boolean;
 	count: number;
 	text?: string;
+	createText?: string;
 }) => {
 	if (!expanded || loading) return '';
-	if (count === 0) return text ? t('No results found') : '';
+	if (count === 0) return createText ?? (text ? t('No results found') : '');
 	return count === 1 ? t('1 result') : t('{0} results', { 0: count });
 };
 
@@ -237,7 +239,13 @@ const autocomplete = <I>(props: AProps<I>) => {
 				readonly: isSingle,
 			}),
 			announcement = useAnnouncer(
-				statusMessage({ expanded, loading, count: items.length, text }),
+				statusMessage({
+					expanded,
+					loading,
+					count: items.length,
+					text,
+					createText: creatable.createText,
+				}),
 			),
 			renderListbox = useListboxView({
 				value,

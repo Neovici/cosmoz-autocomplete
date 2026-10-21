@@ -49,17 +49,21 @@ const setup = async (canvasElement: HTMLElement) => {
 		chips: () =>
 			[...root.querySelectorAll('.chip')].map((c) => c.textContent!.trim()),
 		noResult: () => root.querySelector('.no-result'),
+		status: () => root.querySelector('.status')!.textContent!.trim(),
 	};
 };
 
 export const OffersCreateForUnmatchedQuery: Story = {
 	args: { onCreate: fn((text: string) => ({ text })) },
 	play: async ({ canvasElement, args }) => {
-		const { input, create, options, chips, noResult } =
+		const { input, create, options, chips, noResult, status } =
 			await setup(canvasElement);
 		await userEvent.click(input);
 		await userEvent.type(input, 'Teal');
 		await waitFor(() => expect(create()).toBeTruthy());
+		await waitFor(() => expect(status()).toBe('Create "Teal"'), {
+			timeout: 2000,
+		});
 		expect(create()!.getAttribute('role')).toBe('option');
 		expect(create()!.textContent!.trim()).toBe('Create "Teal"');
 		expect(options()).toHaveLength(1);
@@ -112,12 +116,15 @@ export const CustomCreateLabel: Story = {
 		createLabel: (query: string) => `Use "${query}"`,
 	},
 	play: async ({ canvasElement }) => {
-		const { input, create } = await setup(canvasElement);
+		const { input, create, status } = await setup(canvasElement);
 		await userEvent.click(input);
 		await userEvent.type(input, 'Teal');
 		await waitFor(() =>
 			expect(create()?.textContent!.trim()).toBe('Use "Teal"'),
 		);
+		await waitFor(() => expect(status()).toBe('Use "Teal"'), {
+			timeout: 2000,
+		});
 	},
 };
 
