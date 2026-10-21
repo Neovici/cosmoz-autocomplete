@@ -65,6 +65,29 @@ describe('mark', () => {
 		expect(mark('hello', 'xyz')).toBe('hello');
 	});
 
+	const marked = (result: ReturnType<typeof mark>) => {
+		const [before, m, after] = result as [string, { values: string[] }, string];
+		return [before, m.values[0], after];
+	};
+
+	it('is accent-insensitive like search', () => {
+		expect(marked(mark('Café Årsta', 'cafe'))).toEqual(['', 'Café', ' Årsta']);
+		expect(marked(mark('Café Årsta', 'arst'))).toEqual(['Café ', 'Årst', 'a']);
+	});
+
+	it('matches accented queries against plain text', () => {
+		expect(marked(mark('Malmo', 'malmö'))).toEqual(['', 'Malmo', '']);
+	});
+
+	it('keeps decomposed characters whole', () => {
+		const decomposed = 'Cafe\u0301 noir';
+		expect(marked(mark(decomposed, 'cafe'))).toEqual([
+			'',
+			'Cafe\u0301',
+			' noir',
+		]);
+	});
+
 	it('returns original text when query is empty', () => {
 		expect(mark('hello', '')).toBe('hello');
 		expect(mark('hello', undefined)).toBe('hello');

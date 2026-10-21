@@ -62,7 +62,19 @@ export interface Props<I> extends Base<I> {
 	defaultIndex?: number;
 	externalSearch?: boolean;
 	lazyOpen?: boolean;
+	/** Milliseconds to wait after typing before calling a function `source`. */
+	debounce?: number | string;
 }
+
+const useDebounced = <T>(value: T, delay: number) => {
+	const [debounced, setDebounced] = useState(value);
+	useEffect(() => {
+		if (!delay) return;
+		const id = setTimeout(() => setDebounced(value), delay);
+		return () => clearTimeout(id);
+	}, [value, delay]);
+	return delay ? debounced : value;
+};
 
 export const useAutocomplete = <I>({
 	value: _value,
@@ -84,6 +96,7 @@ export const useAutocomplete = <I>({
 	externalSearch,
 	disabled,
 	lazyOpen,
+	debounce,
 }: Props<I>) => {
 	const limit = _limit != null ? Number(_limit) : undefined,
 		min = _min != null ? Number(_min) : undefined,
@@ -96,6 +109,7 @@ export const useAutocomplete = <I>({
 		[opened, setOpened] = useProperty<boolean>('opened', false),
 		empty = !text,
 		query = useMemo(() => text?.trim(), [text]),
+		sourceQuery = useDebounced(query, Number(debounce) || 0),
 		onText = useNotify(host, _onText, 'text'),
 		onChange = useCallback(
 			(val: I[]) => {
@@ -114,14 +128,21 @@ export const useAutocomplete = <I>({
 					? Promise.resolve([] as I[])
 					: Promise.resolve(
 							typeof source === 'function'
-								? source({ query, active: opened })
+								? source({ query: sourceQuery, active: opened })
 								: source,
 						).then(normalize),
-			[source, opened, query, belowMinLength],
+			[source, opened, sourceQuery, belowMinLength],
 		),
 		value = useMemo(() => array(_value), [_value]);
 
-	useEffect(() => source$.then(setOptions), [source$]);
+	useEffect(() => {
+		// A slower, older source response must not overwrite a newer one.
+		let current = true;
+		source$.then((options) => current && setOptions(options));
+		return () => {
+			current = false;
+		};
+	}, [source$]);
 
 	// Clear query when popover closes
 	useEffect(() => {
