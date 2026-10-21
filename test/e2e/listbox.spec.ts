@@ -5,23 +5,21 @@ const story = (id: string) => `iframe.html?id=${id}&viewMode=story/`;
 const listbox = (page: Page) =>
 	page.locator('cosmoz-autocomplete cosmoz-listbox');
 
-// with focus on the trigger the chip Remove buttons come first in tab
-// order; keep tabbing (bounded loop) until the search input has focus
+// opening the popup focuses the search input itself (C3) — no Tab walk
 const focusSearch = async (page: Page) => {
-	const input = listbox(page).locator('#search');
-	const focused = () =>
-		input.evaluate(
-			(el) => (el.getRootNode() as ShadowRoot).activeElement === el,
-		);
-	for (let i = 0; i < 5; i++) {
-		if (await focused()) {
-			await expect(input).toBeFocused();
-			return;
-		}
-		await page.keyboard.press('Tab');
-	}
 	await expect(listbox(page).locator('#search')).toBeFocused();
 };
+
+test.describe('open focuses the search', () => {
+	test('no Tab walk needed after opening', async ({ page }) => {
+		await page.goto(story('autocomplete--single'));
+		await page
+			.locator('cosmoz-autocomplete cosmoz-autocomplete-trigger')
+			.waitFor();
+		await page.keyboard.press('Tab'); // focus-in opens the popup
+		await expect(listbox(page).locator('#search')).toBeFocused();
+	});
+});
 
 test.describe('listbox semantics', () => {
 	test.beforeEach(async ({ page }) => {

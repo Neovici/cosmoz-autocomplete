@@ -146,37 +146,35 @@ const autocomplete = <I>(props: AProps<I>) => {
 				></cosmoz-autocomplete-chips>
 			</cosmoz-autocomplete-trigger>
 
-			${when(opened, () =>
-				listbox<I>(
-					{
-						...props,
-						items,
-						multi: !isOne,
-					},
-					html`<cosmoz-input
-							slot="search"
-							id="search"
-							part="search-input"
-							placeholder=${t('Search')}
-							.value=${live(text)}
-							@value-changed=${onText}
-							@select=${(e: Event) => e.stopPropagation()}
-							autocomplete="off"
-						></cosmoz-input>
-						${when(
-							loading,
-							() =>
-								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
-							() =>
-								when(
-									text != null && text.length > 0 && items.length === 0,
-									() =>
-										html`<slot name="no-result">
-											<span class="no-result">${t('No results found')}</span>
-										</slot>`,
-								),
-						)}`,
-				),
+			${listbox<I>(
+				{
+					...props,
+					items,
+					multi: !isOne,
+				},
+				html`<cosmoz-input
+						slot="search"
+						id="search"
+						part="search-input"
+						placeholder=${t('Search')}
+						.value=${live(text)}
+						@value-changed=${onText}
+						@select=${(e: Event) => e.stopPropagation()}
+						autocomplete="off"
+					></cosmoz-input>
+					${when(
+						loading,
+						() =>
+							html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+						() =>
+							when(
+								text != null && text.length > 0 && items.length === 0,
+								() =>
+									html`<slot name="no-result">
+										<span class="no-result">${t('No results found')}</span>
+									</slot>`,
+							),
+					)}`,
 			)}
 		</cosmoz-dropdown-next>`;
 	},

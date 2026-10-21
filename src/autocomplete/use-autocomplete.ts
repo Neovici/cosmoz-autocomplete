@@ -237,7 +237,15 @@ export const useAutocomplete = <I>({
 					valueProperty,
 				} = meta;
 				if (!keepQuery) onText('');
-				if (!keepOpened) setOpened(false);
+				// Focus the field before closing: the trigger focus-in is a
+				// no-op while the popup is open, and the popover hiding with
+				// focus inside would otherwise drop focus to body.
+				if (!keepOpened) {
+					host.shadowRoot
+						?.querySelector<HTMLElement>('cosmoz-autocomplete-trigger')
+						?.focus();
+					setOpened(false);
+				}
 				const value = array(val),
 					predicate = prop(valueProperty),
 					deselect = value.some((v) => predicate(v) === predicate(newVal));
