@@ -1,4 +1,4 @@
-import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-CwKkupxr.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-Djbj3CEb.js";const p=e=>e??K,G=ne(S`
+import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-zfXFs_nW.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-BwH9h0dn.js";const p=e=>e??K,G=ne(S`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -238,9 +238,6 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 		);
 		color: var(--cz-color-text-secondary);
 		border-radius: var(--cz-radius-full);
-		/* Pill rungs hardcoded: md 1.75rem, lg 2rem = control height minus 2x spacing of air */
-		box-sizing: border-box;
-		min-height: 1.75rem;
 		padding: ${h(.5)} ${h(2)};
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);
@@ -312,7 +309,6 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 
 	/* --- Pill sizes --- */
 	:host([size='sm']) .badge {
-		min-height: 1.5rem;
 		padding: ${h(.5)} ${h(2)};
 		font-size: var(--cz-text-xs);
 		line-height: var(--cz-text-xs-line-height);
@@ -320,7 +316,6 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 	}
 
 	:host([size='lg']) .badge {
-		min-height: 2rem;
 		padding: ${h(1)} ${h(3)};
 	}
 
@@ -462,7 +457,8 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 	/* Compact counters keep a stable pill height around smaller metadata text. */
 	:host([size='xs']) .badge,
 	:host([size='xs'][dot]) .badge {
-		min-height: 1.25rem;
+		box-sizing: border-box;
+		min-height: ${h(5)};
 		padding: 0 ${h(1)};
 		font-size: var(--cz-text-2xs, var(--cz-text-xs));
 		line-height: var(--cz-text-2xs-line-height, var(--cz-text-xs-line-height));
@@ -1830,7 +1826,7 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 	   the count badge outside. The band invariants ride the adopted
 	   overflowStyle; the context sizing and the one-row height stay
 	   here. */
-	/* one chip row, matched to the cosmoz-tag size ladder */
+	/* one chip row, matched to the tag pill heights */
 	slot[name='chips'] {
 		flex: 0 1 auto;
 		min-width: 0;
@@ -1845,11 +1841,11 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 	}
 
 	:host([size='lg']) slot[name='chips'] {
-		max-height: 1.75rem; /* tag md */
+		max-height: 27px; /* tag md pill */
 	}
 
 	:host([size='xl']) slot[name='chips'] {
-		max-height: 2rem; /* tag lg */
+		max-height: 31px; /* tag lg pill */
 	}
 
 	/* wrap mode: chips wrap to real rows and the field grows */
