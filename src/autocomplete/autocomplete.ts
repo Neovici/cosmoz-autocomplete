@@ -89,6 +89,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				part="input"
 				.label=${label}
 				.hint=${hint}
+				aria-label=${label}
 				.errorMessage=${guard([source$, errorMessage], () =>
 					until(
 						source$.then(
@@ -157,6 +158,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 						id="search"
 						part="search-input"
 						placeholder=${t('Search')}
+						aria-label=${t('Search')}
 						.value=${live(text)}
 						@value-changed=${onText}
 						@select=${(e: Event) => e.stopPropagation()}

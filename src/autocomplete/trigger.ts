@@ -164,6 +164,9 @@ const Trigger = (host: HTMLElement & TriggerProps) => {
 			errorMessage,
 			compact: !!compact,
 			required: !!required,
+			// no input element in this shadow: the for="input" reference
+			// would dangle
+			labelFor: null,
 		},
 	);
 };

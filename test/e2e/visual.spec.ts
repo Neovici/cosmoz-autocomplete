@@ -43,6 +43,11 @@ test('autocomplete select', async ({ page }) => {
 	await expect(page).toHaveScreenshot();
 
 	await page.getByText('Choose color').click();
+	// settle the open state first: the focus ring moving to the search
+	// input raced the paint and flaked the shot
+	await expect(
+		page.locator('cosmoz-autocomplete cosmoz-listbox #search'),
+	).toBeFocused();
 	await expect(page).toHaveScreenshot();
 
 	await page.getByRole('option', { name: 'Blue' }).click();

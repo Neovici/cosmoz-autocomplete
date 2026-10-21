@@ -1,0 +1,41 @@
+diff --git a/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js b/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js
+index 7463905..bbc1d21 100644
+--- a/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js
++++ b/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js
+@@ -41,6 +41,7 @@ export const Input = (host) => {
+ 				placeholder=${getPlaceholder({ placeholder: host.placeholder })}
+ 				?readonly=${readonly}
+ 				aria-disabled=${disabled ? 'true' : 'false'}
++				aria-label=${ifDefined(host.getAttribute('aria-label'))}
+ 				?disabled=${disabled}
+ 				?required=${required}
+ 				.value=${live(value ?? '')}
+diff --git a/node_modules/@neovici/cosmoz-input/dist/render.d.ts b/node_modules/@neovici/cosmoz-input/dist/render.d.ts
+index d5cf809..72ff4a4 100644
+--- a/node_modules/@neovici/cosmoz-input/dist/render.d.ts
++++ b/node_modules/@neovici/cosmoz-input/dist/render.d.ts
+@@ -9,5 +9,6 @@ export interface Render {
+     hint?: string;
+     compact?: boolean;
+     required?: boolean;
++    labelFor?: string | null;
+ }
+-export declare const render: <T>(control: T, { hint, label, invalid, errorMessage, compact, required }: Render) => import("lit-html").TemplateResult<1>, attributes: string[];
++export declare const render: <T>(control: T, { hint, label, invalid, errorMessage, compact, required, labelFor }: Render) => import("lit-html").TemplateResult<1>, attributes: string[];
+diff --git a/node_modules/@neovici/cosmoz-input/dist/render.js b/node_modules/@neovici/cosmoz-input/dist/render.js
+index 6808312..d339a07 100644
+--- a/node_modules/@neovici/cosmoz-input/dist/render.js
++++ b/node_modules/@neovici/cosmoz-input/dist/render.js
+@@ -2,9 +2,10 @@ import { infoCircleIcon } from '@neovici/cosmoz-icons/untitled';
+ import '@neovici/cosmoz-tooltip';
+ import { html } from 'lit-html';
+ import { when } from 'lit-html/directives/when.js';
+-export const render = (control, { hint, label, invalid, errorMessage, compact, required }) => html `
++import { ifDefined } from 'lit-html/directives/if-defined.js';
++export const render = (control, { hint, label, invalid, errorMessage, compact, required, labelFor = 'input' }) => html `
+ 		<!-- label: hidden in compact mode -->
+-		${when(!compact && label, () => html `<label for="input" part="label"
++		${when(!compact && label, () => html `<label for=${ifDefined(labelFor ?? undefined)} part="label"
+ 					>${label}
+ 					${when(required, () => html `<span class="required">*</span>`)}
+ 				</label>`)}
