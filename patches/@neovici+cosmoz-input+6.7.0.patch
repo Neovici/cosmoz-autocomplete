@@ -1,15 +1,56 @@
 diff --git a/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js b/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js
-index 7463905..bbc1d21 100644
+index 7463905..56010ca 100644
 --- a/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js
 +++ b/node_modules/@neovici/cosmoz-input/dist/cosmoz-input.js
-@@ -41,6 +41,7 @@ export const Input = (host) => {
+@@ -26,8 +26,8 @@ const observedAttributes = [
+     ...attributes,
+ ];
+ export const Input = (host) => {
+-    const { type = 'text', pattern, allowedPattern, autocomplete, value, readonly, disabled, min, max, step, maxlength, required, } = host, { onChange, onFocus, onInput, onRef } = useInput(host);
+-    const onBeforeInput = useAllowedPattern(allowedPattern);
++    const { type = 'text', pattern, allowedPattern, autocomplete, value, readonly, disabled, min, max, step, maxlength, required, hint, compact, invalid, errorMessage, } = host, { onChange, onFocus, onInput, onRef } = useInput(host);
++    const onBeforeInput = useAllowedPattern(allowedPattern), showHint = !compact && hint && !invalid, showError = !compact && invalid && errorMessage, describedBy = (showError && 'error') || (showHint && 'hint') || undefined;
+     host.toggleAttribute('has-value', !!value);
+     return render(html `
+ 			<input
+@@ -41,8 +41,11 @@ export const Input = (host) => {
  				placeholder=${getPlaceholder({ placeholder: host.placeholder })}
  				?readonly=${readonly}
  				aria-disabled=${disabled ? 'true' : 'false'}
 +				aria-label=${ifDefined(host.getAttribute('aria-label'))}
  				?disabled=${disabled}
  				?required=${required}
++				aria-invalid=${ifDefined(showError ? 'true' : undefined)}
++				aria-describedby=${ifDefined(describedBy)}
  				.value=${live(value ?? '')}
+ 				maxlength=${ifDefined(maxlength)}
+ 				@beforeinput=${onBeforeInput}
+diff --git a/node_modules/@neovici/cosmoz-input/dist/cosmoz-textarea.js b/node_modules/@neovici/cosmoz-input/dist/cosmoz-textarea.js
+index 6d9e99c..d38ce03 100644
+--- a/node_modules/@neovici/cosmoz-input/dist/cosmoz-textarea.js
++++ b/node_modules/@neovici/cosmoz-input/dist/cosmoz-textarea.js
+@@ -17,15 +17,19 @@ const observedAttributes = [
+     ...attributes,
+ ];
+ export const Textarea = (host) => {
+-    const { autocomplete, value, placeholder, readonly, disabled, rows, cols, maxlength, } = host, { onChange, onFocus, onInput, onRef } = useInput(host);
++    const { autocomplete, value, placeholder, readonly, disabled, required, hint, compact, invalid, errorMessage, rows, cols, maxlength, } = host, { onChange, onFocus, onInput, onRef } = useInput(host);
+     useAutoHeight(host);
++    const showHint = !compact && hint && !invalid, showError = !compact && invalid && errorMessage, describedBy = (showError && 'error') || (showHint && 'hint') || undefined;
+     return render(html `
+ 			<textarea id="input" part="input"
+ 				${ref(onRef)}
+ 				autocomplete=${ifDefined(autocomplete)}
+ 				placeholder=${placeholder || ' '}
+ 				rows=${rows ?? 1} cols=${ifDefined(cols)}
+-				?readonly=${readonly} ?aria-disabled=${disabled} ?disabled=${disabled}
++				?readonly=${readonly} aria-disabled=${disabled ? 'true' : 'false'}
++				?disabled=${disabled} ?required=${required}
++				aria-invalid=${ifDefined(showError ? 'true' : undefined)}
++				aria-describedby=${ifDefined(describedBy)}
+ 				.value=${live(value ?? '')} maxlength=${ifDefined(maxlength)} @input=${onInput}
+ 				@change=${onChange} @focus=${onFocus} @blur=${onFocus}>`, host);
+ };
 diff --git a/node_modules/@neovici/cosmoz-input/dist/render.d.ts b/node_modules/@neovici/cosmoz-input/dist/render.d.ts
 index d5cf809..72ff4a4 100644
 --- a/node_modules/@neovici/cosmoz-input/dist/render.d.ts
@@ -23,19 +64,72 @@ index d5cf809..72ff4a4 100644
 -export declare const render: <T>(control: T, { hint, label, invalid, errorMessage, compact, required }: Render) => import("lit-html").TemplateResult<1>, attributes: string[];
 +export declare const render: <T>(control: T, { hint, label, invalid, errorMessage, compact, required, labelFor }: Render) => import("lit-html").TemplateResult<1>, attributes: string[];
 diff --git a/node_modules/@neovici/cosmoz-input/dist/render.js b/node_modules/@neovici/cosmoz-input/dist/render.js
-index 6808312..d339a07 100644
+index 6808312..a227d34 100644
 --- a/node_modules/@neovici/cosmoz-input/dist/render.js
 +++ b/node_modules/@neovici/cosmoz-input/dist/render.js
-@@ -2,9 +2,10 @@ import { infoCircleIcon } from '@neovici/cosmoz-icons/untitled';
+@@ -2,11 +2,13 @@ import { infoCircleIcon } from '@neovici/cosmoz-icons/untitled';
  import '@neovici/cosmoz-tooltip';
  import { html } from 'lit-html';
  import { when } from 'lit-html/directives/when.js';
 -export const render = (control, { hint, label, invalid, errorMessage, compact, required }) => html `
+-		<!-- label: hidden in compact mode -->
+-		${when(!compact && label, () => html `<label for="input" part="label"
 +import { ifDefined } from 'lit-html/directives/if-defined.js';
 +export const render = (control, { hint, label, invalid, errorMessage, compact, required, labelFor = 'input' }) => html `
- 		<!-- label: hidden in compact mode -->
--		${when(!compact && label, () => html `<label for="input" part="label"
-+		${when(!compact && label, () => html `<label for=${ifDefined(labelFor ?? undefined)} part="label"
++		<!-- label: visually hidden in compact mode -->
++		${when(label, () => html `<label for=${ifDefined(labelFor)} part="label"
++					class=${ifDefined(compact ? 'sr-only' : undefined)}
  					>${label}
- 					${when(required, () => html `<span class="required">*</span>`)}
+-					${when(required, () => html `<span class="required">*</span>`)}
++					${when(required && !compact, () => html `<span class="required">*</span>`)}
  				</label>`)}
+ 		<div class="wrap" part="wrap">
+ 			<slot name="prefix"></slot>
+@@ -26,7 +28,7 @@ export const render = (control, { hint, label, invalid, errorMessage, compact, r
+ 			<slot name="suffix"></slot>
+ 		</div>
+ 		<!-- hint: visible when valid, hidden when invalid or compact -->
+-		${when(!compact && hint && !invalid, () => html `<span class="hint" part="hint">${hint}</span>`)}
++		${when(!compact && hint && !invalid, () => html `<span class="hint" part="hint" id="hint">${hint}</span>`)}
+ 		<!-- error: replaces hint when invalid, hidden in compact -->
+-		${when(!compact && invalid && errorMessage, () => html `<span class="error" part="error">${errorMessage}</span>`)}
++		${when(!compact && invalid && errorMessage, () => html `<span class="error" part="error" id="error">${errorMessage}</span>`)}
+ 	`, attributes = ['autocomplete', 'readonly', 'disabled', 'maxlength', 'invalid'];
+diff --git a/node_modules/@neovici/cosmoz-input/dist/styles.js b/node_modules/@neovici/cosmoz-input/dist/styles.js
+index 9dbf584..df2b19d 100644
+--- a/node_modules/@neovici/cosmoz-input/dist/styles.js
++++ b/node_modules/@neovici/cosmoz-input/dist/styles.js
+@@ -133,6 +133,17 @@ export const styles = css `
+ 
+ 	/* === Label === */
+ 
++	.sr-only {
++		position: absolute;
++		width: 1px;
++		height: 1px;
++		margin: -1px;
++		padding: 0;
++		overflow: hidden;
++		clip: rect(0 0 0 0);
++		white-space: nowrap;
++	}
++
+ 	label {
+ 		position: relative;
+ 		font-size: var(--cz-text-sm);
+@@ -279,7 +290,14 @@ export const styles = css `
+ 	}
+ 
+ 	:host([variant='cell']) label {
+-		display: none;
++		position: absolute;
++		width: 1px;
++		height: 1px;
++		margin: -1px;
++		padding: 0;
++		overflow: hidden;
++		clip: rect(0 0 0 0);
++		white-space: nowrap;
+ 	}
+ 
+ 	:host([variant='cell']) .error {
