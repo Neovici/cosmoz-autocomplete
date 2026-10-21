@@ -1,4 +1,4 @@
-import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-GiArtUMv.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-CNxCQ4Um.js";const p=e=>e??K,G=ne(S`
+import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-DoIOkUrv.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-9IXx0nRR.js";const p=e=>e??K,G=ne(S`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1869,7 +1869,6 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 	::slotted(cosmoz-tag) {
 		align-items: center;
 		flex: none;
-		max-width: calc(100% - calc(var(--cz-spacing) * 2));
 		margin-left: var(--cz-spacing);
 	}
 
