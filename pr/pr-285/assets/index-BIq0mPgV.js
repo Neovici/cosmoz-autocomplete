@@ -1,4 +1,4 @@
-import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-C9rdMApk.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-C7bFd8bK.js";const p=e=>e??K,G=ne(S`
+import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-GiArtUMv.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-CNxCQ4Um.js";const p=e=>e??K,G=ne(S`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1839,9 +1839,17 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 		max-height: 1.6rem; /* inline md */
 	}
 
-	:host([size='sm']) slot[name='chips'],
-	:host([variant='cell']) slot[name='chips'] {
-		max-height: 1.25rem; /* tag xs */
+	:host([size='sm']) slot[name='chips'] {
+		max-height: 1.25rem; /* the sm pill */
+	}
+
+	/* variants restyle the sm pill fonts: cells render 21.25, inline 24 */
+	:host([size='sm'][variant='cell']) slot[name='chips'] {
+		max-height: 21.3px; /* cell sm pill */
+	}
+
+	:host([size='sm'][variant='inline']) slot[name='chips'] {
+		max-height: 24px; /* inline sm pill */
 	}
 
 	:host([size='lg']) slot[name='chips'] {
