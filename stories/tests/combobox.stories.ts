@@ -230,6 +230,36 @@ export const ArrowDownOpensAClosedList: Story = {
 	},
 };
 
+const composing = (input: HTMLInputElement, key: string, init: object) =>
+	input.dispatchEvent(
+		new KeyboardEvent('keydown', {
+			key,
+			bubbles: true,
+			composed: true,
+			cancelable: true,
+			...init,
+		}),
+	);
+
+export const IgnoresKeysWhileComposing: Story = {
+	play: async ({ canvasElement }) => {
+		const { host, input, option, highlighted } = await parts(canvasElement);
+		await open(input());
+		await userEvent.keyboard('{ArrowDown}');
+		await waitFor(() => expect(highlighted()).toBe(option(1)));
+
+		for (const init of [{ isComposing: true }, { keyCode: 229 }]) {
+			expect(composing(input(), 'Enter', init)).toBe(true);
+			expect(composing(input(), 'Escape', init)).toBe(true);
+			expect(composing(input(), 'ArrowDown', init)).toBe(true);
+		}
+		await new Promise((r) => setTimeout(r, 100));
+		expect(host.shadowRoot!.querySelector('.chip')).toBeNull();
+		expect(input().getAttribute('aria-expanded')).toBe('true');
+		expect(highlighted()).toBe(option(1));
+	},
+};
+
 export const AltArrowUpCloses: Story = {
 	play: async ({ canvasElement }) => {
 		const { input } = await parts(canvasElement);

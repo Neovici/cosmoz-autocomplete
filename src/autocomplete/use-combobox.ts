@@ -1,6 +1,6 @@
 import { useActiveDescendant } from '@neovici/cosmoz-utils/hooks/use-active-descendant';
-import { useListNavigation } from '@neovici/cosmoz-utils/hooks/use-list-navigation';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
+import { useListNavigation } from '@neovici/cosmoz-utils/hooks/use-list-navigation';
 import { useLayoutEffect, useMemo, useState } from '@pionjs/pion';
 
 interface Props<I> {
@@ -67,6 +67,8 @@ export const useCombobox = <I>({
 		// The virtualizer renders scrolled-in options after we did.
 		onRangeChanged: () => rerender((n) => n + 1),
 		onKeyDown: (e: KeyboardEvent) => {
+			// keyCode 229: IME composition, where isComposing is unreliable in Safari
+			if (e.isComposing || e.keyCode === 229) return;
 			const { key, altKey } = e,
 				plain = !(altKey || e.ctrlKey || e.metaKey || e.shiftKey),
 				toggle = (opened: boolean) => {
