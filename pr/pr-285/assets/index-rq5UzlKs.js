@@ -1,4 +1,4 @@
-import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De,w as ve,E as R,i as ue,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as ut,m as pt,t as we}from"./iframe-EtW7y8GZ.js";import{u as N,n as E,a as V,e as G,f as ae,i as qe,t as U,p as re,s as K,b as gt,c as vt,d as de,g as mt,w as he,l as ft}from"./index-CfDxd1sz.js";const h=e=>e??Z,X=ne(S`
+import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De,w as ve,E as R,i as ue,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as ut,m as pt,t as we}from"./iframe-D1C0CI8t.js";import{u as N,n as E,a as V,e as G,f as ae,i as qe,t as U,p as re,s as K,b as gt,c as vt,d as de,g as mt,w as he,l as ft}from"./index-v2U48CON.js";const h=e=>e??Z,X=ne(S`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1813,7 +1813,7 @@ import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De
 			class="cz-overflow-band"
 			${vo(e.overflow)}
 		></slot>
-		<slot name="badge"></slot>`;customElements.define("cosmoz-selection-row",C(wo,{styleSheets:[K(zo),uo]}));customElements.define("cosmoz-selection",C(fo,{styleSheets:[K(bo)]}));const yo=new Set(["Enter"," ","ArrowDown","ArrowUp"]),xo=Q`
+		<slot name="badge"></slot>`;customElements.define("cosmoz-selection-row",C(wo,{styleSheets:[K(zo),uo]}));customElements.define("cosmoz-autocomplete-chips",C(fo,{styleSheets:[K(bo)]}));const yo=new Set(["Enter"," ","ArrowDown","ArrowUp"]),xo=Q`
 	:host {
 		cursor: pointer;
 	}
@@ -2004,7 +2004,7 @@ import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De
 				<slot name="suffix" slot="suffix">
 					${E(b==="select",()=>St({styles:"margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);",width:"16",height:"16"}))}
 				</slot>
-				<cosmoz-selection
+				<cosmoz-autocomplete-chips
 					slot="control"
 					.value=${y}
 					.min=${O}
@@ -2014,7 +2014,7 @@ import{A as Z,s as ne,c as S,d as C,b as g,f as x,D as at,g as ge,a as w,h as De
 					.disabled=${d}
 					.chipRenderer=${P}
 					.wrap=${p}
-				></cosmoz-selection>
+				></cosmoz-autocomplete-chips>
 			</cosmoz-autocomplete-trigger>
 
 			${E(o,()=>ft({...e,items:A,multi:!_},g`<cosmoz-input
