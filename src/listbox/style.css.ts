@@ -8,7 +8,7 @@ const checkSVG =
 /* eslint-enable quotes */
 
 const style = css`
-	:host {
+	.listbox {
 		display: block;
 		font-family: var(--cz-font-body);
 		background: var(--cz-color-bg-primary);
@@ -28,7 +28,7 @@ const style = css`
 		padding-inline: calc(var(--cz-spacing) * 1.5);
 		min-width: calc(var(--cz-spacing) * 20);
 	}
-	:host(:focus-within) {
+	.listbox:focus-within {
 		outline: none;
 		box-shadow: var(--cz-focus-ring);
 	}
@@ -67,11 +67,11 @@ const style = css`
 		line-height: var(--cz-text-sm-line-height);
 	}
 
-	:host(:not([multi])) .item[aria-selected] {
+	.listbox:not([data-multi]) .item[aria-selected='true'] {
 		background: rgb(from var(--cz-color-alpha-black) r g b / 0.22);
 	}
 
-	:host([multi]) .item::before {
+	.listbox[data-multi] .item::before {
 		content: '';
 		font-size: 0;
 		padding: calc(var(--cz-spacing) * 2);
@@ -82,7 +82,7 @@ const style = css`
 		vertical-align: top;
 	}
 
-	:host([multi]) .item[aria-selected]::before {
+	.listbox[data-multi] .item[aria-selected='true']::before {
 		border-color: var(--cz-color-bg-brand-solid);
 		/* prettier-ignore */
 		background: url("${checkSVG}") var(--cz-color-bg-brand-solid) no-repeat 50%;
@@ -91,16 +91,21 @@ const style = css`
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
+
+	.item[data-highlighted] {
+		background: rgb(from var(--cz-color-alpha-black) r g b / 0.14);
+	}
+	.item[data-highlighted][part~='error'] {
+		background: var(--cz-color-bg-error);
+	}
 `;
 
 export default style;
 
 export const styles = ({
-	index,
 	itemHeight,
 	auto,
 }: {
-	index?: number;
 	itemHeight: number;
 	auto: boolean;
 }) => css`
@@ -113,10 +118,4 @@ export const styles = ({
 			}
 		`,
 	)}
-	.item[data-index='${index || '0'}'] {
-		background: rgb(from var(--cz-color-alpha-black) r g b / 0.14);
-	}
-	.item[data-index='${index || '0'}'][part~='error'] {
-		background: var(--cz-color-bg-error);
-	}
 `;

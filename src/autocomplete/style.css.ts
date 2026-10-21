@@ -16,7 +16,7 @@ export default css`
 		display: block;
 	}
 
-	:host(:not([variant='inline'])) cosmoz-listbox {
+	:host(:not([variant='inline'])) .listbox {
 		margin-top: var(--cz-spacing);
 	}
 

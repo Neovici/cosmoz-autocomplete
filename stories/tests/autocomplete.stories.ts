@@ -141,7 +141,7 @@ export const FocusOpensListbox: Story = {
 		value: [],
 	},
 	play: async ({ canvas }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Listbox should appear after focus - verify by finding an option
@@ -181,7 +181,7 @@ export const OnChangeCallback: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Wait for listbox to appear and select an item
@@ -204,7 +204,7 @@ export const OnTextCallback: Story = {
 		onText: fn(),
 	},
 	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.type(input, 'Gre');
 
 		await waitFor(() => {
@@ -223,7 +223,7 @@ export const BackspaceRemovesChip: Story = {
 		await canvas.findByShadowText(/Red/u);
 		await canvas.findByShadowText(/Green/u);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Backspace when input is empty should remove last chip
@@ -245,7 +245,7 @@ export const KeyboardSelectItem: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Wait for listbox by finding an option
@@ -300,7 +300,7 @@ export const DisabledState: Story = {
 		await userEvent.click(input!);
 		await new Promise((r) => setTimeout(r, 200));
 
-		const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
+		const listbox = autocomplete.shadowRoot?.querySelector('[role="listbox"]');
 		expect(listbox).toBeFalsy();
 
 		// onChange should NOT have been called
@@ -373,7 +373,7 @@ export const ExternalSearchMode: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, canvasElement }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Type a query that would normally filter items
@@ -382,10 +382,9 @@ export const ExternalSearchMode: Story = {
 		// With externalSearch=true, all items should still appear (no client-side filtering)
 		await waitFor(() => {
 			const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			const options = listbox?.shadowRoot?.querySelectorAll(
-				'.item[role="option"]',
-			);
+			const listbox =
+				autocomplete.shadowRoot?.querySelector('[role="listbox"]');
+			const options = listbox?.querySelectorAll('.item[role="option"]');
 			expect(options?.length).toBe(4);
 		});
 	},
@@ -402,16 +401,15 @@ export const ValueProperty: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, canvasElement }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Both items should appear in the listbox — the value item is deduplicated by id
 		await waitFor(() => {
 			const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			const options = listbox?.shadowRoot?.querySelectorAll(
-				'.item[role="option"]',
-			);
+			const listbox =
+				autocomplete.shadowRoot?.querySelector('[role="listbox"]');
+			const options = listbox?.querySelectorAll('.item[role="option"]');
 			expect(options?.length).toBe(2);
 		});
 	},
@@ -425,7 +423,7 @@ export const OnSelectCallback: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
@@ -466,7 +464,7 @@ export const ProgrammaticClose: Story = {
 		const autocomplete = canvasElement.querySelector<
 			HTMLElement & { opened: boolean }
 		>('cosmoz-autocomplete')!;
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 		await canvas.findByShadowRole('option', { name: /Red/u });
 
@@ -493,7 +491,7 @@ export const OpenedChangedEvent: Story = {
 			events.push(e.detail.value);
 		}) as EventListener);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		await waitFor(() => {
@@ -510,21 +508,21 @@ export const LazyOpenHidesItems: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, canvasElement }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// No items should be shown initially (empty query)
 		await new Promise((r) => setTimeout(r, 200));
 		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		let listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-		let options = listbox?.shadowRoot?.querySelectorAll('.item[role="option"]');
+		let listbox = autocomplete.shadowRoot?.querySelector('[role="listbox"]');
+		let options = listbox?.querySelectorAll('.item[role="option"]');
 		expect(options?.length ?? 0).toBe(0);
 
 		// Type 1 character — threshold met, items should appear
 		await userEvent.type(input, 'R');
 		await waitFor(() => {
-			listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			options = listbox?.shadowRoot?.querySelectorAll('.item[role="option"]');
+			listbox = autocomplete.shadowRoot?.querySelector('[role="listbox"]');
+			options = listbox?.querySelectorAll('.item[role="option"]');
 			expect(options?.length).toBeGreaterThan(0);
 		});
 	},
@@ -544,7 +542,7 @@ export const LazyOpenSuppressesSource: Story = {
 			return Promise.resolve(colors);
 		};
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Source function should NOT be called when query is empty
@@ -558,10 +556,9 @@ export const LazyOpenSuppressesSource: Story = {
 		});
 
 		await waitFor(() => {
-			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			const options = listbox?.shadowRoot?.querySelectorAll(
-				'.item[role="option"]',
-			);
+			const listbox =
+				autocomplete.shadowRoot?.querySelector('[role="listbox"]');
+			const options = listbox?.querySelectorAll('.item[role="option"]');
 			expect(options?.length).toBeGreaterThan(0);
 		});
 	},
@@ -580,7 +577,7 @@ export const TypingClearsValueWhenSelected: Story = {
 		const chipsBefore = autocomplete.shadowRoot?.querySelectorAll('.chip');
 		expect(chipsBefore?.length).toBe(1);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 		await userEvent.keyboard('G');
 
@@ -656,7 +653,7 @@ export const TypingDoesNotClearValueWhenMultiSelect: Story = {
 		const chipsBefore = autocomplete.shadowRoot?.querySelectorAll('.chip');
 		expect(chipsBefore?.length).toBe(2);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 		await userEvent.keyboard('B');
 
@@ -681,7 +678,7 @@ export const TypingDoesNotClearWhenDisabled: Story = {
 		const chipsBefore = autocomplete.shadowRoot?.querySelectorAll('.chip');
 		expect(chipsBefore?.length).toBe(1);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 		await userEvent.keyboard('G');
 
@@ -712,7 +709,7 @@ export const DeselectWithPreserveOrderAndValueProperty: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Item 1 should appear as selected (checked) in the dropdown
@@ -742,7 +739,7 @@ export const DeselectWithValuePropertyWithoutPreserveOrder: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		// Item 1 should appear as selected in the dropdown
@@ -771,7 +768,7 @@ export const Required: Story = {
 		);
 		expect(autocomplete?.hasAttribute('required')).toBe(true);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		expect(input.hasAttribute('required')).toBe(true);
 	},
 };
@@ -783,7 +780,7 @@ export const SelectModeValueIsSingleItem: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, canvasElement, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
@@ -812,7 +809,7 @@ export const MultiModeValueIsArray: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, canvasElement, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });

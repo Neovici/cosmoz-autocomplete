@@ -83,7 +83,7 @@ export const OpenedChangedEvent: Story = {
 			events.push(e.detail.value);
 		}) as EventListener);
 
-		const input = await canvas.findByShadowRole('textbox');
+		const input = await canvas.findByShadowRole('combobox');
 		await userEvent.click(input);
 
 		await waitFor(() => {

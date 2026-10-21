@@ -681,7 +681,7 @@ export const InteractionTest: Story = {
 		});
 
 		await step('Remove chips and select new item', async () => {
-			const input = await canvas.findByShadowRole('textbox');
+			const input = await canvas.findByShadowRole('combobox');
 			await userEvent.click(input);
 			await userEvent.keyboard('{Backspace}{Backspace}');
 			await userEvent.type(input, 'Wh');
@@ -690,7 +690,7 @@ export const InteractionTest: Story = {
 		});
 
 		await step('No results message', async () => {
-			const input = await canvas.findByShadowRole('textbox');
+			const input = await canvas.findByShadowRole('combobox');
 			await userEvent.click(input);
 			await userEvent.tripleClick(input);
 			await userEvent.type(input, 'Asdf');
