@@ -1,4 +1,4 @@
-import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-CXsmnaiJ.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-DK41lmtT.js";const p=e=>e??K,G=ne(S`
+import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De,w as ve,E as R,i as pe,u as se,j as Ie,r as it,p as lt,e as M,k as ct,H as dt,n as ht,l as pt,m as ut,t as we}from"./iframe-C9rdMApk.js";import{u as N,n as E,a as U,e as Z,f as ae,i as qe,t as H,p as re,s as V,b as gt,c as vt,d as de,g as mt,w as he,l as bt}from"./index-C7bFd8bK.js";const p=e=>e??K,G=ne(S`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1833,6 +1833,10 @@ import{A as K,s as ne,c as S,d as C,b as v,f as $,D as at,g as ge,a as x,h as De
 		/* the gap keeps wrapped rows clear of the cap, no slivers */
 		row-gap: calc(var(--cz-spacing) * 2);
 		max-height: 1.5rem; /* tag sm, the default size */
+	}
+
+	:host([variant='inline']) slot[name='chips'] {
+		max-height: 1.6rem; /* inline md */
 	}
 
 	:host([size='sm']) slot[name='chips'],
