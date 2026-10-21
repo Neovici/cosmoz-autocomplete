@@ -200,6 +200,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				setOpened: thru.setOpened,
 				onSelect: thru.onSelect,
 				onChipKeys: thru.onChipKeys,
+				value,
+				valueProperty: thru.valueProperty,
 				defaultIndex: thru.defaultIndex,
 				itemLimit: thru.itemLimit,
 				readonly: isSingle,

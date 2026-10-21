@@ -1,7 +1,14 @@
 import { useActiveDescendant } from '@neovici/cosmoz-utils/hooks/use-active-descendant';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useListNavigation } from '@neovici/cosmoz-utils/hooks/use-list-navigation';
-import { useLayoutEffect, useMemo, useState } from '@pionjs/pion';
+import {
+	useEffect,
+	useLayoutEffect,
+	useMemo,
+	useRef,
+	useState,
+} from '@pionjs/pion';
+import { byValue } from '../listbox/util';
 
 interface Props<I> {
 	items: I[];
@@ -9,6 +16,8 @@ interface Props<I> {
 	setOpened: (opened: boolean) => void;
 	onSelect: (item: I) => void;
 	onChipKeys: (e: KeyboardEvent) => void;
+	value: I[];
+	valueProperty?: string;
 	defaultIndex?: number;
 	itemLimit?: number;
 	readonly?: boolean;
@@ -20,6 +29,8 @@ export const useCombobox = <I>({
 	setOpened,
 	onSelect,
 	onChipKeys,
+	value,
+	valueProperty,
 	defaultIndex,
 	itemLimit = 5,
 	readonly,
@@ -28,6 +39,8 @@ export const useCombobox = <I>({
 		root = host.shadowRoot!,
 		[, rerender] = useState(0),
 		retries = useMemo(() => ({ count: 0 }), []),
+		// Where the highlight lands once the list opens: -1 none, Infinity last
+		openAt = useRef<number>(),
 		{ activeIndex, setActiveIndex, onKeyDown } = useListNavigation({
 			count: items.length,
 			defaultIndex: isNaN(defaultIndex as number) ? 0 : Number(defaultIndex),
@@ -53,6 +66,17 @@ export const useCombobox = <I>({
 		el.setAttribute('aria-expanded', String(expanded));
 	});
 
+	const shown = expanded && items.length > 0;
+	useEffect(() => {
+		if (!shown) return;
+		const intent = openAt.current,
+			at = intent ?? items.findIndex(byValue(value, valueProperty));
+		openAt.current = undefined;
+		if (intent !== undefined || at !== -1) {
+			setActiveIndex(Math.min(at, items.length - 1));
+		}
+	}, [shown]);
+
 	useActiveDescendant({
 		control: input,
 		listbox: () => root.querySelector('[role="listbox"]'),
@@ -77,11 +101,10 @@ export const useCombobox = <I>({
 				};
 
 			if (!expanded) {
-				const arrow = key === 'ArrowDown' || key === 'ArrowUp';
-				if ((plain && arrow) || (altKey && key === 'ArrowDown')) {
-					return toggle(true);
-				}
-				return onChipKeys(e);
+				if (altKey && key === 'ArrowDown') openAt.current = -1;
+				else if (plain && key === 'ArrowUp') openAt.current = Infinity;
+				else if (!(plain && key === 'ArrowDown')) return onChipKeys(e);
+				return toggle(true);
 			}
 			if (key === 'Escape' || (altKey && key === 'ArrowUp')) {
 				return toggle(false);

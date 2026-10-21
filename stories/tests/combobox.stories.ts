@@ -17,6 +17,7 @@ interface Args {
 	value?: { text: string }[];
 	itemLimit?: number;
 	count?: number;
+	preserveOrder?: boolean;
 	onChange?: (v: unknown) => void;
 }
 
@@ -34,6 +35,7 @@ const render = ({
 	value,
 	itemLimit,
 	count,
+	preserveOrder,
 }: Args): TemplateResult =>
 	html`<cosmoz-autocomplete
 		.label=${label}
@@ -42,6 +44,7 @@ const render = ({
 		.limit=${limit}
 		.mode=${mode}
 		.itemLimit=${itemLimit}
+		.preserveOrder=${preserveOrder}
 		text-property="text"
 	></cosmoz-autocomplete>`;
 
@@ -227,6 +230,51 @@ export const ArrowDownOpensAClosedList: Story = {
 		await waitFor(() =>
 			expect(input().getAttribute('aria-expanded')).toBe('true'),
 		);
+	},
+};
+
+const reopen = async (input: HTMLInputElement, keys: string) => {
+	await open(input);
+	await userEvent.keyboard('{Escape}');
+	await waitFor(() =>
+		expect(input.getAttribute('aria-expanded')).toBe('false'),
+	);
+	await userEvent.keyboard(keys);
+	await waitFor(() => expect(input.getAttribute('aria-expanded')).toBe('true'));
+};
+
+export const AltArrowDownOpensWithoutHighlight: Story = {
+	play: async ({ canvasElement }) => {
+		const { input, option, highlighted } = await parts(canvasElement);
+		await reopen(input(), '{Alt>}{ArrowDown}{/Alt}');
+		await waitFor(() => expect(option(0)).toBeTruthy());
+		await new Promise((r) => setTimeout(r, 100));
+		expect(highlighted()).toBeNull();
+		expect(input().ariaActiveDescendantElement).toBeNull();
+
+		await userEvent.keyboard('{ArrowDown}');
+		await waitFor(() => expect(highlighted()).toBe(option(0)));
+	},
+};
+
+export const ArrowUpOpensOnTheLastOption: Story = {
+	play: async ({ canvasElement }) => {
+		const { input, option, highlighted } = await parts(canvasElement);
+		await reopen(input(), '{ArrowUp}');
+		await waitFor(() => expect(highlighted()).toBe(option(5)));
+		expect(input().ariaActiveDescendantElement).toBe(option(5));
+	},
+};
+
+export const OpeningHighlightsTheSelectedOption: Story = {
+	args: { value: [colors[2]], preserveOrder: true },
+	play: async ({ canvasElement }) => {
+		const { input, option, highlighted } = await parts(canvasElement);
+		await open(input());
+		await waitFor(() => expect(highlighted()).toBe(option(2)));
+
+		await reopen(input(), '{ArrowDown}');
+		await waitFor(() => expect(highlighted()).toBe(option(2)));
 	},
 };
 

@@ -6,7 +6,7 @@ Accessible combobox: screen readers now hear the highlighted option.
 
 - The input is a `role="combobox"` with `aria-expanded`, `aria-autocomplete="list"`, and `aria-controls` / `aria-activedescendant` set through ARIA element reflection (requires Chrome 135, Firefox 136, Safari 16.4).
 - The listbox (`role="listbox"`, labelled by `label`, `aria-multiselectable` for multi-select) and its options now render in the autocomplete's own shadow root instead of inside `cosmoz-listbox`. Options report `aria-selected="true|false"`, `aria-setsize` and `aria-posinset`, and the highlighted option has `data-highlighted`.
-- Keys are handled by the focused input instead of the global keybindings context: Arrow keys (and Alt+ArrowDown / ArrowDown to open a closed list), Enter, Escape and Alt+ArrowUp to close, PageUp/PageDown by `item-limit`, and Home/End when the input is read-only (a single selection).
+- Keys are handled by the focused input instead of the global keybindings context: Arrow keys (and Alt+ArrowDown / ArrowDown to open a closed list), Enter, Escape and Alt+ArrowUp to close, PageUp/PageDown by `item-limit`, and Home/End when the input is read-only (a single selection). Opening highlights the selected option, else the first; ArrowUp opens on the last option and Alt+ArrowDown opens without a highlight. Keys are left to the input method while it composes.
 
 Breaking changes:
 
