@@ -8,7 +8,7 @@ export interface ItemRendererOpts<I> {
 	position: Position;
 	highlight: (i: number) => void;
 	select: (item: I) => void;
-	isSelected: (item: I) => void;
+	isSelected: (item: I) => boolean;
 	query?: string;
 	textual: (i: I) => string;
 }
@@ -27,6 +27,7 @@ export const itemRenderer =
 		item: I,
 		i: number,
 		{
+			items,
 			highlight,
 			select,
 			textual = identity as () => string,
@@ -41,7 +42,9 @@ export const itemRenderer =
 				class="item"
 				role="option"
 				part="option"
-				?aria-selected=${isSelected(item)}
+				aria-selected=${isSelected(item) ? 'true' : 'false'}
+				aria-setsize=${items.length}
+				aria-posinset=${i + 1}
 				data-index=${i}
 				@mouseenter=${() => highlight(i)}
 				@click=${() => select(item)}

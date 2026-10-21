@@ -50,8 +50,9 @@ export const useListbox = <I>({
 		),
 		// TODO: investigate if we can drop this
 		items = useMemo(() => _items.slice(), [_items, isSelected]),
-		{ position, highlight, select } = useItems({
+		{ position, highlight, select, announce } = useItems({
 			items,
+			textual,
 			onSelect,
 			defaultIndex: isNaN(defaultIndex as number)
 				? undefined
@@ -61,6 +62,7 @@ export const useListbox = <I>({
 
 	return {
 		position,
+		announce,
 		items,
 		height: Math.min(itemLimit, items.length) * itemHeight,
 		highlight,

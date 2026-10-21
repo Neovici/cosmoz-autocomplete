@@ -67,7 +67,7 @@ const style = css`
 		line-height: var(--cz-text-sm-line-height);
 	}
 
-	:host(:not([multi])) .item[aria-selected] {
+	:host(:not([multi])) .item[aria-selected='true'] {
 		background: rgb(from var(--cz-color-alpha-black) r g b / 0.22);
 	}
 
@@ -82,7 +82,7 @@ const style = css`
 		vertical-align: top;
 	}
 
-	:host([multi]) .item[aria-selected]::before {
+	:host([multi]) .item[aria-selected='true']::before {
 		border-color: var(--cz-color-bg-brand-solid);
 		/* prettier-ignore */
 		background: url("${checkSVG}") var(--cz-color-bg-brand-solid) no-repeat 50%;
@@ -90,6 +90,19 @@ const style = css`
 
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
+	}
+
+	/* live region for arrow-key navigation; visually hidden */
+	.announcer {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+		border: 0;
 	}
 `;
 

@@ -9,6 +9,7 @@ import { noop } from '@neovici/cosmoz-utils/function';
 import { useStyleSheet } from '@neovici/cosmoz-utils/hooks/use-stylesheet';
 import { props } from '@neovici/cosmoz-utils/object';
 import { component, html, useEffect, useRef } from '@pionjs/pion';
+import { t } from 'i18next';
 import { ref } from 'lit-html/directives/ref.js';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
@@ -17,8 +18,15 @@ const ignore = noop;
 
 const Listbox = <I>(host: HTMLElement & Props<I>) => {
 	const listRef = useRef<Element | undefined>(undefined);
-	const { position, items, renderItem, height, itemHeight, setItemHeight } =
-		useListbox(host);
+	const {
+		position,
+		announce,
+		items,
+		renderItem,
+		height,
+		itemHeight,
+		setItemHeight,
+	} = useListbox(host);
 
 	useEffect(() => {
 		const vl = (listRef.current as VirtualizerHostElement | undefined)?.[
@@ -56,6 +64,9 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 	return html`<slot name="search"></slot>
 		<div
 			class="items"
+			role="listbox"
+			aria-label=${t('Options')}
+			aria-multiselectable=${host.hasAttribute('multi') ? 'true' : 'false'}
 			style="min-height: ${height}px"
 			${ref((el) => (listRef.current = el))}
 		>
@@ -66,6 +77,9 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 				scroller: true,
 			})}
 		</div>
+		<span class="announcer" aria-live="polite" aria-atomic="true"
+			>${announce}</span
+		>
 		<slot></slot>`;
 };
 
