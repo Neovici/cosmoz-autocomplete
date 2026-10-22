@@ -52,6 +52,16 @@ export default css`
 		display: contents !important;
 	}
 
+	.hint {
+		font-size: var(--cz-text-xs);
+		color: var(--cz-color-text-tertiary);
+	}
+
+	.error {
+		font-size: var(--cz-text-xs);
+		color: var(--cz-color-text-error);
+	}
+
 	.no-result {
 		font-size: var(--cz-text-sm);
 		line-height: var(--cz-text-sm-line-height);

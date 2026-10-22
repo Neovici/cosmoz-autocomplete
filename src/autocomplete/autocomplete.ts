@@ -8,6 +8,7 @@ import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
+import '../announcer';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
 import './selection';
@@ -75,110 +76,128 @@ const autocomplete = <I>(props: AProps<I>) => {
 				wrap,
 				mode,
 			} = props,
-			isOne = limit === 1;
+			isOne = limit === 1,
+			showHint = !compact && hint && !invalid,
+			showError = !compact && invalid && errorMessage,
+			describedBy = (showError && 'error') || (showHint && 'hint') || undefined;
 
 		return html`<cosmoz-dropdown-next
-			open-on-focus
-			?disabled=${disabled}
-			.opened=${opened}
-			@dropdown-toggle=${onToggle}
-			part="dropdown"
-		>
-			<cosmoz-autocomplete-trigger
-				slot="button"
-				part="input"
-				.label=${label}
-				.hint=${hint}
-				aria-label=${label}
-				.errorMessage=${guard([source$, errorMessage], () =>
-					until(
-						source$.then(
-							() => errorMessage,
-							(e: { message?: string }) => e.message,
-						),
-						errorMessage,
-					),
-				)}
-				?invalid=${guard([source$, invalid], () =>
-					until(
-						source$.then(
-							() => invalid,
-							() => true,
-						),
-						invalid,
-					),
-				)}
-				variant=${ifDefined(variant)}
-				.placeholder=${placeholder}
-				?compact=${compact}
+				open-on-focus
 				?disabled=${disabled}
-				?required=${required}
-				?has-value=${value.length > 0}
-				exportparts=${inputParts}
-				role="button"
-				tabindex=${disabled ? -1 : 0}
-				aria-haspopup="listbox"
-				aria-expanded=${opened ? 'true' : 'false'}
-				?data-wrap=${wrap}
-				size=${ifDefined(size === 'md' ? undefined : size)}
+				.opened=${opened}
+				@dropdown-toggle=${onToggle}
+				part="dropdown"
 			>
-				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix">
-					${when(mode === 'select', () =>
-						chevronDownIcon({
-							styles:
-								'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
-							width: '16',
-							height: '16',
-						}),
-					)}
-				</slot>
-				<cosmoz-autocomplete-chips
-					slot="control"
-					.value=${value}
-					.min=${min}
-					.variant=${variant}
-					.textual=${textual}
-					.onDeselect=${onDeselect}
-					.disabled=${disabled}
-					.chipRenderer=${chipRenderer}
-					.wrap=${wrap}
-					.size=${size}
-				></cosmoz-autocomplete-chips>
-			</cosmoz-autocomplete-trigger>
-
-			${listbox<I>(
-				{
-					...props,
-					items,
-					multi: !isOne,
-				},
-				html`<cosmoz-input
-						slot="search"
-						id="search"
-						part="search-input"
-						placeholder=${t('Search')}
-						aria-label=${t('Search')}
-						.value=${live(text)}
-						@value-changed=${onText}
-						@select=${(e: Event) => e.stopPropagation()}
-						autocomplete="off"
-					></cosmoz-input>
-					${when(
-						loading,
-						() =>
-							html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
-						() =>
-							when(
-								text != null && text.length > 0 && items.length === 0,
-								() =>
-									html`<slot name="no-result">
-										<span class="no-result">${t('No results found')}</span>
-									</slot>`,
+				<cosmoz-autocomplete-trigger
+					slot="button"
+					part="input"
+					.label=${label}
+					aria-label=${label}
+					aria-invalid=${ifDefined(showError ? 'true' : undefined)}
+					aria-describedby=${ifDefined(describedBy)}
+					.errorMessage=${guard([source$, errorMessage, compact], () =>
+						until(
+							source$.then(
+								() => (compact ? errorMessage : undefined),
+								(e: { message?: string }) => (compact ? e.message : undefined),
 							),
-					)}`,
+							compact ? errorMessage : undefined,
+						),
+					)}
+					?invalid=${guard([source$, invalid], () =>
+						until(
+							source$.then(
+								() => invalid,
+								() => true,
+							),
+							invalid,
+						),
+					)}
+					variant=${ifDefined(variant)}
+					.placeholder=${placeholder}
+					?compact=${compact}
+					?disabled=${disabled}
+					?required=${required}
+					?has-value=${value.length > 0}
+					exportparts=${inputParts}
+					role="button"
+					tabindex=${disabled ? -1 : 0}
+					aria-haspopup="listbox"
+					aria-expanded=${opened ? 'true' : 'false'}
+					?data-wrap=${wrap}
+					size=${ifDefined(size === 'md' ? undefined : size)}
+				>
+					<slot name="prefix" slot="prefix"></slot>
+					<slot name="suffix" slot="suffix">
+						${when(mode === 'select', () =>
+							chevronDownIcon({
+								styles:
+									'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
+								width: '16',
+								height: '16',
+							}),
+						)}
+					</slot>
+					<cosmoz-autocomplete-chips
+						slot="control"
+						.value=${value}
+						.min=${min}
+						.variant=${variant}
+						.textual=${textual}
+						.onDeselect=${onDeselect}
+						.disabled=${disabled}
+						.chipRenderer=${chipRenderer}
+						.wrap=${wrap}
+						.size=${size}
+					></cosmoz-autocomplete-chips>
+				</cosmoz-autocomplete-trigger>
+
+				${listbox<I>(
+					{
+						...props,
+						items,
+						multi: !isOne,
+					},
+					html`<cosmoz-input
+							slot="search"
+							id="search"
+							part="search-input"
+							placeholder=${t('Search')}
+							aria-label=${t('Search')}
+							.value=${live(text)}
+							@value-changed=${onText}
+							@select=${(e: Event) => e.stopPropagation()}
+							autocomplete="off"
+						></cosmoz-input>
+						${when(
+							loading,
+							() =>
+								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+							() =>
+								when(
+									text != null && text.length > 0 && items.length === 0,
+									() =>
+										html`<slot name="no-result">
+											<span class="no-result">${t('No results found')}</span>
+										</slot>`,
+								),
+						)}`,
+				)}
+			</cosmoz-dropdown-next>
+			${when(
+				showHint,
+				() => html`<span class="hint" part="hint" id="hint">${hint}</span>`,
 			)}
-		</cosmoz-dropdown-next>`;
+			${when(
+				showError,
+				() =>
+					html`<span class="error" part="error" id="error"
+						>${errorMessage}</span
+					>`,
+			)}
+			<cosmoz-announcer
+				.message=${showError ? errorMessage : ''}
+			></cosmoz-announcer>`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {

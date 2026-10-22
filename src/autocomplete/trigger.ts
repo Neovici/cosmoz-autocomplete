@@ -5,7 +5,6 @@ import { html } from 'lit-html';
 
 export interface TriggerProps {
 	label?: string;
-	hint?: string;
 	errorMessage?: string;
 	invalid?: boolean;
 	disabled?: boolean;
@@ -106,6 +105,18 @@ const fieldFocus = css`
 		min-height: var(--cz-control-height-xl, calc(1lh + var(--cz-spacing) * 4));
 	}
 
+	/* live region for validation announcements; visually hidden */
+	.announcer {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
 	/* Variant: inline hides the placeholder, like #input::placeholder */
 	:host([variant='inline']) {
 		cursor: default;
@@ -129,7 +140,6 @@ const fieldFocus = css`
 const Trigger = (host: HTMLElement & TriggerProps) => {
 	const {
 		label,
-		hint,
 		errorMessage,
 		invalid,
 		placeholder,
@@ -159,7 +169,6 @@ const Trigger = (host: HTMLElement & TriggerProps) => {
 			: html``,
 		{
 			label,
-			hint,
 			invalid,
 			errorMessage,
 			compact: !!compact,

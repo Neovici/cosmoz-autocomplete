@@ -91,19 +91,6 @@ const style = css`
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
-
-	/* live region for arrow-key navigation; visually hidden */
-	.announcer {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0;
-		overflow: hidden;
-		clip: rect(0 0 0 0);
-		white-space: nowrap;
-		border: 0;
-	}
 `;
 
 export default style;

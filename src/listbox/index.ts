@@ -11,6 +11,7 @@ import { props } from '@neovici/cosmoz-utils/object';
 import { component, html, useEffect, useRef } from '@pionjs/pion';
 import { t } from 'i18next';
 import { ref } from 'lit-html/directives/ref.js';
+import '../announcer';
 import style, { styles } from './style.css';
 import { Props, properties, useListbox } from './use-listbox';
 
@@ -77,9 +78,7 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 				scroller: true,
 			})}
 		</div>
-		<span class="announcer" aria-live="polite" aria-atomic="true"
-			>${announce}</span
-		>
+		<cosmoz-announcer .message=${announce}></cosmoz-announcer>
 		<slot></slot>`;
 };
 
