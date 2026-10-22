@@ -1,0 +1,31 @@
+diff --git a/node_modules/@neovici/cosmoz-tag/dist/cosmoz-tag.js b/node_modules/@neovici/cosmoz-tag/dist/cosmoz-tag.js
+index 89f7a62..0f5b770 100644
+--- a/node_modules/@neovici/cosmoz-tag/dist/cosmoz-tag.js
++++ b/node_modules/@neovici/cosmoz-tag/dist/cosmoz-tag.js
+@@ -28,7 +28,7 @@ import { styles } from './styles';
+  * ```
+  */
+ const CosmozTag = (host) => {
+-    const { color, size, disabled, removable } = host;
++    const { color, size, disabled, removable, removeLabel = 'Remove' } = host;
+     const handleRemove = () => {
+         if (disabled)
+             return;
+@@ -48,7 +48,7 @@ const CosmozTag = (host) => {
+ 					icon-only
+ 					slot="suffix"
+ 					class="close"
+-					aria-label="Remove"
++					aria-label=${removeLabel}
+ 					@mousedown=${(e) => e.preventDefault()}
+ 					@click=${handleRemove}
+ 				>
+@@ -57,7 +57,7 @@ const CosmozTag = (host) => {
+ 	</cosmoz-badge>`;
+ };
+ customElements.define('cosmoz-tag', component(CosmozTag, {
+-    observedAttributes: ['color', 'size', 'disabled', 'removable'],
++    observedAttributes: ['color', 'size', 'disabled', 'removable', 'remove-label'],
+     styleSheets: [normalize, styles],
+ }));
+ export { CosmozTag };
