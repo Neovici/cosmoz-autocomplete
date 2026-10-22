@@ -11,15 +11,21 @@ const overflow = (host: HTMLElement) => {
 	for (const chip of chips) {
 		chip.hidden = false;
 	}
-	const input = host.shadowRoot!.querySelector('cosmoz-input')!;
-	const limit = input.shadowRoot
-		?.querySelector('.control')
-		?.getBoundingClientRect();
+	// The pill layout keeps its "add" button after the chips, so leave it room.
+	const row = host.shadowRoot!.querySelector<HTMLElement>('.pill-row');
+	const add = row?.querySelector('cosmoz-dropdown-next');
+	const reserve = add ? add.getBoundingClientRect().width + 48 : 24;
+	const limit = (
+		row ??
+		host
+			.shadowRoot!.querySelector('cosmoz-input')!
+			.shadowRoot?.querySelector('.control')
+	)?.getBoundingClientRect();
 	let i;
 	for (i = 0; i < chips.length; i++) {
 		const chip = chips[i];
 		const bounds = chip.getBoundingClientRect();
-		const isIn = bounds.x + bounds.width <= limit!.x + limit!.width - 24;
+		const isIn = bounds.x + bounds.width <= limit!.x + limit!.width - reserve;
 		if (!isIn) {
 			break;
 		}
@@ -28,6 +34,10 @@ const overflow = (host: HTMLElement) => {
 	const overflown = chips.length - i;
 	badge.querySelector('span')!.textContent = '+' + overflown.toString();
 	badge.hidden = overflown < 1;
+	badge.title = Array.from(chips)
+		.slice(i)
+		.map((chip) => chip.title || chip.textContent?.trim())
+		.join(', ');
 
 	for (; i < chips.length; i++) {
 		chips[i].hidden = true;
@@ -52,7 +62,9 @@ export const useOverflow = <I>({
 
 	useLayoutEffect(() => {
 		if (!enabled) return;
-		const input = host.shadowRoot!.querySelector('cosmoz-input')!;
+		const input =
+			host.shadowRoot!.querySelector('.pill-row') ??
+			host.shadowRoot!.querySelector('cosmoz-input')!;
 		const observer = new ResizeObserver((e) => {
 			setWidth(e[0].contentRect.width);
 		});

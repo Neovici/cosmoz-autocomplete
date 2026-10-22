@@ -836,41 +836,67 @@ export const MultiModeValueIsArray: Story = {
 
 export const PillVariant: Story = {
 	render: () => html`
-		<cosmoz-autocomplete
-			.source=${[{ text: 'Red' }, { text: 'Green' }]}
-			.value=${[{ text: 'Red' }]}
-			text-property="text"
-			variant="pill"
-			.placeholder=${'Label'}
-		></cosmoz-autocomplete>
+		<div style="width: 320px">
+			<cosmoz-autocomplete
+				.source=${Array.from({ length: 12 }, (_, i) => ({
+					text: `Label number ${i + 1}`,
+				}))}
+				.value=${Array.from({ length: 8 }, (_, i) => ({
+					text: `Label number ${i + 1}`,
+				}))}
+				text-property="text"
+				variant="pill"
+				keep-opened
+				.placeholder=${'Label'}
+				.searchPlaceholder=${'Filter labels'}
+			></cosmoz-autocomplete>
+		</div>
 	`,
 	play: async ({ canvasElement, step }) => {
 		const el = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const input = () =>
-			el.shadowRoot!.querySelector<HTMLElement & { focus(): void }>(
-				'cosmoz-input',
-			)!;
-		const control = () =>
-			input().shadowRoot!.querySelector<HTMLElement>('.control')!;
-		const inputEl = () =>
-			input().shadowRoot!.querySelector<HTMLInputElement>('#input')!;
+		const $ = <E extends Element>(sel: string) =>
+			el.shadowRoot!.querySelector<E>(sel)!;
+		const badge = () => $<HTMLElement>('cosmoz-tag.badge');
+		const popover = () =>
+			$('cosmoz-dropdown-next').shadowRoot!.querySelector('[popover]')!;
 
-		await step('places the add pill after the chips with a plus', async () => {
-			await waitFor(() => expect(control()).toBeTruthy());
-			const chip = el.shadowRoot!.querySelector('cosmoz-tag.chip')!;
-			expect(chip.getBoundingClientRect().right).toBeLessThanOrEqual(
-				inputEl().getBoundingClientRect().left,
-			);
-			expect(getComputedStyle(control(), '::before').content).toBe('""');
-		});
+		await step(
+			'collapses what does not fit and keeps the add button',
+			async () => {
+				await waitFor(() => expect(badge().hidden).toBe(false));
+				const add = $<HTMLElement>('.add').getBoundingClientRect();
+				const row = $<HTMLElement>('.pill-row').getBoundingClientRect();
+				expect(add.right).toBeLessThanOrEqual(row.right);
+				expect(badge().title.split(', ').length).toBe(
+					Number(badge().textContent!.trim().slice(1)),
+				);
+			},
+		);
 
-		await step('drops the plus and grows on focus', async () => {
-			const width = inputEl().getBoundingClientRect().width;
-			inputEl().focus();
+		await step('the badge opens the picker', async () => {
+			await userEvent.click(badge());
 			await waitFor(() =>
-				expect(getComputedStyle(control(), '::before').display).toBe('none'),
+				expect(popover().matches(':popover-open')).toBe(true),
 			);
-			expect(inputEl().getBoundingClientRect().width).toBeGreaterThan(width);
 		});
+
+		await step(
+			'searches inside the popover, with checks on selected',
+			async () => {
+				const listbox = () => $('cosmoz-listbox');
+				await waitFor(() =>
+					expect(listbox().hasAttribute('checkmark')).toBe(true),
+				);
+				await userEvent.type(
+					$('cosmoz-input.search').shadowRoot!.querySelector('input')!,
+					'12',
+				);
+				await waitFor(() =>
+					expect(listbox().shadowRoot!.querySelectorAll('.item').length).toBe(
+						1,
+					),
+				);
+			},
+		);
 	},
 };

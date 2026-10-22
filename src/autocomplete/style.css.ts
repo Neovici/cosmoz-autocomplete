@@ -100,58 +100,92 @@ export default css`
 		color: var(--cz-color-text-secondary);
 	}
 
-	/* pill: the chips and an "add" pill share one row; the pill grows into a
-	   text field on focus */
-	cosmoz-input[variant='pill']::part(control) {
+	/* pill: chips followed by an "add" button that opens a search popover */
+	.pill-row {
+		display: flex;
 		align-items: center;
 		gap: var(--cz-spacing);
+		min-width: 0;
 	}
 
-	cosmoz-input[variant='pill'] cosmoz-tag {
+	.pill-row cosmoz-tag {
 		margin-left: 0;
-	}
-
-	cosmoz-input[variant='pill']::part(input) {
-		order: 2;
 		flex: none;
-		width: calc(var(--cz-spacing) * 24);
-		padding-inline-start: calc(var(--cz-spacing) * 6.5);
 	}
 
-	@supports (field-sizing: content) {
-		cosmoz-input[variant='pill']::part(input) {
-			field-sizing: content;
-			width: auto;
-		}
+	.pill-row .badge {
+		cursor: pointer;
 	}
 
-	cosmoz-input[variant='pill']::part(control)::before {
-		content: '';
-		order: 1;
-		position: relative;
-		z-index: 1;
+	.pill-row cosmoz-dropdown-next {
 		flex: none;
-		width: calc(var(--cz-spacing) * 3);
-		height: calc(var(--cz-spacing) * 3);
-		margin-inline: calc(var(--cz-spacing) * 2.5) calc(var(--cz-spacing) * -5.5);
-		background: var(--cz-color-fg-quaternary);
-		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E")
-			center / contain no-repeat;
-		pointer-events: none;
 	}
 
-	cosmoz-input[variant='pill']:focus-within::part(control)::before {
+	.add {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--cz-spacing);
+		margin: 0;
+		padding: calc(var(--cz-spacing) * 0.75) calc(var(--cz-spacing) * 2.5);
+		border: 0;
+		border-radius: var(--cz-radius-full);
+		box-shadow: inset 0 0 0 1px var(--cz-color-border-primary);
+		background: transparent;
+		color: var(--cz-color-text-tertiary);
+		font-family: var(--cz-font-body);
+		font-size: var(--cz-text-xs);
+		line-height: var(--cz-text-xs-line-height);
+		white-space: nowrap;
+		cursor: pointer;
+		transition: background 0.1s;
+	}
+
+	.add svg {
+		color: var(--cz-color-fg-quaternary);
+	}
+
+	.add:hover,
+	:host([opened]) .add {
+		background: var(--cz-color-bg-primary-hover);
+		color: var(--cz-color-text-secondary);
+	}
+
+	.add:focus-visible {
+		outline: none;
+		box-shadow:
+			inset 0 0 0 1px var(--cz-color-border-primary),
+			var(--cz-focus-ring);
+	}
+
+	.add[disabled] {
 		display: none;
 	}
 
-	cosmoz-input[variant='pill']:not([data-one])::part(input):focus {
-		flex: 1 1 calc(var(--cz-spacing) * 32);
-		min-width: calc(var(--cz-spacing) * 16);
-		width: auto;
-		padding-inline-start: calc(var(--cz-spacing) * 2.5);
+	.panel {
+		box-sizing: border-box;
+		width: calc(var(--cz-spacing) * 72);
+		max-width: calc(100vw - var(--cz-spacing) * 4);
+		background: var(--cz-color-bg-primary);
+		border-radius: var(--cz-radius-lg);
+		box-shadow:
+			0 0 0 1px var(--cz-color-border-secondary),
+			var(--cz-shadow-lg);
+		overflow: hidden;
 	}
 
-	:host([variant='pill']) cosmoz-listbox {
-		margin-top: calc(var(--cz-spacing) * 1.5);
+	.search::part(wrap) {
+		border-radius: 0;
+		background: transparent;
+		box-shadow: inset 0 -1px 0 var(--cz-color-border-secondary);
+	}
+
+	.search svg {
+		color: var(--cz-color-fg-quaternary);
+	}
+
+	.panel cosmoz-listbox {
+		margin-top: 0;
+		border-radius: 0;
+		box-shadow: none;
 	}
 `;
