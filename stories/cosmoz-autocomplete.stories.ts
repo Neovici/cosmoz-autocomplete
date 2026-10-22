@@ -12,7 +12,7 @@ import { swedishWords } from './swedish-words';
 
 interface AutocompleteArgs {
 	source: { text: string }[];
-	variant?: 'default' | 'cell' | 'inline';
+	variant?: 'default' | 'cell' | 'inline' | 'pill';
 	limit?: number;
 	textProperty: string;
 	min?: number;
@@ -141,7 +141,7 @@ const meta: Meta<AutocompleteArgs> = {
 		},
 		variant: {
 			control: 'select',
-			options: ['default', 'inline', 'cell'],
+			options: ['default', 'inline', 'cell', 'pill'],
 			description: 'Visual variant',
 			table: { defaultValue: { summary: 'default' } },
 		},
@@ -276,6 +276,31 @@ export const Default: Story = {
 			</div>
 		</div>
 	`,
+};
+
+export const Pill: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Pill variant</h1>
+			<cosmoz-autocomplete
+				.label=${'Labels'}
+				.placeholder=${'Label'}
+				.source=${colors}
+				text-property="text"
+				variant="pill"
+				keep-opened
+				.value=${[colors[0], colors[3]]}
+			></cosmoz-autocomplete>
+		</div>
+	`,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Chips and an "add" pill on one row, e.g. labels in a header. The pill grows into a text field on focus.',
+			},
+		},
+	},
 };
 
 export const Inline: Story = {
