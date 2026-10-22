@@ -1,4 +1,4 @@
-import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De,w as me,E as O,i as ue,u as ae,j as qe,r as it,p as lt,e as j,k as ct,H as dt,n as ht,l as pt,m as ut,t as de}from"./iframe-Ce3JGcxz.js";import{u as N,n as k,a as Z,e as Q,f as ie,i as Be,t as K,b as W,p as ne,s as G,c as gt,d as vt,g as he,h as mt,w as pe,l as bt}from"./index-DL2_giCv.js";const c=e=>e??X,J=se(_`
+import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De,w as me,E as O,i as ue,u as ae,j as qe,r as it,p as lt,e as j,k as ct,H as dt,n as ht,l as pt,m as ut,t as de}from"./iframe-Brn7nkGt.js";import{u as N,n as k,a as Z,e as Q,f as ie,i as Be,t as K,b as W,p as ne,s as G,c as gt,d as vt,g as he,h as mt,w as pe,l as bt}from"./index-JO-k7HPR.js";const c=e=>e??X,J=se(_`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1216,12 +1216,14 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 				>
 					<slot ${$e(s)}></slot>
 				</div>`}
-	`,jt=e=>Yt(Mt(e));customElements.define("cosmoz-dropdown-next",T(jt,{styleSheets:[Nt],observedAttributes:["placement","disabled","passthrough","open-on-hover","open-on-focus"],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const le=Q(class extends Be{constructor(e){if(super(e),e.type!==K.PROPERTY&&e.type!==K.ATTRIBUTE&&e.type!==K.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!it(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===O||t===X)return t;const o=e.element,r=e.name;if(e.type===K.PROPERTY){if(t===o[r])return O}else if(e.type===K.BOOLEAN_ATTRIBUTE){if(!!t===o.hasAttribute(r))return O}else if(e.type===K.ATTRIBUTE&&o.getAttribute(r)===t+"")return O;return lt(e),t}}),be=(e,{hint:t,label:o,invalid:r,errorMessage:n,compact:s,required:l,labelFor:d="input"})=>g`
+	`,jt=e=>Yt(Mt(e));customElements.define("cosmoz-dropdown-next",T(jt,{styleSheets:[Nt],observedAttributes:["placement","disabled","passthrough","open-on-hover","open-on-focus"],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const le=Q(class extends Be{constructor(e){if(super(e),e.type!==K.PROPERTY&&e.type!==K.ATTRIBUTE&&e.type!==K.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!it(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===O||t===X)return t;const o=e.element,r=e.name;if(e.type===K.PROPERTY){if(t===o[r])return O}else if(e.type===K.BOOLEAN_ATTRIBUTE){if(!!t===o.hasAttribute(r))return O}else if(e.type===K.ATTRIBUTE&&o.getAttribute(r)===t+"")return O;return lt(e),t}}),be=(e,{label:t,labelFor:o="input",hint:r,invalid:n,errorMessage:s,compact:l,required:d})=>g`
 		<!-- label: visually hidden in compact mode -->
-		${k(o,()=>g`<label for=${c(d)} part="label"
-					class=${c(s?"sr-only":void 0)}
-					>${o}
-					${k(l&&!s,()=>g`<span class="required">*</span>`)}
+		${k(t,()=>g`<label
+					for=${c(o)}
+					part="label"
+					class=${c(l?"sr-only":void 0)}
+					>${t}
+					${k(d&&!l,()=>g`<span class="required">*</span>`)}
 				</label>`)}
 		<div class="wrap" part="wrap">
 			<slot name="prefix"></slot>
@@ -1230,9 +1232,9 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 				${e}
 			</div>
 			<!-- compact: tooltip always visible, red icon when invalid -->
-			${k(s&&r&&n,()=>g`<cosmoz-tooltip
+			${k(l&&n&&s,()=>g`<cosmoz-tooltip
 						placement="top"
-						description=${n}
+						description=${s}
 						delay="300"
 					>
 						${_t({width:"16px",height:"16px"})}
@@ -1241,9 +1243,19 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 			<slot name="suffix"></slot>
 		</div>
 		<!-- hint: read with the field while valid; visually hidden in compact -->
-		${k(t&&!r,()=>g`<span class=${s?"hint sr-only":"hint"} part="hint" id="hint">${t}</span>`)}
+		${k(r&&!n,()=>g`<span
+					class=${l?"hint sr-only":"hint"}
+					part="hint"
+					id="hint"
+					>${r}</span
+				>`)}
 		<!-- error: replaces hint when invalid; visually hidden in compact -->
-		${k(r&&n,()=>g`<span class=${s?"error sr-only":"error"} part="error" id="error">${n}</span>`)}
+		${k(n&&s,()=>g`<span
+					class=${l?"error sr-only":"error"}
+					part="error"
+					id="error"
+					>${s}</span
+				>`)}
 	`,Ie=["autocomplete","readonly","disabled","maxlength","invalid"],fe=W`
 	/* === Host === */
 
@@ -1603,7 +1615,7 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 	slot[name='suffix']::slotted(*) {
 		padding-inline-end: calc(var(--cz-spacing) * 2);
 	}
-`,Ht=e=>j(()=>{if(e==null)return;const t=new RegExp(e,"u");return o=>{!o.defaultPrevented&&o.data&&!t.test(o.data)&&o.preventDefault()}},[e]),Ut=ct(class extends dt{values;constructor(e,t,o,r){super(e,t),Object.assign(t.host,o),this.values=r}update(e,t){this.hasChanged(t)&&(this.values=t,Object.assign(this.state.host,e))}hasChanged(e=[]){return e.some((t,o)=>this.values[o]!==t)}}),Vt=/([A-Z])/gu,ke=(e,t,o)=>{e[t]=o,e.dispatchEvent(new CustomEvent(t.replace(Vt,"-$1").toLowerCase()+"-changed",{detail:{value:o}}))},Fe=e=>{const t=N(void 0),o=x(a=>t.current=a,[]),r=e.shadowRoot,n=x(a=>e.dispatchEvent(new Event(a.type,{bubbles:a.bubbles})),[]),s=x(a=>ke(e,"value",a.target.value),[]),l=x(a=>ke(e,"focused",a.type==="focus"),[]),d=x(()=>{const a=t.current?.checkValidity();return e.toggleAttribute("invalid",!a),a},[]);return Ut({validate:d},[d]),$(()=>{const a=i=>{i.composedPath()[0]?.closest?.("input, textarea, label")||(i.preventDefault(),t.current?.focus())};return r.addEventListener("mousedown",a),()=>r.removeEventListener("mousedown",a)},[]),{onChange:n,onFocus:l,onInput:s,onRef:o}},Kt=({placeholder:e})=>e||" ",Zt=(e,t)=>t??(e==="date"?"9999-12-31":void 0),Gt=["type","variant","size","hint","compact","required","pattern","allowed-pattern","min","max","step","autosize","label","placeholder",...Ie],Xt=e=>{const{type:t="text",pattern:o,allowedPattern:r,autocomplete:n,value:s,readonly:l,disabled:d,min:a,max:i,step:u,maxlength:v,required:b,hint:m,invalid:f,errorMessage:C}=e,{onChange:y,onFocus:z,onInput:R,onRef:E}=Fe(e),S=Ht(r),q=m&&!f,P=f&&C,p=P&&"error"||q&&"hint"||void 0;return e.toggleAttribute("has-value",!!s),be(g`
+`,Ht=e=>j(()=>{if(e==null)return;const t=new RegExp(e,"u");return o=>{!o.defaultPrevented&&o.data&&!t.test(o.data)&&o.preventDefault()}},[e]),Ut=ct(class extends dt{values;constructor(e,t,o,r){super(e,t),Object.assign(t.host,o),this.values=r}update(e,t){this.hasChanged(t)&&(this.values=t,Object.assign(this.state.host,e))}hasChanged(e=[]){return e.some((t,o)=>this.values[o]!==t)}}),Vt=/([A-Z])/gu,ke=(e,t,o)=>{e[t]=o,e.dispatchEvent(new CustomEvent(t.replace(Vt,"-$1").toLowerCase()+"-changed",{detail:{value:o}}))},Fe=e=>{const t=N(void 0),o=x(a=>t.current=a,[]),r=e.shadowRoot,n=x(a=>e.dispatchEvent(new Event(a.type,{bubbles:a.bubbles})),[]),s=x(a=>ke(e,"value",a.target.value),[]),l=x(a=>ke(e,"focused",a.type==="focus"),[]),d=x(()=>{const a=t.current?.checkValidity();return e.toggleAttribute("invalid",!a),a},[]);return Ut({validate:d},[d]),$(()=>{const a=i=>{i.composedPath()[0]?.closest?.("input, textarea, label")||(i.preventDefault(),t.current?.focus())};return r.addEventListener("mousedown",a),()=>r.removeEventListener("mousedown",a)},[]),{onChange:n,onFocus:l,onInput:s,onRef:o}},Kt=({placeholder:e})=>e||" ",Zt=(e,t)=>t??(e==="date"?"9999-12-31":void 0),Gt=["type","variant","size","hint","compact","required","pattern","allowed-pattern","min","max","step","autosize","label","placeholder",...Ie,"aria-label"],Xt=e=>{const{type:t="text",pattern:o,allowedPattern:r,autocomplete:n,value:s,readonly:l,disabled:d,min:a,max:i,step:u,maxlength:v,required:b,hint:m,invalid:f,errorMessage:C}=e,{onChange:y,onFocus:z,onInput:R,onRef:E}=Fe(e),S=Ht(r),q=m&&!f,P=f&&C,p=P&&"error"||q&&"hint"||void 0;return e.toggleAttribute("has-value",!!s),be(g`
 			<input
 				${Z(E)}
 				style="--chars: ${s?.toString()?.length??0}ch"

@@ -1,4 +1,4 @@
-import{b as l}from"./iframe-Ce3JGcxz.js";import"./index-CuiXn-2y.js";import"./preload-helper-PPVm8Dsz.js";import"./index-tdJih139.js";import"./index-DL2_giCv.js";const{expect:o,userEvent:m,waitFor:d}=__STORYBOOK_MODULE_TEST__,s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],i=({source:t,textProperty:e="text",value:n=[],compact:u,keepOpened:p})=>l`
+import{b as l}from"./iframe-Brn7nkGt.js";import"./index-BFfTuhdA.js";import"./preload-helper-PPVm8Dsz.js";import"./index-VIGwaZWz.js";import"./index-JO-k7HPR.js";const{expect:o,userEvent:m,waitFor:d}=__STORYBOOK_MODULE_TEST__,s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],i=({source:t,textProperty:e="text",value:n=[],compact:u,keepOpened:p})=>l`
     <cosmoz-autocomplete-excluding
         .source=${t}
         .textProperty=${e}
