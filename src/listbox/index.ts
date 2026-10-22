@@ -69,6 +69,7 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 			aria-label=${t('Options')}
 			aria-multiselectable=${host.hasAttribute('multi') ? 'true' : 'false'}
 			style="min-height: ${height}px"
+			tabindex="-1"
 			${ref((el) => (listRef.current = el))}
 		>
 			<div virtualizer-sizer></div>

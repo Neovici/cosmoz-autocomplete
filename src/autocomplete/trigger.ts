@@ -2,6 +2,7 @@ import { render, styles } from '@neovici/cosmoz-input';
 import { tagged as css, sheet } from '@neovici/cosmoz-utils';
 import { component, useEffect } from '@pionjs/pion';
 import { html } from 'lit-html';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 
 export interface TriggerProps {
 	label?: string;
@@ -13,6 +14,12 @@ export interface TriggerProps {
 	compact?: boolean;
 	required?: boolean;
 	hasValue?: boolean;
+	// aria channels: the dropdown forwards expanded onto the host, the
+	// wrapper writes invalid/describedby; the surface re-emits them
+	ariaExpanded?: string;
+	ariaHaspopup?: string;
+	ariaInvalid?: string;
+	ariaDescribedby?: string;
 }
 
 // The trigger opens the dropdown. Keys only count when they land on the
@@ -105,6 +112,18 @@ const fieldFocus = css`
 		min-height: var(--cz-control-height-xl, calc(1lh + var(--cz-spacing) * 4));
 	}
 
+	/* the open surface is the control's focus+click zone, overlaid so the
+	   chips slot after it stays first in the field's flat tree after it;
+	   the tags ride above it via their row's ::slotted rule */
+	.surface {
+		position: absolute;
+		inset: 0;
+	}
+
+	.surface:focus-visible {
+		outline: none;
+	}
+
 	/* live region for validation announcements; visually hidden */
 	.announcer {
 		position: absolute;
@@ -146,7 +165,25 @@ const Trigger = (host: HTMLElement & TriggerProps) => {
 		compact,
 		required,
 		hasValue,
+		disabled,
 	} = host;
+	// the surface is the closed field's open-affordance stop; once the
+	// popup holds focus the field collapses to the search as its single stop
+	const surface = html`<div
+			class="surface"
+			role="button"
+			tabindex=${disabled || host.ariaExpanded === 'true' ? '-1' : '0'}
+			aria-haspopup="listbox"
+			aria-expanded=${host.ariaExpanded ?? 'false'}
+			aria-label=${label ?? ''}
+			aria-invalid=${ifDefined(host.ariaInvalid)}
+			aria-describedby=${ifDefined(host.ariaDescribedby)}
+		>
+			${placeholder != null && !hasValue
+				? html`<span class="placeholder">${placeholder}</span>`
+				: html``}
+		</div>
+		<slot name="chips"></slot>`;
 
 	useEffect(() => {
 		const onKeydown = (e: KeyboardEvent) => {
@@ -163,27 +200,23 @@ const Trigger = (host: HTMLElement & TriggerProps) => {
 		return () => host.removeEventListener('keydown', onKeydown);
 	}, []);
 
-	return render(
-		placeholder != null && !hasValue
-			? html`<span class="placeholder">${placeholder}</span>`
-			: html``,
-		{
-			label,
-			invalid,
-			errorMessage,
-			compact: !!compact,
-			required: !!required,
-			// no input element in this shadow: the for="input" reference
-			// would dangle
-			labelFor: null,
-		},
-	);
+	return render(surface, {
+		label,
+		invalid,
+		errorMessage,
+		compact: !!compact,
+		required: !!required,
+		// no input element in this shadow: the for="input" reference
+		// would dangle
+		labelFor: null,
+	});
 };
 
 customElements.define(
 	'cosmoz-autocomplete-trigger',
 	component(Trigger, {
 		styleSheets: [sheet(styles), sheet(fieldFocus)],
+		shadowRootInit: { mode: 'open' as const, delegatesFocus: true },
 		observedAttributes: [
 			'variant',
 			'disabled',
@@ -191,6 +224,10 @@ customElements.define(
 			'compact',
 			'required',
 			'has-value',
+			'aria-expanded',
+			'aria-haspopup',
+			'aria-invalid',
+			'aria-describedby',
 		] as const,
 	}),
 );

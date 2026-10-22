@@ -138,6 +138,9 @@ const selectionRowStyle = css`
 		align-items: center;
 		flex: none;
 		margin-left: var(--cz-spacing);
+		/* the trigger's overlay surface must stay under the chips */
+		position: relative;
+		z-index: 1;
 	}
 
 	:host([variant='inline']) ::slotted(cosmoz-tag:first-of-type) {

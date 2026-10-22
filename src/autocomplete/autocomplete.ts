@@ -120,10 +120,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 					?required=${required}
 					?has-value=${value.length > 0}
 					exportparts=${inputParts}
-					role="button"
-					tabindex=${disabled ? -1 : 0}
-					aria-haspopup="listbox"
-					aria-expanded=${opened ? 'true' : 'false'}
+					slot="button"
 					?data-wrap=${wrap}
 					size=${ifDefined(size === 'md' ? undefined : size)}
 				>
@@ -139,7 +136,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 						)}
 					</slot>
 					<cosmoz-autocomplete-chips
-						slot="control"
+						slot="chips"
 						.value=${value}
 						.min=${min}
 						.variant=${variant}

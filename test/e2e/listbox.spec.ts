@@ -66,17 +66,10 @@ test.describe('listbox semantics', () => {
 		await page.keyboard.type('re'); // [Red, Green]; Red is already selected
 		await page.keyboard.press('ArrowDown'); // to Green
 		await page.keyboard.press('Enter'); // select Green
-		await expect
-			.poll(() =>
-				page.evaluate(() => {
-					let el: Element | null = document.activeElement;
-					while (el && el.shadowRoot && el.shadowRoot.activeElement) {
-						el = el.shadowRoot.activeElement;
-					}
-					return el ? el.tagName.toLowerCase() : '';
-				}),
-			)
-			.toBe('cosmoz-autocomplete-trigger');
+		// focus restores to the open surface inside the trigger
+		await expect(
+			page.getByRole('button', { name: 'Choose color', exact: true }),
+		).toBeFocused();
 		await expect(page.locator('cosmoz-autocomplete')).toContainText('Green');
 	});
 });
