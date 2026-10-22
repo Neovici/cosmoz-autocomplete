@@ -14,6 +14,7 @@ interface Props<I> {
 	textual: (i: I) => string;
 	disabled?: boolean;
 	chipRenderer?: ChipRenderer<I>;
+	interactiveBadge?: boolean;
 }
 
 export const selection = <I>({
@@ -23,6 +24,7 @@ export const selection = <I>({
 	textual,
 	disabled,
 	chipRenderer = defaultChipRenderer,
+	interactiveBadge,
 }: Props<I>) => [
 	...values.filter(Boolean).map((value) =>
 		chipRenderer({
@@ -37,7 +39,7 @@ export const selection = <I>({
 		item: null,
 		content: html`<span></span>`,
 		className: 'badge',
-		disabled: true,
+		disabled: !interactiveBadge,
 		slot: 'control',
 		hidden: true,
 	}),

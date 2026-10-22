@@ -285,6 +285,7 @@ export const Pill: Story = {
 			<cosmoz-autocomplete
 				.label=${'Labels'}
 				.placeholder=${'Label'}
+				.searchPlaceholder=${'Filter colors'}
 				.source=${colors}
 				text-property="text"
 				variant="pill"
@@ -297,7 +298,7 @@ export const Pill: Story = {
 		docs: {
 			description: {
 				story:
-					'Chips and an "add" pill on one row, e.g. labels in a header. The pill grows into a text field on focus.',
+					'Chips followed by an "add" button, e.g. labels in a view header. The button opens a popover with its own search field; selected options get a check. Chips that do not fit collapse into a "+N" badge that lists them on hover and opens the popover on click.',
 			},
 		},
 	},

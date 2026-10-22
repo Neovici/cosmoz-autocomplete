@@ -169,6 +169,7 @@ export const useAutocomplete = <I>({
 	return {
 		limit,
 		opened,
+		setOpened,
 		query,
 		textual,
 		value,
