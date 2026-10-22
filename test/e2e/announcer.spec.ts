@@ -56,9 +56,7 @@ test.describe('trigger announcements', () => {
 		await expect(announcer).toHaveText('Required');
 	});
 
-	test('compact shows neither the announcement nor the invalid state', async ({
-		page,
-	}) => {
+	test('compact announces and describes the error', async ({ page }) => {
 		await page.goto(story('autocomplete--playground'));
 		await page.locator('cosmoz-autocomplete').waitFor();
 		await page.evaluate(() => {
@@ -67,9 +65,14 @@ test.describe('trigger announcements', () => {
 				.toggleAttribute('compact', true);
 		});
 		await setError(page, 'Required', true);
-		await expect(region(page)).toHaveText('');
-		await expect(
-			page.locator('cosmoz-autocomplete-trigger'),
-		).not.toHaveAttribute('aria-invalid', 'true');
+		await expect(region(page)).toHaveText('Required', { timeout: 800 });
+		await expect(page.locator('cosmoz-autocomplete-trigger')).toHaveAttribute(
+			'aria-invalid',
+			'true',
+		);
+		await expect(page.locator('cosmoz-autocomplete-trigger')).toHaveAttribute(
+			'aria-describedby',
+			'error',
+		);
 	});
 });

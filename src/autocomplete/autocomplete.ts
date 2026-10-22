@@ -77,8 +77,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 				mode,
 			} = props,
 			isOne = limit === 1,
-			showHint = !compact && hint && !invalid,
-			showError = !compact && invalid && errorMessage,
+			showHint = hint && !invalid,
+			showError = invalid && errorMessage,
 			describedBy = (showError && 'error') || (showHint && 'hint') || undefined;
 
 		return html`<cosmoz-dropdown-next
@@ -93,7 +93,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 					part="input"
 					.label=${label}
 					aria-label=${label}
-					aria-invalid=${ifDefined(showError ? 'true' : undefined)}
+					aria-invalid=${ifDefined(invalid ? 'true' : undefined)}
 					aria-describedby=${ifDefined(describedBy)}
 					.errorMessage=${guard([source$, errorMessage, compact], () =>
 						until(
@@ -186,12 +186,21 @@ const autocomplete = <I>(props: AProps<I>) => {
 			</cosmoz-dropdown-next>
 			${when(
 				showHint,
-				() => html`<span class="hint" part="hint" id="hint">${hint}</span>`,
+				() =>
+					html`<span
+						class=${compact ? 'hint sr-only' : 'hint'}
+						part="hint"
+						id="hint"
+						>${hint}</span
+					>`,
 			)}
 			${when(
 				showError,
 				() =>
-					html`<span class="error" part="error" id="error"
+					html`<span
+						class=${compact ? 'error sr-only' : 'error'}
+						part="error"
+						id="error"
 						>${errorMessage}</span
 					>`,
 			)}
