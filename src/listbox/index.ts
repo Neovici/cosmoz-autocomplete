@@ -75,15 +75,17 @@ customElements.define(
 
 interface ListboxProps<I> extends Props<I> {
 	multi?: boolean;
+	checkmark?: boolean;
 }
 
 export const listbox = <I>(
-	{ multi, ...thru }: ListboxProps<I>,
+	{ multi, checkmark, ...thru }: ListboxProps<I>,
 	content: unknown,
 ) =>
 	html`<cosmoz-listbox
 		part="listbox"
 		?multi=${multi}
+		?checkmark=${checkmark}
 		...=${spreadProps(props(properties)(thru))}
 		>${content}</cosmoz-listbox
 	>`;

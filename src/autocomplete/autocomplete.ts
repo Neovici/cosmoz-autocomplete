@@ -1,5 +1,9 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
-import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
+import {
+	chevronDownIcon,
+	plusIcon,
+	searchMdIcon,
+} from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
@@ -18,12 +22,13 @@ import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
-	variant?: 'default' | 'cell' | 'inline';
+	variant?: 'default' | 'cell' | 'inline' | 'pill';
 	invalid?: boolean;
 	errorMessage?: string;
 	hint?: string;
 	label?: string;
 	placeholder?: string;
+	searchPlaceholder?: string;
 	compact?: boolean;
 	required?: boolean;
 	showSingle?: boolean;
@@ -57,6 +62,117 @@ const shouldShowDropdown = <I>({
 	if (!opened) return false;
 	if (isSingle && !showSingle) return false;
 	return hasResultsOrQuery;
+};
+
+const noResult = () =>
+	html`<slot name="no-result">
+		<span class="no-result">${t('No results found')}</span>
+	</slot>`;
+
+// Light-dismissing the popover drops focus to the body; hand it back to the
+// add button when it was inside the popover.
+const returnFocus = (e: ToggleEvent) => {
+	if (e.newState !== 'closed') return;
+	const dropdown = e.currentTarget as HTMLElement;
+	if (
+		!dropdown.matches(':focus-within') &&
+		document.activeElement !== document.body
+	) {
+		return;
+	}
+	dropdown.querySelector<HTMLElement>('.add')?.focus();
+};
+
+/**
+ * Chips followed by an "add" button; the button opens a popover with its own
+ * search field above the options.
+ */
+const pill = <I>(props: AProps<I>) => {
+	const {
+		opened,
+		setOpened,
+		disabled,
+		label,
+		placeholder,
+		searchPlaceholder,
+		text,
+		onText,
+		onToggle,
+		onDeselect,
+		value,
+		min,
+		textual,
+		chipRenderer,
+		items,
+		loading,
+	} = props;
+
+	return html`<div
+		class="pill-row"
+		part="row"
+		@click=${(e: Event) =>
+			!disabled && (e.target as Element).closest?.('.badge') && setOpened(true)}
+	>
+		${selection({
+			value,
+			min,
+			isOne: false,
+			onDeselect,
+			textual,
+			disabled,
+			chipRenderer,
+			interactiveBadge: !disabled,
+		})}
+		<cosmoz-dropdown-next
+			?disabled=${disabled}
+			.opened=${opened}
+			@dropdown-toggle=${(e: ToggleEvent) => {
+				onToggle(e);
+				returnFocus(e);
+			}}
+			part="dropdown"
+		>
+			<button
+				slot="button"
+				class="add"
+				part="add"
+				type="button"
+				?disabled=${disabled}
+				aria-haspopup="dialog"
+				aria-expanded=${opened ? 'true' : 'false'}
+			>
+				${plusIcon({ width: '12', height: '12' })}
+				<span>${placeholder ?? label}</span>
+			</button>
+			<div class="panel" part="panel">
+				<cosmoz-input
+					class="search"
+					part="search"
+					autofocus
+					compact
+					.label=${label ?? placeholder}
+					.placeholder=${searchPlaceholder ?? t('Search')}
+					.value=${live(text)}
+					@value-changed=${onText}
+					autocomplete="off"
+				>
+					${searchMdIcon({ slot: 'prefix', width: '16', height: '16' })}
+				</cosmoz-input>
+				${when(opened, () =>
+					listbox<I>(
+						{ ...props, items, multi: true, checkmark: true },
+						when(
+							loading,
+							() =>
+								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
+							() => when(text && items.length === 0, () => noResult()),
+						),
+					),
+				)}
+				<slot name="footer"></slot>
+			</div>
+		</cosmoz-dropdown-next>
+	</div>`;
 };
 
 const autocomplete = <I>(props: AProps<I>) => {
@@ -178,10 +294,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 							() =>
 								when(
 									text != null && text.length > 0 && items.length === 0,
-									() =>
-										html`<slot name="no-result">
-											<span class="no-result">${t('No results found')}</span>
-										</slot>`,
+									() => noResult(),
 								),
 						),
 					),
@@ -194,7 +307,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			...useAutocomplete(props),
 		};
 		useOverflow(thru);
-		return autocomplete(thru);
+		return props.variant === 'pill' ? pill(thru) : autocomplete(thru);
 	},
 	observedAttributes = [
 		'variant',

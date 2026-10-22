@@ -11,23 +11,33 @@ const overflow = (host: HTMLElement) => {
 	for (const chip of chips) {
 		chip.hidden = false;
 	}
-	const input = host.shadowRoot!.querySelector('cosmoz-input')!;
-	const limit = input.shadowRoot
-		?.querySelector('.control')
-		?.getBoundingClientRect();
-	let i;
-	for (i = 0; i < chips.length; i++) {
-		const chip = chips[i];
+	// The pill layout keeps its "add" button after the chips, so leave it room;
+	// room for the +N badge is only needed once something overflows.
+	const row = host.shadowRoot!.querySelector<HTMLElement>('.pill-row');
+	const add = row?.querySelector('cosmoz-dropdown-next');
+	const addWidth = add ? add.getBoundingClientRect().width + 8 : 0;
+	const limit = (row ??
+		host
+			.shadowRoot!.querySelector('cosmoz-input')!
+			.shadowRoot?.querySelector('.control'))!.getBoundingClientRect();
+	const fits = (reserve: number) => (chip: HTMLElement) => {
 		const bounds = chip.getBoundingClientRect();
-		const isIn = bounds.x + bounds.width <= limit!.x + limit!.width - 24;
-		if (!isIn) {
-			break;
-		}
+		return bounds.x + bounds.width <= limit.x + limit.width - reserve;
+	};
+	const all = Array.from(chips);
+	let i = all.length;
+	if (!all.every(fits(add ? addWidth : 24))) {
+		const isIn = fits(add ? addWidth + 48 : 24);
+		i = all.findIndex((chip) => !isIn(chip));
 	}
 
 	const overflown = chips.length - i;
 	badge.querySelector('span')!.textContent = '+' + overflown.toString();
 	badge.hidden = overflown < 1;
+	badge.title = Array.from(chips)
+		.slice(i)
+		.map((chip) => chip.title || chip.textContent?.trim())
+		.join(', ');
 
 	for (; i < chips.length; i++) {
 		chips[i].hidden = true;
@@ -52,7 +62,9 @@ export const useOverflow = <I>({
 
 	useLayoutEffect(() => {
 		if (!enabled) return;
-		const input = host.shadowRoot!.querySelector('cosmoz-input')!;
+		const input =
+			host.shadowRoot!.querySelector('.pill-row') ??
+			host.shadowRoot!.querySelector('cosmoz-input')!;
 		const observer = new ResizeObserver((e) => {
 			setWidth(e[0].contentRect.width);
 		});
