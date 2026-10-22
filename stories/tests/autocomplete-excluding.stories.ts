@@ -74,7 +74,7 @@ export const OpenedChangedEvent: Story = {
 		textProperty: 'text',
 		value: [],
 	},
-	play: async ({ canvas }) => {
+	play: async () => {
 		const autocomplete = document.querySelector<
 			HTMLElement & { opened: boolean }
 		>('cosmoz-autocomplete-excluding')!;
@@ -83,8 +83,10 @@ export const OpenedChangedEvent: Story = {
 			events.push(e.detail.value);
 		}) as EventListener);
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		const trigger = autocomplete.shadowRoot!.querySelector(
+			'cosmoz-autocomplete-trigger',
+		)!;
+		await userEvent.click(trigger);
 
 		await waitFor(() => {
 			expect(events).toContain(true);
@@ -102,8 +104,10 @@ export const CompactState: Story = {
 		const autocomplete = document.querySelector(
 			'cosmoz-autocomplete-excluding',
 		)!;
-		const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
+		const trigger = autocomplete.shadowRoot?.querySelector(
+			'cosmoz-autocomplete-trigger',
+		);
 
-		expect(input?.hasAttribute('compact')).toBe(true);
+		expect(trigger?.hasAttribute('compact')).toBe(true);
 	},
 };

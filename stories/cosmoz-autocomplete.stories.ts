@@ -703,8 +703,16 @@ export const InteractionTest: Story = {
 		});
 
 		await step('Remove chips and select new item', async () => {
-			const input = await canvas.findByShadowRole('textbox');
-			await userEvent.click(input);
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			)!;
+			const trigger = autocomplete.shadowRoot!.querySelector(
+				'cosmoz-autocomplete-trigger',
+			)!;
+			await userEvent.click(trigger);
+			const input = await canvas.findByShadowRole('textbox', {
+				name: 'Search',
+			});
 			await userEvent.keyboard('{Backspace}{Backspace}');
 			await userEvent.type(input, 'Wh');
 			await userEvent.keyboard('{Enter}');
@@ -712,8 +720,16 @@ export const InteractionTest: Story = {
 		});
 
 		await step('No results message', async () => {
-			const input = await canvas.findByShadowRole('textbox');
-			await userEvent.click(input);
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			)!;
+			const trigger = autocomplete.shadowRoot!.querySelector(
+				'cosmoz-autocomplete-trigger',
+			)!;
+			await userEvent.click(trigger);
+			const input = await canvas.findByShadowRole('textbox', {
+				name: 'Search',
+			});
 			await userEvent.tripleClick(input);
 			await userEvent.type(input, 'Asdf');
 			await canvas.findByShadowText(/No results found/u);
