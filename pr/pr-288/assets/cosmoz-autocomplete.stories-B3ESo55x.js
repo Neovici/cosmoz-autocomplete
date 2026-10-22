@@ -1,50 +1,31 @@
-import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./index-ClZFkt-1.js";import{n as E}from"./index-D-idj6fW.js";import{c as e,o as ee}from"./data-BNBqXQJI.js";import"./preload-helper-PPVm8Dsz.js";const T=({slot:o,title:t,className:a,width:l="24",height:P="24",styles:I}={})=>s`
-  <svg
-    slot=${r(o)}
-    class=${`search-md-icon ${a??""}`}
-    viewBox="0 0 24 24"
-    preserveAspectRatio="xMidYMid meet"
-    focusable="false"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    width=${l}
-    height=${P}
-    style=${r(I)}
-  >
-    ${E(t,()=>X`<title>${t}</title>`)}
-    <path d="m21 21-4.35-4.35M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
-  </svg>
-`,oe=[{id:1,name:"camion"},{id:2,name:"camión"},{id:3,name:"cámion"},{id:4,name:"camíon"},{id:5,name:"telefono"},{id:6,name:"teléfono"},{id:7,name:"téléfono"},{id:8,name:"telefóno"},{id:9,name:"logico"},{id:10,name:"lógico"},{id:11,name:"lógíco"},{id:12,name:"logicó"},{id:13,name:"rapido"},{id:14,name:"rápido"},{id:15,name:"rapído"},{id:16,name:"rapidó"},{id:17,name:"musica"},{id:18,name:"música"},{id:19,name:"músíca"},{id:20,name:"musíca"},{id:21,name:"medico"},{id:22,name:"médico"},{id:23,name:"medíco"},{id:24,name:"medicó"},{id:25,name:"nacion"},{id:26,name:"nación"},{id:27,name:"nácion"},{id:28,name:"nacióń"},{id:29,name:"arboles"},{id:30,name:"árboles"},{id:31,name:"arbólés"},{id:32,name:"arbóles"},{id:33,name:"facil"},{id:34,name:"fácil"},{id:35,name:"fácíl"},{id:36,name:"facíl"},{id:37,name:"publico"},{id:38,name:"público"},{id:39,name:"publíco"},{id:40,name:"publicó"},{id:41,name:"tecnico"},{id:42,name:"técnico"},{id:43,name:"tecníco"},{id:44,name:"tecnicó"},{id:45,name:"heroe"},{id:46,name:"héroe"},{id:47,name:"heróe"},{id:48,name:"héroe"},{id:49,name:"cancion"},{id:50,name:"canción"},{id:51,name:"cáncion"},{id:52,name:"canciòn"},{id:53,name:"reunion"},{id:54,name:"reunión"},{id:55,name:"réunion"},{id:56,name:"reúniôn"},{id:57,name:"opinion"},{id:58,name:"opinión"},{id:59,name:"ópinion"},{id:60,name:"opíníon"},{id:61,name:"sofisticado"},{id:62,name:"sofísticado"},{id:63,name:"sofisticadó"},{id:64,name:"sófisticado"},{id:65,name:"especifico"},{id:66,name:"específico"},{id:67,name:"especifíco"},{id:68,name:"especificó"},{id:69,name:"analisis"},{id:70,name:"análisis"},{id:71,name:"ánalisis"},{id:72,name:"analísís"},{id:73,name:"vehiculo"},{id:74,name:"vehículo"},{id:75,name:"véhiculo"},{id:76,name:"vehículó"},{id:77,name:"dificil"},{id:78,name:"difícil"},{id:79,name:"dífícil"},{id:80,name:"dificíl"}],te=[{id:1,name:"forsok"},{id:2,name:"försök"},{id:3,name:"fôrsök"},{id:4,name:"försôk"},{id:5,name:"manad"},{id:6,name:"månad"},{id:7,name:"månád"},{id:8,name:"manád"},{id:9,name:"lagg"},{id:10,name:"lägg"},{id:11,name:"lägğ"},{id:12,name:"làgg"},{id:13,name:"karlek"},{id:14,name:"kärlek"},{id:15,name:"kârlek"},{id:16,name:"kärlék"},{id:17,name:"arbete"},{id:18,name:"arbeté"},{id:19,name:"ârbete"},{id:20,name:"àrbete"},{id:21,name:"betyg"},{id:22,name:"bêtyg"},{id:23,name:"bétyg"},{id:24,name:"bëtyg"},{id:25,name:"skola"},{id:26,name:"skóla"},{id:27,name:"skôla"},{id:28,name:"skolá"},{id:29,name:"vinter"},{id:30,name:"vínter"},{id:31,name:"vîntér"},{id:32,name:"vintêr"},{id:33,name:"sommar"},{id:34,name:"sômmar"},{id:35,name:"sommár"},{id:36,name:"sómmar"},{id:37,name:"helgdag"},{id:38,name:"hélgdag"},{id:39,name:"hêlgdag"},{id:40,name:"helgdág"},{id:41,name:"flygplan"},{id:42,name:"flýgplan"},{id:43,name:"flügplan"},{id:44,name:"flygplân"},{id:45,name:"studera"},{id:46,name:"stûdera"},{id:47,name:"studerá"},{id:48,name:"stúdérä"},{id:49,name:"huset"},{id:50,name:"hûset"},{id:51,name:"húset"},{id:52,name:"husét"},{id:53,name:"datorn"},{id:54,name:"dâtorn"},{id:55,name:"dátorn"},{id:56,name:"dătorn"},{id:57,name:"telefon"},{id:58,name:"téléfon"},{id:59,name:"telefôn"},{id:60,name:"tèlefón"},{id:61,name:"minuter"},{id:62,name:"mínuter"},{id:63,name:"mînuter"},{id:64,name:"minûtér"},{id:65,name:"sverige"},{id:66,name:"svérige"},{id:67,name:"svêrige"},{id:68,name:"svérigé"},{id:69,name:"spraket"},{id:70,name:"språket"},{id:71,name:"sprâket"},{id:72,name:"sprákét"},{id:73,name:"gladje"},{id:74,name:"glädje"},{id:75,name:"gládje"},{id:76,name:"glädjé"},{id:77,name:"natten"},{id:78,name:"nátten"},{id:79,name:"nättén"},{id:80,name:"nâtten"}],{expect:i,userEvent:n}=__STORYBOOK_MODULE_TEST__,ae=(o,t)=>t==null?o:({active:a})=>a?new Promise(l=>setTimeout(()=>l(o),t)):void 0,ne=({variant:o,source:t,limit:a,textProperty:l,min:P,label:I="",hint:q,value:D=[],disabled:R=!1,compact:W=!1,placeholder:M="",defaultIndex:O=0,showSingle:A=!1,preserveOrder:L=!1,wrap:_=!1,keepOpened:j=!1,keepQuery:H=!1,opened:N=!1,overflowed:V=!1,responseTime:Y,lazyOpen:K,invalid:Q,errorMessage:U,required:Z,mode:F})=>{const G={maxWidth:V?"170px":"initial"},J=ae(t,Y);return s`
+import{b as s}from"./iframe-DO48oCGP.js";import{s as P,c as I,o as i}from"./index--UKIOpcz.js";import{n as X}from"./index-ifBkMsH3.js";import{c as e,o as Z}from"./data-CzgH9ggr.js";import"./preload-helper-PPVm8Dsz.js";const ee=[{id:1,name:"camion"},{id:2,name:"camión"},{id:3,name:"cámion"},{id:4,name:"camíon"},{id:5,name:"telefono"},{id:6,name:"teléfono"},{id:7,name:"téléfono"},{id:8,name:"telefóno"},{id:9,name:"logico"},{id:10,name:"lógico"},{id:11,name:"lógíco"},{id:12,name:"logicó"},{id:13,name:"rapido"},{id:14,name:"rápido"},{id:15,name:"rapído"},{id:16,name:"rapidó"},{id:17,name:"musica"},{id:18,name:"música"},{id:19,name:"músíca"},{id:20,name:"musíca"},{id:21,name:"medico"},{id:22,name:"médico"},{id:23,name:"medíco"},{id:24,name:"medicó"},{id:25,name:"nacion"},{id:26,name:"nación"},{id:27,name:"nácion"},{id:28,name:"nacióń"},{id:29,name:"arboles"},{id:30,name:"árboles"},{id:31,name:"arbólés"},{id:32,name:"arbóles"},{id:33,name:"facil"},{id:34,name:"fácil"},{id:35,name:"fácíl"},{id:36,name:"facíl"},{id:37,name:"publico"},{id:38,name:"público"},{id:39,name:"publíco"},{id:40,name:"publicó"},{id:41,name:"tecnico"},{id:42,name:"técnico"},{id:43,name:"tecníco"},{id:44,name:"tecnicó"},{id:45,name:"heroe"},{id:46,name:"héroe"},{id:47,name:"heróe"},{id:48,name:"héroe"},{id:49,name:"cancion"},{id:50,name:"canción"},{id:51,name:"cáncion"},{id:52,name:"canciòn"},{id:53,name:"reunion"},{id:54,name:"reunión"},{id:55,name:"réunion"},{id:56,name:"reúniôn"},{id:57,name:"opinion"},{id:58,name:"opinión"},{id:59,name:"ópinion"},{id:60,name:"opíníon"},{id:61,name:"sofisticado"},{id:62,name:"sofísticado"},{id:63,name:"sofisticadó"},{id:64,name:"sófisticado"},{id:65,name:"especifico"},{id:66,name:"específico"},{id:67,name:"especifíco"},{id:68,name:"especificó"},{id:69,name:"analisis"},{id:70,name:"análisis"},{id:71,name:"ánalisis"},{id:72,name:"analísís"},{id:73,name:"vehiculo"},{id:74,name:"vehículo"},{id:75,name:"véhiculo"},{id:76,name:"vehículó"},{id:77,name:"dificil"},{id:78,name:"difícil"},{id:79,name:"dífícil"},{id:80,name:"dificíl"}],oe=[{id:1,name:"forsok"},{id:2,name:"försök"},{id:3,name:"fôrsök"},{id:4,name:"försôk"},{id:5,name:"manad"},{id:6,name:"månad"},{id:7,name:"månád"},{id:8,name:"manád"},{id:9,name:"lagg"},{id:10,name:"lägg"},{id:11,name:"lägğ"},{id:12,name:"làgg"},{id:13,name:"karlek"},{id:14,name:"kärlek"},{id:15,name:"kârlek"},{id:16,name:"kärlék"},{id:17,name:"arbete"},{id:18,name:"arbeté"},{id:19,name:"ârbete"},{id:20,name:"àrbete"},{id:21,name:"betyg"},{id:22,name:"bêtyg"},{id:23,name:"bétyg"},{id:24,name:"bëtyg"},{id:25,name:"skola"},{id:26,name:"skóla"},{id:27,name:"skôla"},{id:28,name:"skolá"},{id:29,name:"vinter"},{id:30,name:"vínter"},{id:31,name:"vîntér"},{id:32,name:"vintêr"},{id:33,name:"sommar"},{id:34,name:"sômmar"},{id:35,name:"sommár"},{id:36,name:"sómmar"},{id:37,name:"helgdag"},{id:38,name:"hélgdag"},{id:39,name:"hêlgdag"},{id:40,name:"helgdág"},{id:41,name:"flygplan"},{id:42,name:"flýgplan"},{id:43,name:"flügplan"},{id:44,name:"flygplân"},{id:45,name:"studera"},{id:46,name:"stûdera"},{id:47,name:"studerá"},{id:48,name:"stúdérä"},{id:49,name:"huset"},{id:50,name:"hûset"},{id:51,name:"húset"},{id:52,name:"husét"},{id:53,name:"datorn"},{id:54,name:"dâtorn"},{id:55,name:"dátorn"},{id:56,name:"dătorn"},{id:57,name:"telefon"},{id:58,name:"téléfon"},{id:59,name:"telefôn"},{id:60,name:"tèlefón"},{id:61,name:"minuter"},{id:62,name:"mínuter"},{id:63,name:"mînuter"},{id:64,name:"minûtér"},{id:65,name:"sverige"},{id:66,name:"svérige"},{id:67,name:"svêrige"},{id:68,name:"svérigé"},{id:69,name:"spraket"},{id:70,name:"språket"},{id:71,name:"sprâket"},{id:72,name:"sprákét"},{id:73,name:"gladje"},{id:74,name:"glädje"},{id:75,name:"gládje"},{id:76,name:"glädjé"},{id:77,name:"natten"},{id:78,name:"nátten"},{id:79,name:"nättén"},{id:80,name:"nâtten"}],{expect:r,userEvent:n}=__STORYBOOK_MODULE_TEST__,te=(o,t)=>t==null?o:({active:a})=>a?new Promise(l=>setTimeout(()=>l(o),t)):void 0,ae=({variant:o,source:t,limit:a,textProperty:l,min:B,label:T="",hint:E,value:q=[],disabled:D=!1,compact:W=!1,placeholder:R="",defaultIndex:O=0,showSingle:M=!1,preserveOrder:A=!1,wrap:L=!1,keepOpened:_=!1,keepQuery:j=!1,opened:H=!1,overflowed:N=!1,responseTime:V,lazyOpen:F,invalid:K,errorMessage:Q,required:U,mode:Y})=>{const G={maxWidth:N?"170px":"initial"},J=te(t,V);return s`
         <cosmoz-autocomplete
-            variant=${r(o)}
-            mode=${r(F)}
-            .label=${I}
-            hint=${r(q)}
-            .errorMessage=${r(U)}
-            .placeholder=${M}
+            variant=${i(o)}
+            mode=${i(Y)}
+            .label=${T}
+            hint=${i(E)}
+            .errorMessage=${i(Q)}
+            .placeholder=${R}
             .source=${J}
             .textProperty=${l}
             .limit=${a}
-            .value=${D}
-            .min=${P}
+            .value=${q}
+            .min=${B}
             .defaultIndex=${O}
-            .opened=${N}
-            ?lazy-open=${K}
-            ?disabled=${R}
+            .opened=${H}
+            ?lazy-open=${F}
+            ?disabled=${D}
             ?compact=${W}
-            ?show-single=${A}
-            ?preserve-order=${L}
-            ?wrap=${_}
-            ?keep-opened=${j}
-            ?keep-query=${H}
-            ?invalid=${Q}
-            ?required=${Z}
-            style=${ee(G)}
+            ?show-single=${M}
+            ?preserve-order=${A}
+            ?wrap=${L}
+            ?keep-opened=${_}
+            ?keep-query=${j}
+            ?invalid=${K}
+            ?required=${U}
+            style=${Z(G)}
         ></cosmoz-autocomplete>
-    `},de={title:"Autocomplete",render:ne,argTypes:{label:{control:"text",description:"The label displayed on the screen"},source:{control:"object",description:"The source for the values"},textProperty:{control:"text",description:"Property to select value"},value:{control:"object",description:"The actual value"},limit:{control:"number"},defaultIndex:{control:"number",description:"Default index of source"},disabled:{control:"boolean",description:"Disabled state"},compact:{control:"boolean",description:"Compact input density"},placeholder:{control:"text"},showSingle:{control:"boolean"},keepOpened:{control:"boolean"},keepQuery:{control:"boolean"},opened:{control:"boolean",description:"Programmatically open/close the dropdown"},preserveOrder:{control:"boolean"},min:{control:"number"},lazyOpen:{control:"boolean",description:"Suppress results until the user types at least 1 character"},variant:{control:"select",options:["default","inline","cell","pill"],description:"Visual variant",table:{defaultValue:{summary:"default"}}},hint:{control:"text",description:"Hint text displayed below the input"},invalid:{control:"boolean",description:"Invalid state"},errorMessage:{control:"text",description:"Error message displayed when invalid"},required:{control:"boolean",description:"Required state (shows asterisk on label)"},wrap:{control:"boolean"},overflowed:{control:"boolean"},responseTime:{control:"number"},uppercase:{control:"boolean"},mode:{control:"select",options:["select"],description:"Selection behavior mode"}},decorators:[(o,{args:t})=>E(t.uppercase,()=>s`<div style="text-transform: uppercase">${o()}</div>`,()=>o())],parameters:{docs:{controls:{exclude:["overflowed","responseTime","uppercase"]},description:{component:"The Cosmoz Autocomplete web component"}},layout:"fullscreen"}},c={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[2]],hint:"Pick one or more colors"},parameters:{docs:{description:{story:"Interactive playground — use the controls to explore all props."}}}},d={render:()=>s`
+    `},ce={title:"Autocomplete",render:ae,argTypes:{label:{control:"text",description:"The label displayed on the screen"},source:{control:"object",description:"The source for the values"},textProperty:{control:"text",description:"Property to select value"},value:{control:"object",description:"The actual value"},limit:{control:"number"},defaultIndex:{control:"number",description:"Default index of source"},disabled:{control:"boolean",description:"Disabled state"},compact:{control:"boolean",description:"Compact input density"},placeholder:{control:"text"},showSingle:{control:"boolean"},keepOpened:{control:"boolean"},keepQuery:{control:"boolean"},opened:{control:"boolean",description:"Programmatically open/close the dropdown"},preserveOrder:{control:"boolean"},min:{control:"number"},lazyOpen:{control:"boolean",description:"Suppress results until the user types at least 1 character"},variant:{control:"select",options:["default","inline","cell","pill"],description:"Visual variant",table:{defaultValue:{summary:"default"}}},hint:{control:"text",description:"Hint text displayed below the input"},invalid:{control:"boolean",description:"Invalid state"},errorMessage:{control:"text",description:"Error message displayed when invalid"},required:{control:"boolean",description:"Required state (shows asterisk on label)"},wrap:{control:"boolean"},overflowed:{control:"boolean"},responseTime:{control:"number"},uppercase:{control:"boolean"},mode:{control:"select",options:["select"],description:"Selection behavior mode"}},decorators:[(o,{args:t})=>X(t.uppercase,()=>s`<div style="text-transform: uppercase">${o()}</div>`,()=>o())],parameters:{docs:{controls:{exclude:["overflowed","responseTime","uppercase"]},description:{component:"The Cosmoz Autocomplete web component"}},layout:"fullscreen"}},c={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[2]],hint:"Pick one or more colors"},parameters:{docs:{description:{story:"Interactive playground — use the controls to explore all props."}}}},d={render:()=>s`
         <div class="story-stack">
             <h1 class="story-section-title">Default variant</h1>
             <div class="story-grid">
@@ -105,6 +86,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
             <cosmoz-autocomplete
                 .label=${"Labels"}
                 .placeholder=${"Label"}
+                .searchPlaceholder=${"Filter colors"}
                 .source=${e}
                 text-property="text"
                 variant="pill"
@@ -112,7 +94,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                 .value=${[e[0],e[3]]}
             ></cosmoz-autocomplete>
         </div>
-    `,parameters:{docs:{description:{story:'Chips and an "add" pill on one row, e.g. labels in a header. The pill grows into a text field on focus.'}}}},p={render:()=>s`
+    `,parameters:{docs:{description:{story:'Chips followed by an "add" button, e.g. labels in a view header. The button opens a popover with its own search field; selected options get a check. Chips that do not fit collapse into a "+N" badge that lists them on hover and opens the popover on click.'}}}},p={render:()=>s`
         <div class="story-stack">
             <h1 class="story-section-title">Inline variant</h1>
             <div class="story-grid">
@@ -231,7 +213,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                 </div>
             </div>
         </div>
-    `},v={args:{label:"Choose color",source:e,textProperty:"text",limit:1,value:[e[2]]},play:async({canvas:o})=>{await o.findByShadowText(/Purple/u)}},y={args:{label:"Choose color",source:e,textProperty:"text",value:e[2],mode:"select",preserveOrder:!0},play:async({canvas:o,step:t})=>{await t("Renders with initial selection",async()=>{await o.findByShadowText(/Purple/u)}),await t("Select Blue option",async()=>{const a=await o.findByShadowText(/Choose color/u);await n.click(a);const l=await o.findByShadowRole("option",{name:"Blue"});await n.click(l),await o.findByShadowText(/Blue/u)})}},h={args:{label:"Choose color",source:e,textProperty:"text",limit:1,defaultIndex:-1},play:async({step:o})=>{await o("Renders with no initial selection",async()=>{const t=document.querySelector("cosmoz-autocomplete");i(t?.shadowRoot?.querySelectorAll(".chip")?.length??0).toBe(0)})}},x={args:{label:"Choose color (single value)",source:e.slice(0,1),textProperty:"text",limit:1,defaultIndex:-1}},b={args:{label:"Choose color",source:e,textProperty:"text",required:!0,hint:"This field is required"}},$={args:{label:"Choose color",source:e,textProperty:"text",limit:1,value:e[0],disabled:!0},play:async()=>{const o=document.querySelector("cosmoz-autocomplete");i(o?.hasAttribute("disabled")).toBe(!0)}},f={args:{placeholder:"Choose color (placeholder text)",source:e,limit:1,textProperty:"text",value:e[0]}},w={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[1],e[2]],overflowed:!0},play:async()=>{const o=document.querySelector("cosmoz-autocomplete");i(o?.style.maxWidth).toBe("170px")}},g={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[1],e[2]],wrap:!0,overflowed:!0},play:async()=>{const o=document.querySelector("cosmoz-autocomplete");i(o?.hasAttribute("wrap")).toBe(!0)}},z={args:{label:"Start typing to see results",source:e,textProperty:"text",lazyOpen:!0}},S={render:()=>s`
+    `},v={args:{label:"Choose color",source:e,textProperty:"text",limit:1,value:[e[2]]},play:async({canvas:o})=>{await o.findByShadowText(/Purple/u)}},y={args:{label:"Choose color",source:e,textProperty:"text",value:e[2],mode:"select",preserveOrder:!0},play:async({canvas:o,step:t})=>{await t("Renders with initial selection",async()=>{await o.findByShadowText(/Purple/u)}),await t("Select Blue option",async()=>{const a=await o.findByShadowText(/Choose color/u);await n.click(a);const l=await o.findByShadowRole("option",{name:"Blue"});await n.click(l),await o.findByShadowText(/Blue/u)})}},h={args:{label:"Choose color",source:e,textProperty:"text",limit:1,defaultIndex:-1},play:async({step:o})=>{await o("Renders with no initial selection",async()=>{const t=document.querySelector("cosmoz-autocomplete");r(t?.shadowRoot?.querySelectorAll(".chip")?.length??0).toBe(0)})}},x={args:{label:"Choose color (single value)",source:e.slice(0,1),textProperty:"text",limit:1,defaultIndex:-1}},b={args:{label:"Choose color",source:e,textProperty:"text",required:!0,hint:"This field is required"}},$={args:{label:"Choose color",source:e,textProperty:"text",limit:1,value:e[0],disabled:!0},play:async()=>{const o=document.querySelector("cosmoz-autocomplete");r(o?.hasAttribute("disabled")).toBe(!0)}},f={args:{placeholder:"Choose color (placeholder text)",source:e,limit:1,textProperty:"text",value:e[0]}},w={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[1],e[2]],overflowed:!0},play:async()=>{const o=document.querySelector("cosmoz-autocomplete");r(o?.style.maxWidth).toBe("170px")}},g={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[1],e[2]],wrap:!0,overflowed:!0},play:async()=>{const o=document.querySelector("cosmoz-autocomplete");r(o?.hasAttribute("wrap")).toBe(!0)}},z={args:{label:"Start typing to see results",source:e,textProperty:"text",lazyOpen:!0}},S={render:()=>s`
         <div class="story-stack">
             <h1 class="story-section-title">Accent-insensitive search</h1>
             <div class="story-grid">
@@ -239,7 +221,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                     <div class="story-label">Spanish Words</div>
                     <cosmoz-autocomplete
                         .label=${"Choose Spanish word"}
-                        .source=${oe}
+                        .source=${ee}
                         text-property="name"
                         .defaultIndex=${-1}
                     ></cosmoz-autocomplete>
@@ -248,7 +230,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                     <div class="story-label">Swedish Words</div>
                     <cosmoz-autocomplete
                         .label=${"Choose Swedish word"}
-                        .source=${te}
+                        .source=${oe}
                         text-property="name"
                         .defaultIndex=${-1}
                     ></cosmoz-autocomplete>
@@ -267,7 +249,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                         text-property="text"
                         .defaultIndex=${-1}
                     >
-                        ${T({slot:"prefix"})}
+                        ${P({slot:"prefix"})}
                     </cosmoz-autocomplete>
                 </div>
                 <div>
@@ -279,7 +261,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                         .value=${e.slice(3)}
                         .defaultIndex=${-1}
                     >
-                        ${B({slot:"suffix"})}
+                        ${I({slot:"suffix"})}
                     </cosmoz-autocomplete>
                 </div>
                 <div>
@@ -290,8 +272,8 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                         text-property="text"
                         .value=${[e[0]]}
                     >
-                        ${T({slot:"prefix"})}
-                        ${B({slot:"suffix"})}
+                        ${P({slot:"prefix"})}
+                        ${I({slot:"suffix"})}
                     </cosmoz-autocomplete>
                 </div>
                 <div>
@@ -303,13 +285,13 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
                         variant="inline"
                         .value=${[e[0],e[3]]}
                     >
-                        ${T({slot:"prefix"})}
-                        ${B({slot:"suffix"})}
+                        ${P({slot:"prefix"})}
+                        ${I({slot:"suffix"})}
                     </cosmoz-autocomplete>
                 </div>
             </div>
         </div>
-    `},k={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[3]]},play:async({canvas:o,step:t})=>{await t("Renders with initial value",async()=>{const a=document.querySelector("cosmoz-autocomplete");i(a).toBeTruthy(),await o.findByShadowText(/Red/u),await o.findByShadowText(/Blue/u)}),await t("Remove chips and select new item",async()=>{const a=await o.findByShadowRole("textbox");await n.click(a),await n.keyboard("{Backspace}{Backspace}"),await n.type(a,"Wh"),await n.keyboard("{Enter}"),await o.findByShadowText(/White/u)}),await t("No results message",async()=>{const a=await o.findByShadowRole("textbox");await n.click(a),await n.tripleClick(a),await n.type(a,"Asdf"),await o.findByShadowText(/No results found/u)})}};c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{
+    `},k={args:{label:"Choose color",source:e,textProperty:"text",value:[e[0],e[3]]},play:async({canvas:o,step:t})=>{await t("Renders with initial value",async()=>{const a=document.querySelector("cosmoz-autocomplete");r(a).toBeTruthy(),await o.findByShadowText(/Red/u),await o.findByShadowText(/Blue/u)}),await t("Remove chips and select new item",async()=>{const a=await o.findByShadowRole("textbox");await n.click(a),await n.keyboard("{Backspace}{Backspace}"),await n.type(a,"Wh"),await n.keyboard("{Enter}"),await o.findByShadowText(/White/u)}),await t("No results message",async()=>{const a=await o.findByShadowRole("textbox");await n.click(a),await n.tripleClick(a),await n.type(a,"Asdf"),await o.findByShadowText(/No results found/u)})}};c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{
   args: {
     label: 'Choose color',
     source: colors,
@@ -388,6 +370,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
             <cosmoz-autocomplete
                 .label=\${'Labels'}
                 .placeholder=\${'Label'}
+                .searchPlaceholder=\${'Filter colors'}
                 .source=\${colors}
                 text-property="text"
                 variant="pill"
@@ -399,7 +382,7 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
   parameters: {
     docs: {
       description: {
-        story: 'Chips and an "add" pill on one row, e.g. labels in a header. The pill grows into a text field on focus.'
+        story: 'Chips followed by an "add" button, e.g. labels in a view header. The button opens a popover with its own search field; selected options get a check. Chips that do not fit collapse into a "+N" badge that lists them on hover and opens the popover on click.'
       }
     }
   }
@@ -777,4 +760,4 @@ import{b as s,w as X}from"./iframe-D3z2Kzvu.js";import{o as r,c as B}from"./inde
       await canvas.findByShadowText(/No results found/u);
     });
   }
-}`,...k.parameters?.docs?.source}}};const me=["Playground","Default","Pill","Inline","Cell","Single","Select","DefaultIndex","DefaultIndexSingleValue","Required","Disabled","Placeholder","Overflown","Wrap","LazyOpen","AccentInsensitiveSearch","PrefixSuffix","InteractionTest"];export{S as AccentInsensitiveSearch,u as Cell,d as Default,h as DefaultIndex,x as DefaultIndexSingleValue,$ as Disabled,p as Inline,k as InteractionTest,z as LazyOpen,w as Overflown,m as Pill,f as Placeholder,c as Playground,C as PrefixSuffix,b as Required,y as Select,v as Single,g as Wrap,me as __namedExportsOrder,de as default};
+}`,...k.parameters?.docs?.source}}};const de=["Playground","Default","Pill","Inline","Cell","Single","Select","DefaultIndex","DefaultIndexSingleValue","Required","Disabled","Placeholder","Overflown","Wrap","LazyOpen","AccentInsensitiveSearch","PrefixSuffix","InteractionTest"];export{S as AccentInsensitiveSearch,u as Cell,d as Default,h as DefaultIndex,x as DefaultIndexSingleValue,$ as Disabled,p as Inline,k as InteractionTest,z as LazyOpen,w as Overflown,m as Pill,f as Placeholder,c as Playground,C as PrefixSuffix,b as Required,y as Select,v as Single,g as Wrap,de as __namedExportsOrder,ce as default};
