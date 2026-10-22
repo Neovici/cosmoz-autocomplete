@@ -833,3 +833,44 @@ export const MultiModeValueIsArray: Story = {
 		expect(value).toEqual([colors[0]]);
 	},
 };
+
+export const PillVariant: Story = {
+	render: () => html`
+		<cosmoz-autocomplete
+			.source=${[{ text: 'Red' }, { text: 'Green' }]}
+			.value=${[{ text: 'Red' }]}
+			text-property="text"
+			variant="pill"
+			.placeholder=${'Label'}
+		></cosmoz-autocomplete>
+	`,
+	play: async ({ canvasElement, step }) => {
+		const el = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const input = () =>
+			el.shadowRoot!.querySelector<HTMLElement & { focus(): void }>(
+				'cosmoz-input',
+			)!;
+		const control = () =>
+			input().shadowRoot!.querySelector<HTMLElement>('.control')!;
+		const inputEl = () =>
+			input().shadowRoot!.querySelector<HTMLInputElement>('#input')!;
+
+		await step('places the add pill after the chips with a plus', async () => {
+			await waitFor(() => expect(control()).toBeTruthy());
+			const chip = el.shadowRoot!.querySelector('cosmoz-tag.chip')!;
+			expect(chip.getBoundingClientRect().right).toBeLessThanOrEqual(
+				inputEl().getBoundingClientRect().left,
+			);
+			expect(getComputedStyle(control(), '::before').content).toBe('""');
+		});
+
+		await step('drops the plus and grows on focus', async () => {
+			const width = inputEl().getBoundingClientRect().width;
+			inputEl().focus();
+			await waitFor(() =>
+				expect(getComputedStyle(control(), '::before').display).toBe('none'),
+			);
+			expect(inputEl().getBoundingClientRect().width).toBeGreaterThan(width);
+		});
+	},
+};

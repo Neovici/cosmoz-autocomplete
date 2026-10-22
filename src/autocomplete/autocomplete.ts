@@ -18,7 +18,7 @@ import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
-	variant?: 'default' | 'cell' | 'inline';
+	variant?: 'default' | 'cell' | 'inline' | 'pill';
 	invalid?: boolean;
 	errorMessage?: string;
 	hint?: string;
