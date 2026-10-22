@@ -1,4 +1,4 @@
-import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De,w as me,E as O,i as ue,u as ae,j as qe,r as it,p as lt,e as j,k as ct,H as dt,n as ht,l as pt,m as ut,t as de}from"./iframe-Brn7nkGt.js";import{u as N,n as k,a as Z,e as Q,f as ie,i as Be,t as K,b as W,p as ne,s as G,c as gt,d as vt,g as he,h as mt,w as pe,l as bt}from"./index-JO-k7HPR.js";const c=e=>e??X,J=se(_`
+import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De,w as me,E as O,i as ue,u as ae,j as qe,r as it,p as lt,e as j,k as ct,H as dt,n as ht,l as pt,m as ut,t as de}from"./iframe-Bdm7Dr3F.js";import{u as N,n as k,a as Z,e as Q,f as ie,i as Be,t as K,b as W,p as ne,s as G,c as gt,d as vt,g as he,h as mt,w as pe,l as bt}from"./index-D_po4I_2.js";const c=e=>e??X,J=se(_`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -474,7 +474,7 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 		width: ${h(3)};
 		height: ${h(3)};
 	}
-`,zt=()=>g`<span class="badge" part="badge" role="status">
+`,zt=()=>g`<span class="badge" part="badge">
 		<span class="dot" part="dot"></span>
 		<slot name="prefix"></slot>
 		<span class="content"><slot></slot></span>
@@ -1127,7 +1127,7 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 	:host([color='success']) ::slotted(svg) {
 		color: var(--cz-color-fg-success-secondary);
 	}
-`,Ot=e=>{const{color:t,size:o,disabled:r,removable:n}=e,s=()=>{r||e.dispatchEvent(new CustomEvent("remove"))};return g`<cosmoz-badge
+`,Ot=e=>{const{color:t,size:o,disabled:r,removable:n,removeLabel:s="Remove"}=e,l=()=>{r||e.dispatchEvent(new CustomEvent("remove"))};return g`<cosmoz-badge
 		color=${c(t)}
 		size=${c(o)}
 		?disabled=${r}
@@ -1141,13 +1141,13 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 					icon-only
 					slot="suffix"
 					class="close"
-					aria-label="Remove"
-					@mousedown=${l=>l.preventDefault()}
-					@click=${s}
+					aria-label=${s}
+					@mousedown=${d=>d.preventDefault()}
+					@click=${l}
 				>
 					${Rt()}
 				</cosmoz-button>`)}
-	</cosmoz-badge>`};customElements.define("cosmoz-tag",T(Ot,{observedAttributes:["color","size","disabled","removable"],styleSheets:[J,Lt]}));class Pt extends ie{_slot;_ref;#t=()=>{!this._slot||!this._ref||(this._ref.current=this._slot.assignedElements({flatten:!0}))};#e=()=>this.#t();update(t,[o]){this._ref=o;const r=t.element;this._slot!==r&&(this._slot?.removeEventListener("slotchange",this.#e),this._slot=r,r.addEventListener("slotchange",this.#e)),this.#t()}disconnected(){this._slot?.removeEventListener("slotchange",this.#e),this._slot=void 0}render(t){return O}}const $e=Q(Pt),Dt=(e,t,o)=>{o==null?e.removeAttribute(t):e.setAttribute(t,o)},qt=(e,t)=>{for(const[o,r]of Object.entries(e))Dt(t,o,ue(r,t))};class Bt extends ie{_slot;_attrs;#t=()=>{if(!this._slot||!this._attrs)return;const t=this._slot.assignedElements({flatten:!0});for(const o of t)qt(this._attrs,o)};#e=()=>this.#t();render(t){return O}update(t,[o]){this._attrs=o;const r=t.element;return this._slot!==r&&(this._slot?.removeEventListener("slotchange",this.#e),this._slot=r,r.addEventListener("slotchange",this.#e)),this.#t(),O}disconnected(){this._slot?.removeEventListener("slotchange",this.#e),this._slot=void 0}}const It=Q(Bt),Ft=e=>{for(const t of e.current??[]){const o=t.matches("[autofocus]")?t:t.querySelector("[autofocus]");if(o instanceof HTMLElement){o.focus();break}}},Mt=e=>{const{placement:t="bottom span-right",disabled:o,passthrough:r,openOnHover:n,openOnFocus:s}=e,l=N(),[d,a]=ae("opened",!1),i=N(),u=N(),v=qe({disabled:o,openOnHover:n}),b=x(()=>{const p=i.current?.[0];return p instanceof HTMLElement?p:void 0},[]),m=x(()=>{v.disabled||(a(!0),l.current?.showPopover?.())},[]),f=x(()=>{a(!1),l.current?.hidePopover?.()},[]),C=x(()=>{l.current?.matches(":popover-open")?f():m()},[]),y=x(()=>{clearTimeout(v.closeTimeout)},[]),z=x(p=>{v.disabled||p.target===b()&&(y(),m())},[]),R=x(()=>{v.disabled||(y(),m())},[]),E=x(()=>{clearTimeout(v.closeTimeout),v.closeTimeout=setTimeout(()=>{const p=l.current;v.openOnHover&&(e.matches(":hover")||p?.matches(":hover"))||e.matches(":focus-within")||p?.matches(":focus-within")||f()},100)},[]),S=x(()=>{let p=document.activeElement;for(;p?.shadowRoot;)p=p.shadowRoot.activeElement;if(!(p==null||p===document.body||p.offsetParent==null))return;const L=b();L&&(e.removeEventListener("focusin",z),L.focus(),e.addEventListener("focusin",z))},[]),q=x(p=>{const w=p.newState==="open";a(w),w?Ft(u):S(),e.dispatchEvent(new ToggleEvent("dropdown-toggle",{newState:p.newState,oldState:p.oldState,composed:!0}))},[]);return $(()=>{const p=l.current;p&&(d?p.showPopover?.():p.hidePopover?.())},[d]),$(()=>{e.toggleAttribute("opened",!!d)},[d]),$(()=>{if(!(!s||o))return e.addEventListener("focusin",z),e.addEventListener("focusout",E),()=>{e.removeEventListener("focusin",z),e.removeEventListener("focusout",E)}},[s,o]),$(()=>{if(!(!n||o))return e.addEventListener("pointerenter",R),e.addEventListener("pointerleave",E),()=>{e.removeEventListener("pointerenter",R),e.removeEventListener("pointerleave",E)}},[n,o]),{placement:t,disabled:o,passthrough:r,opened:d,triggers:i,content:u,popoverRef:l,handleClick:s?m:C,onToggle:q,close:f,scheduleClose:E,cancelClose:y}},Nt=_`
+	</cosmoz-badge>`};customElements.define("cosmoz-tag",T(Ot,{observedAttributes:["color","size","disabled","removable","remove-label"],styleSheets:[J,Lt]}));class Pt extends ie{_slot;_ref;#t=()=>{!this._slot||!this._ref||(this._ref.current=this._slot.assignedElements({flatten:!0}))};#e=()=>this.#t();update(t,[o]){this._ref=o;const r=t.element;this._slot!==r&&(this._slot?.removeEventListener("slotchange",this.#e),this._slot=r,r.addEventListener("slotchange",this.#e)),this.#t()}disconnected(){this._slot?.removeEventListener("slotchange",this.#e),this._slot=void 0}render(t){return O}}const $e=Q(Pt),Dt=(e,t,o)=>{o==null?e.removeAttribute(t):e.setAttribute(t,o)},qt=(e,t)=>{for(const[o,r]of Object.entries(e))Dt(t,o,ue(r,t))};class Bt extends ie{_slot;_attrs;#t=()=>{if(!this._slot||!this._attrs)return;const t=this._slot.assignedElements({flatten:!0});for(const o of t)qt(this._attrs,o)};#e=()=>this.#t();render(t){return O}update(t,[o]){this._attrs=o;const r=t.element;return this._slot!==r&&(this._slot?.removeEventListener("slotchange",this.#e),this._slot=r,r.addEventListener("slotchange",this.#e)),this.#t(),O}disconnected(){this._slot?.removeEventListener("slotchange",this.#e),this._slot=void 0}}const It=Q(Bt),Ft=e=>{for(const t of e.current??[]){const o=t.matches("[autofocus]")?t:t.querySelector("[autofocus]");if(o instanceof HTMLElement){o.focus();break}}},Mt=e=>{const{placement:t="bottom span-right",disabled:o,passthrough:r,openOnHover:n,openOnFocus:s}=e,l=N(),[d,a]=ae("opened",!1),i=N(),u=N(),v=qe({disabled:o,openOnHover:n}),b=x(()=>{const p=i.current?.[0];return p instanceof HTMLElement?p:void 0},[]),m=x(()=>{v.disabled||(a(!0),l.current?.showPopover?.())},[]),f=x(()=>{a(!1),l.current?.hidePopover?.()},[]),C=x(()=>{l.current?.matches(":popover-open")?f():m()},[]),y=x(()=>{clearTimeout(v.closeTimeout)},[]),z=x(p=>{v.disabled||p.target===b()&&(y(),m())},[]),R=x(()=>{v.disabled||(y(),m())},[]),E=x(()=>{clearTimeout(v.closeTimeout),v.closeTimeout=setTimeout(()=>{const p=l.current;v.openOnHover&&(e.matches(":hover")||p?.matches(":hover"))||e.matches(":focus-within")||p?.matches(":focus-within")||f()},100)},[]),S=x(()=>{let p=document.activeElement;for(;p?.shadowRoot;)p=p.shadowRoot.activeElement;if(!(p==null||p===document.body||p.offsetParent==null))return;const L=b();L&&(e.removeEventListener("focusin",z),L.focus(),e.addEventListener("focusin",z))},[]),q=x(p=>{const w=p.newState==="open";a(w),w?Ft(u):S(),e.dispatchEvent(new ToggleEvent("dropdown-toggle",{newState:p.newState,oldState:p.oldState,composed:!0}))},[]);return $(()=>{const p=l.current;p&&(d?p.showPopover?.():p.hidePopover?.())},[d]),$(()=>{e.toggleAttribute("opened",!!d)},[d]),$(()=>{if(!(!s||o))return e.addEventListener("focusin",z),e.addEventListener("focusout",E),()=>{e.removeEventListener("focusin",z),e.removeEventListener("focusout",E)}},[s,o]),$(()=>{if(!(!n||o))return e.addEventListener("pointerenter",R),e.addEventListener("pointerleave",E),()=>{e.removeEventListener("pointerenter",R),e.removeEventListener("pointerleave",E)}},[n,o]),{placement:t,disabled:o,passthrough:r,opened:d,triggers:i,content:u,popoverRef:l,handleClick:s?m:C,onToggle:q,close:f,scheduleClose:E,cancelClose:y}},Nt=_`
 	:host {
 		display: inline-block;
 		anchor-name: --dropdown-anchor;
@@ -1833,6 +1833,7 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 		?disabled=${o}
 		?hidden=${n}
 		?removable=${!!t&&!o}
+		remove-label=${c(typeof e=="string"&&t?`Remove ${e}`:void 0)}
 		@remove=${t}
 		title=${c(typeof e=="string"?e:void 0)}
 		>${e}</cosmoz-tag
@@ -1928,7 +1929,7 @@ import{A as X,s as se,c as _,d as T,b as g,f as $,D as at,g as ve,a as x,h as De
 			class="cz-overflow-band"
 			${vo(e.overflow)}
 		></slot>
-		<slot name="badge"></slot>`;customElements.define("cosmoz-autocomplete-chips-row",T(wo,{styleSheets:[G(zo),po]}));customElements.define("cosmoz-autocomplete-chips",T(bo,{styleSheets:[G(fo)]}));const xo=new Set(["Enter"," ","ArrowDown","ArrowUp"]),yo=W`
+		<span role="status"><slot name="badge"></slot></span>`;customElements.define("cosmoz-autocomplete-chips-row",T(wo,{styleSheets:[G(zo),po]}));customElements.define("cosmoz-autocomplete-chips",T(bo,{styleSheets:[G(fo)]}));const xo=new Set(["Enter"," ","ArrowDown","ArrowUp"]),yo=W`
 	:host {
 		cursor: pointer;
 	}
