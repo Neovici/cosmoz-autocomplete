@@ -18,4 +18,15 @@ test.describe('field naming', () => {
 		await page.locator('cosmoz-autocomplete').click();
 		await expect(page.getByRole('textbox', { name: 'Search' })).toBeFocused();
 	});
+
+	test('chip remove buttons are named after their items', async ({ page }) => {
+		await page.goto(story('autocomplete--playground'));
+		await page.locator('cosmoz-autocomplete').waitFor();
+		await expect(
+			page.getByRole('button', { name: 'Remove Red', exact: true }),
+		).toBeAttached();
+		await expect(
+			page.getByRole('button', { name: 'Remove Purple', exact: true }),
+		).toBeAttached();
+	});
 });
