@@ -16,23 +16,50 @@ const inField = (page: import('@playwright/test').Page) =>
 	});
 
 test.describe('trigger keyboard contract', () => {
-	test('the search is the field\'s only keyboard stop', async ({ page }) => {
+	test('tab focuses the trigger without opening', async ({ page }) => {
 		await page.goto(story('autocomplete--playground'));
 		await page
 			.getByRole('button', { name: 'Choose color', exact: true })
 			.waitFor();
 
-		// entry: the open affordance hands focus to the search
 		await page.keyboard.press('Tab');
-		await expect(page.getByRole('textbox', { name: 'Search' })).toBeFocused();
+		await expect(
+			page.getByRole('button', { name: 'Choose color', exact: true }),
+		).toBeFocused();
+		await expect(
+			page.getByRole('button', { name: 'Choose color', exact: true }),
+		).toHaveAttribute('aria-expanded', 'false');
+		await expect(page.getByRole('option', { name: 'Red' })).toBeHidden();
+	});
 
-		// exit: the search is the field's last stop
+	test('activation opens and lands the search', async ({ page }) => {
+		await page.goto(story('autocomplete--playground'));
+		await page
+			.getByRole('button', { name: 'Choose color', exact: true })
+			.waitFor();
+
+		await page.keyboard.press('Tab');
+		await page.keyboard.press('Enter');
+		await expect(page.getByRole('textbox', { name: 'Search' })).toBeFocused();
+		await expect(page.getByRole('option', { name: 'Red' })).toBeVisible();
+
+		// tabbing out of the field closes the popup again
 		await page.keyboard.press('Tab');
 		expect(await inField(page)).toBe(false);
+		await expect(
+			page.getByRole('button', { name: 'Choose color', exact: true }),
+		).toHaveAttribute('aria-expanded', 'false', { timeout: 2000 });
+	});
 
-		// wrap-around re-enters straight into the search
+	test('arrow key from the trigger opens too', async ({ page }) => {
+		await page.goto(story('autocomplete--playground'));
+		await page
+			.getByRole('button', { name: 'Choose color', exact: true })
+			.waitFor();
+
 		await page.keyboard.press('Tab');
-		await expect(page.getByRole('textbox', { name: 'Search' })).toBeFocused();
+		await page.keyboard.press('ArrowDown');
+		await expect(page.getByRole('option', { name: 'Red' })).toBeVisible();
 	});
 
 	test('chip removes stay pointer/screen-reader-only and keep working', async ({

@@ -11,12 +11,13 @@ const focusSearch = async (page: Page) => {
 };
 
 test.describe('open focuses the search', () => {
-	test('no Tab walk needed after opening', async ({ page }) => {
+	test('activation opens and focuses the search', async ({ page }) => {
 		await page.goto(story('autocomplete--single'));
 		await page
 			.locator('cosmoz-autocomplete cosmoz-autocomplete-trigger')
 			.waitFor();
-		await page.keyboard.press('Tab'); // focus-in opens the popup
+		await page.keyboard.press('Tab'); // focus stays on the trigger
+		await page.keyboard.press('Enter'); // activation opens; the search lands
 		await expect(listbox(page).locator('#search')).toBeFocused();
 	});
 });
@@ -77,12 +78,12 @@ test.describe('listbox semantics', () => {
 test.describe('single-mode listbox', () => {
 	test('container is not multiselectable', async ({ page }) => {
 		await page.goto(story('autocomplete--single'));
-		// open-on-focus: Tab into the trigger opens the popup (and focuses
-		// the search input)
+		// activation opens the popup and lands the search input
 		await page
 			.locator('cosmoz-autocomplete cosmoz-autocomplete-trigger')
 			.waitFor();
 		await page.keyboard.press('Tab');
+		await page.keyboard.press('Enter');
 		const band = listbox(page).locator('.items');
 		await expect(band).toHaveAttribute('role', 'listbox');
 		await expect(band).toHaveAttribute('aria-multiselectable', 'false');

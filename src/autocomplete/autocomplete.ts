@@ -82,7 +82,6 @@ const autocomplete = <I>(props: AProps<I>) => {
 			describedBy = (showError && 'error') || (showHint && 'hint') || undefined;
 
 		return html`<cosmoz-dropdown-next
-				open-on-focus
 				?disabled=${disabled}
 				.opened=${opened}
 				@dropdown-toggle=${onToggle}
