@@ -16,7 +16,7 @@ export default css`
 		display: block;
 	}
 
-	:host(:not([variant='inline'])) cosmoz-listbox {
+	:host(:not([variant='inline'], [variant='pill'])) cosmoz-listbox {
 		margin-top: var(--cz-spacing);
 	}
 
@@ -184,7 +184,6 @@ export default css`
 	}
 
 	.panel cosmoz-listbox {
-		margin-top: 0;
 		border-radius: 0;
 		box-shadow: none;
 	}

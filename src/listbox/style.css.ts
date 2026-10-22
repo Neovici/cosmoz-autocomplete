@@ -90,7 +90,6 @@ const style = css`
 
 	/* checkmark: a check at the end of selected options instead of a checkbox */
 	:host([multi][checkmark]) .item {
-		position: relative;
 		padding-inline-end: calc(var(--cz-spacing) * 8);
 	}
 

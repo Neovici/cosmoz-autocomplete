@@ -900,3 +900,76 @@ export const PillVariant: Story = {
 		);
 	},
 };
+
+const pillOf = (canvasElement: HTMLElement) => {
+	const el = canvasElement.querySelector('cosmoz-autocomplete')!;
+	const $ = <E extends Element>(sel: string) =>
+		el.shadowRoot!.querySelector<E>(sel)!;
+	return { el, $, badge: () => $<HTMLElement>('cosmoz-tag.badge') };
+};
+
+export const PillVariantFits: Story = {
+	render: () => html`
+		<div style="display: inline-flex; width: 600px">
+			<cosmoz-autocomplete
+				style="flex: 1"
+				.source=${[{ text: 'Red' }, { text: 'Green' }, { text: 'Blue' }]}
+				.value=${[{ text: 'Red' }, { text: 'Green' }, { text: 'Blue' }]}
+				text-property="text"
+				variant="pill"
+				.placeholder=${'Label'}
+			></cosmoz-autocomplete>
+		</div>
+	`,
+	play: async ({ canvasElement }) => {
+		const { el, badge } = pillOf(canvasElement);
+		await waitFor(() =>
+			expect(
+				el.shadowRoot!.querySelectorAll('.chip:not([hidden])').length,
+			).toBe(3),
+		);
+		expect(badge().hidden).toBe(true);
+	},
+};
+
+export const PillVariantKeepsValueWhileSearching: Story = {
+	render: () => html`
+		<cosmoz-autocomplete
+			.source=${[{ text: 'Red' }, { text: 'Green' }]}
+			.value=${[{ text: 'Red' }, { text: 'Green' }]}
+			text-property="text"
+			variant="pill"
+			keep-opened
+		></cosmoz-autocomplete>
+	`,
+	play: async ({ canvasElement }) => {
+		const { el, $ } = pillOf(canvasElement);
+		await userEvent.click($('.add'));
+		const input = () =>
+			$('cosmoz-input.search').shadowRoot!.querySelector('input')!;
+		await waitFor(() => expect(input()).toBeTruthy());
+		await userEvent.type(input(), 'g{Backspace}{Backspace}{Backspace}');
+		expect((el as unknown as { value: unknown[] }).value.length).toBe(2);
+	},
+};
+
+export const PillVariantDisabled: Story = {
+	render: () => html`
+		<div style="width: 160px">
+			<cosmoz-autocomplete
+				.source=${[{ text: 'Red' }, { text: 'Green' }, { text: 'Blue' }]}
+				.value=${[{ text: 'Red' }, { text: 'Green' }, { text: 'Blue' }]}
+				text-property="text"
+				variant="pill"
+				disabled
+			></cosmoz-autocomplete>
+		</div>
+	`,
+	play: async ({ canvasElement }) => {
+		const { el, badge } = pillOf(canvasElement);
+		await waitFor(() => expect(badge().hidden).toBe(false));
+		badge().click();
+		await new Promise((resolve) => setTimeout(resolve, 100));
+		expect(el.hasAttribute('opened')).toBe(false);
+	},
+};
