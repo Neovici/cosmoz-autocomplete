@@ -52,17 +52,6 @@ export default css`
 		display: contents !important;
 	}
 
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0;
-		overflow: hidden;
-		clip: rect(0 0 0 0);
-		white-space: nowrap;
-	}
-
 	.hint {
 		font-size: var(--cz-text-xs);
 		color: var(--cz-color-text-tertiary);
