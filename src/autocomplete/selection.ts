@@ -162,7 +162,7 @@ const Row = (host: HTMLElement & { overflow: OverflowConfig }) =>
 			class="cz-overflow-band"
 			${detectOverflow(host.overflow)}
 		></slot>
-		<slot name="badge"></slot>`;
+		<span role="status"><slot name="badge"></slot></span>`;
 
 customElements.define(
 	'cosmoz-autocomplete-chips-row',
