@@ -69,6 +69,20 @@ const noResult = () =>
 		<span class="no-result">${t('No results found')}</span>
 	</slot>`;
 
+// Light-dismissing the popover drops focus to the body; hand it back to the
+// add button when it was inside the popover.
+const returnFocus = (e: ToggleEvent) => {
+	if (e.newState !== 'closed') return;
+	const dropdown = e.currentTarget as HTMLElement;
+	if (
+		!dropdown.matches(':focus-within') &&
+		document.activeElement !== document.body
+	) {
+		return;
+	}
+	dropdown.querySelector<HTMLElement>('.add')?.focus();
+};
+
 /**
  * Chips followed by an "add" button; the button opens a popover with its own
  * search field above the options.
@@ -97,7 +111,7 @@ const pill = <I>(props: AProps<I>) => {
 		class="pill-row"
 		part="row"
 		@click=${(e: Event) =>
-			(e.target as Element).closest?.('.badge') && setOpened(true)}
+			!disabled && (e.target as Element).closest?.('.badge') && setOpened(true)}
 	>
 		${selection({
 			value,
@@ -107,12 +121,15 @@ const pill = <I>(props: AProps<I>) => {
 			textual,
 			disabled,
 			chipRenderer,
-			interactiveBadge: true,
+			interactiveBadge: !disabled,
 		})}
 		<cosmoz-dropdown-next
 			?disabled=${disabled}
 			.opened=${opened}
-			@dropdown-toggle=${onToggle}
+			@dropdown-toggle=${(e: ToggleEvent) => {
+				onToggle(e);
+				returnFocus(e);
+			}}
 			part="dropdown"
 		>
 			<button
@@ -121,7 +138,7 @@ const pill = <I>(props: AProps<I>) => {
 				part="add"
 				type="button"
 				?disabled=${disabled}
-				aria-haspopup="listbox"
+				aria-haspopup="dialog"
 				aria-expanded=${opened ? 'true' : 'false'}
 			>
 				${plusIcon({ width: '12', height: '12' })}
@@ -152,6 +169,7 @@ const pill = <I>(props: AProps<I>) => {
 						),
 					),
 				)}
+				<slot name="footer"></slot>
 			</div>
 		</cosmoz-dropdown-next>
 	</div>`;
