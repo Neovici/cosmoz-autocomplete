@@ -27,6 +27,7 @@ interface AutocompleteArgs {
 	showSingle?: boolean;
 	preserveOrder?: boolean;
 	wrap?: boolean;
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	keepOpened?: boolean;
 	keepQuery?: boolean;
 	opened?: boolean;
@@ -66,6 +67,7 @@ const Autocomplete = ({
 	showSingle = false,
 	preserveOrder = false,
 	wrap = false,
+	size,
 	keepOpened = false,
 	keepQuery = false,
 	opened = false,
@@ -101,6 +103,7 @@ const Autocomplete = ({
 			?show-single=${showSingle}
 			?preserve-order=${preserveOrder}
 			?wrap=${wrap}
+			.size=${size}
 			?keep-opened=${keepOpened}
 			?keep-query=${keepQuery}
 			?invalid=${invalid}
@@ -135,6 +138,12 @@ const meta: Meta<AutocompleteArgs> = {
 		},
 		preserveOrder: { control: 'boolean' },
 		min: { control: 'number' },
+		size: {
+			control: 'select',
+			options: ['sm', 'md', 'lg', 'xl'],
+			description: 'Control height for the input chrome and the chips',
+			table: { defaultValue: { summary: 'md' } },
+		},
 		lazyOpen: {
 			control: 'boolean',
 			description: 'Suppress results until the user types at least 1 character',
@@ -385,6 +394,19 @@ export const Cell: Story = {
 						.source=${colors}
 						text-property="text"
 						variant="cell"
+						invalid
+						.errorMessage=${'This field is required'}
+					></cosmoz-autocomplete>
+				</div>
+				<div>
+					<div class="story-label">Invalid with value</div>
+					<cosmoz-autocomplete
+						.label=${'Choose color'}
+						.source=${colors}
+						text-property="text"
+						variant="cell"
+						.limit=${1}
+						.value=${colors[2]}
 						invalid
 						.errorMessage=${'This field is required'}
 					></cosmoz-autocomplete>
@@ -681,8 +703,16 @@ export const InteractionTest: Story = {
 		});
 
 		await step('Remove chips and select new item', async () => {
-			const input = await canvas.findByShadowRole('textbox');
-			await userEvent.click(input);
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			)!;
+			const trigger = autocomplete.shadowRoot!.querySelector(
+				'cosmoz-autocomplete-trigger',
+			)!;
+			await userEvent.click(trigger);
+			const input = await canvas.findByShadowRole('textbox', {
+				name: 'Search',
+			});
 			await userEvent.keyboard('{Backspace}{Backspace}');
 			await userEvent.type(input, 'Wh');
 			await userEvent.keyboard('{Enter}');
@@ -690,8 +720,16 @@ export const InteractionTest: Story = {
 		});
 
 		await step('No results message', async () => {
-			const input = await canvas.findByShadowRole('textbox');
-			await userEvent.click(input);
+			const autocomplete = document.querySelector<HTMLElement>(
+				'cosmoz-autocomplete',
+			)!;
+			const trigger = autocomplete.shadowRoot!.querySelector(
+				'cosmoz-autocomplete-trigger',
+			)!;
+			await userEvent.click(trigger);
+			const input = await canvas.findByShadowRole('textbox', {
+				name: 'Search',
+			});
 			await userEvent.tripleClick(input);
 			await userEvent.type(input, 'Asdf');
 			await canvas.findByShadowText(/No results found/u);

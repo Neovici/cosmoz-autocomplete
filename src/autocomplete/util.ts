@@ -55,25 +55,15 @@ export const normalize = <I>(source: I[] | false | null | undefined) => {
 export const notify = <T>(host: EventTarget, name: string, detail: T) =>
 	host.dispatchEvent(new CustomEvent(name, { detail }));
 
-export const EMPTY: never[] = [];
-
-type Arr = unknown[];
-type ArrFn<T extends Arr> = (...args: T) => void;
-
 /**
- * Request animation frame wrapper with cleanup.
+ * The focused element, traversing into open shadow roots.
  */
-export const raf =
-	<A extends Arr, F extends ArrFn<A> = ArrFn<A>>(fn: F) =>
-	(...args: A) => {
-		let id: number | undefined;
-		const cleanup = () => {
-			if (id) cancelAnimationFrame(id);
-		};
-		cleanup();
-		id = requestAnimationFrame(() => {
-			id = undefined;
-			fn(...args);
-		});
-		return cleanup;
-	};
+export const deepActiveElement = (
+	root: Document | ShadowRoot = document,
+): Element | null => {
+	const el = root.activeElement;
+	if (!el) return null;
+	return el.shadowRoot ? deepActiveElement(el.shadowRoot) : el;
+};
+
+export const EMPTY: never[] = [];

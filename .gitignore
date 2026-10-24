@@ -15,4 +15,9 @@ playwright-report/
 # Codecov uploader artifacts
 codecov
 codecov.SHA256SUM
-codecov.SHA256SUM.sig
+codecov.SHA256SUM.sig.log
+
+# storybook debug log
+debug-storybook.log
+# playwright mcp artifacts
+.playwright-mcp/

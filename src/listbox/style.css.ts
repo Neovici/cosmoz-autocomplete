@@ -67,7 +67,7 @@ const style = css`
 		line-height: var(--cz-text-sm-line-height);
 	}
 
-	:host(:not([multi])) .item[aria-selected] {
+	:host(:not([multi])) .item[aria-selected='true'] {
 		background: rgb(from var(--cz-color-alpha-black) r g b / 0.22);
 	}
 
@@ -82,7 +82,7 @@ const style = css`
 		vertical-align: top;
 	}
 
-	:host([multi]) .item[aria-selected]::before {
+	:host([multi]) .item[aria-selected='true']::before {
 		border-color: var(--cz-color-bg-brand-solid);
 		/* prettier-ignore */
 		background: url("${checkSVG}") var(--cz-color-bg-brand-solid) no-repeat 50%;

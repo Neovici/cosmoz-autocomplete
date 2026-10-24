@@ -5,13 +5,13 @@ import { html } from 'lit-html';
 export const byValue = <K extends PropertyKey | undefined, T>(
 	value: T | T[],
 	valueProperty: K,
-) => {
+): ((item: T) => boolean) => {
 	if (!valueProperty) {
 		return (item: T) => item != null && array(value).includes(item);
 	}
 	return (item: T) =>
 		item != null &&
-		array(value).find(
+		array(value).some(
 			(value) =>
 				(value as Rec<NonNullable<K>>)[valueProperty] ===
 				(item as Rec<NonNullable<K>>)[valueProperty],

@@ -90,6 +90,37 @@ const colors = [
 	{ text: 'Yellow' },
 ];
 
+type AutocompleteHost = HTMLElement & {
+	opened: boolean;
+	value: unknown;
+	source?: unknown;
+};
+
+const host = (canvasElement: HTMLElement) =>
+	canvasElement.querySelector<AutocompleteHost>('cosmoz-autocomplete')!;
+
+// the trigger opens the dropdown; the search input lives inside the popup
+const dropdownTrigger = (autocomplete: HTMLElement) =>
+	autocomplete.shadowRoot?.querySelector('cosmoz-autocomplete-trigger');
+
+// the chips row is the light-dom child chain
+// trigger -> cosmoz-autocomplete-chips -> cosmoz-autocomplete-chips-row
+const chipRow = (autocomplete: HTMLElement) =>
+	autocomplete.shadowRoot
+		?.querySelector('cosmoz-autocomplete-chips')
+		?.shadowRoot?.querySelector('cosmoz-autocomplete-chips-row');
+
+const chips = (autocomplete: HTMLElement) =>
+	chipRow(autocomplete)?.querySelectorAll('cosmoz-tag.chip').length ?? 0;
+
+const chip = (autocomplete: HTMLElement, title: string) =>
+	chipRow(autocomplete)?.querySelector(`cosmoz-tag[title='${title}']`);
+
+const listboxOptions = (autocomplete: HTMLElement) =>
+	autocomplete.shadowRoot
+		?.querySelector('cosmoz-listbox')
+		?.shadowRoot?.querySelectorAll('.item[role="option"]');
+
 export const RenderWithValue: Story = {
 	args: {
 		source: colors,
@@ -99,8 +130,8 @@ export const RenderWithValue: Story = {
 		await canvas.findByShadowText(/Red/u);
 		await canvas.findByShadowText(/Blue/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete');
-		expect(autocomplete?.shadowRoot?.querySelectorAll('.chip').length).toBe(2);
+		const autocomplete = host(canvasElement);
+		expect(chips(autocomplete)).toBe(2);
 	},
 };
 
@@ -113,8 +144,8 @@ export const RenderLimit1: Story = {
 	play: async ({ canvas, canvasElement }) => {
 		await canvas.findByShadowText(/Green/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete');
-		expect(autocomplete?.shadowRoot?.querySelectorAll('.chip').length).toBe(1);
+		const autocomplete = host(canvasElement);
+		expect(chips(autocomplete)).toBe(1);
 	},
 };
 
@@ -140,11 +171,10 @@ export const FocusOpensListbox: Story = {
 		source: colors,
 		value: [],
 	},
-	play: async ({ canvas }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+	play: async ({ canvas, canvasElement }) => {
+		const autocomplete = host(canvasElement);
+		await userEvent.click(dropdownTrigger(autocomplete)!);
 
-		// Listbox should appear after focus - verify by finding an option
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
 		expect(option).toBeTruthy();
 	},
@@ -157,15 +187,13 @@ export const DeselectChip: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, canvasElement, args }) => {
+		const autocomplete = host(canvasElement);
 		await canvas.findByShadowText(/Red/u);
+		const tag = chip(autocomplete, 'Red');
+		const removeButton = tag?.shadowRoot?.querySelector('cosmoz-button.close');
+		expect(removeButton).toBeTruthy();
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chip = autocomplete.shadowRoot?.querySelector('cosmoz-tag');
-		const clearButton =
-			chip?.shadowRoot?.querySelector<HTMLElement>('button.close');
-		expect(clearButton).toBeTruthy();
-
-		await userEvent.click(clearButton!);
+		await userEvent.click(removeButton!);
 
 		await waitFor(() => {
 			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
@@ -180,11 +208,9 @@ export const OnChangeCallback: Story = {
 		onChange: fn(),
 		keepOpened: true,
 	},
-	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+	play: async ({ canvas, canvasElement, args }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
-		// Wait for listbox to appear and select an item
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
 		await userEvent.click(option);
 
@@ -203,8 +229,9 @@ export const OnTextCallback: Story = {
 		value: [],
 		onText: fn(),
 	},
-	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
+	play: async ({ canvas, canvasElement, args }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
 		await userEvent.type(input, 'Gre');
 
 		await waitFor(() => {
@@ -219,14 +246,12 @@ export const BackspaceRemovesChip: Story = {
 		value: [colors[0], colors[1]],
 		onChange: fn(),
 	},
-	play: async ({ canvas, args }) => {
-		await canvas.findByShadowText(/Red/u);
+	play: async ({ canvas, canvasElement, args }) => {
 		await canvas.findByShadowText(/Green/u);
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
-		// Backspace when input is empty should remove last chip
+		// Backspace on the empty search removes the last chip
 		await userEvent.keyboard('{Backspace}');
 
 		await waitFor(() => {
@@ -244,11 +269,8 @@ export const KeyboardSelectItem: Story = {
 		value: [],
 		onChange: fn(),
 	},
-	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
-
-		// Wait for listbox by finding an option
+	play: async ({ canvas, canvasElement, args }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 		await canvas.findByShadowRole('option', { name: /Red/u });
 
 		// Navigate down and select with Enter
@@ -268,10 +290,8 @@ export const DefaultIndexNegative: Story = {
 		defaultIndex: -1,
 	},
 	play: async ({ canvasElement }) => {
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete');
-		expect(
-			autocomplete?.shadowRoot?.querySelectorAll('.chip').length ?? 0,
-		).toBe(0);
+		const autocomplete = host(canvasElement);
+		expect(chips(autocomplete)).toBe(0);
 	},
 };
 
@@ -285,11 +305,10 @@ export const DisabledState: Story = {
 	play: async ({ canvas, canvasElement, args }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const autocomplete = host(canvasElement);
+		const trigger = dropdownTrigger(autocomplete)!;
 		expect(autocomplete.hasAttribute('disabled')).toBe(true);
-
-		const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
-		expect(input?.hasAttribute('disabled')).toBe(true);
+		expect(trigger.hasAttribute('disabled')).toBe(true);
 
 		const dropdown = autocomplete.shadowRoot?.querySelector(
 			'cosmoz-dropdown-next',
@@ -297,13 +316,10 @@ export const DisabledState: Story = {
 		expect(dropdown?.hasAttribute('disabled')).toBe(true);
 
 		// Clicking should NOT open the listbox
-		await userEvent.click(input!);
+		await userEvent.click(trigger);
 		await new Promise((r) => setTimeout(r, 200));
 
-		const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-		expect(listbox).toBeFalsy();
-
-		// onChange should NOT have been called
+		expect(trigger.getAttribute('aria-expanded')).toBe('false');
 		expect(args.onChange).not.toHaveBeenCalled();
 	},
 };
@@ -314,10 +330,8 @@ export const CompactState: Story = {
 		compact: true,
 	},
 	play: async ({ canvasElement }) => {
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
-
-		expect(input?.hasAttribute('compact')).toBe(true);
+		const autocomplete = host(canvasElement);
+		expect(dropdownTrigger(autocomplete)!.hasAttribute('compact')).toBe(true);
 	},
 };
 
@@ -331,14 +345,12 @@ export const DisabledNoChipClear: Story = {
 	play: async ({ canvas, canvasElement, args }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chip = autocomplete.shadowRoot?.querySelector('cosmoz-tag');
-		expect(chip).toBeTruthy();
+		const autocomplete = host(canvasElement);
+		const tag = chip(autocomplete, 'Red');
+		expect(tag).toBeTruthy();
 
 		// Clear button should NOT be present when disabled
-		const clearButton =
-			chip?.shadowRoot?.querySelector<HTMLElement>('button.close');
-		expect(clearButton).toBeFalsy();
+		expect(tag?.hasAttribute('removable')).toBe(false);
 
 		// onChange should NOT have been called
 		expect(args.onChange).not.toHaveBeenCalled();
@@ -373,20 +385,13 @@ export const ExternalSearchMode: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, canvasElement }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
-
-		// Type a query that would normally filter items
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
 		await userEvent.type(input, 'Red');
 
 		// With externalSearch=true, all items should still appear (no client-side filtering)
 		await waitFor(() => {
-			const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			const options = listbox?.shadowRoot?.querySelectorAll(
-				'.item[role="option"]',
-			);
-			expect(options?.length).toBe(4);
+			expect(listboxOptions(host(canvasElement))?.length).toBe(4);
 		});
 	},
 };
@@ -401,18 +406,12 @@ export const ValueProperty: Story = {
 		valueProperty: 'id',
 		keepOpened: true,
 	},
-	play: async ({ canvas, canvasElement }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+	play: async ({ canvasElement }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
 		// Both items should appear in the listbox — the value item is deduplicated by id
 		await waitFor(() => {
-			const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			const options = listbox?.shadowRoot?.querySelectorAll(
-				'.item[role="option"]',
-			);
-			expect(options?.length).toBe(2);
+			expect(listboxOptions(host(canvasElement))?.length).toBe(2);
 		});
 	},
 };
@@ -424,9 +423,8 @@ export const OnSelectCallback: Story = {
 		onSelect: fn(),
 		keepOpened: true,
 	},
-	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+	play: async ({ canvas, canvasElement, args }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
 		await userEvent.click(option);
@@ -463,11 +461,8 @@ export const ProgrammaticClose: Story = {
 		value: [],
 	},
 	play: async ({ canvas, canvasElement }) => {
-		const autocomplete = canvasElement.querySelector<
-			HTMLElement & { opened: boolean }
-		>('cosmoz-autocomplete')!;
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		const autocomplete = host(canvasElement);
+		await userEvent.click(dropdownTrigger(autocomplete)!);
 		await canvas.findByShadowRole('option', { name: /Red/u });
 
 		autocomplete.opened = false;
@@ -484,17 +479,14 @@ export const OpenedChangedEvent: Story = {
 		source: colors,
 		value: [],
 	},
-	play: async ({ canvas, canvasElement }) => {
-		const autocomplete = canvasElement.querySelector<
-			HTMLElement & { opened: boolean }
-		>('cosmoz-autocomplete')!;
+	play: async ({ canvasElement }) => {
+		const autocomplete = host(canvasElement);
 		const events: boolean[] = [];
 		autocomplete.addEventListener('opened-changed', ((e: CustomEvent) => {
 			events.push(e.detail.value);
 		}) as EventListener);
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		await userEvent.click(dropdownTrigger(autocomplete)!);
 
 		await waitFor(() => {
 			expect(events).toContain(true);
@@ -510,22 +502,18 @@ export const LazyOpenHidesItems: Story = {
 		keepOpened: true,
 	},
 	play: async ({ canvas, canvasElement }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
 
 		// No items should be shown initially (empty query)
 		await new Promise((r) => setTimeout(r, 200));
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		let listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-		let options = listbox?.shadowRoot?.querySelectorAll('.item[role="option"]');
-		expect(options?.length ?? 0).toBe(0);
+		const autocomplete = host(canvasElement);
+		expect(listboxOptions(autocomplete)?.length ?? 0).toBe(0);
 
 		// Type 1 character — threshold met, items should appear
 		await userEvent.type(input, 'R');
 		await waitFor(() => {
-			listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			options = listbox?.shadowRoot?.querySelectorAll('.item[role="option"]');
-			expect(options?.length).toBeGreaterThan(0);
+			expect(listboxOptions(autocomplete)?.length).toBeGreaterThan(0);
 		});
 	},
 };
@@ -538,14 +526,14 @@ export const LazyOpenSuppressesSource: Story = {
 	},
 	play: async ({ canvas, canvasElement }) => {
 		const calls: unknown[] = [];
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const autocomplete = host(canvasElement);
 		autocomplete.source = (opts: unknown) => {
 			calls.push(opts);
 			return Promise.resolve(colors);
 		};
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		await userEvent.click(dropdownTrigger(autocomplete)!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
 
 		// Source function should NOT be called when query is empty
 		await new Promise((r) => setTimeout(r, 200));
@@ -558,11 +546,7 @@ export const LazyOpenSuppressesSource: Story = {
 		});
 
 		await waitFor(() => {
-			const listbox = autocomplete.shadowRoot?.querySelector('cosmoz-listbox');
-			const options = listbox?.shadowRoot?.querySelectorAll(
-				'.item[role="option"]',
-			);
-			expect(options?.length).toBeGreaterThan(0);
+			expect(listboxOptions(autocomplete)?.length).toBeGreaterThan(0);
 		});
 	},
 };
@@ -576,19 +560,17 @@ export const TypingClearsValueWhenSelected: Story = {
 	play: async ({ canvas, canvasElement }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chipsBefore = autocomplete.shadowRoot?.querySelectorAll('.chip');
-		expect(chipsBefore?.length).toBe(1);
+		const autocomplete = host(canvasElement);
+		expect(chips(autocomplete)).toBe(1);
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
-		await userEvent.keyboard('G');
+		await userEvent.click(dropdownTrigger(autocomplete)!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
+		await userEvent.type(input, 'G');
 
 		await waitFor(() => {
-			const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
-			expect(chipsAfter?.length).toBe(0);
+			expect(chips(autocomplete)).toBe(0);
 		});
-		expect((input as HTMLInputElement).value).toBe('G');
+		expect(input.value).toBe('G');
 	},
 };
 
@@ -601,9 +583,9 @@ export const ShortcutDoesNotClearValueWhenSelected: Story = {
 	play: async ({ canvas, canvasElement }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		const autocomplete = host(canvasElement);
+		await userEvent.click(dropdownTrigger(autocomplete)!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
 		input.dispatchEvent(
 			new KeyboardEvent('keydown', {
 				key: 'c',
@@ -614,7 +596,7 @@ export const ShortcutDoesNotClearValueWhenSelected: Story = {
 		);
 		await new Promise((resolve) => setTimeout(resolve, 100));
 
-		expect(autocomplete.shadowRoot?.querySelectorAll('.chip').length).toBe(1);
+		expect(chips(autocomplete)).toBe(1);
 	},
 };
 
@@ -627,17 +609,18 @@ export const InputWithoutKeydownClearsValueWhenSelected: Story = {
 	play: async ({ canvas, canvasElement }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const input = (await canvas.findByShadowRole(
-			'textbox',
-		)) as HTMLInputElement;
+		const autocomplete = host(canvasElement);
+		await userEvent.click(dropdownTrigger(autocomplete)!);
+		const input = (await canvas.findByShadowRole('textbox', {
+			name: 'Search',
+		})) as HTMLInputElement;
 		await userEvent.click(input);
 		// paste, IME and Android keyboards change the text without a usable keydown
 		input.value = 'Bl';
 		input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
 
 		await waitFor(() => {
-			expect(autocomplete.shadowRoot?.querySelectorAll('.chip').length).toBe(0);
+			expect(chips(autocomplete)).toBe(0);
 		});
 		expect(input.value).toBe('Bl');
 	},
@@ -652,18 +635,16 @@ export const TypingDoesNotClearValueWhenMultiSelect: Story = {
 		await canvas.findByShadowText(/Red/u);
 		await canvas.findByShadowText(/Green/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chipsBefore = autocomplete.shadowRoot?.querySelectorAll('.chip');
-		expect(chipsBefore?.length).toBe(2);
+		const autocomplete = host(canvasElement);
+		expect(chips(autocomplete)).toBe(2);
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
-		await userEvent.keyboard('B');
+		await userEvent.click(dropdownTrigger(autocomplete)!);
+		const input = await canvas.findByShadowRole('textbox', { name: 'Search' });
+		await userEvent.type(input, 'B');
 
 		await new Promise((r) => setTimeout(r, 100));
 
-		const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
-		expect(chipsAfter?.length).toBe(2);
+		expect(chips(autocomplete)).toBe(2);
 	},
 };
 
@@ -677,18 +658,17 @@ export const TypingDoesNotClearWhenDisabled: Story = {
 	play: async ({ canvas, canvasElement }) => {
 		await canvas.findByShadowText(/Red/u);
 
-		const autocomplete = canvasElement.querySelector('cosmoz-autocomplete')!;
-		const chipsBefore = autocomplete.shadowRoot?.querySelectorAll('.chip');
-		expect(chipsBefore?.length).toBe(1);
+		const autocomplete = host(canvasElement);
+		expect(chips(autocomplete)).toBe(1);
 
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
-		await userEvent.keyboard('G');
-
+		await userEvent.click(dropdownTrigger(autocomplete)!);
 		await new Promise((r) => setTimeout(r, 100));
 
-		const chipsAfter = autocomplete.shadowRoot?.querySelectorAll('.chip');
-		expect(chipsAfter?.length).toBe(1);
+		// disabled: the dropdown never opens and the value survives
+		expect(chips(autocomplete)).toBe(1);
+		expect(dropdownTrigger(autocomplete)!.getAttribute('aria-expanded')).toBe(
+			'false',
+		);
 	},
 };
 
@@ -711,9 +691,8 @@ export const DeselectWithPreserveOrderAndValueProperty: Story = {
 		keepOpened: true,
 		onChange: fn(),
 	},
-	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+	play: async ({ canvas, canvasElement, args }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
 		// Item 1 should appear as selected (checked) in the dropdown
 		const option = await canvas.findByShadowRole('option', {
@@ -741,9 +720,8 @@ export const DeselectWithValuePropertyWithoutPreserveOrder: Story = {
 		keepOpened: true,
 		onChange: fn(),
 	},
-	play: async ({ canvas, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+	play: async ({ canvas, canvasElement, args }) => {
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
 		// Item 1 should appear as selected in the dropdown
 		const option = await canvas.findByShadowRole('option', {
@@ -765,14 +743,11 @@ export const Required: Story = {
 		source: colors,
 		required: true,
 	},
-	play: async ({ canvas }) => {
-		const autocomplete = document.querySelector<HTMLElement>(
-			'cosmoz-autocomplete',
-		);
-		expect(autocomplete?.hasAttribute('required')).toBe(true);
+	play: async ({ canvasElement }) => {
+		const autocomplete = host(canvasElement);
+		expect(autocomplete.hasAttribute('required')).toBe(true);
 
-		const input = await canvas.findByShadowRole('textbox');
-		expect(input.hasAttribute('required')).toBe(true);
+		expect(dropdownTrigger(autocomplete)!.hasAttribute('required')).toBe(true);
 	},
 };
 
@@ -783,8 +758,7 @@ export const SelectModeValueIsSingleItem: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, canvasElement, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
 		await userEvent.click(option);
@@ -796,9 +770,7 @@ export const SelectModeValueIsSingleItem: Story = {
 			);
 		});
 
-		const autocomplete = canvasElement.querySelector<
-			HTMLElement & { value: unknown }
-		>('cosmoz-autocomplete')!;
+		const autocomplete = host(canvasElement);
 		const { value } = autocomplete;
 		expect(Array.isArray(value)).toBe(false);
 		expect(value).toEqual(colors[0]);
@@ -812,8 +784,7 @@ export const MultiModeValueIsArray: Story = {
 		onChange: fn(),
 	},
 	play: async ({ canvas, canvasElement, args }) => {
-		const input = await canvas.findByShadowRole('textbox');
-		await userEvent.click(input);
+		await userEvent.click(dropdownTrigger(host(canvasElement))!);
 
 		const option = await canvas.findByShadowRole('option', { name: /Red/u });
 		await userEvent.click(option);
@@ -825,9 +796,7 @@ export const MultiModeValueIsArray: Story = {
 			);
 		});
 
-		const autocomplete = canvasElement.querySelector<
-			HTMLElement & { value: unknown }
-		>('cosmoz-autocomplete')!;
+		const autocomplete = host(canvasElement);
 		const { value } = autocomplete;
 		expect(Array.isArray(value)).toBe(true);
 		expect(value).toEqual([colors[0]]);

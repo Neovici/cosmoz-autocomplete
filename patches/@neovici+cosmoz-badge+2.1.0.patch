@@ -1,0 +1,13 @@
+diff --git a/node_modules/@neovici/cosmoz-badge/dist/cosmoz-badge.js b/node_modules/@neovici/cosmoz-badge/dist/cosmoz-badge.js
+index d7b92e7..e0d1f61 100644
+--- a/node_modules/@neovici/cosmoz-badge/dist/cosmoz-badge.js
++++ b/node_modules/@neovici/cosmoz-badge/dist/cosmoz-badge.js
+@@ -38,7 +38,7 @@ import { styles } from './styles';
+  * ```
+  */
+ const CosmozBadge = () => {
+-    return html `<span class="badge" part="badge" role="status">
++    return html `<span class="badge" part="badge">
+ 		<span class="dot" part="dot"></span>
+ 		<slot name="prefix"></slot>
+ 		<span class="content"><slot></slot></span>

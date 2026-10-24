@@ -16,80 +16,61 @@ export default css`
 		display: block;
 	}
 
-	:host(:not([variant='inline'])) cosmoz-listbox {
-		margin-top: var(--cz-spacing);
-	}
-
-	cosmoz-input[variant='inline'] cosmoz-tag {
+	cosmoz-autocomplete-trigger[variant='inline'] cosmoz-tag {
 		align-items: center;
 		margin-left: var(--cz-spacing);
 	}
 
-	cosmoz-input[variant='inline'] cosmoz-tag:first-of-type {
+	cosmoz-autocomplete-trigger[variant='inline'] cosmoz-tag:first-of-type {
 		margin-left: 0;
 	}
 
-	cosmoz-tag {
-		align-items: center;
-		margin-left: calc(var(--cz-spacing) * 2);
-	}
-
-	cosmoz-input::part(control) {
-		display: flex;
-		min-width: calc(var(--cz-spacing) * 9);
-	}
-
-	cosmoz-input[variant='inline']:has(cosmoz-tag[removable])::part(label),
-	cosmoz-input[variant='inline'][disabled]:has(cosmoz-tag:not([hidden]))::part(
-			label
-		) {
+	cosmoz-autocomplete-trigger[variant='inline']:has(
+			cosmoz-tag[removable]
+		)::part(label),
+	cosmoz-autocomplete-trigger[variant='inline'][disabled]:has(
+			cosmoz-tag:not([hidden])
+		)::part(label) {
 		transform: translate(var(--cz-spacing), -75%) scale(0.85);
 	}
 
-	cosmoz-input::part(input) {
-		flex: 1 calc(var(--cz-spacing) * 6);
-		min-width: 0;
+	cosmoz-autocomplete-trigger::part(control) {
+		display: flex;
+		align-items: center;
+		min-width: calc(var(--cz-spacing) * 9);
 	}
 
-	cosmoz-input[data-one] cosmoz-tag {
-		max-width: calc(100% - 16px);
+	cosmoz-listbox cosmoz-input {
+		margin: calc(var(--cz-spacing) * 1.5);
 	}
 
-	cosmoz-input:not([data-one])::part(input):focus {
-		flex: 4 0.00001 calc(var(--cz-spacing) * 12.5);
-		min-width: calc(var(--cz-spacing) * 5);
-	}
-
-	.badge {
-		min-width: initial;
-		flex: none;
-		text-align: center;
-		padding: 0 var(--cz-spacing);
-	}
-
-	[data-single]::part(input) {
-		flex: 0;
-	}
-
-	[data-one] .badge {
-		display: none;
-	}
-
-	[hidden] {
-		display: none;
-	}
-
-	:host([wrap]) cosmoz-input::part(control) {
-		flex-wrap: wrap;
+	:host([wrap]) cosmoz-autocomplete-trigger::part(control) {
 		padding-right: calc(var(--cz-spacing) * 2);
-	}
-
-	:host([wrap]) cosmoz-tag {
-		padding-block: calc(var(--cz-spacing) * 1.5);
 	}
 
 	slot {
 		display: contents !important;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	.hint {
+		font-size: var(--cz-text-xs);
+		color: var(--cz-color-text-tertiary);
+	}
+
+	.error {
+		font-size: var(--cz-text-xs);
+		color: var(--cz-color-text-error);
 	}
 
 	.no-result {

@@ -8,13 +8,16 @@ import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { live } from 'lit-html/directives/live.js';
 import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
+import '../announcer';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
-import { ChipRenderer, selection } from './selection';
+import './selection';
+import './trigger';
+
+import type { ChipRenderer } from './selection';
 import './skeleton-span';
 import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
-import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
@@ -23,41 +26,27 @@ export interface Props<I> extends Base<I> {
 	errorMessage?: string;
 	hint?: string;
 	label?: string;
+	/** @deprecated search happens in the dropdown; kept for API compatibility */
 	placeholder?: string;
 	compact?: boolean;
 	required?: boolean;
+	/** @deprecated the dropdown opens regardless of a filled single-select */
 	showSingle?: boolean;
 	itemHeight?: number | 'auto';
 	itemLimit?: number;
 	wrap?: boolean;
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	defaultIndex?: number;
 	externalSearch?: boolean;
 	itemRenderer?: ItemRenderer<I>;
 	chipRenderer?: ChipRenderer<I>;
 }
 
-type AProps<I> = Omit<Props<I>, keyof RProps<I>> &
-	RProps<I> & {
-		onInputRef?: (el?: Element) => void;
-	};
+type AProps<I> = Omit<Props<I>, keyof RProps<I>> & RProps<I>;
 
-const inputParts = ['input', 'control', 'label', 'line', 'error', 'wrap']
+const inputParts = ['control', 'label', 'hint', 'error', 'wrap']
 	.map((part) => `${part}: input-${part}`)
 	.join();
-
-const shouldShowDropdown = <I>({
-	opened,
-	isSingle,
-	showSingle,
-	hasResultsOrQuery,
-}: Pick<AProps<I>, 'opened' | 'showSingle'> & {
-	isSingle: boolean;
-	hasResultsOrQuery: boolean;
-}) => {
-	if (!opened) return false;
-	if (isSingle && !showSingle) return false;
-	return hasResultsOrQuery;
-};
 
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
@@ -79,99 +68,104 @@ const autocomplete = <I>(props: AProps<I>) => {
 				value,
 				limit,
 				min,
-				showSingle,
 				items,
 				source$,
 				loading,
 				chipRenderer,
+				size,
+				wrap,
 				mode,
 			} = props,
 			isOne = limit === 1,
-			isSingle = isOne && value?.[0] != null;
-
-		const hasResultsOrQuery =
-			loading || items.length > 0 || (text != null && text.length > 0);
+			showHint = hint && !invalid,
+			showError = invalid && errorMessage,
+			describedBy = (showError && 'error') || (showHint && 'hint') || undefined;
 
 		return html`<cosmoz-dropdown-next
-			open-on-focus
-			?disabled=${disabled}
-			.opened=${opened}
-			@dropdown-toggle=${onToggle}
-			part="dropdown"
-		>
-			<cosmoz-input
-				slot="button"
-				id="input"
-				part="input"
-				.label=${label}
-				.placeholder=${isSingle ? undefined : placeholder}
-				hint=${ifDefined(hint)}
-				variant=${ifDefined(variant)}
-				?compact=${compact}
 				?disabled=${disabled}
-				?required=${required}
-				?invalid=${guard([source$, invalid], () =>
-					until(
-						source$.then(
-							() => invalid,
-							() => true,
-						),
-						invalid,
-					),
-				)}
-				.errorMessage=${guard([source$, errorMessage], () =>
-					until(
-						source$.then(
-							() => errorMessage,
-							(e: { message?: string }) => e.message,
-						),
-						errorMessage,
-					),
-				)}
-				.value=${live(text)}
-				@value-changed=${onText}
-				autocomplete="off"
-				exportparts=${inputParts}
-				?data-one=${isOne}
-				?data-single=${isSingle}
+				.opened=${opened}
+				@dropdown-toggle=${onToggle}
+				part="dropdown"
 			>
-				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix">
-					${when(mode === 'select', () =>
-						chevronDownIcon({
-							styles:
-								'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
-							width: '16',
-							height: '16',
-						}),
+				<cosmoz-autocomplete-trigger
+					slot="button"
+					part="input"
+					.label=${label}
+					aria-label=${label}
+					aria-invalid=${ifDefined(invalid ? 'true' : undefined)}
+					aria-describedby=${ifDefined(describedBy)}
+					.errorMessage=${guard([source$, errorMessage, compact], () =>
+						until(
+							source$.then(
+								() => (compact ? errorMessage : undefined),
+								(e: { message?: string }) => (compact ? e.message : undefined),
+							),
+							compact ? errorMessage : undefined,
+						),
 					)}
-				</slot>
-				${selection({
-					value,
-					min,
-					isOne,
-					onDeselect,
-					textual,
-					disabled,
-					chipRenderer,
-				})}
-			</cosmoz-input>
+					?invalid=${guard([source$, invalid], () =>
+						until(
+							source$.then(
+								() => invalid,
+								() => true,
+							),
+							invalid,
+						),
+					)}
+					variant=${ifDefined(variant)}
+					.placeholder=${placeholder}
+					?compact=${compact}
+					?disabled=${disabled}
+					?required=${required}
+					?has-value=${value.length > 0}
+					exportparts=${inputParts}
+					slot="button"
+					?data-wrap=${wrap}
+					size=${ifDefined(size === 'md' ? undefined : size)}
+				>
+					<slot name="prefix" slot="prefix"></slot>
+					<slot name="suffix" slot="suffix">
+						${when(mode === 'select', () =>
+							chevronDownIcon({
+								styles:
+									'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
+								width: '16',
+								height: '16',
+							}),
+						)}
+					</slot>
+					<cosmoz-autocomplete-chips
+						slot="chips"
+						.value=${value}
+						.min=${min}
+						.variant=${variant}
+						.textual=${textual}
+						.onDeselect=${onDeselect}
+						.disabled=${disabled}
+						.chipRenderer=${chipRenderer}
+						.wrap=${wrap}
+						.size=${size}
+					></cosmoz-autocomplete-chips>
+				</cosmoz-autocomplete-trigger>
 
-			${when(
-				shouldShowDropdown({
-					opened,
-					isSingle,
-					showSingle,
-					hasResultsOrQuery,
-				}),
-				() =>
-					listbox<I>(
-						{
-							...props,
-							items,
-							multi: !isOne,
-						},
-						when(
+				${listbox<I>(
+					{
+						...props,
+						items,
+						multi: !isOne,
+					},
+					html`<cosmoz-input
+							slot="search"
+							id="search"
+							part="search-input"
+							placeholder=${t('Search')}
+							aria-label=${t('Search')}
+							.value=${live(text)}
+							@value-changed=${onText}
+							@select=${(e: Event) => e.stopPropagation()}
+							autocomplete="off"
+						></cosmoz-input>
+						${when(
 							loading,
 							() =>
 								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
@@ -183,17 +177,38 @@ const autocomplete = <I>(props: AProps<I>) => {
 											<span class="no-result">${t('No results found')}</span>
 										</slot>`,
 								),
-						),
-					),
+						)}`,
+				)}
+			</cosmoz-dropdown-next>
+			${when(
+				showHint,
+				() =>
+					html`<span
+						class=${compact ? 'hint sr-only' : 'hint'}
+						part="hint"
+						id="hint"
+						>${hint}</span
+					>`,
 			)}
-		</cosmoz-dropdown-next>`;
+			${when(
+				showError,
+				() =>
+					html`<span
+						class=${compact ? 'error sr-only' : 'error'}
+						part="error"
+						id="error"
+						>${errorMessage}</span
+					>`,
+			)}
+			<cosmoz-announcer
+				.message=${showError ? errorMessage : ''}
+			></cosmoz-announcer>`;
 	},
 	Autocomplete = <I>(props: Props<I>) => {
 		const thru = {
 			...props,
 			...useAutocomplete(props),
 		};
-		useOverflow(thru);
 		return autocomplete(thru);
 	},
 	observedAttributes = [
@@ -213,6 +228,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 		'keep-query',
 		'default-index',
 		'external-search',
+		'size',
 		'item-height',
 		'item-limit',
 		'wrap',
