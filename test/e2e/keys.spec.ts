@@ -62,6 +62,25 @@ test.describe('trigger keyboard contract', () => {
 		await expect(page.getByRole('option', { name: 'Red' })).toBeVisible();
 	});
 
+	test('escape closes and restores focus to the trigger', async ({ page }) => {
+		await page.goto(story('autocomplete--playground'));
+		await page
+			.getByRole('button', { name: 'Choose color', exact: true })
+			.waitFor();
+
+		await page.keyboard.press('Tab');
+		await page.keyboard.press('Enter');
+		await expect(page.getByRole('textbox', { name: 'Search' })).toBeFocused();
+
+		await page.keyboard.press('Escape');
+		await expect(
+			page.getByRole('button', { name: 'Choose color', exact: true }),
+		).toBeFocused();
+		await expect(
+			page.getByRole('button', { name: 'Choose color', exact: true }),
+		).toHaveAttribute('aria-expanded', 'false');
+	});
+
 	test('chip removes stay pointer/screen-reader-only and keep working', async ({
 		page,
 	}) => {

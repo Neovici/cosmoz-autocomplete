@@ -152,6 +152,43 @@ export const useAutocomplete = <I>({
 		host.toggleAttribute('opened', !!opened);
 	}, [opened]);
 
+	// Esc-dismiss drops focus to body (upstream restoreFocus checks before
+	// the platform hides the popover); the dismissal is owned here so the
+	// platform never races it
+	useEffect(() => {
+		const onKeydown = (e: KeyboardEvent) => {
+			if (!opened || e.key !== 'Escape' || e.defaultPrevented) return;
+			e.preventDefault();
+			setOpened(false);
+		};
+		host.addEventListener('keydown', onKeydown);
+		return () => host.removeEventListener('keydown', onKeydown);
+	}, [opened]);
+
+	// after a non-select close (esc, defocus-loss) the focus belongs on the
+	// field again unless it moved deliberately (tab-out)
+	useEffect(() => {
+		if (opened) return;
+		const active = deepActiveElement();
+		// the focus may still sit on the hiding popover's input: in-field is
+		// a close we triggered, a foreign element is a deliberate tab-out
+		const inField = (() => {
+			let el: Element | null = active ?? null;
+			while (el) {
+				if (el === host) return true;
+				el =
+					el.parentElement ??
+					(el.getRootNode() as ShadowRoot | null)?.host ??
+					null;
+			}
+			return false;
+		})();
+		if (!inField && active && active !== document.body) return;
+		host.shadowRoot
+			?.querySelector<HTMLElement>('cosmoz-autocomplete-trigger')
+			?.focus();
+	}, [opened]);
+
 	// Focus the search input when the popup opens so typing starts right away.
 	// Skipped when a chip's remove button was clicked - focus should stay there.
 	useLayoutEffect(() => {
