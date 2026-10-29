@@ -2,7 +2,6 @@ import { array, without } from '@neovici/cosmoz-utils/array';
 import { useHost } from '@neovici/cosmoz-utils/hooks/use-host';
 import { useMeta } from '@neovici/cosmoz-utils/hooks/use-meta';
 import { usePromise } from '@neovici/cosmoz-utils/hooks/use-promise';
-import { useActivity } from '@neovici/cosmoz-utils/keybindings';
 import { prop, strProp } from '@neovici/cosmoz-utils/object';
 import {
 	useCallback,
@@ -11,7 +10,6 @@ import {
 	useProperty,
 	useState,
 } from '@pionjs/pion';
-import { AUTOCOMPLETE_DESELECT_LAST } from './autocomplete-keybindings';
 import { EMPTY, normalize, notify, search } from './util';
 
 const useNotify = <V>(
@@ -125,22 +123,6 @@ export const useAutocomplete = <I>({
 
 	useEffect(() => source$.then(setOptions), [source$]);
 
-	// Backspace to deselect last chip (when input is empty)
-	useActivity(
-		{
-			activity: AUTOCOMPLETE_DESELECT_LAST,
-			callback: () => {
-				const values = array(value);
-				if (values.length > (min ?? 0)) {
-					onChange(values.slice(0, -1));
-				}
-			},
-			check: () => !disabled && empty && host.matches(':focus-within'),
-			element: () => host,
-		},
-		[],
-	);
-
 	// Clear query when popover closes
 	useEffect(() => {
 		if (!opened && !keepQuery) onText('');
@@ -169,6 +151,22 @@ export const useAutocomplete = <I>({
 	return {
 		limit,
 		opened,
+		setOpened,
+		/** Chip keys: Backspace removes the last chip, typing replaces a single selection. */
+		onChipKeys: (e: KeyboardEvent) => {
+			if (disabled || !empty || e.ctrlKey || e.metaKey || e.altKey) return;
+			const values = array(value);
+			if (e.key === 'Backspace') {
+				if (values.length > (min ?? 0)) {
+					e.preventDefault();
+					onChange(values.slice(0, -1));
+				}
+				return;
+			}
+			if (e.key.length === 1 && limit === 1 && values.length > 0) {
+				onChange(values.slice(0, -1));
+			}
+		},
 		query,
 		textual,
 		value,

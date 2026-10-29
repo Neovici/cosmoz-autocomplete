@@ -345,7 +345,7 @@ export const InteractionTest: Story = {
 		});
 
 		await step('Toggle exclude state via listbox', async () => {
-			const input = await canvas.findByShadowRole('textbox');
+			const input = await canvas.findByShadowRole('combobox');
 			await userEvent.click(input);
 			const blueOption = await canvas.findByShadowRole('option', {
 				name: /Blue/u,
@@ -367,7 +367,7 @@ export const InteractionTest: Story = {
 			const autocomplete = document.querySelector<HTMLElement>(
 				'cosmoz-autocomplete-excluding',
 			)!;
-			const input = await canvas.findByShadowRole('textbox');
+			const input = await canvas.findByShadowRole('combobox');
 			await userEvent.click(input);
 			await userEvent.tripleClick(input);
 			await userEvent.type(input, 'Asdf');
