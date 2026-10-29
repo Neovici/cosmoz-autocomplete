@@ -12,7 +12,7 @@ import { swedishWords } from './swedish-words';
 
 interface AutocompleteArgs {
 	source: { text: string }[];
-	variant?: 'default' | 'cell' | 'inline';
+	variant?: 'default' | 'cell' | 'inline' | 'pill';
 	limit?: number;
 	textProperty: string;
 	min?: number;
@@ -141,7 +141,7 @@ const meta: Meta<AutocompleteArgs> = {
 		},
 		variant: {
 			control: 'select',
-			options: ['default', 'inline', 'cell'],
+			options: ['default', 'inline', 'cell', 'pill'],
 			description: 'Visual variant',
 			table: { defaultValue: { summary: 'default' } },
 		},
@@ -276,6 +276,32 @@ export const Default: Story = {
 			</div>
 		</div>
 	`,
+};
+
+export const Pill: Story = {
+	render: () => html`
+		<div class="story-stack">
+			<h1 class="story-section-title">Pill variant</h1>
+			<cosmoz-autocomplete
+				.label=${'Labels'}
+				.placeholder=${'Label'}
+				.searchPlaceholder=${'Filter colors'}
+				.source=${colors}
+				text-property="text"
+				variant="pill"
+				keep-opened
+				.value=${[colors[0], colors[3]]}
+			></cosmoz-autocomplete>
+		</div>
+	`,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Chips followed by an "add" button, e.g. labels in a view header. The button opens a popover with its own search field; selected options get a check. Chips that do not fit collapse into a "+N" badge that lists them on hover and opens the popover on click.',
+			},
+		},
+	},
 };
 
 export const Inline: Story = {

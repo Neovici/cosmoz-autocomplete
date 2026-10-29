@@ -16,7 +16,7 @@ export default css`
 		display: block;
 	}
 
-	:host(:not([variant='inline'])) cosmoz-listbox {
+	:host(:not([variant='inline'], [variant='pill'])) cosmoz-listbox {
 		margin-top: var(--cz-spacing);
 	}
 
@@ -98,5 +98,93 @@ export default css`
 		font-weight: var(--cz-font-weight-regular);
 		padding: 0 calc(var(--cz-spacing) * 3);
 		color: var(--cz-color-text-secondary);
+	}
+
+	/* pill: chips followed by an "add" button that opens a search popover */
+	.pill-row {
+		display: flex;
+		align-items: center;
+		gap: var(--cz-spacing);
+		min-width: 0;
+	}
+
+	.pill-row cosmoz-tag {
+		margin-left: 0;
+		flex: none;
+	}
+
+	.pill-row .badge {
+		cursor: pointer;
+	}
+
+	.pill-row cosmoz-dropdown-next {
+		flex: none;
+	}
+
+	.add {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--cz-spacing);
+		margin: 0;
+		padding: calc(var(--cz-spacing) * 0.75) calc(var(--cz-spacing) * 2.5);
+		border: 0;
+		border-radius: var(--cz-radius-full);
+		box-shadow: inset 0 0 0 1px var(--cz-color-border-primary);
+		background: transparent;
+		color: var(--cz-color-text-tertiary);
+		font-family: var(--cz-font-body);
+		font-size: var(--cz-text-xs);
+		line-height: var(--cz-text-xs-line-height);
+		white-space: nowrap;
+		cursor: pointer;
+		transition: background 0.1s;
+	}
+
+	.add svg {
+		color: var(--cz-color-fg-quaternary);
+	}
+
+	.add:hover,
+	:host([opened]) .add {
+		background: var(--cz-color-bg-primary-hover);
+		color: var(--cz-color-text-secondary);
+	}
+
+	.add:focus-visible {
+		outline: none;
+		box-shadow:
+			inset 0 0 0 1px var(--cz-color-border-primary),
+			var(--cz-focus-ring);
+	}
+
+	.add[disabled] {
+		display: none;
+	}
+
+	.panel {
+		box-sizing: border-box;
+		width: calc(var(--cz-spacing) * 72);
+		max-width: calc(100vw - var(--cz-spacing) * 4);
+		background: var(--cz-color-bg-primary);
+		border-radius: var(--cz-radius-lg);
+		box-shadow:
+			0 0 0 1px var(--cz-color-border-secondary),
+			var(--cz-shadow-lg);
+		overflow: hidden;
+	}
+
+	.search::part(wrap) {
+		border-radius: 0;
+		background: transparent;
+		box-shadow: inset 0 -1px 0 var(--cz-color-border-secondary);
+	}
+
+	.search svg {
+		color: var(--cz-color-fg-quaternary);
+	}
+
+	.panel cosmoz-listbox {
+		border-radius: 0;
+		box-shadow: none;
 	}
 `;

@@ -88,6 +88,31 @@ const style = css`
 		background: url("${checkSVG}") var(--cz-color-bg-brand-solid) no-repeat 50%;
 	}
 
+	/* checkmark: a check at the end of selected options instead of a checkbox */
+	:host([multi][checkmark]) .item {
+		padding-inline-end: calc(var(--cz-spacing) * 8);
+	}
+
+	:host([multi][checkmark]) .item::before {
+		display: none;
+	}
+
+	:host([multi][checkmark]) .item[aria-selected]::after {
+		content: '';
+		position: absolute;
+		inset-inline-end: calc(var(--cz-spacing) * 2.5);
+		top: 50%;
+		width: calc(var(--cz-spacing) * 3);
+		height: calc(var(--cz-spacing) * 3);
+		transform: translateY(-50%);
+		background: var(
+			--cz-color-fg-brand-primary,
+			var(--cz-color-bg-brand-solid)
+		);
+		/* prettier-ignore */
+		mask: url("${checkSVG}") center / contain no-repeat;
+	}
+
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
