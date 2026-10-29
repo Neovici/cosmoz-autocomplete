@@ -1,3 +1,9 @@
+## 14.1.2
+
+### Patch Changes
+
+- 9c5e417: align dependencies with latest cosmoz-components
+
 ## 14.1.1
 
 ### Patch Changes
