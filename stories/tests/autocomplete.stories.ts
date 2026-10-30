@@ -867,11 +867,22 @@ export const PillVariant: Story = {
 				const add = $<HTMLElement>('.add').getBoundingClientRect();
 				const row = $<HTMLElement>('.pill-row').getBoundingClientRect();
 				expect(add.right).toBeLessThanOrEqual(row.right);
-				expect(badge().title.split(', ').length).toBe(
+				const tooltip = $<HTMLElement>('cosmoz-tooltip[for="overflow"]');
+				expect(badge().getAttribute('name')).toBe('overflow');
+				expect(badge().hasAttribute('title')).toBe(false);
+				expect(tooltip.getAttribute('description')!.split(', ').length).toBe(
 					Number(badge().textContent!.trim().slice(1)),
 				);
 			},
 		);
+
+		await step('the badge names the hidden labels on hover', async () => {
+			await userEvent.hover(badge());
+			await waitFor(() =>
+				expect($('[role="tooltip"]').matches(':popover-open')).toBe(true),
+			);
+			expect($('[role="tooltip"]').textContent).toContain('Label number 8');
+		});
 
 		await step('the badge opens the picker', async () => {
 			await userEvent.click(badge());

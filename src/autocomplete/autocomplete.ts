@@ -5,6 +5,7 @@ import {
 	searchMdIcon,
 } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
+import '@neovici/cosmoz-tooltip';
 import { t } from 'i18next';
 import { html } from 'lit-html';
 import { guard } from 'lit-html/directives/guard.js';
@@ -306,8 +307,12 @@ const autocomplete = <I>(props: AProps<I>) => {
 			...props,
 			...useAutocomplete(props),
 		};
-		useOverflow(thru);
-		return props.variant === 'pill' ? pill(thru) : autocomplete(thru);
+		const overflown = useOverflow(thru);
+		return html`${props.variant === 'pill' ? pill(thru) : autocomplete(thru)}
+			<cosmoz-tooltip
+				for="overflow"
+				description=${overflown}
+			></cosmoz-tooltip>`;
 	},
 	observedAttributes = [
 		'variant',
