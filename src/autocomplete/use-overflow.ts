@@ -6,7 +6,7 @@ import { raf } from './util';
 const overflow = (host: HTMLElement) => {
 	const chips = host.shadowRoot!.querySelectorAll<HTMLElement>('.chip');
 	const badge = host.shadowRoot!.querySelector<HTMLElement>('.badge');
-	if (!badge) return;
+	if (!badge) return '';
 	badge.hidden = true;
 	for (const chip of chips) {
 		chip.hidden = false;
@@ -34,14 +34,14 @@ const overflow = (host: HTMLElement) => {
 	const overflown = chips.length - i;
 	badge.querySelector('span')!.textContent = '+' + overflown.toString();
 	badge.hidden = overflown < 1;
-	badge.title = Array.from(chips)
-		.slice(i)
+	badge.setAttribute('name', 'overflow');
+	const hidden = all.slice(i);
+	for (const chip of hidden) {
+		chip.hidden = true;
+	}
+	return hidden
 		.map((chip) => chip.title || chip.textContent?.trim())
 		.join(', ');
-
-	for (; i < chips.length; i++) {
-		chips[i].hidden = true;
-	}
 };
 
 export const useOverflow = <I>({
@@ -57,7 +57,8 @@ export const useOverflow = <I>({
 }) => {
 	const host = useHost();
 	const enabled = !(wrap || limit === 1) && value.length > 0;
-	const doRaf = useMemo(() => raf(() => overflow(host)), []);
+	const [hidden, setHidden] = useState('');
+	const doRaf = useMemo(() => raf(() => setHidden(overflow(host))), []);
 	const [width, setWidth] = useState(0);
 
 	useLayoutEffect(() => {
@@ -76,4 +77,6 @@ export const useOverflow = <I>({
 		() => (enabled ? doRaf() : undefined),
 		[enabled, width, opened, value],
 	);
+
+	return hidden;
 };
