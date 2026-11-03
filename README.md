@@ -26,3 +26,9 @@ npm install --save @neovici/cosmoz-autocomplete
 import { html } from 'lit-html';
 html`<cosmoz-autocomplete .source=${['A', 'B', 'C', 'D']} />`;
 ```
+
+## Testing
+
+Unit tests run with `npm test`, which also runs the visual regression suite
+that guards the component's rendered states — see
+[docs/visual-regression-tests.md](docs/visual-regression-tests.md).
