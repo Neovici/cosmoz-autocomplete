@@ -229,6 +229,13 @@ export const styles = ({
 				height: ${itemHeight}px;
 			}
 		`,
+		// sized by content: every option gets the same breathing room
+		// (shadcn's command item: py-1.5), not just ones with a hint or media
+		() => css`
+			.item {
+				padding-block: calc(var(--cz-spacing) * 1.5);
+			}
+		`,
 	)}
 	.item[data-index='${index || '0'}'] {
 		background: var(
