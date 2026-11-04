@@ -7,6 +7,13 @@ const checkSVG =
 	"d='M9.5 1L5.20039 7.04766L1.66348 3.46152' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 /* eslint-enable quotes */
 
+const checkMask =
+	/* eslint-disable quotes */
+	"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' " +
+	"stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E" +
+	"%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E";
+/* eslint-enable quotes */
+
 const style = css`
 	:host {
 		display: block;
@@ -93,6 +100,76 @@ const style = css`
 	[virtualizer-sizer]:not(.sizer) {
 		line-height: 1;
 	}
+
+	/* =========================================
+	 * OPTION PARTS (see ../option.ts): a label,
+	 * a muted description and a hint line below.
+	 * ========================================= */
+	.option-line,
+	.option-hint {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-height: var(--cz-text-sm-line-height);
+	}
+	.item:has(.option-hint) {
+		padding-block: calc(var(--cz-spacing) * 1.5);
+	}
+	.option-label {
+		font-weight: var(--cz-font-weight-medium);
+		font-variant-numeric: tabular-nums;
+	}
+	.option-description {
+		margin-inline-start: calc(var(--cz-spacing) * 1.5);
+		color: var(--cz-color-text-tertiary);
+	}
+	.option-hint {
+		font-size: var(--cz-text-xs);
+		line-height: var(--cz-text-xs-line-height);
+		color: var(--cz-color-text-tertiary);
+	}
+
+	/* =========================================
+	 * SELECT MODE: a combobox popover. The
+	 * selected option carries a check mark
+	 * instead of a fill; hover is a soft accent.
+	 * ========================================= */
+	:host([select]) {
+		--cosmoz-listbox-highlight: var(--cz-color-bg-primary-hover);
+		padding: var(--cz-spacing);
+		box-shadow:
+			0 0 0 1px var(--cz-color-border-secondary),
+			var(--cz-shadow-lg);
+	}
+	:host([select]) .items {
+		padding-inline: 0;
+	}
+	:host([select]:not([multi])) .item {
+		position: relative;
+		width: 100%;
+		margin-block: 0;
+		padding-inline: calc(var(--cz-spacing) * 8) calc(var(--cz-spacing) * 2);
+	}
+	:host([select]:not([multi])) .item[aria-selected] {
+		background: none;
+	}
+	:host([select]:not([multi])) .item::before {
+		content: '';
+		position: absolute;
+		inset-inline-start: calc(var(--cz-spacing) * 2);
+		top: 50%;
+		width: calc(var(--cz-spacing) * 4);
+		height: calc(var(--cz-spacing) * 4);
+		translate: 0 -50%;
+		background: currentColor;
+		/* prettier-ignore */
+		mask: url("${checkMask}") center / contain no-repeat;
+		opacity: 0;
+	}
+	:host([select]:not([multi])) .item[aria-selected]::before {
+		opacity: 1;
+	}
 `;
 
 export default style;
@@ -116,7 +193,10 @@ export const styles = ({
 		`,
 	)}
 	.item[data-index='${index || '0'}'] {
-		background: rgb(from var(--cz-color-alpha-black) r g b / 0.14);
+		background: var(
+			--cosmoz-listbox-highlight,
+			rgb(from var(--cz-color-alpha-black) r g b / 0.14)
+		);
 	}
 	.item[data-index='${index || '0'}'][part~='error'] {
 		background: var(--cz-color-bg-error);
