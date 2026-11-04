@@ -105,6 +105,43 @@ const style = css`
 	 * OPTION PARTS (see ../option.ts): a label,
 	 * a muted description and a hint line below.
 	 * ========================================= */
+	.option {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--cz-spacing) * 3);
+		min-width: 0;
+		height: 100%;
+	}
+	.option-text {
+		flex: 1;
+		min-width: 0;
+	}
+	.option-media {
+		display: grid;
+		flex: none;
+		place-items: center;
+		width: var(--cosmoz-option-media-size, calc(var(--cz-spacing) * 10));
+		height: var(--cosmoz-option-media-size, calc(var(--cz-spacing) * 10));
+		border-radius: var(--cz-radius-md);
+		overflow: hidden;
+		background: var(--cz-color-bg-secondary);
+		color: var(--cz-color-fg-quaternary);
+	}
+	.option-media > img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		background: var(--cz-color-bg-primary);
+	}
+	.option-trailing {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: calc(var(--cz-spacing) * 2);
+		font-weight: var(--cz-font-weight-medium);
+		font-variant-numeric: tabular-nums;
+		line-height: var(--cz-text-sm-line-height);
+	}
 	.option-line,
 	.option-hint {
 		display: block;
@@ -113,7 +150,8 @@ const style = css`
 		white-space: nowrap;
 		line-height: var(--cz-text-sm-line-height);
 	}
-	.item:has(.option-hint) {
+	.item:has(.option-hint),
+	.item:has(.option-media) {
 		padding-block: calc(var(--cz-spacing) * 1.5);
 	}
 	.option-label {

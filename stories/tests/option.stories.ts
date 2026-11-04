@@ -110,3 +110,57 @@ export const ChevronStaysNextToSuffix: Story = {
 		).not.toBeNull();
 	},
 };
+
+interface Article {
+	title: string;
+	number: string;
+	price: string;
+	image?: string;
+}
+
+const articles: Article[] = [
+	{
+		title: 'Safety vest',
+		number: 'A-1001',
+		price: '€12.00',
+		image: `data:image/svg+xml,${encodeURIComponent(
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="orange"/></svg>',
+		)}`,
+	},
+	{ title: 'Work gloves', number: 'A-2002', price: '€4.50' },
+];
+
+const catalog = optionRenderers<Article>({
+	media: (a) => (a.image ? html`<img src=${a.image} alt="" />` : '#'),
+	hint: (a) => a.number,
+	trailing: (a) => a.price,
+});
+
+export const OptionShowsMediaAndTrailing: Story = {
+	render: () =>
+		html`<cosmoz-autocomplete
+			.label=${'Catalog'}
+			.source=${articles}
+			.textProperty=${'title'}
+			item-height="64"
+			.itemRenderer=${catalog.itemRenderer}
+		></cosmoz-autocomplete>`,
+	play: async ({ canvas }) => {
+		await userEvent.click(await canvas.findByShadowRole('textbox'));
+		await userEvent.keyboard('vest');
+		const option = await canvas.findByShadowRole('option', {
+			name: /^Safety vest\s*A-1001\s*€12\.00$/u,
+		});
+		// the query is marked in the default label
+		expect(option.querySelector('.option-label mark')?.textContent).toBe(
+			'vest',
+		);
+		expect(option.querySelector('.option-media img')).not.toBeNull();
+		// no media, no empty square
+		await userEvent.keyboard('{Backspace>4/}gloves');
+		const plain = await canvas.findByShadowRole('option', {
+			name: /^#\s*Work gloves/u,
+		});
+		expect(plain.querySelector('.option-trailing')?.textContent).toBe('€4.50');
+	},
+};
