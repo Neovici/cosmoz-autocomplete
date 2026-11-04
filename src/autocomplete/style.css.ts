@@ -16,6 +16,52 @@ export default css`
 		display: block;
 	}
 
+	/* select: the chosen value fills the row like a button's label; the
+	   caret stays hidden until the user types, which swaps it for the query */
+	:host([mode='select']) cosmoz-input[data-single] cosmoz-tag.chip {
+		flex: 1;
+		min-width: 0;
+		max-width: none;
+	}
+	:host([mode='select'])
+		cosmoz-input[data-single]:not([data-query])::part(input) {
+		caret-color: transparent;
+		cursor: pointer;
+	}
+	:host([mode='select']) cosmoz-input[data-query] cosmoz-tag.chip {
+		display: none;
+	}
+	:host([mode='select']) cosmoz-input[data-single][data-query]::part(input) {
+		flex: 1;
+	}
+
+	/* select: clear button beside the chevron */
+	.clear {
+		display: grid;
+		flex: none;
+		place-items: center;
+		width: calc(var(--cz-spacing) * 6);
+		height: calc(var(--cz-spacing) * 6);
+		margin-inline-end: var(--cz-spacing);
+		padding: 0;
+		border: 0;
+		border-radius: var(--cz-radius-full);
+		background: none;
+		color: var(--cz-color-text-quaternary);
+		cursor: pointer;
+		transition:
+			background-color 0.1s,
+			color 0.1s;
+	}
+	.clear:hover {
+		background: var(--cz-color-bg-tertiary);
+		color: var(--cz-color-text-secondary);
+	}
+	.clear:focus-visible {
+		outline: 2px solid var(--cz-color-focus-ring);
+		outline-offset: 1px;
+	}
+
 	:host(:not([variant='inline'])) cosmoz-listbox {
 		margin-top: var(--cz-spacing);
 	}

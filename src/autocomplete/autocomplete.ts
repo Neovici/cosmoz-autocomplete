@@ -1,5 +1,5 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
-import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
+import { chevronDownIcon, xIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
@@ -87,7 +87,10 @@ const autocomplete = <I>(props: AProps<I>) => {
 				mode,
 			} = props,
 			isOne = limit === 1,
-			isSingle = isOne && value?.[0] != null;
+			isSingle = isOne && value?.[0] != null,
+			isSelect = mode === 'select',
+			// a select clears from its own button by the chevron, not the chip
+			clearable = isSelect && isSingle && Number(min ?? 1) < 1 && !disabled;
 
 		const hasResultsOrQuery =
 			loading || items.length > 0 || (text != null && text.length > 0);
@@ -134,8 +137,26 @@ const autocomplete = <I>(props: AProps<I>) => {
 				exportparts=${inputParts}
 				?data-one=${isOne}
 				?data-single=${isSingle}
+				?data-query=${!!text}
 			>
 				<slot name="prefix" slot="prefix"></slot>
+				${when(
+					clearable,
+					() =>
+						html`<button
+							type="button"
+							slot="suffix"
+							class="clear"
+							part="clear"
+							aria-label=${t('Clear')}
+							@click=${(e: Event) => {
+								e.stopPropagation();
+								onDeselect(value[0]);
+							}}
+						>
+							${xIcon({ width: '14', height: '14' })}
+						</button>`,
+				)}
 				<slot name="suffix" slot="suffix">
 					${when(mode === 'select', () =>
 						chevronDownIcon({
@@ -148,7 +169,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				</slot>
 				${selection({
 					value,
-					min,
+					min: isSelect ? Infinity : min,
 					isOne,
 					onDeselect,
 					textual,

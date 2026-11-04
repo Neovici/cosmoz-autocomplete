@@ -176,11 +176,13 @@ export const DeselectChip: Story = {
 	},
 };
 
+const shadow = (canvasElement: HTMLElement) =>
+	canvasElement.querySelector('cosmoz-autocomplete')?.shadowRoot;
+// a select clears from its own button beside the chevron, never the chip
 const clearButton = (canvasElement: HTMLElement) =>
-	canvasElement
-		.querySelector('cosmoz-autocomplete')
-		?.shadowRoot?.querySelector('cosmoz-tag')
-		?.shadowRoot?.querySelector<HTMLElement>('button.close');
+	shadow(canvasElement)?.querySelector<HTMLElement>('button.clear');
+const chipRemovable = (canvasElement: HTMLElement) =>
+	!!shadow(canvasElement)?.querySelector('cosmoz-tag.chip[removable]');
 
 export const SelectKeepsItsValue: Story = {
 	args: {
@@ -206,6 +208,7 @@ export const SelectClearableWithMinZero: Story = {
 		await canvas.findByShadowText(/Red/u);
 		const button = clearButton(canvasElement);
 		expect(button).toBeTruthy();
+		expect(chipRemovable(canvasElement)).toBe(false);
 		await userEvent.click(button!);
 		await waitFor(() => {
 			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
