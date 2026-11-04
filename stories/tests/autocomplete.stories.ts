@@ -10,7 +10,7 @@ interface AutocompleteArgs {
 				query?: string;
 				active?: boolean;
 		  }) => PromiseLike<{ text: string; id?: number }[]> | undefined);
-	value?: { text: string; id?: number }[];
+	value?: { text: string; id?: number }[] | { text: string; id?: number };
 	limit?: number;
 	textProperty?: string;
 	valueProperty?: string;
@@ -27,6 +27,7 @@ interface AutocompleteArgs {
 	preserveOrder?: boolean;
 	required?: boolean;
 	mode?: 'select';
+	min?: number;
 }
 
 const AutocompleteTest = ({
@@ -48,6 +49,7 @@ const AutocompleteTest = ({
 	preserveOrder,
 	required,
 	mode,
+	min,
 }: AutocompleteArgs): TemplateResult => html`
 	<cosmoz-autocomplete
 		.source=${source}
@@ -68,6 +70,7 @@ const AutocompleteTest = ({
 		?external-search=${externalSearch}
 		?preserve-order=${preserveOrder}
 		.mode=${mode}
+		.min=${min}
 	></cosmoz-autocomplete>
 `;
 
@@ -167,6 +170,43 @@ export const DeselectChip: Story = {
 
 		await userEvent.click(clearButton!);
 
+		await waitFor(() => {
+			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
+		});
+	},
+};
+
+const clearButton = (canvasElement: HTMLElement) =>
+	canvasElement
+		.querySelector('cosmoz-autocomplete')
+		?.shadowRoot?.querySelector('cosmoz-tag')
+		?.shadowRoot?.querySelector<HTMLElement>('button.close');
+
+export const SelectKeepsItsValue: Story = {
+	args: {
+		mode: 'select',
+		source: colors,
+		value: colors[0],
+	},
+	play: async ({ canvas, canvasElement }) => {
+		await canvas.findByShadowText(/Red/u);
+		expect(clearButton(canvasElement)).toBeFalsy();
+	},
+};
+
+export const SelectClearableWithMinZero: Story = {
+	args: {
+		mode: 'select',
+		min: 0,
+		source: colors,
+		value: colors[0],
+		onChange: fn(),
+	},
+	play: async ({ canvas, canvasElement, args }) => {
+		await canvas.findByShadowText(/Red/u);
+		const button = clearButton(canvasElement);
+		expect(button).toBeTruthy();
+		await userEvent.click(button!);
 		await waitFor(() => {
 			expect(args.onChange).toHaveBeenCalledWith([], expect.any(Function));
 		});
