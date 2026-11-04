@@ -17,7 +17,8 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 		...props,
 		...(isSelect && {
 			limit: 1,
-			min: 1,
+			// a select keeps its value unless the consumer allows clearing it (min 0)
+			min: props.min ?? 1,
 			showSingle: true,
 		}),
 		mode,
