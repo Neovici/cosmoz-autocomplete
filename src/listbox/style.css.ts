@@ -15,7 +15,9 @@ const style = css`
 		backdrop-filter: blur(16px) saturate(180%);
 		-webkit-backdrop-filter: blur(16px) saturate(180%);
 		border-radius: var(--cz-radius-md);
-		box-shadow: 0 0 0 1px var(--cz-color-border-primary);
+		box-shadow:
+			0 0 0 1px var(--cz-color-border-primary),
+			var(--cz-shadow-lg);
 		text-transform: var(--cosmoz-autocomplete-listbox-text-transform, initial);
 		overflow: hidden;
 		padding-block: var(--cz-spacing);

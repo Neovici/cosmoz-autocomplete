@@ -73,6 +73,22 @@ export const Basic: Story = {
 	},
 };
 
+export const NoTabStop: Story = {
+	args: {
+		items: Array.from({ length: 20 }, (_, i) => `Item ${i}`),
+		itemLimit: 5,
+	},
+	play: async () => {
+		await waitForLayout();
+		const items = document
+			.querySelector('cosmoz-listbox')!
+			.shadowRoot!.querySelector<HTMLElement>('.items')!;
+		// scroll containers are keyboard focusable; the input keeps focus instead
+		expect(items.scrollHeight).toBeGreaterThan(items.clientHeight);
+		expect(items.getAttribute('tabindex')).toBe('-1');
+	},
+};
+
 export const KeyboardNavigation: Story = {
 	args: {
 		items: ['Item 0', 'Item 1', 'Item 2'],
