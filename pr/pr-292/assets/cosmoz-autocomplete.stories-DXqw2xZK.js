@@ -1,4 +1,4 @@
-import{b as r,w as E}from"./iframe-CtvhLsb_.js";import{o as l}from"./index-_AaNOMuG.js";import{n as T}from"./index-CKWnpTA-.js";import{c as e,o as X}from"./data-CD07yWBY.js";import"./preload-helper-PPVm8Dsz.js";const I=({slot:o,title:t,className:a,width:n="24",height:i="24",styles:c}={})=>r`
+import{b as r,w as E}from"./iframe-DdPua5x4.js";import{o as l}from"./index-CjkS3Qds.js";import{n as T}from"./index-Di6gNg6O.js";import{c as e,o as X}from"./data-CM_cUC9X.js";import"./preload-helper-PPVm8Dsz.js";const I=({slot:o,title:t,className:a,width:n="24",height:i="24",styles:c}={})=>r`
   <svg
     slot=${l(o)}
     class=${`chevron-down-icon ${a??""}`}
