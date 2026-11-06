@@ -87,3 +87,35 @@ test.describe('autocomplete excluding', () => {
 		await expect(page).toHaveScreenshot();
 	});
 });
+
+test.describe('autocomplete option', () => {
+	test('select', async ({ page }) => {
+		await page.goto(
+			'iframe.html?id=autocomplete-option--select&viewMode=story/',
+		);
+		// the field: label and description, a consumer's suffix, the chevron
+		await expect(page).toHaveScreenshot();
+
+		// the list: description and hint rows, a check on the selected option
+		await page.getByText('Cost center').click();
+		await expect(page.getByRole('option', { name: /111200/u })).toBeVisible();
+		await expect(page).toHaveScreenshot();
+	});
+
+	test('catalog', async ({ page }) => {
+		await page.goto(
+			'iframe.html?id=autocomplete-option--catalog&viewMode=story/',
+		);
+		// image in the media square, no square without media, trailing price
+		await page.getByText('Catalog').click();
+		await expect(
+			page.getByRole('option', { name: /Work gloves/u }),
+		).toBeVisible();
+		await expect(page).toHaveScreenshot();
+
+		// the query is marked in the label
+		await page.keyboard.type('vest');
+		await expect(page.getByRole('option')).toHaveCount(1);
+		await expect(page).toHaveScreenshot();
+	});
+});
