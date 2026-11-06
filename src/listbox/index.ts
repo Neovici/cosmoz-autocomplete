@@ -76,7 +76,8 @@ customElements.define(
 
 interface ListboxProps<I> extends Props<I> {
 	multi?: boolean;
-	mode?: string;
+	/** `select` gives the popover the combobox look. */
+	mode?: 'select';
 }
 
 export const listbox = <I>(

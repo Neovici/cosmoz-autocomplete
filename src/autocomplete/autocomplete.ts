@@ -141,8 +141,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 					// after the suffix slot, not its fallback: a consumer's suffix keeps it
 					chevronSelectorVerticalIcon({
 						slot: 'suffix',
-						styles:
-							'flex: none; margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-quaternary);',
+						className: 'chevron',
 						width: '16',
 						height: '16',
 					}),

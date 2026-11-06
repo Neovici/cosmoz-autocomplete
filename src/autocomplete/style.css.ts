@@ -12,16 +12,11 @@ export default css`
 		--cosmoz-badge-bg-color: transparent;
 	}
 
-	/* the selected value as option parts (see ../option.ts) */
-	.option-label {
-		font-weight: var(--cz-font-weight-medium);
-		font-variant-numeric: tabular-nums;
-		color: var(--cz-color-text-primary);
-	}
-	.option-description {
-		margin-inline-start: calc(var(--cz-spacing) * 1.5);
-		color: var(--cz-color-text-tertiary);
-		font-weight: var(--cz-font-weight-regular);
+	/* select mode's chevron, kept beside a consumer's suffix */
+	.chevron {
+		flex: none;
+		margin-right: calc(var(--cz-spacing) * 2);
+		color: var(--cz-color-text-quaternary);
 	}
 
 	cosmoz-dropdown-next {

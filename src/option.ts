@@ -1,4 +1,5 @@
-import { html, nothing } from 'lit-html';
+import { component, css, html } from '@pionjs/pion';
+import { nothing } from 'lit-html';
 import { chip, ChipProps } from './autocomplete/chip';
 import { itemRenderer } from './listbox/item-renderer';
 
@@ -18,17 +19,106 @@ export interface OptionParts<I> {
 	trailing?: (item: I) => unknown;
 }
 
-const line = (label: unknown, description?: string | null) =>
-	html`<span class="option-line"
-		><span class="option-label">${label}</span>${description
-			? html`<span class="option-description">${description}</span>`
-			: nothing}</span
-	>`;
+interface OptionProps {
+	description?: unknown;
+	hint?: unknown;
+	media?: unknown;
+	trailing?: unknown;
+}
+
+const isEmpty = (content: unknown): boolean =>
+	content == null ||
+	content === false ||
+	content === '' ||
+	content === nothing ||
+	(Array.isArray(content) && content.every(isEmpty));
 
 const part = (className: string, content: unknown) =>
-	content == null || content === nothing || content === ''
-		? nothing
-		: html`<span class=${className}>${content}</span>`;
+	isEmpty(content) ? nothing : html`<span class=${className}>${content}</span>`;
+
+const style = css`
+	:host {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--cz-spacing) * 3);
+		min-width: 0;
+		height: 100%;
+	}
+	.text {
+		flex: 1;
+		min-width: 0;
+	}
+	.media {
+		display: grid;
+		flex: none;
+		place-items: center;
+		width: var(--cosmoz-option-media-size, calc(var(--cz-spacing) * 10));
+		height: var(--cosmoz-option-media-size, calc(var(--cz-spacing) * 10));
+		border-radius: var(--cz-radius-md);
+		overflow: hidden;
+		background: var(--cz-color-bg-secondary);
+		color: var(--cz-color-fg-quaternary);
+	}
+	.media > img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		background: var(--cz-color-bg-primary);
+	}
+	.trailing {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: calc(var(--cz-spacing) * 2);
+		font-weight: var(--cz-font-weight-medium);
+		font-variant-numeric: tabular-nums;
+		line-height: var(--cz-text-sm-line-height);
+	}
+	.line,
+	.hint {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-height: var(--cz-text-sm-line-height);
+	}
+	.label {
+		font-weight: var(--cz-font-weight-medium);
+		font-variant-numeric: tabular-nums;
+		color: var(--cz-color-text-primary);
+	}
+	.description {
+		margin-inline-start: calc(var(--cz-spacing) * 1.5);
+		color: var(--cz-color-text-tertiary);
+		font-weight: var(--cz-font-weight-regular);
+	}
+	.hint {
+		font-size: var(--cz-text-xs);
+		line-height: var(--cz-text-xs-line-height);
+		color: var(--cz-color-text-tertiary);
+	}
+`;
+
+/**
+ * An option's parts: an optional image or icon, the label (slotted, so a
+ * marked query stays in the light DOM), a muted description, an optional hint
+ * line below and an optional trailing part. Self-styled, so only consumers of
+ * `optionRenderers` load these styles.
+ */
+const Option = ({ description, hint, media, trailing }: OptionProps) =>
+	html`${part('media', media)}<span class="text"
+			><span class="line"
+				><span class="label"><slot></slot></span>${part(
+					'description',
+					description,
+				)}</span
+			>${part('hint', hint)}</span
+		>${part('trailing', trailing)}`;
+
+customElements.define(
+	'cosmoz-option',
+	component<OptionProps>(Option, { styleSheets: [style] }),
+);
 
 /**
  * Renderers for combobox-style options: an optional image or icon, a label,
@@ -49,28 +139,37 @@ export const optionRenderers = <I>({
 	media,
 	trailing,
 }: OptionParts<I> = {}) => ({
-	itemRenderer: itemRenderer<I>((content, item) =>
+	itemRenderer: itemRenderer<I>((content, item) => {
 		// the virtualizer can ask for a row before its item exists
-		item == null
-			? content
-			: html`<span class="option"
-					>${part('option-media', media?.(item))}<span class="option-text"
-						>${line(
-							label ? label(item, content) : content,
-							description?.(item),
-						)}${part('option-hint', hint?.(item))}</span
-					>${part('option-trailing', trailing?.(item))}</span
-				>`,
-	),
+		if (item == null) return content;
+		const parts = {
+			description: description?.(item),
+			hint: hint?.(item),
+			media: media?.(item),
+			trailing: trailing?.(item),
+		};
+		// markers for the listbox's padding: :has() can't see into the shadow
+		return html`<cosmoz-option
+			?data-media=${!isEmpty(parts.media)}
+			?data-hint=${!isEmpty(parts.hint)}
+			.description=${parts.description}
+			.hint=${parts.hint}
+			.media=${parts.media}
+			.trailing=${parts.trailing}
+			>${label ? label(item, content) : content}</cosmoz-option
+		>`;
+	}),
 	chipRenderer: (props: ChipProps<I>) =>
-		chip({
-			...props,
-			content:
-				props.item == null
-					? props.content
-					: line(
-							label ? label(props.item, props.content) : props.content,
-							description?.(props.item),
-						),
-		}),
+		props.item == null
+			? chip(props)
+			: chip({
+					...props,
+					// the field shows the parts, the tooltip keeps the item's text
+					title: typeof props.content === 'string' ? props.content : undefined,
+					content: html`<cosmoz-option .description=${description?.(props.item)}
+						>${label
+							? label(props.item, props.content)
+							: props.content}</cosmoz-option
+					>`,
+				}),
 });
