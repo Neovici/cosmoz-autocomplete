@@ -71,6 +71,11 @@ export default css`
 		flex: 0;
 	}
 
+	/* a cell hides its error text behind a value (the red border stays); cosmoz-input only sees typed text */
+	cosmoz-input[variant='cell'][data-has-value]::part(error) {
+		visibility: hidden;
+	}
+
 	[data-one] .badge {
 		display: none;
 	}
