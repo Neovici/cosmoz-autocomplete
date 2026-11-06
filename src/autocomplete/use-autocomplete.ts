@@ -64,6 +64,7 @@ export interface Props<I> extends Base<I> {
 	defaultIndex?: number;
 	externalSearch?: boolean;
 	lazyOpen?: boolean;
+	variant?: string;
 }
 
 export const useAutocomplete = <I>({
@@ -86,10 +87,13 @@ export const useAutocomplete = <I>({
 	externalSearch,
 	disabled,
 	lazyOpen,
+	variant,
 }: Props<I>) => {
 	const limit = _limit != null ? Number(_limit) : undefined,
 		min = _min != null ? Number(_min) : undefined,
 		isSelect = mode === 'select',
+		// pill searches in its popover: typing there is not editing the value
+		isPill = variant === 'pill',
 		textual = useMemo(
 			() => (_textual ?? strProp)(textProperty),
 			[_textual, textProperty],
@@ -135,7 +139,8 @@ export const useAutocomplete = <I>({
 					onChange(values.slice(0, -1));
 				}
 			},
-			check: () => !disabled && empty && host.matches(':focus-within'),
+			check: () =>
+				!disabled && !isPill && empty && host.matches(':focus-within'),
 			element: () => host,
 		},
 		[],
@@ -169,6 +174,7 @@ export const useAutocomplete = <I>({
 	return {
 		limit,
 		opened,
+		setOpened,
 		query,
 		textual,
 		value,
@@ -206,11 +212,11 @@ export const useAutocomplete = <I>({
 			(e: InputEvent) => {
 				if (disabled) return;
 				const text = (e.target as HTMLInputElement).value;
-				if (text && limit === 1 && value.length > 0) onChange([]);
+				if (!isPill && text && limit === 1 && value.length > 0) onChange([]);
 				onText(text);
 				setOpened(true);
 			},
-			[disabled, onText, setOpened, limit, value, onChange],
+			[disabled, onText, setOpened, limit, value, onChange, isPill],
 		),
 		onSelect: useCallback(
 			(newVal: I) => {

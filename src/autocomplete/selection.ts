@@ -14,6 +14,7 @@ interface Props<I> {
 	textual: (i: I) => string;
 	disabled?: boolean;
 	chipRenderer?: ChipRenderer<I>;
+	overflowBadge?: unknown;
 }
 
 export const selection = <I>({
@@ -23,6 +24,7 @@ export const selection = <I>({
 	textual,
 	disabled,
 	chipRenderer = defaultChipRenderer,
+	overflowBadge,
 }: Props<I>) => [
 	...values.filter(Boolean).map((value) =>
 		chipRenderer({
@@ -33,12 +35,13 @@ export const selection = <I>({
 			slot: 'control',
 		}),
 	),
-	chipRenderer({
-		item: null,
-		content: html`<span></span>`,
-		className: 'badge',
-		disabled: true,
-		slot: 'control',
-		hidden: true,
-	}),
+	overflowBadge ??
+		chipRenderer({
+			item: null,
+			content: html`<span></span>`,
+			className: 'badge',
+			disabled: true,
+			slot: 'control',
+			hidden: true,
+		}),
 ];
