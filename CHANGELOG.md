@@ -1,3 +1,14 @@
+## 14.2.0
+
+### Minor Changes
+
+- 3775f94: Add a `pill` variant: chips followed by an "add" button that opens a popover with its own search field (`searchPlaceholder`), a check on selected options, and a `footer` slot. Chips that don't fit collapse into a `+N` badge whose tooltip lists them and which opens the popover. Adds a `checkmark` option to the listbox.
+
+### Patch Changes
+
+- 37e762c: A `variant="cell"` autocomplete hides its error text once a value is selected, like cosmoz-input does for typed text, instead of drawing it over the chip. The invalid border stays.
+- f477e94: The listbox floats above the page with a large shadow, and its scroll container is no longer a Tab stop: Tab from an open autocomplete moves to the next field instead of into the list.
+
 ## 14.1.2
 
 ### Patch Changes
