@@ -198,6 +198,8 @@ const autocomplete = <I>(props: AProps<I>) => {
 	},
 	observedAttributes = [
 		'variant',
+		'label',
+		'placeholder',
 		'disabled',
 		'invalid',
 		'required',
