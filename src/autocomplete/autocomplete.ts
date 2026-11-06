@@ -1,5 +1,5 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
-import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
+import { chevronSelectorVerticalIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import { t } from 'i18next';
 import { html } from 'lit-html';
@@ -136,16 +136,16 @@ const autocomplete = <I>(props: AProps<I>) => {
 				?data-single=${isSingle}
 			>
 				<slot name="prefix" slot="prefix"></slot>
-				<slot name="suffix" slot="suffix">
-					${when(mode === 'select', () =>
-						chevronDownIcon({
-							styles:
-								'margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);',
-							width: '16',
-							height: '16',
-						}),
-					)}
-				</slot>
+				<slot name="suffix" slot="suffix"></slot>
+				${when(mode === 'select', () =>
+					// after the suffix slot, not its fallback: a consumer's suffix keeps it
+					chevronSelectorVerticalIcon({
+						slot: 'suffix',
+						className: 'chevron',
+						width: '16',
+						height: '16',
+					}),
+				)}
 				${selection({
 					value,
 					min,

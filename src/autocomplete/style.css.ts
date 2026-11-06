@@ -12,6 +12,13 @@ export default css`
 		--cosmoz-badge-bg-color: transparent;
 	}
 
+	/* select mode's chevron, kept beside a consumer's suffix */
+	.chevron {
+		flex: none;
+		margin-right: calc(var(--cz-spacing) * 2);
+		color: var(--cz-color-text-quaternary);
+	}
+
 	cosmoz-dropdown-next {
 		display: block;
 	}

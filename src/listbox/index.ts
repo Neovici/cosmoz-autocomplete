@@ -76,15 +76,18 @@ customElements.define(
 
 interface ListboxProps<I> extends Props<I> {
 	multi?: boolean;
+	/** `select` gives the popover the combobox look. */
+	mode?: 'select';
 }
 
 export const listbox = <I>(
-	{ multi, ...thru }: ListboxProps<I>,
+	{ multi, mode, ...thru }: ListboxProps<I>,
 	content: unknown,
 ) =>
 	html`<cosmoz-listbox
 		part="listbox"
 		?multi=${multi}
+		?select=${mode === 'select'}
 		...=${spreadProps(props(properties)(thru))}
 		>${content}</cosmoz-listbox
 	>`;

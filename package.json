@@ -64,7 +64,8 @@
 		"./keybindings": "./dist/autocomplete/autocomplete-keybindings.js",
 		"./listbox": "./dist/listbox/index.js",
 		"./listbox/keybindings": "./dist/listbox/listbox-keybindings.js",
-		"./item-renderer": "./dist/listbox/item-renderer.js"
+		"./item-renderer": "./dist/listbox/item-renderer.js",
+		"./option": "./dist/option.js"
 	},
 	"dependencies": {
 		"@lit-labs/virtualizer": "^2.0.0",

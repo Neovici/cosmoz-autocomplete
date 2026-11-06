@@ -12,6 +12,8 @@ export interface ChipProps<I> extends Props {
 	slot?: string;
 	className?: string;
 	content: unknown;
+	/** Tooltip; defaults to the content when it is text. */
+	title?: string;
 	hidden?: boolean;
 }
 export const chip = <I>({
@@ -21,6 +23,7 @@ export const chip = <I>({
 	className = 'chip',
 	hidden,
 	slot,
+	title = typeof content === 'string' ? content : undefined,
 }: ChipProps<I>) =>
 	html`<cosmoz-tag
 		class=${ifDefined(className)}
@@ -30,6 +33,6 @@ export const chip = <I>({
 		?hidden=${hidden}
 		?removable=${!!onClear && !disabled}
 		@remove=${onClear}
-		title=${ifDefined(typeof content === 'string' ? content : undefined)}
+		title=${ifDefined(title)}
 		>${content}</cosmoz-tag
 	>`;
