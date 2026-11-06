@@ -897,7 +897,7 @@ export const PillVariant: Story = {
 		const el = canvasElement.querySelector('cosmoz-autocomplete')!;
 		const $ = <E extends Element>(sel: string) =>
 			el.shadowRoot!.querySelector<E>(sel)!;
-		const badge = () => $<HTMLElement>('cosmoz-tag.badge');
+		const badge = () => $<HTMLElement>('.badge');
 		const popover = () =>
 			$('cosmoz-dropdown-next').shadowRoot!.querySelector('[popover]')!;
 
@@ -957,7 +957,7 @@ const pillOf = (canvasElement: HTMLElement) => {
 	const el = canvasElement.querySelector('cosmoz-autocomplete')!;
 	const $ = <E extends Element>(sel: string) =>
 		el.shadowRoot!.querySelector<E>(sel)!;
-	return { el, $, badge: () => $<HTMLElement>('cosmoz-tag.badge') };
+	return { el, $, badge: () => $<HTMLElement>('.badge') };
 };
 
 export const PillVariantFits: Story = {
@@ -981,6 +981,7 @@ export const PillVariantFits: Story = {
 			).toBe(3),
 		);
 		expect(badge().hidden).toBe(true);
+		expect(getComputedStyle(badge()).display).toBe('none');
 	},
 };
 
@@ -1023,5 +1024,24 @@ export const PillVariantDisabled: Story = {
 		badge().click();
 		await new Promise((resolve) => setTimeout(resolve, 100));
 		expect(el.hasAttribute('opened')).toBe(false);
+	},
+};
+
+export const PillVariantKeyboardOverflow: Story = {
+	...PillVariant,
+	play: async ({ canvasElement }) => {
+		const { $, badge } = pillOf(canvasElement);
+		const popover = () =>
+			$('cosmoz-dropdown-next').shadowRoot!.querySelector('[popover]')!;
+		await waitFor(() => expect(badge().hidden).toBe(false));
+		expect(badge().tabIndex).toBe(0);
+		badge().focus();
+		await waitFor(() => expect(badge().matches(':focus')).toBe(true));
+		await waitFor(() =>
+			expect($('[role="tooltip"]').matches(':popover-open')).toBe(true),
+		);
+		expect($('[role="tooltip"]').textContent).toContain('Label number 8');
+		await userEvent.keyboard('{Enter}');
+		await waitFor(() => expect(popover().matches(':popover-open')).toBe(true));
 	},
 };

@@ -122,7 +122,18 @@ const pill = <I>(props: AProps<I>) => {
 			textual,
 			disabled,
 			chipRenderer,
-			interactiveBadge: !disabled,
+			overflowBadge: html`<button
+				type="button"
+				class="badge overflow-button"
+				name="overflow"
+				?disabled=${disabled}
+				aria-label=${t('Show more')}
+				aria-haspopup="dialog"
+				aria-expanded=${opened ? 'true' : 'false'}
+				hidden
+			>
+				<span></span>
+			</button>`,
 		})}
 		<cosmoz-dropdown-next
 			?disabled=${disabled}

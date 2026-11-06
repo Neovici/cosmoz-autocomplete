@@ -126,7 +126,8 @@ export default css`
 		flex: none;
 	}
 
-	.add {
+	.add,
+	.overflow-button {
 		display: inline-flex;
 		align-items: center;
 		gap: var(--cz-spacing);
@@ -145,17 +146,23 @@ export default css`
 		transition: background 0.1s;
 	}
 
+	.overflow-button[hidden] {
+		display: none;
+	}
+
 	.add svg {
 		color: var(--cz-color-fg-quaternary);
 	}
 
+	.overflow-button:hover,
 	.add:hover,
 	:host([opened]) .add {
 		background: var(--cz-color-bg-primary-hover);
 		color: var(--cz-color-text-secondary);
 	}
 
-	.add:focus-visible {
+	.add:focus-visible,
+	.overflow-button:focus-visible {
 		outline: none;
 		box-shadow:
 			inset 0 0 0 1px var(--cz-color-border-primary),
