@@ -55,6 +55,7 @@ const Listbox = <I>(host: HTMLElement & Props<I>) => {
 
 	return html`<div
 			class="items"
+			tabindex="-1"
 			style="min-height: ${height}px"
 			${ref((el) => (listRef.current = el))}
 		>
