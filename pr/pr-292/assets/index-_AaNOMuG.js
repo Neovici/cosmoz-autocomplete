@@ -1,4 +1,4 @@
-import{A as W,s as J,c as R,d as A,b as u,w as ce,f as $,u as le,a as y,r as We,E as Y,p as Je,D as et,g as de,e as M,h as tt,H as ot,n as nt,j as rt,k as st,l as it,m as ge,t as at}from"./iframe-B76lpf05.js";import{n as x,u as B,b as Z,e as pe,i as Ce,t as V,f as ct,s as lt,c as Te,d as re,g as dt,w as se,p as ie,l as pt,h as ut}from"./index-CbHuQBus.js";const v=e=>e??W,ee=J(R`
+import{A as W,s as J,c as R,d as A,b as u,w as ce,f as $,u as le,a as y,r as We,E as Y,p as Je,D as et,g as de,e as M,h as tt,H as ot,n as nt,j as rt,k as st,l as it,m as ge,t as at}from"./iframe-CtvhLsb_.js";import{n as x,u as B,b as Z,e as pe,i as Ce,t as V,f as ct,s as lt,c as Te,d as re,g as dt,w as se,p as ie,l as pt,h as ut}from"./index-CKWnpTA-.js";const v=e=>e??W,ee=J(R`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -1208,7 +1208,7 @@ import{A as W,s as J,c as R,d as A,b as u,w as ce,f as $,u as le,a as y,r as We,
 	::slotted(*) {
 		margin-left: calc(var(--cz-spacing) * 1);
 	}
-`;customElements.define("cosmoz-toggle",A(Bt,{styleSheets:[Dt,jt],observedAttributes:["label","disabled","error"]}));const Ft={},be=pe(class extends Ce{constructor(){super(...arguments),this.ot=Ft}render(e,t){return t()}update(e,[t,o]){if(Array.isArray(t)){if(Array.isArray(this.ot)&&this.ot.length===t.length&&t.every((n,s)=>n===this.ot[s]))return Y}else if(this.ot===t)return Y;return this.ot=Array.isArray(t)?Array.from(t):t,this.render(t,o)}});class Ht{constructor(t){this.G=t}disconnect(){this.G=void 0}reconnect(t){this.G=t}deref(){return this.G}}class Ut{constructor(){this.Y=void 0,this.Z=void 0}get(){return this.Y}pause(){this.Y??=new Promise(t=>this.Z=t)}resume(){this.Z?.(),this.Y=this.Z=void 0}}const ze=e=>!nt(e)&&typeof e.then=="function",ye=1073741823;class Vt extends ct{constructor(){super(...arguments),this._$Cwt=ye,this._$Cbt=[],this._$CK=new Ht(this),this._$CX=new Ut}render(...t){return t.find(o=>!ze(o))??Y}update(t,o){const n=this._$Cbt;let s=n.length;this._$Cbt=o;const r=this._$CK,a=this._$CX;this.isConnected||this.disconnected();for(let c=0;c<o.length&&!(c>this._$Cwt);c++){const i=o[c];if(!ze(i))return this._$Cwt=c,i;c<s&&i===n[c]||(this._$Cwt=ye,s=0,Promise.resolve(i).then(async p=>{for(;a.get();)await a.get();const d=r.deref();if(d!==void 0){const h=d._$Cbt.indexOf(i);h>-1&&h<d._$Cwt&&(d._$Cwt=h,d.setValue(p))}}))}return Y}disconnected(){this._$CK.disconnect(),this._$CX.pause()}reconnected(){this._$CK.reconnect(this),this._$CX.resume()}}const we=pe(Vt),Zt=({content:e,onClear:t,disabled:o,className:n="chip",hidden:s,slot:r})=>u`<cosmoz-tag
+`;customElements.define("cosmoz-toggle",A(Bt,{styleSheets:[Dt,jt],observedAttributes:["label","disabled","error"]}));const Ft={},be=pe(class extends Ce{constructor(){super(...arguments),this.ot=Ft}render(e,t){return t()}update(e,[t,o]){if(Array.isArray(t)){if(Array.isArray(this.ot)&&this.ot.length===t.length&&t.every((n,s)=>n===this.ot[s]))return Y}else if(this.ot===t)return Y;return this.ot=Array.isArray(t)?Array.from(t):t,this.render(t,o)}});class Ht{constructor(t){this.G=t}disconnect(){this.G=void 0}reconnect(t){this.G=t}deref(){return this.G}}class Ut{constructor(){this.Y=void 0,this.Z=void 0}get(){return this.Y}pause(){this.Y??=new Promise(t=>this.Z=t)}resume(){this.Z?.(),this.Y=this.Z=void 0}}const ze=e=>!nt(e)&&typeof e.then=="function",ye=1073741823;class Vt extends ct{constructor(){super(...arguments),this._$Cwt=ye,this._$Cbt=[],this._$CK=new Ht(this),this._$CX=new Ut}render(...t){return t.find(o=>!ze(o))??Y}update(t,o){const n=this._$Cbt;let s=n.length;this._$Cbt=o;const r=this._$CK,a=this._$CX;this.isConnected||this.disconnected();for(let c=0;c<o.length&&!(c>this._$Cwt);c++){const i=o[c];if(!ze(i))return this._$Cwt=c,i;c<s&&i===n[c]||(this._$Cwt=ye,s=0,Promise.resolve(i).then(async p=>{for(;a.get();)await a.get();const d=r.deref();if(d!==void 0){const h=d._$Cbt.indexOf(i);h>-1&&h<d._$Cwt&&(d._$Cwt=h,d.setValue(p))}}))}return Y}disconnected(){this._$CK.disconnect(),this._$CX.pause()}reconnected(){this._$CK.reconnect(this),this._$CX.resume()}}const we=pe(Vt),Zt=({content:e,onClear:t,disabled:o,className:n="chip",hidden:s,slot:r,title:a=typeof e=="string"?e:void 0})=>u`<cosmoz-tag
 		class=${v(n)}
 		slot=${v(r)}
 		exportparts="chip-text, chip-clear"
@@ -1216,7 +1216,7 @@ import{A as W,s as J,c as R,d as A,b as u,w as ce,f as $,u as le,a as y,r as We,
 		?hidden=${s}
 		?removable=${!!t&&!o}
 		@remove=${t}
-		title=${v(typeof e=="string"?e:void 0)}
+		title=${v(a)}
 		>${e}</cosmoz-tag
 	>`,Gt=({value:e,min:t=0,onDeselect:o,textual:n,disabled:s,chipRenderer:r=Zt})=>[...e.filter(Boolean).map(a=>r({item:a,content:n(a),onClear:e.length>t&&(()=>o(a)),disabled:s,slot:"control"})),r({item:null,content:u`<span></span>`,className:"badge",disabled:!0,slot:"control",hidden:!0})],Kt=R`
 	:host {
@@ -1257,16 +1257,11 @@ import{A as W,s as J,c as R,d as A,b as u,w as ce,f as $,u as le,a as y,r as We,
 		--cosmoz-badge-bg-color: transparent;
 	}
 
-	/* the selected value as option parts (see ../option.ts) */
-	.option-label {
-		font-weight: var(--cz-font-weight-medium);
-		font-variant-numeric: tabular-nums;
-		color: var(--cz-color-text-primary);
-	}
-	.option-description {
-		margin-inline-start: calc(var(--cz-spacing) * 1.5);
-		color: var(--cz-color-text-tertiary);
-		font-weight: var(--cz-font-weight-regular);
+	/* select mode's chevron, kept beside a consumer's suffix */
+	.chevron {
+		flex: none;
+		margin-right: calc(var(--cz-spacing) * 2);
+		color: var(--cz-color-text-quaternary);
 	}
 
 	cosmoz-dropdown-next {
@@ -1385,7 +1380,7 @@ import{A as W,s as J,c as R,d as A,b as u,w as ce,f as $,u as le,a as y,r as We,
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix"></slot>
-				${x(f==="select",()=>mt({slot:"suffix",styles:"flex: none; margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-quaternary);",width:"16",height:"16"}))}
+				${x(f==="select",()=>mt({slot:"suffix",className:"chevron",width:"16",height:"16"}))}
 				${Gt({value:m,min:D,onDeselect:C,textual:h,disabled:d,chipRenderer:E})}
 			</cosmoz-input>
 
