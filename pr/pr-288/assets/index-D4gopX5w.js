@@ -1,4 +1,4 @@
-import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,E as D,p as at,D as it,g as se,e as j,h as ct,H as lt,i as me,n as dt,j as pt,k as ut,l as ht,m as fe,t as Se}from"./iframe-DRS0278a.js";import{n as w,u as F,a as V,e as he,i as Re,t as Z,p as ne,f as gt,s as vt,b as Oe,c as de,d as mt,w as pe,l as Pe,g as ft}from"./index-pXGhGR8D.js";const f=e=>e??G,X=ae(O`
+import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,E as D,p as at,D as it,g as se,e as j,h as ct,H as lt,i as fe,n as dt,j as pt,k as ut,l as ht,m as be,t as ue}from"./iframe-40yvxTIP.js";import{n as w,u as F,a as V,e as ge,i as Re,t as Z,p as ne,f as gt,s as vt,b as Oe,c as de,d as mt,w as pe,l as Pe,g as ft}from"./index-C8HAajyV.js";const f=e=>e??G,X=ae(O`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -697,7 +697,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 				>
 					<slot></slot>
 				</div>`}
-	`};customElements.define("cosmoz-dropdown-next",P(Rt,{styleSheets:[St],observedAttributes:["placement","disabled","passthrough","open-on-hover","open-on-focus"],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const Q=he(class extends Re{constructor(e){if(super(e),e.type!==Z.PROPERTY&&e.type!==Z.ATTRIBUTE&&e.type!==Z.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!st(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===D||t===G)return t;const o=e.element,r=e.name;if(e.type===Z.PROPERTY){if(t===o[r])return D}else if(e.type===Z.BOOLEAN_ATTRIBUTE){if(!!t===o.hasAttribute(r))return D}else if(e.type===Z.ATTRIBUTE&&o.getAttribute(r)===t+"")return D;return at(e),t}}),Ot=O`
+	`};customElements.define("cosmoz-dropdown-next",P(Rt,{styleSheets:[St],observedAttributes:["placement","disabled","passthrough","open-on-hover","open-on-focus"],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const Q=ge(class extends Re{constructor(e){if(super(e),e.type!==Z.PROPERTY&&e.type!==Z.ATTRIBUTE&&e.type!==Z.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!st(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===D||t===G)return t;const o=e.element,r=e.name;if(e.type===Z.PROPERTY){if(t===o[r])return D}else if(e.type===Z.BOOLEAN_ATTRIBUTE){if(!!t===o.hasAttribute(r))return D}else if(e.type===Z.ATTRIBUTE&&o.getAttribute(r)===t+"")return D;return at(e),t}}),Ot=O`
 	:host {
 		display: flex;
 		flex-direction: column;
@@ -716,7 +716,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 			<slot name="heading"></slot>
 			<slot name="description"></slot>
 			<slot></slot>
-		`,{styleSheets:[X,Ot]}));const ue=ae(O`
+		`,{styleSheets:[X,Ot]}));const he=ae(O`
 	.cosmoz-tooltip-popover {
 		position: fixed;
 		inset: unset;
@@ -778,10 +778,10 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 			transition: none;
 		}
 	}
-`),be=(e,t,o)=>it(h`<cosmoz-tooltip-content>
+`),ze=(e,t,o)=>it(h`<cosmoz-tooltip-content>
 			${w(t,()=>h`<strong slot="heading">${t}</strong>`)}
 			${w(o,()=>h`<p slot="description">${o}</p>`)}
-		</cosmoz-tooltip-content>`,e),Pt=(e,t)=>{const{for:o,heading:r,description:n,placement:s="top",delay:c=300,disabled:l=!1}=t,a=F(),d=!!(r||n)&&!l;k(()=>{if(!o||!d)return;const p=e.getRootNode(),g=p.adoptedStyleSheets??[];g.includes(ue)||(p.adoptedStyleSheets=[...g,ue]);const v=document.createElement("div");v.setAttribute("popover","manual"),v.setAttribute("role","tooltip"),v.classList.add("cosmoz-tooltip-popover"),e.after(v),a.current=v,be(v,r,n);const b=`[name="${o}"]`,$=`--tooltip-anchor-${o}`;let m;const z=E=>{l||(clearTimeout(m),E.style.anchorName=$,v.style.positionAnchor=$,v.style.positionArea=s,m=window.setTimeout(()=>v.showPopover(),c))},L=()=>{clearTimeout(m),v.hidePopover()},q=E=>{const C=E.target.closest?.(b);C&&z(C)},A=E=>{const C=E.target.closest?.(b);if(!C)return;const R=E.relatedTarget;R&&C.contains(R)||L()},S=E=>{const C=E.target.closest?.(b);C&&z(C)},I=E=>{E.target.closest?.(b)&&L()};return p.addEventListener("pointerover",q),p.addEventListener("pointerout",A),p.addEventListener("focusin",S),p.addEventListener("focusout",I),()=>{clearTimeout(m),p.removeEventListener("pointerover",q),p.removeEventListener("pointerout",A),p.removeEventListener("focusin",S),p.removeEventListener("focusout",I),v.hidePopover(),v.remove(),a.current=void 0}},[o,s,c,d]),k(()=>{!o||!a.current||be(a.current,r,n)},[r,n,o]),k(()=>{!l||!a.current||a.current.hidePopover()},[l])},Lt=e=>{const[t,o]=se(!1);return k(()=>{const r=e.current;if(!r)return;const n=()=>{o(r.assignedElements().length>0)};return n(),r.addEventListener("slotchange",n),()=>r.removeEventListener("slotchange",n)},[e.current]),t},qt=O`
+		</cosmoz-tooltip-content>`,e),Pt=(e,t)=>{const{for:o,heading:r,description:n,placement:s="top",delay:c=300,disabled:l=!1}=t,a=F(),d=!!(r||n)&&!l;k(()=>{if(!o||!d)return;const p=e.getRootNode(),g=p.adoptedStyleSheets??[];g.includes(he)||(p.adoptedStyleSheets=[...g,he]);const v=document.createElement("div");v.setAttribute("popover","manual"),v.setAttribute("role","tooltip"),v.classList.add("cosmoz-tooltip-popover"),e.after(v),a.current=v,ze(v,r,n);const b=`[name="${o}"]`,$=`--tooltip-anchor-${o}`;let m;const z=E=>{l||(clearTimeout(m),E.style.anchorName=$,v.style.positionAnchor=$,v.style.positionArea=s,m=window.setTimeout(()=>v.showPopover(),c))},L=()=>{clearTimeout(m),v.hidePopover()},q=E=>{const C=E.target.closest?.(b);C&&z(C)},A=E=>{const C=E.target.closest?.(b);if(!C)return;const R=E.relatedTarget;R&&C.contains(R)||L()},S=E=>{const C=E.target.closest?.(b);C&&z(C)},I=E=>{E.target.closest?.(b)&&L()};return p.addEventListener("pointerover",q),p.addEventListener("pointerout",A),p.addEventListener("focusin",S),p.addEventListener("focusout",I),()=>{clearTimeout(m),p.removeEventListener("pointerover",q),p.removeEventListener("pointerout",A),p.removeEventListener("focusin",S),p.removeEventListener("focusout",I),v.hidePopover(),v.remove(),a.current=void 0}},[o,s,c,d]),k(()=>{!o||!a.current||ze(a.current,r,n)},[r,n,o]),k(()=>{!l||!a.current||a.current.hidePopover()},[l])},Lt=e=>{const[t,o]=se(!1);return k(()=>{const r=e.current;if(!r)return;const n=()=>{o(r.assignedElements().length>0)};return n(),r.addEventListener("slotchange",n),()=>r.removeEventListener("slotchange",n)},[e.current]),t},qt=O`
 	:host {
 		display: inline-block;
 		anchor-name: --tooltip-anchor;
@@ -813,7 +813,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 	`:h`
 			<slot></slot>
 			<slot name="content" ${V(i)} hidden></slot>
-		`};customElements.define("cosmoz-tooltip",P(It,{styleSheets:[X,ue,qt],observedAttributes:["heading","description","for","placement","delay","disabled"]}));const qe=(e,{label:t,labelFor:o="input",hint:r,invalid:n,errorMessage:s,compact:c,required:l})=>h`
+		`};customElements.define("cosmoz-tooltip",P(It,{styleSheets:[X,he,qt],observedAttributes:["heading","description","for","placement","delay","disabled"]}));const qe=(e,{label:t,labelFor:o="input",hint:r,invalid:n,errorMessage:s,compact:c,required:l})=>h`
 		<!-- label: visually hidden in compact mode -->
 		${w(t,()=>h`<label
 					for=${f(o)}
@@ -1212,7 +1212,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 	slot[name='suffix']::slotted(*) {
 		padding-inline-end: calc(var(--cz-spacing) * 2);
 	}
-`,Mt=e=>j(()=>{if(e==null)return;const t=new RegExp(e,"u");return o=>{!o.defaultPrevented&&o.data&&!t.test(o.data)&&o.preventDefault()}},[e]),Bt=ct(class extends lt{values;constructor(e,t,o,r){super(e,t),Object.assign(t.host,o),this.values=r}update(e,t){this.hasChanged(t)&&(this.values=t,Object.assign(this.state.host,e))}hasChanged(e=[]){return e.some((t,o)=>this.values[o]!==t)}}),Yt=/([A-Z])/gu,ze=(e,t,o)=>{e[t]=o,e.dispatchEvent(new CustomEvent(t.replace(Yt,"-$1").toLowerCase()+"-changed",{detail:{value:o}}))},Be=e=>{const t=F(void 0),o=x(a=>t.current=a,[]),r=e.shadowRoot,n=x(a=>e.dispatchEvent(new Event(a.type,{bubbles:a.bubbles})),[]),s=x(a=>ze(e,"value",a.target.value),[]),c=x(a=>ze(e,"focused",a.type==="focus"),[]),l=x(()=>{const a=t.current?.checkValidity();return e.toggleAttribute("invalid",!a),a},[]);return Bt({validate:l},[l]),k(()=>{const a=i=>{i.composedPath()[0]?.closest?.("input, textarea, label")||(i.preventDefault(),t.current?.focus())};return r.addEventListener("mousedown",a),()=>r.removeEventListener("mousedown",a)},[]),{onChange:n,onFocus:c,onInput:s,onRef:o}},Nt=({placeholder:e})=>e||" ",_t=(e,t)=>t??(e==="date"?"9999-12-31":void 0),jt=["type","variant","size","hint","compact","required","pattern","allowed-pattern","min","max","step","autosize","label","placeholder",...Ie,"aria-label"],Dt=e=>{const{type:t="text",pattern:o,allowedPattern:r,autocomplete:n,value:s,readonly:c,disabled:l,min:a,max:i,step:d,maxlength:p,required:g,hint:v,invalid:b,errorMessage:$}=e,{onChange:m,onFocus:z,onInput:L,onRef:q}=Be(e),A=Mt(r),S=v&&!b,I=b&&$,E=I&&"error"||S&&"hint"||void 0;return e.toggleAttribute("has-value",!!s),qe(h`
+`,Mt=e=>j(()=>{if(e==null)return;const t=new RegExp(e,"u");return o=>{!o.defaultPrevented&&o.data&&!t.test(o.data)&&o.preventDefault()}},[e]),Bt=ct(class extends lt{values;constructor(e,t,o,r){super(e,t),Object.assign(t.host,o),this.values=r}update(e,t){this.hasChanged(t)&&(this.values=t,Object.assign(this.state.host,e))}hasChanged(e=[]){return e.some((t,o)=>this.values[o]!==t)}}),Yt=/([A-Z])/gu,we=(e,t,o)=>{e[t]=o,e.dispatchEvent(new CustomEvent(t.replace(Yt,"-$1").toLowerCase()+"-changed",{detail:{value:o}}))},Be=e=>{const t=F(void 0),o=x(a=>t.current=a,[]),r=e.shadowRoot,n=x(a=>e.dispatchEvent(new Event(a.type,{bubbles:a.bubbles})),[]),s=x(a=>we(e,"value",a.target.value),[]),c=x(a=>we(e,"focused",a.type==="focus"),[]),l=x(()=>{const a=t.current?.checkValidity();return e.toggleAttribute("invalid",!a),a},[]);return Bt({validate:l},[l]),k(()=>{const a=i=>{i.composedPath()[0]?.closest?.("input, textarea, label")||(i.preventDefault(),t.current?.focus())};return r.addEventListener("mousedown",a),()=>r.removeEventListener("mousedown",a)},[]),{onChange:n,onFocus:c,onInput:s,onRef:o}},Nt=({placeholder:e})=>e||" ",_t=(e,t)=>t??(e==="date"?"9999-12-31":void 0),jt=["type","variant","size","hint","compact","required","pattern","allowed-pattern","min","max","step","autosize","label","placeholder",...Ie,"aria-label"],Dt=e=>{const{type:t="text",pattern:o,allowedPattern:r,autocomplete:n,value:s,readonly:c,disabled:l,min:a,max:i,step:d,maxlength:p,required:g,hint:v,invalid:b,errorMessage:$}=e,{onChange:m,onFocus:z,onInput:L,onRef:q}=Be(e),A=Mt(r),S=v&&!b,I=b&&$,E=I&&"error"||S&&"hint"||void 0;return e.toggleAttribute("has-value",!!s),qe(h`
 			<input
 				${V(q)}
 				style="--chars: ${s?.toString()?.length??0}ch"
@@ -1240,7 +1240,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 				max=${f(_t(t,i))}
 				step=${f(d)}
 			/>
-		`,e)};customElements.define("cosmoz-input",P(Dt,{observedAttributes:jt,styleSheets:[ae(Me)],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const we=e=>{e.style.height="",e.style.height=`${e.scrollHeight}px`},Ft=(e,t=0)=>{if(t>0){const o=e.getAttribute("rows")??"",r=e.style.height;e.style.height="",e.setAttribute("rows",t),e.style.maxHeight=e.getBoundingClientRect().height+"px",e.style.height=r,e.setAttribute("rows",o)}},Ht=e=>{const{value:t,maxRows:o}=e,r=j(()=>()=>e.shadowRoot.querySelector("#input"),[]);k(()=>Ft(r(),o),[o,r]),k(()=>we(r()),[r,t]),k(()=>{const n=r(),s=new ResizeObserver(()=>requestAnimationFrame(()=>we(n)));return s.observe(n),()=>s.unobserve(n)},[r])},Ut=["rows","placeholder","label","hint","compact","required",...Ie],Zt=e=>{const{autocomplete:t,value:o,placeholder:r,readonly:n,disabled:s,required:c,hint:l,invalid:a,errorMessage:i,rows:d,cols:p,maxlength:g}=e,{onChange:v,onFocus:b,onInput:$,onRef:m}=Be(e);Ht(e);const z=l&&!a,L=a&&i,q=L&&"error"||z&&"hint"||void 0;return qe(h`
+		`,e)};customElements.define("cosmoz-input",P(Dt,{observedAttributes:jt,styleSheets:[ae(Me)],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const ye=e=>{e.style.height="",e.style.height=`${e.scrollHeight}px`},Ft=(e,t=0)=>{if(t>0){const o=e.getAttribute("rows")??"",r=e.style.height;e.style.height="",e.setAttribute("rows",t),e.style.maxHeight=e.getBoundingClientRect().height+"px",e.style.height=r,e.setAttribute("rows",o)}},Ht=e=>{const{value:t,maxRows:o}=e,r=j(()=>()=>e.shadowRoot.querySelector("#input"),[]);k(()=>Ft(r(),o),[o,r]),k(()=>ye(r()),[r,t]),k(()=>{const n=r(),s=new ResizeObserver(()=>requestAnimationFrame(()=>ye(n)));return s.observe(n),()=>s.unobserve(n)},[r])},Ut=["rows","placeholder","label","hint","compact","required",...Ie],Zt=e=>{const{autocomplete:t,value:o,placeholder:r,readonly:n,disabled:s,required:c,hint:l,invalid:a,errorMessage:i,rows:d,cols:p,maxlength:g}=e,{onChange:v,onFocus:b,onInput:$,onRef:m}=Be(e);Ht(e);const z=l&&!a,L=a&&i,q=L&&"error"||z&&"hint"||void 0;return qe(h`
 			<textarea id="input" part="input"
 				${V(m)}
 				autocomplete=${f(t)}
@@ -1327,7 +1327,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 	::slotted(*) {
 		margin-left: calc(var(--cz-spacing) * 1);
 	}
-`;customElements.define("cosmoz-toggle",P(Vt,{styleSheets:[Kt,Gt],observedAttributes:["label","disabled","error"]}));const Xt=e=>{const t=i=>i.label!=null?me(i.label,i.value):typeof i.value=="string"?i.value:"",o=(e.options??[]).map(i=>typeof i=="object"&&i!=null&&"value"in i?i:{value:i}),[r,n]=ie("value"),s=i=>ne(e.valueProperty)(i),c=s(r),l=i=>n(i.value),a=i=>{if(i.key!=="ArrowRight"&&i.key!=="ArrowLeft")return;i.preventDefault();const d=o.map(m=>s(m.value)),p=d.findIndex(m=>m===c);if(p===-1)return;const g=i.key==="ArrowRight"?1:-1,v=o[(p+g+d.length)%d.length];n(v.value),i.currentTarget.children[(p+g+d.length)%d.length]?.focus()};return h`<div
+`;customElements.define("cosmoz-toggle",P(Vt,{styleSheets:[Kt,Gt],observedAttributes:["label","disabled","error"]}));const Xt=e=>{const t=i=>i.label!=null?fe(i.label,i.value):typeof i.value=="string"?i.value:"",o=(e.options??[]).map(i=>typeof i=="object"&&i!=null&&"value"in i?i:{value:i}),[r,n]=ie("value"),s=i=>ne(e.valueProperty)(i),c=s(r),l=i=>n(i.value),a=i=>{if(i.key!=="ArrowRight"&&i.key!=="ArrowLeft")return;i.preventDefault();const d=o.map(m=>s(m.value)),p=d.findIndex(m=>m===c);if(p===-1)return;const g=i.key==="ArrowRight"?1:-1,v=o[(p+g+d.length)%d.length];n(v.value),i.currentTarget.children[(p+g+d.length)%d.length]?.focus()};return h`<div
 		class="group"
 		part="group"
 		role="radiogroup"
@@ -1339,7 +1339,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 				role="radio"
 				aria-checked=${d?"true":"false"}
 				?disabled=${i.disabled||e.disabled}
-				title=${i.title!=null?me(i.title,i.value):G}
+				title=${i.title!=null?fe(i.title,i.value):G}
 				part=${d?"option selected-option":"option"}
 				class=${d?"option selected":"option"}
 				@click=${()=>l(i)}
@@ -1411,7 +1411,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 	:host([size='sm']) .option {
 		padding-block: var(--cz-spacing);
 	}
-`;customElements.define("cosmoz-toggle-group",P(Xt,{styleSheets:[X,Qt,Wt],observedAttributes:["label","disabled","value-property"]}));const Jt={},ye=he(class extends Re{constructor(){super(...arguments),this.ot=Jt}render(e,t){return t()}update(e,[t,o]){if(Array.isArray(t)){if(Array.isArray(this.ot)&&this.ot.length===t.length&&t.every((r,n)=>r===this.ot[n]))return D}else if(this.ot===t)return D;return this.ot=Array.isArray(t)?Array.from(t):t,this.render(t,o)}});class eo{constructor(t){this.G=t}disconnect(){this.G=void 0}reconnect(t){this.G=t}deref(){return this.G}}class to{constructor(){this.Y=void 0,this.Z=void 0}get(){return this.Y}pause(){this.Y??=new Promise(t=>this.Z=t)}resume(){this.Z?.(),this.Y=this.Z=void 0}}const xe=e=>!dt(e)&&typeof e.then=="function",$e=1073741823;class oo extends gt{constructor(){super(...arguments),this._$Cwt=$e,this._$Cbt=[],this._$CK=new eo(this),this._$CX=new to}render(...t){return t.find(o=>!xe(o))??D}update(t,o){const r=this._$Cbt;let n=r.length;this._$Cbt=o;const s=this._$CK,c=this._$CX;this.isConnected||this.disconnected();for(let l=0;l<o.length&&!(l>this._$Cwt);l++){const a=o[l];if(!xe(a))return this._$Cwt=l,a;l<n&&a===r[l]||(this._$Cwt=$e,n=0,Promise.resolve(a).then(async i=>{for(;c.get();)await c.get();const d=s.deref();if(d!==void 0){const p=d._$Cbt.indexOf(a);p>-1&&p<d._$Cwt&&(d._$Cwt=p,d.setValue(i))}}))}return D}disconnected(){this._$CK.disconnect(),this._$CX.pause()}reconnected(){this._$CK.reconnect(this),this._$CX.resume()}}const ke=he(oo),ro=({content:e,onClear:t,disabled:o,className:r="chip",hidden:n,slot:s})=>h`<cosmoz-tag
+`;customElements.define("cosmoz-toggle-group",P(Xt,{styleSheets:[X,Qt,Wt],observedAttributes:["label","disabled","value-property"]}));const Jt={},xe=ge(class extends Re{constructor(){super(...arguments),this.ot=Jt}render(e,t){return t()}update(e,[t,o]){if(Array.isArray(t)){if(Array.isArray(this.ot)&&this.ot.length===t.length&&t.every((r,n)=>r===this.ot[n]))return D}else if(this.ot===t)return D;return this.ot=Array.isArray(t)?Array.from(t):t,this.render(t,o)}});class eo{constructor(t){this.G=t}disconnect(){this.G=void 0}reconnect(t){this.G=t}deref(){return this.G}}class to{constructor(){this.Y=void 0,this.Z=void 0}get(){return this.Y}pause(){this.Y??=new Promise(t=>this.Z=t)}resume(){this.Z?.(),this.Y=this.Z=void 0}}const $e=e=>!dt(e)&&typeof e.then=="function",ke=1073741823;class oo extends gt{constructor(){super(...arguments),this._$Cwt=ke,this._$Cbt=[],this._$CK=new eo(this),this._$CX=new to}render(...t){return t.find(o=>!$e(o))??D}update(t,o){const r=this._$Cbt;let n=r.length;this._$Cbt=o;const s=this._$CK,c=this._$CX;this.isConnected||this.disconnected();for(let l=0;l<o.length&&!(l>this._$Cwt);l++){const a=o[l];if(!$e(a))return this._$Cwt=l,a;l<n&&a===r[l]||(this._$Cwt=ke,n=0,Promise.resolve(a).then(async i=>{for(;c.get();)await c.get();const d=s.deref();if(d!==void 0){const p=d._$Cbt.indexOf(a);p>-1&&p<d._$Cwt&&(d._$Cwt=p,d.setValue(i))}}))}return D}disconnected(){this._$CK.disconnect(),this._$CX.pause()}reconnected(){this._$CK.reconnect(this),this._$CX.resume()}}const Ee=ge(oo),ro=({content:e,onClear:t,disabled:o,className:r="chip",hidden:n,slot:s})=>h`<cosmoz-tag
 		class=${f(r)}
 		slot=${f(s)}
 		exportparts="chip-text, chip-clear"
@@ -1421,7 +1421,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 		@remove=${t}
 		title=${f(typeof e=="string"?e:void 0)}
 		>${e}</cosmoz-tag
-	>`,Ye=({value:e,min:t=0,onDeselect:o,textual:r,disabled:n,chipRenderer:s=ro,interactiveBadge:c})=>[...e.filter(Boolean).map(l=>s({item:l,content:r(l),onClear:e.length>t&&(()=>o(l)),disabled:n,slot:"control"})),s({item:null,content:h`<span></span>`,className:"badge",disabled:!c,slot:"control",hidden:!0})],no=O`
+	>`,Ye=({value:e,min:t=0,onDeselect:o,textual:r,disabled:n,chipRenderer:s=ro,overflowBadge:c})=>[...e.filter(Boolean).map(l=>s({item:l,content:r(l),onClear:e.length>t&&(()=>o(l)),disabled:n,slot:"control"})),c??s({item:null,content:h`<span></span>`,className:"badge",disabled:!0,slot:"control",hidden:!0})],no=O`
 	:host {
 		display: inline-block;
 		vertical-align: middle;
@@ -1519,6 +1519,11 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 		flex: 0;
 	}
 
+	/* a cell hides its error text behind a value (the red border stays); cosmoz-input only sees typed text */
+	cosmoz-input[variant='cell'][data-has-value]::part(error) {
+		visibility: hidden;
+	}
+
 	[data-one] .badge {
 		display: none;
 	}
@@ -1569,7 +1574,8 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 		flex: none;
 	}
 
-	.add {
+	.add,
+	.overflow-button {
 		display: inline-flex;
 		align-items: center;
 		gap: var(--cz-spacing);
@@ -1588,17 +1594,23 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 		transition: background 0.1s;
 	}
 
+	.overflow-button[hidden] {
+		display: none;
+	}
+
 	.add svg {
 		color: var(--cz-color-fg-quaternary);
 	}
 
+	.overflow-button:hover,
 	.add:hover,
 	:host([opened]) .add {
 		background: var(--cz-color-bg-primary-hover);
 		color: var(--cz-color-text-secondary);
 	}
 
-	.add:focus-visible {
+	.add:focus-visible,
+	.overflow-button:focus-visible {
 		outline: none;
 		box-shadow:
 			inset 0 0 0 1px var(--cz-color-border-primary),
@@ -1635,14 +1647,25 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 		border-radius: 0;
 		box-shadow: none;
 	}
-`,ge=(e,t=()=>({}))=>{const o={type:e,toString(){return e}};return Object.assign((...n)=>Object.assign(t(...n),o),o)},Ee=e=>e.type||e.toString(),Ce=e=>Array.isArray(e)?e:[e],ao=(e,t)=>{const o=Ce(t),r=(o.every(Array.isArray)?o:[o]).map(([n,s])=>({actions:Ce(n).map(Ee),handle:s}));return(n=e,s)=>{const c=r.find(l=>l.actions.includes(Ee(s)));return c?c.handle(n,s):n}},H={pending:"pending",rejected:"rejected",resolved:"resolved"},Ne={error:void 0,result:void 0,state:H.pending},_e=ge(H.pending),je=ge(H.resolved,e=>({result:e})),De=ge(H.rejected,e=>({error:e})),io=ao(Ne,[[_e,()=>({error:void 0,result:void 0,state:H.pending})],[je,(e,{result:t})=>({error:void 0,result:t,state:H.resolved})],[De,(e,{error:t})=>({error:t,result:void 0,state:H.rejected})]]),co=e=>{const[{error:t,result:o,state:r},n]=pt(io,Ne);return k(()=>{if(!e)return;let s=!1;return n(_e()),e.then(c=>!s&&n(je(c)),c=>!s&&n(De(c))),()=>{s=!0}},[e]),[o,t,r]},Ae=e=>e.normalize("NFD").replace(/[\u0300-\u036f]/gu,""),lo=(e,t,o)=>{if(!t)return e;const r=Ae(t.toLowerCase()),n=[];for(const s of e){const l=Ae(o(s).toLowerCase()).indexOf(r);l<0||n.push({item:s,index:l})}return n.sort((s,c)=>s.index-c.index).map(({item:s})=>s)},po=e=>e===!1||e==null?[]:e,uo=(e,t,o)=>e.dispatchEvent(new CustomEvent(t,{detail:o})),Te=[],ho=e=>(...t)=>{let o;const r=()=>{o&&cancelAnimationFrame(o)};return r(),o=requestAnimationFrame(()=>{o=void 0,e(...t)}),r},go=(e,t,o)=>x(r=>{t?.(r),e.dispatchEvent(new CustomEvent(o,{detail:r}))},[t]),vo=({value:e,text:t,mode:o,onChange:r,onText:n,onSelect:s,limit:c,min:l,source:a,textProperty:i,textual:d,valueProperty:p,keepOpened:g,keepQuery:v,preserveOrder:b,defaultIndex:$,externalSearch:m,disabled:z,lazyOpen:L,variant:q})=>{const A=c!=null?Number(c):void 0,S=l!=null?Number(l):void 0,I=o==="select",E=q==="pill",C=j(()=>(d??vt)(i),[d,i]),R=Oe(),[T,M]=ie("opened",!1),W=!t,B=j(()=>t?.trim(),[t]),J=go(R,n,"text"),ee=x(y=>{r?.(y,()=>M(!1));const U=I?y[0]:y;uo(R,"value",U)},[r]),[ce,Ge]=se([]),te=!!(L&&!B),oe=j(()=>te?Promise.resolve([]):Promise.resolve(typeof a=="function"?a({query:B,active:T}):a).then(po),[a,T,B,te]),Y=j(()=>de(e),[e]);k(()=>oe.then(Ge),[oe]),mt({activity:ut,callback:()=>{const y=de(Y);y.length>(S??0)&&ee(y.slice(0,-1))},check:()=>!z&&!E&&W&&R.matches(":focus-within"),element:()=>R},[]),k(()=>{!T&&!v&&J("")},[T,v]),k(()=>{R.toggleAttribute("opened",!!T)},[T]);const N=ht({onText:J,onChange:ee,value:Y,limit:A,min:S,keepQuery:v,keepOpened:g,setOpened:M,onSelect:s,valueProperty:p}),[,,Ke]=co(oe);return{limit:A,opened:T,setOpened:M,query:B,textual:C,value:Y,source$:oe,loading:Ke==="pending",items:j(()=>{if(!T||te)return Te;const y=b?ce:[...Y,...pe(Y,ne(p))(ce)];return m?y:lo(y,B,C)},[ce,T,B,C,W,Y,b,p,m,te]),onToggle:x(y=>{z||M(y.newState==="open")},[z]),onText:x(y=>{if(z)return;const U=y.target.value;!E&&U&&A===1&&Y.length>0&&ee([]),J(U),M(!0)},[z,J,M,A,Y,ee,E]),onSelect:x(y=>{if(z)return;N.onSelect?.(y,N);const{onChange:U,onText:Xe,limit:Qe,min:We,value:Je,keepQuery:et,keepOpened:tt,setOpened:ot,valueProperty:rt}=N;et||Xe(""),tt||ot(!1);const re=de(Je),le=ne(rt),ve=re.some(nt=>le(nt)===le(y));ve&&re.length===We||U((ve?pe(y,le)(re):[...re,y]).slice(-Qe))},[z,N]),onDeselect:x(y=>{z||N.onChange(pe(y,ne(N.valueProperty))(N.value))},[z,N]),defaultIndex:B!==void 0&&B?.length>0?0:$}},mo=e=>{const t=e.shadowRoot.querySelectorAll(".chip"),o=e.shadowRoot.querySelector(".badge");if(!o)return"";o.hidden=!0;for(const g of t)g.hidden=!1;const r=e.shadowRoot.querySelector(".pill-row"),n=r?.querySelector("cosmoz-dropdown-next"),s=n?n.getBoundingClientRect().width+8:0,c=(r??e.shadowRoot.querySelector("cosmoz-input").shadowRoot?.querySelector(".control")).getBoundingClientRect(),l=g=>v=>{const b=v.getBoundingClientRect();return b.x+b.width<=c.x+c.width-g},a=Array.from(t);let i=a.length;if(!a.every(l(n?s:24))){const g=l(n?s+48:24);i=a.findIndex(v=>!g(v))}const d=t.length-i;o.querySelector("span").textContent="+"+d.toString(),o.hidden=d<1,o.setAttribute("name","overflow");const p=a.slice(i);for(const g of p)g.hidden=!0;return p.map(g=>g.title||g.textContent?.trim()).join(", ")},fo=({value:e,opened:t,wrap:o,limit:r})=>{const n=Oe(),s=!(o||r===1)&&e.length>0,[c,l]=se(""),a=j(()=>ho(()=>l(mo(n))),[]),[i,d]=se(0);return fe(()=>{if(!s)return;const p=n.shadowRoot.querySelector(".pill-row")??n.shadowRoot.querySelector("cosmoz-input"),g=new ResizeObserver(v=>{d(v[0].contentRect.width)});return g.observe(p),()=>g.disconnect()},[s]),fe(()=>s?a():void 0,[s,i,t,e]),c},bo=["input","control","label","line","error","wrap"].map(e=>`${e}: input-${e}`).join(),zo=({opened:e,isSingle:t,showSingle:o,hasResultsOrQuery:r})=>!e||t&&!o?!1:r,Fe=()=>h`<slot name="no-result">
-		<span class="no-result">${Se("No results found")}</span>
+`,ve=(e,t=()=>({}))=>{const o={type:e,toString(){return e}};return Object.assign((...n)=>Object.assign(t(...n),o),o)},Ce=e=>e.type||e.toString(),Ae=e=>Array.isArray(e)?e:[e],ao=(e,t)=>{const o=Ae(t),r=(o.every(Array.isArray)?o:[o]).map(([n,s])=>({actions:Ae(n).map(Ce),handle:s}));return(n=e,s)=>{const c=r.find(l=>l.actions.includes(Ce(s)));return c?c.handle(n,s):n}},H={pending:"pending",rejected:"rejected",resolved:"resolved"},Ne={error:void 0,result:void 0,state:H.pending},_e=ve(H.pending),je=ve(H.resolved,e=>({result:e})),De=ve(H.rejected,e=>({error:e})),io=ao(Ne,[[_e,()=>({error:void 0,result:void 0,state:H.pending})],[je,(e,{result:t})=>({error:void 0,result:t,state:H.resolved})],[De,(e,{error:t})=>({error:t,result:void 0,state:H.rejected})]]),co=e=>{const[{error:t,result:o,state:r},n]=pt(io,Ne);return k(()=>{if(!e)return;let s=!1;return n(_e()),e.then(c=>!s&&n(je(c)),c=>!s&&n(De(c))),()=>{s=!0}},[e]),[o,t,r]},Te=e=>e.normalize("NFD").replace(/[\u0300-\u036f]/gu,""),lo=(e,t,o)=>{if(!t)return e;const r=Te(t.toLowerCase()),n=[];for(const s of e){const l=Te(o(s).toLowerCase()).indexOf(r);l<0||n.push({item:s,index:l})}return n.sort((s,c)=>s.index-c.index).map(({item:s})=>s)},po=e=>e===!1||e==null?[]:e,uo=(e,t,o)=>e.dispatchEvent(new CustomEvent(t,{detail:o})),Se=[],ho=e=>(...t)=>{let o;const r=()=>{o&&cancelAnimationFrame(o)};return r(),o=requestAnimationFrame(()=>{o=void 0,e(...t)}),r},go=(e,t,o)=>x(r=>{t?.(r),e.dispatchEvent(new CustomEvent(o,{detail:r}))},[t]),vo=({value:e,text:t,mode:o,onChange:r,onText:n,onSelect:s,limit:c,min:l,source:a,textProperty:i,textual:d,valueProperty:p,keepOpened:g,keepQuery:v,preserveOrder:b,defaultIndex:$,externalSearch:m,disabled:z,lazyOpen:L,variant:q})=>{const A=c!=null?Number(c):void 0,S=l!=null?Number(l):void 0,I=o==="select",E=q==="pill",C=j(()=>(d??vt)(i),[d,i]),R=Oe(),[T,M]=ie("opened",!1),W=!t,B=j(()=>t?.trim(),[t]),J=go(R,n,"text"),ee=x(y=>{r?.(y,()=>M(!1));const U=I?y[0]:y;uo(R,"value",U)},[r]),[ce,Ge]=se([]),te=!!(L&&!B),oe=j(()=>te?Promise.resolve([]):Promise.resolve(typeof a=="function"?a({query:B,active:T}):a).then(po),[a,T,B,te]),Y=j(()=>de(e),[e]);k(()=>oe.then(Ge),[oe]),mt({activity:ut,callback:()=>{const y=de(Y);y.length>(S??0)&&ee(y.slice(0,-1))},check:()=>!z&&!E&&W&&R.matches(":focus-within"),element:()=>R},[]),k(()=>{!T&&!v&&J("")},[T,v]),k(()=>{R.toggleAttribute("opened",!!T)},[T]);const N=ht({onText:J,onChange:ee,value:Y,limit:A,min:S,keepQuery:v,keepOpened:g,setOpened:M,onSelect:s,valueProperty:p}),[,,Ke]=co(oe);return{limit:A,opened:T,setOpened:M,query:B,textual:C,value:Y,source$:oe,loading:Ke==="pending",items:j(()=>{if(!T||te)return Se;const y=b?ce:[...Y,...pe(Y,ne(p))(ce)];return m?y:lo(y,B,C)},[ce,T,B,C,W,Y,b,p,m,te]),onToggle:x(y=>{z||M(y.newState==="open")},[z]),onText:x(y=>{if(z)return;const U=y.target.value;!E&&U&&A===1&&Y.length>0&&ee([]),J(U),M(!0)},[z,J,M,A,Y,ee,E]),onSelect:x(y=>{if(z)return;N.onSelect?.(y,N);const{onChange:U,onText:Xe,limit:Qe,min:We,value:Je,keepQuery:et,keepOpened:tt,setOpened:ot,valueProperty:rt}=N;et||Xe(""),tt||ot(!1);const re=de(Je),le=ne(rt),me=re.some(nt=>le(nt)===le(y));me&&re.length===We||U((me?pe(y,le)(re):[...re,y]).slice(-Qe))},[z,N]),onDeselect:x(y=>{z||N.onChange(pe(y,ne(N.valueProperty))(N.value))},[z,N]),defaultIndex:B!==void 0&&B?.length>0?0:$}},mo=e=>{const t=e.shadowRoot.querySelectorAll(".chip"),o=e.shadowRoot.querySelector(".badge");if(!o)return"";o.hidden=!0;for(const g of t)g.hidden=!1;const r=e.shadowRoot.querySelector(".pill-row"),n=r?.querySelector("cosmoz-dropdown-next"),s=n?n.getBoundingClientRect().width+8:0,c=(r??e.shadowRoot.querySelector("cosmoz-input").shadowRoot?.querySelector(".control")).getBoundingClientRect(),l=g=>v=>{const b=v.getBoundingClientRect();return b.x+b.width<=c.x+c.width-g},a=Array.from(t);let i=a.length;if(!a.every(l(n?s:24))){const g=l(n?s+48:24);i=a.findIndex(v=>!g(v))}const d=t.length-i;o.querySelector("span").textContent="+"+d.toString(),o.hidden=d<1,o.setAttribute("name","overflow");const p=a.slice(i);for(const g of p)g.hidden=!0;return p.map(g=>g.title||g.textContent?.trim()).join(", ")},fo=({value:e,opened:t,wrap:o,limit:r})=>{const n=Oe(),s=!(o||r===1)&&e.length>0,[c,l]=se(""),a=j(()=>ho(()=>l(mo(n))),[]),[i,d]=se(0);return be(()=>{if(!s)return;const p=n.shadowRoot.querySelector(".pill-row")??n.shadowRoot.querySelector("cosmoz-input"),g=new ResizeObserver(v=>{d(v[0].contentRect.width)});return g.observe(p),()=>g.disconnect()},[s]),be(()=>s?a():void 0,[s,i,t,e]),c},bo=["input","control","label","line","error","wrap"].map(e=>`${e}: input-${e}`).join(),zo=({opened:e,isSingle:t,showSingle:o,hasResultsOrQuery:r})=>!e||t&&!o?!1:r,Fe=()=>h`<slot name="no-result">
+		<span class="no-result">${ue("No results found")}</span>
 	</slot>`,wo=e=>{if(e.newState!=="closed")return;const t=e.currentTarget;!t.matches(":focus-within")&&document.activeElement!==document.body||t.querySelector(".add")?.focus()},yo=e=>{const{opened:t,setOpened:o,disabled:r,label:n,placeholder:s,searchPlaceholder:c,text:l,onText:a,onToggle:i,onDeselect:d,value:p,min:g,textual:v,chipRenderer:b,items:$,loading:m}=e;return h`<div
 		class="pill-row"
 		part="row"
 		@click=${z=>!r&&z.target.closest?.(".badge")&&o(!0)}
 	>
-		${Ye({value:p,min:g,onDeselect:d,textual:v,disabled:r,chipRenderer:b,interactiveBadge:!r})}
+		${Ye({value:p,min:g,onDeselect:d,textual:v,disabled:r,chipRenderer:b,overflowBadge:h`<button
+				type="button"
+				class="badge overflow-button"
+				name="overflow"
+				?disabled=${r}
+				aria-label=${ue("Show more")}
+				aria-haspopup="dialog"
+				aria-expanded=${t?"true":"false"}
+				hidden
+			>
+				<span></span>
+			</button>`})}
 		<cosmoz-dropdown-next
 			?disabled=${r}
 			.opened=${t}
@@ -1668,7 +1691,7 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 					autofocus
 					compact
 					.label=${n??s}
-					.placeholder=${c??Se("Search")}
+					.placeholder=${c??ue("Search")}
 					.value=${Q(l)}
 					@value-changed=${a}
 					autocomplete="off"
@@ -1697,14 +1720,15 @@ import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,
 				?compact=${a}
 				?disabled=${d}
 				?required=${i}
-				?invalid=${ye([S,r],()=>ke(S.then(()=>r,()=>!0),r))}
-				.errorMessage=${ye([S,n],()=>ke(S.then(()=>n,W=>W.message),n))}
+				?invalid=${xe([S,r],()=>Ee(S.then(()=>r,()=>!0),r))}
+				.errorMessage=${xe([S,n],()=>Ee(S.then(()=>n,W=>W.message),n))}
 				.value=${Q(g)}
 				@value-changed=${v}
 				autocomplete="off"
 				exportparts=${bo}
 				?data-one=${R}
 				?data-single=${T}
+				?data-has-value=${!!m?.length}
 			>
 				<slot name="prefix" slot="prefix"></slot>
 				<slot name="suffix" slot="suffix">
