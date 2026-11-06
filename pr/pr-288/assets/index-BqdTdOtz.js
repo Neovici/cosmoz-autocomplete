@@ -1,4 +1,4 @@
-import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,E as D,p as at,D as it,g as ue,e as j,h as ct,H as lt,i as me,n as dt,j as pt,k as ut,l as ht,m as fe,t as Se}from"./iframe-hEiTz7EJ.js";import{n as w,u as F,a as V,e as he,i as Re,t as Z,p as ne,f as gt,s as vt,b as Oe,c as le,d as mt,w as de,l as Pe,g as ft}from"./index-Bbs7n9LB.js";const m=e=>e??G,X=se(O`
+import{A as G,s as ae,c as O,d as P,b as h,w as K,f as k,u as ie,a as x,r as st,E as D,p as at,D as it,g as se,e as j,h as ct,H as lt,i as me,n as dt,j as pt,k as ut,l as ht,m as fe,t as Se}from"./iframe-DRS0278a.js";import{n as w,u as F,a as V,e as he,i as Re,t as Z,p as ne,f as gt,s as vt,b as Oe,c as de,d as mt,w as pe,l as Pe,g as ft}from"./index-pXGhGR8D.js";const f=e=>e??G,X=ae(O`
 	/*
 	 * Use border-box sizing for all elements.
 	 * This is safe and doesn't conflict with child component styles.
@@ -440,7 +440,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 		<slot name="suffix"></slot>
 	</span>`;customElements.define("cosmoz-badge",P(zt,{styleSheets:[X,bt]}));const wt=({slot:e,title:t,className:o,width:r="24",height:n="24",styles:s}={})=>h`
   <svg
-    slot=${m(e)}
+    slot=${f(e)}
     class=${`chevron-down-icon ${o??""}`}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -452,14 +452,14 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
     stroke-linejoin="round"
     width=${r}
     height=${n}
-    style=${m(s)}
+    style=${f(s)}
   >
     ${w(t,()=>K`<title>${t}</title>`)}
     <path d="m6 9 6 6 6-6" />
   </svg>
 `,yt=({slot:e,title:t,className:o,width:r="24",height:n="24",styles:s}={})=>h`
   <svg
-    slot=${m(e)}
+    slot=${f(e)}
     class=${`info-circle-icon ${o??""}`}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -471,7 +471,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
     stroke-linejoin="round"
     width=${r}
     height=${n}
-    style=${m(s)}
+    style=${f(s)}
   >
     ${w(t,()=>K`<title>${t}</title>`)}
     <path
@@ -480,7 +480,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
   </svg>
 `,xt=({slot:e,title:t,className:o,width:r="24",height:n="24",styles:s}={})=>h`
   <svg
-    slot=${m(e)}
+    slot=${f(e)}
     class=${`plus-icon ${o??""}`}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -492,14 +492,14 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
     stroke-linejoin="round"
     width=${r}
     height=${n}
-    style=${m(s)}
+    style=${f(s)}
   >
     ${w(t,()=>K`<title>${t}</title>`)}
     <path d="M12 5v14m-7-7h14" />
   </svg>
 `,$t=({slot:e,title:t,className:o,width:r="24",height:n="24",styles:s}={})=>h`
   <svg
-    slot=${m(e)}
+    slot=${f(e)}
     class=${`search-md-icon ${o??""}`}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -511,14 +511,14 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
     stroke-linejoin="round"
     width=${r}
     height=${n}
-    style=${m(s)}
+    style=${f(s)}
   >
     ${w(t,()=>K`<title>${t}</title>`)}
     <path d="m21 21-4.35-4.35M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
   </svg>
 `,kt=({slot:e,title:t,className:o,width:r="24",height:n="24",styles:s}={})=>h`
   <svg
-    slot=${m(e)}
+    slot=${f(e)}
     class=${`x-close-icon ${o??""}`}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -530,7 +530,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
     stroke-linejoin="round"
     width=${r}
     height=${n}
-    style=${m(s)}
+    style=${f(s)}
   >
     ${w(t,()=>K`<title>${t}</title>`)}
     <path d="M18 6 6 18M6 6l12 12" />
@@ -614,8 +614,8 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 		color: var(--cz-color-fg-success-secondary);
 	}
 `,Ct=e=>{const{color:t,size:o,disabled:r,removable:n}=e,s=()=>{r||e.dispatchEvent(new CustomEvent("remove"))};return h`<cosmoz-badge
-		color=${m(t)}
-		size=${m(o)}
+		color=${f(t)}
+		size=${f(o)}
 		?disabled=${r}
 		type="color"
 	>
@@ -631,7 +631,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 				>
 					${kt()}
 				</button>`)}
-	</cosmoz-badge>`};customElements.define("cosmoz-tag",P(Ct,{observedAttributes:["color","size","disabled","removable"],styleSheets:[X,Et]}));const Le=(e,...t)=>e.flatMap((o,r)=>[o,t[r]??""]).join(""),At=({host:e,popoverRef:t,disabled:o,openOnHover:r,openOnFocus:n,open:s,close:c})=>{const l=F(),i=()=>clearTimeout(l.current),a=()=>{clearTimeout(l.current),l.current=setTimeout(()=>{const p=t.current;r&&(e.matches(":hover")||p?.matches(":hover"))||e.matches(":focus-within")||p?.matches(":focus-within")||c()},100)},d=()=>{o||(i(),s())};return k(()=>{if(!(!r||o))return e.addEventListener("pointerenter",d),e.addEventListener("pointerleave",a),()=>{i(),e.removeEventListener("pointerenter",d),e.removeEventListener("pointerleave",a)}},[r,o,e]),k(()=>{if(!(!n||o))return e.addEventListener("focusin",d),e.addEventListener("focusout",a),()=>{i(),e.removeEventListener("focusin",d),e.removeEventListener("focusout",a)}},[n,o,e]),{scheduleClose:a,cancelClose:i}},Tt=e=>{if(e.newState!=="open")return;const r=e.target.querySelector("slot:not([name])")?.assignedElements({flatten:!0})??[];for(const n of r){const s=n.matches("[autofocus]")?n:n.querySelector("[autofocus]");if(s instanceof HTMLElement){s.focus();break}}},St=O`
+	</cosmoz-badge>`};customElements.define("cosmoz-tag",P(Ct,{observedAttributes:["color","size","disabled","removable"],styleSheets:[X,Et]}));const Le=(e,...t)=>e.flatMap((o,r)=>[o,t[r]??""]).join(""),At=({host:e,popoverRef:t,disabled:o,openOnHover:r,openOnFocus:n,open:s,close:c})=>{const l=F(),a=()=>clearTimeout(l.current),i=()=>{clearTimeout(l.current),l.current=setTimeout(()=>{const p=t.current;r&&(e.matches(":hover")||p?.matches(":hover"))||e.matches(":focus-within")||p?.matches(":focus-within")||c()},100)},d=()=>{o||(a(),s())};return k(()=>{if(!(!r||o))return e.addEventListener("pointerenter",d),e.addEventListener("pointerleave",i),()=>{a(),e.removeEventListener("pointerenter",d),e.removeEventListener("pointerleave",i)}},[r,o,e]),k(()=>{if(!(!n||o))return e.addEventListener("focusin",d),e.addEventListener("focusout",i),()=>{a(),e.removeEventListener("focusin",d),e.removeEventListener("focusout",i)}},[n,o,e]),{scheduleClose:i,cancelClose:a}},Tt=e=>{if(e.newState!=="open")return;const r=e.target.querySelector("slot:not([name])")?.assignedElements({flatten:!0})??[];for(const n of r){const s=n.matches("[autofocus]")?n:n.querySelector("[autofocus]");if(s instanceof HTMLElement){s.focus();break}}},St=O`
 	:host {
 		display: inline-block;
 		anchor-name: --dropdown-anchor;
@@ -684,16 +684,16 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 			transition: none;
 		}
 	}
-`,Rt=e=>{const{placement:t="bottom span-right",disabled:o,passthrough:r,openOnHover:n,openOnFocus:s}=e,c=F(),[l,i]=ae("opened",!1),a=x(()=>{o||(i(!0),c.current?.showPopover?.())},[o]),d=x(()=>{i(!1),c.current?.hidePopover?.()},[]),p=x(()=>{if(o)return;c.current?.matches(":popover-open")?d():a()},[o]);k(()=>{const v=c.current;v&&(l?v.showPopover?.():v.hidePopover?.())},[l]),k(()=>{e.toggleAttribute("opened",!!l)},[l]);const{scheduleClose:f,cancelClose:g}=At({host:e,popoverRef:c,disabled:o,openOnHover:n,openOnFocus:s,open:a,close:d}),z=s?a:p,$=x(v=>{Tt(v),i(v.newState==="open"),e.dispatchEvent(new ToggleEvent("dropdown-toggle",{newState:v.newState,oldState:v.oldState,composed:!0}))},[]);return h`
-		<slot name="button" @click=${z}></slot>
+`,Rt=e=>{const{placement:t="bottom span-right",disabled:o,passthrough:r,openOnHover:n,openOnFocus:s}=e,c=F(),[l,a]=ie("opened",!1),i=x(()=>{o||(a(!0),c.current?.showPopover?.())},[o]),d=x(()=>{a(!1),c.current?.hidePopover?.()},[]),p=x(()=>{if(o)return;c.current?.matches(":popover-open")?d():i()},[o]);k(()=>{const m=c.current;m&&(l?m.showPopover?.():m.hidePopover?.())},[l]),k(()=>{e.toggleAttribute("opened",!!l)},[l]);const{scheduleClose:g,cancelClose:v}=At({host:e,popoverRef:c,disabled:o,openOnHover:n,openOnFocus:s,open:i,close:d}),b=s?i:p,$=x(m=>{Tt(m),a(m.newState==="open"),e.dispatchEvent(new ToggleEvent("dropdown-toggle",{newState:m.newState,oldState:m.oldState,composed:!0}))},[]);return h`
+		<slot name="button" @click=${b}></slot>
 		${o&&r?h`<slot></slot>`:h`<div
 					popover
 					style="position-area: ${t}"
 					@toggle=${$}
 					@select=${d}
-					@focusout=${f}
-					@focusin=${g}
-					${V(v=>v&&(c.current=v))}
+					@focusout=${g}
+					@focusin=${v}
+					${V(m=>m&&(c.current=m))}
 				>
 					<slot></slot>
 				</div>`}
@@ -716,7 +716,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 			<slot name="heading"></slot>
 			<slot name="description"></slot>
 			<slot></slot>
-		`,{styleSheets:[X,Ot]}));const pe=se(O`
+		`,{styleSheets:[X,Ot]}));const ue=ae(O`
 	.cosmoz-tooltip-popover {
 		position: fixed;
 		inset: unset;
@@ -781,7 +781,7 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 `),be=(e,t,o)=>it(h`<cosmoz-tooltip-content>
 			${w(t,()=>h`<strong slot="heading">${t}</strong>`)}
 			${w(o,()=>h`<p slot="description">${o}</p>`)}
-		</cosmoz-tooltip-content>`,e),Pt=(e,t)=>{const{for:o,heading:r,description:n,placement:s="top",delay:c=300,disabled:l=!1}=t,i=F(),d=!!(r||n)&&!l;k(()=>{if(!o||!d)return;const p=e.getRootNode(),f=p.adoptedStyleSheets??[];f.includes(pe)||(p.adoptedStyleSheets=[...f,pe]);const g=document.createElement("div");g.setAttribute("popover","manual"),g.setAttribute("role","tooltip"),g.classList.add("cosmoz-tooltip-popover"),e.after(g),i.current=g,be(g,r,n);const z=`[name="${o}"]`,$=`--tooltip-anchor-${o}`;let v;const b=E=>{l||(clearTimeout(v),E.style.anchorName=$,g.style.positionAnchor=$,g.style.positionArea=s,v=window.setTimeout(()=>g.showPopover(),c))},L=()=>{clearTimeout(v),g.hidePopover()},q=E=>{const C=E.target.closest?.(z);C&&b(C)},A=E=>{const C=E.target.closest?.(z);if(!C)return;const R=E.relatedTarget;R&&C.contains(R)||L()},S=E=>{const C=E.target.closest?.(z);C&&b(C)},I=E=>{E.target.closest?.(z)&&L()};return p.addEventListener("pointerover",q),p.addEventListener("pointerout",A),p.addEventListener("focusin",S),p.addEventListener("focusout",I),()=>{clearTimeout(v),p.removeEventListener("pointerover",q),p.removeEventListener("pointerout",A),p.removeEventListener("focusin",S),p.removeEventListener("focusout",I),g.hidePopover(),g.remove(),i.current=void 0}},[o,s,c,d]),k(()=>{!o||!i.current||be(i.current,r,n)},[r,n,o]),k(()=>{!l||!i.current||i.current.hidePopover()},[l])},Lt=e=>{const[t,o]=ue(!1);return k(()=>{const r=e.current;if(!r)return;const n=()=>{o(r.assignedElements().length>0)};return n(),r.addEventListener("slotchange",n),()=>r.removeEventListener("slotchange",n)},[e.current]),t},qt=O`
+		</cosmoz-tooltip-content>`,e),Pt=(e,t)=>{const{for:o,heading:r,description:n,placement:s="top",delay:c=300,disabled:l=!1}=t,a=F(),d=!!(r||n)&&!l;k(()=>{if(!o||!d)return;const p=e.getRootNode(),g=p.adoptedStyleSheets??[];g.includes(ue)||(p.adoptedStyleSheets=[...g,ue]);const v=document.createElement("div");v.setAttribute("popover","manual"),v.setAttribute("role","tooltip"),v.classList.add("cosmoz-tooltip-popover"),e.after(v),a.current=v,be(v,r,n);const b=`[name="${o}"]`,$=`--tooltip-anchor-${o}`;let m;const z=E=>{l||(clearTimeout(m),E.style.anchorName=$,v.style.positionAnchor=$,v.style.positionArea=s,m=window.setTimeout(()=>v.showPopover(),c))},L=()=>{clearTimeout(m),v.hidePopover()},q=E=>{const C=E.target.closest?.(b);C&&z(C)},A=E=>{const C=E.target.closest?.(b);if(!C)return;const R=E.relatedTarget;R&&C.contains(R)||L()},S=E=>{const C=E.target.closest?.(b);C&&z(C)},I=E=>{E.target.closest?.(b)&&L()};return p.addEventListener("pointerover",q),p.addEventListener("pointerout",A),p.addEventListener("focusin",S),p.addEventListener("focusout",I),()=>{clearTimeout(m),p.removeEventListener("pointerover",q),p.removeEventListener("pointerout",A),p.removeEventListener("focusin",S),p.removeEventListener("focusout",I),v.hidePopover(),v.remove(),a.current=void 0}},[o,s,c,d]),k(()=>{!o||!a.current||be(a.current,r,n)},[r,n,o]),k(()=>{!l||!a.current||a.current.hidePopover()},[l])},Lt=e=>{const[t,o]=se(!1);return k(()=>{const r=e.current;if(!r)return;const n=()=>{o(r.assignedElements().length>0)};return n(),r.addEventListener("slotchange",n),()=>r.removeEventListener("slotchange",n)},[e.current]),t},qt=O`
 	:host {
 		display: inline-block;
 		anchor-name: --tooltip-anchor;
@@ -795,8 +795,8 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 	.cosmoz-tooltip-popover {
 		position-anchor: --tooltip-anchor;
 	}
-`,It=e=>{const{heading:t,description:o,for:r,placement:n="top",delay:s=300,disabled:c=!1}=e,l=F(),i=F(),a=F(),d=Lt(a),f=!!(t||o||d)&&!c,g=x(()=>{f&&(clearTimeout(i.current),i.current=window.setTimeout(()=>{l.current?.showPopover()},s))},[s,f]);k(()=>{c&&(clearTimeout(i.current),l.current?.hidePopover())},[c]);const z=x(()=>{clearTimeout(i.current),l.current?.hidePopover()},[]);return k(()=>{if(r)return;const $=v=>{const b=v.relatedTarget;b&&e.contains(b)||z()};return e.addEventListener("pointerover",g),e.addEventListener("pointerout",$),()=>{e.removeEventListener("pointerover",g),e.removeEventListener("pointerout",$)}},[r,g,z]),Pt(e,{for:r,heading:t,description:o,placement:n,delay:s,disabled:c}),r?G:f?h`
-		<slot @focusin=${g} @focusout=${z}></slot>
+`,It=e=>{const{heading:t,description:o,for:r,placement:n="top",delay:s=300,disabled:c=!1}=e,l=F(),a=F(),i=F(),d=Lt(i),g=!!(t||o||d)&&!c,v=x(()=>{g&&(clearTimeout(a.current),a.current=window.setTimeout(()=>{l.current?.showPopover()},s))},[s,g]);k(()=>{c&&(clearTimeout(a.current),l.current?.hidePopover())},[c]);const b=x(()=>{clearTimeout(a.current),l.current?.hidePopover()},[]);return k(()=>{if(r)return;const $=m=>{const z=m.relatedTarget;z&&e.contains(z)||b()};return e.addEventListener("pointerover",v),e.addEventListener("pointerout",$),()=>{e.removeEventListener("pointerover",v),e.removeEventListener("pointerout",$)}},[r,v,b]),Pt(e,{for:r,heading:t,description:o,placement:n,delay:s,disabled:c}),r?G:g?h`
+		<slot @focusin=${v} @focusout=${b}></slot>
 		<div
 			class="cosmoz-tooltip-popover"
 			popover="manual"
@@ -807,18 +807,18 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 			<cosmoz-tooltip-content>
 				${w(t,()=>h`<strong slot="heading">${t}</strong>`)}
 				${w(o,()=>h`<p slot="description">${o}</p>`)}
-				<slot name="content" ${V(a)}></slot>
+				<slot name="content" ${V(i)}></slot>
 			</cosmoz-tooltip-content>
 		</div>
 	`:h`
 			<slot></slot>
-			<slot name="content" ${V(a)} hidden></slot>
-		`};customElements.define("cosmoz-tooltip",P(It,{styleSheets:[X,pe,qt],observedAttributes:["heading","description","for","placement","delay","disabled"]}));const qe=(e,{label:t,labelFor:o="input",hint:r,invalid:n,errorMessage:s,compact:c,required:l})=>h`
+			<slot name="content" ${V(i)} hidden></slot>
+		`};customElements.define("cosmoz-tooltip",P(It,{styleSheets:[X,ue,qt],observedAttributes:["heading","description","for","placement","delay","disabled"]}));const qe=(e,{label:t,labelFor:o="input",hint:r,invalid:n,errorMessage:s,compact:c,required:l})=>h`
 		<!-- label: visually hidden in compact mode -->
 		${w(t,()=>h`<label
-					for=${m(o)}
+					for=${f(o)}
 					part="label"
-					class=${m(c?"sr-only":void 0)}
+					class=${f(c?"sr-only":void 0)}
 					>${t}
 					${w(l&&!c,()=>h`<span class="required">*</span>`)}
 				</label>`)}
@@ -1212,46 +1212,46 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 	slot[name='suffix']::slotted(*) {
 		padding-inline-end: calc(var(--cz-spacing) * 2);
 	}
-`,Mt=e=>j(()=>{if(e==null)return;const t=new RegExp(e,"u");return o=>{!o.defaultPrevented&&o.data&&!t.test(o.data)&&o.preventDefault()}},[e]),Bt=ct(class extends lt{values;constructor(e,t,o,r){super(e,t),Object.assign(t.host,o),this.values=r}update(e,t){this.hasChanged(t)&&(this.values=t,Object.assign(this.state.host,e))}hasChanged(e=[]){return e.some((t,o)=>this.values[o]!==t)}}),Yt=/([A-Z])/gu,ze=(e,t,o)=>{e[t]=o,e.dispatchEvent(new CustomEvent(t.replace(Yt,"-$1").toLowerCase()+"-changed",{detail:{value:o}}))},Be=e=>{const t=F(void 0),o=x(i=>t.current=i,[]),r=e.shadowRoot,n=x(i=>e.dispatchEvent(new Event(i.type,{bubbles:i.bubbles})),[]),s=x(i=>ze(e,"value",i.target.value),[]),c=x(i=>ze(e,"focused",i.type==="focus"),[]),l=x(()=>{const i=t.current?.checkValidity();return e.toggleAttribute("invalid",!i),i},[]);return Bt({validate:l},[l]),k(()=>{const i=a=>{a.composedPath()[0]?.closest?.("input, textarea, label")||(a.preventDefault(),t.current?.focus())};return r.addEventListener("mousedown",i),()=>r.removeEventListener("mousedown",i)},[]),{onChange:n,onFocus:c,onInput:s,onRef:o}},Nt=({placeholder:e})=>e||" ",_t=(e,t)=>t??(e==="date"?"9999-12-31":void 0),jt=["type","variant","size","hint","compact","required","pattern","allowed-pattern","min","max","step","autosize","label","placeholder",...Ie,"aria-label"],Dt=e=>{const{type:t="text",pattern:o,allowedPattern:r,autocomplete:n,value:s,readonly:c,disabled:l,min:i,max:a,step:d,maxlength:p,required:f,hint:g,invalid:z,errorMessage:$}=e,{onChange:v,onFocus:b,onInput:L,onRef:q}=Be(e),A=Mt(r),S=g&&!z,I=z&&$,E=I&&"error"||S&&"hint"||void 0;return e.toggleAttribute("has-value",!!s),qe(h`
+`,Mt=e=>j(()=>{if(e==null)return;const t=new RegExp(e,"u");return o=>{!o.defaultPrevented&&o.data&&!t.test(o.data)&&o.preventDefault()}},[e]),Bt=ct(class extends lt{values;constructor(e,t,o,r){super(e,t),Object.assign(t.host,o),this.values=r}update(e,t){this.hasChanged(t)&&(this.values=t,Object.assign(this.state.host,e))}hasChanged(e=[]){return e.some((t,o)=>this.values[o]!==t)}}),Yt=/([A-Z])/gu,ze=(e,t,o)=>{e[t]=o,e.dispatchEvent(new CustomEvent(t.replace(Yt,"-$1").toLowerCase()+"-changed",{detail:{value:o}}))},Be=e=>{const t=F(void 0),o=x(a=>t.current=a,[]),r=e.shadowRoot,n=x(a=>e.dispatchEvent(new Event(a.type,{bubbles:a.bubbles})),[]),s=x(a=>ze(e,"value",a.target.value),[]),c=x(a=>ze(e,"focused",a.type==="focus"),[]),l=x(()=>{const a=t.current?.checkValidity();return e.toggleAttribute("invalid",!a),a},[]);return Bt({validate:l},[l]),k(()=>{const a=i=>{i.composedPath()[0]?.closest?.("input, textarea, label")||(i.preventDefault(),t.current?.focus())};return r.addEventListener("mousedown",a),()=>r.removeEventListener("mousedown",a)},[]),{onChange:n,onFocus:c,onInput:s,onRef:o}},Nt=({placeholder:e})=>e||" ",_t=(e,t)=>t??(e==="date"?"9999-12-31":void 0),jt=["type","variant","size","hint","compact","required","pattern","allowed-pattern","min","max","step","autosize","label","placeholder",...Ie,"aria-label"],Dt=e=>{const{type:t="text",pattern:o,allowedPattern:r,autocomplete:n,value:s,readonly:c,disabled:l,min:a,max:i,step:d,maxlength:p,required:g,hint:v,invalid:b,errorMessage:$}=e,{onChange:m,onFocus:z,onInput:L,onRef:q}=Be(e),A=Mt(r),S=v&&!b,I=b&&$,E=I&&"error"||S&&"hint"||void 0;return e.toggleAttribute("has-value",!!s),qe(h`
 			<input
 				${V(q)}
 				style="--chars: ${s?.toString()?.length??0}ch"
 				id="input"
 				part="input"
 				type=${t}
-				pattern=${m(o)}
-				autocomplete=${m(n)}
+				pattern=${f(o)}
+				autocomplete=${f(n)}
 				placeholder=${Nt({placeholder:e.placeholder})}
 				?readonly=${c}
 				aria-disabled=${l?"true":"false"}
-				aria-label=${m(e.getAttribute("aria-label"))}
+				aria-label=${f(e.getAttribute("aria-label"))}
 				?disabled=${l}
-				?required=${f}
-				aria-invalid=${m(z?"true":void 0)}
-				aria-describedby=${m(E)}
+				?required=${g}
+				aria-invalid=${f(b?"true":void 0)}
+				aria-describedby=${f(E)}
 				.value=${Q(s??"")}
-				maxlength=${m(p)}
+				maxlength=${f(p)}
 				@beforeinput=${A}
 				@input=${L}
-				@change=${v}
-				@focus=${b}
-				@blur=${b}
-				min=${m(i)}
-				max=${m(_t(t,a))}
-				step=${m(d)}
+				@change=${m}
+				@focus=${z}
+				@blur=${z}
+				min=${f(a)}
+				max=${f(_t(t,i))}
+				step=${f(d)}
 			/>
-		`,e)};customElements.define("cosmoz-input",P(Dt,{observedAttributes:jt,styleSheets:[se(Me)],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const we=e=>{e.style.height="",e.style.height=`${e.scrollHeight}px`},Ft=(e,t=0)=>{if(t>0){const o=e.getAttribute("rows")??"",r=e.style.height;e.style.height="",e.setAttribute("rows",t),e.style.maxHeight=e.getBoundingClientRect().height+"px",e.style.height=r,e.setAttribute("rows",o)}},Ht=e=>{const{value:t,maxRows:o}=e,r=j(()=>()=>e.shadowRoot.querySelector("#input"),[]);k(()=>Ft(r(),o),[o,r]),k(()=>we(r()),[r,t]),k(()=>{const n=r(),s=new ResizeObserver(()=>requestAnimationFrame(()=>we(n)));return s.observe(n),()=>s.unobserve(n)},[r])},Ut=["rows","placeholder","label","hint","compact","required",...Ie],Zt=e=>{const{autocomplete:t,value:o,placeholder:r,readonly:n,disabled:s,required:c,hint:l,invalid:i,errorMessage:a,rows:d,cols:p,maxlength:f}=e,{onChange:g,onFocus:z,onInput:$,onRef:v}=Be(e);Ht(e);const b=l&&!i,L=i&&a,q=L&&"error"||b&&"hint"||void 0;return qe(h`
+		`,e)};customElements.define("cosmoz-input",P(Dt,{observedAttributes:jt,styleSheets:[ae(Me)],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const we=e=>{e.style.height="",e.style.height=`${e.scrollHeight}px`},Ft=(e,t=0)=>{if(t>0){const o=e.getAttribute("rows")??"",r=e.style.height;e.style.height="",e.setAttribute("rows",t),e.style.maxHeight=e.getBoundingClientRect().height+"px",e.style.height=r,e.setAttribute("rows",o)}},Ht=e=>{const{value:t,maxRows:o}=e,r=j(()=>()=>e.shadowRoot.querySelector("#input"),[]);k(()=>Ft(r(),o),[o,r]),k(()=>we(r()),[r,t]),k(()=>{const n=r(),s=new ResizeObserver(()=>requestAnimationFrame(()=>we(n)));return s.observe(n),()=>s.unobserve(n)},[r])},Ut=["rows","placeholder","label","hint","compact","required",...Ie],Zt=e=>{const{autocomplete:t,value:o,placeholder:r,readonly:n,disabled:s,required:c,hint:l,invalid:a,errorMessage:i,rows:d,cols:p,maxlength:g}=e,{onChange:v,onFocus:b,onInput:$,onRef:m}=Be(e);Ht(e);const z=l&&!a,L=a&&i,q=L&&"error"||z&&"hint"||void 0;return qe(h`
 			<textarea id="input" part="input"
-				${V(v)}
-				autocomplete=${m(t)}
+				${V(m)}
+				autocomplete=${f(t)}
 				placeholder=${r||" "}
-				rows=${d??1} cols=${m(p)}
+				rows=${d??1} cols=${f(p)}
 				?readonly=${n} aria-disabled=${s?"true":"false"}
 				?disabled=${s} ?required=${c}
-				aria-invalid=${m(i?"true":void 0)}
-				aria-describedby=${m(q)}
-				.value=${Q(o??"")} maxlength=${m(f)} @input=${$}
-				@change=${g} @focus=${z} @blur=${z}>`,e)};customElements.define("cosmoz-textarea",P(Zt,{observedAttributes:Ut,styleSheets:[se(Me)],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const Vt=e=>{const{label:t,value:o,disabled:r,error:n}=e,s=x(c=>e.dispatchEvent(new CustomEvent("change",{detail:c.target.checked})),[]);return h`<input
+				aria-invalid=${f(a?"true":void 0)}
+				aria-describedby=${f(q)}
+				.value=${Q(o??"")} maxlength=${f(g)} @input=${$}
+				@change=${v} @focus=${b} @blur=${b}>`,e)};customElements.define("cosmoz-textarea",P(Zt,{observedAttributes:Ut,styleSheets:[ae(Me)],shadowRootInit:{mode:"open",delegatesFocus:!0}}));const Vt=e=>{const{label:t,value:o,disabled:r,error:n}=e,s=x(c=>e.dispatchEvent(new CustomEvent("change",{detail:c.target.checked})),[]);return h`<input
 			id="toggle"
 			class="toggle"
 			part="toggle"
@@ -1327,25 +1327,25 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 	::slotted(*) {
 		margin-left: calc(var(--cz-spacing) * 1);
 	}
-`;customElements.define("cosmoz-toggle",P(Vt,{styleSheets:[Kt,Gt],observedAttributes:["label","disabled","error"]}));const Xt=e=>{const t=a=>a.label!=null?me(a.label,a.value):typeof a.value=="string"?a.value:"",o=(e.options??[]).map(a=>typeof a=="object"&&a!=null&&"value"in a?a:{value:a}),[r,n]=ae("value"),s=a=>ne(e.valueProperty)(a),c=s(r),l=a=>n(a.value),i=a=>{if(a.key!=="ArrowRight"&&a.key!=="ArrowLeft")return;a.preventDefault();const d=o.map(v=>s(v.value)),p=d.findIndex(v=>v===c);if(p===-1)return;const f=a.key==="ArrowRight"?1:-1,g=o[(p+f+d.length)%d.length];n(g.value),a.currentTarget.children[(p+f+d.length)%d.length]?.focus()};return h`<div
+`;customElements.define("cosmoz-toggle",P(Vt,{styleSheets:[Kt,Gt],observedAttributes:["label","disabled","error"]}));const Xt=e=>{const t=i=>i.label!=null?me(i.label,i.value):typeof i.value=="string"?i.value:"",o=(e.options??[]).map(i=>typeof i=="object"&&i!=null&&"value"in i?i:{value:i}),[r,n]=ie("value"),s=i=>ne(e.valueProperty)(i),c=s(r),l=i=>n(i.value),a=i=>{if(i.key!=="ArrowRight"&&i.key!=="ArrowLeft")return;i.preventDefault();const d=o.map(m=>s(m.value)),p=d.findIndex(m=>m===c);if(p===-1)return;const g=i.key==="ArrowRight"?1:-1,v=o[(p+g+d.length)%d.length];n(v.value),i.currentTarget.children[(p+g+d.length)%d.length]?.focus()};return h`<div
 		class="group"
 		part="group"
 		role="radiogroup"
 		aria-label=${e.label??""}
-		@keydown=${i}
+		@keydown=${a}
 	>
-		${o.map(a=>{const d=c===s(a.value),p=t(a);return h`<button
+		${o.map(i=>{const d=c===s(i.value),p=t(i);return h`<button
 				type="button"
 				role="radio"
 				aria-checked=${d?"true":"false"}
-				?disabled=${a.disabled||e.disabled}
-				title=${a.title!=null?me(a.title,a.value):G}
+				?disabled=${i.disabled||e.disabled}
+				title=${i.title!=null?me(i.title,i.value):G}
 				part=${d?"option selected-option":"option"}
 				class=${d?"option selected":"option"}
-				@click=${()=>l(a)}
+				@click=${()=>l(i)}
 				tabindex=${d?"0":"-1"}
 			>
-				${a.icon?.({width:"16",height:"16"})}${p}
+				${i.icon?.({width:"16",height:"16"})}${p}
 			</button>`})}
 	</div>`},Qt=O`
 	:host {
@@ -1411,15 +1411,15 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 	:host([size='sm']) .option {
 		padding-block: var(--cz-spacing);
 	}
-`;customElements.define("cosmoz-toggle-group",P(Xt,{styleSheets:[X,Qt,Wt],observedAttributes:["label","disabled","value-property"]}));const Jt={},ye=he(class extends Re{constructor(){super(...arguments),this.ot=Jt}render(e,t){return t()}update(e,[t,o]){if(Array.isArray(t)){if(Array.isArray(this.ot)&&this.ot.length===t.length&&t.every((r,n)=>r===this.ot[n]))return D}else if(this.ot===t)return D;return this.ot=Array.isArray(t)?Array.from(t):t,this.render(t,o)}});class eo{constructor(t){this.G=t}disconnect(){this.G=void 0}reconnect(t){this.G=t}deref(){return this.G}}class to{constructor(){this.Y=void 0,this.Z=void 0}get(){return this.Y}pause(){this.Y??=new Promise(t=>this.Z=t)}resume(){this.Z?.(),this.Y=this.Z=void 0}}const xe=e=>!dt(e)&&typeof e.then=="function",$e=1073741823;class oo extends gt{constructor(){super(...arguments),this._$Cwt=$e,this._$Cbt=[],this._$CK=new eo(this),this._$CX=new to}render(...t){return t.find(o=>!xe(o))??D}update(t,o){const r=this._$Cbt;let n=r.length;this._$Cbt=o;const s=this._$CK,c=this._$CX;this.isConnected||this.disconnected();for(let l=0;l<o.length&&!(l>this._$Cwt);l++){const i=o[l];if(!xe(i))return this._$Cwt=l,i;l<n&&i===r[l]||(this._$Cwt=$e,n=0,Promise.resolve(i).then(async a=>{for(;c.get();)await c.get();const d=s.deref();if(d!==void 0){const p=d._$Cbt.indexOf(i);p>-1&&p<d._$Cwt&&(d._$Cwt=p,d.setValue(a))}}))}return D}disconnected(){this._$CK.disconnect(),this._$CX.pause()}reconnected(){this._$CK.reconnect(this),this._$CX.resume()}}const ke=he(oo),ro=({content:e,onClear:t,disabled:o,className:r="chip",hidden:n,slot:s})=>h`<cosmoz-tag
-		class=${m(r)}
-		slot=${m(s)}
+`;customElements.define("cosmoz-toggle-group",P(Xt,{styleSheets:[X,Qt,Wt],observedAttributes:["label","disabled","value-property"]}));const Jt={},ye=he(class extends Re{constructor(){super(...arguments),this.ot=Jt}render(e,t){return t()}update(e,[t,o]){if(Array.isArray(t)){if(Array.isArray(this.ot)&&this.ot.length===t.length&&t.every((r,n)=>r===this.ot[n]))return D}else if(this.ot===t)return D;return this.ot=Array.isArray(t)?Array.from(t):t,this.render(t,o)}});class eo{constructor(t){this.G=t}disconnect(){this.G=void 0}reconnect(t){this.G=t}deref(){return this.G}}class to{constructor(){this.Y=void 0,this.Z=void 0}get(){return this.Y}pause(){this.Y??=new Promise(t=>this.Z=t)}resume(){this.Z?.(),this.Y=this.Z=void 0}}const xe=e=>!dt(e)&&typeof e.then=="function",$e=1073741823;class oo extends gt{constructor(){super(...arguments),this._$Cwt=$e,this._$Cbt=[],this._$CK=new eo(this),this._$CX=new to}render(...t){return t.find(o=>!xe(o))??D}update(t,o){const r=this._$Cbt;let n=r.length;this._$Cbt=o;const s=this._$CK,c=this._$CX;this.isConnected||this.disconnected();for(let l=0;l<o.length&&!(l>this._$Cwt);l++){const a=o[l];if(!xe(a))return this._$Cwt=l,a;l<n&&a===r[l]||(this._$Cwt=$e,n=0,Promise.resolve(a).then(async i=>{for(;c.get();)await c.get();const d=s.deref();if(d!==void 0){const p=d._$Cbt.indexOf(a);p>-1&&p<d._$Cwt&&(d._$Cwt=p,d.setValue(i))}}))}return D}disconnected(){this._$CK.disconnect(),this._$CX.pause()}reconnected(){this._$CK.reconnect(this),this._$CX.resume()}}const ke=he(oo),ro=({content:e,onClear:t,disabled:o,className:r="chip",hidden:n,slot:s})=>h`<cosmoz-tag
+		class=${f(r)}
+		slot=${f(s)}
 		exportparts="chip-text, chip-clear"
 		?disabled=${o}
 		?hidden=${n}
 		?removable=${!!t&&!o}
 		@remove=${t}
-		title=${m(typeof e=="string"?e:void 0)}
+		title=${f(typeof e=="string"?e:void 0)}
 		>${e}</cosmoz-tag
 	>`,Ye=({value:e,min:t=0,onDeselect:o,textual:r,disabled:n,chipRenderer:s=ro,interactiveBadge:c})=>[...e.filter(Boolean).map(l=>s({item:l,content:r(l),onClear:e.length>t&&(()=>o(l)),disabled:n,slot:"control"})),s({item:null,content:h`<span></span>`,className:"badge",disabled:!c,slot:"control",hidden:!0})],no=O`
 	:host {
@@ -1635,18 +1635,18 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 		border-radius: 0;
 		box-shadow: none;
 	}
-`,ge=(e,t=()=>({}))=>{const o={type:e,toString(){return e}};return Object.assign((...n)=>Object.assign(t(...n),o),o)},Ee=e=>e.type||e.toString(),Ce=e=>Array.isArray(e)?e:[e],ao=(e,t)=>{const o=Ce(t),r=(o.every(Array.isArray)?o:[o]).map(([n,s])=>({actions:Ce(n).map(Ee),handle:s}));return(n=e,s)=>{const c=r.find(l=>l.actions.includes(Ee(s)));return c?c.handle(n,s):n}},H={pending:"pending",rejected:"rejected",resolved:"resolved"},Ne={error:void 0,result:void 0,state:H.pending},_e=ge(H.pending),je=ge(H.resolved,e=>({result:e})),De=ge(H.rejected,e=>({error:e})),io=ao(Ne,[[_e,()=>({error:void 0,result:void 0,state:H.pending})],[je,(e,{result:t})=>({error:void 0,result:t,state:H.resolved})],[De,(e,{error:t})=>({error:t,result:void 0,state:H.rejected})]]),co=e=>{const[{error:t,result:o,state:r},n]=pt(io,Ne);return k(()=>{if(!e)return;let s=!1;return n(_e()),e.then(c=>!s&&n(je(c)),c=>!s&&n(De(c))),()=>{s=!0}},[e]),[o,t,r]},Ae=e=>e.normalize("NFD").replace(/[\u0300-\u036f]/gu,""),lo=(e,t,o)=>{if(!t)return e;const r=Ae(t.toLowerCase()),n=[];for(const s of e){const l=Ae(o(s).toLowerCase()).indexOf(r);l<0||n.push({item:s,index:l})}return n.sort((s,c)=>s.index-c.index).map(({item:s})=>s)},po=e=>e===!1||e==null?[]:e,uo=(e,t,o)=>e.dispatchEvent(new CustomEvent(t,{detail:o})),Te=[],ho=e=>(...t)=>{let o;const r=()=>{o&&cancelAnimationFrame(o)};return r(),o=requestAnimationFrame(()=>{o=void 0,e(...t)}),r},go=(e,t,o)=>x(r=>{t?.(r),e.dispatchEvent(new CustomEvent(o,{detail:r}))},[t]),vo=({value:e,text:t,mode:o,onChange:r,onText:n,onSelect:s,limit:c,min:l,source:i,textProperty:a,textual:d,valueProperty:p,keepOpened:f,keepQuery:g,preserveOrder:z,defaultIndex:$,externalSearch:v,disabled:b,lazyOpen:L,variant:q})=>{const A=c!=null?Number(c):void 0,S=l!=null?Number(l):void 0,I=o==="select",E=q==="pill",C=j(()=>(d??vt)(a),[d,a]),R=Oe(),[T,M]=ae("opened",!1),W=!t,B=j(()=>t?.trim(),[t]),J=go(R,n,"text"),ee=x(y=>{r?.(y,()=>M(!1));const U=I?y[0]:y;uo(R,"value",U)},[r]),[ie,Ge]=ue([]),te=!!(L&&!B),oe=j(()=>te?Promise.resolve([]):Promise.resolve(typeof i=="function"?i({query:B,active:T}):i).then(po),[i,T,B,te]),Y=j(()=>le(e),[e]);k(()=>oe.then(Ge),[oe]),mt({activity:ut,callback:()=>{const y=le(Y);y.length>(S??0)&&ee(y.slice(0,-1))},check:()=>!b&&!E&&W&&R.matches(":focus-within"),element:()=>R},[]),k(()=>{!T&&!g&&J("")},[T,g]),k(()=>{R.toggleAttribute("opened",!!T)},[T]);const N=ht({onText:J,onChange:ee,value:Y,limit:A,min:S,keepQuery:g,keepOpened:f,setOpened:M,onSelect:s,valueProperty:p}),[,,Ke]=co(oe);return{limit:A,opened:T,setOpened:M,query:B,textual:C,value:Y,source$:oe,loading:Ke==="pending",items:j(()=>{if(!T||te)return Te;const y=z?ie:[...Y,...de(Y,ne(p))(ie)];return v?y:lo(y,B,C)},[ie,T,B,C,W,Y,z,p,v,te]),onToggle:x(y=>{b||M(y.newState==="open")},[b]),onText:x(y=>{if(b)return;const U=y.target.value;!E&&U&&A===1&&Y.length>0&&ee([]),J(U),M(!0)},[b,J,M,A,Y,ee,E]),onSelect:x(y=>{if(b)return;N.onSelect?.(y,N);const{onChange:U,onText:Xe,limit:Qe,min:We,value:Je,keepQuery:et,keepOpened:tt,setOpened:ot,valueProperty:rt}=N;et||Xe(""),tt||ot(!1);const re=le(Je),ce=ne(rt),ve=re.some(nt=>ce(nt)===ce(y));ve&&re.length===We||U((ve?de(y,ce)(re):[...re,y]).slice(-Qe))},[b,N]),onDeselect:x(y=>{b||N.onChange(de(y,ne(N.valueProperty))(N.value))},[b,N]),defaultIndex:B!==void 0&&B?.length>0?0:$}},mo=e=>{const t=e.shadowRoot.querySelectorAll(".chip"),o=e.shadowRoot.querySelector(".badge");if(!o)return;o.hidden=!0;for(const p of t)p.hidden=!1;const r=e.shadowRoot.querySelector(".pill-row"),n=r?.querySelector("cosmoz-dropdown-next"),s=n?n.getBoundingClientRect().width+8:0,c=(r??e.shadowRoot.querySelector("cosmoz-input").shadowRoot?.querySelector(".control")).getBoundingClientRect(),l=p=>f=>{const g=f.getBoundingClientRect();return g.x+g.width<=c.x+c.width-p},i=Array.from(t);let a=i.length;if(!i.every(l(n?s:24))){const p=l(n?s+48:24);a=i.findIndex(f=>!p(f))}const d=t.length-a;for(o.querySelector("span").textContent="+"+d.toString(),o.hidden=d<1,o.title=Array.from(t).slice(a).map(p=>p.title||p.textContent?.trim()).join(", ");a<t.length;a++)t[a].hidden=!0},fo=({value:e,opened:t,wrap:o,limit:r})=>{const n=Oe(),s=!(o||r===1)&&e.length>0,c=j(()=>ho(()=>mo(n)),[]),[l,i]=ue(0);fe(()=>{if(!s)return;const a=n.shadowRoot.querySelector(".pill-row")??n.shadowRoot.querySelector("cosmoz-input"),d=new ResizeObserver(p=>{i(p[0].contentRect.width)});return d.observe(a),()=>d.disconnect()},[s]),fe(()=>s?c():void 0,[s,l,t,e])},bo=["input","control","label","line","error","wrap"].map(e=>`${e}: input-${e}`).join(),zo=({opened:e,isSingle:t,showSingle:o,hasResultsOrQuery:r})=>!e||t&&!o?!1:r,Fe=()=>h`<slot name="no-result">
+`,ge=(e,t=()=>({}))=>{const o={type:e,toString(){return e}};return Object.assign((...n)=>Object.assign(t(...n),o),o)},Ee=e=>e.type||e.toString(),Ce=e=>Array.isArray(e)?e:[e],ao=(e,t)=>{const o=Ce(t),r=(o.every(Array.isArray)?o:[o]).map(([n,s])=>({actions:Ce(n).map(Ee),handle:s}));return(n=e,s)=>{const c=r.find(l=>l.actions.includes(Ee(s)));return c?c.handle(n,s):n}},H={pending:"pending",rejected:"rejected",resolved:"resolved"},Ne={error:void 0,result:void 0,state:H.pending},_e=ge(H.pending),je=ge(H.resolved,e=>({result:e})),De=ge(H.rejected,e=>({error:e})),io=ao(Ne,[[_e,()=>({error:void 0,result:void 0,state:H.pending})],[je,(e,{result:t})=>({error:void 0,result:t,state:H.resolved})],[De,(e,{error:t})=>({error:t,result:void 0,state:H.rejected})]]),co=e=>{const[{error:t,result:o,state:r},n]=pt(io,Ne);return k(()=>{if(!e)return;let s=!1;return n(_e()),e.then(c=>!s&&n(je(c)),c=>!s&&n(De(c))),()=>{s=!0}},[e]),[o,t,r]},Ae=e=>e.normalize("NFD").replace(/[\u0300-\u036f]/gu,""),lo=(e,t,o)=>{if(!t)return e;const r=Ae(t.toLowerCase()),n=[];for(const s of e){const l=Ae(o(s).toLowerCase()).indexOf(r);l<0||n.push({item:s,index:l})}return n.sort((s,c)=>s.index-c.index).map(({item:s})=>s)},po=e=>e===!1||e==null?[]:e,uo=(e,t,o)=>e.dispatchEvent(new CustomEvent(t,{detail:o})),Te=[],ho=e=>(...t)=>{let o;const r=()=>{o&&cancelAnimationFrame(o)};return r(),o=requestAnimationFrame(()=>{o=void 0,e(...t)}),r},go=(e,t,o)=>x(r=>{t?.(r),e.dispatchEvent(new CustomEvent(o,{detail:r}))},[t]),vo=({value:e,text:t,mode:o,onChange:r,onText:n,onSelect:s,limit:c,min:l,source:a,textProperty:i,textual:d,valueProperty:p,keepOpened:g,keepQuery:v,preserveOrder:b,defaultIndex:$,externalSearch:m,disabled:z,lazyOpen:L,variant:q})=>{const A=c!=null?Number(c):void 0,S=l!=null?Number(l):void 0,I=o==="select",E=q==="pill",C=j(()=>(d??vt)(i),[d,i]),R=Oe(),[T,M]=ie("opened",!1),W=!t,B=j(()=>t?.trim(),[t]),J=go(R,n,"text"),ee=x(y=>{r?.(y,()=>M(!1));const U=I?y[0]:y;uo(R,"value",U)},[r]),[ce,Ge]=se([]),te=!!(L&&!B),oe=j(()=>te?Promise.resolve([]):Promise.resolve(typeof a=="function"?a({query:B,active:T}):a).then(po),[a,T,B,te]),Y=j(()=>de(e),[e]);k(()=>oe.then(Ge),[oe]),mt({activity:ut,callback:()=>{const y=de(Y);y.length>(S??0)&&ee(y.slice(0,-1))},check:()=>!z&&!E&&W&&R.matches(":focus-within"),element:()=>R},[]),k(()=>{!T&&!v&&J("")},[T,v]),k(()=>{R.toggleAttribute("opened",!!T)},[T]);const N=ht({onText:J,onChange:ee,value:Y,limit:A,min:S,keepQuery:v,keepOpened:g,setOpened:M,onSelect:s,valueProperty:p}),[,,Ke]=co(oe);return{limit:A,opened:T,setOpened:M,query:B,textual:C,value:Y,source$:oe,loading:Ke==="pending",items:j(()=>{if(!T||te)return Te;const y=b?ce:[...Y,...pe(Y,ne(p))(ce)];return m?y:lo(y,B,C)},[ce,T,B,C,W,Y,b,p,m,te]),onToggle:x(y=>{z||M(y.newState==="open")},[z]),onText:x(y=>{if(z)return;const U=y.target.value;!E&&U&&A===1&&Y.length>0&&ee([]),J(U),M(!0)},[z,J,M,A,Y,ee,E]),onSelect:x(y=>{if(z)return;N.onSelect?.(y,N);const{onChange:U,onText:Xe,limit:Qe,min:We,value:Je,keepQuery:et,keepOpened:tt,setOpened:ot,valueProperty:rt}=N;et||Xe(""),tt||ot(!1);const re=de(Je),le=ne(rt),ve=re.some(nt=>le(nt)===le(y));ve&&re.length===We||U((ve?pe(y,le)(re):[...re,y]).slice(-Qe))},[z,N]),onDeselect:x(y=>{z||N.onChange(pe(y,ne(N.valueProperty))(N.value))},[z,N]),defaultIndex:B!==void 0&&B?.length>0?0:$}},mo=e=>{const t=e.shadowRoot.querySelectorAll(".chip"),o=e.shadowRoot.querySelector(".badge");if(!o)return"";o.hidden=!0;for(const g of t)g.hidden=!1;const r=e.shadowRoot.querySelector(".pill-row"),n=r?.querySelector("cosmoz-dropdown-next"),s=n?n.getBoundingClientRect().width+8:0,c=(r??e.shadowRoot.querySelector("cosmoz-input").shadowRoot?.querySelector(".control")).getBoundingClientRect(),l=g=>v=>{const b=v.getBoundingClientRect();return b.x+b.width<=c.x+c.width-g},a=Array.from(t);let i=a.length;if(!a.every(l(n?s:24))){const g=l(n?s+48:24);i=a.findIndex(v=>!g(v))}const d=t.length-i;o.querySelector("span").textContent="+"+d.toString(),o.hidden=d<1,o.setAttribute("name","overflow");const p=a.slice(i);for(const g of p)g.hidden=!0;return p.map(g=>g.title||g.textContent?.trim()).join(", ")},fo=({value:e,opened:t,wrap:o,limit:r})=>{const n=Oe(),s=!(o||r===1)&&e.length>0,[c,l]=se(""),a=j(()=>ho(()=>l(mo(n))),[]),[i,d]=se(0);return fe(()=>{if(!s)return;const p=n.shadowRoot.querySelector(".pill-row")??n.shadowRoot.querySelector("cosmoz-input"),g=new ResizeObserver(v=>{d(v[0].contentRect.width)});return g.observe(p),()=>g.disconnect()},[s]),fe(()=>s?a():void 0,[s,i,t,e]),c},bo=["input","control","label","line","error","wrap"].map(e=>`${e}: input-${e}`).join(),zo=({opened:e,isSingle:t,showSingle:o,hasResultsOrQuery:r})=>!e||t&&!o?!1:r,Fe=()=>h`<slot name="no-result">
 		<span class="no-result">${Se("No results found")}</span>
-	</slot>`,wo=e=>{if(e.newState!=="closed")return;const t=e.currentTarget;!t.matches(":focus-within")&&document.activeElement!==document.body||t.querySelector(".add")?.focus()},yo=e=>{const{opened:t,setOpened:o,disabled:r,label:n,placeholder:s,searchPlaceholder:c,text:l,onText:i,onToggle:a,onDeselect:d,value:p,min:f,textual:g,chipRenderer:z,items:$,loading:v}=e;return h`<div
+	</slot>`,wo=e=>{if(e.newState!=="closed")return;const t=e.currentTarget;!t.matches(":focus-within")&&document.activeElement!==document.body||t.querySelector(".add")?.focus()},yo=e=>{const{opened:t,setOpened:o,disabled:r,label:n,placeholder:s,searchPlaceholder:c,text:l,onText:a,onToggle:i,onDeselect:d,value:p,min:g,textual:v,chipRenderer:b,items:$,loading:m}=e;return h`<div
 		class="pill-row"
 		part="row"
-		@click=${b=>!r&&b.target.closest?.(".badge")&&o(!0)}
+		@click=${z=>!r&&z.target.closest?.(".badge")&&o(!0)}
 	>
-		${Ye({value:p,min:f,onDeselect:d,textual:g,disabled:r,chipRenderer:z,interactiveBadge:!r})}
+		${Ye({value:p,min:g,onDeselect:d,textual:v,disabled:r,chipRenderer:b,interactiveBadge:!r})}
 		<cosmoz-dropdown-next
 			?disabled=${r}
 			.opened=${t}
-			@dropdown-toggle=${b=>{a(b),wo(b)}}
+			@dropdown-toggle=${z=>{i(z),wo(z)}}
 			part="dropdown"
 		>
 			<button
@@ -1670,20 +1670,20 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 					.label=${n??s}
 					.placeholder=${c??Se("Search")}
 					.value=${Q(l)}
-					@value-changed=${i}
+					@value-changed=${a}
 					autocomplete="off"
 				>
 					${$t({slot:"prefix",width:"16",height:"16"})}
 				</cosmoz-input>
-				${w(t,()=>Pe({...e,items:$,multi:!0,checkmark:!0},w(v,()=>h`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,()=>w(l&&$.length===0,()=>Fe()))))}
+				${w(t,()=>Pe({...e,items:$,multi:!0,checkmark:!0},w(m,()=>h`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,()=>w(l&&$.length===0,()=>Fe()))))}
 				<slot name="footer"></slot>
 			</div>
 		</cosmoz-dropdown-next>
-	</div>`},xo=e=>{const{variant:t,opened:o,invalid:r,errorMessage:n,hint:s,label:c,placeholder:l,compact:i,required:a,disabled:d,textual:p,text:f,onText:g,onToggle:z,onDeselect:$,value:v,limit:b,min:L,showSingle:q,items:A,source$:S,loading:I,chipRenderer:E,mode:C}=e,R=b===1,T=R&&v?.[0]!=null,M=I||A.length>0||f!=null&&f.length>0;return h`<cosmoz-dropdown-next
+	</div>`},xo=e=>{const{variant:t,opened:o,invalid:r,errorMessage:n,hint:s,label:c,placeholder:l,compact:a,required:i,disabled:d,textual:p,text:g,onText:v,onToggle:b,onDeselect:$,value:m,limit:z,min:L,showSingle:q,items:A,source$:S,loading:I,chipRenderer:E,mode:C}=e,R=z===1,T=R&&m?.[0]!=null,M=I||A.length>0||g!=null&&g.length>0;return h`<cosmoz-dropdown-next
 			open-on-focus
 			?disabled=${d}
 			.opened=${o}
-			@dropdown-toggle=${z}
+			@dropdown-toggle=${b}
 			part="dropdown"
 		>
 			<cosmoz-input
@@ -1692,15 +1692,15 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 				part="input"
 				.label=${c}
 				.placeholder=${T?void 0:l}
-				hint=${m(s)}
-				variant=${m(t)}
-				?compact=${i}
+				hint=${f(s)}
+				variant=${f(t)}
+				?compact=${a}
 				?disabled=${d}
-				?required=${a}
+				?required=${i}
 				?invalid=${ye([S,r],()=>ke(S.then(()=>r,()=>!0),r))}
 				.errorMessage=${ye([S,n],()=>ke(S.then(()=>n,W=>W.message),n))}
-				.value=${Q(f)}
-				@value-changed=${g}
+				.value=${Q(g)}
+				@value-changed=${v}
 				autocomplete="off"
 				exportparts=${bo}
 				?data-one=${R}
@@ -1710,8 +1710,12 @@ import{A as G,s as se,c as O,d as P,b as h,w as K,f as k,u as ae,a as x,r as st,
 				<slot name="suffix" slot="suffix">
 					${w(C==="select",()=>wt({styles:"margin-right: calc(var(--cz-spacing) * 2);color: var(--cz-color-text-secondary);",width:"16",height:"16"}))}
 				</slot>
-				${Ye({value:v,min:L,onDeselect:$,textual:p,disabled:d,chipRenderer:E})}
+				${Ye({value:m,min:L,onDeselect:$,textual:p,disabled:d,chipRenderer:E})}
 			</cosmoz-input>
 
-			${w(zo({opened:o,isSingle:T,showSingle:q,hasResultsOrQuery:M}),()=>Pe({...e,items:A,multi:!R},w(I,()=>h`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,()=>w(f!=null&&f.length>0&&A.length===0,()=>Fe()))))}
-		</cosmoz-dropdown-next>`},He=e=>{const t={...e,...vo(e)};return fo(t),e.variant==="pill"?yo(t):xo(t)},Ue=["variant","disabled","invalid","required","compact","hint","text-property","value-property","limit","min","show-single","preserve-order","keep-opened","keep-query","default-index","external-search","item-height","item-limit","wrap","lazy-open","mode"],$o=e=>{const{onChange:t,onText:o,mode:r,...n}=e,s=r==="select",[c,l]=ae("value");return k(()=>{e.onChange!=null&&console.warn("onChange is deprecated; use value-changed and lift instead")},[]),He({...n,...s&&{limit:1,min:1,showSingle:!0},mode:r,value:c,onChange:x((i,...a)=>{l(s?i[0]:i),t?.(i,...a)},[t,s]),onText:x(i=>{e.text=i,o?.(i)},[o])})},Ze=[ft(so)],Ve={mode:"open",delegatesFocus:!0};customElements.define("cosmoz-autocomplete-ui",P(He,{observedAttributes:Ue,styleSheets:Ze,shadowRootInit:Ve}));customElements.define("cosmoz-autocomplete",P($o,{observedAttributes:Ue,styleSheets:Ze,shadowRootInit:Ve}));export{He as A,so as a,Ue as b,wt as c,m as o,$t as s};
+			${w(zo({opened:o,isSingle:T,showSingle:q,hasResultsOrQuery:M}),()=>Pe({...e,items:A,multi:!R},w(I,()=>h`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,()=>w(g!=null&&g.length>0&&A.length===0,()=>Fe()))))}
+		</cosmoz-dropdown-next>`},He=e=>{const t={...e,...vo(e)},o=fo(t);return h`${e.variant==="pill"?yo(t):xo(t)}
+			<cosmoz-tooltip
+				for="overflow"
+				description=${o}
+			></cosmoz-tooltip>`},Ue=["variant","disabled","invalid","required","compact","hint","text-property","value-property","limit","min","show-single","preserve-order","keep-opened","keep-query","default-index","external-search","item-height","item-limit","wrap","lazy-open","mode"],$o=e=>{const{onChange:t,onText:o,mode:r,...n}=e,s=r==="select",[c,l]=ie("value");return k(()=>{e.onChange!=null&&console.warn("onChange is deprecated; use value-changed and lift instead")},[]),He({...n,...s&&{limit:1,min:1,showSingle:!0},mode:r,value:c,onChange:x((a,...i)=>{l(s?a[0]:a),t?.(a,...i)},[t,s]),onText:x(a=>{e.text=a,o?.(a)},[o])})},Ze=[ft(so)],Ve={mode:"open",delegatesFocus:!0};customElements.define("cosmoz-autocomplete-ui",P(He,{observedAttributes:Ue,styleSheets:Ze,shadowRootInit:Ve}));customElements.define("cosmoz-autocomplete",P($o,{observedAttributes:Ue,styleSheets:Ze,shadowRootInit:Ve}));export{He as A,so as a,Ue as b,wt as c,f as o,$t as s};
