@@ -1045,3 +1045,21 @@ export const PillVariantKeyboardOverflow: Story = {
 		await waitFor(() => expect(popover().matches(':popover-open')).toBe(true));
 	},
 };
+
+export const PillVariantCustomIcon: Story = {
+	render: () => html`
+		<cosmoz-autocomplete variant="pill" .placeholder=${'Label'}>
+			<span slot="add-icon" aria-hidden="true">◇</span>
+		</cosmoz-autocomplete>
+	`,
+	play: async ({ canvasElement }) => {
+		const el = canvasElement.querySelector('cosmoz-autocomplete')!;
+		const slot = el.shadowRoot!.querySelector<HTMLSlotElement>(
+			'slot[name="add-icon"]',
+		)!;
+		expect(slot.assignedElements()).toEqual([
+			el.querySelector('[slot="add-icon"]'),
+		]);
+		expect(slot.closest('button')!.textContent).toContain('Label');
+	},
+};

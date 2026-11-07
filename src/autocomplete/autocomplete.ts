@@ -153,7 +153,7 @@ const pill = <I>(props: AProps<I>) => {
 				aria-haspopup="dialog"
 				aria-expanded=${opened ? 'true' : 'false'}
 			>
-				${plusIcon({ width: '12', height: '12' })}
+				<slot name="add-icon">${plusIcon({ width: '12', height: '12' })}</slot>
 				<span>${placeholder ?? label}</span>
 			</button>
 			<div class="panel" part="panel">
