@@ -1,5 +1,6 @@
 import './autocomplete/';
 import './excluding/';
+import './pills/';
 export {
 	AUTOCOMPLETE_DESELECT_LAST,
 	autocompleteKeybindings,
