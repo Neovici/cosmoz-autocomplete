@@ -87,3 +87,19 @@ test.describe('autocomplete excluding', () => {
 		await expect(page).toHaveScreenshot();
 	});
 });
+
+test.describe('autocomplete pills', () => {
+	test('opens the search popover', async ({ page }) => {
+		await page.goto(
+			'iframe.html?id=autocomplete-pills--overflown&viewMode=story/',
+		);
+		await expect(page).toHaveScreenshot();
+
+		await page.evaluate(() => {
+			const host = document.querySelector('cosmoz-autocomplete-pills')!;
+			host.shadowRoot!.querySelector<HTMLElement>('.add')!.click();
+		});
+		await expect(page.getByRole('textbox', { name: 'Label' })).toBeFocused();
+		await expect(page).toHaveScreenshot();
+	});
+});
