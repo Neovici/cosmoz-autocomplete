@@ -1,4 +1,4 @@
-import{b as h}from"./iframe-C4ySl2j_.js";import"./index-83Wu6Lxu.js";import"./preload-helper-PPVm8Dsz.js";import"./use-autocomplete-C4VLhZI7.js";import"./index-CnHIaa_i.js";import"./search-md-BZvwMs9f.js";const{expect:e,userEvent:c,waitFor:s}=__STORYBOOK_MODULE_TEST__,z={title:"Tests/Autocomplete Pills"},p={render:()=>h`
+import{b as h}from"./iframe-zCxUUSHg.js";import"./index-BcxQUuI3.js";import"./preload-helper-PPVm8Dsz.js";import"./use-autocomplete-BnArfQ27.js";import"./index-s1pP-A5o.js";import"./search-md-Cfe-1-JP.js";const{expect:e,userEvent:c,waitFor:s}=__STORYBOOK_MODULE_TEST__,z={title:"Tests/Autocomplete Pills"},p={render:()=>h`
         <div style="width: 320px">
             <cosmoz-autocomplete-pills
                 .source=${Array.from({length:12},(n,t)=>({text:`Label number ${t+1}`}))}

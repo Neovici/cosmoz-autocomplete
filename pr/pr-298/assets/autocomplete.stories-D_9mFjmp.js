@@ -1,4 +1,4 @@
-import{b as j}from"./iframe-C4ySl2j_.js";import"./index-BZ9MZG2d.js";import"./preload-helper-PPVm8Dsz.js";import"./index-CnHIaa_i.js";import"./use-autocomplete-C4VLhZI7.js";const{expect:o,fn:p,userEvent:s,waitFor:i}=__STORYBOOK_MODULE_TEST__,se=({source:e,value:a,limit:t,textProperty:c="text",valueProperty:l,onChange:r,onText:u,onSelect:_,disabled:J,compact:Q,defaultIndex:X,text:Z,keepOpened:ee,externalSearch:te,lazyOpen:oe,preserveOrder:ae,required:ne,mode:ce})=>j`
+import{b as j}from"./iframe-zCxUUSHg.js";import"./index-Bt6z4p6V.js";import"./preload-helper-PPVm8Dsz.js";import"./index-s1pP-A5o.js";import"./use-autocomplete-BnArfQ27.js";const{expect:o,fn:p,userEvent:s,waitFor:i}=__STORYBOOK_MODULE_TEST__,se=({source:e,value:a,limit:t,textProperty:c="text",valueProperty:l,onChange:r,onText:u,onSelect:_,disabled:J,compact:Q,defaultIndex:X,text:Z,keepOpened:ee,externalSearch:te,lazyOpen:oe,preserveOrder:ae,required:ne,mode:ce})=>j`
     <cosmoz-autocomplete
         .source=${e}
         .value=${a}

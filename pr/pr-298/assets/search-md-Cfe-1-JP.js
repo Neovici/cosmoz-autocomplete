@@ -1,4 +1,4 @@
-import{b as l,w as a}from"./iframe-C4ySl2j_.js";import{o as e}from"./use-autocomplete-C4VLhZI7.js";import{n as c}from"./index-CnHIaa_i.js";const $=({slot:t,title:o,className:r,width:s="24",height:i="24",styles:n}={})=>l`
+import{b as l,w as a}from"./iframe-zCxUUSHg.js";import{o as e}from"./use-autocomplete-BnArfQ27.js";import{n as c}from"./index-s1pP-A5o.js";const $=({slot:t,title:o,className:r,width:s="24",height:i="24",styles:n}={})=>l`
   <svg
     slot=${e(t)}
     class=${`search-md-icon ${r??""}`}
