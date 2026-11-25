@@ -1,4 +1,4 @@
-import{b as l}from"./iframe-40yvxTIP.js";import"./index-Bq0VaUe2.js";import"./preload-helper-PPVm8Dsz.js";import"./index-D4gopX5w.js";import"./index-C8HAajyV.js";const{expect:o,userEvent:m,waitFor:d}=__STORYBOOK_MODULE_TEST__,s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],i=({source:t,textProperty:e="text",value:n=[],compact:u,keepOpened:p})=>l`
+import{b as l}from"./iframe-zCxUUSHg.js";import"./index-D3_2pic9.js";import"./preload-helper-PPVm8Dsz.js";import"./use-autocomplete-BnArfQ27.js";import"./index-s1pP-A5o.js";import"./index-Bt6z4p6V.js";const{expect:o,userEvent:m,waitFor:d}=__STORYBOOK_MODULE_TEST__,s=[{text:"Red"},{text:"Green"},{text:"Blue"},{text:"Yellow"}],i=({source:t,textProperty:e="text",value:n=[],compact:u,keepOpened:p})=>l`
     <cosmoz-autocomplete-excluding
         .source=${t}
         .textProperty=${e}
@@ -6,7 +6,7 @@ import{b as l}from"./iframe-40yvxTIP.js";import"./index-Bq0VaUe2.js";import"./pr
         ?compact=${u}
         ?keep-opened=${p}
     ></cosmoz-autocomplete-excluding>
-`,S={title:"Tests/Autocomplete Excluding",render:i,tags:["!autodocs"],parameters:{layout:"fullscreen"}},a={args:{source:s,textProperty:"text",value:[{item:s[0],excluded:!0}]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding");await t.findByShadowText(/Red/u),o(e.opened).toBeFalsy(),o(e.hasAttribute("opened")).toBe(!1),e.opened=!0,await t.findByShadowRole("option",{name:/Green/u}),o(e.hasAttribute("opened")).toBe(!0)}},c={args:{source:s,textProperty:"text",value:[]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding"),n=[];e.addEventListener("opened-changed",(p=>{n.push(p.detail.value)}));const u=await t.findByShadowRole("textbox");await m.click(u),await d(()=>{o(n).toContain(!0)})}},r={args:{source:s,textProperty:"text",compact:!0},play:async()=>{const e=document.querySelector("cosmoz-autocomplete-excluding").shadowRoot?.querySelector("cosmoz-input");o(e?.hasAttribute("compact")).toBe(!0)}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+`,h={title:"Tests/Autocomplete Excluding",render:i,tags:["!autodocs"],parameters:{layout:"fullscreen"}},a={args:{source:s,textProperty:"text",value:[{item:s[0],excluded:!0}]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding");await t.findByShadowText(/Red/u),o(e.opened).toBeFalsy(),o(e.hasAttribute("opened")).toBe(!1),e.opened=!0,await t.findByShadowRole("option",{name:/Green/u}),o(e.hasAttribute("opened")).toBe(!0)}},c={args:{source:s,textProperty:"text",value:[]},play:async({canvas:t})=>{const e=document.querySelector("cosmoz-autocomplete-excluding"),n=[];e.addEventListener("opened-changed",(p=>{n.push(p.detail.value)}));const u=await t.findByShadowRole("textbox");await m.click(u),await d(()=>{o(n).toContain(!0)})}},r={args:{source:s,textProperty:"text",compact:!0},play:async()=>{const e=document.querySelector("cosmoz-autocomplete-excluding").shadowRoot?.querySelector("cosmoz-input");o(e?.hasAttribute("compact")).toBe(!0)}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
   args: {
     source: colors,
     textProperty: 'text',
@@ -63,4 +63,4 @@ import{b as l}from"./iframe-40yvxTIP.js";import"./index-Bq0VaUe2.js";import"./pr
     const input = autocomplete.shadowRoot?.querySelector('cosmoz-input');
     expect(input?.hasAttribute('compact')).toBe(true);
   }
-}`,...r.parameters?.docs?.source}}};const h=["ProgrammaticOpen","OpenedChangedEvent","CompactState"];export{r as CompactState,c as OpenedChangedEvent,a as ProgrammaticOpen,h as __namedExportsOrder,S as default};
+}`,...r.parameters?.docs?.source}}};const B=["ProgrammaticOpen","OpenedChangedEvent","CompactState"];export{r as CompactState,c as OpenedChangedEvent,a as ProgrammaticOpen,B as __namedExportsOrder,h as default};
