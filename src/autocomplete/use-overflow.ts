@@ -11,23 +11,18 @@ const overflow = (host: HTMLElement) => {
 	for (const chip of chips) {
 		chip.hidden = false;
 	}
-	// The pill layout keeps its "add" button after the chips, so leave it room;
-	// room for the +N badge is only needed once something overflows.
-	const row = host.shadowRoot!.querySelector<HTMLElement>('.pill-row');
-	const add = row?.querySelector('cosmoz-dropdown-next');
-	const addWidth = add ? add.getBoundingClientRect().width + 8 : 0;
-	const limit = (row ??
-		host
-			.shadowRoot!.querySelector('cosmoz-input')!
-			.shadowRoot?.querySelector('.control'))!.getBoundingClientRect();
+	const limit = host
+		.shadowRoot!.querySelector('cosmoz-input')!
+		.shadowRoot!.querySelector('.control')!
+		.getBoundingClientRect();
 	const fits = (reserve: number) => (chip: HTMLElement) => {
 		const bounds = chip.getBoundingClientRect();
 		return bounds.x + bounds.width <= limit.x + limit.width - reserve;
 	};
 	const all = Array.from(chips);
 	let i = all.length;
-	if (!all.every(fits(add ? addWidth : 24))) {
-		const isIn = fits(add ? addWidth + 48 : 24);
+	if (!all.every(fits(24))) {
+		const isIn = fits(24 + 48);
 		i = all.findIndex((chip) => !isIn(chip));
 	}
 
@@ -63,9 +58,7 @@ export const useOverflow = <I>({
 
 	useLayoutEffect(() => {
 		if (!enabled) return;
-		const input =
-			host.shadowRoot!.querySelector('.pill-row') ??
-			host.shadowRoot!.querySelector('cosmoz-input')!;
+		const input = host.shadowRoot!.querySelector('cosmoz-input')!;
 		const observer = new ResizeObserver((e) => {
 			setWidth(e[0].contentRect.width);
 		});

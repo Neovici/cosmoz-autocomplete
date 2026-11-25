@@ -15,6 +15,7 @@ interface ExcludingValue {
 interface AutocompleteExcludingArgs {
 	source: { text: string }[];
 	variant?: 'default' | 'cell' | 'inline';
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	limit?: number;
 	textProperty: string;
 	min?: number;
@@ -52,6 +53,7 @@ const delay = <T>(
 
 const Autocomplete = ({
 	variant,
+	size,
 	source,
 	limit,
 	textProperty,
@@ -84,6 +86,7 @@ const Autocomplete = ({
 	return html`
 		<cosmoz-autocomplete-excluding
 			variant=${ifDefined(variant)}
+			size=${ifDefined(size)}
 			.label=${label}
 			hint=${ifDefined(hint)}
 			.placeholder=${placeholder}
@@ -161,6 +164,12 @@ const meta: Meta<AutocompleteExcludingArgs> = {
 			options: ['default', 'inline', 'cell'],
 			description: 'Visual variant',
 			table: { defaultValue: { summary: 'default' } },
+		},
+		size: {
+			control: 'select',
+			options: ['sm', 'md', 'lg', 'xl'],
+			description: 'Control size',
+			table: { defaultValue: { summary: 'md' } },
 		},
 		hint: {
 			control: 'text',
@@ -304,6 +313,38 @@ export const States: Story = {
 // =====================================================================
 // Excluding with dropdown open
 // =====================================================================
+
+export const Sizes: Story = {
+	render: () => html`
+		<div class="story-stack">
+			${(['sm', 'md', 'lg', 'xl'] as const).map(
+				(size) => html`
+					<div>
+						<h1 class="story-section-title">${size}</h1>
+						<cosmoz-autocomplete-excluding
+							size=${size}
+							.label=${'Choose color'}
+							.source=${colors}
+							text-property="text"
+							.value=${[
+								{ item: colors[1], excluded: true },
+								{ item: colors[3], excluded: false },
+							]}
+							keep-opened
+						></cosmoz-autocomplete-excluding>
+					</div>
+				`,
+			)}
+		</div>
+	`,
+	parameters: {
+		docs: {
+			description: {
+				story: 'Excluding chips at each control size.',
+			},
+		},
+	},
+};
 
 export const DropdownOpen: Story = {
 	render: () => html`

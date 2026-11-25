@@ -61,10 +61,12 @@ const mkChipRenderer =
 		hidden,
 		className = 'chip',
 		slot,
+		size,
 	}: ChipProps<I>) =>
 		html`<cosmoz-tag
 			class=${ifDefined(className)}
 			slot=${ifDefined(slot)}
+			size=${ifDefined(size)}
 			exportparts="chip-text, chip-clear"
 			color=${excludedState(value, item)}
 			?disabled=${disabled}

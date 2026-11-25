@@ -1,9 +1,5 @@
 import '@neovici/cosmoz-dropdown/cosmoz-dropdown-next';
-import {
-	chevronDownIcon,
-	plusIcon,
-	searchMdIcon,
-} from '@neovici/cosmoz-icons/untitled';
+import { chevronDownIcon } from '@neovici/cosmoz-icons/untitled';
 import '@neovici/cosmoz-input';
 import '@neovici/cosmoz-tooltip';
 import { t } from 'i18next';
@@ -15,7 +11,7 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
-import { ChipRenderer, selection } from './selection';
+import { ChipRenderer, chipSize, selection } from './selection';
 import './skeleton-span';
 import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
@@ -23,13 +19,13 @@ import { useOverflow } from './use-overflow';
 
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
-	variant?: 'default' | 'cell' | 'inline' | 'pill';
+	variant?: 'default' | 'cell' | 'inline';
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	invalid?: boolean;
 	errorMessage?: string;
 	hint?: string;
 	label?: string;
 	placeholder?: string;
-	searchPlaceholder?: string;
 	compact?: boolean;
 	required?: boolean;
 	showSingle?: boolean;
@@ -70,126 +66,10 @@ const noResult = () =>
 		<span class="no-result">${t('No results found')}</span>
 	</slot>`;
 
-// Light-dismissing the popover drops focus to the body; hand it back to the
-// add button when it was inside the popover.
-const returnFocus = (e: ToggleEvent) => {
-	if (e.newState !== 'closed') return;
-	const dropdown = e.currentTarget as HTMLElement;
-	if (
-		!dropdown.matches(':focus-within') &&
-		document.activeElement !== document.body
-	) {
-		return;
-	}
-	dropdown.querySelector<HTMLElement>('.add')?.focus();
-};
-
-/**
- * Chips followed by an "add" button; the button opens a popover with its own
- * search field above the options.
- */
-const pill = <I>(props: AProps<I>) => {
-	const {
-		opened,
-		setOpened,
-		disabled,
-		label,
-		placeholder,
-		searchPlaceholder,
-		text,
-		onText,
-		onToggle,
-		onDeselect,
-		value,
-		min,
-		textual,
-		chipRenderer,
-		items,
-		loading,
-	} = props;
-
-	return html`<div
-		class="pill-row"
-		part="row"
-		@click=${(e: Event) =>
-			!disabled && (e.target as Element).closest?.('.badge') && setOpened(true)}
-	>
-		${selection({
-			value,
-			min,
-			isOne: false,
-			onDeselect,
-			textual,
-			disabled,
-			chipRenderer,
-			overflowBadge: html`<button
-				type="button"
-				class="badge overflow-button"
-				name="overflow"
-				?disabled=${disabled}
-				aria-label=${t('Show more')}
-				aria-haspopup="dialog"
-				aria-expanded=${opened ? 'true' : 'false'}
-				hidden
-			>
-				<span></span>
-			</button>`,
-		})}
-		<cosmoz-dropdown-next
-			?disabled=${disabled}
-			.opened=${opened}
-			@dropdown-toggle=${(e: ToggleEvent) => {
-				onToggle(e);
-				returnFocus(e);
-			}}
-			part="dropdown"
-		>
-			<button
-				slot="button"
-				class="add"
-				part="add"
-				type="button"
-				?disabled=${disabled}
-				aria-haspopup="dialog"
-				aria-expanded=${opened ? 'true' : 'false'}
-			>
-				${plusIcon({ width: '12', height: '12' })}
-				<span>${placeholder ?? label}</span>
-			</button>
-			<div class="panel" part="panel">
-				<cosmoz-input
-					class="search"
-					part="search"
-					autofocus
-					compact
-					.label=${label ?? placeholder}
-					.placeholder=${searchPlaceholder ?? t('Search')}
-					.value=${live(text)}
-					@value-changed=${onText}
-					autocomplete="off"
-				>
-					${searchMdIcon({ slot: 'prefix', width: '16', height: '16' })}
-				</cosmoz-input>
-				${when(opened, () =>
-					listbox<I>(
-						{ ...props, items, multi: true, checkmark: true },
-						when(
-							loading,
-							() =>
-								html`<cosmoz-autocomplete-skeleton-span></cosmoz-autocomplete-skeleton-span>`,
-							() => when(text && items.length === 0, () => noResult()),
-						),
-					),
-				)}
-				<slot name="footer"></slot>
-			</div>
-		</cosmoz-dropdown-next>
-	</div>`;
-};
-
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
 				variant,
+				size,
 				opened,
 				invalid,
 				errorMessage,
@@ -235,6 +115,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				.placeholder=${isSingle ? undefined : placeholder}
 				hint=${ifDefined(hint)}
 				variant=${ifDefined(variant)}
+				size=${ifDefined(size)}
 				?compact=${compact}
 				?disabled=${disabled}
 				?required=${required}
@@ -283,6 +164,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 					textual,
 					disabled,
 					chipRenderer,
+					size: chipSize(size),
 				})}
 			</cosmoz-input>
 
@@ -320,7 +202,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 			...useAutocomplete(props),
 		};
 		const overflown = useOverflow(thru);
-		return html`${props.variant === 'pill' ? pill(thru) : autocomplete(thru)}
+		return html`${autocomplete(thru)}
 			<cosmoz-tooltip
 				for="overflow"
 				description=${overflown}
@@ -328,6 +210,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 	},
 	observedAttributes = [
 		'variant',
+		'size',
 		'disabled',
 		'invalid',
 		'required',

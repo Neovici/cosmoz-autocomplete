@@ -12,7 +12,8 @@ import { swedishWords } from './swedish-words';
 
 interface AutocompleteArgs {
 	source: { text: string }[];
-	variant?: 'default' | 'cell' | 'inline' | 'pill';
+	variant?: 'default' | 'cell' | 'inline';
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	limit?: number;
 	textProperty: string;
 	min?: number;
@@ -52,6 +53,7 @@ const delay = <T>(
 
 const Autocomplete = ({
 	variant,
+	size,
 	source,
 	limit,
 	textProperty,
@@ -83,6 +85,7 @@ const Autocomplete = ({
 	return html`
 		<cosmoz-autocomplete
 			variant=${ifDefined(variant)}
+			size=${ifDefined(size)}
 			mode=${ifDefined(mode)}
 			.label=${label}
 			hint=${ifDefined(hint)}
@@ -141,9 +144,15 @@ const meta: Meta<AutocompleteArgs> = {
 		},
 		variant: {
 			control: 'select',
-			options: ['default', 'inline', 'cell', 'pill'],
+			options: ['default', 'inline', 'cell'],
 			description: 'Visual variant',
 			table: { defaultValue: { summary: 'default' } },
+		},
+		size: {
+			control: 'select',
+			options: ['sm', 'md', 'lg', 'xl'],
+			description: 'Control size',
+			table: { defaultValue: { summary: 'md' } },
 		},
 		hint: {
 			control: 'text',
@@ -278,27 +287,31 @@ export const Default: Story = {
 	`,
 };
 
-export const Pill: Story = {
+export const Sizes: Story = {
 	render: () => html`
 		<div class="story-stack">
-			<h1 class="story-section-title">Pill variant</h1>
-			<cosmoz-autocomplete
-				.label=${'Labels'}
-				.placeholder=${'Label'}
-				.searchPlaceholder=${'Filter colors'}
-				.source=${colors}
-				text-property="text"
-				variant="pill"
-				keep-opened
-				.value=${[colors[0], colors[3]]}
-			></cosmoz-autocomplete>
+			${(['sm', 'md', 'lg', 'xl'] as const).map(
+				(size) => html`
+					<div>
+						<h1 class="story-section-title">${size}</h1>
+						<cosmoz-autocomplete
+							size=${size}
+							.label=${'Labels'}
+							.source=${colors}
+							.textProperty=${'text'}
+							.value=${[colors[0], colors[2]]}
+							keep-opened
+						></cosmoz-autocomplete>
+					</div>
+				`,
+			)}
 		</div>
 	`,
 	parameters: {
 		docs: {
 			description: {
 				story:
-					'Chips followed by an "add" button, e.g. labels in a view header. The button opens a popover with its own search field; selected options get a check. Chips that do not fit collapse into a "+N" badge that lists them on hover and opens the popover on click.',
+					'Chip rows at each control size; the chips step down one tag size from the control.',
 			},
 		},
 	},
