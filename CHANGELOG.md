@@ -1,3 +1,13 @@
+## 15.0.0
+
+### Major Changes
+
+- 92050d4: The `pill` variant is now its own `cosmoz-autocomplete-pills` element.
+
+### Minor Changes
+
+- 92050d4: The autocomplete takes a `size` like cosmoz-input and renders its chips one tag size below the control.
+
 ## 14.2.0
 
 ### Minor Changes
