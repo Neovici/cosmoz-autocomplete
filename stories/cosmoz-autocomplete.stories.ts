@@ -13,6 +13,7 @@ import { swedishWords } from './swedish-words';
 interface AutocompleteArgs {
 	source: { text: string }[];
 	variant?: 'default' | 'cell' | 'inline';
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	limit?: number;
 	textProperty: string;
 	min?: number;
@@ -52,6 +53,7 @@ const delay = <T>(
 
 const Autocomplete = ({
 	variant,
+	size,
 	source,
 	limit,
 	textProperty,
@@ -83,6 +85,7 @@ const Autocomplete = ({
 	return html`
 		<cosmoz-autocomplete
 			variant=${ifDefined(variant)}
+			size=${ifDefined(size)}
 			mode=${ifDefined(mode)}
 			.label=${label}
 			hint=${ifDefined(hint)}
@@ -144,6 +147,12 @@ const meta: Meta<AutocompleteArgs> = {
 			options: ['default', 'inline', 'cell'],
 			description: 'Visual variant',
 			table: { defaultValue: { summary: 'default' } },
+		},
+		size: {
+			control: 'select',
+			options: ['sm', 'md', 'lg', 'xl'],
+			description: 'Control size',
+			table: { defaultValue: { summary: 'md' } },
 		},
 		hint: {
 			control: 'text',
@@ -276,6 +285,36 @@ export const Default: Story = {
 			</div>
 		</div>
 	`,
+};
+
+export const Sizes: Story = {
+	render: () => html`
+		<div class="story-stack">
+			${(['sm', 'md', 'lg', 'xl'] as const).map(
+				(size) => html`
+					<div>
+						<h1 class="story-section-title">${size}</h1>
+						<cosmoz-autocomplete
+							size=${size}
+							.label=${'Labels'}
+							.source=${colors}
+							.textProperty=${'text'}
+							.value=${[colors[0], colors[2]]}
+							keep-opened
+						></cosmoz-autocomplete>
+					</div>
+				`,
+			)}
+		</div>
+	`,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Chip rows at each control size; the chips step down one tag size from the control.',
+			},
+		},
+	},
 };
 
 export const Inline: Story = {

@@ -23,6 +23,12 @@ export type Props<I> = Omit<AutocompleteProps<I>, 'variant'> & {
 
 type PillsProps<I> = Omit<Props<I>, keyof RProps<I>> & RProps<I>;
 
+// the row has no control chrome to sit inside: chips take the given size
+const tagSizes = { sm: 'sm', md: 'md', lg: 'lg', xl: 'lg' } as const;
+
+const pillChipSize = (size?: string) =>
+	tagSizes[size as keyof typeof tagSizes] ?? tagSizes.md;
+
 const noResult = () =>
 	lit`<slot name="no-result">
 		<span class="no-result">${t('No results found')}</span>
@@ -64,6 +70,7 @@ export const pills = <I>(props: PillsProps<I>) => {
 		chipRenderer,
 		items,
 		loading,
+		size,
 	} = props;
 
 	return lit`<div
@@ -80,6 +87,7 @@ export const pills = <I>(props: PillsProps<I>) => {
 			textual,
 			disabled,
 			chipRenderer,
+			size: pillChipSize(size),
 			overflowBadge: lit`<button
 				type="button"
 				class="badge overflow-button"
@@ -186,6 +194,7 @@ const Standalone = <I>(host: HTMLElement & Props<I>) => {
 const observedAttributes = [
 	'disabled',
 	'label',
+	'size',
 	'placeholder',
 	'search-placeholder',
 	'text-property',

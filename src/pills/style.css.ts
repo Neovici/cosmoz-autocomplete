@@ -38,9 +38,11 @@ export default css`
 		align-items: center;
 		gap: var(--cz-spacing);
 		margin: 0;
-		padding: calc(var(--cz-spacing) * 0.75) calc(var(--cz-spacing) * 2.5);
+		/* one chip row: the height follows the tag sizes */
+		min-height: 1.6875rem;
+		padding: 0 calc(var(--cz-spacing) * 2.5);
 		border: 0;
-		border-radius: var(--cz-radius-full);
+		border-radius: var(--cz-radius-sm);
 		box-shadow: inset 0 0 0 1px var(--cz-color-border-primary);
 		background: transparent;
 		color: var(--cz-color-text-tertiary);
@@ -78,6 +80,23 @@ export default css`
 
 	.add[disabled] {
 		display: none;
+	}
+
+	:host([size='sm']) .add,
+	:host([size='sm']) .overflow-button {
+		min-height: 1.5rem;
+		font-size: var(--cz-text-2xs);
+		line-height: var(--cz-text-2xs-line-height);
+	}
+
+	:host([size='lg']) .add,
+	:host([size='lg']) .overflow-button,
+	:host([size='xl']) .add,
+	:host([size='xl']) .overflow-button {
+		min-height: 1.9375rem;
+		border-radius: var(--cz-radius-md);
+		font-size: var(--cz-text-sm);
+		line-height: var(--cz-text-sm-line-height);
 	}
 
 	.panel {

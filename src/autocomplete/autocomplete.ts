@@ -11,7 +11,7 @@ import { until } from 'lit-html/directives/until.js';
 import { when } from 'lit-html/directives/when.js';
 import { listbox } from '../listbox';
 import { ItemRenderer } from '../listbox/item-renderer';
-import { ChipRenderer, selection } from './selection';
+import { ChipRenderer, chipSize, selection } from './selection';
 import './skeleton-span';
 import style from './style.css';
 import { Props as Base, RProps, useAutocomplete } from './use-autocomplete';
@@ -20,6 +20,7 @@ import { useOverflow } from './use-overflow';
 export interface Props<I> extends Base<I> {
 	mode?: 'select';
 	variant?: 'default' | 'cell' | 'inline';
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 	invalid?: boolean;
 	errorMessage?: string;
 	hint?: string;
@@ -68,6 +69,7 @@ const noResult = () =>
 const autocomplete = <I>(props: AProps<I>) => {
 		const {
 				variant,
+				size,
 				opened,
 				invalid,
 				errorMessage,
@@ -113,6 +115,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 				.placeholder=${isSingle ? undefined : placeholder}
 				hint=${ifDefined(hint)}
 				variant=${ifDefined(variant)}
+				size=${ifDefined(size)}
 				?compact=${compact}
 				?disabled=${disabled}
 				?required=${required}
@@ -161,6 +164,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 					textual,
 					disabled,
 					chipRenderer,
+					size: chipSize(size),
 				})}
 			</cosmoz-input>
 
@@ -206,6 +210,7 @@ const autocomplete = <I>(props: AProps<I>) => {
 	},
 	observedAttributes = [
 		'variant',
+		'size',
 		'disabled',
 		'invalid',
 		'required',

@@ -58,3 +58,32 @@ export const Overflown: Story = {
 		</div>
 	`,
 };
+
+export const Sizes: Story = {
+	render: () => html`
+		<div class="story-stack">
+			${(['sm', 'md', 'lg', 'xl'] as const).map(
+				(size) => html`
+					<div>
+						<h1 class="story-section-title">${size}</h1>
+						<cosmoz-autocomplete-pills
+							size=${size}
+							.value=${[colors[0], colors[2]]}
+							.source=${colors}
+							.textProperty=${'text'}
+							.placeholder=${'Label'}
+						>
+						</cosmoz-autocomplete-pills>
+					</div>
+				`,
+			)}
+		</div>
+	`,
+	parameters: {
+		docs: {
+			description: {
+				story: 'Chips take the given size; xl uses the largest tag.',
+			},
+		},
+	},
+};

@@ -36,6 +36,7 @@ export default css`
 
 	cosmoz-input::part(control) {
 		display: flex;
+		align-items: center;
 		min-width: calc(var(--cz-spacing) * 9);
 	}
 
